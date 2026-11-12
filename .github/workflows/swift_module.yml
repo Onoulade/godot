@@ -59,7 +59,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: swift-actions/setup-swift@v2
         with:
-          swift-version: "6.0"
+          # setup-swift needs an exact version on Windows.
+          swift-version: "6.0.3"
       - name: Build the runtime package
         run: swift build -c release --package-path modules/swift/runtime
       - name: Check the runtime libraries
