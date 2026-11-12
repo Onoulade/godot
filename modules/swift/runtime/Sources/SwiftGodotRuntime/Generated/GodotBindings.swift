@@ -23585,9 +23585,6 @@ public class Resource: RefCounted {
 		get { Host.shared.getProperty(object: ptr, name: "resource_scene_unique_id").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "resource_scene_unique_id", value: VariantBox(newValue)) }
 	}
-	public func emit_changed() {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("changed")])
-	}
 	public func emit_setup_local_to_scene_requested() {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("setup_local_to_scene_requested")])
 	}

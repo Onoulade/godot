@@ -312,18 +312,26 @@ public final class Runtime {
 		NSRange(location: 0, length: source.utf16.count)
 	}
 
+	// NSRange -> String without Range(_:in:) (unreliable overload resolution).
+	private func substring(of source: String, _ r: NSRange) -> String? {
+		let utf16 = source.utf16
+		let lower = r.location
+		let upper = r.location + r.length
+		guard lower >= 0, upper <= utf16.count else { return nil }
+		return String(utf16[lower..<upper])
+	}
+
 	private func firstMatch(of pattern: String, in source: String) -> String? {
 		guard let regex = try? NSRegularExpression(pattern: pattern) else { return nil }
 		guard let match = regex.firstMatch(in: source, range: nsrange(of: source)), match.numberOfRanges > 1 else { return nil }
-		guard let range = Range(match.range(at: 1), in: source) else { return nil }
-		return String(source[range])
+		return substring(of: source, match.range(at: 1))
 	}
 
 	private func allMatches(of pattern: String, in source: String) -> [String] {
 		guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }
 		return regex.matches(in: source, range: nsrange(of: source)).compactMap { match in
-			guard match.numberOfRanges > 1, let range = Range(match.range(at: 1), in: source) else { return nil }
-			return String(source[range])
+			guard match.numberOfRanges > 1 else { return nil }
+			return substring(of: source, match.range(at: 1))
 		}
 	}
 
@@ -331,8 +339,7 @@ public final class Runtime {
 		guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }
 		return regex.matches(in: source, range: nsrange(of: source)).map { match in
 			(1..<match.numberOfRanges).map { group in
-				guard let range = Range(match.range(at: group), in: source) else { return "" }
-				return String(source[range])
+				substring(of: source, match.range(at: group)) ?? ""
 			}
 		}
 	}

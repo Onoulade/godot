@@ -634,6 +634,8 @@ def main():
         for s in c.get("signals", []):
             if s.get("name") in inherited_names:
                 continue
+            if sanitize("emit_" + str(s.get("name", ""))) in method_names:
+                continue  # a real engine method with this name exists
             out.extend(emit_signal(s))
         out.append("}")
         out.append("")

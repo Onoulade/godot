@@ -61,13 +61,7 @@ public class VariantBox {
 		Host.shared.variantSetInt(ptr, Int64(value.rawValue))
 	}
 
-	// Godot value types (Vector2, Color, ...): marshaled through GodotValueType.
-	public init<T: GodotValueType>(_ value: T) {
-		self.init()
-		Host.shared.variantCopy(ptr, value.toVariantBox().borrowedPtr)
-	}
-
-	public var borrowedPtr: UnsafeRawPointer { ptr }
+	public var borrowedPtr: UnsafeRawPointer { UnsafeRawPointer(ptr) }
 
 	public func asInt() -> Int {
 		Int(Host.shared.variantAsInt(ptr))
@@ -87,12 +81,12 @@ public class VariantBox {
 
 	public func asObject<T: GodotObject>(_ type: T.Type) -> T? {
 		guard let object = Host.shared.variantGetObject(ptr) else { return nil }
-		return T(ptr: object)
+		return GodotObject(ptr: object) as? T
 	}
 
 	// Same, with T inferred from the context (return type / property type).
 	public func asObject<T: GodotObject>() -> T? {
 		guard let object = Host.shared.variantGetObject(ptr) else { return nil }
-		return T(ptr: object)
+		return GodotObject(ptr: object) as? T
 	}
 }
