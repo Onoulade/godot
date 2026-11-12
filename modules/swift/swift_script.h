@@ -41,6 +41,7 @@ class SwiftScript : public Script {
 
 	String source_code;
 	bool valid = false;
+	StringName base_type;
 	SwiftGodotScriptHandle compiled_handle = nullptr;
 
 protected:
@@ -51,7 +52,7 @@ public:
 	virtual Ref<Script> get_base_script() const override { return Ref<Script>(); }
 	virtual StringName get_global_name() const override;
 	virtual bool inherits_script(const Ref<Script> &p_script) const override { return false; }
-	virtual StringName get_instance_base_type() const override { return StringName(); }
+	virtual StringName get_instance_base_type() const override { return base_type; }
 	virtual ScriptInstance *instance_create(Object *p_this) override;
 
 	virtual bool has_source_code() const override { return !source_code.is_empty(); }

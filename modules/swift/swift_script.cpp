@@ -35,8 +35,10 @@
 #include "swift_language.h"
 
 #include "core/config/engine.h"
+#include "core/config/project_settings.h"
 #include "core/io/file_access.h"
 #include "core/os/memory.h"
+#include "core/string/regex.h"
 
 void SwiftScript::_bind_methods() {
 }
@@ -85,6 +87,16 @@ Error SwiftScript::reload(bool p_keep_state) {
 	}
 	valid = false;
 
+	// Parse the base class ("class Foo: Node") so the editor's attach dialog
+	// and scene loading know what the script inherits from.
+	{
+		Ref<RegEx> class_regex;
+		class_regex.instantiate();
+		class_regex->compile("\\bclass\\s+[A-Za-z_][A-Za-z0-9_]*\\s*:\\s*([A-Za-z_][A-Za-z0-9_.]*)");
+		Ref<RegExMatch> match = class_regex->search(source_code);
+		base_type = match.is_valid() ? StringName(match->get_string(1)) : StringName();
+	}
+
 	if (bridge->has_script_api()) {
 		const SwiftGodotABI &abi = bridge->get_abi();
 		CharString path = get_path().utf8();
@@ -95,8 +107,11 @@ Error SwiftScript::reload(bool p_keep_state) {
 		// recompile from source (swiftc) and refresh the cache instead, so a
 		// stale cache can never be picked up.
 		bool loaded_precompiled = false;
-		if (!Engine::get_singleton()->is_editor_hint() && abi.script_load_precompiled != nullptr && FileAccess::exists(bin_path)) {
-			CharString bin = bin_path.utf8();
+		// In exported games the .swiftbin is a loose file next to the binary,
+		// so resolve res:// to a real path: dlopen cannot read inside a .pck.
+		String bin_path_real = ProjectSettings::get_singleton()->globalize_path(bin_path);
+		if (!Engine::get_singleton()->is_editor_hint() && abi.script_load_precompiled != nullptr && FileAccess::exists(bin_path_real)) {
+			CharString bin = bin_path_real.utf8();
 			compiled_handle = (SwiftGodotScriptHandle)abi.script_load_precompiled(bin.get_data(), path.get_data(), source.get_data());
 			loaded_precompiled = compiled_handle != nullptr;
 		}

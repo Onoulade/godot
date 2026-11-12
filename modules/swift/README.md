@@ -168,14 +168,24 @@ from source, so a stale cache is never used there.
 scons platform=<platform> module_swift_enabled=yes
 ```
 
-The Swift runtime itself is built separately with the Swift toolchain:
+The Swift runtime package is built automatically by `scons` when a Swift
+toolchain (`swift` in `PATH`) is available: the produced
+`libswiftgodot_runtime.{so,dylib,dll}` and `libSwiftGodotUI.{so,dylib,dll}`
+are copied next to the Godot executable in `bin/`, where the module loads
+them at startup (it also searches `../Frameworks/` inside macOS `.app`
+bundles and `res://bin`). Set `SWIFTGODOT_SKIP_RUNTIME_BUILD=1` to skip this
+step (e.g. on CI builders without Swift). To do it by hand instead:
 
 ```sh
 cd modules/swift/runtime
-swift build -c release
+swift build -c release   # or -c debug for editor/template_debug builds
 # then place the produced libswiftgodot_runtime.{so,dylib,dll}
 # next to the Godot executable or in res://bin of the project.
 ```
+
+If the runtime library is missing at startup, the editor prints a warning and
+Swift scripts load but cannot be instantiated (no crash): attach the runtime
+libraries and restart.
 
 Regenerating the bindings (needs an editor build to dump the API):
 

@@ -32,6 +32,7 @@
 
 #include "swift_host.h"
 
+#include "core/config/project_settings.h"
 #include "core/os/memory.h"
 
 // Engine-side GDExtension function resolver, handed to the Swift runtime so
@@ -57,24 +58,37 @@ String SwiftBridge::get_runtime_library_name() {
 #endif
 }
 
-void *SwiftBridge::_resolve(const char *p_name, bool p_optional) {
+String SwiftBridge::get_ui_library_name() {
+#if defined(_WIN32)
+	return "SwiftGodotUI.dll";
+#elif defined(__APPLE__)
+	return "libSwiftGodotUI.dylib";
+#else
+	return "libSwiftGodotUI.so";
+#endif
+}
+
+void *SwiftBridge::_resolve_from(void *p_handle, const char *p_name, bool p_optional) {
 	void *symbol = nullptr;
-	Error err = OS::get_singleton()->get_dynamic_library_symbol_handle(library_handle, p_name, symbol, p_optional);
+	Error err = OS::get_singleton()->get_dynamic_library_symbol_handle(p_handle, p_name, symbol, p_optional);
 	if (err != OK) {
-		if (!p_optional) {
-			OS::get_singleton()->close_dynamic_library(library_handle);
-			library_handle = nullptr;
-			return nullptr;
-		}
 		return nullptr;
 	}
 	return symbol;
 }
 
-Error SwiftBridge::_try_load_from(const String &p_dir) {
-	String path = p_dir.path_join(get_runtime_library_name());
+void *SwiftBridge::_resolve(const char *p_name, bool p_optional) {
+	void *symbol = _resolve_from(library_handle, p_name, p_optional);
+	if (symbol == nullptr && !p_optional) {
+		OS::get_singleton()->close_dynamic_library(library_handle);
+		library_handle = nullptr;
+	}
+	return symbol;
+}
+
+Error SwiftBridge::_try_load_from(const String &p_path) {
 	void *handle = nullptr;
-	Error err = OS::get_singleton()->open_dynamic_library(path, handle);
+	Error err = OS::get_singleton()->open_dynamic_library(p_path, handle);
 	if (err != OK) {
 		return err;
 	}
@@ -133,12 +147,39 @@ Error SwiftBridge::load() {
 		return OK;
 	}
 
-	Vector<String> search_dirs;
-	search_dirs.push_back(OS::get_singleton()->get_executable_path().get_base_dir());
-	search_dirs.push_back("res://bin");
-	search_dirs.push_back("res://");
-	for (const String &dir : search_dirs) {
-		if (_try_load_from(dir) == OK) {
+	String lib = get_runtime_library_name();
+	String exe_dir = OS::get_singleton()->get_executable_path().get_base_dir();
+	Vector<String> candidates;
+	candidates.push_back(exe_dir.path_join(lib));
+	// macOS .app bundles keep bundled dylibs in Contents/Frameworks, next to
+	// Contents/MacOS where the executable lives.
+	candidates.push_back(exe_dir.path_join("..").path_join("Frameworks").path_join(lib));
+	// Project-local locations (globalized: dlopen cannot read res:// inside a
+	// packed .pck, but a real directory works, e.g. an unpacked project).
+	candidates.push_back(ProjectSettings::get_singleton()->globalize_path("res://bin").path_join(lib));
+	candidates.push_back(ProjectSettings::get_singleton()->globalize_path("res://").path_join(lib));
+#ifdef __APPLE__
+	// dlopen() expands @executable_path itself, covering .app bundles no
+	// matter the current working directory.
+	candidates.push_back("@executable_path/../Frameworks/" + lib);
+#endif
+	for (const String &path : candidates) {
+		if (_try_load_from(path) == OK) {
+			// The scene/UI entry points (swiftgodot_scene_build/invalidate)
+			// live in a separate library shipped next to the runtime one.
+			String ui_path = path.get_base_dir().path_join(get_ui_library_name());
+			void *ui_handle = nullptr;
+			if (OS::get_singleton()->open_dynamic_library(ui_path, ui_handle) == OK) {
+				ui_library_handle = ui_handle;
+				void *sym = _resolve_from(ui_handle, "swiftgodot_scene_build", true);
+				if (sym != nullptr) {
+					abi.scene_build = reinterpret_cast<uintptr_t (*)(GDExtensionObjectPtr)>(sym);
+				}
+				sym = _resolve_from(ui_handle, "swiftgodot_scene_invalidate", true);
+				if (sym != nullptr) {
+					abi.scene_invalidate = reinterpret_cast<void (*)(GDExtensionObjectPtr)>(sym);
+				}
+			}
 			return OK;
 		}
 	}
@@ -155,6 +196,10 @@ void SwiftBridge::unload() {
 	}
 	OS::get_singleton()->close_dynamic_library(library_handle);
 	library_handle = nullptr;
+	if (ui_library_handle != nullptr) {
+		OS::get_singleton()->close_dynamic_library(ui_library_handle);
+		ui_library_handle = nullptr;
+	}
 	abi = SwiftGodotABI();
 }
 

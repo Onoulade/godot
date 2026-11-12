@@ -98,10 +98,12 @@ class SwiftBridge {
 	static SwiftBridge *singleton;
 
 	void *library_handle = nullptr;
+	void *ui_library_handle = nullptr;
 	SwiftGodotABI abi;
 
 	void *_resolve(const char *p_name, bool p_optional);
-	Error _try_load_from(const String &p_dir);
+	void *_resolve_from(void *p_handle, const char *p_name, bool p_optional);
+	Error _try_load_from(const String &p_path);
 
 public:
 	static SwiftBridge *get_singleton();
@@ -121,6 +123,7 @@ public:
 	void *get_library_handle() const { return library_handle; }
 
 	static String get_runtime_library_name();
+	static String get_ui_library_name();
 
 	~SwiftBridge();
 };

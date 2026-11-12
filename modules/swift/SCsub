@@ -1,9 +1,61 @@
 #!/usr/bin/env python
 from misc.utility.scons_hints import *
 
+import os
+import shutil
+import subprocess
+import sys
+
 Import("env")
 Import("env_modules")
 
 env_swift = env_modules.Clone()
 
 env_swift.add_source_files(env.modules_sources, "*.cpp")
+
+
+# Build the Swift runtime package (when a Swift toolchain is available) and
+# copy its dynamic libraries next to the engine binary: SwiftBridge searches
+# the executable's directory first when loading the runtime at startup.
+# Set SWIFTGODOT_SKIP_RUNTIME_BUILD=1 to skip (e.g. no toolchain on a CI
+# builder that only compiles the C++ side).
+def _build_swift_runtime_libs():
+    if os.environ.get("SWIFTGODOT_SKIP_RUNTIME_BUILD"):
+        return
+    if env.GetOption("clean") or env.GetOption("help"):
+        return
+    swift = shutil.which("swift")
+    if swift is None:
+        return
+    package_path = os.path.join("modules", "swift", "runtime")
+    config = "debug" if env["target"] in ("editor", "template_debug") else "release"
+    print(f"swift module: building the Swift runtime package (swift build -c {config})...")
+    result = subprocess.run([swift, "build", "-c", config, "--package-path", package_path])
+    if result.returncode != 0:
+        print(
+            "swift module: WARNING: 'swift build' failed; runtime libraries not copied (Swift scripts will load but not run)."
+        )
+        return
+    if os.name == "nt":
+        names = ("swiftgodot_runtime.dll", "SwiftGodotUI.dll")
+    elif sys.platform == "darwin":
+        names = ("libswiftgodot_runtime.dylib", "libSwiftGodotUI.dylib")
+    else:
+        names = ("libswiftgodot_runtime.so", "libSwiftGodotUI.so")
+    build_dir = os.path.realpath(os.path.join(package_path, ".build", config))
+    bin_dir = env.Dir("#bin").abspath
+    os.makedirs(bin_dir, exist_ok=True)
+    for name in names:
+        found = None
+        for root, _dirs, files in os.walk(build_dir):
+            if name in files:
+                found = os.path.join(root, name)
+                break
+        if found is None:
+            print(f"swift module: WARNING: {name} not found under {build_dir}")
+            continue
+        shutil.copy2(found, os.path.join(bin_dir, name))
+        print(f"swift module: copied {name} next to the engine binary")
+
+
+_build_swift_runtime_libs()
