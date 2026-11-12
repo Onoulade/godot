@@ -7,7 +7,7 @@ import SwiftGodotRuntime
 @_cdecl("swiftgodot_scene_build")
 public func swiftgodot_scene_build(_ host: UnsafeMutableRawPointer?) -> UInt {
 	let h = SendableRawPointer(host)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		SceneRegistry.shared.build(host: h.ptr).map { UInt(bitPattern: $0) } ?? 0
 	}
 }
