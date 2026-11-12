@@ -115,3 +115,9 @@ jobs:
           python3 modules/swift/tools/generate_bindings.py --api /tmp/apidump/extension_api.json --all \
             --exclude SwiftViewHost --out /tmp/apidump/GodotBindings.swift
           diff -q /tmp/apidump/GodotBindings.swift modules/swift/runtime/Sources/SwiftGodotRuntime/Generated/GodotBindings.swift
+      - name: Upload the official API dump (to regenerate bindings locally)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: extension_api.json
+          path: /tmp/apidump/extension_api.json

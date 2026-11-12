@@ -279,10 +279,18 @@ def enum_default_literal(class_name, dv):
         enum_name = class_name
     if not values:
         return None
+    s = str(dv).strip()
     try:
-        target = int(str(dv).strip())
+        target = int(s)
     except ValueError:
-        return None
+        # Constant name form, e.g. "INTERNAL_MODE_DISABLED" or "Node.INTERNAL_MODE_DISABLED".
+        s = s.split(".")[-1]
+        for const, val in values.items():
+            if const == s or const.endswith("." + s):
+                target = val
+                break
+        else:
+            return None
     for case, val in enum_case_names(enum_name, values):
         if val == target:
             return "." + case
@@ -290,21 +298,39 @@ def enum_default_literal(class_name, dv):
 
 
 def enum_swift_type(class_name, generated):
-    # "Node.ProcessMode" -> "Node.ProcessMode" if Node is generated, else Int.
+    # "Node.ProcessMode" -> "Node.ProcessMode" if Node is generated and the
+    # enum is known, else Int.
     if not class_name:
         return "Int"
     if "." not in class_name:
         return sanitize(class_name) if class_name in GLOBAL_ENUMS else "Int"
     cls, en = class_name.split(".", 1)
-    if cls in generated:
+    if cls in generated and CLASS_ENUM_VALUES.get(class_name):
         return f"{cls}.{sanitize(en)}"
     return "Int"
+
+
+def enum_values(en):
+    # Official --dump-extension-api uses a list of {"name","value"} (or
+    # [name, value] pairs); accept a plain {name: value} dict too.
+    values = en.get("values", {})
+    if isinstance(values, dict):
+        return values
+    out = {}
+    for item in values:
+        if isinstance(item, dict):
+            out[item.get("name")] = item.get("value")
+        elif isinstance(item, (list, tuple)) and len(item) == 2:
+            out[item[0]] = item[1]
+    return out
 
 
 def is_enum(jtype, class_name):
     if (jtype or "").lower() != "int" or not class_name:
         return False
-    return "." in class_name or class_name in GLOBAL_ENUMS
+    if "." in class_name:
+        return bool(CLASS_ENUM_VALUES.get(class_name))
+    return class_name in GLOBAL_ENUMS
 
 
 def swift_type(jtype, class_name, generated):
@@ -355,7 +381,10 @@ def emit_method(m, generated):
         st = swift_type(a.get("type"), a.get("class_name"), generated)
         pname = sanitize(a.get("name", "arg"))
         if is_enum(a.get("type"), a.get("class_name")):
-            dv = enum_default_literal(a.get("class_name"), a.get("default_value")) if st != "Int" else None
+            if st != "Int":
+                dv = enum_default_literal(a.get("class_name"), a.get("default_value"))
+            else:
+                dv = default_literal(a.get("default_value"))
         else:
             dv = default_literal(a.get("default_value")) if st in ("Bool", "Int", "Double", "String") else None
         params.append(f"{pname}: {st} = {dv}" if dv is not None else f"{pname}: {st}")
@@ -404,6 +433,8 @@ def emit_property(p, method_names, generated):
     if name in method_names:
         return []
     st = swift_type(p.get("type"), p.get("class_name"), generated)
+    is_object = (p.get("type") or "").lower() == "object"
+    decl = st + "?" if is_object else st
     raw = p.get("name")
     if is_enum(p.get("type"), p.get("class_name")) and st != "Int":
         accessor = f".asEnum({st}.self)"
@@ -413,10 +444,14 @@ def emit_property(p, method_names, generated):
         accessor = f".asObject({st}.self)"
     else:
         accessor = f".as{st}()"
+    if is_object:
+        setter = f'\t\tset {{ Host.shared.setProperty(object: ptr, name: "{raw}", value: newValue.map {{ VariantBox($0) }} ?? VariantBox()) }}'
+    else:
+        setter = f'\t\tset {{ Host.shared.setProperty(object: ptr, name: "{raw}", value: VariantBox(newValue)) }}'
     lines = [
-        f"\tpublic var {name}: {st} {{",
+        f"\tpublic var {name}: {decl} {{",
         f'\t\tget {{ Host.shared.getProperty(object: ptr, name: "{raw}")' + accessor + " }",
-        f'\t\tset {{ Host.shared.setProperty(object: ptr, name: "{raw}", value: VariantBox(newValue)) }}',
+        setter,
         "\t}",
     ]
     return lines
@@ -429,7 +464,7 @@ def emit_enum_cases(name, values, indent):
 def emit_enum(en):
     name = sanitize(en.get("name", "Enum"))
     lines = [f"\tpublic enum {name}: Int, Sendable, CaseIterable {{"]
-    lines.extend(emit_enum_cases(en.get("name", ""), en.get("values", {}), "\t\t"))
+    lines.extend(emit_enum_cases(en.get("name", ""), enum_values(en), "\t\t"))
     lines.append("\t}")
     return lines
 
@@ -485,7 +520,7 @@ def main():
     all_classes = {c["name"]: c for c in api.get("classes", [])}
     for c in all_classes.values():
         for en in c.get("enums", []):
-            CLASS_ENUM_VALUES[f"{c['name']}.{en.get('name', '')}"] = en.get("values", {})
+            CLASS_ENUM_VALUES[f"{c['name']}.{en.get('name', '')}"] = enum_values(en)
     if args.all:
         selected = set(all_classes)
     elif args.classes:
