@@ -42,7 +42,7 @@ public func swiftgodot_shutdown() {
 public func swiftgodot_script_compile(_ path: UnsafePointer<CChar>, _ source: UnsafePointer<CChar>) -> UInt {
 	let p = String(cString: path)
 	let s = String(cString: source)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.compileScript(path: p, source: s).map { UInt(bitPattern: $0) } ?? 0
 	}
 }
@@ -52,7 +52,7 @@ public func swiftgodot_script_load_precompiled(_ libraryPath: UnsafePointer<CCha
 	let lib = String(cString: libraryPath)
 	let p = String(cString: path)
 	let s = String(cString: source)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.loadPrecompiled(libraryPath: lib, path: p, source: s).map { UInt(bitPattern: $0) } ?? 0
 	}
 }
@@ -77,7 +77,7 @@ public func swiftgodot_script_free(_ script: UnsafeMutableRawPointer?) {
 @_cdecl("swiftgodot_script_is_valid")
 public func swiftgodot_script_is_valid(_ script: UnsafeMutableRawPointer?) -> UInt8 {
 	let s = SendableRawPointer(script)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.isScriptValid(s.ptr) ? 1 : 0
 	}
 }
@@ -94,7 +94,7 @@ public func swiftgodot_script_get_error(_ script: UnsafeMutableRawPointer?, _ bu
 @_cdecl("swiftgodot_script_get_class_name")
 public func swiftgodot_script_get_class_name(_ script: UnsafeMutableRawPointer?) -> UInt {
 	let s = SendableRawPointer(script)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.getScriptClassName(s.ptr).map { UInt(bitPattern: $0) } ?? 0
 	}
 }
@@ -102,7 +102,7 @@ public func swiftgodot_script_get_class_name(_ script: UnsafeMutableRawPointer?)
 @_cdecl("swiftgodot_script_is_tool")
 public func swiftgodot_script_is_tool(_ script: UnsafeMutableRawPointer?) -> UInt8 {
 	let s = SendableRawPointer(script)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.isScriptTool(s.ptr) ? 1 : 0
 	}
 }
@@ -110,7 +110,7 @@ public func swiftgodot_script_is_tool(_ script: UnsafeMutableRawPointer?) -> UIn
 @_cdecl("swiftgodot_script_get_method_count")
 public func swiftgodot_script_get_method_count(_ script: UnsafeMutableRawPointer?) -> Int32 {
 	let s = SendableRawPointer(script)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.getScriptMethodCount(s.ptr)
 	}
 }
@@ -118,7 +118,7 @@ public func swiftgodot_script_get_method_count(_ script: UnsafeMutableRawPointer
 @_cdecl("swiftgodot_script_get_method_name")
 public func swiftgodot_script_get_method_name(_ script: UnsafeMutableRawPointer?, _ index: Int32) -> UInt {
 	let s = SendableRawPointer(script)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.getScriptMethodName(s.ptr, index: index).map { UInt(bitPattern: $0) } ?? 0
 	}
 }
@@ -127,7 +127,7 @@ public func swiftgodot_script_get_method_name(_ script: UnsafeMutableRawPointer?
 public func swiftgodot_script_has_method(_ script: UnsafeMutableRawPointer?, _ method: UnsafePointer<CChar>) -> UInt8 {
 	let s = SendableRawPointer(script)
 	let m = String(cString: method)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.scriptHasMethod(s.ptr, method: m) ? 1 : 0
 	}
 }
@@ -135,7 +135,7 @@ public func swiftgodot_script_has_method(_ script: UnsafeMutableRawPointer?, _ m
 @_cdecl("swiftgodot_script_get_signal_count")
 public func swiftgodot_script_get_signal_count(_ script: UnsafeMutableRawPointer?) -> Int32 {
 	let s = SendableRawPointer(script)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.getScriptSignalCount(s.ptr)
 	}
 }
@@ -143,7 +143,7 @@ public func swiftgodot_script_get_signal_count(_ script: UnsafeMutableRawPointer
 @_cdecl("swiftgodot_script_get_signal_name")
 public func swiftgodot_script_get_signal_name(_ script: UnsafeMutableRawPointer?, _ index: Int32) -> UInt {
 	let s = SendableRawPointer(script)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.getScriptSignalName(s.ptr, index: index).map { UInt(bitPattern: $0) } ?? 0
 	}
 }
@@ -152,7 +152,7 @@ public func swiftgodot_script_get_signal_name(_ script: UnsafeMutableRawPointer?
 public func swiftgodot_script_has_signal(_ script: UnsafeMutableRawPointer?, _ signal: UnsafePointer<CChar>) -> UInt8 {
 	let s = SendableRawPointer(script)
 	let sig = String(cString: signal)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.scriptHasSignal(s.ptr, signal: sig) ? 1 : 0
 	}
 }
@@ -160,7 +160,7 @@ public func swiftgodot_script_has_signal(_ script: UnsafeMutableRawPointer?, _ s
 @_cdecl("swiftgodot_script_get_property_count")
 public func swiftgodot_script_get_property_count(_ script: UnsafeMutableRawPointer?) -> Int32 {
 	let s = SendableRawPointer(script)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.getScriptPropertyCount(s.ptr)
 	}
 }
@@ -168,7 +168,7 @@ public func swiftgodot_script_get_property_count(_ script: UnsafeMutableRawPoint
 @_cdecl("swiftgodot_script_get_property_name")
 public func swiftgodot_script_get_property_name(_ script: UnsafeMutableRawPointer?, _ index: Int32) -> UInt {
 	let s = SendableRawPointer(script)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.getScriptPropertyName(s.ptr, index: index).map { UInt(bitPattern: $0) } ?? 0
 	}
 }
@@ -176,7 +176,7 @@ public func swiftgodot_script_get_property_name(_ script: UnsafeMutableRawPointe
 @_cdecl("swiftgodot_script_get_property_type")
 public func swiftgodot_script_get_property_type(_ script: UnsafeMutableRawPointer?, _ index: Int32) -> Int32 {
 	let s = SendableRawPointer(script)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.getScriptPropertyType(s.ptr, index: index)
 	}
 }
@@ -184,7 +184,7 @@ public func swiftgodot_script_get_property_type(_ script: UnsafeMutableRawPointe
 @_cdecl("swiftgodot_script_get_property_usage")
 public func swiftgodot_script_get_property_usage(_ script: UnsafeMutableRawPointer?, _ index: Int32) -> Int32 {
 	let s = SendableRawPointer(script)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.getScriptPropertyUsage(s.ptr, index: index)
 	}
 }
@@ -193,7 +193,7 @@ public func swiftgodot_script_get_property_usage(_ script: UnsafeMutableRawPoint
 public func swiftgodot_instance_create(_ script: UnsafeMutableRawPointer?, _ owner: UnsafeMutableRawPointer?) -> UInt {
 	let s = SendableRawPointer(script)
 	let o = SendableRawPointer(owner)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.createInstance(script: s.ptr, owner: o.ptr).map { UInt(bitPattern: $0) } ?? 0
 	}
 }
@@ -220,7 +220,7 @@ public func swiftgodot_instance_call(
 	let r = SendableRawPointer(ret)
 	let e = SendableRawPointer(error)
 	let m = String(cString: method)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.instanceCall(i.ptr, method: m, args: a.ptr, argCount: argCount, ret: r.ptr, error: e.ptr)
 	}
 }
@@ -238,7 +238,7 @@ public func swiftgodot_instance_set(_ instance: UnsafeMutableRawPointer?, _ name
 	let i = SendableRawPointer(instance)
 	let v = SendableConstPointer(value)
 	let n = String(cString: name)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.instanceSet(i.ptr, name: n, value: v.ptr) ? 1 : 0
 	}
 }
@@ -248,7 +248,7 @@ public func swiftgodot_instance_get(_ instance: UnsafeMutableRawPointer?, _ name
 	let i = SendableRawPointer(instance)
 	let r = SendableRawPointer(ret)
 	let n = String(cString: name)
-	MainActor.assumeIsolated {
+	return MainActor.assumeIsolated {
 		Runtime.shared.instanceGet(i.ptr, name: n, ret: r.ptr) ? 1 : 0
 	}
 }
