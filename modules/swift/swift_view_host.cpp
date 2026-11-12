@@ -36,6 +36,9 @@
 
 void SwiftViewHost::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("invalidate"), &SwiftViewHost::invalidate);
+	ClassDB::bind_method(D_METHOD("set_root_view", "name"), &SwiftViewHost::set_root_view);
+	ClassDB::bind_method(D_METHOD("get_root_view"), &SwiftViewHost::get_root_view);
+	ADD_PROPERTY(PropertyInfo(Variant::STRING, "root_view", PROPERTY_HINT_NONE, "", PROPERTY_USAGE_DEFAULT), "set_root_view", "get_root_view");
 }
 
 void SwiftViewHost::_notification(int p_what) {

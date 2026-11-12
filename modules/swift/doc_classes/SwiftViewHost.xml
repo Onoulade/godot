@@ -16,4 +16,9 @@
 			</description>
 		</method>
 	</methods>
+	<members>
+		<member name="root_view" type="String" setter="set_root_view" getter="get_root_view" default="&quot;&quot;">
+			Name of the Swift [code]struct X: View[/code] to render in this host. With several [SwiftViewHost] nodes, each can host a different scene.
+		</member>
+	</members>
 </class>

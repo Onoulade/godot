@@ -22,30 +22,44 @@ public func swiftgodot_scene_invalidate(_ host: UnsafeMutableRawPointer?) {
 public final class SceneRegistry {
 	public static let shared = SceneRegistry()
 
-	private var rootView: (any View)?
-	private var roots: [ObjectIdentifier: Node] = [:]
+	private var namedRoots: [String: any View] = [:]
+	private var lastRoot: (any View)?
+	private var trees: [ObjectIdentifier: RenderedView] = [:]
 
 	private init() {}
 
 	// Called by the per-script compiled library (swiftgodot_scene_register)
 	// when the script declares a root view (`struct MyScene: View`).
-	public func registerRoot<V: View>(_ view: V) {
-		rootView = view
+	public func registerRoot<V: View>(_ view: V, named name: String) {
+		namedRoots[name] = view
+		lastRoot = view
+	}
+
+	// The root view for a host: its "root_view" property names the Swift View
+	// struct to render; with no name set, the last registered root is used.
+	private func rootView(for host: UnsafeMutableRawPointer?) -> (any View)? {
+		if let host {
+			let name = Host.shared.getProperty(object: host, name: "root_view").asString()
+			if !name.isEmpty, let view = namedRoots[name] {
+				return view
+			}
+		}
+		return lastRoot
 	}
 
 	public func build(host: UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? {
-		guard let rootView, let host, let hostNode = Node(raw: host) else { return nil }
+		guard let host, let hostNode = Node(raw: host), let view = rootView(for: host) else { return nil }
 		let id = ObjectIdentifier(hostNode.ptr)
-		if let existing = roots[id] {
-			return existing.ptr
+		if let existing = trees[id] {
+			return existing.node?.ptr
 		}
-		guard let node = rootView.render() else { return nil }
-		roots[id] = node
-		return node.ptr
+		let tree = view.renderTree()
+		trees[id] = tree
+		return tree.node?.ptr
 	}
 
 	public func invalidate(host: UnsafeMutableRawPointer?) {
-		guard let rootView, let host, let hostNode = Node(raw: host) else { return }
+		guard let host, let hostNode = Node(raw: host), let view = rootView(for: host) else { return }
 		let id = ObjectIdentifier(hostNode.ptr)
 		// Scoped, propagated invalidation: the root body is re-evaluated as an
 		// attribute of the graph; Observation tracks the @State/@Observable
@@ -53,10 +67,10 @@ public final class SceneRegistry {
 		// coalesced on the main actor, then diffed into the node tree.
 		let attribute = AttributeGraph.AttributeID(self)
 		AttributeGraph.shared.register(id: attribute) { [weak self] in
-			guard let self, let newNode = rootView.render() else { return }
-			let frame = ComponentFrame(id: "root", viewType: "\(type(of: rootView))")
-			Differ.shared.apply(old: nil, new: frame, newNode: newNode, parent: hostNode)
-			roots[id] = newNode
+			guard let self else { return }
+			let newTree = view.renderTree()
+			Differ.shared.apply(old: trees[id], new: newTree, parent: hostNode, at: 0)
+			trees[id] = newTree
 		}
 		AttributeGraph.shared.evaluate(attribute)
 	}

@@ -36,10 +36,16 @@
 // target SwiftGodotUI). On ready, it asks the Swift runtime for the scene's
 // root node (ABI: swiftgodot_scene_build) and parents it. invalidate()
 // triggers a scoped re-render (ABI: swiftgodot_scene_invalidate).
+// The "root_view" property names the Swift `struct X: View` to render
+// (several hosts can host different scenes).
 class SwiftViewHost : public Node {
 	GDCLASS(SwiftViewHost, Node);
 
+	String root_view;
 	bool scene_built = false;
+
+	void set_root_view(const String &p_name) { root_view = p_name; }
+	String get_root_view() const { return root_view; }
 
 protected:
 	static void _bind_methods();

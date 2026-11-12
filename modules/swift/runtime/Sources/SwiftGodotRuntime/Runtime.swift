@@ -20,6 +20,7 @@ public enum VariantTypeMirror: Int32 {
 	var properties: [(name: String, type: Int32, usage: Int32)] = []
 	var error: String?
 	var libraryHandle: UnsafeMutableRawPointer?
+	var libraryPath: String?
 	var descriptor: UnsafePointer<SwiftGodotScriptDescriptor>?
 
 	init(path: String, source: String) {
@@ -85,6 +86,51 @@ public final class Runtime {
 		if script.className != nil || script.rootViewClass != nil {
 			ScriptCompiler.shared.tryCompile(script: script, className: script.className, rootView: script.rootViewClass)
 		}
+		return store(script)
+	}
+
+	// Loads a precompiled script library (exported ".swiftbin") and attaches
+	// its descriptor / scene registration without invoking swiftc.
+	public func loadPrecompiled(libraryPath: String, path: String, source: String) -> UnsafeMutableRawPointer? {
+		let script = CompiledScript(path: path, source: source)
+		parseMetadata(script)
+		script.libraryPath = libraryPath
+		if let handle = dlopen(libraryPath, RTLD_NOW | RTLD_LOCAL) {
+			attachLibrary(handle: handle, script: script)
+		} else {
+			script.error = "dlopen failed on precompiled library: \(String(cString: dlerror() ?? "unknown"))"
+		}
+		return store(script)
+	}
+
+	public func getScriptLibraryPath(_ handle: UnsafeMutableRawPointer?, buffer: UnsafeMutablePointer<CChar>?, bufferSize: Int32) {
+		let path = script(for: handle)?.libraryPath ?? ""
+		guard let buffer = buffer, bufferSize > 0 else { return }
+		path.withCString { cString in
+			strncpy(buffer, cString, Int(bufferSize) - 1)
+			buffer[Int(bufferSize) - 1] = 0
+		}
+	}
+
+	// Attaches an already-dlopened library to `script`: reads the script
+	// descriptor and, for scene scripts, calls swiftgodot_scene_register.
+	func attachLibrary(handle: UnsafeMutableRawPointer, script: CompiledScript) {
+		guard let descriptorPtr = dlsym(handle, "swiftgodot_script_descriptor") else {
+			script.error = "Compiled library does not export swiftgodot_script_descriptor."
+			dlclose(handle)
+			return
+		}
+		typealias DescriptorFn = @convention(c) () -> UnsafePointer<SwiftGodotScriptDescriptor>
+		let descriptorFn = unsafeBitCast(descriptorPtr, to: DescriptorFn.self)
+		script.libraryHandle = handle
+		script.descriptor = descriptorFn()
+		if script.rootViewClass != nil, let registerPtr = dlsym(handle, "swiftgodot_scene_register") {
+			typealias RegisterFn = @convention(c) () -> Void
+			unsafeBitCast(registerPtr, to: RegisterFn.self)()
+		}
+	}
+
+	private func store(_ script: CompiledScript) -> UnsafeMutableRawPointer? {
 		lock.lock()
 		let handle = UnsafeMutableRawPointer(bitPattern: ObjectIdentifier(script).hashValue & 0x7FFF_FFFF)!
 		scripts[handle] = script

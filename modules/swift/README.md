@@ -120,15 +120,26 @@ Engine side: `SwiftViewHost` (a `Node`) calls `scene_build` on
 `NOTIFICATION_READY` and exposes `invalidate()`; the ABI gained
 `scene_build`/`scene_invalidate`. A script declaring `struct MyScene: View`
 gets a generated `swiftgodot_scene_register` entry point that registers the
-root view in `SceneRegistry`; the host renders it once and re-renders
-through the attribute graph + differ on invalidation. Compiling scene
-scripts requires the runtime package to be pre-built (`swift build` in
-`modules/swift/runtime`); `ScriptCompiler` links each per-script library
-against its `.build/debug`.
+root view (by name) in `SceneRegistry`; each host renders the view named by
+its `root_view` property (several hosts can host different scenes) and
+re-renders through the attribute graph + differ on invalidation: `renderTree()`
+produces a `RenderedView` (node + component identity), and the differ keeps
+same-type containers stable, reconciles children pairwise by position, and
+swaps leaves in place. Compiling scene scripts requires the runtime package
+to be pre-built (`swift build` in `modules/swift/runtime`); `ScriptCompiler`
+links each per-script library against its `.build/debug`.
 
-**Status:** skeleton. Remaining: per-host root-view association, container
-wrappers, fine-grained in-place child reconciliation in the differ, and
-precompilation of scene scripts at export time.
+**Precompiled scripts at export (`.swiftbin`):** exported games have no
+`swiftc`. In the editor, every successful compile is cached next to the
+source as `<script>.swiftbin` (via the ABI's `script_get_library_path`);
+outside the editor, `SwiftScript::reload` loads the `.swiftbin` through
+`script_load_precompiled` instead of compiling, and `SwiftExportPlugin`
+bundles the `.swiftbin` files into the export. The editor always recompiles
+from source, so a stale cache is never used there.
+
+**Status:** done except container wrappers (VStack/HStack/... on top of
+`TupleView`), LSP-based completion, typed Array/Dictionary wrappers, and
+user docs (separate documentation repo).
 
 ## Building
 

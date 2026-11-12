@@ -74,19 +74,8 @@ public final class ScriptCompiler {
 				script.error = "dlopen failed: \(String(cString: dlerror() ?? "unknown"))"
 				return
 			}
-			guard let descriptorPtr = dlsym(handle, "swiftgodot_script_descriptor") else {
-				script.error = "Compiled library does not export swiftgodot_script_descriptor."
-				dlclose(handle)
-				return
-			}
-			typealias DescriptorFn = @convention(c) () -> UnsafePointer<SwiftGodotScriptDescriptor>
-			let descriptorFn = unsafeBitCast(descriptorPtr, to: DescriptorFn.self)
-			script.libraryHandle = handle
-			script.descriptor = descriptorFn()
-			if rootView != nil, let registerPtr = dlsym(handle, "swiftgodot_scene_register") {
-				typealias RegisterFn = @convention(c) () -> Void
-				unsafeBitCast(registerPtr, to: RegisterFn.self)()
-			}
+			script.libraryPath = libURL.path
+			Runtime.shared.attachLibrary(handle: handle, script: script)
 		} catch {
 			script.error = "Compilation failed: \(error.localizedDescription)"
 		}
@@ -144,7 +133,7 @@ public final class ScriptCompiler {
 			lines.append("")
 			lines.append("@_cdecl(\"swiftgodot_scene_register\")")
 			lines.append("public func swiftgodot_scene_register() {")
-			lines.append("\tMainActor.assumeIsolated { SceneRegistry.shared.registerRoot(\(rootView)()) }")
+			lines.append("\tMainActor.assumeIsolated { SceneRegistry.shared.registerRoot(\(rootView)(), named: \"\(rootView)\") }")
 			lines.append("}")
 		}
 		return lines.joined(separator: "\n")

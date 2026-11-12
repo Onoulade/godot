@@ -2,41 +2,35 @@ import Foundation
 import SwiftGodotRuntime
 
 // Component stack + structural differ. While a `body` chain evaluates, the
-// component stack gives every component a stable identity (type + position),
-// which the differ uses to update the Godot node tree in place instead of
-// rebuilding it.
-
-@MainActor
-public struct ComponentFrame {
-	public let id: String
-	public let viewType: String
-	public var children: [ComponentFrame] = []
-
-	public init(id: String, viewType: String, children: [ComponentFrame] = []) {
-		self.id = id
-		self.viewType = viewType
-		self.children = children
-	}
-}
+// component stack tracks the path of composite views being rendered; the
+// differ then reconciles the freshly rendered tree against the previous one
+// and applies the minimal set of node mutations to the Godot tree: same view
+// type at the same position keeps the existing container node and recurses,
+// a different type replaces just that child, leaves are swapped in place so
+// new properties apply.
 
 @MainActor
 public final class ComponentStack {
 	public static let shared = ComponentStack()
 
-	private var stack: [ComponentFrame] = []
+	private var stack: [String] = []
 
 	private init() {}
 
-	public func push(_ frame: ComponentFrame) {
-		stack.append(frame)
+	public func push(_ viewType: String) {
+		stack.append(viewType)
 	}
 
-	public func pop() -> ComponentFrame? {
-		stack.popLast()
+	public func pop() {
+		_ = stack.popLast()
 	}
 
-	public var current: ComponentFrame? {
+	public var current: String? {
 		stack.last
+	}
+
+	public var depth: Int {
+		stack.count
 	}
 }
 
@@ -46,23 +40,47 @@ public final class Differ {
 
 	private init() {}
 
-	// Reconciles `parent`'s children with a freshly rendered subtree: the same
-	// component type at the same position keeps the existing node (fine-grained
-	// in-place updates land with the component stack); a different type or a
-	// new component replaces the subtree.
-	public func apply(old: ComponentFrame?, new: ComponentFrame, newNode: Node?, parent: Node) {
-		if let old, old.viewType == new.viewType, parent.get_child_count() > 0 {
+	// Applies `new` to `parent` at child position `index`, given the previous
+	// render `old` (nil if none).
+	public func apply(old: RenderedView?, new: RenderedView, parent: Node, at index: Int) {
+		let existing: Node? = index < parent.get_child_count() ? parent.get_child(idx: index) : nil
+		if let old, old.viewType == new.viewType, let existing {
+			if new.children.isEmpty {
+				// Leaf at the same position: swap the node in place.
+				replaceChild(at: index, with: new.node, in: parent)
+			} else {
+				// Same container type: keep the node, reconcile children pairwise.
+				reconcile(old: old.children, new: new.children, parent: existing)
+			}
 			return
 		}
-		removeAllChildren(of: parent)
-		if let newNode {
-			parent.add_child(node: newNode)
+		replaceChild(at: index, with: new.node, in: parent)
+	}
+
+	private func reconcile(old: [RenderedView], new: [RenderedView], parent: Node) {
+		for i in 0..<new.count {
+			let oldChild = i < old.count ? old[i] : nil
+			if let oldChild {
+				apply(old: oldChild, new: new[i], parent: parent, at: i)
+			} else if let node = new[i].node {
+				parent.add_child(node: node)
+			}
+		}
+		while parent.get_child_count() > new.count {
+			guard let child = parent.get_child(idx: parent.get_child_count() - 1) else { break }
+			parent.remove_child(node: child)
 		}
 	}
 
-	private func removeAllChildren(of parent: Node) {
-		while parent.get_child_count() > 0, let child = parent.get_child(idx: 0) {
-			parent.remove_child(node: child)
+	private func replaceChild(at index: Int, with node: Node?, in parent: Node) {
+		if index < parent.get_child_count(), let old = parent.get_child(idx: index) {
+			parent.remove_child(node: old)
+		}
+		if let node {
+			parent.add_child(node: node)
+			if index < parent.get_child_count() - 1 {
+				parent.move_child(child_node: node, to_index: index)
+			}
 		}
 	}
 }

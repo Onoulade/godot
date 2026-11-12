@@ -91,6 +91,8 @@ Error SwiftBridge::_try_load_from(const String &p_dir) {
 	abi.runtime_shutdown = reinterpret_cast<void (*)()>(_resolve("swiftgodot_shutdown", true));
 
 	abi.script_compile = reinterpret_cast<SwiftGodotScriptHandle (*)(const char *, const char *)>(_resolve("swiftgodot_script_compile", true));
+	abi.script_load_precompiled = reinterpret_cast<SwiftGodotScriptHandle (*)(const char *, const char *, const char *)>(_resolve("swiftgodot_script_load_precompiled", true));
+	abi.script_get_library_path = reinterpret_cast<void (*)(SwiftGodotScriptHandle, char *, int)>(_resolve("swiftgodot_script_get_library_path", true));
 	abi.script_free = reinterpret_cast<void (*)(SwiftGodotScriptHandle)>(_resolve("swiftgodot_script_free", true));
 	abi.script_is_valid = reinterpret_cast<GDExtensionBool (*)(SwiftGodotScriptHandle)>(_resolve("swiftgodot_script_is_valid", true));
 	abi.script_get_error = reinterpret_cast<void (*)(SwiftGodotScriptHandle, char *, int)>(_resolve("swiftgodot_script_get_error", true));

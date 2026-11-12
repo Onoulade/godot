@@ -70,6 +70,15 @@ protected:
 		if (!file.is_empty()) {
 			add_file(p_path, file, true);
 		}
+		// Bundle the precompiled library cached by the editor, so exported
+		// games run Swift scripts without a Swift toolchain.
+		String bin_path = p_path + ".swiftbin";
+		if (FileAccess::exists(bin_path)) {
+			Vector<uint8_t> bin = FileAccess::get_file_as_bytes(bin_path);
+			if (!bin.is_empty()) {
+				add_file(bin_path, bin, true);
+			}
+		}
 	}
 
 public:

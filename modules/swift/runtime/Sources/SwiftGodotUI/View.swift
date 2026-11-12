@@ -6,24 +6,46 @@ import SwiftGodotRuntime
 // leaf primitives (the generated bindings in GodotBindings.swift).
 // Everything is @MainActor: Godot's node tree is main-thread-only.
 
+// A rendered view: the Godot node it produced (nil for EmptyView) plus its
+// component identity (view type + children), which the differ uses to update
+// the node tree in place.
+@MainActor
+public struct RenderedView {
+	public let viewType: String
+	public let node: Node?
+	public let children: [RenderedView]
+
+	public init(viewType: String, node: Node?, children: [RenderedView] = []) {
+		self.viewType = viewType
+		self.node = node
+		self.children = children
+	}
+}
+
 @MainActor
 public protocol View {
 	associatedtype Body: View
 	@ViewBuilder var body: Body { get }
+	func renderTree() -> RenderedView
 }
 
 extension View {
-	// Renders this view into a Godot node. Default: render the body.
+	// Default: a view renders as its body (passthrough).
+	public func renderTree() -> RenderedView {
+		body.renderTree()
+	}
+
 	public func render() -> Node? {
-		body.render()
+		renderTree().node
 	}
 }
 
 public struct EmptyView: View {
 	public init() {}
 	public var body: some View { EmptyView() }
-	// Overridden to avoid infinite recursion through the default render().
-	public func render() -> Node? { nil }
+	public func renderTree() -> RenderedView {
+		RenderedView(viewType: "EmptyView", node: nil)
+	}
 }
 
 // A leaf view wrapping a native Godot node (Label, Button, VBoxContainer...).
@@ -36,11 +58,13 @@ public struct NodeView<Root: Node>: View {
 
 	public var body: some View { EmptyView() }
 
-	public func render() -> Node? { node }
+	public func renderTree() -> RenderedView {
+		RenderedView(viewType: String(describing: Root.self), node: node)
+	}
 }
 
-// Several children in one body: rendered into a plain Node group. Layout
-// containers (VBox/HStack-like wrappers) come later on top of this.
+// Several children in one body: rendered into a plain Node group (kept stable
+// across re-renders; layout containers get their own wrappers later).
 public struct TupleView: View {
 	public let content: [any View]
 
@@ -50,20 +74,23 @@ public struct TupleView: View {
 
 	public var body: some View { EmptyView() }
 
-	public func render() -> Node? {
+	public func renderTree() -> RenderedView {
 		switch content.count {
 		case 0:
-			return nil
+			return RenderedView(viewType: "TupleView", node: nil)
 		case 1:
-			return content[0].render()
+			return content[0].renderTree()
 		default:
+			ComponentStack.shared.push("TupleView")
+			defer { ComponentStack.shared.pop() }
+			let rendered = content.map { $0.renderTree() }
 			let group = Node()
-			for child in content {
-				if let node = child.render() {
+			for child in rendered {
+				if let node = child.node {
 					group.add_child(node: node)
 				}
 			}
-			return group
+			return RenderedView(viewType: "TupleView", node: group, children: rendered)
 		}
 	}
 }
@@ -106,7 +133,9 @@ public struct OptionalView<Content: View>: View {
 		}
 	}
 
-	public func render() -> Node? { content?.render() }
+	public func renderTree() -> RenderedView {
+		content?.renderTree() ?? RenderedView(viewType: "OptionalView", node: nil)
+	}
 }
 
 public struct EitherView<C0: View, C1: View>: View {
@@ -134,12 +163,12 @@ public struct EitherView<C0: View, C1: View>: View {
 		}
 	}
 
-	public func render() -> Node? {
+	public func renderTree() -> RenderedView {
 		switch value {
 		case .first(let c0):
-			return c0.render()
+			return c0.renderTree()
 		case .second(let c1):
-			return c1.render()
+			return c1.renderTree()
 		}
 	}
 }

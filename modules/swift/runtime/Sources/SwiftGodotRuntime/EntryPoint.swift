@@ -37,6 +37,20 @@ public func swiftgodot_script_compile(_ path: UnsafePointer<CChar>, _ source: Un
 	}
 }
 
+@_cdecl("swiftgodot_script_load_precompiled")
+public func swiftgodot_script_load_precompiled(_ libraryPath: UnsafePointer<CChar>, _ path: UnsafePointer<CChar>, _ source: UnsafePointer<CChar>) -> UnsafeMutableRawPointer? {
+	MainActor.assumeIsolated {
+		Runtime.shared.loadPrecompiled(libraryPath: String(cString: libraryPath), path: String(cString: path), source: String(cString: source))
+	}
+}
+
+@_cdecl("swiftgodot_script_get_library_path")
+public func swiftgodot_script_get_library_path(_ script: UnsafeMutableRawPointer?, _ buffer: UnsafeMutablePointer<CChar>?, _ bufferSize: Int32) {
+	MainActor.assumeIsolated {
+		Runtime.shared.getScriptLibraryPath(script, buffer: buffer, bufferSize: bufferSize)
+	}
+}
+
 @_cdecl("swiftgodot_script_free")
 public func swiftgodot_script_free(_ script: UnsafeMutableRawPointer?) {
 	MainActor.assumeIsolated {

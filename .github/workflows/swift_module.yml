@@ -31,6 +31,45 @@ jobs:
           nm -D "$UILIB" | grep -q swiftgodot_scene_build
           nm -D "$UILIB" | grep -q swiftgodot_scene_invalidate
 
+  build-swift-runtime-macos:
+    name: Build Swift runtime (macOS)
+    runs-on: macos-14
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: swift-actions/setup-swift@v2
+        with:
+          swift-version: "6.0"
+      - name: Build the runtime package
+        run: swift build -c release --package-path modules/swift/runtime
+      - name: Check the runtime libraries
+        run: |
+          LIB=$(find modules/swift/runtime/.build/release -name "libswiftgodot_runtime.dylib" | head -1)
+          test -n "$LIB"
+          nm -gU "$LIB" | grep -q swiftgodot_init
+          UILIB=$(find modules/swift/runtime/.build/release -name "libSwiftGodotUI.dylib" | head -1)
+          test -n "$UILIB"
+          nm -gU "$UILIB" | grep -q swiftgodot_scene_build
+
+  build-swift-runtime-windows:
+    name: Build Swift runtime (Windows)
+    runs-on: windows-2022
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: swift-actions/setup-swift@v2
+        with:
+          swift-version: "6.0"
+      - name: Build the runtime package
+        run: swift build -c release --package-path modules/swift/runtime
+      - name: Check the runtime libraries
+        shell: pwsh
+        run: |
+          $lib = Get-ChildItem -Recurse modules/swift/runtime/.build/release -Filter "swiftgodot_runtime.dll" | Select-Object -First 1
+          if (-not $lib) { throw "swiftgodot_runtime.dll not found" }
+          $ui = Get-ChildItem -Recurse modules/swift/runtime/.build/release -Filter "SwiftGodotUI.dll" | Select-Object -First 1
+          if (-not $ui) { throw "SwiftGodotUI.dll not found" }
+
   build-engine-with-swift-module:
     name: Build engine with module_swift_enabled=yes
     runs-on: ubuntu-24.04

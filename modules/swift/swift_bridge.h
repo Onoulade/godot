@@ -59,6 +59,12 @@ struct SwiftGodotABI {
 	void (*runtime_shutdown)() = nullptr;
 
 	SwiftGodotScriptHandle (*script_compile)(const char *p_path, const char *p_source) = nullptr;
+	// Loads a precompiled script library (".swiftbin" next to the source,
+	// produced by the editor at compile time) instead of running swiftc;
+	// used in exported games, which have no Swift toolchain.
+	SwiftGodotScriptHandle (*script_load_precompiled)(const char *p_library_path, const char *p_path, const char *p_source) = nullptr;
+	// Writes the path of the library a script handle was loaded from (if any).
+	void (*script_get_library_path)(SwiftGodotScriptHandle p_script, char *r_buffer, int p_buffer_size) = nullptr;
 	void (*script_free)(SwiftGodotScriptHandle p_script) = nullptr;
 	GDExtensionBool (*script_is_valid)(SwiftGodotScriptHandle p_script) = nullptr;
 	void (*script_get_error)(SwiftGodotScriptHandle p_script, char *r_buffer, int p_buffer_size) = nullptr;

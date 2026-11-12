@@ -34,6 +34,8 @@
 #include "swift_instance.h"
 #include "swift_language.h"
 
+#include "core/config/engine.h"
+#include "core/io/file_access.h"
 #include "core/os/memory.h"
 
 void SwiftScript::_bind_methods() {
@@ -87,7 +89,20 @@ Error SwiftScript::reload(bool p_keep_state) {
 		const SwiftGodotABI &abi = bridge->get_abi();
 		CharString path = get_path().utf8();
 		CharString source = source_code.utf8();
-		compiled_handle = abi.script_compile(path.get_data(), source.get_data());
+		String bin_path = get_path() + ".swiftbin";
+		// Exported games have no Swift toolchain: load the precompiled library
+		// cached by the editor next to the source. In the editor, always
+		// recompile from source (swiftc) and refresh the cache instead, so a
+		// stale cache can never be picked up.
+		bool loaded_precompiled = false;
+		if (!Engine::get_singleton()->is_editor_hint() && abi.script_load_precompiled != nullptr && FileAccess::exists(bin_path)) {
+			CharString bin = bin_path.utf8();
+			compiled_handle = abi.script_load_precompiled(bin.get_data(), path.get_data(), source.get_data());
+			loaded_precompiled = compiled_handle != nullptr;
+		}
+		if (!loaded_precompiled) {
+			compiled_handle = abi.script_compile(path.get_data(), source.get_data());
+		}
 		if (compiled_handle != nullptr) {
 			valid = abi.script_is_valid != nullptr && abi.script_is_valid(compiled_handle) != 0;
 			if (!valid && abi.script_get_error != nullptr) {
@@ -96,6 +111,20 @@ Error SwiftScript::reload(bool p_keep_state) {
 				abi.script_get_error(compiled_handle, error_buffer, sizeof(error_buffer));
 				ERR_PRINT(vformat("Swift script '%s' failed to compile: %s", get_path(), String::utf8(error_buffer)));
 			}
+#ifdef TOOLS_ENABLED
+			if (valid && Engine::get_singleton()->is_editor_hint() && abi.script_get_library_path != nullptr) {
+				char lib_buffer[4096];
+				lib_buffer[0] = '\0';
+				abi.script_get_library_path(compiled_handle, lib_buffer, sizeof(lib_buffer));
+				if (lib_buffer[0] != '\0') {
+					Vector<uint8_t> data = FileAccess::get_file_as_bytes(String::utf8(lib_buffer));
+					Ref<FileAccess> out = FileAccess::open(bin_path, FileAccess::WRITE);
+					if (out.is_valid() && !data.is_empty()) {
+						out->store_buffer(data.ptrw(), data.size());
+					}
+				}
+			}
+#endif
 		}
 	} else {
 		// Without the runtime, a non-empty source is considered valid,
