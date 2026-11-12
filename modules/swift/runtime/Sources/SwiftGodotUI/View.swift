@@ -42,7 +42,7 @@ extension View {
 
 public struct EmptyView: View {
 	public init() {}
-	public var body: some View { EmptyView() }
+	@ViewBuilder public var body: some View { EmptyView() }
 	public func renderTree() -> RenderedView {
 		RenderedView(viewType: "EmptyView", node: nil)
 	}
@@ -56,7 +56,7 @@ public struct NodeView<Root: Node>: View {
 		self.node = node
 	}
 
-	public var body: some View { EmptyView() }
+	@ViewBuilder public var body: some View { EmptyView() }
 
 	public func renderTree() -> RenderedView {
 		RenderedView(viewType: String(describing: Root.self), node: node)
@@ -72,7 +72,7 @@ public struct TupleView: View {
 		self.content = content
 	}
 
-	public var body: some View { EmptyView() }
+	@ViewBuilder public var body: some View { EmptyView() }
 
 	public func renderTree() -> RenderedView {
 		switch content.count {
@@ -95,14 +95,53 @@ public struct TupleView: View {
 	}
 }
 
+@MainActor
 @resultBuilder
 public enum ViewBuilder {
 	public static func buildBlock() -> EmptyView {
 		EmptyView()
 	}
 
-	public static func buildBlock<each C: View>(repeat each component: each C) -> TupleView {
-		TupleView(content: [repeat each component])
+	// Heterogeneous children without parameter packs (VariadicGenerics is
+	// still experimental in Swift 6): fixed-arity overloads up to 10.
+	public static func buildBlock<C0: View>(_ c0: C0) -> TupleView {
+		TupleView(content: [c0])
+	}
+
+	public static func buildBlock<C0: View, C1: View>(_ c0: C0, _ c1: C1) -> TupleView {
+		TupleView(content: [c0, c1])
+	}
+
+	public static func buildBlock<C0: View, C1: View, C2: View>(_ c0: C0, _ c1: C1, _ c2: C2) -> TupleView {
+		TupleView(content: [c0, c1, c2])
+	}
+
+	public static func buildBlock<C0: View, C1: View, C2: View, C3: View>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3) -> TupleView {
+		TupleView(content: [c0, c1, c2, c3])
+	}
+
+	public static func buildBlock<C0: View, C1: View, C2: View, C3: View, C4: View>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4) -> TupleView {
+		TupleView(content: [c0, c1, c2, c3, c4])
+	}
+
+	public static func buildBlock<C0: View, C1: View, C2: View, C3: View, C4: View, C5: View>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5) -> TupleView {
+		TupleView(content: [c0, c1, c2, c3, c4, c5])
+	}
+
+	public static func buildBlock<C0: View, C1: View, C2: View, C3: View, C4: View, C5: View, C6: View>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6) -> TupleView {
+		TupleView(content: [c0, c1, c2, c3, c4, c5, c6])
+	}
+
+	public static func buildBlock<C0: View, C1: View, C2: View, C3: View, C4: View, C5: View, C6: View, C7: View>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7) -> TupleView {
+		TupleView(content: [c0, c1, c2, c3, c4, c5, c6, c7])
+	}
+
+	public static func buildBlock<C0: View, C1: View, C2: View, C3: View, C4: View, C5: View, C6: View, C7: View, C8: View>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8) -> TupleView {
+		TupleView(content: [c0, c1, c2, c3, c4, c5, c6, c7, c8])
+	}
+
+	public static func buildBlock<C0: View, C1: View, C2: View, C3: View, C4: View, C5: View, C6: View, C7: View, C8: View, C9: View>(_ c0: C0, _ c1: C1, _ c2: C2, _ c3: C3, _ c4: C4, _ c5: C5, _ c6: C6, _ c7: C7, _ c8: C8, _ c9: C9) -> TupleView {
+		TupleView(content: [c0, c1, c2, c3, c4, c5, c6, c7, c8, c9])
 	}
 
 	public static func buildOptional<C: View>(_ component: C?) -> OptionalView<C> {
@@ -125,7 +164,7 @@ public struct OptionalView<Content: View>: View {
 		self.content = content
 	}
 
-	public var body: some View {
+	@ViewBuilder public var body: some View {
 		if let content {
 			content.body
 		} else {
@@ -149,12 +188,12 @@ public struct EitherView<C0: View, C1: View>: View {
 		value = .second(second)
 	}
 
-	public enum Either {
-		case first(C0)
-		case second(C1)
+	public enum Either<First, Second> {
+		case first(First)
+		case second(Second)
 	}
 
-	public var body: some View {
+	@ViewBuilder public var body: some View {
 		switch value {
 		case .first(let c0):
 			c0.body

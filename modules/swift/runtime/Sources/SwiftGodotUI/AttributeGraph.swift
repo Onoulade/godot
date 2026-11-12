@@ -34,8 +34,9 @@ public final class AttributeGraph {
 		guard let recompute = recomputes[id] else { return }
 		withObservationTracking {
 			recompute()
-		} onChange: { [weak self] in
-			self?.invalidate(id)
+		} onChange: {
+			// onChange is @Sendable and may fire off the main actor.
+			Task { @MainActor in AttributeGraph.shared.invalidate(id) }
 		}
 	}
 

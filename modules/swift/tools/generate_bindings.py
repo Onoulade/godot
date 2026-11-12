@@ -325,33 +325,91 @@ def enum_values(en):
     return out
 
 
-def is_enum(jtype, class_name):
-    if (jtype or "").lower() != "int" or not class_name:
+def is_known_enum(class_name):
+    if not class_name:
         return False
     if "." in class_name:
         return bool(CLASS_ENUM_VALUES.get(class_name))
     return class_name in GLOBAL_ENUMS
 
 
+def enum_name_of(jtype, class_name):
+    # New dump format encodes enums as "enum::Class.Enum" / "enum::Key";
+    # the old format used "int" + class_name.
+    t = (jtype or "").strip()
+    if t.lower().startswith("enum::"):
+        return t[len("enum::") :]
+    if t.lower() == "int" and is_known_enum(class_name):
+        return class_name
+    return None
+
+
+def is_enum(jtype, class_name):
+    return enum_name_of(jtype, class_name) is not None
+
+
+def base_class_of(t):
+    # New dump format encodes "any of these classes" as a comma-separated
+    # list (entries starting with '-' are exclusions): pick the base class.
+    parts = [p.strip() for p in t.split(",") if p.strip()]
+    if not parts:
+        return t
+    if any(p.startswith("-") for p in parts):
+        for p in parts:
+            if not p.startswith("-"):
+                return p
+        return parts[0].lstrip("-")
+    return parts[-1]
+
+
 def swift_type(jtype, class_name, generated):
-    t = (jtype or "").lower()
-    if t == "bool":
-        return "Bool"
-    if t == "int":
-        if is_enum(jtype, class_name):
-            return enum_swift_type(class_name, generated)
+    t = (jtype or "").strip()
+    tl = t.lower()
+    en = enum_name_of(t, class_name)
+    if en is not None:
+        return enum_swift_type(en, generated)
+    if tl.startswith("bitfield::"):
         return "Int"
-    if t == "float":
+    if "," in t:
+        return swift_type(base_class_of(t), None, generated)
+    if t.endswith("*"):
+        return swift_type(t[:-1].strip(), None, generated)
+    if tl == "bool":
+        return "Bool"
+    if tl == "int":
+        return "Int"
+    if tl in ("float", "double"):
         return "Double"
-    if t in ("string", "stringname", "nodepath"):
+    if tl in ("string", "stringname", "nodepath"):
         return "String"
-    if t in VALUE_TYPES:
-        return VALUE_TYPES[t]
-    if t == "object":
+    if tl in VALUE_TYPES:
+        return VALUE_TYPES[tl]
+    if tl == "object":
         if class_name and class_name in generated:
             return class_name
         return "GodotObject"
+    if tl.startswith("object::"):
+        name = t[len("object::") :]
+        return name if name in generated else "GodotObject"
+    if t and t[0].isupper() and t in generated:
+        return t
     return "VariantBox"
+
+
+def is_object_type(jtype, class_name, generated):
+    t = (jtype or "").strip()
+    tl = t.lower()
+    if tl.startswith(("enum::", "bitfield::")):
+        return False
+    if tl == "object" or tl.startswith("object::"):
+        return True
+    if "," in t:
+        return is_object_type(base_class_of(t), None, generated)
+    if t.endswith("*"):
+        return is_object_type(t[:-1].strip(), None, generated)
+    if t and t[0].isupper() and t in generated:
+        return True
+    return False
 
 
 def default_literal(dv):
@@ -371,18 +429,22 @@ def default_literal(dv):
 
 def emit_method(m, generated):
     name = sanitize(m.get("name", "unknown"))
-    ret = m.get("return_type", {})
+    # New dump format uses "return_value" (absent = void); old format "return_type".
+    ret = m.get("return_value") or m.get("return_type") or {}
     ret_void = is_void(ret.get("type", "void"))
     ret_swift = swift_type(ret.get("type"), ret.get("class_name"), generated)
+    ret_enum = enum_name_of(ret.get("type"), ret.get("class_name"))
+    ret_object = is_object_type(ret.get("type"), ret.get("class_name"), generated)
     args = m.get("arguments", [])
     params = []
     call_args = []
     for a in args:
         st = swift_type(a.get("type"), a.get("class_name"), generated)
         pname = sanitize(a.get("name", "arg"))
-        if is_enum(a.get("type"), a.get("class_name")):
+        en = enum_name_of(a.get("type"), a.get("class_name"))
+        if en is not None:
             if st != "Int":
-                dv = enum_default_literal(a.get("class_name"), a.get("default_value"))
+                dv = enum_default_literal(en, a.get("default_value"))
             else:
                 dv = default_literal(a.get("default_value"))
         else:
@@ -393,7 +455,7 @@ def emit_method(m, generated):
                 elif st == "String" and not (dv.startswith('"') and dv.endswith('"')):
                     dv = None
         params.append(f"{pname}: {st} = {dv}" if dv is not None else f"{pname}: {st}")
-        if is_enum(a.get("type"), a.get("class_name")) and st != "Int":
+        if en is not None and st != "Int":
             call_args.append(f"VariantBox({pname}.rawValue)")
         else:
             call_args.append(f"VariantBox({pname})")
@@ -401,12 +463,7 @@ def emit_method(m, generated):
     lines = []
     if not ret_void:
         lines.append("\t@discardableResult")
-    lines.append(
-        "\t"
-        + signature
-        + ("" if ret_void else f" -> {ret_swift}" + ("?" if ret.get("type", "").lower() == "object" else ""))
-        + " {"
-    )
+    lines.append("\t" + signature + ("" if ret_void else f" -> {ret_swift}" + ("?" if ret_object else "")) + " {")
     mname = m.get("name", "unknown")
     args_joined = ", ".join(call_args)
     call = f'Host.shared.callMethod(object: ptr, method: "{mname}", args: [{args_joined}])'
@@ -423,7 +480,7 @@ def emit_method(m, generated):
         lines.append("\t\treturn __ret.asString()")
     elif ret_swift in VALUE_TYPE_ACCESSORS:
         lines.append(f"\t\treturn __ret.{VALUE_TYPE_ACCESSORS[ret_swift]}()")
-    elif is_enum(ret.get("type"), ret.get("class_name")) and ret_swift != "Int":
+    elif ret_enum is not None and ret_swift != "Int":
         lines.append(f"\t\treturn __ret.asEnum({ret_swift}.self)")
     elif ret_swift == "VariantBox":
         lines.append("\t\treturn __ret")
@@ -438,10 +495,10 @@ def emit_property(p, method_names, generated):
     if name in method_names:
         return []
     st = swift_type(p.get("type"), p.get("class_name"), generated)
-    is_object = (p.get("type") or "").lower() == "object"
+    is_object = is_object_type(p.get("type"), p.get("class_name"), generated)
     decl = st + "?" if is_object else st
     raw = p.get("name")
-    if is_enum(p.get("type"), p.get("class_name")) and st != "Int":
+    if enum_name_of(p.get("type"), p.get("class_name")) is not None and st != "Int":
         accessor = f".asEnum({st}.self)"
     elif st == "VariantBox":
         accessor = ""
@@ -482,17 +539,20 @@ def emit_top_level_enum(name, values):
     return lines
 
 
-def emit_signal(s):
+def emit_signal(s, generated):
     name = sanitize(s.get("name", "unknown"))
     args = s.get("arguments", [])
     params = []
     sname = s.get("name", "unknown")
     call_args = [f'VariantBox("{sname}")']
     for a in args:
-        st = swift_type(a.get("type"), a.get("class_name"), set())
+        st = swift_type(a.get("type"), a.get("class_name"), generated)
         pname = sanitize(a.get("name", "arg"))
         params.append(f"{pname}: {st}")
-        call_args.append(f"VariantBox({pname})")
+        if enum_name_of(a.get("type"), a.get("class_name")) is not None and st != "Int":
+            call_args.append(f"VariantBox({pname}.rawValue)")
+        else:
+            call_args.append(f"VariantBox({pname})")
     args_joined = ", ".join(call_args)
     params_joined = ", ".join(params)
     return [
@@ -519,8 +579,13 @@ def main():
     with open(args.api) as f:
         api = json.load(f)
 
+    # Global enums come from the dump itself when present (new format: list of
+    # {"name","values":[{"name","value"}]}); core headers fill the gaps.
+    for en in api.get("global_enums", []):
+        GLOBAL_ENUMS[en.get("name", "")] = enum_values(en)
     for header in args.global_enums_headers.split(","):
-        GLOBAL_ENUMS.update(parse_header_enums(header))
+        for ename, values in parse_header_enums(header).items():
+            GLOBAL_ENUMS.setdefault(ename, values)
 
     all_classes = {c["name"]: c for c in api.get("classes", [])}
     for c in all_classes.values():
@@ -636,7 +701,7 @@ def main():
                 continue
             if sanitize("emit_" + str(s.get("name", ""))) in method_names:
                 continue  # a real engine method with this name exists
-            out.extend(emit_signal(s))
+            out.extend(emit_signal(s, selected))
         out.append("}")
         out.append("")
 

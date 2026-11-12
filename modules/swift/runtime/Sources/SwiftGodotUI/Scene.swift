@@ -51,7 +51,7 @@ public final class SceneRegistry {
 
 	public func build(host: UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? {
 		guard let host, let hostNode = Node(raw: host), let view = rootView(for: host) else { return nil }
-		let id = ObjectIdentifier(hostNode.ptr)
+		let id = ObjectIdentifier(hostNode)
 		if let existing = trees[id] {
 			return existing.node?.ptr
 		}
@@ -62,7 +62,7 @@ public final class SceneRegistry {
 
 	public func invalidate(host: UnsafeMutableRawPointer?) {
 		guard let host, let hostNode = Node(raw: host), let view = rootView(for: host) else { return }
-		let id = ObjectIdentifier(hostNode.ptr)
+		let id = ObjectIdentifier(hostNode)
 		// Scoped, propagated invalidation: the root body is re-evaluated as an
 		// attribute of the graph; Observation tracks the @State/@Observable
 		// reads it performs, so only the dependents of a change are re-run,
