@@ -857,13 +857,13 @@ public class AccessibilityServer: Object {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func create_element(window_id: Int, role: AccessibilityServer.AccessibilityRole) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "create_element", args: [VariantBox(window_id), VariantBox(role.rawValue)])
+	public func create_element(window_id: Int, role: Int) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "create_element", args: [VariantBox(window_id), VariantBox(role)])
 		return __ret
 	}
 	@discardableResult
-	public func create_sub_element(parent_rid: VariantBox, role: AccessibilityServer.AccessibilityRole, insert_pos: Int = -1) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "create_sub_element", args: [VariantBox(parent_rid), VariantBox(role.rawValue), VariantBox(insert_pos)])
+	public func create_sub_element(parent_rid: VariantBox, role: Int, insert_pos: Int = -1) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "create_sub_element", args: [VariantBox(parent_rid), VariantBox(role), VariantBox(insert_pos)])
 		return __ret
 	}
 	@discardableResult
@@ -902,8 +902,8 @@ public class AccessibilityServer: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_window_root", args: [VariantBox(window_id)])
 		return __ret
 	}
-	public func update_set_role(id: VariantBox, role: AccessibilityServer.AccessibilityRole) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_role", args: [VariantBox(id), VariantBox(role.rawValue)])
+	public func update_set_role(id: VariantBox, role: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_role", args: [VariantBox(id), VariantBox(role)])
 	}
 	public func update_set_name(id: VariantBox, name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_name", args: [VariantBox(id), VariantBox(name)])
@@ -971,11 +971,11 @@ public class AccessibilityServer: Object {
 	public func update_set_error_message(id: VariantBox, other_id: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_error_message", args: [VariantBox(id), VariantBox(other_id)])
 	}
-	public func update_set_live(id: VariantBox, live: AccessibilityServer.AccessibilityLiveMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_live", args: [VariantBox(id), VariantBox(live.rawValue)])
+	public func update_set_live(id: VariantBox, live: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_live", args: [VariantBox(id), VariantBox(live)])
 	}
-	public func update_add_action(id: VariantBox, action: AccessibilityServer.AccessibilityAction, callable: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "update_add_action", args: [VariantBox(id), VariantBox(action.rawValue), VariantBox(callable)])
+	public func update_add_action(id: VariantBox, action: Int, callable: VariantBox) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "update_add_action", args: [VariantBox(id), VariantBox(action), VariantBox(callable)])
 	}
 	public func update_add_custom_action(id: VariantBox, action_id: Int, action_description: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update_add_custom_action", args: [VariantBox(id), VariantBox(action_id), VariantBox(action_description)])
@@ -1013,8 +1013,8 @@ public class AccessibilityServer: Object {
 	public func update_set_list_item_expanded(id: VariantBox, expanded: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_list_item_expanded", args: [VariantBox(id), VariantBox(expanded)])
 	}
-	public func update_set_popup_type(id: VariantBox, popup: AccessibilityServer.AccessibilityPopupType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_popup_type", args: [VariantBox(id), VariantBox(popup.rawValue)])
+	public func update_set_popup_type(id: VariantBox, popup: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_popup_type", args: [VariantBox(id), VariantBox(popup)])
 	}
 	public func update_set_checked(id: VariantBox, checekd: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_checked", args: [VariantBox(id), VariantBox(checekd)])
@@ -1052,8 +1052,8 @@ public class AccessibilityServer: Object {
 	public func update_set_text_selection(id: VariantBox, text_start_id: VariantBox, start_char: Int, text_end_id: VariantBox, end_char: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_text_selection", args: [VariantBox(id), VariantBox(text_start_id), VariantBox(start_char), VariantBox(text_end_id), VariantBox(end_char)])
 	}
-	public func update_set_flag(id: VariantBox, flag: AccessibilityServer.AccessibilityFlags, value: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_flag", args: [VariantBox(id), VariantBox(flag.rawValue), VariantBox(value)])
+	public func update_set_flag(id: VariantBox, flag: Int, value: Bool) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_flag", args: [VariantBox(id), VariantBox(flag), VariantBox(value)])
 	}
 	public func update_set_classname(id: VariantBox, classname: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_classname", args: [VariantBox(id), VariantBox(classname)])
@@ -1470,9 +1470,9 @@ public class ClassDB: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "instantiate", args: [VariantBox(class_)])
 	}
 	@discardableResult
-	public func class_get_api_type(class_: String) -> ClassDB.APIType {
+	public func class_get_api_type(class_: String) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "class_get_api_type", args: [VariantBox(class_)])
-		return __ret.asEnum(ClassDB.APIType.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func class_has_signal(class_: String, signal: String) -> Bool {
@@ -1927,11 +1927,11 @@ public class DisplayServer: Object {
 	public func tts_stop() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "tts_stop", args: [])
 	}
-	public func tts_set_utterance_callback(event: DisplayServer.TTSUtteranceEvent, callable: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "tts_set_utterance_callback", args: [VariantBox(event.rawValue), VariantBox(callable)])
+	public func tts_set_utterance_callback(event: Int, callable: VariantBox) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "tts_set_utterance_callback", args: [VariantBox(event), VariantBox(callable)])
 	}
-	public func _tts_post_utterance_event(event: DisplayServer.TTSUtteranceEvent, id: Int, char_pos: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_tts_post_utterance_event", args: [VariantBox(event.rawValue), VariantBox(id), VariantBox(char_pos)])
+	public func _tts_post_utterance_event(event: Int, id: Int, char_pos: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_tts_post_utterance_event", args: [VariantBox(event), VariantBox(id), VariantBox(char_pos)])
 	}
 	@discardableResult
 	public func is_dark_mode_supported() -> Bool {
@@ -2093,13 +2093,13 @@ public class DisplayServer: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "screen_get_image_rect", args: [VariantBox(rect)])
 		return __ret.asObject(Image.self)
 	}
-	public func screen_set_orientation(orientation: DisplayServer.ScreenOrientation, screen: Int = -1) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "screen_set_orientation", args: [VariantBox(orientation.rawValue), VariantBox(screen)])
+	public func screen_set_orientation(orientation: Int, screen: Int = -1) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "screen_set_orientation", args: [VariantBox(orientation), VariantBox(screen)])
 	}
 	@discardableResult
-	public func screen_get_orientation(screen: Int = -1) -> DisplayServer.ScreenOrientation {
+	public func screen_get_orientation(screen: Int = -1) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "screen_get_orientation", args: [VariantBox(screen)])
-		return __ret.asEnum(DisplayServer.ScreenOrientation.self)
+		return __ret.asInt()
 	}
 	public func screen_set_keep_on(enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "screen_set_keep_on", args: [VariantBox(enable)])
@@ -2120,8 +2120,8 @@ public class DisplayServer: Object {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func window_get_native_handle(handle_type: DisplayServer.HandleType, window_id: Int = 0) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "window_get_native_handle", args: [VariantBox(handle_type.rawValue), VariantBox(window_id)])
+	public func window_get_native_handle(handle_type: Int, window_id: Int = 0) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "window_get_native_handle", args: [VariantBox(handle_type), VariantBox(window_id)])
 		return __ret.asInt()
 	}
 	@discardableResult
@@ -2226,12 +2226,12 @@ public class DisplayServer: Object {
 	public func window_set_mode(mode: DisplayServer.WindowMode, window_id: Int = 0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "window_set_mode", args: [VariantBox(mode.rawValue), VariantBox(window_id)])
 	}
-	public func window_set_flag(flag: DisplayServer.WindowFlags, enabled: Bool, window_id: Int = 0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "window_set_flag", args: [VariantBox(flag.rawValue), VariantBox(enabled), VariantBox(window_id)])
+	public func window_set_flag(flag: Int, enabled: Bool, window_id: Int = 0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "window_set_flag", args: [VariantBox(flag), VariantBox(enabled), VariantBox(window_id)])
 	}
 	@discardableResult
-	public func window_get_flag(flag: DisplayServer.WindowFlags, window_id: Int = 0) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "window_get_flag", args: [VariantBox(flag.rawValue), VariantBox(window_id)])
+	public func window_get_flag(flag: Int, window_id: Int = 0) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "window_get_flag", args: [VariantBox(flag), VariantBox(window_id)])
 		return __ret.asBool()
 	}
 	public func window_set_icon(icon: Image, window_id: Int = 0) {
@@ -2282,13 +2282,13 @@ public class DisplayServer: Object {
 	public func window_set_ime_rect(rect: Rect2i, window_id: Int = 0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "window_set_ime_rect", args: [VariantBox(rect), VariantBox(window_id)])
 	}
-	public func window_set_vsync_mode(vsync_mode: DisplayServer.VSyncMode, window_id: Int = 0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "window_set_vsync_mode", args: [VariantBox(vsync_mode.rawValue), VariantBox(window_id)])
+	public func window_set_vsync_mode(vsync_mode: Int, window_id: Int = 0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "window_set_vsync_mode", args: [VariantBox(vsync_mode), VariantBox(window_id)])
 	}
 	@discardableResult
-	public func window_get_vsync_mode(window_id: Int = 0) -> DisplayServer.VSyncMode {
+	public func window_get_vsync_mode(window_id: Int = 0) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "window_get_vsync_mode", args: [VariantBox(window_id)])
-		return __ret.asEnum(DisplayServer.VSyncMode.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func window_is_hdr_output_supported(window_id: Int = 0) -> Bool {
@@ -2357,8 +2357,8 @@ public class DisplayServer: Object {
 	public func window_start_drag(window_id: Int = 0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "window_start_drag", args: [VariantBox(window_id)])
 	}
-	public func window_start_resize(edge: DisplayServer.WindowResizeEdge, window_id: Int = 0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "window_start_resize", args: [VariantBox(edge.rawValue), VariantBox(window_id)])
+	public func window_start_resize(edge: Int, window_id: Int = 0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "window_start_resize", args: [VariantBox(edge), VariantBox(window_id)])
 	}
 	public func window_set_color(color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "window_set_color", args: [VariantBox(color)])
@@ -2384,13 +2384,13 @@ public class DisplayServer: Object {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func accessibility_create_element(window_id: Int, role: DisplayServer.AccessibilityRole) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_create_element", args: [VariantBox(window_id), VariantBox(role.rawValue)])
+	public func accessibility_create_element(window_id: Int, role: Int) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_create_element", args: [VariantBox(window_id), VariantBox(role)])
 		return __ret
 	}
 	@discardableResult
-	public func accessibility_create_sub_element(parent_rid: VariantBox, role: DisplayServer.AccessibilityRole, insert_pos: Int = -1) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_create_sub_element", args: [VariantBox(parent_rid), VariantBox(role.rawValue), VariantBox(insert_pos)])
+	public func accessibility_create_sub_element(parent_rid: VariantBox, role: Int, insert_pos: Int = -1) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_create_sub_element", args: [VariantBox(parent_rid), VariantBox(role), VariantBox(insert_pos)])
 		return __ret
 	}
 	@discardableResult
@@ -2429,8 +2429,8 @@ public class DisplayServer: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_get_window_root", args: [VariantBox(window_id)])
 		return __ret
 	}
-	public func accessibility_update_set_role(id: VariantBox, role: DisplayServer.AccessibilityRole) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_role", args: [VariantBox(id), VariantBox(role.rawValue)])
+	public func accessibility_update_set_role(id: VariantBox, role: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_role", args: [VariantBox(id), VariantBox(role)])
 	}
 	public func accessibility_update_set_name(id: VariantBox, name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_name", args: [VariantBox(id), VariantBox(name)])
@@ -2492,11 +2492,11 @@ public class DisplayServer: Object {
 	public func accessibility_update_set_error_message(id: VariantBox, other_id: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_error_message", args: [VariantBox(id), VariantBox(other_id)])
 	}
-	public func accessibility_update_set_live(id: VariantBox, live: DisplayServer.AccessibilityLiveMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_live", args: [VariantBox(id), VariantBox(live.rawValue)])
+	public func accessibility_update_set_live(id: VariantBox, live: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_live", args: [VariantBox(id), VariantBox(live)])
 	}
-	public func accessibility_update_add_action(id: VariantBox, action: DisplayServer.AccessibilityAction, callable: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_add_action", args: [VariantBox(id), VariantBox(action.rawValue), VariantBox(callable)])
+	public func accessibility_update_add_action(id: VariantBox, action: Int, callable: VariantBox) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_add_action", args: [VariantBox(id), VariantBox(action), VariantBox(callable)])
 	}
 	public func accessibility_update_add_custom_action(id: VariantBox, action_id: Int, action_description: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_add_custom_action", args: [VariantBox(id), VariantBox(action_id), VariantBox(action_description)])
@@ -2534,8 +2534,8 @@ public class DisplayServer: Object {
 	public func accessibility_update_set_list_item_expanded(id: VariantBox, expanded: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_list_item_expanded", args: [VariantBox(id), VariantBox(expanded)])
 	}
-	public func accessibility_update_set_popup_type(id: VariantBox, popup: DisplayServer.AccessibilityPopupType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_popup_type", args: [VariantBox(id), VariantBox(popup.rawValue)])
+	public func accessibility_update_set_popup_type(id: VariantBox, popup: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_popup_type", args: [VariantBox(id), VariantBox(popup)])
 	}
 	public func accessibility_update_set_checked(id: VariantBox, checekd: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_checked", args: [VariantBox(id), VariantBox(checekd)])
@@ -2573,8 +2573,8 @@ public class DisplayServer: Object {
 	public func accessibility_update_set_text_selection(id: VariantBox, text_start_id: VariantBox, start_char: Int, text_end_id: VariantBox, end_char: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_text_selection", args: [VariantBox(id), VariantBox(text_start_id), VariantBox(start_char), VariantBox(text_end_id), VariantBox(end_char)])
 	}
-	public func accessibility_update_set_flag(id: VariantBox, flag: DisplayServer.AccessibilityFlags, value: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_flag", args: [VariantBox(id), VariantBox(flag.rawValue), VariantBox(value)])
+	public func accessibility_update_set_flag(id: VariantBox, flag: Int, value: Bool) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_flag", args: [VariantBox(id), VariantBox(flag), VariantBox(value)])
 	}
 	public func accessibility_update_set_classname(id: VariantBox, classname: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_classname", args: [VariantBox(id), VariantBox(classname)])
@@ -2622,8 +2622,8 @@ public class DisplayServer: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "ime_get_text", args: [])
 		return __ret.asString()
 	}
-	public func virtual_keyboard_show(existing_text: String, position: Rect2, type: DisplayServer.VirtualKeyboardType, max_length: Int = -1, cursor_start: Int = -1, cursor_end: Int = -1) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "virtual_keyboard_show", args: [VariantBox(existing_text), VariantBox(position), VariantBox(type.rawValue), VariantBox(max_length), VariantBox(cursor_start), VariantBox(cursor_end)])
+	public func virtual_keyboard_show(existing_text: String, position: Rect2, type: Int = 0, max_length: Int = -1, cursor_start: Int = -1, cursor_end: Int = -1) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "virtual_keyboard_show", args: [VariantBox(existing_text), VariantBox(position), VariantBox(type), VariantBox(max_length), VariantBox(cursor_start), VariantBox(cursor_end)])
 	}
 	public func virtual_keyboard_hide() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "virtual_keyboard_hide", args: [])
@@ -2641,16 +2641,16 @@ public class DisplayServer: Object {
 	public func set_hardware_keyboard_connection_change_callback(callable: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_hardware_keyboard_connection_change_callback", args: [VariantBox(callable)])
 	}
-	public func cursor_set_shape(shape: DisplayServer.CursorShape) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "cursor_set_shape", args: [VariantBox(shape.rawValue)])
+	public func cursor_set_shape(shape: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "cursor_set_shape", args: [VariantBox(shape)])
 	}
 	@discardableResult
-	public func cursor_get_shape() -> DisplayServer.CursorShape {
+	public func cursor_get_shape() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "cursor_get_shape", args: [])
-		return __ret.asEnum(DisplayServer.CursorShape.self)
+		return __ret.asInt()
 	}
-	public func cursor_set_custom_image(cursor: Resource, shape: DisplayServer.CursorShape, hotspot: Vector2) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "cursor_set_custom_image", args: [VariantBox(cursor), VariantBox(shape.rawValue), VariantBox(hotspot)])
+	public func cursor_set_custom_image(cursor: Resource, shape: Int = 0, hotspot: Vector2) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "cursor_set_custom_image", args: [VariantBox(cursor), VariantBox(shape), VariantBox(hotspot)])
 	}
 	@discardableResult
 	public func send_toast_notification(title: String, text: String, image: Texture2D, callback: VariantBox) -> Int {
@@ -3328,13 +3328,13 @@ public class Geometry2D: Object {
 		return __ret
 	}
 	@discardableResult
-	public func offset_polygon(polygon: VariantBox, delta: Double, join_type: Geometry2D.PolyJoinType) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "offset_polygon", args: [VariantBox(polygon), VariantBox(delta), VariantBox(join_type.rawValue)])
+	public func offset_polygon(polygon: VariantBox, delta: Double, join_type: Int = 0) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "offset_polygon", args: [VariantBox(polygon), VariantBox(delta), VariantBox(join_type)])
 		return __ret
 	}
 	@discardableResult
-	public func offset_polyline(polyline: VariantBox, delta: Double, join_type: Geometry2D.PolyJoinType, end_type: Geometry2D.PolyEndType) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "offset_polyline", args: [VariantBox(polyline), VariantBox(delta), VariantBox(join_type.rawValue), VariantBox(end_type.rawValue)])
+	public func offset_polyline(polyline: VariantBox, delta: Double, join_type: Int = 0, end_type: Int = 3) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "offset_polyline", args: [VariantBox(polyline), VariantBox(delta), VariantBox(join_type), VariantBox(end_type)])
 		return __ret
 	}
 	@discardableResult
@@ -3369,12 +3369,12 @@ public class Geometry3D: Object {
 		return __ret
 	}
 	@discardableResult
-	public func build_cylinder_planes(radius: Double, height: Double, sides: Int, axis: Int) -> VariantBox {
+	public func build_cylinder_planes(radius: Double, height: Double, sides: Int, axis: Int = 2) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "build_cylinder_planes", args: [VariantBox(radius), VariantBox(height), VariantBox(sides), VariantBox(axis)])
 		return __ret
 	}
 	@discardableResult
-	public func build_capsule_planes(radius: Double, height: Double, sides: Int, lats: Int, axis: Int) -> VariantBox {
+	public func build_capsule_planes(radius: Double, height: Double, sides: Int, lats: Int, axis: Int = 2) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "build_capsule_planes", args: [VariantBox(radius), VariantBox(height), VariantBox(sides), VariantBox(lats), VariantBox(axis)])
 		return __ret
 	}
@@ -3881,16 +3881,16 @@ public class Input: Object {
 	public func action_release(action: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "action_release", args: [VariantBox(action)])
 	}
-	public func set_default_cursor_shape(shape: Input.CursorShape) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_default_cursor_shape", args: [VariantBox(shape.rawValue)])
+	public func set_default_cursor_shape(shape: Int = 0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_default_cursor_shape", args: [VariantBox(shape)])
 	}
 	@discardableResult
-	public func get_current_cursor_shape() -> Input.CursorShape {
+	public func get_current_cursor_shape() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_current_cursor_shape", args: [])
-		return __ret.asEnum(Input.CursorShape.self)
+		return __ret.asInt()
 	}
-	public func set_custom_mouse_cursor(image: Resource, shape: Input.CursorShape, hotspot: Vector2) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_custom_mouse_cursor", args: [VariantBox(image), VariantBox(shape.rawValue), VariantBox(hotspot)])
+	public func set_custom_mouse_cursor(image: Resource, shape: Int = 0, hotspot: Vector2) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_custom_mouse_cursor", args: [VariantBox(image), VariantBox(shape), VariantBox(hotspot)])
 	}
 	public func parse_input_event(event: InputEvent) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "parse_input_event", args: [VariantBox(event)])
@@ -4300,27 +4300,27 @@ public class NativeMenu: Object {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func has_system_menu(menu_id: NativeMenu.SystemMenus) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "has_system_menu", args: [VariantBox(menu_id.rawValue)])
+	public func has_system_menu(menu_id: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "has_system_menu", args: [VariantBox(menu_id)])
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func get_system_menu(menu_id: NativeMenu.SystemMenus) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_system_menu", args: [VariantBox(menu_id.rawValue)])
+	public func get_system_menu(menu_id: Int) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_system_menu", args: [VariantBox(menu_id)])
 		return __ret
 	}
 	@discardableResult
-	public func get_system_menu_name(menu_id: NativeMenu.SystemMenus) -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_system_menu_name", args: [VariantBox(menu_id.rawValue)])
+	public func get_system_menu_name(menu_id: Int) -> String {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_system_menu_name", args: [VariantBox(menu_id)])
 		return __ret.asString()
 	}
 	@discardableResult
-	public func get_system_menu_text(menu_id: NativeMenu.SystemMenus) -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_system_menu_text", args: [VariantBox(menu_id.rawValue)])
+	public func get_system_menu_text(menu_id: Int) -> String {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_system_menu_text", args: [VariantBox(menu_id)])
 		return __ret.asString()
 	}
-	public func set_system_menu_text(menu_id: NativeMenu.SystemMenus, name: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_system_menu_text", args: [VariantBox(menu_id.rawValue), VariantBox(name)])
+	public func set_system_menu_text(menu_id: Int, name: String) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_system_menu_text", args: [VariantBox(menu_id), VariantBox(name)])
 	}
 	@discardableResult
 	public func create_menu() -> VariantBox {
@@ -5190,8 +5190,8 @@ public class NavigationServer2D: Object {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func get_process_info(process_info: NavigationServer2D.ProcessInfo) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_process_info", args: [VariantBox(process_info.rawValue)])
+	public func get_process_info(process_info: Int) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_process_info", args: [VariantBox(process_info)])
 		return __ret.asInt()
 	}
 	public func emit_map_changed(map: VariantBox) {
@@ -5865,8 +5865,8 @@ public class NavigationServer3D: Object {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func get_process_info(process_info: NavigationServer3D.ProcessInfo) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_process_info", args: [VariantBox(process_info.rawValue)])
+	public func get_process_info(process_info: Int) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_process_info", args: [VariantBox(process_info)])
 		return __ret.asInt()
 	}
 	public func emit_map_changed(map: VariantBox) {
@@ -6208,13 +6208,13 @@ public class Node: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_process_thread_group", args: [])
 		return __ret.asEnum(Node.ProcessThreadGroup.self)
 	}
-	public func set_process_thread_messages(flags: Node.ProcessThreadMessages) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_process_thread_messages", args: [VariantBox(flags.rawValue)])
+	public func set_process_thread_messages(flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_process_thread_messages", args: [VariantBox(flags)])
 	}
 	@discardableResult
-	public func get_process_thread_messages() -> Node.ProcessThreadMessages {
+	public func get_process_thread_messages() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_process_thread_messages", args: [])
-		return __ret.asEnum(Node.ProcessThreadMessages.self)
+		return __ret.asInt()
 	}
 	public func set_process_thread_group_order(order: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_process_thread_group_order", args: [VariantBox(order)])
@@ -6488,13 +6488,13 @@ public class Node: Object {
 		get { Host.shared.getProperty(object: ptr, name: "scene_file_path").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "scene_file_path", value: VariantBox(newValue)) }
 	}
-	public var owner: Node {
+	public var owner: Node? {
 		get { Host.shared.getProperty(object: ptr, name: "owner").asObject(Node.self) }
-		set { Host.shared.setProperty(object: ptr, name: "owner", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "owner", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var multiplayer: MultiplayerAPI {
+	public var multiplayer: MultiplayerAPI? {
 		get { Host.shared.getProperty(object: ptr, name: "multiplayer").asObject(MultiplayerAPI.self) }
-		set { Host.shared.setProperty(object: ptr, name: "multiplayer", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "multiplayer", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Process: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Process") }
@@ -6704,19 +6704,19 @@ public class OS: Object {
 		return __ret
 	}
 	@discardableResult
-	public func get_stdin_type() -> OS.StdHandleType {
+	public func get_stdin_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_stdin_type", args: [])
-		return __ret.asEnum(OS.StdHandleType.self)
+		return __ret.asInt()
 	}
 	@discardableResult
-	public func get_stdout_type() -> OS.StdHandleType {
+	public func get_stdout_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_stdout_type", args: [])
-		return __ret.asEnum(OS.StdHandleType.self)
+		return __ret.asInt()
 	}
 	@discardableResult
-	public func get_stderr_type() -> OS.StdHandleType {
+	public func get_stderr_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_stderr_type", args: [])
-		return __ret.asEnum(OS.StdHandleType.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func execute(path: String, arguments: VariantBox, output: VariantBox, read_stderr: Bool = false, open_console: Bool = false) -> Int {
@@ -7253,8 +7253,8 @@ public class OpenXRInteractionProfileMetadata: Object {
 	public func register_interaction_profile(display_name: String, openxr_path: String, openxr_extension_names: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "register_interaction_profile", args: [VariantBox(display_name), VariantBox(openxr_path), VariantBox(openxr_extension_names)])
 	}
-	public func register_io_path(interaction_profile: String, display_name: String, toplevel_path: String, openxr_path: String, openxr_extension_names: String, action_type: OpenXRAction.ActionType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "register_io_path", args: [VariantBox(interaction_profile), VariantBox(display_name), VariantBox(toplevel_path), VariantBox(openxr_path), VariantBox(openxr_extension_names), VariantBox(action_type.rawValue)])
+	public func register_io_path(interaction_profile: String, display_name: String, toplevel_path: String, openxr_path: String, openxr_extension_names: String, action_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "register_io_path", args: [VariantBox(interaction_profile), VariantBox(display_name), VariantBox(toplevel_path), VariantBox(openxr_path), VariantBox(openxr_extension_names), VariantBox(action_type)])
 	}
 }
 
@@ -8103,9 +8103,9 @@ public class PhysicsServer2D: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "shape_set_data", args: [VariantBox(shape), VariantBox(data)])
 	}
 	@discardableResult
-	public func shape_get_type(shape: VariantBox) -> PhysicsServer2D.ShapeType {
+	public func shape_get_type(shape: VariantBox) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "shape_get_type", args: [VariantBox(shape)])
-		return __ret.asEnum(PhysicsServer2D.ShapeType.self)
+		return __ret.asInt()
 	}
 	public func shape_get_data(shape: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "shape_get_data", args: [VariantBox(shape)])
@@ -8123,12 +8123,12 @@ public class PhysicsServer2D: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "space_is_active", args: [VariantBox(space)])
 		return __ret.asBool()
 	}
-	public func space_set_param(space: VariantBox, param: PhysicsServer2D.SpaceParameter, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "space_set_param", args: [VariantBox(space), VariantBox(param.rawValue), VariantBox(value)])
+	public func space_set_param(space: VariantBox, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "space_set_param", args: [VariantBox(space), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func space_get_param(space: VariantBox, param: PhysicsServer2D.SpaceParameter) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "space_get_param", args: [VariantBox(space), VariantBox(param.rawValue)])
+	public func space_get_param(space: VariantBox, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "space_get_param", args: [VariantBox(space), VariantBox(param)])
 		return __ret.asDouble()
 	}
 	@discardableResult
@@ -8198,14 +8198,14 @@ public class PhysicsServer2D: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "area_get_collision_mask", args: [VariantBox(area)])
 		return __ret.asInt()
 	}
-	public func area_set_param(area: VariantBox, param: PhysicsServer2D.AreaParameter, value: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "area_set_param", args: [VariantBox(area), VariantBox(param.rawValue), VariantBox(value)])
+	public func area_set_param(area: VariantBox, param: Int, value: VariantBox) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "area_set_param", args: [VariantBox(area), VariantBox(param), VariantBox(value)])
 	}
 	public func area_set_transform(area: VariantBox, transform: Transform2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "area_set_transform", args: [VariantBox(area), VariantBox(transform)])
 	}
-	public func area_get_param(area: VariantBox, param: PhysicsServer2D.AreaParameter) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "area_get_param", args: [VariantBox(area), VariantBox(param.rawValue)])
+	public func area_get_param(area: VariantBox, param: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "area_get_param", args: [VariantBox(area), VariantBox(param)])
 	}
 	@discardableResult
 	public func area_get_transform(area: VariantBox) -> Transform2D {
@@ -8310,13 +8310,13 @@ public class PhysicsServer2D: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "body_get_canvas_instance_id", args: [VariantBox(body)])
 		return __ret.asInt()
 	}
-	public func body_set_continuous_collision_detection_mode(body: VariantBox, mode: PhysicsServer2D.CCDMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "body_set_continuous_collision_detection_mode", args: [VariantBox(body), VariantBox(mode.rawValue)])
+	public func body_set_continuous_collision_detection_mode(body: VariantBox, mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "body_set_continuous_collision_detection_mode", args: [VariantBox(body), VariantBox(mode)])
 	}
 	@discardableResult
-	public func body_get_continuous_collision_detection_mode(body: VariantBox) -> PhysicsServer2D.CCDMode {
+	public func body_get_continuous_collision_detection_mode(body: VariantBox) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "body_get_continuous_collision_detection_mode", args: [VariantBox(body)])
-		return __ret.asEnum(PhysicsServer2D.CCDMode.self)
+		return __ret.asInt()
 	}
 	public func body_set_collision_layer(body: VariantBox, layer: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "body_set_collision_layer", args: [VariantBox(body), VariantBox(layer)])
@@ -8342,11 +8342,11 @@ public class PhysicsServer2D: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "body_get_collision_priority", args: [VariantBox(body)])
 		return __ret.asDouble()
 	}
-	public func body_set_param(body: VariantBox, param: PhysicsServer2D.BodyParameter, value: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "body_set_param", args: [VariantBox(body), VariantBox(param.rawValue), VariantBox(value)])
+	public func body_set_param(body: VariantBox, param: Int, value: VariantBox) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "body_set_param", args: [VariantBox(body), VariantBox(param), VariantBox(value)])
 	}
-	public func body_get_param(body: VariantBox, param: PhysicsServer2D.BodyParameter) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "body_get_param", args: [VariantBox(body), VariantBox(param.rawValue)])
+	public func body_get_param(body: VariantBox, param: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "body_get_param", args: [VariantBox(body), VariantBox(param)])
 	}
 	public func body_reset_mass_properties(body: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "body_reset_mass_properties", args: [VariantBox(body)])
@@ -8482,20 +8482,20 @@ public class PhysicsServer2D: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "pin_joint_get_flag", args: [VariantBox(joint), VariantBox(flag.rawValue)])
 		return __ret.asBool()
 	}
-	public func pin_joint_set_param(joint: VariantBox, param: PhysicsServer2D.PinJointParam, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "pin_joint_set_param", args: [VariantBox(joint), VariantBox(param.rawValue), VariantBox(value)])
+	public func pin_joint_set_param(joint: VariantBox, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "pin_joint_set_param", args: [VariantBox(joint), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func pin_joint_get_param(joint: VariantBox, param: PhysicsServer2D.PinJointParam) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "pin_joint_get_param", args: [VariantBox(joint), VariantBox(param.rawValue)])
+	public func pin_joint_get_param(joint: VariantBox, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "pin_joint_get_param", args: [VariantBox(joint), VariantBox(param)])
 		return __ret.asDouble()
 	}
-	public func damped_spring_joint_set_param(joint: VariantBox, param: PhysicsServer2D.DampedSpringParam, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "damped_spring_joint_set_param", args: [VariantBox(joint), VariantBox(param.rawValue), VariantBox(value)])
+	public func damped_spring_joint_set_param(joint: VariantBox, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "damped_spring_joint_set_param", args: [VariantBox(joint), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func damped_spring_joint_get_param(joint: VariantBox, param: PhysicsServer2D.DampedSpringParam) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "damped_spring_joint_get_param", args: [VariantBox(joint), VariantBox(param.rawValue)])
+	public func damped_spring_joint_get_param(joint: VariantBox, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "damped_spring_joint_get_param", args: [VariantBox(joint), VariantBox(param)])
 		return __ret.asDouble()
 	}
 	@discardableResult
@@ -8510,8 +8510,8 @@ public class PhysicsServer2D: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_active", args: [VariantBox(active)])
 	}
 	@discardableResult
-	public func get_process_info(process_info: PhysicsServer2D.ProcessInfo) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_process_info", args: [VariantBox(process_info.rawValue)])
+	public func get_process_info(process_info: Int) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_process_info", args: [VariantBox(process_info)])
 		return __ret.asInt()
 	}
 	public func emit__debug_changed() {
@@ -8639,9 +8639,9 @@ public class PhysicsServer3D: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "shape_set_margin", args: [VariantBox(shape), VariantBox(margin)])
 	}
 	@discardableResult
-	public func shape_get_type(shape: VariantBox) -> PhysicsServer3D.ShapeType {
+	public func shape_get_type(shape: VariantBox) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "shape_get_type", args: [VariantBox(shape)])
-		return __ret.asEnum(PhysicsServer3D.ShapeType.self)
+		return __ret.asInt()
 	}
 	public func shape_get_data(shape: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "shape_get_data", args: [VariantBox(shape)])
@@ -8664,12 +8664,12 @@ public class PhysicsServer3D: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "space_is_active", args: [VariantBox(space)])
 		return __ret.asBool()
 	}
-	public func space_set_param(space: VariantBox, param: PhysicsServer3D.SpaceParameter, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "space_set_param", args: [VariantBox(space), VariantBox(param.rawValue), VariantBox(value)])
+	public func space_set_param(space: VariantBox, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "space_set_param", args: [VariantBox(space), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func space_get_param(space: VariantBox, param: PhysicsServer3D.SpaceParameter) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "space_get_param", args: [VariantBox(space), VariantBox(param.rawValue)])
+	public func space_get_param(space: VariantBox, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "space_get_param", args: [VariantBox(space), VariantBox(param)])
 		return __ret.asDouble()
 	}
 	@discardableResult
@@ -8739,14 +8739,14 @@ public class PhysicsServer3D: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "area_get_collision_mask", args: [VariantBox(area)])
 		return __ret.asInt()
 	}
-	public func area_set_param(area: VariantBox, param: PhysicsServer3D.AreaParameter, value: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "area_set_param", args: [VariantBox(area), VariantBox(param.rawValue), VariantBox(value)])
+	public func area_set_param(area: VariantBox, param: Int, value: VariantBox) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "area_set_param", args: [VariantBox(area), VariantBox(param), VariantBox(value)])
 	}
 	public func area_set_transform(area: VariantBox, transform: Transform3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "area_set_transform", args: [VariantBox(area), VariantBox(transform)])
 	}
-	public func area_get_param(area: VariantBox, param: PhysicsServer3D.AreaParameter) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "area_get_param", args: [VariantBox(area), VariantBox(param.rawValue)])
+	public func area_get_param(area: VariantBox, param: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "area_get_param", args: [VariantBox(area), VariantBox(param)])
 	}
 	@discardableResult
 	public func area_get_transform(area: VariantBox) -> Transform3D {
@@ -8867,11 +8867,11 @@ public class PhysicsServer3D: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "body_is_continuous_collision_detection_enabled", args: [VariantBox(body)])
 		return __ret.asBool()
 	}
-	public func body_set_param(body: VariantBox, param: PhysicsServer3D.BodyParameter, value: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "body_set_param", args: [VariantBox(body), VariantBox(param.rawValue), VariantBox(value)])
+	public func body_set_param(body: VariantBox, param: Int, value: VariantBox) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "body_set_param", args: [VariantBox(body), VariantBox(param), VariantBox(value)])
 	}
-	public func body_get_param(body: VariantBox, param: PhysicsServer3D.BodyParameter) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "body_get_param", args: [VariantBox(body), VariantBox(param.rawValue)])
+	public func body_get_param(body: VariantBox, param: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "body_get_param", args: [VariantBox(body), VariantBox(param)])
 	}
 	public func body_reset_mass_properties(body: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "body_reset_mass_properties", args: [VariantBox(body)])
@@ -9133,12 +9133,12 @@ public class PhysicsServer3D: Object {
 	public func joint_make_pin(joint: VariantBox, body_A: VariantBox, local_A: Vector3, body_B: VariantBox, local_B: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "joint_make_pin", args: [VariantBox(joint), VariantBox(body_A), VariantBox(local_A), VariantBox(body_B), VariantBox(local_B)])
 	}
-	public func pin_joint_set_param(joint: VariantBox, param: PhysicsServer3D.PinJointParam, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "pin_joint_set_param", args: [VariantBox(joint), VariantBox(param.rawValue), VariantBox(value)])
+	public func pin_joint_set_param(joint: VariantBox, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "pin_joint_set_param", args: [VariantBox(joint), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func pin_joint_get_param(joint: VariantBox, param: PhysicsServer3D.PinJointParam) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "pin_joint_get_param", args: [VariantBox(joint), VariantBox(param.rawValue)])
+	public func pin_joint_get_param(joint: VariantBox, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "pin_joint_get_param", args: [VariantBox(joint), VariantBox(param)])
 		return __ret.asDouble()
 	}
 	public func pin_joint_set_local_a(joint: VariantBox, local_A: Vector3) {
@@ -9160,12 +9160,12 @@ public class PhysicsServer3D: Object {
 	public func joint_make_hinge(joint: VariantBox, body_A: VariantBox, hinge_A: Transform3D, body_B: VariantBox, hinge_B: Transform3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "joint_make_hinge", args: [VariantBox(joint), VariantBox(body_A), VariantBox(hinge_A), VariantBox(body_B), VariantBox(hinge_B)])
 	}
-	public func hinge_joint_set_param(joint: VariantBox, param: PhysicsServer3D.HingeJointParam, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "hinge_joint_set_param", args: [VariantBox(joint), VariantBox(param.rawValue), VariantBox(value)])
+	public func hinge_joint_set_param(joint: VariantBox, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "hinge_joint_set_param", args: [VariantBox(joint), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func hinge_joint_get_param(joint: VariantBox, param: PhysicsServer3D.HingeJointParam) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "hinge_joint_get_param", args: [VariantBox(joint), VariantBox(param.rawValue)])
+	public func hinge_joint_get_param(joint: VariantBox, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "hinge_joint_get_param", args: [VariantBox(joint), VariantBox(param)])
 		return __ret.asDouble()
 	}
 	public func hinge_joint_set_flag(joint: VariantBox, flag: PhysicsServer3D.HingeJointFlag, enabled: Bool) {
@@ -9179,23 +9179,23 @@ public class PhysicsServer3D: Object {
 	public func joint_make_slider(joint: VariantBox, body_A: VariantBox, local_ref_A: Transform3D, body_B: VariantBox, local_ref_B: Transform3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "joint_make_slider", args: [VariantBox(joint), VariantBox(body_A), VariantBox(local_ref_A), VariantBox(body_B), VariantBox(local_ref_B)])
 	}
-	public func slider_joint_set_param(joint: VariantBox, param: PhysicsServer3D.SliderJointParam, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "slider_joint_set_param", args: [VariantBox(joint), VariantBox(param.rawValue), VariantBox(value)])
+	public func slider_joint_set_param(joint: VariantBox, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "slider_joint_set_param", args: [VariantBox(joint), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func slider_joint_get_param(joint: VariantBox, param: PhysicsServer3D.SliderJointParam) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "slider_joint_get_param", args: [VariantBox(joint), VariantBox(param.rawValue)])
+	public func slider_joint_get_param(joint: VariantBox, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "slider_joint_get_param", args: [VariantBox(joint), VariantBox(param)])
 		return __ret.asDouble()
 	}
 	public func joint_make_cone_twist(joint: VariantBox, body_A: VariantBox, local_ref_A: Transform3D, body_B: VariantBox, local_ref_B: Transform3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "joint_make_cone_twist", args: [VariantBox(joint), VariantBox(body_A), VariantBox(local_ref_A), VariantBox(body_B), VariantBox(local_ref_B)])
 	}
-	public func cone_twist_joint_set_param(joint: VariantBox, param: PhysicsServer3D.ConeTwistJointParam, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "cone_twist_joint_set_param", args: [VariantBox(joint), VariantBox(param.rawValue), VariantBox(value)])
+	public func cone_twist_joint_set_param(joint: VariantBox, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "cone_twist_joint_set_param", args: [VariantBox(joint), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func cone_twist_joint_get_param(joint: VariantBox, param: PhysicsServer3D.ConeTwistJointParam) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "cone_twist_joint_get_param", args: [VariantBox(joint), VariantBox(param.rawValue)])
+	public func cone_twist_joint_get_param(joint: VariantBox, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "cone_twist_joint_get_param", args: [VariantBox(joint), VariantBox(param)])
 		return __ret.asDouble()
 	}
 	@discardableResult
@@ -9222,20 +9222,20 @@ public class PhysicsServer3D: Object {
 	public func joint_make_generic_6dof(joint: VariantBox, body_A: VariantBox, local_ref_A: Transform3D, body_B: VariantBox, local_ref_B: Transform3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "joint_make_generic_6dof", args: [VariantBox(joint), VariantBox(body_A), VariantBox(local_ref_A), VariantBox(body_B), VariantBox(local_ref_B)])
 	}
-	public func generic_6dof_joint_set_param(joint: VariantBox, axis: Int, param: PhysicsServer3D.G6DOFJointAxisParam, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "generic_6dof_joint_set_param", args: [VariantBox(joint), VariantBox(axis), VariantBox(param.rawValue), VariantBox(value)])
+	public func generic_6dof_joint_set_param(joint: VariantBox, axis: Int, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "generic_6dof_joint_set_param", args: [VariantBox(joint), VariantBox(axis), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func generic_6dof_joint_get_param(joint: VariantBox, axis: Int, param: PhysicsServer3D.G6DOFJointAxisParam) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "generic_6dof_joint_get_param", args: [VariantBox(joint), VariantBox(axis), VariantBox(param.rawValue)])
+	public func generic_6dof_joint_get_param(joint: VariantBox, axis: Int, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "generic_6dof_joint_get_param", args: [VariantBox(joint), VariantBox(axis), VariantBox(param)])
 		return __ret.asDouble()
 	}
-	public func generic_6dof_joint_set_flag(joint: VariantBox, axis: Int, flag: PhysicsServer3D.G6DOFJointAxisFlag, enable: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "generic_6dof_joint_set_flag", args: [VariantBox(joint), VariantBox(axis), VariantBox(flag.rawValue), VariantBox(enable)])
+	public func generic_6dof_joint_set_flag(joint: VariantBox, axis: Int, flag: Int, enable: Bool) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "generic_6dof_joint_set_flag", args: [VariantBox(joint), VariantBox(axis), VariantBox(flag), VariantBox(enable)])
 	}
 	@discardableResult
-	public func generic_6dof_joint_get_flag(joint: VariantBox, axis: Int, flag: PhysicsServer3D.G6DOFJointAxisFlag) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "generic_6dof_joint_get_flag", args: [VariantBox(joint), VariantBox(axis), VariantBox(flag.rawValue)])
+	public func generic_6dof_joint_get_flag(joint: VariantBox, axis: Int, flag: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "generic_6dof_joint_get_flag", args: [VariantBox(joint), VariantBox(axis), VariantBox(flag)])
 		return __ret.asBool()
 	}
 	public func generic_6dof_joint_set_angular_target_rotation(joint: VariantBox, target_rotation: Quaternion) {
@@ -9253,8 +9253,8 @@ public class PhysicsServer3D: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_active", args: [VariantBox(active)])
 	}
 	@discardableResult
-	public func get_process_info(process_info: PhysicsServer3D.ProcessInfo) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_process_info", args: [VariantBox(process_info.rawValue)])
+	public func get_process_info(process_info: Int) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_process_info", args: [VariantBox(process_info)])
 		return __ret.asInt()
 	}
 	public func emit__debug_changed() {
@@ -9993,13 +9993,13 @@ public class RenderingDevice: Object {
 		return __ret
 	}
 	@discardableResult
-	public func texture_create_shared_from_slice(view: RDTextureView, with_texture: VariantBox, layer: Int, mipmap: Int, mipmaps: Int = 1, slice_type: RenderingDevice.TextureSliceType, layers: Int = 0) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "texture_create_shared_from_slice", args: [VariantBox(view), VariantBox(with_texture), VariantBox(layer), VariantBox(mipmap), VariantBox(mipmaps), VariantBox(slice_type.rawValue), VariantBox(layers)])
+	public func texture_create_shared_from_slice(view: RDTextureView, with_texture: VariantBox, layer: Int, mipmap: Int, mipmaps: Int = 1, slice_type: Int = 0, layers: Int = 0) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "texture_create_shared_from_slice", args: [VariantBox(view), VariantBox(with_texture), VariantBox(layer), VariantBox(mipmap), VariantBox(mipmaps), VariantBox(slice_type), VariantBox(layers)])
 		return __ret
 	}
 	@discardableResult
-	public func texture_create_from_extension(type: RenderingDevice.TextureType, format: RenderingDevice.DataFormat, samples: RenderingDevice.TextureSamples, usage_flags: RenderingDevice.TextureUsageBits, image: Int, width: Int, height: Int, depth: Int, layers: Int, mipmaps: Int = 1) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "texture_create_from_extension", args: [VariantBox(type.rawValue), VariantBox(format.rawValue), VariantBox(samples.rawValue), VariantBox(usage_flags.rawValue), VariantBox(image), VariantBox(width), VariantBox(height), VariantBox(depth), VariantBox(layers), VariantBox(mipmaps)])
+	public func texture_create_from_extension(type: RenderingDevice.TextureType, format: RenderingDevice.DataFormat, samples: RenderingDevice.TextureSamples, usage_flags: Int, image: Int, width: Int, height: Int, depth: Int, layers: Int, mipmaps: Int = 1) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "texture_create_from_extension", args: [VariantBox(type.rawValue), VariantBox(format.rawValue), VariantBox(samples.rawValue), VariantBox(usage_flags), VariantBox(image), VariantBox(width), VariantBox(height), VariantBox(depth), VariantBox(layers), VariantBox(mipmaps)])
 		return __ret
 	}
 	@discardableResult
@@ -10018,8 +10018,8 @@ public class RenderingDevice: Object {
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func texture_is_format_supported_for_usage(format: RenderingDevice.DataFormat, usage_flags: RenderingDevice.TextureUsageBits) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "texture_is_format_supported_for_usage", args: [VariantBox(format.rawValue), VariantBox(usage_flags.rawValue)])
+	public func texture_is_format_supported_for_usage(format: RenderingDevice.DataFormat, usage_flags: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "texture_is_format_supported_for_usage", args: [VariantBox(format.rawValue), VariantBox(usage_flags)])
 		return __ret.asBool()
 	}
 	@discardableResult
@@ -10126,8 +10126,8 @@ public class RenderingDevice: Object {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func vertex_buffer_create(size_bytes: Int, data: VariantBox, creation_bits: RenderingDevice.BufferCreationBits) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "vertex_buffer_create", args: [VariantBox(size_bytes), VariantBox(data), VariantBox(creation_bits.rawValue)])
+	public func vertex_buffer_create(size_bytes: Int, data: VariantBox, creation_bits: Int = 0) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "vertex_buffer_create", args: [VariantBox(size_bytes), VariantBox(data), VariantBox(creation_bits)])
 		return __ret
 	}
 	@discardableResult
@@ -10141,8 +10141,8 @@ public class RenderingDevice: Object {
 		return __ret
 	}
 	@discardableResult
-	public func index_buffer_create(size_indices: Int, format: RenderingDevice.IndexBufferFormat, data: VariantBox, use_restart_indices: Bool = false, creation_bits: RenderingDevice.BufferCreationBits) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "index_buffer_create", args: [VariantBox(size_indices), VariantBox(format.rawValue), VariantBox(data), VariantBox(use_restart_indices), VariantBox(creation_bits.rawValue)])
+	public func index_buffer_create(size_indices: Int, format: RenderingDevice.IndexBufferFormat, data: VariantBox, use_restart_indices: Bool = false, creation_bits: Int = 0) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "index_buffer_create", args: [VariantBox(size_indices), VariantBox(format.rawValue), VariantBox(data), VariantBox(use_restart_indices), VariantBox(creation_bits)])
 		return __ret
 	}
 	@discardableResult
@@ -10181,13 +10181,13 @@ public class RenderingDevice: Object {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func uniform_buffer_create(size_bytes: Int, data: VariantBox, creation_bits: RenderingDevice.BufferCreationBits) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "uniform_buffer_create", args: [VariantBox(size_bytes), VariantBox(data), VariantBox(creation_bits.rawValue)])
+	public func uniform_buffer_create(size_bytes: Int, data: VariantBox, creation_bits: Int = 0) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "uniform_buffer_create", args: [VariantBox(size_bytes), VariantBox(data), VariantBox(creation_bits)])
 		return __ret
 	}
 	@discardableResult
-	public func storage_buffer_create(size_bytes: Int, data: VariantBox, usage: RenderingDevice.StorageBufferUsage, creation_bits: RenderingDevice.BufferCreationBits) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "storage_buffer_create", args: [VariantBox(size_bytes), VariantBox(data), VariantBox(usage.rawValue), VariantBox(creation_bits.rawValue)])
+	public func storage_buffer_create(size_bytes: Int, data: VariantBox, usage: RenderingDevice.StorageBufferUsage, creation_bits: Int = 0) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "storage_buffer_create", args: [VariantBox(size_bytes), VariantBox(data), VariantBox(usage.rawValue), VariantBox(creation_bits)])
 		return __ret
 	}
 	@discardableResult
@@ -10236,8 +10236,8 @@ public class RenderingDevice: Object {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func render_pipeline_create(shader: VariantBox, framebuffer_format: Int, vertex_format: Int, primitive: RenderingDevice.RenderPrimitive, rasterization_state: RDPipelineRasterizationState, multisample_state: RDPipelineMultisampleState, stencil_state: RDPipelineDepthStencilState, color_blend_state: RDPipelineColorBlendState, dynamic_state_flags: RenderingDevice.PipelineDynamicStateFlags, for_render_pass: Int = 0, specialization_constants: VariantBox) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "render_pipeline_create", args: [VariantBox(shader), VariantBox(framebuffer_format), VariantBox(vertex_format), VariantBox(primitive.rawValue), VariantBox(rasterization_state), VariantBox(multisample_state), VariantBox(stencil_state), VariantBox(color_blend_state), VariantBox(dynamic_state_flags.rawValue), VariantBox(for_render_pass), VariantBox(specialization_constants)])
+	public func render_pipeline_create(shader: VariantBox, framebuffer_format: Int, vertex_format: Int, primitive: RenderingDevice.RenderPrimitive, rasterization_state: RDPipelineRasterizationState, multisample_state: RDPipelineMultisampleState, stencil_state: RDPipelineDepthStencilState, color_blend_state: RDPipelineColorBlendState, dynamic_state_flags: Int = 0, for_render_pass: Int = 0, specialization_constants: VariantBox) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "render_pipeline_create", args: [VariantBox(shader), VariantBox(framebuffer_format), VariantBox(vertex_format), VariantBox(primitive.rawValue), VariantBox(rasterization_state), VariantBox(multisample_state), VariantBox(stencil_state), VariantBox(color_blend_state), VariantBox(dynamic_state_flags), VariantBox(for_render_pass), VariantBox(specialization_constants)])
 		return __ret
 	}
 	@discardableResult
@@ -10266,13 +10266,13 @@ public class RenderingDevice: Object {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func blas_create(geometries: VariantBox, flags: RenderingDevice.AccelerationStructureFlagBits) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "blas_create", args: [VariantBox(geometries), VariantBox(flags.rawValue)])
+	public func blas_create(geometries: VariantBox, flags: Int) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "blas_create", args: [VariantBox(geometries), VariantBox(flags)])
 		return __ret
 	}
 	@discardableResult
-	public func tlas_create(max_instance_count: Int, flags: RenderingDevice.AccelerationStructureFlagBits) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "tlas_create", args: [VariantBox(max_instance_count), VariantBox(flags.rawValue)])
+	public func tlas_create(max_instance_count: Int, flags: Int) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "tlas_create", args: [VariantBox(max_instance_count), VariantBox(flags)])
 		return __ret
 	}
 	@discardableResult
@@ -10331,8 +10331,8 @@ public class RenderingDevice: Object {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func draw_list_begin(framebuffer: VariantBox, draw_flags: RenderingDevice.DrawFlags, clear_color_values: VariantBox, clear_depth_value: Double = 1.0, clear_stencil_value: Int = 0, region: Rect2, breadcrumb: Int = 0) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "draw_list_begin", args: [VariantBox(framebuffer), VariantBox(draw_flags.rawValue), VariantBox(clear_color_values), VariantBox(clear_depth_value), VariantBox(clear_stencil_value), VariantBox(region), VariantBox(breadcrumb)])
+	public func draw_list_begin(framebuffer: VariantBox, draw_flags: Int = 0, clear_color_values: VariantBox, clear_depth_value: Double = 1.0, clear_stencil_value: Int = 0, region: Rect2, breadcrumb: Int = 0) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "draw_list_begin", args: [VariantBox(framebuffer), VariantBox(draw_flags), VariantBox(clear_color_values), VariantBox(clear_depth_value), VariantBox(clear_stencil_value), VariantBox(region), VariantBox(breadcrumb)])
 		return __ret.asInt()
 	}
 	@discardableResult
@@ -10464,8 +10464,8 @@ public class RenderingDevice: Object {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func has_feature(feature: RenderingDevice.Features) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "has_feature", args: [VariantBox(feature.rawValue)])
+	public func has_feature(feature: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "has_feature", args: [VariantBox(feature)])
 		return __ret.asBool()
 	}
 	@discardableResult
@@ -10523,8 +10523,8 @@ public class RenderingDevice: Object {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func get_memory_usage(type: RenderingDevice.MemoryType) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_memory_usage", args: [VariantBox(type.rawValue)])
+	public func get_memory_usage(type: Int) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_memory_usage", args: [VariantBox(type)])
 		return __ret.asInt()
 	}
 	@discardableResult
@@ -10882,8 +10882,8 @@ public class RenderingServer: Object {
 		return __ret
 	}
 	@discardableResult
-	public func texture_2d_layered_create(layers: VariantBox, layered_type: RenderingServer.TextureLayeredType) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "texture_2d_layered_create", args: [VariantBox(layers), VariantBox(layered_type.rawValue)])
+	public func texture_2d_layered_create(layers: VariantBox, layered_type: Int) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "texture_2d_layered_create", args: [VariantBox(layers), VariantBox(layered_type)])
 		return __ret
 	}
 	@discardableResult
@@ -10897,8 +10897,8 @@ public class RenderingServer: Object {
 		return __ret
 	}
 	@discardableResult
-	public func texture_create_from_native_handle(type: RenderingServer.TextureType, format: Image.Format, native_handle: Int, width: Int, height: Int, depth: Int, layers: Int = 1, layered_type: RenderingServer.TextureLayeredType) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "texture_create_from_native_handle", args: [VariantBox(type.rawValue), VariantBox(format.rawValue), VariantBox(native_handle), VariantBox(width), VariantBox(height), VariantBox(depth), VariantBox(layers), VariantBox(layered_type.rawValue)])
+	public func texture_create_from_native_handle(type: RenderingServer.TextureType, format: Image.Format, native_handle: Int, width: Int, height: Int, depth: Int, layers: Int = 1, layered_type: Int = 0) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "texture_create_from_native_handle", args: [VariantBox(type.rawValue), VariantBox(format.rawValue), VariantBox(native_handle), VariantBox(width), VariantBox(height), VariantBox(depth), VariantBox(layers), VariantBox(layered_type)])
 		return __ret
 	}
 	@discardableResult
@@ -10924,8 +10924,8 @@ public class RenderingServer: Object {
 		return __ret
 	}
 	@discardableResult
-	public func texture_2d_layered_placeholder_create(layered_type: RenderingServer.TextureLayeredType) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "texture_2d_layered_placeholder_create", args: [VariantBox(layered_type.rawValue)])
+	public func texture_2d_layered_placeholder_create(layered_type: Int) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "texture_2d_layered_placeholder_create", args: [VariantBox(layered_type)])
 		return __ret
 	}
 	@discardableResult
@@ -10982,8 +10982,8 @@ public class RenderingServer: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "texture_set_force_redraw_if_visible", args: [VariantBox(texture), VariantBox(enable)])
 	}
 	@discardableResult
-	public func texture_rd_create(rd_texture: VariantBox, layer_type: RenderingServer.TextureLayeredType) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "texture_rd_create", args: [VariantBox(rd_texture), VariantBox(layer_type.rawValue)])
+	public func texture_rd_create(rd_texture: VariantBox, layer_type: Int = 0) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "texture_rd_create", args: [VariantBox(rd_texture), VariantBox(layer_type)])
 		return __ret
 	}
 	@discardableResult
@@ -11094,8 +11094,8 @@ public class RenderingServer: Object {
 	public func mesh_add_surface(mesh: VariantBox, surface: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "mesh_add_surface", args: [VariantBox(mesh), VariantBox(surface)])
 	}
-	public func mesh_add_surface_from_arrays(mesh: VariantBox, primitive: RenderingServer.PrimitiveType, arrays: VariantBox, blend_shapes: VariantBox, lods: VariantBox, compress_format: RenderingServer.ArrayFormat) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "mesh_add_surface_from_arrays", args: [VariantBox(mesh), VariantBox(primitive.rawValue), VariantBox(arrays), VariantBox(blend_shapes), VariantBox(lods), VariantBox(compress_format.rawValue)])
+	public func mesh_add_surface_from_arrays(mesh: VariantBox, primitive: Int, arrays: VariantBox, blend_shapes: VariantBox, lods: VariantBox, compress_format: RenderingServer.ArrayFormat) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "mesh_add_surface_from_arrays", args: [VariantBox(mesh), VariantBox(primitive), VariantBox(arrays), VariantBox(blend_shapes), VariantBox(lods), VariantBox(compress_format.rawValue)])
 	}
 	@discardableResult
 	public func mesh_get_blend_shape_count(mesh: VariantBox) -> Int {
@@ -11192,8 +11192,8 @@ public class RenderingServer: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "multimesh_create", args: [])
 		return __ret
 	}
-	public func multimesh_allocate_data(multimesh: VariantBox, instances: Int, transform_format: RenderingServer.MultimeshTransformFormat, color_format: Bool = false, custom_data_format: Bool = false, use_indirect: Bool = false) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "multimesh_allocate_data", args: [VariantBox(multimesh), VariantBox(instances), VariantBox(transform_format.rawValue), VariantBox(color_format), VariantBox(custom_data_format), VariantBox(use_indirect)])
+	public func multimesh_allocate_data(multimesh: VariantBox, instances: Int, transform_format: Int, color_format: Bool = false, custom_data_format: Bool = false, use_indirect: Bool = false) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "multimesh_allocate_data", args: [VariantBox(multimesh), VariantBox(instances), VariantBox(transform_format), VariantBox(color_format), VariantBox(custom_data_format), VariantBox(use_indirect)])
 	}
 	@discardableResult
 	public func multimesh_get_instance_count(multimesh: VariantBox) -> Int {
@@ -11285,8 +11285,8 @@ public class RenderingServer: Object {
 	public func multimesh_set_physics_interpolated(multimesh: VariantBox, interpolated: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "multimesh_set_physics_interpolated", args: [VariantBox(multimesh), VariantBox(interpolated)])
 	}
-	public func multimesh_set_physics_interpolation_quality(multimesh: VariantBox, quality: RenderingServer.MultimeshPhysicsInterpolationQuality) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "multimesh_set_physics_interpolation_quality", args: [VariantBox(multimesh), VariantBox(quality.rawValue)])
+	public func multimesh_set_physics_interpolation_quality(multimesh: VariantBox, quality: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "multimesh_set_physics_interpolation_quality", args: [VariantBox(multimesh), VariantBox(quality)])
 	}
 	public func multimesh_instance_reset_physics_interpolation(multimesh: VariantBox, index: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "multimesh_instance_reset_physics_interpolation", args: [VariantBox(multimesh), VariantBox(index)])
@@ -11373,8 +11373,8 @@ public class RenderingServer: Object {
 	public func light_set_shadow_caster_mask(light: VariantBox, mask: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "light_set_shadow_caster_mask", args: [VariantBox(light), VariantBox(mask)])
 	}
-	public func light_set_bake_mode(light: VariantBox, bake_mode: RenderingServer.LightBakeMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "light_set_bake_mode", args: [VariantBox(light), VariantBox(bake_mode.rawValue)])
+	public func light_set_bake_mode(light: VariantBox, bake_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "light_set_bake_mode", args: [VariantBox(light), VariantBox(bake_mode)])
 	}
 	public func light_set_max_sdfgi_cascade(light: VariantBox, cascade: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "light_set_max_sdfgi_cascade", args: [VariantBox(light), VariantBox(cascade)])
@@ -11382,11 +11382,11 @@ public class RenderingServer: Object {
 	public func light_set_allow_contact_shadows(light: VariantBox, enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "light_set_allow_contact_shadows", args: [VariantBox(light), VariantBox(enable)])
 	}
-	public func light_omni_set_shadow_mode(light: VariantBox, mode: RenderingServer.LightOmniShadowMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "light_omni_set_shadow_mode", args: [VariantBox(light), VariantBox(mode.rawValue)])
+	public func light_omni_set_shadow_mode(light: VariantBox, mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "light_omni_set_shadow_mode", args: [VariantBox(light), VariantBox(mode)])
 	}
-	public func light_directional_set_shadow_mode(light: VariantBox, mode: RenderingServer.LightDirectionalShadowMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "light_directional_set_shadow_mode", args: [VariantBox(light), VariantBox(mode.rawValue)])
+	public func light_directional_set_shadow_mode(light: VariantBox, mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "light_directional_set_shadow_mode", args: [VariantBox(light), VariantBox(mode)])
 	}
 	public func light_directional_set_blend_splits(light: VariantBox, enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "light_directional_set_blend_splits", args: [VariantBox(light), VariantBox(enable)])
@@ -11420,8 +11420,8 @@ public class RenderingServer: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "reflection_probe_create", args: [])
 		return __ret
 	}
-	public func reflection_probe_set_update_mode(probe: VariantBox, mode: RenderingServer.ReflectionProbeUpdateMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "reflection_probe_set_update_mode", args: [VariantBox(probe), VariantBox(mode.rawValue)])
+	public func reflection_probe_set_update_mode(probe: VariantBox, mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "reflection_probe_set_update_mode", args: [VariantBox(probe), VariantBox(mode)])
 	}
 	public func reflection_probe_set_intensity(probe: VariantBox, intensity: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "reflection_probe_set_intensity", args: [VariantBox(probe), VariantBox(intensity)])
@@ -11429,8 +11429,8 @@ public class RenderingServer: Object {
 	public func reflection_probe_set_blend_distance(probe: VariantBox, blend_distance: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "reflection_probe_set_blend_distance", args: [VariantBox(probe), VariantBox(blend_distance)])
 	}
-	public func reflection_probe_set_ambient_mode(probe: VariantBox, mode: RenderingServer.ReflectionProbeAmbientMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "reflection_probe_set_ambient_mode", args: [VariantBox(probe), VariantBox(mode.rawValue)])
+	public func reflection_probe_set_ambient_mode(probe: VariantBox, mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "reflection_probe_set_ambient_mode", args: [VariantBox(probe), VariantBox(mode)])
 	}
 	public func reflection_probe_set_ambient_color(probe: VariantBox, color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "reflection_probe_set_ambient_color", args: [VariantBox(probe), VariantBox(color)])
@@ -11568,8 +11568,8 @@ public class RenderingServer: Object {
 	public func voxel_gi_set_use_two_bounces(voxel_gi: VariantBox, enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "voxel_gi_set_use_two_bounces", args: [VariantBox(voxel_gi), VariantBox(enable)])
 	}
-	public func voxel_gi_set_quality(quality: RenderingServer.VoxelGIQuality) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "voxel_gi_set_quality", args: [VariantBox(quality.rawValue)])
+	public func voxel_gi_set_quality(quality: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "voxel_gi_set_quality", args: [VariantBox(quality)])
 	}
 	@discardableResult
 	public func lightmap_create() -> VariantBox {
@@ -11687,11 +11687,11 @@ public class RenderingServer: Object {
 	public func particles_set_transform_align(particles: VariantBox, align: RenderingServer.ParticlesTransformAlign) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "particles_set_transform_align", args: [VariantBox(particles), VariantBox(align.rawValue)])
 	}
-	public func particles_set_transform_align_channel_filter(particles: VariantBox, channel_filter: RenderingServer.ParticlesTransformAlignCustomSrc) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "particles_set_transform_align_channel_filter", args: [VariantBox(particles), VariantBox(channel_filter.rawValue)])
+	public func particles_set_transform_align_channel_filter(particles: VariantBox, channel_filter: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "particles_set_transform_align_channel_filter", args: [VariantBox(particles), VariantBox(channel_filter)])
 	}
-	public func particles_set_transform_align_axis(particles: VariantBox, rotation_axis: RenderingServer.ParticlesTransformAlignAxis) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "particles_set_transform_align_axis", args: [VariantBox(particles), VariantBox(rotation_axis.rawValue)])
+	public func particles_set_transform_align_axis(particles: VariantBox, rotation_axis: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "particles_set_transform_align_axis", args: [VariantBox(particles), VariantBox(rotation_axis)])
 	}
 	public func particles_set_trails(particles: VariantBox, enable: Bool, length_sec: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "particles_set_trails", args: [VariantBox(particles), VariantBox(enable), VariantBox(length_sec)])
@@ -11865,8 +11865,8 @@ public class RenderingServer: Object {
 	public func viewport_set_canvas_cull_mask(viewport: VariantBox, canvas_cull_mask: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_canvas_cull_mask", args: [VariantBox(viewport), VariantBox(canvas_cull_mask)])
 	}
-	public func viewport_set_scaling_3d_mode(viewport: VariantBox, scaling_3d_mode: RenderingServer.ViewportScaling3DMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_scaling_3d_mode", args: [VariantBox(viewport), VariantBox(scaling_3d_mode.rawValue)])
+	public func viewport_set_scaling_3d_mode(viewport: VariantBox, scaling_3d_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_scaling_3d_mode", args: [VariantBox(viewport), VariantBox(scaling_3d_mode)])
 	}
 	public func viewport_set_scaling_3d_scale(viewport: VariantBox, scale: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_scaling_3d_scale", args: [VariantBox(viewport), VariantBox(scale)])
@@ -11877,19 +11877,19 @@ public class RenderingServer: Object {
 	public func viewport_set_texture_mipmap_bias(viewport: VariantBox, mipmap_bias: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_texture_mipmap_bias", args: [VariantBox(viewport), VariantBox(mipmap_bias)])
 	}
-	public func viewport_set_anisotropic_filtering_level(viewport: VariantBox, anisotropic_filtering_level: RenderingServer.ViewportAnisotropicFiltering) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_anisotropic_filtering_level", args: [VariantBox(viewport), VariantBox(anisotropic_filtering_level.rawValue)])
+	public func viewport_set_anisotropic_filtering_level(viewport: VariantBox, anisotropic_filtering_level: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_anisotropic_filtering_level", args: [VariantBox(viewport), VariantBox(anisotropic_filtering_level)])
 	}
-	public func viewport_set_update_mode(viewport: VariantBox, update_mode: RenderingServer.ViewportUpdateMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_update_mode", args: [VariantBox(viewport), VariantBox(update_mode.rawValue)])
+	public func viewport_set_update_mode(viewport: VariantBox, update_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_update_mode", args: [VariantBox(viewport), VariantBox(update_mode)])
 	}
 	@discardableResult
-	public func viewport_get_update_mode(viewport: VariantBox) -> RenderingServer.ViewportUpdateMode {
+	public func viewport_get_update_mode(viewport: VariantBox) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_get_update_mode", args: [VariantBox(viewport)])
-		return __ret.asEnum(RenderingServer.ViewportUpdateMode.self)
+		return __ret.asInt()
 	}
-	public func viewport_set_clear_mode(viewport: VariantBox, clear_mode: RenderingServer.ViewportClearMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_clear_mode", args: [VariantBox(viewport), VariantBox(clear_mode.rawValue)])
+	public func viewport_set_clear_mode(viewport: VariantBox, clear_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_clear_mode", args: [VariantBox(viewport), VariantBox(clear_mode)])
 	}
 	@discardableResult
 	public func viewport_get_render_target(viewport: VariantBox) -> VariantBox {
@@ -11907,8 +11907,8 @@ public class RenderingServer: Object {
 	public func viewport_set_disable_2d(viewport: VariantBox, disable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_disable_2d", args: [VariantBox(viewport), VariantBox(disable)])
 	}
-	public func viewport_set_environment_mode(viewport: VariantBox, mode: RenderingServer.ViewportEnvironmentMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_environment_mode", args: [VariantBox(viewport), VariantBox(mode.rawValue)])
+	public func viewport_set_environment_mode(viewport: VariantBox, mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_environment_mode", args: [VariantBox(viewport), VariantBox(mode)])
 	}
 	public func viewport_attach_camera(viewport: VariantBox, camera: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_attach_camera", args: [VariantBox(viewport), VariantBox(camera)])
@@ -11946,8 +11946,8 @@ public class RenderingServer: Object {
 	public func viewport_set_global_canvas_transform(viewport: VariantBox, transform: Transform2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_global_canvas_transform", args: [VariantBox(viewport), VariantBox(transform)])
 	}
-	public func viewport_set_sdf_oversize_and_scale(viewport: VariantBox, oversize: RenderingServer.ViewportSDFOversize, scale: RenderingServer.ViewportSDFScale) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_sdf_oversize_and_scale", args: [VariantBox(viewport), VariantBox(oversize.rawValue), VariantBox(scale.rawValue)])
+	public func viewport_set_sdf_oversize_and_scale(viewport: VariantBox, oversize: Int, scale: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_sdf_oversize_and_scale", args: [VariantBox(viewport), VariantBox(oversize), VariantBox(scale)])
 	}
 	public func viewport_set_positional_shadow_atlas_size(viewport: VariantBox, size: Int, use_16_bits: Bool = false) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_positional_shadow_atlas_size", args: [VariantBox(viewport), VariantBox(size), VariantBox(use_16_bits)])
@@ -11955,17 +11955,17 @@ public class RenderingServer: Object {
 	public func viewport_set_positional_shadow_atlas_quadrant_subdivision(viewport: VariantBox, quadrant: Int, subdivision: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_positional_shadow_atlas_quadrant_subdivision", args: [VariantBox(viewport), VariantBox(quadrant), VariantBox(subdivision)])
 	}
-	public func viewport_set_msaa_3d(viewport: VariantBox, msaa: RenderingServer.ViewportMSAA) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_msaa_3d", args: [VariantBox(viewport), VariantBox(msaa.rawValue)])
+	public func viewport_set_msaa_3d(viewport: VariantBox, msaa: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_msaa_3d", args: [VariantBox(viewport), VariantBox(msaa)])
 	}
-	public func viewport_set_msaa_2d(viewport: VariantBox, msaa: RenderingServer.ViewportMSAA) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_msaa_2d", args: [VariantBox(viewport), VariantBox(msaa.rawValue)])
+	public func viewport_set_msaa_2d(viewport: VariantBox, msaa: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_msaa_2d", args: [VariantBox(viewport), VariantBox(msaa)])
 	}
 	public func viewport_set_use_hdr_2d(viewport: VariantBox, enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_use_hdr_2d", args: [VariantBox(viewport), VariantBox(enabled)])
 	}
-	public func viewport_set_screen_space_aa(viewport: VariantBox, mode: RenderingServer.ViewportScreenSpaceAA) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_screen_space_aa", args: [VariantBox(viewport), VariantBox(mode.rawValue)])
+	public func viewport_set_screen_space_aa(viewport: VariantBox, mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_screen_space_aa", args: [VariantBox(viewport), VariantBox(mode)])
 	}
 	public func viewport_set_use_taa(viewport: VariantBox, enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_use_taa", args: [VariantBox(viewport), VariantBox(enable)])
@@ -11979,8 +11979,8 @@ public class RenderingServer: Object {
 	public func viewport_set_occlusion_rays_per_thread(rays_per_thread: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_occlusion_rays_per_thread", args: [VariantBox(rays_per_thread)])
 	}
-	public func viewport_set_occlusion_culling_build_quality(quality: RenderingServer.ViewportOcclusionCullingBuildQuality) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_occlusion_culling_build_quality", args: [VariantBox(quality.rawValue)])
+	public func viewport_set_occlusion_culling_build_quality(quality: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_occlusion_culling_build_quality", args: [VariantBox(quality)])
 	}
 	@discardableResult
 	public func viewport_get_render_info(viewport: VariantBox, type: RenderingServer.ViewportRenderInfoType, info: RenderingServer.ViewportRenderInfo) -> Int {
@@ -12003,11 +12003,11 @@ public class RenderingServer: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_get_measured_render_time_gpu", args: [VariantBox(viewport)])
 		return __ret.asDouble()
 	}
-	public func viewport_set_vrs_mode(viewport: VariantBox, mode: RenderingServer.ViewportVRSMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_vrs_mode", args: [VariantBox(viewport), VariantBox(mode.rawValue)])
+	public func viewport_set_vrs_mode(viewport: VariantBox, mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_vrs_mode", args: [VariantBox(viewport), VariantBox(mode)])
 	}
-	public func viewport_set_vrs_update_mode(viewport: VariantBox, mode: RenderingServer.ViewportVRSUpdateMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_vrs_update_mode", args: [VariantBox(viewport), VariantBox(mode.rawValue)])
+	public func viewport_set_vrs_update_mode(viewport: VariantBox, mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_vrs_update_mode", args: [VariantBox(viewport), VariantBox(mode)])
 	}
 	public func viewport_set_vrs_texture(viewport: VariantBox, texture: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "viewport_set_vrs_texture", args: [VariantBox(viewport), VariantBox(texture)])
@@ -12042,8 +12042,8 @@ public class RenderingServer: Object {
 	public func compositor_effect_set_callback(effect: VariantBox, callback_type: RenderingServer.CompositorEffectCallbackType, callback: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "compositor_effect_set_callback", args: [VariantBox(effect), VariantBox(callback_type.rawValue), VariantBox(callback)])
 	}
-	public func compositor_effect_set_flag(effect: VariantBox, flag: RenderingServer.CompositorEffectFlags, set: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "compositor_effect_set_flag", args: [VariantBox(effect), VariantBox(flag.rawValue), VariantBox(set)])
+	public func compositor_effect_set_flag(effect: VariantBox, flag: Int, set: Bool) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "compositor_effect_set_flag", args: [VariantBox(effect), VariantBox(flag), VariantBox(set)])
 	}
 	@discardableResult
 	public func compositor_create() -> VariantBox {
@@ -12058,8 +12058,8 @@ public class RenderingServer: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "environment_create", args: [])
 		return __ret
 	}
-	public func environment_set_background(env: VariantBox, bg: RenderingServer.EnvironmentBG) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_background", args: [VariantBox(env), VariantBox(bg.rawValue)])
+	public func environment_set_background(env: VariantBox, bg: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_background", args: [VariantBox(env), VariantBox(bg)])
 	}
 	public func environment_set_camera_id(env: VariantBox, id: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_camera_id", args: [VariantBox(env), VariantBox(id)])
@@ -12082,14 +12082,14 @@ public class RenderingServer: Object {
 	public func environment_set_canvas_max_layer(env: VariantBox, max_layer: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_canvas_max_layer", args: [VariantBox(env), VariantBox(max_layer)])
 	}
-	public func environment_set_ambient_light(env: VariantBox, color: Color, ambient: RenderingServer.EnvironmentAmbientSource, energy: Double = 1.0, sky_contribution: Double = 0.0, reflection_source: RenderingServer.EnvironmentReflectionSource) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_ambient_light", args: [VariantBox(env), VariantBox(color), VariantBox(ambient.rawValue), VariantBox(energy), VariantBox(sky_contribution), VariantBox(reflection_source.rawValue)])
+	public func environment_set_ambient_light(env: VariantBox, color: Color, ambient: Int = 0, energy: Double = 1.0, sky_contribution: Double = 0.0, reflection_source: Int = 0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_ambient_light", args: [VariantBox(env), VariantBox(color), VariantBox(ambient), VariantBox(energy), VariantBox(sky_contribution), VariantBox(reflection_source)])
 	}
-	public func environment_set_glow(env: VariantBox, enable: Bool, levels: VariantBox, intensity: Double, strength: Double, mix: Double, bloom_threshold: Double, blend_mode: RenderingServer.EnvironmentGlowBlendMode, hdr_bleed_threshold: Double, hdr_bleed_scale: Double, hdr_luminance_cap: Double, glow_map_strength: Double, glow_map: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_glow", args: [VariantBox(env), VariantBox(enable), VariantBox(levels), VariantBox(intensity), VariantBox(strength), VariantBox(mix), VariantBox(bloom_threshold), VariantBox(blend_mode.rawValue), VariantBox(hdr_bleed_threshold), VariantBox(hdr_bleed_scale), VariantBox(hdr_luminance_cap), VariantBox(glow_map_strength), VariantBox(glow_map)])
+	public func environment_set_glow(env: VariantBox, enable: Bool, levels: VariantBox, intensity: Double, strength: Double, mix: Double, bloom_threshold: Double, blend_mode: Int, hdr_bleed_threshold: Double, hdr_bleed_scale: Double, hdr_luminance_cap: Double, glow_map_strength: Double, glow_map: VariantBox) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_glow", args: [VariantBox(env), VariantBox(enable), VariantBox(levels), VariantBox(intensity), VariantBox(strength), VariantBox(mix), VariantBox(bloom_threshold), VariantBox(blend_mode), VariantBox(hdr_bleed_threshold), VariantBox(hdr_bleed_scale), VariantBox(hdr_luminance_cap), VariantBox(glow_map_strength), VariantBox(glow_map)])
 	}
-	public func environment_set_tonemap(env: VariantBox, tone_mapper: RenderingServer.EnvironmentToneMapper, exposure: Double, white: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_tonemap", args: [VariantBox(env), VariantBox(tone_mapper.rawValue), VariantBox(exposure), VariantBox(white)])
+	public func environment_set_tonemap(env: VariantBox, tone_mapper: Int, exposure: Double, white: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_tonemap", args: [VariantBox(env), VariantBox(tone_mapper), VariantBox(exposure), VariantBox(white)])
 	}
 	public func environment_set_tonemap_agx_contrast(env: VariantBox, agx_contrast: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_tonemap_agx_contrast", args: [VariantBox(env), VariantBox(agx_contrast)])
@@ -12103,14 +12103,14 @@ public class RenderingServer: Object {
 	public func environment_set_ssao(env: VariantBox, enable: Bool, radius: Double, intensity: Double, power: Double, detail: Double, horizon: Double, sharpness: Double, light_affect: Double, ao_channel_affect: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_ssao", args: [VariantBox(env), VariantBox(enable), VariantBox(radius), VariantBox(intensity), VariantBox(power), VariantBox(detail), VariantBox(horizon), VariantBox(sharpness), VariantBox(light_affect), VariantBox(ao_channel_affect)])
 	}
-	public func environment_set_fog(env: VariantBox, enable: Bool, light_color: Color, light_energy: Double, sun_scatter: Double, density: Double, height: Double, height_density: Double, aerial_perspective: Double, sky_affect: Double, fog_mode: RenderingServer.EnvironmentFogMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_fog", args: [VariantBox(env), VariantBox(enable), VariantBox(light_color), VariantBox(light_energy), VariantBox(sun_scatter), VariantBox(density), VariantBox(height), VariantBox(height_density), VariantBox(aerial_perspective), VariantBox(sky_affect), VariantBox(fog_mode.rawValue)])
+	public func environment_set_fog(env: VariantBox, enable: Bool, light_color: Color, light_energy: Double, sun_scatter: Double, density: Double, height: Double, height_density: Double, aerial_perspective: Double, sky_affect: Double, fog_mode: Int = 0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_fog", args: [VariantBox(env), VariantBox(enable), VariantBox(light_color), VariantBox(light_energy), VariantBox(sun_scatter), VariantBox(density), VariantBox(height), VariantBox(height_density), VariantBox(aerial_perspective), VariantBox(sky_affect), VariantBox(fog_mode)])
 	}
 	public func environment_set_fog_depth(env: VariantBox, curve: Double, begin: Double, end: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_fog_depth", args: [VariantBox(env), VariantBox(curve), VariantBox(begin), VariantBox(end)])
 	}
-	public func environment_set_sdfgi(env: VariantBox, enable: Bool, cascades: Int, min_cell_size: Double, y_scale: RenderingServer.EnvironmentSDFGIYScale, use_occlusion: Bool, bounce_feedback: Double, read_sky: Bool, energy: Double, normal_bias: Double, probe_bias: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_sdfgi", args: [VariantBox(env), VariantBox(enable), VariantBox(cascades), VariantBox(min_cell_size), VariantBox(y_scale.rawValue), VariantBox(use_occlusion), VariantBox(bounce_feedback), VariantBox(read_sky), VariantBox(energy), VariantBox(normal_bias), VariantBox(probe_bias)])
+	public func environment_set_sdfgi(env: VariantBox, enable: Bool, cascades: Int, min_cell_size: Double, y_scale: Int, use_occlusion: Bool, bounce_feedback: Double, read_sky: Bool, energy: Double, normal_bias: Double, probe_bias: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_sdfgi", args: [VariantBox(env), VariantBox(enable), VariantBox(cascades), VariantBox(min_cell_size), VariantBox(y_scale), VariantBox(use_occlusion), VariantBox(bounce_feedback), VariantBox(read_sky), VariantBox(energy), VariantBox(normal_bias), VariantBox(probe_bias)])
 	}
 	public func environment_set_volumetric_fog(env: VariantBox, enable: Bool, density: Double, albedo: Color, emission: Color, emission_energy: Double, anisotropy: Double, length: Double, detail_spread: Double, gi_inject: Double, temporal_reprojection: Bool, temporal_reprojection_amount: Double, ambient_inject: Double, sky_affect: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_volumetric_fog", args: [VariantBox(env), VariantBox(enable), VariantBox(density), VariantBox(albedo), VariantBox(emission), VariantBox(emission_energy), VariantBox(anisotropy), VariantBox(length), VariantBox(detail_spread), VariantBox(gi_inject), VariantBox(temporal_reprojection), VariantBox(temporal_reprojection_amount), VariantBox(ambient_inject), VariantBox(sky_affect)])
@@ -12121,23 +12121,23 @@ public class RenderingServer: Object {
 	public func environment_set_ssr_half_size(half_size: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_ssr_half_size", args: [VariantBox(half_size)])
 	}
-	public func environment_set_ssr_roughness_quality(quality: RenderingServer.EnvironmentSSRRoughnessQuality) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_ssr_roughness_quality", args: [VariantBox(quality.rawValue)])
+	public func environment_set_ssr_roughness_quality(quality: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_ssr_roughness_quality", args: [VariantBox(quality)])
 	}
-	public func environment_set_ssao_quality(quality: RenderingServer.EnvironmentSSAOQuality, half_size: Bool, adaptive_target: Double, blur_passes: Int, fadeout_from: Double, fadeout_to: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_ssao_quality", args: [VariantBox(quality.rawValue), VariantBox(half_size), VariantBox(adaptive_target), VariantBox(blur_passes), VariantBox(fadeout_from), VariantBox(fadeout_to)])
+	public func environment_set_ssao_quality(quality: Int, half_size: Bool, adaptive_target: Double, blur_passes: Int, fadeout_from: Double, fadeout_to: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_ssao_quality", args: [VariantBox(quality), VariantBox(half_size), VariantBox(adaptive_target), VariantBox(blur_passes), VariantBox(fadeout_from), VariantBox(fadeout_to)])
 	}
-	public func environment_set_ssil_quality(quality: RenderingServer.EnvironmentSSILQuality, half_size: Bool, adaptive_target: Double, blur_passes: Int, fadeout_from: Double, fadeout_to: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_ssil_quality", args: [VariantBox(quality.rawValue), VariantBox(half_size), VariantBox(adaptive_target), VariantBox(blur_passes), VariantBox(fadeout_from), VariantBox(fadeout_to)])
+	public func environment_set_ssil_quality(quality: Int, half_size: Bool, adaptive_target: Double, blur_passes: Int, fadeout_from: Double, fadeout_to: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_ssil_quality", args: [VariantBox(quality), VariantBox(half_size), VariantBox(adaptive_target), VariantBox(blur_passes), VariantBox(fadeout_from), VariantBox(fadeout_to)])
 	}
-	public func environment_set_sdfgi_ray_count(ray_count: RenderingServer.EnvironmentSDFGIRayCount) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_sdfgi_ray_count", args: [VariantBox(ray_count.rawValue)])
+	public func environment_set_sdfgi_ray_count(ray_count: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_sdfgi_ray_count", args: [VariantBox(ray_count)])
 	}
-	public func environment_set_sdfgi_frames_to_converge(frames: RenderingServer.EnvironmentSDFGIFramesToConverge) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_sdfgi_frames_to_converge", args: [VariantBox(frames.rawValue)])
+	public func environment_set_sdfgi_frames_to_converge(frames: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_sdfgi_frames_to_converge", args: [VariantBox(frames)])
 	}
-	public func environment_set_sdfgi_frames_to_update_light(frames: RenderingServer.EnvironmentSDFGIFramesToUpdateLight) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_sdfgi_frames_to_update_light", args: [VariantBox(frames.rawValue)])
+	public func environment_set_sdfgi_frames_to_update_light(frames: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_sdfgi_frames_to_update_light", args: [VariantBox(frames)])
 	}
 	public func environment_set_volumetric_fog_volume_size(size: Int, depth: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "environment_set_volumetric_fog_volume_size", args: [VariantBox(size), VariantBox(depth)])
@@ -12164,11 +12164,11 @@ public class RenderingServer: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "camera_attributes_create", args: [])
 		return __ret
 	}
-	public func camera_attributes_set_dof_blur_quality(quality: RenderingServer.DOFBlurQuality, use_jitter: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "camera_attributes_set_dof_blur_quality", args: [VariantBox(quality.rawValue), VariantBox(use_jitter)])
+	public func camera_attributes_set_dof_blur_quality(quality: Int, use_jitter: Bool) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "camera_attributes_set_dof_blur_quality", args: [VariantBox(quality), VariantBox(use_jitter)])
 	}
-	public func camera_attributes_set_dof_blur_bokeh_shape(shape: RenderingServer.DOFBokehShape) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "camera_attributes_set_dof_blur_bokeh_shape", args: [VariantBox(shape.rawValue)])
+	public func camera_attributes_set_dof_blur_bokeh_shape(shape: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "camera_attributes_set_dof_blur_bokeh_shape", args: [VariantBox(shape)])
 	}
 	public func camera_attributes_set_dof_blur(camera_attributes: VariantBox, far_enable: Bool, far_distance: Double, far_transition: Double, near_enable: Bool, near_distance: Double, near_transition: Double, amount: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "camera_attributes_set_dof_blur", args: [VariantBox(camera_attributes), VariantBox(far_enable), VariantBox(far_distance), VariantBox(far_transition), VariantBox(near_enable), VariantBox(near_distance), VariantBox(near_transition), VariantBox(amount)])
@@ -12254,8 +12254,8 @@ public class RenderingServer: Object {
 	public func instance_set_ignore_culling(instance: VariantBox, enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "instance_set_ignore_culling", args: [VariantBox(instance), VariantBox(enabled)])
 	}
-	public func instance_geometry_set_flag(instance: VariantBox, flag: RenderingServer.InstanceFlags, enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "instance_geometry_set_flag", args: [VariantBox(instance), VariantBox(flag.rawValue), VariantBox(enabled)])
+	public func instance_geometry_set_flag(instance: VariantBox, flag: Int, enabled: Bool) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "instance_geometry_set_flag", args: [VariantBox(instance), VariantBox(flag), VariantBox(enabled)])
 	}
 	public func instance_geometry_set_cast_shadows_setting(instance: VariantBox, shadow_casting_setting: RenderingServer.ShadowCastingSetting) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "instance_geometry_set_cast_shadows_setting", args: [VariantBox(instance), VariantBox(shadow_casting_setting.rawValue)])
@@ -12266,8 +12266,8 @@ public class RenderingServer: Object {
 	public func instance_geometry_set_material_overlay(instance: VariantBox, material: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "instance_geometry_set_material_overlay", args: [VariantBox(instance), VariantBox(material)])
 	}
-	public func instance_geometry_set_visibility_range(instance: VariantBox, min: Double, max: Double, min_margin: Double, max_margin: Double, fade_mode: RenderingServer.VisibilityRangeFadeMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "instance_geometry_set_visibility_range", args: [VariantBox(instance), VariantBox(min), VariantBox(max), VariantBox(min_margin), VariantBox(max_margin), VariantBox(fade_mode.rawValue)])
+	public func instance_geometry_set_visibility_range(instance: VariantBox, min: Double, max: Double, min_margin: Double, max_margin: Double, fade_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "instance_geometry_set_visibility_range", args: [VariantBox(instance), VariantBox(min), VariantBox(max), VariantBox(min_margin), VariantBox(max_margin), VariantBox(fade_mode)])
 	}
 	public func instance_geometry_set_lightmap(instance: VariantBox, lightmap: VariantBox, lightmap_uv_scale: Rect2, lightmap_slice: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "instance_geometry_set_lightmap", args: [VariantBox(instance), VariantBox(lightmap), VariantBox(lightmap_uv_scale), VariantBox(lightmap_slice)])
@@ -12426,8 +12426,8 @@ public class RenderingServer: Object {
 	public func canvas_item_add_texture_rect_region(item: VariantBox, rect: Rect2, texture: VariantBox, src_rect: Rect2, modulate: Color, transpose: Bool = false, clip_uv: Bool = true) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "canvas_item_add_texture_rect_region", args: [VariantBox(item), VariantBox(rect), VariantBox(texture), VariantBox(src_rect), VariantBox(modulate), VariantBox(transpose), VariantBox(clip_uv)])
 	}
-	public func canvas_item_add_nine_patch(item: VariantBox, rect: Rect2, source: Rect2, texture: VariantBox, topleft: Vector2, bottomright: Vector2, x_axis_mode: RenderingServer.NinePatchAxisMode, y_axis_mode: RenderingServer.NinePatchAxisMode, draw_center: Bool = true, modulate: Color) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "canvas_item_add_nine_patch", args: [VariantBox(item), VariantBox(rect), VariantBox(source), VariantBox(texture), VariantBox(topleft), VariantBox(bottomright), VariantBox(x_axis_mode.rawValue), VariantBox(y_axis_mode.rawValue), VariantBox(draw_center), VariantBox(modulate)])
+	public func canvas_item_add_nine_patch(item: VariantBox, rect: Rect2, source: Rect2, texture: VariantBox, topleft: Vector2, bottomright: Vector2, x_axis_mode: Int = 0, y_axis_mode: Int = 0, draw_center: Bool = true, modulate: Color) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "canvas_item_add_nine_patch", args: [VariantBox(item), VariantBox(rect), VariantBox(source), VariantBox(texture), VariantBox(topleft), VariantBox(bottomright), VariantBox(x_axis_mode), VariantBox(y_axis_mode), VariantBox(draw_center), VariantBox(modulate)])
 	}
 	public func canvas_item_add_primitive(item: VariantBox, points: VariantBox, colors: VariantBox, uvs: VariantBox, texture: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "canvas_item_add_primitive", args: [VariantBox(item), VariantBox(points), VariantBox(colors), VariantBox(uvs), VariantBox(texture)])
@@ -12558,8 +12558,8 @@ public class RenderingServer: Object {
 	public func canvas_light_set_shadow_enabled(light: VariantBox, enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "canvas_light_set_shadow_enabled", args: [VariantBox(light), VariantBox(enabled)])
 	}
-	public func canvas_light_set_shadow_filter(light: VariantBox, filter: RenderingServer.CanvasLightShadowFilter) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "canvas_light_set_shadow_filter", args: [VariantBox(light), VariantBox(filter.rawValue)])
+	public func canvas_light_set_shadow_filter(light: VariantBox, filter: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "canvas_light_set_shadow_filter", args: [VariantBox(light), VariantBox(filter)])
 	}
 	public func canvas_light_set_shadow_color(light: VariantBox, color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "canvas_light_set_shadow_color", args: [VariantBox(light), VariantBox(color)])
@@ -12619,14 +12619,14 @@ public class RenderingServer: Object {
 	public func canvas_occluder_polygon_set_shape(occluder_polygon: VariantBox, shape: VariantBox, closed: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "canvas_occluder_polygon_set_shape", args: [VariantBox(occluder_polygon), VariantBox(shape), VariantBox(closed)])
 	}
-	public func canvas_occluder_polygon_set_cull_mode(occluder_polygon: VariantBox, mode: RenderingServer.CanvasOccluderPolygonCullMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "canvas_occluder_polygon_set_cull_mode", args: [VariantBox(occluder_polygon), VariantBox(mode.rawValue)])
+	public func canvas_occluder_polygon_set_cull_mode(occluder_polygon: VariantBox, mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "canvas_occluder_polygon_set_cull_mode", args: [VariantBox(occluder_polygon), VariantBox(mode)])
 	}
 	public func canvas_set_shadow_texture_size(size: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "canvas_set_shadow_texture_size", args: [VariantBox(size)])
 	}
-	public func global_shader_parameter_add(name: String, type: RenderingServer.GlobalShaderParameterType, default_value: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "global_shader_parameter_add", args: [VariantBox(name), VariantBox(type.rawValue), VariantBox(default_value)])
+	public func global_shader_parameter_add(name: String, type: Int, default_value: VariantBox) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "global_shader_parameter_add", args: [VariantBox(name), VariantBox(type), VariantBox(default_value)])
 	}
 	public func global_shader_parameter_remove(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "global_shader_parameter_remove", args: [VariantBox(name)])
@@ -12646,9 +12646,9 @@ public class RenderingServer: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "global_shader_parameter_get", args: [VariantBox(name)])
 	}
 	@discardableResult
-	public func global_shader_parameter_get_type(name: String) -> RenderingServer.GlobalShaderParameterType {
+	public func global_shader_parameter_get_type(name: String) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "global_shader_parameter_get_type", args: [VariantBox(name)])
-		return __ret.asEnum(RenderingServer.GlobalShaderParameterType.self)
+		return __ret.asInt()
 	}
 	public func free_rid(rid: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "free_rid", args: [VariantBox(rid)])
@@ -12776,8 +12776,8 @@ public class RenderingServer: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "call_on_render_thread", args: [VariantBox(callable)])
 	}
 	@discardableResult
-	public func has_feature(feature: RenderingServer.Features) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "has_feature", args: [VariantBox(feature.rawValue)])
+	public func has_feature(feature: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "has_feature", args: [VariantBox(feature)])
 		return __ret.asBool()
 	}
 	public var render_loop_enabled: Bool {
@@ -12814,9 +12814,9 @@ public class ResourceLoader: Object {
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func load_threaded_get_status(path: String, progress: VariantBox) -> ResourceLoader.ThreadLoadStatus {
+	public func load_threaded_get_status(path: String, progress: VariantBox) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_threaded_get_status", args: [VariantBox(path), VariantBox(progress)])
-		return __ret.asEnum(ResourceLoader.ThreadLoadStatus.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func load_threaded_get(path: String) -> Resource? {
@@ -12889,8 +12889,8 @@ public class ResourceSaver: Object {
 		super.init(ptr: raw)
 	}
 	@discardableResult
-	public func save(resource: Resource, path: String, flags: ResourceSaver.SaverFlags) -> Error {
-		let __ret = Host.shared.callMethod(object: ptr, method: "save", args: [VariantBox(resource), VariantBox(path), VariantBox(flags.rawValue)])
+	public func save(resource: Resource, path: String, flags: Int = 0) -> Error {
+		let __ret = Host.shared.callMethod(object: ptr, method: "save", args: [VariantBox(resource), VariantBox(path), VariantBox(flags)])
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
@@ -13223,25 +13223,25 @@ public class ThemeDB: Object {
 		get { Host.shared.getProperty(object: ptr, name: "fallback_base_scale").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "fallback_base_scale", value: VariantBox(newValue)) }
 	}
-	public var fallback_font: Font {
+	public var fallback_font: Font? {
 		get { Host.shared.getProperty(object: ptr, name: "fallback_font").asObject(Font.self) }
-		set { Host.shared.setProperty(object: ptr, name: "fallback_font", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "fallback_font", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var fallback_font_size: Int {
 		get { Host.shared.getProperty(object: ptr, name: "fallback_font_size").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "fallback_font_size", value: VariantBox(newValue)) }
 	}
-	public var fallback_icon: Texture2D {
+	public var fallback_icon: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "fallback_icon").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "fallback_icon", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "fallback_icon", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var fallback_stylebox: StyleBox {
+	public var fallback_stylebox: StyleBox? {
 		get { Host.shared.getProperty(object: ptr, name: "fallback_stylebox").asObject(StyleBox.self) }
-		set { Host.shared.setProperty(object: ptr, name: "fallback_stylebox", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "fallback_stylebox", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var fallback_sound: AudioStream {
+	public var fallback_sound: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "fallback_sound").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "fallback_sound", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "fallback_sound", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public func emit_fallback_changed() {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("fallback_changed")])
@@ -13491,9 +13491,9 @@ public class TileData: Object {
 		get { Host.shared.getProperty(object: ptr, name: "modulate").asColor() }
 		set { Host.shared.setProperty(object: ptr, name: "modulate", value: VariantBox(newValue)) }
 	}
-	public var material: GodotObject {
+	public var material: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "material").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "material", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "material", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var z_index: Int {
 		get { Host.shared.getProperty(object: ptr, name: "z_index").asInt() }
@@ -13847,13 +13847,13 @@ public class TreeItem: Object {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_cell_mode(column: Int, mode: TreeItem.TreeCellMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_cell_mode", args: [VariantBox(column), VariantBox(mode.rawValue)])
+	public func set_cell_mode(column: Int, mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_cell_mode", args: [VariantBox(column), VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_cell_mode(column: Int) -> TreeItem.TreeCellMode {
+	public func get_cell_mode(column: Int) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_cell_mode", args: [VariantBox(column)])
-		return __ret.asEnum(TreeItem.TreeCellMode.self)
+		return __ret.asInt()
 	}
 	public func set_auto_translate_mode(column: Int, mode: Node.AutoTranslateMode) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_auto_translate_mode", args: [VariantBox(column), VariantBox(mode.rawValue)])
@@ -13914,37 +13914,37 @@ public class TreeItem: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_text_direction", args: [VariantBox(column)])
 		return __ret.asEnum(Control.TextDirection.self)
 	}
-	public func set_autowrap_mode(column: Int, autowrap_mode: TextServer.AutowrapMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_mode", args: [VariantBox(column), VariantBox(autowrap_mode.rawValue)])
+	public func set_autowrap_mode(column: Int, autowrap_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_mode", args: [VariantBox(column), VariantBox(autowrap_mode)])
 	}
 	@discardableResult
-	public func get_autowrap_mode(column: Int) -> TextServer.AutowrapMode {
+	public func get_autowrap_mode(column: Int) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_autowrap_mode", args: [VariantBox(column)])
-		return __ret.asEnum(TextServer.AutowrapMode.self)
+		return __ret.asInt()
 	}
-	public func set_autowrap_trim_flags(column: Int, flags: TextServer.LineBreakFlag) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_trim_flags", args: [VariantBox(column), VariantBox(flags.rawValue)])
+	public func set_autowrap_trim_flags(column: Int, flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_trim_flags", args: [VariantBox(column), VariantBox(flags)])
 	}
 	@discardableResult
-	public func get_autowrap_trim_flags(column: Int) -> TextServer.LineBreakFlag {
+	public func get_autowrap_trim_flags(column: Int) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_autowrap_trim_flags", args: [VariantBox(column)])
-		return __ret.asEnum(TextServer.LineBreakFlag.self)
+		return __ret.asInt()
 	}
-	public func set_text_overrun_behavior(column: Int, overrun_behavior: TextServer.OverrunBehavior) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_overrun_behavior", args: [VariantBox(column), VariantBox(overrun_behavior.rawValue)])
+	public func set_text_overrun_behavior(column: Int, overrun_behavior: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_overrun_behavior", args: [VariantBox(column), VariantBox(overrun_behavior)])
 	}
 	@discardableResult
-	public func get_text_overrun_behavior(column: Int) -> TextServer.OverrunBehavior {
+	public func get_text_overrun_behavior(column: Int) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_text_overrun_behavior", args: [VariantBox(column)])
-		return __ret.asEnum(TextServer.OverrunBehavior.self)
+		return __ret.asInt()
 	}
-	public func set_structured_text_bidi_override(column: Int, parser: TextServer.StructuredTextParser) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override", args: [VariantBox(column), VariantBox(parser.rawValue)])
+	public func set_structured_text_bidi_override(column: Int, parser: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override", args: [VariantBox(column), VariantBox(parser)])
 	}
 	@discardableResult
-	public func get_structured_text_bidi_override(column: Int) -> TextServer.StructuredTextParser {
+	public func get_structured_text_bidi_override(column: Int) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_structured_text_bidi_override", args: [VariantBox(column)])
-		return __ret.asEnum(TextServer.StructuredTextParser.self)
+		return __ret.asInt()
 	}
 	public func set_structured_text_bidi_override_options(column: Int, args: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override_options", args: [VariantBox(column), VariantBox(args)])
@@ -14375,8 +14375,8 @@ public class UndoRedo: Object {
 		}
 		super.init(ptr: raw)
 	}
-	public func create_action(name: String, merge_mode: UndoRedo.MergeMode, backward_undo_ops: Bool = false) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "create_action", args: [VariantBox(name), VariantBox(merge_mode.rawValue), VariantBox(backward_undo_ops)])
+	public func create_action(name: String, merge_mode: Int = 0, backward_undo_ops: Bool = false) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "create_action", args: [VariantBox(name), VariantBox(merge_mode), VariantBox(backward_undo_ops)])
 	}
 	public func commit_action(execute: Bool = true) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "commit_action", args: [VariantBox(execute)])
@@ -14578,8 +14578,8 @@ public class XRServer: Object {
 	public func clear_reference_frame() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "clear_reference_frame", args: [])
 	}
-	public func center_on_hmd(rotation_mode: XRServer.RotationMode, keep_height: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "center_on_hmd", args: [VariantBox(rotation_mode.rawValue), VariantBox(keep_height)])
+	public func center_on_hmd(rotation_mode: Int, keep_height: Bool) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "center_on_hmd", args: [VariantBox(rotation_mode), VariantBox(keep_height)])
 	}
 	@discardableResult
 	public func get_hmd_transform() -> Transform3D {
@@ -14666,9 +14666,9 @@ public class XRServer: Object {
 		get { Host.shared.getProperty(object: ptr, name: "camera_locked_to_origin").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "camera_locked_to_origin", value: VariantBox(newValue)) }
 	}
-	public var primary_interface: GodotObject {
+	public var primary_interface: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "primary_interface").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "primary_interface", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "primary_interface", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public func emit_reference_frame_changed() {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("reference_frame_changed")])
@@ -15435,8 +15435,8 @@ public class AnimationMixer: Node {
 	public func advance(delta: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "advance", args: [VariantBox(delta)])
 	}
-	public func capture(name: String, duration: Double, trans_type: Tween.TransitionType, ease_type: Tween.EaseType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "capture", args: [VariantBox(name), VariantBox(duration), VariantBox(trans_type.rawValue), VariantBox(ease_type.rawValue)])
+	public func capture(name: String, duration: Double, trans_type: Int = 0, ease_type: Int = 0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "capture", args: [VariantBox(name), VariantBox(duration), VariantBox(trans_type), VariantBox(ease_type)])
 	}
 	public func set_reset_on_save_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_reset_on_save_enabled", args: [VariantBox(enabled)])
@@ -15793,9 +15793,9 @@ public class AudioStreamPlayer: Node {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_playback_type", args: [])
 		return __ret.asEnum(AudioServer.PlaybackType.self)
 	}
-	public var stream: AudioStream {
+	public var stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var volume_db: Double {
 		get { Host.shared.getProperty(object: ptr, name: "volume_db").asDouble() }
@@ -15873,12 +15873,12 @@ public class CameraFeed: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_name", args: [VariantBox(name)])
 	}
 	@discardableResult
-	public func get_position() -> CameraFeed.FeedPosition {
+	public func get_position() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_position", args: [])
-		return __ret.asEnum(CameraFeed.FeedPosition.self)
+		return __ret.asInt()
 	}
-	public func set_position(position: CameraFeed.FeedPosition) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_position", args: [VariantBox(position.rawValue)])
+	public func set_position(position: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_position", args: [VariantBox(position)])
 	}
 	@discardableResult
 	public func get_transform() -> Transform2D {
@@ -15901,14 +15901,14 @@ public class CameraFeed: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_external", args: [VariantBox(width), VariantBox(height)])
 	}
 	@discardableResult
-	public func get_texture_tex_id(feed_image_type: CameraServer.FeedImage) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture_tex_id", args: [VariantBox(feed_image_type.rawValue)])
+	public func get_texture_tex_id(feed_image_type: Int) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture_tex_id", args: [VariantBox(feed_image_type)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func get_datatype() -> CameraFeed.FeedDataType {
+	public func get_datatype() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_datatype", args: [])
-		return __ret.asEnum(CameraFeed.FeedDataType.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_formats() -> VariantBox {
@@ -16151,17 +16151,17 @@ public class CanvasItem: Node {
 	public func draw_colored_polygon(points: VariantBox, color: Color, uvs: VariantBox, texture: Texture2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "draw_colored_polygon", args: [VariantBox(points), VariantBox(color), VariantBox(uvs), VariantBox(texture)])
 	}
-	public func draw_string(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(modulate), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
+	public func draw_string(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, modulate: Color, justification_flags: Int = 3, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(modulate), VariantBox(justification_flags), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_multiline_string(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(modulate), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
+	public func draw_multiline_string(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, modulate: Color, brk_flags: Int = 3, justification_flags: Int = 3, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(modulate), VariantBox(brk_flags), VariantBox(justification_flags), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_string_outline(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, size: Int = 1, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string_outline", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(size), VariantBox(modulate), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
+	public func draw_string_outline(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, size: Int = 1, modulate: Color, justification_flags: Int = 3, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string_outline", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(size), VariantBox(modulate), VariantBox(justification_flags), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_multiline_string_outline(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, size: Int = 1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string_outline", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(size), VariantBox(modulate), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
+	public func draw_multiline_string_outline(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, size: Int = 1, modulate: Color, brk_flags: Int = 3, justification_flags: Int = 3, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string_outline", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(size), VariantBox(modulate), VariantBox(brk_flags), VariantBox(justification_flags), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
 	public func draw_char(font: Font, pos: Vector2, char: String, font_size: Int = 16, modulate: Color, oversampling: Double = 0.0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "draw_char", args: [VariantBox(font), VariantBox(pos), VariantBox(char), VariantBox(font_size), VariantBox(modulate), VariantBox(oversampling)])
@@ -16330,13 +16330,13 @@ public class CanvasItem: Node {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture_repeat", args: [])
 		return __ret.asEnum(CanvasItem.TextureRepeat.self)
 	}
-	public func set_clip_children_mode(mode: CanvasItem.ClipChildrenMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_clip_children_mode", args: [VariantBox(mode.rawValue)])
+	public func set_clip_children_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_clip_children_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_clip_children_mode() -> CanvasItem.ClipChildrenMode {
+	public func get_clip_children_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_clip_children_mode", args: [])
-		return __ret.asEnum(CanvasItem.ClipChildrenMode.self)
+		return __ret.asInt()
 	}
 	public func set_oversampling_with_scale(enabled: CanvasItem.OversamplingWithScale) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_oversampling_with_scale", args: [VariantBox(enabled.rawValue)])
@@ -16421,9 +16421,9 @@ public class CanvasItem: Node {
 		get { Host.shared.getProperty(object: ptr, name: "Material") }
 		set { Host.shared.setProperty(object: ptr, name: "Material", value: VariantBox(newValue)) }
 	}
-	public var material: GodotObject {
+	public var material: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "material").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "material", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "material", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var use_parent_material: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "use_parent_material").asBool() }
@@ -16576,9 +16576,9 @@ public class CanvasLayer: Node {
 		get { Host.shared.getProperty(object: ptr, name: "") }
 		set { Host.shared.setProperty(object: ptr, name: "", value: VariantBox(newValue)) }
 	}
-	public var custom_viewport: Viewport {
+	public var custom_viewport: Viewport? {
 		get { Host.shared.getProperty(object: ptr, name: "custom_viewport").asObject(Viewport.self) }
-		set { Host.shared.setProperty(object: ptr, name: "custom_viewport", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "custom_viewport", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Follow_Viewport: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Follow Viewport") }
@@ -16875,13 +16875,13 @@ public class Crypto: RefCounted {
 		return __ret.asObject(X509Certificate.self)
 	}
 	@discardableResult
-	public func sign(hash_type: HashingContext.HashType, hash: VariantBox, key: CryptoKey) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "sign", args: [VariantBox(hash_type.rawValue), VariantBox(hash), VariantBox(key)])
+	public func sign(hash_type: Int, hash: VariantBox, key: CryptoKey) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "sign", args: [VariantBox(hash_type), VariantBox(hash), VariantBox(key)])
 		return __ret
 	}
 	@discardableResult
-	public func verify(hash_type: HashingContext.HashType, hash: VariantBox, signature: VariantBox, key: CryptoKey) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "verify", args: [VariantBox(hash_type.rawValue), VariantBox(hash), VariantBox(signature), VariantBox(key)])
+	public func verify(hash_type: Int, hash: VariantBox, signature: VariantBox, key: CryptoKey) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "verify", args: [VariantBox(hash_type), VariantBox(hash), VariantBox(signature), VariantBox(key)])
 		return __ret.asBool()
 	}
 	@discardableResult
@@ -16895,8 +16895,8 @@ public class Crypto: RefCounted {
 		return __ret
 	}
 	@discardableResult
-	public func hmac_digest(hash_type: HashingContext.HashType, key: VariantBox, msg: VariantBox) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "hmac_digest", args: [VariantBox(hash_type.rawValue), VariantBox(key), VariantBox(msg)])
+	public func hmac_digest(hash_type: Int, key: VariantBox, msg: VariantBox) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "hmac_digest", args: [VariantBox(hash_type), VariantBox(key), VariantBox(msg)])
 		return __ret
 	}
 	@discardableResult
@@ -17194,8 +17194,8 @@ public class ENetConnection: RefCounted {
 	public func broadcast(channel: Int, packet: VariantBox, flags: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "broadcast", args: [VariantBox(channel), VariantBox(packet), VariantBox(flags)])
 	}
-	public func compress(mode: ENetConnection.CompressionMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "compress", args: [VariantBox(mode.rawValue)])
+	public func compress(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "compress", args: [VariantBox(mode)])
 	}
 	@discardableResult
 	public func dtls_server_setup(server_options: TLSOptions) -> Error {
@@ -17211,8 +17211,8 @@ public class ENetConnection: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "refuse_new_connections", args: [VariantBox(refuse)])
 	}
 	@discardableResult
-	public func pop_statistic(statistic: ENetConnection.HostStatistic) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "pop_statistic", args: [VariantBox(statistic.rawValue)])
+	public func pop_statistic(statistic: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "pop_statistic", args: [VariantBox(statistic)])
 		return __ret.asDouble()
 	}
 	@discardableResult
@@ -17317,23 +17317,23 @@ public class FileAccess: RefCounted {
 		super.init(ptr: raw)
 	}
 	@discardableResult
-	public func open_(path: String, flags: FileAccess.ModeFlags) -> FileAccess? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "open", args: [VariantBox(path), VariantBox(flags.rawValue)])
+	public func open_(path: String, flags: Int) -> FileAccess? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "open", args: [VariantBox(path), VariantBox(flags)])
 		return __ret.asObject(FileAccess.self)
 	}
 	@discardableResult
-	public func open_encrypted(path: String, mode_flags: FileAccess.ModeFlags, key: VariantBox, iv: VariantBox) -> FileAccess? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "open_encrypted", args: [VariantBox(path), VariantBox(mode_flags.rawValue), VariantBox(key), VariantBox(iv)])
+	public func open_encrypted(path: String, mode_flags: Int, key: VariantBox, iv: VariantBox) -> FileAccess? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "open_encrypted", args: [VariantBox(path), VariantBox(mode_flags), VariantBox(key), VariantBox(iv)])
 		return __ret.asObject(FileAccess.self)
 	}
 	@discardableResult
-	public func open_encrypted_with_pass(path: String, mode_flags: FileAccess.ModeFlags, pass: String) -> FileAccess? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "open_encrypted_with_pass", args: [VariantBox(path), VariantBox(mode_flags.rawValue), VariantBox(pass)])
+	public func open_encrypted_with_pass(path: String, mode_flags: Int, pass: String) -> FileAccess? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "open_encrypted_with_pass", args: [VariantBox(path), VariantBox(mode_flags), VariantBox(pass)])
 		return __ret.asObject(FileAccess.self)
 	}
 	@discardableResult
-	public func open_compressed(path: String, mode_flags: FileAccess.ModeFlags, compression_mode: FileAccess.CompressionMode) -> FileAccess? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "open_compressed", args: [VariantBox(path), VariantBox(mode_flags.rawValue), VariantBox(compression_mode.rawValue)])
+	public func open_compressed(path: String, mode_flags: Int, compression_mode: Int = 0) -> FileAccess? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "open_compressed", args: [VariantBox(path), VariantBox(mode_flags), VariantBox(compression_mode)])
 		return __ret.asObject(FileAccess.self)
 	}
 	@discardableResult
@@ -17342,8 +17342,8 @@ public class FileAccess: RefCounted {
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func create_temp(mode_flags: FileAccess.ModeFlags, prefix: String, extension_: String, keep: Bool = false) -> FileAccess? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "create_temp", args: [VariantBox(mode_flags.rawValue), VariantBox(prefix), VariantBox(extension_), VariantBox(keep)])
+	public func create_temp(mode_flags: Int, prefix: String, extension_: String, keep: Bool = false) -> FileAccess? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "create_temp", args: [VariantBox(mode_flags), VariantBox(prefix), VariantBox(extension_), VariantBox(keep)])
 		return __ret.asObject(FileAccess.self)
 	}
 	@discardableResult
@@ -17585,13 +17585,13 @@ public class FileAccess: RefCounted {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func get_unix_permissions(file: String) -> FileAccess.UnixPermissionFlags {
+	public func get_unix_permissions(file: String) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_unix_permissions", args: [VariantBox(file)])
-		return __ret.asEnum(FileAccess.UnixPermissionFlags.self)
+		return __ret.asInt()
 	}
 	@discardableResult
-	public func set_unix_permissions(file: String, permissions: FileAccess.UnixPermissionFlags) -> Error {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_unix_permissions", args: [VariantBox(file), VariantBox(permissions.rawValue)])
+	public func set_unix_permissions(file: String, permissions: Int) -> Error {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_unix_permissions", args: [VariantBox(file), VariantBox(permissions)])
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
@@ -17866,9 +17866,9 @@ public class GLTFObjectModelProperty: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "append_path_to_property", args: [VariantBox(node_path), VariantBox(prop_name)])
 	}
 	@discardableResult
-	public func get_accessor_type() -> GLTFAccessor.GLTFAccessorType {
+	public func get_accessor_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_accessor_type", args: [])
-		return __ret.asEnum(GLTFAccessor.GLTFAccessorType.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_gltf_to_godot_expression() -> Expression? {
@@ -17900,12 +17900,12 @@ public class GLTFObjectModelProperty: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_node_paths", args: [VariantBox(node_paths)])
 	}
 	@discardableResult
-	public func get_object_model_type() -> GLTFObjectModelProperty.GLTFObjectModelType {
+	public func get_object_model_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_object_model_type", args: [])
-		return __ret.asEnum(GLTFObjectModelProperty.GLTFObjectModelType.self)
+		return __ret.asInt()
 	}
-	public func set_object_model_type(type: GLTFObjectModelProperty.GLTFObjectModelType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_object_model_type", args: [VariantBox(type.rawValue)])
+	public func set_object_model_type(type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_object_model_type", args: [VariantBox(type)])
 	}
 	@discardableResult
 	public func get_json_pointers() -> VariantBox {
@@ -17928,16 +17928,16 @@ public class GLTFObjectModelProperty: RefCounted {
 	public func set_variant_type(variant_type: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_variant_type", args: [VariantBox(variant_type)])
 	}
-	public func set_types(variant_type: Int, obj_model_type: GLTFObjectModelProperty.GLTFObjectModelType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_types", args: [VariantBox(variant_type), VariantBox(obj_model_type.rawValue)])
+	public func set_types(variant_type: Int, obj_model_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_types", args: [VariantBox(variant_type), VariantBox(obj_model_type)])
 	}
-	public var gltf_to_godot_expression: Expression {
+	public var gltf_to_godot_expression: Expression? {
 		get { Host.shared.getProperty(object: ptr, name: "gltf_to_godot_expression").asObject(Expression.self) }
-		set { Host.shared.setProperty(object: ptr, name: "gltf_to_godot_expression", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "gltf_to_godot_expression", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var godot_to_gltf_expression: Expression {
+	public var godot_to_gltf_expression: Expression? {
 		get { Host.shared.getProperty(object: ptr, name: "godot_to_gltf_expression").asObject(Expression.self) }
-		set { Host.shared.setProperty(object: ptr, name: "godot_to_gltf_expression", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "godot_to_gltf_expression", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var node_paths: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "node_paths") }
@@ -18000,8 +18000,8 @@ public class HMACContext: RefCounted {
 		super.init(ptr: raw)
 	}
 	@discardableResult
-	public func start(hash_type: HashingContext.HashType, key: VariantBox) -> Error {
-		let __ret = Host.shared.callMethod(object: ptr, method: "start", args: [VariantBox(hash_type.rawValue), VariantBox(key)])
+	public func start(hash_type: Int, key: VariantBox) -> Error {
+		let __ret = Host.shared.callMethod(object: ptr, method: "start", args: [VariantBox(hash_type), VariantBox(key)])
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
@@ -18151,9 +18151,9 @@ public class HTTPClient: RefCounted {
 		get { Host.shared.getProperty(object: ptr, name: "blocking_mode_enabled").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "blocking_mode_enabled", value: VariantBox(newValue)) }
 	}
-	public var connection: StreamPeer {
+	public var connection: StreamPeer? {
 		get { Host.shared.getProperty(object: ptr, name: "connection").asObject(StreamPeer.self) }
-		set { Host.shared.setProperty(object: ptr, name: "connection", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "connection", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var read_chunk_size: Int {
 		get { Host.shared.getProperty(object: ptr, name: "read_chunk_size").asInt() }
@@ -18346,8 +18346,8 @@ public class HashingContext: RefCounted {
 		super.init(ptr: raw)
 	}
 	@discardableResult
-	public func start(type: HashingContext.HashType) -> Error {
-		let __ret = Host.shared.callMethod(object: ptr, method: "start", args: [VariantBox(type.rawValue)])
+	public func start(type: Int) -> Error {
+		let __ret = Host.shared.callMethod(object: ptr, method: "start", args: [VariantBox(type)])
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
@@ -18734,13 +18734,13 @@ public class MeshConvexDecompositionSettings: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_normalize_mesh", args: [])
 		return __ret.asBool()
 	}
-	public func set_mode(mode: MeshConvexDecompositionSettings.Mode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_mode", args: [VariantBox(mode.rawValue)])
+	public func set_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_mode() -> MeshConvexDecompositionSettings.Mode {
+	public func get_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_mode", args: [])
-		return __ret.asEnum(MeshConvexDecompositionSettings.Mode.self)
+		return __ret.asInt()
 	}
 	public func set_convex_hull_approximation(convex_hull_approximation: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_convex_hull_approximation", args: [VariantBox(convex_hull_approximation)])
@@ -19145,9 +19145,9 @@ public class MultiplayerAPI: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_default_interface", args: [])
 		return __ret.asObject(MultiplayerAPI.self)
 	}
-	public var multiplayer_peer: MultiplayerPeer {
+	public var multiplayer_peer: MultiplayerPeer? {
 		get { Host.shared.getProperty(object: ptr, name: "multiplayer_peer").asObject(MultiplayerPeer.self) }
-		set { Host.shared.setProperty(object: ptr, name: "multiplayer_peer", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "multiplayer_peer", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public func emit_peer_connected(id: Int) {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("peer_connected"), VariantBox(id)])
@@ -19293,13 +19293,13 @@ public class MultiplayerSynchronizer: Node {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_replication_config", args: [])
 		return __ret.asObject(SceneReplicationConfig.self)
 	}
-	public func set_visibility_update_mode(mode: MultiplayerSynchronizer.VisibilityUpdateMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_visibility_update_mode", args: [VariantBox(mode.rawValue)])
+	public func set_visibility_update_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_visibility_update_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_visibility_update_mode() -> MultiplayerSynchronizer.VisibilityUpdateMode {
+	public func get_visibility_update_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_visibility_update_mode", args: [])
-		return __ret.asEnum(MultiplayerSynchronizer.VisibilityUpdateMode.self)
+		return __ret.asInt()
 	}
 	public func update_visibility(for_peer: Int = 0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update_visibility", args: [VariantBox(for_peer)])
@@ -19338,9 +19338,9 @@ public class MultiplayerSynchronizer: Node {
 		get { Host.shared.getProperty(object: ptr, name: "delta_interval").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "delta_interval", value: VariantBox(newValue)) }
 	}
-	public var replication_config: SceneReplicationConfig {
+	public var replication_config: SceneReplicationConfig? {
 		get { Host.shared.getProperty(object: ptr, name: "replication_config").asObject(SceneReplicationConfig.self) }
-		set { Host.shared.setProperty(object: ptr, name: "replication_config", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "replication_config", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var visibility_update_mode: Int {
 		get { Host.shared.getProperty(object: ptr, name: "visibility_update_mode").asInt() }
@@ -19501,21 +19501,21 @@ public class NavigationAgent2D: Node {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_pathfinding_algorithm", args: [])
 		return __ret.asEnum(NavigationPathQueryParameters2D.PathfindingAlgorithm.self)
 	}
-	public func set_path_postprocessing(path_postprocessing: NavigationPathQueryParameters2D.PathPostProcessing) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_path_postprocessing", args: [VariantBox(path_postprocessing.rawValue)])
+	public func set_path_postprocessing(path_postprocessing: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_path_postprocessing", args: [VariantBox(path_postprocessing)])
 	}
 	@discardableResult
-	public func get_path_postprocessing() -> NavigationPathQueryParameters2D.PathPostProcessing {
+	public func get_path_postprocessing() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_path_postprocessing", args: [])
-		return __ret.asEnum(NavigationPathQueryParameters2D.PathPostProcessing.self)
+		return __ret.asInt()
 	}
-	public func set_path_metadata_flags(flags: NavigationPathQueryParameters2D.PathMetadataFlags) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_path_metadata_flags", args: [VariantBox(flags.rawValue)])
+	public func set_path_metadata_flags(flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_path_metadata_flags", args: [VariantBox(flags)])
 	}
 	@discardableResult
-	public func get_path_metadata_flags() -> NavigationPathQueryParameters2D.PathMetadataFlags {
+	public func get_path_metadata_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_path_metadata_flags", args: [])
-		return __ret.asEnum(NavigationPathQueryParameters2D.PathMetadataFlags.self)
+		return __ret.asInt()
 	}
 	public func set_navigation_map(navigation_map: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_navigation_map", args: [VariantBox(navigation_map)])
@@ -20027,21 +20027,21 @@ public class NavigationAgent3D: Node {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_pathfinding_algorithm", args: [])
 		return __ret.asEnum(NavigationPathQueryParameters3D.PathfindingAlgorithm.self)
 	}
-	public func set_path_postprocessing(path_postprocessing: NavigationPathQueryParameters3D.PathPostProcessing) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_path_postprocessing", args: [VariantBox(path_postprocessing.rawValue)])
+	public func set_path_postprocessing(path_postprocessing: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_path_postprocessing", args: [VariantBox(path_postprocessing)])
 	}
 	@discardableResult
-	public func get_path_postprocessing() -> NavigationPathQueryParameters3D.PathPostProcessing {
+	public func get_path_postprocessing() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_path_postprocessing", args: [])
-		return __ret.asEnum(NavigationPathQueryParameters3D.PathPostProcessing.self)
+		return __ret.asInt()
 	}
-	public func set_path_metadata_flags(flags: NavigationPathQueryParameters3D.PathMetadataFlags) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_path_metadata_flags", args: [VariantBox(flags.rawValue)])
+	public func set_path_metadata_flags(flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_path_metadata_flags", args: [VariantBox(flags)])
 	}
 	@discardableResult
-	public func get_path_metadata_flags() -> NavigationPathQueryParameters3D.PathMetadataFlags {
+	public func get_path_metadata_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_path_metadata_flags", args: [])
-		return __ret.asEnum(NavigationPathQueryParameters3D.PathMetadataFlags.self)
+		return __ret.asInt()
 	}
 	public func set_navigation_map(navigation_map: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_navigation_map", args: [VariantBox(navigation_map)])
@@ -20427,13 +20427,13 @@ public class NavigationPathQueryParameters2D: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_pathfinding_algorithm", args: [])
 		return __ret.asEnum(NavigationPathQueryParameters2D.PathfindingAlgorithm.self)
 	}
-	public func set_path_postprocessing(path_postprocessing: NavigationPathQueryParameters2D.PathPostProcessing) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_path_postprocessing", args: [VariantBox(path_postprocessing.rawValue)])
+	public func set_path_postprocessing(path_postprocessing: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_path_postprocessing", args: [VariantBox(path_postprocessing)])
 	}
 	@discardableResult
-	public func get_path_postprocessing() -> NavigationPathQueryParameters2D.PathPostProcessing {
+	public func get_path_postprocessing() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_path_postprocessing", args: [])
-		return __ret.asEnum(NavigationPathQueryParameters2D.PathPostProcessing.self)
+		return __ret.asInt()
 	}
 	public func set_map(map: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_map", args: [VariantBox(map)])
@@ -20467,13 +20467,13 @@ public class NavigationPathQueryParameters2D: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_navigation_layers", args: [])
 		return __ret.asInt()
 	}
-	public func set_metadata_flags(flags: NavigationPathQueryParameters2D.PathMetadataFlags) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_metadata_flags", args: [VariantBox(flags.rawValue)])
+	public func set_metadata_flags(flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_metadata_flags", args: [VariantBox(flags)])
 	}
 	@discardableResult
-	public func get_metadata_flags() -> NavigationPathQueryParameters2D.PathMetadataFlags {
+	public func get_metadata_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_metadata_flags", args: [])
-		return __ret.asEnum(NavigationPathQueryParameters2D.PathMetadataFlags.self)
+		return __ret.asInt()
 	}
 	public func set_simplify_path(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_simplify_path", args: [VariantBox(enabled)])
@@ -20621,13 +20621,13 @@ public class NavigationPathQueryParameters3D: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_pathfinding_algorithm", args: [])
 		return __ret.asEnum(NavigationPathQueryParameters3D.PathfindingAlgorithm.self)
 	}
-	public func set_path_postprocessing(path_postprocessing: NavigationPathQueryParameters3D.PathPostProcessing) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_path_postprocessing", args: [VariantBox(path_postprocessing.rawValue)])
+	public func set_path_postprocessing(path_postprocessing: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_path_postprocessing", args: [VariantBox(path_postprocessing)])
 	}
 	@discardableResult
-	public func get_path_postprocessing() -> NavigationPathQueryParameters3D.PathPostProcessing {
+	public func get_path_postprocessing() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_path_postprocessing", args: [])
-		return __ret.asEnum(NavigationPathQueryParameters3D.PathPostProcessing.self)
+		return __ret.asInt()
 	}
 	public func set_map(map: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_map", args: [VariantBox(map)])
@@ -20661,13 +20661,13 @@ public class NavigationPathQueryParameters3D: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_navigation_layers", args: [])
 		return __ret.asInt()
 	}
-	public func set_metadata_flags(flags: NavigationPathQueryParameters3D.PathMetadataFlags) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_metadata_flags", args: [VariantBox(flags.rawValue)])
+	public func set_metadata_flags(flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_metadata_flags", args: [VariantBox(flags)])
 	}
 	@discardableResult
-	public func get_metadata_flags() -> NavigationPathQueryParameters3D.PathMetadataFlags {
+	public func get_metadata_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_metadata_flags", args: [])
-		return __ret.asEnum(NavigationPathQueryParameters3D.PathMetadataFlags.self)
+		return __ret.asInt()
 	}
 	public func set_simplify_path(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_simplify_path", args: [VariantBox(enabled)])
@@ -21553,9 +21553,9 @@ public class OpenXRAPIExtension: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_emulate_environment_blend_mode_alpha_blend", args: [VariantBox(enabled)])
 	}
 	@discardableResult
-	public func is_environment_blend_mode_alpha_supported() -> OpenXRAPIExtension.OpenXRAlphaBlendModeSupport {
+	public func is_environment_blend_mode_alpha_supported() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_environment_blend_mode_alpha_supported", args: [])
-		return __ret.asEnum(OpenXRAPIExtension.OpenXRAlphaBlendModeSupport.self)
+		return __ret.asInt()
 	}
 	public func update_main_swapchain_size() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update_main_swapchain_size", args: [])
@@ -21672,9 +21672,9 @@ public class OpenXRFutureResult: RefCounted {
 		super.init(ptr: raw)
 	}
 	@discardableResult
-	public func get_status() -> OpenXRFutureResult.ResultStatus {
+	public func get_status() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_status", args: [])
-		return __ret.asEnum(OpenXRFutureResult.ResultStatus.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_future() -> Int {
@@ -21738,9 +21738,9 @@ public class OpenXRRenderModelExtension: OpenXRExtensionWrapper {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func render_model_get_confidence(render_model: VariantBox) -> XRPose.TrackingConfidence {
+	public func render_model_get_confidence(render_model: VariantBox) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "render_model_get_confidence", args: [VariantBox(render_model)])
-		return __ret.asEnum(XRPose.TrackingConfidence.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func render_model_get_root_transform(render_model: VariantBox) -> Transform3D {
@@ -22222,13 +22222,13 @@ public class OpenXRSpatialMarkerTrackingCapability: OpenXRExtensionWrapper {
 		let __ret = Host.shared.callMethod(object: ptr, method: "do_entity_update", args: [VariantBox(spatial_context), VariantBox(component_data), VariantBox(next_snapshot_create), VariantBox(next_snapshot_query)])
 	}
 	@discardableResult
-	public func get_built_in_tracking_state() -> OpenXRSpatialEntityExtension.TrackingState {
+	public func get_built_in_tracking_state() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_built_in_tracking_state", args: [])
-		return __ret.asEnum(OpenXRSpatialEntityExtension.TrackingState.self)
+		return __ret.asInt()
 	}
 	@discardableResult
-	public func start_built_in_tracking(marker_types: OpenXRSpatialMarkerTrackingCapability.MarkerTypeFlags) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "start_built_in_tracking", args: [VariantBox(marker_types.rawValue)])
+	public func start_built_in_tracking(marker_types: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "start_built_in_tracking", args: [VariantBox(marker_types)])
 		return __ret.asBool()
 	}
 	public func stop_built_in_tracking(clear_trackers: Bool = true) {
@@ -22256,9 +22256,9 @@ public class OpenXRSpatialPlaneTrackingCapability: OpenXRExtensionWrapper {
 		return __ret.asObject(OpenXRFutureResult.self)
 	}
 	@discardableResult
-	public func get_built_in_tracking_state() -> OpenXRSpatialEntityExtension.TrackingState {
+	public func get_built_in_tracking_state() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_built_in_tracking_state", args: [])
-		return __ret.asEnum(OpenXRSpatialEntityExtension.TrackingState.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func start_built_in_tracking() -> Bool {
@@ -22302,9 +22302,9 @@ public class OpenXRStructureBase: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_header", args: [VariantBox(next)])
 		return __ret.asInt()
 	}
-	public var next: OpenXRStructureBase {
+	public var next: OpenXRStructureBase? {
 		get { Host.shared.getProperty(object: ptr, name: "next").asObject(OpenXRStructureBase.self) }
-		set { Host.shared.setProperty(object: ptr, name: "next", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "next", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -23372,9 +23372,9 @@ public class PhysicsIntersectRayResult2D: RefCounted {
 		get { Host.shared.getProperty(object: ptr, name: "collider_id").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "collider_id", value: VariantBox(newValue)) }
 	}
-	public var collider: GodotObject {
+	public var collider: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "collider").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "collider", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "collider", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var collider_shape: Int {
 		get { Host.shared.getProperty(object: ptr, name: "collider_shape").asInt() }
@@ -23442,9 +23442,9 @@ public class PhysicsIntersectRayResult3D: RefCounted {
 		get { Host.shared.getProperty(object: ptr, name: "collider_id").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "collider_id", value: VariantBox(newValue)) }
 	}
-	public var collider: GodotObject {
+	public var collider: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "collider").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "collider", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "collider", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var collider_shape: Int {
 		get { Host.shared.getProperty(object: ptr, name: "collider_shape").asInt() }
@@ -23984,9 +23984,9 @@ public class PhysicsServer2DExtension: PhysicsServer2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_shape_set_custom_solver_bias", args: [VariantBox(shape), VariantBox(bias)])
 	}
 	@discardableResult
-	public func _shape_get_type(shape: VariantBox) -> PhysicsServer2D.ShapeType {
+	public func _shape_get_type(shape: VariantBox) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_shape_get_type", args: [VariantBox(shape)])
-		return __ret.asEnum(PhysicsServer2D.ShapeType.self)
+		return __ret.asInt()
 	}
 	public func _shape_get_data(shape: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_shape_get_data", args: [VariantBox(shape)])
@@ -24014,12 +24014,12 @@ public class PhysicsServer2DExtension: PhysicsServer2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_space_is_active", args: [VariantBox(space)])
 		return __ret.asBool()
 	}
-	public func _space_set_param(space: VariantBox, param: PhysicsServer2D.SpaceParameter, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_space_set_param", args: [VariantBox(space), VariantBox(param.rawValue), VariantBox(value)])
+	public func _space_set_param(space: VariantBox, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_space_set_param", args: [VariantBox(space), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func _space_get_param(space: VariantBox, param: PhysicsServer2D.SpaceParameter) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_space_get_param", args: [VariantBox(space), VariantBox(param.rawValue)])
+	public func _space_get_param(space: VariantBox, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_space_get_param", args: [VariantBox(space), VariantBox(param)])
 		return __ret.asDouble()
 	}
 	@discardableResult
@@ -24102,14 +24102,14 @@ public class PhysicsServer2DExtension: PhysicsServer2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_area_get_canvas_instance_id", args: [VariantBox(area)])
 		return __ret.asInt()
 	}
-	public func _area_set_param(area: VariantBox, param: PhysicsServer2D.AreaParameter, value: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_area_set_param", args: [VariantBox(area), VariantBox(param.rawValue), VariantBox(value)])
+	public func _area_set_param(area: VariantBox, param: Int, value: VariantBox) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_area_set_param", args: [VariantBox(area), VariantBox(param), VariantBox(value)])
 	}
 	public func _area_set_transform(area: VariantBox, transform: Transform2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_area_set_transform", args: [VariantBox(area), VariantBox(transform)])
 	}
-	public func _area_get_param(area: VariantBox, param: PhysicsServer2D.AreaParameter) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_area_get_param", args: [VariantBox(area), VariantBox(param.rawValue)])
+	public func _area_get_param(area: VariantBox, param: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_area_get_param", args: [VariantBox(area), VariantBox(param)])
 	}
 	@discardableResult
 	public func _area_get_transform(area: VariantBox) -> Transform2D {
@@ -24217,13 +24217,13 @@ public class PhysicsServer2DExtension: PhysicsServer2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_body_get_canvas_instance_id", args: [VariantBox(body)])
 		return __ret.asInt()
 	}
-	public func _body_set_continuous_collision_detection_mode(body: VariantBox, mode: PhysicsServer2D.CCDMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_body_set_continuous_collision_detection_mode", args: [VariantBox(body), VariantBox(mode.rawValue)])
+	public func _body_set_continuous_collision_detection_mode(body: VariantBox, mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_body_set_continuous_collision_detection_mode", args: [VariantBox(body), VariantBox(mode)])
 	}
 	@discardableResult
-	public func _body_get_continuous_collision_detection_mode(body: VariantBox) -> PhysicsServer2D.CCDMode {
+	public func _body_get_continuous_collision_detection_mode(body: VariantBox) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_body_get_continuous_collision_detection_mode", args: [VariantBox(body)])
-		return __ret.asEnum(PhysicsServer2D.CCDMode.self)
+		return __ret.asInt()
 	}
 	public func _body_set_collision_layer(body: VariantBox, layer: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_body_set_collision_layer", args: [VariantBox(body), VariantBox(layer)])
@@ -24249,11 +24249,11 @@ public class PhysicsServer2DExtension: PhysicsServer2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_body_get_collision_priority", args: [VariantBox(body)])
 		return __ret.asDouble()
 	}
-	public func _body_set_param(body: VariantBox, param: PhysicsServer2D.BodyParameter, value: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_body_set_param", args: [VariantBox(body), VariantBox(param.rawValue), VariantBox(value)])
+	public func _body_set_param(body: VariantBox, param: Int, value: VariantBox) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_body_set_param", args: [VariantBox(body), VariantBox(param), VariantBox(value)])
 	}
-	public func _body_get_param(body: VariantBox, param: PhysicsServer2D.BodyParameter) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_body_get_param", args: [VariantBox(body), VariantBox(param.rawValue)])
+	public func _body_get_param(body: VariantBox, param: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_body_get_param", args: [VariantBox(body), VariantBox(param)])
 	}
 	public func _body_reset_mass_properties(body: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_body_reset_mass_properties", args: [VariantBox(body)])
@@ -24410,20 +24410,20 @@ public class PhysicsServer2DExtension: PhysicsServer2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_pin_joint_get_flag", args: [VariantBox(joint), VariantBox(flag.rawValue)])
 		return __ret.asBool()
 	}
-	public func _pin_joint_set_param(joint: VariantBox, param: PhysicsServer2D.PinJointParam, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_pin_joint_set_param", args: [VariantBox(joint), VariantBox(param.rawValue), VariantBox(value)])
+	public func _pin_joint_set_param(joint: VariantBox, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_pin_joint_set_param", args: [VariantBox(joint), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func _pin_joint_get_param(joint: VariantBox, param: PhysicsServer2D.PinJointParam) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_pin_joint_get_param", args: [VariantBox(joint), VariantBox(param.rawValue)])
+	public func _pin_joint_get_param(joint: VariantBox, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_pin_joint_get_param", args: [VariantBox(joint), VariantBox(param)])
 		return __ret.asDouble()
 	}
-	public func _damped_spring_joint_set_param(joint: VariantBox, param: PhysicsServer2D.DampedSpringParam, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_damped_spring_joint_set_param", args: [VariantBox(joint), VariantBox(param.rawValue), VariantBox(value)])
+	public func _damped_spring_joint_set_param(joint: VariantBox, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_damped_spring_joint_set_param", args: [VariantBox(joint), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func _damped_spring_joint_get_param(joint: VariantBox, param: PhysicsServer2D.DampedSpringParam) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_damped_spring_joint_get_param", args: [VariantBox(joint), VariantBox(param.rawValue)])
+	public func _damped_spring_joint_get_param(joint: VariantBox, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_damped_spring_joint_get_param", args: [VariantBox(joint), VariantBox(param)])
 		return __ret.asDouble()
 	}
 	@discardableResult
@@ -24458,8 +24458,8 @@ public class PhysicsServer2DExtension: PhysicsServer2D {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func _get_process_info(process_info: PhysicsServer2D.ProcessInfo) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_get_process_info", args: [VariantBox(process_info.rawValue)])
+	public func _get_process_info(process_info: Int) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_get_process_info", args: [VariantBox(process_info)])
 		return __ret.asInt()
 	}
 }
@@ -24548,9 +24548,9 @@ public class PhysicsServer3DExtension: PhysicsServer3D {
 		return __ret.asDouble()
 	}
 	@discardableResult
-	public func _shape_get_type(shape: VariantBox) -> PhysicsServer3D.ShapeType {
+	public func _shape_get_type(shape: VariantBox) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_shape_get_type", args: [VariantBox(shape)])
-		return __ret.asEnum(PhysicsServer3D.ShapeType.self)
+		return __ret.asInt()
 	}
 	public func _shape_get_data(shape: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_shape_get_data", args: [VariantBox(shape)])
@@ -24573,12 +24573,12 @@ public class PhysicsServer3DExtension: PhysicsServer3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_space_is_active", args: [VariantBox(space)])
 		return __ret.asBool()
 	}
-	public func _space_set_param(space: VariantBox, param: PhysicsServer3D.SpaceParameter, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_space_set_param", args: [VariantBox(space), VariantBox(param.rawValue), VariantBox(value)])
+	public func _space_set_param(space: VariantBox, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_space_set_param", args: [VariantBox(space), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func _space_get_param(space: VariantBox, param: PhysicsServer3D.SpaceParameter) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_space_get_param", args: [VariantBox(space), VariantBox(param.rawValue)])
+	public func _space_get_param(space: VariantBox, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_space_get_param", args: [VariantBox(space), VariantBox(param)])
 		return __ret.asDouble()
 	}
 	@discardableResult
@@ -24653,14 +24653,14 @@ public class PhysicsServer3DExtension: PhysicsServer3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_area_get_object_instance_id", args: [VariantBox(area)])
 		return __ret.asInt()
 	}
-	public func _area_set_param(area: VariantBox, param: PhysicsServer3D.AreaParameter, value: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_area_set_param", args: [VariantBox(area), VariantBox(param.rawValue), VariantBox(value)])
+	public func _area_set_param(area: VariantBox, param: Int, value: VariantBox) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_area_set_param", args: [VariantBox(area), VariantBox(param), VariantBox(value)])
 	}
 	public func _area_set_transform(area: VariantBox, transform: Transform3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_area_set_transform", args: [VariantBox(area), VariantBox(transform)])
 	}
-	public func _area_get_param(area: VariantBox, param: PhysicsServer3D.AreaParameter) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_area_get_param", args: [VariantBox(area), VariantBox(param.rawValue)])
+	public func _area_get_param(area: VariantBox, param: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_area_get_param", args: [VariantBox(area), VariantBox(param)])
 	}
 	@discardableResult
 	public func _area_get_transform(area: VariantBox) -> Transform3D {
@@ -24797,11 +24797,11 @@ public class PhysicsServer3DExtension: PhysicsServer3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_body_get_user_flags", args: [VariantBox(body)])
 		return __ret.asInt()
 	}
-	public func _body_set_param(body: VariantBox, param: PhysicsServer3D.BodyParameter, value: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_body_set_param", args: [VariantBox(body), VariantBox(param.rawValue), VariantBox(value)])
+	public func _body_set_param(body: VariantBox, param: Int, value: VariantBox) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_body_set_param", args: [VariantBox(body), VariantBox(param), VariantBox(value)])
 	}
-	public func _body_get_param(body: VariantBox, param: PhysicsServer3D.BodyParameter) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_body_get_param", args: [VariantBox(body), VariantBox(param.rawValue)])
+	public func _body_get_param(body: VariantBox, param: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_body_get_param", args: [VariantBox(body), VariantBox(param)])
 	}
 	public func _body_reset_mass_properties(body: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_body_reset_mass_properties", args: [VariantBox(body)])
@@ -25081,12 +25081,12 @@ public class PhysicsServer3DExtension: PhysicsServer3D {
 	public func _joint_make_pin(joint: VariantBox, body_A: VariantBox, local_A: Vector3, body_B: VariantBox, local_B: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_joint_make_pin", args: [VariantBox(joint), VariantBox(body_A), VariantBox(local_A), VariantBox(body_B), VariantBox(local_B)])
 	}
-	public func _pin_joint_set_param(joint: VariantBox, param: PhysicsServer3D.PinJointParam, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_pin_joint_set_param", args: [VariantBox(joint), VariantBox(param.rawValue), VariantBox(value)])
+	public func _pin_joint_set_param(joint: VariantBox, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_pin_joint_set_param", args: [VariantBox(joint), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func _pin_joint_get_param(joint: VariantBox, param: PhysicsServer3D.PinJointParam) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_pin_joint_get_param", args: [VariantBox(joint), VariantBox(param.rawValue)])
+	public func _pin_joint_get_param(joint: VariantBox, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_pin_joint_get_param", args: [VariantBox(joint), VariantBox(param)])
 		return __ret.asDouble()
 	}
 	public func _pin_joint_set_local_a(joint: VariantBox, local_A: Vector3) {
@@ -25111,12 +25111,12 @@ public class PhysicsServer3DExtension: PhysicsServer3D {
 	public func _joint_make_hinge_simple(joint: VariantBox, body_A: VariantBox, pivot_A: Vector3, axis_A: Vector3, body_B: VariantBox, pivot_B: Vector3, axis_B: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_joint_make_hinge_simple", args: [VariantBox(joint), VariantBox(body_A), VariantBox(pivot_A), VariantBox(axis_A), VariantBox(body_B), VariantBox(pivot_B), VariantBox(axis_B)])
 	}
-	public func _hinge_joint_set_param(joint: VariantBox, param: PhysicsServer3D.HingeJointParam, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_hinge_joint_set_param", args: [VariantBox(joint), VariantBox(param.rawValue), VariantBox(value)])
+	public func _hinge_joint_set_param(joint: VariantBox, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_hinge_joint_set_param", args: [VariantBox(joint), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func _hinge_joint_get_param(joint: VariantBox, param: PhysicsServer3D.HingeJointParam) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_hinge_joint_get_param", args: [VariantBox(joint), VariantBox(param.rawValue)])
+	public func _hinge_joint_get_param(joint: VariantBox, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_hinge_joint_get_param", args: [VariantBox(joint), VariantBox(param)])
 		return __ret.asDouble()
 	}
 	public func _hinge_joint_set_flag(joint: VariantBox, flag: PhysicsServer3D.HingeJointFlag, enabled: Bool) {
@@ -25130,42 +25130,42 @@ public class PhysicsServer3DExtension: PhysicsServer3D {
 	public func _joint_make_slider(joint: VariantBox, body_A: VariantBox, local_ref_A: Transform3D, body_B: VariantBox, local_ref_B: Transform3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_joint_make_slider", args: [VariantBox(joint), VariantBox(body_A), VariantBox(local_ref_A), VariantBox(body_B), VariantBox(local_ref_B)])
 	}
-	public func _slider_joint_set_param(joint: VariantBox, param: PhysicsServer3D.SliderJointParam, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_slider_joint_set_param", args: [VariantBox(joint), VariantBox(param.rawValue), VariantBox(value)])
+	public func _slider_joint_set_param(joint: VariantBox, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_slider_joint_set_param", args: [VariantBox(joint), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func _slider_joint_get_param(joint: VariantBox, param: PhysicsServer3D.SliderJointParam) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_slider_joint_get_param", args: [VariantBox(joint), VariantBox(param.rawValue)])
+	public func _slider_joint_get_param(joint: VariantBox, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_slider_joint_get_param", args: [VariantBox(joint), VariantBox(param)])
 		return __ret.asDouble()
 	}
 	public func _joint_make_cone_twist(joint: VariantBox, body_A: VariantBox, local_ref_A: Transform3D, body_B: VariantBox, local_ref_B: Transform3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_joint_make_cone_twist", args: [VariantBox(joint), VariantBox(body_A), VariantBox(local_ref_A), VariantBox(body_B), VariantBox(local_ref_B)])
 	}
-	public func _cone_twist_joint_set_param(joint: VariantBox, param: PhysicsServer3D.ConeTwistJointParam, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_cone_twist_joint_set_param", args: [VariantBox(joint), VariantBox(param.rawValue), VariantBox(value)])
+	public func _cone_twist_joint_set_param(joint: VariantBox, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_cone_twist_joint_set_param", args: [VariantBox(joint), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func _cone_twist_joint_get_param(joint: VariantBox, param: PhysicsServer3D.ConeTwistJointParam) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_cone_twist_joint_get_param", args: [VariantBox(joint), VariantBox(param.rawValue)])
+	public func _cone_twist_joint_get_param(joint: VariantBox, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_cone_twist_joint_get_param", args: [VariantBox(joint), VariantBox(param)])
 		return __ret.asDouble()
 	}
 	public func _joint_make_generic_6dof(joint: VariantBox, body_A: VariantBox, local_ref_A: Transform3D, body_B: VariantBox, local_ref_B: Transform3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_joint_make_generic_6dof", args: [VariantBox(joint), VariantBox(body_A), VariantBox(local_ref_A), VariantBox(body_B), VariantBox(local_ref_B)])
 	}
-	public func _generic_6dof_joint_set_param(joint: VariantBox, axis: Int, param: PhysicsServer3D.G6DOFJointAxisParam, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_generic_6dof_joint_set_param", args: [VariantBox(joint), VariantBox(axis), VariantBox(param.rawValue), VariantBox(value)])
+	public func _generic_6dof_joint_set_param(joint: VariantBox, axis: Int, param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_generic_6dof_joint_set_param", args: [VariantBox(joint), VariantBox(axis), VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func _generic_6dof_joint_get_param(joint: VariantBox, axis: Int, param: PhysicsServer3D.G6DOFJointAxisParam) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_generic_6dof_joint_get_param", args: [VariantBox(joint), VariantBox(axis), VariantBox(param.rawValue)])
+	public func _generic_6dof_joint_get_param(joint: VariantBox, axis: Int, param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_generic_6dof_joint_get_param", args: [VariantBox(joint), VariantBox(axis), VariantBox(param)])
 		return __ret.asDouble()
 	}
-	public func _generic_6dof_joint_set_flag(joint: VariantBox, axis: Int, flag: PhysicsServer3D.G6DOFJointAxisFlag, enable: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_generic_6dof_joint_set_flag", args: [VariantBox(joint), VariantBox(axis), VariantBox(flag.rawValue), VariantBox(enable)])
+	public func _generic_6dof_joint_set_flag(joint: VariantBox, axis: Int, flag: Int, enable: Bool) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_generic_6dof_joint_set_flag", args: [VariantBox(joint), VariantBox(axis), VariantBox(flag), VariantBox(enable)])
 	}
 	@discardableResult
-	public func _generic_6dof_joint_get_flag(joint: VariantBox, axis: Int, flag: PhysicsServer3D.G6DOFJointAxisFlag) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_generic_6dof_joint_get_flag", args: [VariantBox(joint), VariantBox(axis), VariantBox(flag.rawValue)])
+	public func _generic_6dof_joint_get_flag(joint: VariantBox, axis: Int, flag: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_generic_6dof_joint_get_flag", args: [VariantBox(joint), VariantBox(axis), VariantBox(flag)])
 		return __ret.asBool()
 	}
 	public func _generic_6dof_joint_set_angular_target_rotation(joint: VariantBox, target_rotation: Quaternion) {
@@ -25224,8 +25224,8 @@ public class PhysicsServer3DExtension: PhysicsServer3D {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func _get_process_info(process_info: PhysicsServer3D.ProcessInfo) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_get_process_info", args: [VariantBox(process_info.rawValue)])
+	public func _get_process_info(process_info: Int) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_get_process_info", args: [VariantBox(process_info)])
 		return __ret.asInt()
 	}
 }
@@ -25327,9 +25327,9 @@ public class PhysicsShapeQueryParameters2D: RefCounted {
 		get { Host.shared.getProperty(object: ptr, name: "motion").asVector2() }
 		set { Host.shared.setProperty(object: ptr, name: "motion", value: VariantBox(newValue)) }
 	}
-	public var shape: Shape2D {
+	public var shape: Shape2D? {
 		get { Host.shared.getProperty(object: ptr, name: "shape").asObject(Shape2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "shape", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "shape", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var shape_rid: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "shape_rid") }
@@ -25446,9 +25446,9 @@ public class PhysicsShapeQueryParameters3D: RefCounted {
 		get { Host.shared.getProperty(object: ptr, name: "motion").asVector3() }
 		set { Host.shared.setProperty(object: ptr, name: "motion", value: VariantBox(newValue)) }
 	}
-	public var shape: Shape3D {
+	public var shape: Shape3D? {
 		get { Host.shared.getProperty(object: ptr, name: "shape").asObject(Shape3D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "shape", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "shape", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var shape_rid: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "shape_rid") }
@@ -25836,13 +25836,13 @@ public class RDAccelerationStructureGeometry: RefCounted {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_flags(p_member: RenderingDevice.AccelerationStructureGeometryFlagBits) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_flags", args: [VariantBox(p_member.rawValue)])
+	public func set_flags(p_member: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_flags", args: [VariantBox(p_member)])
 	}
 	@discardableResult
-	public func get_flags() -> RenderingDevice.AccelerationStructureGeometryFlagBits {
+	public func get_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_flags", args: [])
-		return __ret.asEnum(RenderingDevice.AccelerationStructureGeometryFlagBits.self)
+		return __ret.asInt()
 	}
 	public func set_vertex_buffer(p_member: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_vertex_buffer", args: [VariantBox(p_member)])
@@ -25987,13 +25987,13 @@ public class RDAccelerationStructureInstance: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_hit_sbt_range", args: [])
 		return __ret.asInt()
 	}
-	public func set_flags(p_member: RenderingDevice.AccelerationStructureInstanceFlagBits) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_flags", args: [VariantBox(p_member.rawValue)])
+	public func set_flags(p_member: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_flags", args: [VariantBox(p_member)])
 	}
 	@discardableResult
-	public func get_flags() -> RenderingDevice.AccelerationStructureInstanceFlagBits {
+	public func get_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_flags", args: [])
-		return __ret.asEnum(RenderingDevice.AccelerationStructureInstanceFlagBits.self)
+		return __ret.asInt()
 	}
 	public func set_blas(p_member: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_blas", args: [VariantBox(p_member)])
@@ -26180,17 +26180,17 @@ public class RDHitGroup: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_intersection_shader", args: [])
 		return __ret.asObject(RDPipelineShader.self)
 	}
-	public var closest_hit_shader: GodotObject {
+	public var closest_hit_shader: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "closest_hit_shader").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "closest_hit_shader", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "closest_hit_shader", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var any_hit_shader: GodotObject {
+	public var any_hit_shader: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "any_hit_shader").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "any_hit_shader", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "any_hit_shader", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var intersection_shader: GodotObject {
+	public var intersection_shader: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "intersection_shader").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "intersection_shader", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "intersection_shader", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -26211,13 +26211,13 @@ public class RDPipelineColorBlendState: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_enable_logic_op", args: [])
 		return __ret.asBool()
 	}
-	public func set_logic_op(p_member: RenderingDevice.LogicOperation) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_logic_op", args: [VariantBox(p_member.rawValue)])
+	public func set_logic_op(p_member: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_logic_op", args: [VariantBox(p_member)])
 	}
 	@discardableResult
-	public func get_logic_op() -> RenderingDevice.LogicOperation {
+	public func get_logic_op() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_logic_op", args: [])
-		return __ret.asEnum(RenderingDevice.LogicOperation.self)
+		return __ret.asInt()
 	}
 	public func set_blend_constant(p_member: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_blend_constant", args: [VariantBox(p_member)])
@@ -26289,13 +26289,13 @@ public class RDPipelineColorBlendStateAttachment: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_dst_color_blend_factor", args: [])
 		return __ret.asEnum(RenderingDevice.BlendFactor.self)
 	}
-	public func set_color_blend_op(p_member: RenderingDevice.BlendOperation) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_color_blend_op", args: [VariantBox(p_member.rawValue)])
+	public func set_color_blend_op(p_member: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_color_blend_op", args: [VariantBox(p_member)])
 	}
 	@discardableResult
-	public func get_color_blend_op() -> RenderingDevice.BlendOperation {
+	public func get_color_blend_op() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_color_blend_op", args: [])
-		return __ret.asEnum(RenderingDevice.BlendOperation.self)
+		return __ret.asInt()
 	}
 	public func set_src_alpha_blend_factor(p_member: RenderingDevice.BlendFactor) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_src_alpha_blend_factor", args: [VariantBox(p_member.rawValue)])
@@ -26313,13 +26313,13 @@ public class RDPipelineColorBlendStateAttachment: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_dst_alpha_blend_factor", args: [])
 		return __ret.asEnum(RenderingDevice.BlendFactor.self)
 	}
-	public func set_alpha_blend_op(p_member: RenderingDevice.BlendOperation) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_alpha_blend_op", args: [VariantBox(p_member.rawValue)])
+	public func set_alpha_blend_op(p_member: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_alpha_blend_op", args: [VariantBox(p_member)])
 	}
 	@discardableResult
-	public func get_alpha_blend_op() -> RenderingDevice.BlendOperation {
+	public func get_alpha_blend_op() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_alpha_blend_op", args: [])
-		return __ret.asEnum(RenderingDevice.BlendOperation.self)
+		return __ret.asInt()
 	}
 	public func set_write_r(p_member: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_write_r", args: [VariantBox(p_member)])
@@ -26424,13 +26424,13 @@ public class RDPipelineDepthStencilState: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_enable_depth_write", args: [])
 		return __ret.asBool()
 	}
-	public func set_depth_compare_operator(p_member: RenderingDevice.CompareOperator) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_depth_compare_operator", args: [VariantBox(p_member.rawValue)])
+	public func set_depth_compare_operator(p_member: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_depth_compare_operator", args: [VariantBox(p_member)])
 	}
 	@discardableResult
-	public func get_depth_compare_operator() -> RenderingDevice.CompareOperator {
+	public func get_depth_compare_operator() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_depth_compare_operator", args: [])
-		return __ret.asEnum(RenderingDevice.CompareOperator.self)
+		return __ret.asInt()
 	}
 	public func set_enable_depth_range(p_member: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_enable_depth_range", args: [VariantBox(p_member)])
@@ -26464,37 +26464,37 @@ public class RDPipelineDepthStencilState: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_enable_stencil", args: [])
 		return __ret.asBool()
 	}
-	public func set_front_op_fail(p_member: RenderingDevice.StencilOperation) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_front_op_fail", args: [VariantBox(p_member.rawValue)])
+	public func set_front_op_fail(p_member: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_front_op_fail", args: [VariantBox(p_member)])
 	}
 	@discardableResult
-	public func get_front_op_fail() -> RenderingDevice.StencilOperation {
+	public func get_front_op_fail() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_front_op_fail", args: [])
-		return __ret.asEnum(RenderingDevice.StencilOperation.self)
+		return __ret.asInt()
 	}
-	public func set_front_op_pass(p_member: RenderingDevice.StencilOperation) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_front_op_pass", args: [VariantBox(p_member.rawValue)])
+	public func set_front_op_pass(p_member: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_front_op_pass", args: [VariantBox(p_member)])
 	}
 	@discardableResult
-	public func get_front_op_pass() -> RenderingDevice.StencilOperation {
+	public func get_front_op_pass() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_front_op_pass", args: [])
-		return __ret.asEnum(RenderingDevice.StencilOperation.self)
+		return __ret.asInt()
 	}
-	public func set_front_op_depth_fail(p_member: RenderingDevice.StencilOperation) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_front_op_depth_fail", args: [VariantBox(p_member.rawValue)])
+	public func set_front_op_depth_fail(p_member: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_front_op_depth_fail", args: [VariantBox(p_member)])
 	}
 	@discardableResult
-	public func get_front_op_depth_fail() -> RenderingDevice.StencilOperation {
+	public func get_front_op_depth_fail() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_front_op_depth_fail", args: [])
-		return __ret.asEnum(RenderingDevice.StencilOperation.self)
+		return __ret.asInt()
 	}
-	public func set_front_op_compare(p_member: RenderingDevice.CompareOperator) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_front_op_compare", args: [VariantBox(p_member.rawValue)])
+	public func set_front_op_compare(p_member: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_front_op_compare", args: [VariantBox(p_member)])
 	}
 	@discardableResult
-	public func get_front_op_compare() -> RenderingDevice.CompareOperator {
+	public func get_front_op_compare() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_front_op_compare", args: [])
-		return __ret.asEnum(RenderingDevice.CompareOperator.self)
+		return __ret.asInt()
 	}
 	public func set_front_op_compare_mask(p_member: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_front_op_compare_mask", args: [VariantBox(p_member)])
@@ -26520,37 +26520,37 @@ public class RDPipelineDepthStencilState: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_front_op_reference", args: [])
 		return __ret.asInt()
 	}
-	public func set_back_op_fail(p_member: RenderingDevice.StencilOperation) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_back_op_fail", args: [VariantBox(p_member.rawValue)])
+	public func set_back_op_fail(p_member: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_back_op_fail", args: [VariantBox(p_member)])
 	}
 	@discardableResult
-	public func get_back_op_fail() -> RenderingDevice.StencilOperation {
+	public func get_back_op_fail() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_back_op_fail", args: [])
-		return __ret.asEnum(RenderingDevice.StencilOperation.self)
+		return __ret.asInt()
 	}
-	public func set_back_op_pass(p_member: RenderingDevice.StencilOperation) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_back_op_pass", args: [VariantBox(p_member.rawValue)])
+	public func set_back_op_pass(p_member: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_back_op_pass", args: [VariantBox(p_member)])
 	}
 	@discardableResult
-	public func get_back_op_pass() -> RenderingDevice.StencilOperation {
+	public func get_back_op_pass() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_back_op_pass", args: [])
-		return __ret.asEnum(RenderingDevice.StencilOperation.self)
+		return __ret.asInt()
 	}
-	public func set_back_op_depth_fail(p_member: RenderingDevice.StencilOperation) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_back_op_depth_fail", args: [VariantBox(p_member.rawValue)])
+	public func set_back_op_depth_fail(p_member: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_back_op_depth_fail", args: [VariantBox(p_member)])
 	}
 	@discardableResult
-	public func get_back_op_depth_fail() -> RenderingDevice.StencilOperation {
+	public func get_back_op_depth_fail() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_back_op_depth_fail", args: [])
-		return __ret.asEnum(RenderingDevice.StencilOperation.self)
+		return __ret.asInt()
 	}
-	public func set_back_op_compare(p_member: RenderingDevice.CompareOperator) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_back_op_compare", args: [VariantBox(p_member.rawValue)])
+	public func set_back_op_compare(p_member: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_back_op_compare", args: [VariantBox(p_member)])
 	}
 	@discardableResult
-	public func get_back_op_compare() -> RenderingDevice.CompareOperator {
+	public func get_back_op_compare() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_back_op_compare", args: [])
-		return __ret.asEnum(RenderingDevice.CompareOperator.self)
+		return __ret.asInt()
 	}
 	public func set_back_op_compare_mask(p_member: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_back_op_compare_mask", args: [VariantBox(p_member)])
@@ -26778,13 +26778,13 @@ public class RDPipelineRasterizationState: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_wireframe", args: [])
 		return __ret.asBool()
 	}
-	public func set_cull_mode(p_member: RenderingDevice.PolygonCullMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_cull_mode", args: [VariantBox(p_member.rawValue)])
+	public func set_cull_mode(p_member: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_cull_mode", args: [VariantBox(p_member)])
 	}
 	@discardableResult
-	public func get_cull_mode() -> RenderingDevice.PolygonCullMode {
+	public func get_cull_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_cull_mode", args: [])
-		return __ret.asEnum(RenderingDevice.PolygonCullMode.self)
+		return __ret.asInt()
 	}
 	public func set_front_face(p_member: RenderingDevice.PolygonFrontFace) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_front_face", args: [VariantBox(p_member.rawValue)])
@@ -27045,13 +27045,13 @@ public class RDSamplerState: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_enable_compare", args: [])
 		return __ret.asBool()
 	}
-	public func set_compare_op(p_member: RenderingDevice.CompareOperator) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_compare_op", args: [VariantBox(p_member.rawValue)])
+	public func set_compare_op(p_member: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_compare_op", args: [VariantBox(p_member)])
 	}
 	@discardableResult
-	public func get_compare_op() -> RenderingDevice.CompareOperator {
+	public func get_compare_op() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_compare_op", args: [])
-		return __ret.asEnum(RenderingDevice.CompareOperator.self)
+		return __ret.asInt()
 	}
 	public func set_min_lod(p_member: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_min_lod", args: [VariantBox(p_member)])
@@ -27299,13 +27299,13 @@ public class RDTextureFormat: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_samples", args: [])
 		return __ret.asEnum(RenderingDevice.TextureSamples.self)
 	}
-	public func set_usage_bits(p_member: RenderingDevice.TextureUsageBits) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_usage_bits", args: [VariantBox(p_member.rawValue)])
+	public func set_usage_bits(p_member: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_usage_bits", args: [VariantBox(p_member)])
 	}
 	@discardableResult
-	public func get_usage_bits() -> RenderingDevice.TextureUsageBits {
+	public func get_usage_bits() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_usage_bits", args: [])
-		return __ret.asEnum(RenderingDevice.TextureUsageBits.self)
+		return __ret.asInt()
 	}
 	public func set_is_resolve_buffer(p_member: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_is_resolve_buffer", args: [VariantBox(p_member)])
@@ -27865,28 +27865,28 @@ public class RenderSceneBuffersConfiguration: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_view_count", args: [VariantBox(view_count)])
 	}
 	@discardableResult
-	public func get_scaling_3d_mode() -> RenderingServer.ViewportScaling3DMode {
+	public func get_scaling_3d_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_scaling_3d_mode", args: [])
-		return __ret.asEnum(RenderingServer.ViewportScaling3DMode.self)
+		return __ret.asInt()
 	}
-	public func set_scaling_3d_mode(scaling_3d_mode: RenderingServer.ViewportScaling3DMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_scaling_3d_mode", args: [VariantBox(scaling_3d_mode.rawValue)])
+	public func set_scaling_3d_mode(scaling_3d_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_scaling_3d_mode", args: [VariantBox(scaling_3d_mode)])
 	}
 	@discardableResult
-	public func get_msaa_3d() -> RenderingServer.ViewportMSAA {
+	public func get_msaa_3d() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_msaa_3d", args: [])
-		return __ret.asEnum(RenderingServer.ViewportMSAA.self)
+		return __ret.asInt()
 	}
-	public func set_msaa_3d(msaa_3d: RenderingServer.ViewportMSAA) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_msaa_3d", args: [VariantBox(msaa_3d.rawValue)])
+	public func set_msaa_3d(msaa_3d: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_msaa_3d", args: [VariantBox(msaa_3d)])
 	}
 	@discardableResult
-	public func get_screen_space_aa() -> RenderingServer.ViewportScreenSpaceAA {
+	public func get_screen_space_aa() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_screen_space_aa", args: [])
-		return __ret.asEnum(RenderingServer.ViewportScreenSpaceAA.self)
+		return __ret.asInt()
 	}
-	public func set_screen_space_aa(screen_space_aa: RenderingServer.ViewportScreenSpaceAA) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_screen_space_aa", args: [VariantBox(screen_space_aa.rawValue)])
+	public func set_screen_space_aa(screen_space_aa: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_screen_space_aa", args: [VariantBox(screen_space_aa)])
 	}
 	@discardableResult
 	public func get_fsr_sharpness() -> Double {
@@ -27905,12 +27905,12 @@ public class RenderSceneBuffersConfiguration: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_mipmap_bias", args: [VariantBox(texture_mipmap_bias)])
 	}
 	@discardableResult
-	public func get_anisotropic_filtering_level() -> RenderingServer.ViewportAnisotropicFiltering {
+	public func get_anisotropic_filtering_level() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_anisotropic_filtering_level", args: [])
-		return __ret.asEnum(RenderingServer.ViewportAnisotropicFiltering.self)
+		return __ret.asInt()
 	}
-	public func set_anisotropic_filtering_level(anisotropic_filtering_level: RenderingServer.ViewportAnisotropicFiltering) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_anisotropic_filtering_level", args: [VariantBox(anisotropic_filtering_level.rawValue)])
+	public func set_anisotropic_filtering_level(anisotropic_filtering_level: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_anisotropic_filtering_level", args: [VariantBox(anisotropic_filtering_level)])
 	}
 	public var render_target: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "render_target") }
@@ -28096,8 +28096,8 @@ public class Resource: RefCounted {
 		return __ret.asObject(Resource.self)
 	}
 	@discardableResult
-	public func duplicate_deep(deep_subresources_mode: Resource.DeepDuplicateMode) -> Resource? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "duplicate_deep", args: [VariantBox(deep_subresources_mode.rawValue)])
+	public func duplicate_deep(deep_subresources_mode: Int = 1) -> Resource? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "duplicate_deep", args: [VariantBox(deep_subresources_mode)])
 		return __ret.asObject(Resource.self)
 	}
 	@discardableResult
@@ -28712,17 +28712,17 @@ public class SceneTree: MainLoop {
 		get { Host.shared.getProperty(object: ptr, name: "paused").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "paused", value: VariantBox(newValue)) }
 	}
-	public var edited_scene_root: Node {
+	public var edited_scene_root: Node? {
 		get { Host.shared.getProperty(object: ptr, name: "edited_scene_root").asObject(Node.self) }
-		set { Host.shared.setProperty(object: ptr, name: "edited_scene_root", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "edited_scene_root", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var current_scene: Node {
+	public var current_scene: Node? {
 		get { Host.shared.getProperty(object: ptr, name: "current_scene").asObject(Node.self) }
-		set { Host.shared.setProperty(object: ptr, name: "current_scene", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "current_scene", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var root: Node {
+	public var root: Node? {
 		get { Host.shared.getProperty(object: ptr, name: "root").asObject(Node.self) }
-		set { Host.shared.setProperty(object: ptr, name: "root", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "root", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var multiplayer_poll: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "multiplayer_poll").asBool() }
@@ -29302,9 +29302,9 @@ public class StatusIndicator: Node {
 		get { Host.shared.getProperty(object: ptr, name: "tooltip").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "tooltip", value: VariantBox(newValue)) }
 	}
-	public var icon: Texture2D {
+	public var icon: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "icon").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "icon", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "icon", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var menu: String {
 		get { Host.shared.getProperty(object: ptr, name: "menu").asString() }
@@ -29486,24 +29486,24 @@ public class SurfaceTool: RefCounted {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_skin_weight_count(count: SurfaceTool.SkinWeightCount) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_skin_weight_count", args: [VariantBox(count.rawValue)])
+	public func set_skin_weight_count(count: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_skin_weight_count", args: [VariantBox(count)])
 	}
 	@discardableResult
-	public func get_skin_weight_count() -> SurfaceTool.SkinWeightCount {
+	public func get_skin_weight_count() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_skin_weight_count", args: [])
-		return __ret.asEnum(SurfaceTool.SkinWeightCount.self)
+		return __ret.asInt()
 	}
-	public func set_custom_format(channel_index: Int, format: SurfaceTool.CustomFormat) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_custom_format", args: [VariantBox(channel_index), VariantBox(format.rawValue)])
+	public func set_custom_format(channel_index: Int, format: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_custom_format", args: [VariantBox(channel_index), VariantBox(format)])
 	}
 	@discardableResult
-	public func get_custom_format(channel_index: Int) -> SurfaceTool.CustomFormat {
+	public func get_custom_format(channel_index: Int) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_custom_format", args: [VariantBox(channel_index)])
-		return __ret.asEnum(SurfaceTool.CustomFormat.self)
+		return __ret.asInt()
 	}
-	public func begin(primitive: Mesh.PrimitiveType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "begin", args: [VariantBox(primitive.rawValue)])
+	public func begin(primitive: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "begin", args: [VariantBox(primitive)])
 	}
 	public func add_vertex(vertex: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_vertex", args: [VariantBox(vertex)])
@@ -29570,9 +29570,9 @@ public class SurfaceTool: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_material", args: [VariantBox(material)])
 	}
 	@discardableResult
-	public func get_primitive_type() -> Mesh.PrimitiveType {
+	public func get_primitive_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_primitive_type", args: [])
-		return __ret.asEnum(Mesh.PrimitiveType.self)
+		return __ret.asInt()
 	}
 	public func clear() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "clear", args: [])
@@ -29580,8 +29580,8 @@ public class SurfaceTool: RefCounted {
 	public func create_from(existing: Mesh, surface: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_from", args: [VariantBox(existing), VariantBox(surface)])
 	}
-	public func create_from_arrays(arrays: VariantBox, primitive_type: Mesh.PrimitiveType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "create_from_arrays", args: [VariantBox(arrays), VariantBox(primitive_type.rawValue)])
+	public func create_from_arrays(arrays: VariantBox, primitive_type: Int = 3) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "create_from_arrays", args: [VariantBox(arrays), VariantBox(primitive_type)])
 	}
 	public func create_from_blend_shape(existing: Mesh, surface: Int, blend_shape: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_from_blend_shape", args: [VariantBox(existing), VariantBox(surface), VariantBox(blend_shape)])
@@ -29764,21 +29764,21 @@ public class TextLine: RefCounted {
 	public func tab_align(tab_stops: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "tab_align", args: [VariantBox(tab_stops)])
 	}
-	public func set_flags(flags: TextServer.JustificationFlag) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_flags", args: [VariantBox(flags.rawValue)])
+	public func set_flags(flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_flags", args: [VariantBox(flags)])
 	}
 	@discardableResult
-	public func get_flags() -> TextServer.JustificationFlag {
+	public func get_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_flags", args: [])
-		return __ret.asEnum(TextServer.JustificationFlag.self)
+		return __ret.asInt()
 	}
-	public func set_text_overrun_behavior(overrun_behavior: TextServer.OverrunBehavior) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_overrun_behavior", args: [VariantBox(overrun_behavior.rawValue)])
+	public func set_text_overrun_behavior(overrun_behavior: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_overrun_behavior", args: [VariantBox(overrun_behavior)])
 	}
 	@discardableResult
-	public func get_text_overrun_behavior() -> TextServer.OverrunBehavior {
+	public func get_text_overrun_behavior() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_text_overrun_behavior", args: [])
-		return __ret.asEnum(TextServer.OverrunBehavior.self)
+		return __ret.asInt()
 	}
 	public func set_ellipsis_char(char: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_ellipsis_char", args: [VariantBox(char)])
@@ -29986,29 +29986,29 @@ public class TextParagraph: RefCounted {
 	public func tab_align(tab_stops: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "tab_align", args: [VariantBox(tab_stops)])
 	}
-	public func set_break_flags(flags: TextServer.LineBreakFlag) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_break_flags", args: [VariantBox(flags.rawValue)])
+	public func set_break_flags(flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_break_flags", args: [VariantBox(flags)])
 	}
 	@discardableResult
-	public func get_break_flags() -> TextServer.LineBreakFlag {
+	public func get_break_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_break_flags", args: [])
-		return __ret.asEnum(TextServer.LineBreakFlag.self)
+		return __ret.asInt()
 	}
-	public func set_justification_flags(flags: TextServer.JustificationFlag) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_justification_flags", args: [VariantBox(flags.rawValue)])
+	public func set_justification_flags(flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_justification_flags", args: [VariantBox(flags)])
 	}
 	@discardableResult
-	public func get_justification_flags() -> TextServer.JustificationFlag {
+	public func get_justification_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_justification_flags", args: [])
-		return __ret.asEnum(TextServer.JustificationFlag.self)
+		return __ret.asInt()
 	}
-	public func set_text_overrun_behavior(overrun_behavior: TextServer.OverrunBehavior) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_overrun_behavior", args: [VariantBox(overrun_behavior.rawValue)])
+	public func set_text_overrun_behavior(overrun_behavior: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_overrun_behavior", args: [VariantBox(overrun_behavior)])
 	}
 	@discardableResult
-	public func get_text_overrun_behavior() -> TextServer.OverrunBehavior {
+	public func get_text_overrun_behavior() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_text_overrun_behavior", args: [])
-		return __ret.asEnum(TextServer.OverrunBehavior.self)
+		return __ret.asInt()
 	}
 	public func set_ellipsis_char(char: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_ellipsis_char", args: [VariantBox(char)])
@@ -30362,13 +30362,13 @@ public class TextServer: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "font_get_face_count", args: [VariantBox(font_rid)])
 		return __ret.asInt()
 	}
-	public func font_set_style(font_rid: VariantBox, style: TextServer.FontStyle) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "font_set_style", args: [VariantBox(font_rid), VariantBox(style.rawValue)])
+	public func font_set_style(font_rid: VariantBox, style: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "font_set_style", args: [VariantBox(font_rid), VariantBox(style)])
 	}
 	@discardableResult
-	public func font_get_style(font_rid: VariantBox) -> TextServer.FontStyle {
+	public func font_get_style(font_rid: VariantBox) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "font_get_style", args: [VariantBox(font_rid)])
-		return __ret.asEnum(TextServer.FontStyle.self)
+		return __ret.asInt()
 	}
 	public func font_set_name(font_rid: VariantBox, name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "font_set_name", args: [VariantBox(font_rid), VariantBox(name)])
@@ -30463,13 +30463,13 @@ public class TextServer: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "font_get_fixed_size", args: [VariantBox(font_rid)])
 		return __ret.asInt()
 	}
-	public func font_set_fixed_size_scale_mode(font_rid: VariantBox, fixed_size_scale_mode: TextServer.FixedSizeScaleMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "font_set_fixed_size_scale_mode", args: [VariantBox(font_rid), VariantBox(fixed_size_scale_mode.rawValue)])
+	public func font_set_fixed_size_scale_mode(font_rid: VariantBox, fixed_size_scale_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "font_set_fixed_size_scale_mode", args: [VariantBox(font_rid), VariantBox(fixed_size_scale_mode)])
 	}
 	@discardableResult
-	public func font_get_fixed_size_scale_mode(font_rid: VariantBox) -> TextServer.FixedSizeScaleMode {
+	public func font_get_fixed_size_scale_mode(font_rid: VariantBox) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "font_get_fixed_size_scale_mode", args: [VariantBox(font_rid)])
-		return __ret.asEnum(TextServer.FixedSizeScaleMode.self)
+		return __ret.asInt()
 	}
 	public func font_set_allow_system_fallback(font_rid: VariantBox, allow_system_fallback: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "font_set_allow_system_fallback", args: [VariantBox(font_rid), VariantBox(allow_system_fallback)])
@@ -30561,12 +30561,12 @@ public class TextServer: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "font_get_embolden", args: [VariantBox(font_rid)])
 		return __ret.asDouble()
 	}
-	public func font_set_spacing(font_rid: VariantBox, spacing: TextServer.SpacingType, value: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "font_set_spacing", args: [VariantBox(font_rid), VariantBox(spacing.rawValue), VariantBox(value)])
+	public func font_set_spacing(font_rid: VariantBox, spacing: Int, value: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "font_set_spacing", args: [VariantBox(font_rid), VariantBox(spacing), VariantBox(value)])
 	}
 	@discardableResult
-	public func font_get_spacing(font_rid: VariantBox, spacing: TextServer.SpacingType) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "font_get_spacing", args: [VariantBox(font_rid), VariantBox(spacing.rawValue)])
+	public func font_get_spacing(font_rid: VariantBox, spacing: Int) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "font_get_spacing", args: [VariantBox(font_rid), VariantBox(spacing)])
 		return __ret.asInt()
 	}
 	public func font_set_baseline_offset(font_rid: VariantBox, baseline_offset: Double) {
@@ -30951,12 +30951,12 @@ public class TextServer: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_get_preserve_control", args: [VariantBox(shaped)])
 		return __ret.asBool()
 	}
-	public func shaped_text_set_spacing(shaped: VariantBox, spacing: TextServer.SpacingType, value: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_set_spacing", args: [VariantBox(shaped), VariantBox(spacing.rawValue), VariantBox(value)])
+	public func shaped_text_set_spacing(shaped: VariantBox, spacing: Int, value: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_set_spacing", args: [VariantBox(shaped), VariantBox(spacing), VariantBox(value)])
 	}
 	@discardableResult
-	public func shaped_text_get_spacing(shaped: VariantBox, spacing: TextServer.SpacingType) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_get_spacing", args: [VariantBox(shaped), VariantBox(spacing.rawValue)])
+	public func shaped_text_get_spacing(shaped: VariantBox, spacing: Int) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_get_spacing", args: [VariantBox(shaped), VariantBox(spacing)])
 		return __ret.asInt()
 	}
 	@discardableResult
@@ -31060,8 +31060,8 @@ public class TextServer: RefCounted {
 		return __ret
 	}
 	@discardableResult
-	public func shaped_text_fit_to_width(shaped: VariantBox, width: Double, justification_flags: TextServer.JustificationFlag) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_fit_to_width", args: [VariantBox(shaped), VariantBox(width), VariantBox(justification_flags.rawValue)])
+	public func shaped_text_fit_to_width(shaped: VariantBox, width: Double, justification_flags: Int = 3) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_fit_to_width", args: [VariantBox(shaped), VariantBox(width), VariantBox(justification_flags)])
 		return __ret.asDouble()
 	}
 	@discardableResult
@@ -31105,18 +31105,18 @@ public class TextServer: RefCounted {
 		return __ret.asVector2i()
 	}
 	@discardableResult
-	public func shaped_text_get_line_breaks_adv(shaped: VariantBox, width: VariantBox, start: Int = 0, once: Bool = true, break_flags: TextServer.LineBreakFlag) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_get_line_breaks_adv", args: [VariantBox(shaped), VariantBox(width), VariantBox(start), VariantBox(once), VariantBox(break_flags.rawValue)])
+	public func shaped_text_get_line_breaks_adv(shaped: VariantBox, width: VariantBox, start: Int = 0, once: Bool = true, break_flags: Int = 3) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_get_line_breaks_adv", args: [VariantBox(shaped), VariantBox(width), VariantBox(start), VariantBox(once), VariantBox(break_flags)])
 		return __ret
 	}
 	@discardableResult
-	public func shaped_text_get_line_breaks(shaped: VariantBox, width: Double, start: Int = 0, break_flags: TextServer.LineBreakFlag) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_get_line_breaks", args: [VariantBox(shaped), VariantBox(width), VariantBox(start), VariantBox(break_flags.rawValue)])
+	public func shaped_text_get_line_breaks(shaped: VariantBox, width: Double, start: Int = 0, break_flags: Int = 3) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_get_line_breaks", args: [VariantBox(shaped), VariantBox(width), VariantBox(start), VariantBox(break_flags)])
 		return __ret
 	}
 	@discardableResult
-	public func shaped_text_get_word_breaks(shaped: VariantBox, grapheme_flags: TextServer.GraphemeFlag, skip_grapheme_flags: TextServer.GraphemeFlag) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_get_word_breaks", args: [VariantBox(shaped), VariantBox(grapheme_flags.rawValue), VariantBox(skip_grapheme_flags.rawValue)])
+	public func shaped_text_get_word_breaks(shaped: VariantBox, grapheme_flags: Int = 264, skip_grapheme_flags: Int = 4) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_get_word_breaks", args: [VariantBox(shaped), VariantBox(grapheme_flags), VariantBox(skip_grapheme_flags)])
 		return __ret
 	}
 	@discardableResult
@@ -31139,8 +31139,8 @@ public class TextServer: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_get_ellipsis_glyph_count", args: [VariantBox(shaped)])
 		return __ret.asInt()
 	}
-	public func shaped_text_overrun_trim_to_width(shaped: VariantBox, width: Double = 0, overrun_trim_flags: TextServer.TextOverrunFlag) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_overrun_trim_to_width", args: [VariantBox(shaped), VariantBox(width), VariantBox(overrun_trim_flags.rawValue)])
+	public func shaped_text_overrun_trim_to_width(shaped: VariantBox, width: Double = 0, overrun_trim_flags: Int = 0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_overrun_trim_to_width", args: [VariantBox(shaped), VariantBox(width), VariantBox(overrun_trim_flags)])
 	}
 	@discardableResult
 	public func shaped_text_get_objects(shaped: VariantBox) -> VariantBox {
@@ -31324,8 +31324,8 @@ public class TextServer: RefCounted {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func parse_structured_text(parser_type: TextServer.StructuredTextParser, args: VariantBox, text: String) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "parse_structured_text", args: [VariantBox(parser_type.rawValue), VariantBox(args), VariantBox(text)])
+	public func parse_structured_text(parser_type: Int, args: VariantBox, text: String) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "parse_structured_text", args: [VariantBox(parser_type), VariantBox(args), VariantBox(text)])
 		return __ret
 	}
 }
@@ -31442,13 +31442,13 @@ public class Timer: Node {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_time_left", args: [])
 		return __ret.asDouble()
 	}
-	public func set_timer_process_callback(callback: Timer.TimerProcessCallback) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_timer_process_callback", args: [VariantBox(callback.rawValue)])
+	public func set_timer_process_callback(callback: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_timer_process_callback", args: [VariantBox(callback)])
 	}
 	@discardableResult
-	public func get_timer_process_callback() -> Timer.TimerProcessCallback {
+	public func get_timer_process_callback() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_timer_process_callback", args: [])
-		return __ret.asEnum(Timer.TimerProcessCallback.self)
+		return __ret.asInt()
 	}
 	public var process_callback: Int {
 		get { Host.shared.getProperty(object: ptr, name: "process_callback").asInt() }
@@ -31784,13 +31784,13 @@ public class Tween: RefCounted {
 		return __ret.asObject(Tween.self)
 	}
 	@discardableResult
-	public func set_process_mode(mode: Tween.TweenProcessMode) -> Tween? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_process_mode", args: [VariantBox(mode.rawValue)])
+	public func set_process_mode(mode: Int) -> Tween? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_process_mode", args: [VariantBox(mode)])
 		return __ret.asObject(Tween.self)
 	}
 	@discardableResult
-	public func set_pause_mode(mode: Tween.TweenPauseMode) -> Tween? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_pause_mode", args: [VariantBox(mode.rawValue)])
+	public func set_pause_mode(mode: Int) -> Tween? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_pause_mode", args: [VariantBox(mode)])
 		return __ret.asObject(Tween.self)
 	}
 	@discardableResult
@@ -31819,13 +31819,13 @@ public class Tween: RefCounted {
 		return __ret.asObject(Tween.self)
 	}
 	@discardableResult
-	public func set_trans(trans: Tween.TransitionType) -> Tween? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_trans", args: [VariantBox(trans.rawValue)])
+	public func set_trans(trans: Int) -> Tween? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_trans", args: [VariantBox(trans)])
 		return __ret.asObject(Tween.self)
 	}
 	@discardableResult
-	public func set_ease(ease: Tween.EaseType) -> Tween? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_ease", args: [VariantBox(ease.rawValue)])
+	public func set_ease(ease: Int) -> Tween? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_ease", args: [VariantBox(ease)])
 		return __ret.asObject(Tween.self)
 	}
 	@discardableResult
@@ -31838,8 +31838,8 @@ public class Tween: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "chain", args: [])
 		return __ret.asObject(Tween.self)
 	}
-	public func interpolate_value(initial_value: VariantBox, delta_value: VariantBox, elapsed_time: Double, duration: Double, trans_type: Tween.TransitionType, ease_type: Tween.EaseType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "interpolate_value", args: [VariantBox(initial_value), VariantBox(delta_value), VariantBox(elapsed_time), VariantBox(duration), VariantBox(trans_type.rawValue), VariantBox(ease_type.rawValue)])
+	public func interpolate_value(initial_value: VariantBox, delta_value: VariantBox, elapsed_time: Double, duration: Double, trans_type: Int, ease_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "interpolate_value", args: [VariantBox(initial_value), VariantBox(delta_value), VariantBox(elapsed_time), VariantBox(duration), VariantBox(trans_type), VariantBox(ease_type)])
 	}
 	public func emit_step_finished(idx: Int) {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("step_finished"), VariantBox(idx)])
@@ -32085,13 +32085,13 @@ public class UPNPDevice: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_igd_our_addr", args: [])
 		return __ret.asString()
 	}
-	public func set_igd_status(status: UPNPDevice.IGDStatus) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_igd_status", args: [VariantBox(status.rawValue)])
+	public func set_igd_status(status: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_igd_status", args: [VariantBox(status)])
 	}
 	@discardableResult
-	public func get_igd_status() -> UPNPDevice.IGDStatus {
+	public func get_igd_status() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_igd_status", args: [])
-		return __ret.asEnum(UPNPDevice.IGDStatus.self)
+		return __ret.asInt()
 	}
 	public var description_url: String {
 		get { Host.shared.getProperty(object: ptr, name: "description_url").asString() }
@@ -32251,29 +32251,29 @@ public class Viewport: Node {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_using_hdr_2d", args: [])
 		return __ret.asBool()
 	}
-	public func set_msaa_2d(msaa: Viewport.MSAA) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_msaa_2d", args: [VariantBox(msaa.rawValue)])
+	public func set_msaa_2d(msaa: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_msaa_2d", args: [VariantBox(msaa)])
 	}
 	@discardableResult
-	public func get_msaa_2d() -> Viewport.MSAA {
+	public func get_msaa_2d() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_msaa_2d", args: [])
-		return __ret.asEnum(Viewport.MSAA.self)
+		return __ret.asInt()
 	}
-	public func set_msaa_3d(msaa: Viewport.MSAA) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_msaa_3d", args: [VariantBox(msaa.rawValue)])
+	public func set_msaa_3d(msaa: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_msaa_3d", args: [VariantBox(msaa)])
 	}
 	@discardableResult
-	public func get_msaa_3d() -> Viewport.MSAA {
+	public func get_msaa_3d() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_msaa_3d", args: [])
-		return __ret.asEnum(Viewport.MSAA.self)
+		return __ret.asInt()
 	}
-	public func set_screen_space_aa(screen_space_aa: Viewport.ScreenSpaceAA) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_screen_space_aa", args: [VariantBox(screen_space_aa.rawValue)])
+	public func set_screen_space_aa(screen_space_aa: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_screen_space_aa", args: [VariantBox(screen_space_aa)])
 	}
 	@discardableResult
-	public func get_screen_space_aa() -> Viewport.ScreenSpaceAA {
+	public func get_screen_space_aa() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_screen_space_aa", args: [])
-		return __ret.asEnum(Viewport.ScreenSpaceAA.self)
+		return __ret.asInt()
 	}
 	public func set_use_taa(enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_use_taa", args: [VariantBox(enable)])
@@ -32481,13 +32481,13 @@ public class Viewport: Node {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_snap_2d_vertices_to_pixel_enabled", args: [])
 		return __ret.asBool()
 	}
-	public func set_positional_shadow_atlas_quadrant_subdiv(quadrant: Int, subdiv: Viewport.PositionalShadowAtlasQuadrantSubdiv) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_positional_shadow_atlas_quadrant_subdiv", args: [VariantBox(quadrant), VariantBox(subdiv.rawValue)])
+	public func set_positional_shadow_atlas_quadrant_subdiv(quadrant: Int, subdiv: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_positional_shadow_atlas_quadrant_subdiv", args: [VariantBox(quadrant), VariantBox(subdiv)])
 	}
 	@discardableResult
-	public func get_positional_shadow_atlas_quadrant_subdiv(quadrant: Int) -> Viewport.PositionalShadowAtlasQuadrantSubdiv {
+	public func get_positional_shadow_atlas_quadrant_subdiv(quadrant: Int) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_positional_shadow_atlas_quadrant_subdiv", args: [VariantBox(quadrant)])
-		return __ret.asEnum(Viewport.PositionalShadowAtlasQuadrantSubdiv.self)
+		return __ret.asInt()
 	}
 	public func set_input_as_handled() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_input_as_handled", args: [])
@@ -32558,21 +32558,21 @@ public class Viewport: Node {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_default_canvas_item_texture_repeat", args: [])
 		return __ret.asEnum(Viewport.DefaultCanvasItemTextureRepeat.self)
 	}
-	public func set_sdf_oversize(oversize: Viewport.SDFOversize) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_sdf_oversize", args: [VariantBox(oversize.rawValue)])
+	public func set_sdf_oversize(oversize: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_sdf_oversize", args: [VariantBox(oversize)])
 	}
 	@discardableResult
-	public func get_sdf_oversize() -> Viewport.SDFOversize {
+	public func get_sdf_oversize() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_sdf_oversize", args: [])
-		return __ret.asEnum(Viewport.SDFOversize.self)
+		return __ret.asInt()
 	}
-	public func set_sdf_scale(scale: Viewport.SDFScale) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_sdf_scale", args: [VariantBox(scale.rawValue)])
+	public func set_sdf_scale(scale: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_sdf_scale", args: [VariantBox(scale)])
 	}
 	@discardableResult
-	public func get_sdf_scale() -> Viewport.SDFScale {
+	public func get_sdf_scale() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_sdf_scale", args: [])
-		return __ret.asEnum(Viewport.SDFScale.self)
+		return __ret.asInt()
 	}
 	public func set_mesh_lod_threshold(pixels: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_mesh_lod_threshold", args: [VariantBox(pixels)])
@@ -32658,13 +32658,13 @@ public class Viewport: Node {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_using_xr", args: [])
 		return __ret.asBool()
 	}
-	public func set_scaling_3d_mode(scaling_3d_mode: Viewport.Scaling3DMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_scaling_3d_mode", args: [VariantBox(scaling_3d_mode.rawValue)])
+	public func set_scaling_3d_mode(scaling_3d_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_scaling_3d_mode", args: [VariantBox(scaling_3d_mode)])
 	}
 	@discardableResult
-	public func get_scaling_3d_mode() -> Viewport.Scaling3DMode {
+	public func get_scaling_3d_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_scaling_3d_mode", args: [])
-		return __ret.asEnum(Viewport.Scaling3DMode.self)
+		return __ret.asInt()
 	}
 	public func set_scaling_3d_scale(scale: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_scaling_3d_scale", args: [VariantBox(scale)])
@@ -32690,29 +32690,29 @@ public class Viewport: Node {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture_mipmap_bias", args: [])
 		return __ret.asDouble()
 	}
-	public func set_anisotropic_filtering_level(anisotropic_filtering_level: Viewport.AnisotropicFiltering) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_anisotropic_filtering_level", args: [VariantBox(anisotropic_filtering_level.rawValue)])
+	public func set_anisotropic_filtering_level(anisotropic_filtering_level: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_anisotropic_filtering_level", args: [VariantBox(anisotropic_filtering_level)])
 	}
 	@discardableResult
-	public func get_anisotropic_filtering_level() -> Viewport.AnisotropicFiltering {
+	public func get_anisotropic_filtering_level() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_anisotropic_filtering_level", args: [])
-		return __ret.asEnum(Viewport.AnisotropicFiltering.self)
+		return __ret.asInt()
 	}
-	public func set_vrs_mode(mode: Viewport.VRSMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_vrs_mode", args: [VariantBox(mode.rawValue)])
+	public func set_vrs_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_vrs_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_vrs_mode() -> Viewport.VRSMode {
+	public func get_vrs_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_vrs_mode", args: [])
-		return __ret.asEnum(Viewport.VRSMode.self)
+		return __ret.asInt()
 	}
-	public func set_vrs_update_mode(mode: Viewport.VRSUpdateMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_vrs_update_mode", args: [VariantBox(mode.rawValue)])
+	public func set_vrs_update_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_vrs_update_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_vrs_update_mode() -> Viewport.VRSUpdateMode {
+	public func get_vrs_update_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_vrs_update_mode", args: [])
-		return __ret.asEnum(Viewport.VRSUpdateMode.self)
+		return __ret.asInt()
 	}
 	public func set_vrs_texture(texture: Texture2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_vrs_texture", args: [VariantBox(texture)])
@@ -32734,13 +32734,13 @@ public class Viewport: Node {
 		get { Host.shared.getProperty(object: ptr, name: "own_world_3d").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "own_world_3d", value: VariantBox(newValue)) }
 	}
-	public var world_3d: World3D {
+	public var world_3d: World3D? {
 		get { Host.shared.getProperty(object: ptr, name: "world_3d").asObject(World3D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "world_3d", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "world_3d", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var world_2d: World2D {
+	public var world_2d: World2D? {
 		get { Host.shared.getProperty(object: ptr, name: "world_2d").asObject(World2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "world_2d", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "world_2d", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var transparent_bg: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "transparent_bg").asBool() }
@@ -32834,9 +32834,9 @@ public class Viewport: Node {
 		get { Host.shared.getProperty(object: ptr, name: "vrs_update_mode").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "vrs_update_mode", value: VariantBox(newValue)) }
 	}
-	public var vrs_texture: Texture2D {
+	public var vrs_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "vrs_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "vrs_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "vrs_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Canvas_Items: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Canvas Items") }
@@ -33044,9 +33044,9 @@ public class WebRTCPeerConnection: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "close", args: [])
 	}
 	@discardableResult
-	public func get_connection_state() -> WebRTCPeerConnection.ConnectionState {
+	public func get_connection_state() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_connection_state", args: [])
-		return __ret.asEnum(WebRTCPeerConnection.ConnectionState.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_gathering_state() -> WebRTCPeerConnection.GatheringState {
@@ -33102,17 +33102,17 @@ public class WorldEnvironment: Node {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_compositor", args: [])
 		return __ret.asObject(Compositor.self)
 	}
-	public var environment: Environment {
+	public var environment: Environment? {
 		get { Host.shared.getProperty(object: ptr, name: "environment").asObject(Environment.self) }
-		set { Host.shared.setProperty(object: ptr, name: "environment", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "environment", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var camera_attributes: GodotObject {
+	public var camera_attributes: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "camera_attributes").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "camera_attributes", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "camera_attributes", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var compositor: Compositor {
+	public var compositor: Compositor? {
 		get { Host.shared.getProperty(object: ptr, name: "compositor").asObject(Compositor.self) }
-		set { Host.shared.setProperty(object: ptr, name: "compositor", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "compositor", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -33131,9 +33131,9 @@ public class XMLParser: RefCounted {
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func get_node_type() -> XMLParser.NodeType {
+	public func get_node_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_node_type", args: [])
-		return __ret.asEnum(XMLParser.NodeType.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_node_name() -> String {
@@ -33256,9 +33256,9 @@ public class XRInterface: RefCounted {
 		return __ret
 	}
 	@discardableResult
-	public func get_tracking_status() -> XRInterface.TrackingStatus {
+	public func get_tracking_status() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tracking_status", args: [])
-		return __ret.asEnum(XRInterface.TrackingStatus.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_render_target_size() -> Vector2 {
@@ -33274,18 +33274,18 @@ public class XRInterface: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "trigger_haptic_pulse", args: [VariantBox(action_name), VariantBox(tracker_name), VariantBox(frequency), VariantBox(amplitude), VariantBox(duration_sec), VariantBox(delay_sec)])
 	}
 	@discardableResult
-	public func supports_play_area_mode(mode: XRInterface.PlayAreaMode) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "supports_play_area_mode", args: [VariantBox(mode.rawValue)])
+	public func supports_play_area_mode(mode: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "supports_play_area_mode", args: [VariantBox(mode)])
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func get_play_area_mode() -> XRInterface.PlayAreaMode {
+	public func get_play_area_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_play_area_mode", args: [])
-		return __ret.asEnum(XRInterface.PlayAreaMode.self)
+		return __ret.asInt()
 	}
 	@discardableResult
-	public func set_play_area_mode(mode: XRInterface.PlayAreaMode) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_play_area_mode", args: [VariantBox(mode.rawValue)])
+	public func set_play_area_mode(mode: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_play_area_mode", args: [VariantBox(mode)])
 		return __ret.asBool()
 	}
 	@discardableResult
@@ -33350,14 +33350,14 @@ public class XRInterface: RefCounted {
 		return __ret
 	}
 	@discardableResult
-	public func set_environment_blend_mode(mode: XRInterface.EnvironmentBlendMode) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_environment_blend_mode", args: [VariantBox(mode.rawValue)])
+	public func set_environment_blend_mode(mode: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_environment_blend_mode", args: [VariantBox(mode)])
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func get_environment_blend_mode() -> XRInterface.EnvironmentBlendMode {
+	public func get_environment_blend_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_environment_blend_mode", args: [])
-		return __ret.asEnum(XRInterface.EnvironmentBlendMode.self)
+		return __ret.asInt()
 	}
 	public var Interface: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Interface") }
@@ -33446,13 +33446,13 @@ public class XRPose: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_angular_velocity", args: [])
 		return __ret.asVector3()
 	}
-	public func set_tracking_confidence(tracking_confidence: XRPose.TrackingConfidence) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_tracking_confidence", args: [VariantBox(tracking_confidence.rawValue)])
+	public func set_tracking_confidence(tracking_confidence: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_tracking_confidence", args: [VariantBox(tracking_confidence)])
 	}
 	@discardableResult
-	public func get_tracking_confidence() -> XRPose.TrackingConfidence {
+	public func get_tracking_confidence() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tracking_confidence", args: [])
-		return __ret.asEnum(XRPose.TrackingConfidence.self)
+		return __ret.asInt()
 	}
 	public var has_tracking_data: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "has_tracking_data").asBool() }
@@ -33490,12 +33490,12 @@ public class XRTracker: RefCounted {
 		super.init(ptr: raw)
 	}
 	@discardableResult
-	public func get_tracker_type() -> XRServer.TrackerType {
+	public func get_tracker_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tracker_type", args: [])
-		return __ret.asEnum(XRServer.TrackerType.self)
+		return __ret.asInt()
 	}
-	public func set_tracker_type(type: XRServer.TrackerType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_tracker_type", args: [VariantBox(type.rawValue)])
+	public func set_tracker_type(type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_tracker_type", args: [VariantBox(type)])
 	}
 	@discardableResult
 	public func get_tracker_name() -> String {
@@ -33537,8 +33537,8 @@ public class ZIPPacker: RefCounted {
 		super.init(ptr: raw)
 	}
 	@discardableResult
-	public func open_(path: String, append: ZIPPacker.ZipAppend) -> Error {
-		let __ret = Host.shared.callMethod(object: ptr, method: "open", args: [VariantBox(path), VariantBox(append.rawValue)])
+	public func open_(path: String, append: Int = 0) -> Error {
+		let __ret = Host.shared.callMethod(object: ptr, method: "open", args: [VariantBox(path), VariantBox(append)])
 		return __ret.asEnum(Error.self)
 	}
 	public func set_compression_level(compression_level: Int) {
@@ -33550,13 +33550,13 @@ public class ZIPPacker: RefCounted {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func add_directory(path: String, permissions: FileAccess.UnixPermissionFlags, modified_time: Int = 0) -> Error {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_directory", args: [VariantBox(path), VariantBox(permissions.rawValue), VariantBox(modified_time)])
+	public func add_directory(path: String, permissions: Int = 493, modified_time: Int = 0) -> Error {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_directory", args: [VariantBox(path), VariantBox(permissions), VariantBox(modified_time)])
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func start_file(path: String, permissions: FileAccess.UnixPermissionFlags, modified_time: Int = 0) -> Error {
-		let __ret = Host.shared.callMethod(object: ptr, method: "start_file", args: [VariantBox(path), VariantBox(permissions.rawValue), VariantBox(modified_time)])
+	public func start_file(path: String, permissions: Int = 420, modified_time: Int = 0) -> Error {
+		let __ret = Host.shared.callMethod(object: ptr, method: "start_file", args: [VariantBox(path), VariantBox(permissions), VariantBox(modified_time)])
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
@@ -33641,8 +33641,8 @@ public class Animation: Resource {
 		case exact = 2
 	}
 	@discardableResult
-	public func add_track(type: Animation.TrackType, at_position: Int = -1) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_track", args: [VariantBox(type.rawValue), VariantBox(at_position)])
+	public func add_track(type: Int, at_position: Int = -1) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_track", args: [VariantBox(type), VariantBox(at_position)])
 		return __ret.asInt()
 	}
 	public func remove_track(track_idx: Int) {
@@ -33654,9 +33654,9 @@ public class Animation: Resource {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func track_get_type(track_idx: Int) -> Animation.TrackType {
+	public func track_get_type(track_idx: Int) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "track_get_type", args: [VariantBox(track_idx)])
-		return __ret.asEnum(Animation.TrackType.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func track_get_path(track_idx: Int) -> String {
@@ -33667,8 +33667,8 @@ public class Animation: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "track_set_path", args: [VariantBox(track_idx), VariantBox(path)])
 	}
 	@discardableResult
-	public func find_track(path: String, type: Animation.TrackType) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "find_track", args: [VariantBox(path), VariantBox(type.rawValue)])
+	public func find_track(path: String, type: Int) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "find_track", args: [VariantBox(path), VariantBox(type)])
 		return __ret.asInt()
 	}
 	public func track_move_up(track_idx: Int) {
@@ -33782,13 +33782,13 @@ public class Animation: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "track_find_key", args: [VariantBox(track_idx), VariantBox(time), VariantBox(find_mode.rawValue), VariantBox(limit), VariantBox(backward)])
 		return __ret.asInt()
 	}
-	public func track_set_interpolation_type(track_idx: Int, interpolation: Animation.InterpolationType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "track_set_interpolation_type", args: [VariantBox(track_idx), VariantBox(interpolation.rawValue)])
+	public func track_set_interpolation_type(track_idx: Int, interpolation: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "track_set_interpolation_type", args: [VariantBox(track_idx), VariantBox(interpolation)])
 	}
 	@discardableResult
-	public func track_get_interpolation_type(track_idx: Int) -> Animation.InterpolationType {
+	public func track_get_interpolation_type(track_idx: Int) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "track_get_interpolation_type", args: [VariantBox(track_idx)])
-		return __ret.asEnum(Animation.InterpolationType.self)
+		return __ret.asInt()
 	}
 	public func track_set_interpolation_loop_wrap(track_idx: Int, interpolation: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "track_set_interpolation_loop_wrap", args: [VariantBox(track_idx), VariantBox(interpolation)])
@@ -33803,13 +33803,13 @@ public class Animation: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "track_is_compressed", args: [VariantBox(track_idx)])
 		return __ret.asBool()
 	}
-	public func value_track_set_update_mode(track_idx: Int, mode: Animation.UpdateMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "value_track_set_update_mode", args: [VariantBox(track_idx), VariantBox(mode.rawValue)])
+	public func value_track_set_update_mode(track_idx: Int, mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "value_track_set_update_mode", args: [VariantBox(track_idx), VariantBox(mode)])
 	}
 	@discardableResult
-	public func value_track_get_update_mode(track_idx: Int) -> Animation.UpdateMode {
+	public func value_track_get_update_mode(track_idx: Int) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "value_track_get_update_mode", args: [VariantBox(track_idx)])
-		return __ret.asEnum(Animation.UpdateMode.self)
+		return __ret.asInt()
 	}
 	public func value_track_interpolate(track_idx: Int, time_sec: Double, backward: Bool = false) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "value_track_interpolate", args: [VariantBox(track_idx), VariantBox(time_sec), VariantBox(backward)])
@@ -33960,13 +33960,13 @@ public class Animation: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_length", args: [])
 		return __ret.asDouble()
 	}
-	public func set_loop_mode(loop_mode: Animation.LoopMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_loop_mode", args: [VariantBox(loop_mode.rawValue)])
+	public func set_loop_mode(loop_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_loop_mode", args: [VariantBox(loop_mode)])
 	}
 	@discardableResult
-	public func get_loop_mode() -> Animation.LoopMode {
+	public func get_loop_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_loop_mode", args: [])
-		return __ret.asEnum(Animation.LoopMode.self)
+		return __ret.asInt()
 	}
 	public func set_step(size_sec: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_step", args: [VariantBox(size_sec)])
@@ -34152,13 +34152,13 @@ public class AnimationNode: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "blend_animation", args: [VariantBox(animation), VariantBox(time), VariantBox(delta), VariantBox(seeked), VariantBox(is_external_seeking), VariantBox(blend), VariantBox(looped_flag.rawValue)])
 	}
 	@discardableResult
-	public func blend_node(name: String, node: AnimationNode, time: Double, seek: Bool, is_external_seeking: Bool, blend: Double, filter: AnimationNode.FilterAction, sync: Bool = true, test_only: Bool = false) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "blend_node", args: [VariantBox(name), VariantBox(node), VariantBox(time), VariantBox(seek), VariantBox(is_external_seeking), VariantBox(blend), VariantBox(filter.rawValue), VariantBox(sync), VariantBox(test_only)])
+	public func blend_node(name: String, node: AnimationNode, time: Double, seek: Bool, is_external_seeking: Bool, blend: Double, filter: Int = 0, sync: Bool = true, test_only: Bool = false) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "blend_node", args: [VariantBox(name), VariantBox(node), VariantBox(time), VariantBox(seek), VariantBox(is_external_seeking), VariantBox(blend), VariantBox(filter), VariantBox(sync), VariantBox(test_only)])
 		return __ret.asDouble()
 	}
 	@discardableResult
-	public func blend_input(input_index: Int, time: Double, seek: Bool, is_external_seeking: Bool, blend: Double, filter: AnimationNode.FilterAction, sync: Bool = true, test_only: Bool = false) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "blend_input", args: [VariantBox(input_index), VariantBox(time), VariantBox(seek), VariantBox(is_external_seeking), VariantBox(blend), VariantBox(filter.rawValue), VariantBox(sync), VariantBox(test_only)])
+	public func blend_input(input_index: Int, time: Double, seek: Bool, is_external_seeking: Bool, blend: Double, filter: Int = 0, sync: Bool = true, test_only: Bool = false) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "blend_input", args: [VariantBox(input_index), VariantBox(time), VariantBox(seek), VariantBox(is_external_seeking), VariantBox(blend), VariantBox(filter), VariantBox(sync), VariantBox(test_only)])
 		return __ret.asDouble()
 	}
 	public func set_parameter(name: String, value: VariantBox) {
@@ -34412,9 +34412,9 @@ public class AnimationNodeStateMachineTransition: Resource {
 		get { Host.shared.getProperty(object: ptr, name: "xfade_time").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "xfade_time", value: VariantBox(newValue)) }
 	}
-	public var xfade_curve: Curve {
+	public var xfade_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "xfade_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "xfade_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "xfade_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var break_loop_at_end: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "break_loop_at_end").asBool() }
@@ -34506,21 +34506,21 @@ public class AnimationPlayer: AnimationMixer {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_auto_capture_duration", args: [])
 		return __ret.asDouble()
 	}
-	public func set_auto_capture_transition_type(auto_capture_transition_type: Tween.TransitionType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_auto_capture_transition_type", args: [VariantBox(auto_capture_transition_type.rawValue)])
+	public func set_auto_capture_transition_type(auto_capture_transition_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_auto_capture_transition_type", args: [VariantBox(auto_capture_transition_type)])
 	}
 	@discardableResult
-	public func get_auto_capture_transition_type() -> Tween.TransitionType {
+	public func get_auto_capture_transition_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_auto_capture_transition_type", args: [])
-		return __ret.asEnum(Tween.TransitionType.self)
+		return __ret.asInt()
 	}
-	public func set_auto_capture_ease_type(auto_capture_ease_type: Tween.EaseType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_auto_capture_ease_type", args: [VariantBox(auto_capture_ease_type.rawValue)])
+	public func set_auto_capture_ease_type(auto_capture_ease_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_auto_capture_ease_type", args: [VariantBox(auto_capture_ease_type)])
 	}
 	@discardableResult
-	public func get_auto_capture_ease_type() -> Tween.EaseType {
+	public func get_auto_capture_ease_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_auto_capture_ease_type", args: [])
-		return __ret.asEnum(Tween.EaseType.self)
+		return __ret.asInt()
 	}
 	public func play(name: String, custom_blend: Double = -1, custom_speed: Double = 1.0, from_end: Bool = false) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "play", args: [VariantBox(name), VariantBox(custom_blend), VariantBox(custom_speed), VariantBox(from_end)])
@@ -34540,8 +34540,8 @@ public class AnimationPlayer: AnimationMixer {
 	public func play_section_backwards(name: String, start_time: Double = -1, end_time: Double = -1, custom_blend: Double = -1) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "play_section_backwards", args: [VariantBox(name), VariantBox(start_time), VariantBox(end_time), VariantBox(custom_blend)])
 	}
-	public func play_with_capture(name: String, duration: Double = -1.0, custom_blend: Double = -1, custom_speed: Double = 1.0, from_end: Bool = false, trans_type: Tween.TransitionType, ease_type: Tween.EaseType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "play_with_capture", args: [VariantBox(name), VariantBox(duration), VariantBox(custom_blend), VariantBox(custom_speed), VariantBox(from_end), VariantBox(trans_type.rawValue), VariantBox(ease_type.rawValue)])
+	public func play_with_capture(name: String, duration: Double = -1.0, custom_blend: Double = -1, custom_speed: Double = 1.0, from_end: Bool = false, trans_type: Int = 0, ease_type: Int = 0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "play_with_capture", args: [VariantBox(name), VariantBox(duration), VariantBox(custom_blend), VariantBox(custom_speed), VariantBox(from_end), VariantBox(trans_type), VariantBox(ease_type)])
 	}
 	public func pause() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "pause", args: [])
@@ -34660,21 +34660,21 @@ public class AnimationPlayer: AnimationMixer {
 	public func seek(seconds: Double, update: Bool = false, update_only: Bool = false) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "seek", args: [VariantBox(seconds), VariantBox(update), VariantBox(update_only)])
 	}
-	public func set_process_callback(mode: AnimationPlayer.AnimationProcessCallback) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_process_callback", args: [VariantBox(mode.rawValue)])
+	public func set_process_callback(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_process_callback", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_process_callback() -> AnimationPlayer.AnimationProcessCallback {
+	public func get_process_callback() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_process_callback", args: [])
-		return __ret.asEnum(AnimationPlayer.AnimationProcessCallback.self)
+		return __ret.asInt()
 	}
-	public func set_method_call_mode(mode: AnimationPlayer.AnimationMethodCallMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_method_call_mode", args: [VariantBox(mode.rawValue)])
+	public func set_method_call_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_method_call_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_method_call_mode() -> AnimationPlayer.AnimationMethodCallMode {
+	public func get_method_call_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_method_call_mode", args: [])
-		return __ret.asEnum(AnimationPlayer.AnimationMethodCallMode.self)
+		return __ret.asInt()
 	}
 	public func set_root(path: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_root", args: [VariantBox(path)])
@@ -34781,17 +34781,17 @@ public class AnimationTree: AnimationMixer {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_animation_player", args: [])
 		return __ret.asString()
 	}
-	public func set_process_callback(mode: AnimationTree.AnimationProcessCallback) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_process_callback", args: [VariantBox(mode.rawValue)])
+	public func set_process_callback(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_process_callback", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_process_callback() -> AnimationTree.AnimationProcessCallback {
+	public func get_process_callback() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_process_callback", args: [])
-		return __ret.asEnum(AnimationTree.AnimationProcessCallback.self)
+		return __ret.asInt()
 	}
-	public var tree_root: AnimationRootNode {
+	public var tree_root: AnimationRootNode? {
 		get { Host.shared.getProperty(object: ptr, name: "tree_root").asObject(AnimationRootNode.self) }
-		set { Host.shared.setProperty(object: ptr, name: "tree_root", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "tree_root", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var advance_expression_base_node: String {
 		get { Host.shared.getProperty(object: ptr, name: "advance_expression_base_node").asString() }
@@ -34843,8 +34843,8 @@ public class AudioEffectSpectrumAnalyzerInstance: AudioEffectInstance {
 		super.init(ptr: raw)
 	}
 	@discardableResult
-	public func get_magnitude_for_frequency_range(from_hz: Double, to_hz: Double, mode: AudioEffectSpectrumAnalyzerInstance.MagnitudeMode) -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_magnitude_for_frequency_range", args: [VariantBox(from_hz), VariantBox(to_hz), VariantBox(mode.rawValue)])
+	public func get_magnitude_for_frequency_range(from_hz: Double, to_hz: Double, mode: Int = 1) -> Vector2 {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_magnitude_for_frequency_range", args: [VariantBox(from_hz), VariantBox(to_hz), VariantBox(mode)])
 		return __ret.asVector2()
 	}
 }
@@ -35241,13 +35241,13 @@ public class AudioStreamPlayer3D: Node3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_attenuation_filter_db", args: [])
 		return __ret.asDouble()
 	}
-	public func set_attenuation_model(model: AudioStreamPlayer3D.AttenuationModel) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_attenuation_model", args: [VariantBox(model.rawValue)])
+	public func set_attenuation_model(model: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_attenuation_model", args: [VariantBox(model)])
 	}
 	@discardableResult
-	public func get_attenuation_model() -> AudioStreamPlayer3D.AttenuationModel {
+	public func get_attenuation_model() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_attenuation_model", args: [])
-		return __ret.asEnum(AudioStreamPlayer3D.AttenuationModel.self)
+		return __ret.asInt()
 	}
 	public func set_doppler_tracking(mode: AudioStreamPlayer3D.DopplerTracking) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_doppler_tracking", args: [VariantBox(mode.rawValue)])
@@ -35299,9 +35299,9 @@ public class AudioStreamPlayer3D: Node3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_playback_type", args: [])
 		return __ret.asEnum(AudioServer.PlaybackType.self)
 	}
-	public var stream: AudioStream {
+	public var stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var attenuation_model: Int {
 		get { Host.shared.getProperty(object: ptr, name: "attenuation_model").asInt() }
@@ -35606,9 +35606,9 @@ public class BoneMap: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "find_profile_bone_name", args: [VariantBox(skeleton_bone_name)])
 		return __ret.asString()
 	}
-	public var profile: SkeletonProfile {
+	public var profile: SkeletonProfile? {
 		get { Host.shared.getProperty(object: ptr, name: "profile").asObject(SkeletonProfile.self) }
-		set { Host.shared.setProperty(object: ptr, name: "profile", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "profile", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var bonemap: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "bonemap") }
@@ -35792,12 +35792,12 @@ public class Camera3D: Node3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_near", args: [VariantBox(near)])
 	}
 	@discardableResult
-	public func get_projection() -> Camera3D.ProjectionType {
+	public func get_projection() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_projection", args: [])
-		return __ret.asEnum(Camera3D.ProjectionType.self)
+		return __ret.asInt()
 	}
-	public func set_projection(mode: Camera3D.ProjectionType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_projection", args: [VariantBox(mode.rawValue)])
+	public func set_projection(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_projection", args: [VariantBox(mode)])
 	}
 	public func set_h_offset(offset: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_h_offset", args: [VariantBox(offset)])
@@ -35847,13 +35847,13 @@ public class Camera3D: Node3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_compositor", args: [])
 		return __ret.asObject(Compositor.self)
 	}
-	public func set_keep_aspect_mode(mode: Camera3D.KeepAspect) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_keep_aspect_mode", args: [VariantBox(mode.rawValue)])
+	public func set_keep_aspect_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_keep_aspect_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_keep_aspect_mode() -> Camera3D.KeepAspect {
+	public func get_keep_aspect_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_keep_aspect_mode", args: [])
-		return __ret.asEnum(Camera3D.KeepAspect.self)
+		return __ret.asInt()
 	}
 	public func set_doppler_tracking(mode: Camera3D.DopplerTracking) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_doppler_tracking", args: [VariantBox(mode.rawValue)])
@@ -35899,17 +35899,17 @@ public class Camera3D: Node3D {
 		get { Host.shared.getProperty(object: ptr, name: "cull_mask").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "cull_mask", value: VariantBox(newValue)) }
 	}
-	public var environment: Environment {
+	public var environment: Environment? {
 		get { Host.shared.getProperty(object: ptr, name: "environment").asObject(Environment.self) }
-		set { Host.shared.setProperty(object: ptr, name: "environment", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "environment", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var attributes: GodotObject {
+	public var attributes: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "attributes").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "attributes", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "attributes", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var compositor: Compositor {
+	public var compositor: Compositor? {
 		get { Host.shared.getProperty(object: ptr, name: "compositor").asObject(Compositor.self) }
-		set { Host.shared.setProperty(object: ptr, name: "compositor", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "compositor", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var h_offset: Double {
 		get { Host.shared.getProperty(object: ptr, name: "h_offset").asDouble() }
@@ -36365,9 +36365,9 @@ public class CollisionShape3D: Node3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_enable_debug_fill", args: [])
 		return __ret.asBool()
 	}
-	public var shape: GodotObject {
+	public var shape: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "shape").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "shape", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "shape", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var disabled: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "disabled").asBool() }
@@ -36608,13 +36608,13 @@ public class Control: CanvasItem {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_bound_minimum_size", args: [])
 		return __ret.asVector2()
 	}
-	public func _set_layout_mode(mode: Control.LayoutMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_set_layout_mode", args: [VariantBox(mode.rawValue)])
+	public func _set_layout_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_set_layout_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func _get_layout_mode() -> Control.LayoutMode {
+	public func _get_layout_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_layout_mode", args: [])
-		return __ret.asEnum(Control.LayoutMode.self)
+		return __ret.asInt()
 	}
 	public func _set_anchors_layout_preset(preset: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_set_anchors_layout_preset", args: [VariantBox(preset)])
@@ -36624,14 +36624,14 @@ public class Control: CanvasItem {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_anchors_layout_preset", args: [])
 		return __ret.asInt()
 	}
-	public func set_anchors_preset(preset: Control.LayoutPreset, keep_offsets: Bool = false) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_anchors_preset", args: [VariantBox(preset.rawValue), VariantBox(keep_offsets)])
+	public func set_anchors_preset(preset: Int, keep_offsets: Bool = false) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_anchors_preset", args: [VariantBox(preset), VariantBox(keep_offsets)])
 	}
-	public func set_offsets_preset(preset: Control.LayoutPreset, resize_mode: Control.LayoutPresetMode, margin: Int = 0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_offsets_preset", args: [VariantBox(preset.rawValue), VariantBox(resize_mode.rawValue), VariantBox(margin)])
+	public func set_offsets_preset(preset: Int, resize_mode: Int = 0, margin: Int = 0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_offsets_preset", args: [VariantBox(preset), VariantBox(resize_mode), VariantBox(margin)])
 	}
-	public func set_anchors_and_offsets_preset(preset: Control.LayoutPreset, resize_mode: Control.LayoutPresetMode, margin: Int = 0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_anchors_and_offsets_preset", args: [VariantBox(preset.rawValue), VariantBox(resize_mode.rawValue), VariantBox(margin)])
+	public func set_anchors_and_offsets_preset(preset: Int, resize_mode: Int = 0, margin: Int = 0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_anchors_and_offsets_preset", args: [VariantBox(preset), VariantBox(resize_mode), VariantBox(margin)])
 	}
 	public func _set_anchor(side: Side, anchor: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_set_anchor", args: [VariantBox(side.rawValue), VariantBox(anchor)])
@@ -36788,26 +36788,26 @@ public class Control: CanvasItem {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_global_rect", args: [])
 		return __ret.asRect2()
 	}
-	public func set_focus_mode(mode: Control.FocusMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_focus_mode", args: [VariantBox(mode.rawValue)])
+	public func set_focus_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_focus_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_focus_mode() -> Control.FocusMode {
+	public func get_focus_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_focus_mode", args: [])
-		return __ret.asEnum(Control.FocusMode.self)
+		return __ret.asInt()
 	}
 	@discardableResult
-	public func get_focus_mode_with_override() -> Control.FocusMode {
+	public func get_focus_mode_with_override() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_focus_mode_with_override", args: [])
-		return __ret.asEnum(Control.FocusMode.self)
+		return __ret.asInt()
 	}
-	public func set_focus_behavior_recursive(focus_behavior_recursive: Control.FocusBehaviorRecursive) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_focus_behavior_recursive", args: [VariantBox(focus_behavior_recursive.rawValue)])
+	public func set_focus_behavior_recursive(focus_behavior_recursive: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_focus_behavior_recursive", args: [VariantBox(focus_behavior_recursive)])
 	}
 	@discardableResult
-	public func get_focus_behavior_recursive() -> Control.FocusBehaviorRecursive {
+	public func get_focus_behavior_recursive() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_focus_behavior_recursive", args: [])
-		return __ret.asEnum(Control.FocusBehaviorRecursive.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func has_focus(ignore_hidden_focus: Bool = false) -> Bool {
@@ -36838,13 +36838,13 @@ public class Control: CanvasItem {
 	public func play_theme_sound(stream: AudioStream) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "play_theme_sound", args: [VariantBox(stream)])
 	}
-	public func set_h_size_flags(flags: Control.SizeFlags) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_h_size_flags", args: [VariantBox(flags.rawValue)])
+	public func set_h_size_flags(flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_h_size_flags", args: [VariantBox(flags)])
 	}
 	@discardableResult
-	public func get_h_size_flags() -> Control.SizeFlags {
+	public func get_h_size_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_h_size_flags", args: [])
-		return __ret.asEnum(Control.SizeFlags.self)
+		return __ret.asInt()
 	}
 	public func set_stretch_ratio(ratio: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_stretch_ratio", args: [VariantBox(ratio)])
@@ -36854,13 +36854,13 @@ public class Control: CanvasItem {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_stretch_ratio", args: [])
 		return __ret.asDouble()
 	}
-	public func set_v_size_flags(flags: Control.SizeFlags) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_v_size_flags", args: [VariantBox(flags.rawValue)])
+	public func set_v_size_flags(flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_v_size_flags", args: [VariantBox(flags)])
 	}
 	@discardableResult
-	public func get_v_size_flags() -> Control.SizeFlags {
+	public func get_v_size_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_v_size_flags", args: [])
-		return __ret.asEnum(Control.SizeFlags.self)
+		return __ret.asInt()
 	}
 	public func set_offset_transform_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_offset_transform_enabled", args: [VariantBox(enabled)])
@@ -37160,18 +37160,18 @@ public class Control: CanvasItem {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_translation_context", args: [])
 		return __ret.asString()
 	}
-	public func set_default_cursor_shape(shape: Control.CursorShape) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_default_cursor_shape", args: [VariantBox(shape.rawValue)])
+	public func set_default_cursor_shape(shape: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_default_cursor_shape", args: [VariantBox(shape)])
 	}
 	@discardableResult
-	public func get_default_cursor_shape() -> Control.CursorShape {
+	public func get_default_cursor_shape() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_default_cursor_shape", args: [])
-		return __ret.asEnum(Control.CursorShape.self)
+		return __ret.asInt()
 	}
 	@discardableResult
-	public func get_cursor_shape(at_position: Vector2) -> Control.CursorShape {
+	public func get_cursor_shape(at_position: Vector2) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_cursor_shape", args: [VariantBox(at_position)])
-		return __ret.asEnum(Control.CursorShape.self)
+		return __ret.asInt()
 	}
 	public func set_focus_neighbor(side: Side, neighbor: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_focus_neighbor", args: [VariantBox(side.rawValue), VariantBox(neighbor)])
@@ -37222,13 +37222,13 @@ public class Control: CanvasItem {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_accessibility_description", args: [])
 		return __ret.asString()
 	}
-	public func set_accessibility_live(mode: AccessibilityServer.AccessibilityLiveMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_accessibility_live", args: [VariantBox(mode.rawValue)])
+	public func set_accessibility_live(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_accessibility_live", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_accessibility_live() -> AccessibilityServer.AccessibilityLiveMode {
+	public func get_accessibility_live() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_accessibility_live", args: [])
-		return __ret.asEnum(AccessibilityServer.AccessibilityLiveMode.self)
+		return __ret.asInt()
 	}
 	public func set_accessibility_controls_nodes(node_path: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_accessibility_controls_nodes", args: [VariantBox(node_path)])
@@ -37275,13 +37275,13 @@ public class Control: CanvasItem {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_mouse_filter_with_override", args: [])
 		return __ret.asEnum(Control.MouseFilter.self)
 	}
-	public func set_mouse_behavior_recursive(mouse_behavior_recursive: Control.MouseBehaviorRecursive) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_mouse_behavior_recursive", args: [VariantBox(mouse_behavior_recursive.rawValue)])
+	public func set_mouse_behavior_recursive(mouse_behavior_recursive: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_mouse_behavior_recursive", args: [VariantBox(mouse_behavior_recursive)])
 	}
 	@discardableResult
-	public func get_mouse_behavior_recursive() -> Control.MouseBehaviorRecursive {
+	public func get_mouse_behavior_recursive() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_mouse_behavior_recursive", args: [])
-		return __ret.asEnum(Control.MouseBehaviorRecursive.self)
+		return __ret.asInt()
 	}
 	public func set_force_pass_scroll_events(force_pass_scroll_events: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_force_pass_scroll_events", args: [VariantBox(force_pass_scroll_events)])
@@ -37683,9 +37683,9 @@ public class Control: CanvasItem {
 		get { Host.shared.getProperty(object: ptr, name: "Input") }
 		set { Host.shared.setProperty(object: ptr, name: "Input", value: VariantBox(newValue)) }
 	}
-	public var shortcut_context: GodotObject {
+	public var shortcut_context: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "shortcut_context").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "shortcut_context", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "shortcut_context", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Accessibility: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Accessibility") }
@@ -37723,9 +37723,9 @@ public class Control: CanvasItem {
 		get { Host.shared.getProperty(object: ptr, name: "Theme") }
 		set { Host.shared.setProperty(object: ptr, name: "Theme", value: VariantBox(newValue)) }
 	}
-	public var theme: Theme {
+	public var theme: Theme? {
 		get { Host.shared.getProperty(object: ptr, name: "theme").asObject(Theme.self) }
-		set { Host.shared.setProperty(object: ptr, name: "theme", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "theme", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var theme_type_variation: String {
 		get { Host.shared.getProperty(object: ptr, name: "theme_type_variation").asString() }
@@ -38368,14 +38368,14 @@ public class ENetPacketPeer: PacketPeer {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func get_statistic(statistic: ENetPacketPeer.PeerStatistic) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_statistic", args: [VariantBox(statistic.rawValue)])
+	public func get_statistic(statistic: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_statistic", args: [VariantBox(statistic)])
 		return __ret.asDouble()
 	}
 	@discardableResult
-	public func get_state() -> ENetPacketPeer.PeerState {
+	public func get_state() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_state", args: [])
-		return __ret.asEnum(ENetPacketPeer.PeerState.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_channels() -> Int {
@@ -38427,13 +38427,13 @@ public class Environment: Resource {
 		case exponential = 0
 		case depth = 1
 	}
-	public func set_background(mode: Environment.BGMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_background", args: [VariantBox(mode.rawValue)])
+	public func set_background(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_background", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_background() -> Environment.BGMode {
+	public func get_background() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_background", args: [])
-		return __ret.asEnum(Environment.BGMode.self)
+		return __ret.asInt()
 	}
 	public func set_sky(sky: Sky) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_sky", args: [VariantBox(sky)])
@@ -38771,13 +38771,13 @@ public class Environment: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_sdfgi_cascade0_distance", args: [])
 		return __ret.asDouble()
 	}
-	public func set_sdfgi_y_scale(scale: Environment.SDFGIYScale) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_sdfgi_y_scale", args: [VariantBox(scale.rawValue)])
+	public func set_sdfgi_y_scale(scale: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_sdfgi_y_scale", args: [VariantBox(scale)])
 	}
 	@discardableResult
-	public func get_sdfgi_y_scale() -> Environment.SDFGIYScale {
+	public func get_sdfgi_y_scale() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_sdfgi_y_scale", args: [])
-		return __ret.asEnum(Environment.SDFGIYScale.self)
+		return __ret.asInt()
 	}
 	public func set_sdfgi_use_occlusion(enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_sdfgi_use_occlusion", args: [VariantBox(enable)])
@@ -39211,9 +39211,9 @@ public class Environment: Resource {
 		get { Host.shared.getProperty(object: ptr, name: "Sky") }
 		set { Host.shared.setProperty(object: ptr, name: "Sky", value: VariantBox(newValue)) }
 	}
-	public var sky: Sky {
+	public var sky: Sky? {
 		get { Host.shared.getProperty(object: ptr, name: "sky").asObject(Sky.self) }
-		set { Host.shared.setProperty(object: ptr, name: "sky", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "sky", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var sky_custom_fov: Double {
 		get { Host.shared.getProperty(object: ptr, name: "sky_custom_fov").asDouble() }
@@ -39491,9 +39491,9 @@ public class Environment: Resource {
 		get { Host.shared.getProperty(object: ptr, name: "glow_map_strength").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "glow_map_strength", value: VariantBox(newValue)) }
 	}
-	public var glow_map: Texture2D {
+	public var glow_map: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "glow_map").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "glow_map", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "glow_map", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Fog: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Fog") }
@@ -39631,9 +39631,9 @@ public class Environment: Resource {
 		get { Host.shared.getProperty(object: ptr, name: "adjustment_saturation").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "adjustment_saturation", value: VariantBox(newValue)) }
 	}
-	public var adjustment_color_correction: GodotObject {
+	public var adjustment_color_correction: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "adjustment_color_correction").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "adjustment_color_correction", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "adjustment_color_correction", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -39741,9 +39741,9 @@ public class Font: Resource {
 		return __ret
 	}
 	@discardableResult
-	public func get_font_style() -> TextServer.FontStyle {
+	public func get_font_style() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_font_style", args: [])
-		return __ret.asEnum(TextServer.FontStyle.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_font_weight() -> Int {
@@ -39771,8 +39771,8 @@ public class Font: Resource {
 		return __ret
 	}
 	@discardableResult
-	public func get_spacing(spacing: TextServer.SpacingType) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_spacing", args: [VariantBox(spacing.rawValue)])
+	public func get_spacing(spacing: Int) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_spacing", args: [VariantBox(spacing)])
 		return __ret.asInt()
 	}
 	@discardableResult
@@ -39784,26 +39784,26 @@ public class Font: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_cache_capacity", args: [VariantBox(single_line), VariantBox(multi_line)])
 	}
 	@discardableResult
-	public func get_string_size(text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal) -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_string_size", args: [VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue)])
+	public func get_string_size(text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, justification_flags: Int = 3, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal) -> Vector2 {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_string_size", args: [VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(justification_flags), VariantBox(direction.rawValue), VariantBox(orientation.rawValue)])
 		return __ret.asVector2()
 	}
 	@discardableResult
-	public func get_multiline_string_size(text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal) -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_multiline_string_size", args: [VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue)])
+	public func get_multiline_string_size(text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, brk_flags: Int = 3, justification_flags: Int = 3, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal) -> Vector2 {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_multiline_string_size", args: [VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(brk_flags), VariantBox(justification_flags), VariantBox(direction.rawValue), VariantBox(orientation.rawValue)])
 		return __ret.asVector2()
 	}
-	public func draw_string(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(modulate), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
+	public func draw_string(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, modulate: Color, justification_flags: Int = 3, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(modulate), VariantBox(justification_flags), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_multiline_string(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(modulate), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
+	public func draw_multiline_string(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, modulate: Color, brk_flags: Int = 3, justification_flags: Int = 3, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(modulate), VariantBox(brk_flags), VariantBox(justification_flags), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_string_outline(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, size: Int = 1, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string_outline", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(size), VariantBox(modulate), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
+	public func draw_string_outline(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, size: Int = 1, modulate: Color, justification_flags: Int = 3, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string_outline", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(size), VariantBox(modulate), VariantBox(justification_flags), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_multiline_string_outline(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, size: Int = 1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string_outline", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(size), VariantBox(modulate), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
+	public func draw_multiline_string_outline(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, size: Int = 1, modulate: Color, brk_flags: Int = 3, justification_flags: Int = 3, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string_outline", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(size), VariantBox(modulate), VariantBox(brk_flags), VariantBox(justification_flags), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
 	@discardableResult
 	public func get_char_size(char: Int, font_size: Int) -> Vector2 {
@@ -39924,12 +39924,12 @@ public class GLTFAccessor: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_byte_offset", args: [VariantBox(byte_offset)])
 	}
 	@discardableResult
-	public func get_component_type() -> GLTFAccessor.GLTFComponentType {
+	public func get_component_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_component_type", args: [])
-		return __ret.asEnum(GLTFAccessor.GLTFComponentType.self)
+		return __ret.asInt()
 	}
-	public func set_component_type(component_type: GLTFAccessor.GLTFComponentType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_component_type", args: [VariantBox(component_type.rawValue)])
+	public func set_component_type(component_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_component_type", args: [VariantBox(component_type)])
 	}
 	@discardableResult
 	public func get_normalized() -> Bool {
@@ -39948,12 +39948,12 @@ public class GLTFAccessor: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_count", args: [VariantBox(count)])
 	}
 	@discardableResult
-	public func get_accessor_type() -> GLTFAccessor.GLTFAccessorType {
+	public func get_accessor_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_accessor_type", args: [])
-		return __ret.asEnum(GLTFAccessor.GLTFAccessorType.self)
+		return __ret.asInt()
 	}
-	public func set_accessor_type(accessor_type: GLTFAccessor.GLTFAccessorType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_accessor_type", args: [VariantBox(accessor_type.rawValue)])
+	public func set_accessor_type(accessor_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_accessor_type", args: [VariantBox(accessor_type)])
 	}
 	@discardableResult
 	public func get_type() -> Int {
@@ -40004,12 +40004,12 @@ public class GLTFAccessor: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_sparse_indices_byte_offset", args: [VariantBox(sparse_indices_byte_offset)])
 	}
 	@discardableResult
-	public func get_sparse_indices_component_type() -> GLTFAccessor.GLTFComponentType {
+	public func get_sparse_indices_component_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_sparse_indices_component_type", args: [])
-		return __ret.asEnum(GLTFAccessor.GLTFComponentType.self)
+		return __ret.asInt()
 	}
-	public func set_sparse_indices_component_type(sparse_indices_component_type: GLTFAccessor.GLTFComponentType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_sparse_indices_component_type", args: [VariantBox(sparse_indices_component_type.rawValue)])
+	public func set_sparse_indices_component_type(sparse_indices_component_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_sparse_indices_component_type", args: [VariantBox(sparse_indices_component_type)])
 	}
 	@discardableResult
 	public func get_sparse_values_buffer_view() -> Int {
@@ -40768,9 +40768,9 @@ public class GLTFMesh: Resource {
 		get { Host.shared.getProperty(object: ptr, name: "original_name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "original_name", value: VariantBox(newValue)) }
 	}
-	public var mesh: GodotObject {
+	public var mesh: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "mesh").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "mesh", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "mesh", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var blend_weights: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "blend_weights") }
@@ -41221,9 +41221,9 @@ public class GLTFPhysicsShape: Resource {
 		get { Host.shared.getProperty(object: ptr, name: "mesh_index").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "mesh_index", value: VariantBox(newValue)) }
 	}
-	public var importer_mesh: ImporterMesh {
+	public var importer_mesh: ImporterMesh? {
 		get { Host.shared.getProperty(object: ptr, name: "importer_mesh").asObject(ImporterMesh.self) }
-		set { Host.shared.setProperty(object: ptr, name: "importer_mesh", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "importer_mesh", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -41426,9 +41426,9 @@ public class GLTFSkin: Resource {
 		get { Host.shared.getProperty(object: ptr, name: "joint_i_to_name") }
 		set { Host.shared.setProperty(object: ptr, name: "joint_i_to_name", value: VariantBox(newValue)) }
 	}
-	public var godot_skin: Skin {
+	public var godot_skin: Skin? {
 		get { Host.shared.getProperty(object: ptr, name: "godot_skin").asObject(Skin.self) }
-		set { Host.shared.setProperty(object: ptr, name: "godot_skin", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "godot_skin", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -41481,9 +41481,9 @@ public class GLTFSpecGloss: Resource {
 	public func set_spec_gloss_img(spec_gloss_img: Image) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_spec_gloss_img", args: [VariantBox(spec_gloss_img)])
 	}
-	public var diffuse_img: GodotObject {
+	public var diffuse_img: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "diffuse_img").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "diffuse_img", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "diffuse_img", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var diffuse_factor: Color {
 		get { Host.shared.getProperty(object: ptr, name: "diffuse_factor").asColor() }
@@ -41497,9 +41497,9 @@ public class GLTFSpecGloss: Resource {
 		get { Host.shared.getProperty(object: ptr, name: "specular_factor").asColor() }
 		set { Host.shared.setProperty(object: ptr, name: "specular_factor", value: VariantBox(newValue)) }
 	}
-	public var spec_gloss_img: GodotObject {
+	public var spec_gloss_img: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "spec_gloss_img").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "spec_gloss_img", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "spec_gloss_img", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -42085,21 +42085,21 @@ public class Gradient: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_colors", args: [])
 		return __ret
 	}
-	public func set_interpolation_mode(interpolation_mode: Gradient.InterpolationMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_interpolation_mode", args: [VariantBox(interpolation_mode.rawValue)])
+	public func set_interpolation_mode(interpolation_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_interpolation_mode", args: [VariantBox(interpolation_mode)])
 	}
 	@discardableResult
-	public func get_interpolation_mode() -> Gradient.InterpolationMode {
+	public func get_interpolation_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_interpolation_mode", args: [])
-		return __ret.asEnum(Gradient.InterpolationMode.self)
+		return __ret.asInt()
 	}
-	public func set_interpolation_color_space(interpolation_color_space: Gradient.ColorSpace) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_interpolation_color_space", args: [VariantBox(interpolation_color_space.rawValue)])
+	public func set_interpolation_color_space(interpolation_color_space: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_interpolation_color_space", args: [VariantBox(interpolation_color_space)])
 	}
 	@discardableResult
-	public func get_interpolation_color_space() -> Gradient.ColorSpace {
+	public func get_interpolation_color_space() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_interpolation_color_space", args: [])
-		return __ret.asEnum(Gradient.ColorSpace.self)
+		return __ret.asInt()
 	}
 	public var Interpolation: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Interpolation") }
@@ -42395,13 +42395,13 @@ public class GridMap: Node3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_debug_octant_color", args: [])
 		return __ret.asColor()
 	}
-	public var mesh_library: MeshLibrary {
+	public var mesh_library: MeshLibrary? {
 		get { Host.shared.getProperty(object: ptr, name: "mesh_library").asObject(MeshLibrary.self) }
-		set { Host.shared.setProperty(object: ptr, name: "mesh_library", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "mesh_library", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var physics_material: PhysicsMaterial {
+	public var physics_material: PhysicsMaterial? {
 		get { Host.shared.getProperty(object: ptr, name: "physics_material").asObject(PhysicsMaterial.self) }
-		set { Host.shared.setProperty(object: ptr, name: "physics_material", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "physics_material", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Cell: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Cell") }
@@ -42608,11 +42608,11 @@ public class Image: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_mipmap_offset", args: [VariantBox(mipmap)])
 		return __ret.asInt()
 	}
-	public func resize_to_po2(square: Bool = false, interpolation: Image.Interpolation) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "resize_to_po2", args: [VariantBox(square), VariantBox(interpolation.rawValue)])
+	public func resize_to_po2(square: Bool = false, interpolation: Int = 1) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "resize_to_po2", args: [VariantBox(square), VariantBox(interpolation)])
 	}
-	public func resize(width: Int, height: Int, interpolation: Image.Interpolation) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "resize", args: [VariantBox(width), VariantBox(height), VariantBox(interpolation.rawValue)])
+	public func resize(width: Int, height: Int, interpolation: Int = 1) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "resize", args: [VariantBox(width), VariantBox(height), VariantBox(interpolation)])
 	}
 	public func shrink_x2() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "shrink_x2", args: [])
@@ -42718,9 +42718,9 @@ public class Image: Resource {
 		return __ret
 	}
 	@discardableResult
-	public func detect_alpha() -> Image.AlphaMode {
+	public func detect_alpha() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "detect_alpha", args: [])
-		return __ret.asEnum(Image.AlphaMode.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func is_invisible() -> Bool {
@@ -42733,13 +42733,13 @@ public class Image: Resource {
 		return __ret.asEnum(Image.UsedChannels.self)
 	}
 	@discardableResult
-	public func compress(mode: Image.CompressMode, source: Image.CompressSource = .generic, profile: Image.CompressProfile = .automatic) -> Error {
-		let __ret = Host.shared.callMethod(object: ptr, method: "compress", args: [VariantBox(mode.rawValue), VariantBox(source.rawValue), VariantBox(profile.rawValue)])
+	public func compress(mode: Int, source: Image.CompressSource = .generic, profile: Image.CompressProfile = .automatic) -> Error {
+		let __ret = Host.shared.callMethod(object: ptr, method: "compress", args: [VariantBox(mode), VariantBox(source.rawValue), VariantBox(profile.rawValue)])
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func compress_from_channels(mode: Image.CompressMode, channels: Image.UsedChannels, profile: Image.CompressProfile = .automatic) -> Error {
-		let __ret = Host.shared.callMethod(object: ptr, method: "compress_from_channels", args: [VariantBox(mode.rawValue), VariantBox(channels.rawValue), VariantBox(profile.rawValue)])
+	public func compress_from_channels(mode: Int, channels: Image.UsedChannels, profile: Image.CompressProfile = .automatic) -> Error {
+		let __ret = Host.shared.callMethod(object: ptr, method: "compress_from_channels", args: [VariantBox(mode), VariantBox(channels.rawValue), VariantBox(profile.rawValue)])
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
@@ -42921,8 +42921,8 @@ public class ImageFormatLoaderExtension: ImageFormatLoader {
 		return __ret
 	}
 	@discardableResult
-	public func _load_image(image: Image, fileaccess: FileAccess, flags: ImageFormatLoader.LoaderFlags, scale: Double) -> Error {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_load_image", args: [VariantBox(image), VariantBox(fileaccess), VariantBox(flags.rawValue), VariantBox(scale)])
+	public func _load_image(image: Image, fileaccess: FileAccess, flags: Int, scale: Double) -> Error {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_load_image", args: [VariantBox(image), VariantBox(fileaccess), VariantBox(flags), VariantBox(scale)])
 		return __ret.asEnum(Error.self)
 	}
 }
@@ -42962,8 +42962,8 @@ public class ImporterMesh: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_blend_shape_mode", args: [])
 		return __ret.asEnum(Mesh.BlendShapeMode.self)
 	}
-	public func add_surface(primitive: Mesh.PrimitiveType, arrays: VariantBox, blend_shapes: VariantBox, lods: VariantBox, material: Material, name: String, flags: Int = 0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_surface", args: [VariantBox(primitive.rawValue), VariantBox(arrays), VariantBox(blend_shapes), VariantBox(lods), VariantBox(material), VariantBox(name), VariantBox(flags)])
+	public func add_surface(primitive: Int, arrays: VariantBox, blend_shapes: VariantBox, lods: VariantBox, material: Material, name: String, flags: Int = 0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_surface", args: [VariantBox(primitive), VariantBox(arrays), VariantBox(blend_shapes), VariantBox(lods), VariantBox(material), VariantBox(name), VariantBox(flags)])
 	}
 	@discardableResult
 	public func get_surface_count() -> Int {
@@ -42971,9 +42971,9 @@ public class ImporterMesh: Resource {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func get_surface_primitive_type(surface_idx: Int) -> Mesh.PrimitiveType {
+	public func get_surface_primitive_type(surface_idx: Int) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_surface_primitive_type", args: [VariantBox(surface_idx)])
-		return __ret.asEnum(Mesh.PrimitiveType.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_surface_name(surface_idx: Int) -> String {
@@ -43140,21 +43140,21 @@ public class ImporterMeshInstance3D: Node3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_visibility_range_begin", args: [])
 		return __ret.asDouble()
 	}
-	public func set_visibility_range_fade_mode(mode: GeometryInstance3D.VisibilityRangeFadeMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_visibility_range_fade_mode", args: [VariantBox(mode.rawValue)])
+	public func set_visibility_range_fade_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_visibility_range_fade_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_visibility_range_fade_mode() -> GeometryInstance3D.VisibilityRangeFadeMode {
+	public func get_visibility_range_fade_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_visibility_range_fade_mode", args: [])
-		return __ret.asEnum(GeometryInstance3D.VisibilityRangeFadeMode.self)
+		return __ret.asInt()
 	}
-	public var mesh: ImporterMesh {
+	public var mesh: ImporterMesh? {
 		get { Host.shared.getProperty(object: ptr, name: "mesh").asObject(ImporterMesh.self) }
-		set { Host.shared.setProperty(object: ptr, name: "mesh", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "mesh", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var skin: Skin {
+	public var skin: Skin? {
 		get { Host.shared.getProperty(object: ptr, name: "skin").asObject(Skin.self) }
-		set { Host.shared.setProperty(object: ptr, name: "skin", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "skin", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var skeleton_path: String {
 		get { Host.shared.getProperty(object: ptr, name: "skeleton_path").asString() }
@@ -43598,9 +43598,9 @@ public class LabelSettings: Resource {
 		get { Host.shared.getProperty(object: ptr, name: "Font") }
 		set { Host.shared.setProperty(object: ptr, name: "Font", value: VariantBox(newValue)) }
 	}
-	public var font: Font {
+	public var font: Font? {
 		get { Host.shared.getProperty(object: ptr, name: "font").asObject(Font.self) }
-		set { Host.shared.setProperty(object: ptr, name: "font", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "font", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var font_size: Int {
 		get { Host.shared.getProperty(object: ptr, name: "font_size").asInt() }
@@ -43770,9 +43770,9 @@ public class LightmapGIData: Resource {
 		get { Host.shared.getProperty(object: ptr, name: "_uses_packed_directional").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "_uses_packed_directional", value: VariantBox(newValue)) }
 	}
-	public var light_texture: TextureLayered {
+	public var light_texture: TextureLayered? {
 		get { Host.shared.getProperty(object: ptr, name: "light_texture").asObject(TextureLayered.self) }
-		set { Host.shared.setProperty(object: ptr, name: "light_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "light_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var light_textures: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "light_textures") }
@@ -43871,9 +43871,9 @@ public class Material: Resource {
 		get { Host.shared.getProperty(object: ptr, name: "render_priority").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "render_priority", value: VariantBox(newValue)) }
 	}
-	public var next_pass: Material {
+	public var next_pass: Material? {
 		get { Host.shared.getProperty(object: ptr, name: "next_pass").asObject(Material.self) }
-		set { Host.shared.setProperty(object: ptr, name: "next_pass", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "next_pass", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -44183,13 +44183,13 @@ public class MethodTweener: Tweener {
 		return __ret.asObject(MethodTweener.self)
 	}
 	@discardableResult
-	public func set_trans(trans: Tween.TransitionType) -> MethodTweener? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_trans", args: [VariantBox(trans.rawValue)])
+	public func set_trans(trans: Int) -> MethodTweener? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_trans", args: [VariantBox(trans)])
 		return __ret.asObject(MethodTweener.self)
 	}
 	@discardableResult
-	public func set_ease(ease: Tween.EaseType) -> MethodTweener? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_ease", args: [VariantBox(ease.rawValue)])
+	public func set_ease(ease: Int) -> MethodTweener? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_ease", args: [VariantBox(ease)])
 		return __ret.asObject(MethodTweener.self)
 	}
 }
@@ -44397,13 +44397,13 @@ public class MultiMesh: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_using_custom_data", args: [])
 		return __ret.asBool()
 	}
-	public func set_transform_format(format: MultiMesh.TransformFormat) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_transform_format", args: [VariantBox(format.rawValue)])
+	public func set_transform_format(format: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_transform_format", args: [VariantBox(format)])
 	}
 	@discardableResult
-	public func get_transform_format() -> MultiMesh.TransformFormat {
+	public func get_transform_format() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_transform_format", args: [])
-		return __ret.asEnum(MultiMesh.TransformFormat.self)
+		return __ret.asInt()
 	}
 	public func set_instance_count(count: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_instance_count", args: [VariantBox(count)])
@@ -44421,13 +44421,13 @@ public class MultiMesh: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_visible_instance_count", args: [])
 		return __ret.asInt()
 	}
-	public func set_physics_interpolation_quality(quality: MultiMesh.PhysicsInterpolationQuality) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_physics_interpolation_quality", args: [VariantBox(quality.rawValue)])
+	public func set_physics_interpolation_quality(quality: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_physics_interpolation_quality", args: [VariantBox(quality)])
 	}
 	@discardableResult
-	public func get_physics_interpolation_quality() -> MultiMesh.PhysicsInterpolationQuality {
+	public func get_physics_interpolation_quality() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_physics_interpolation_quality", args: [])
-		return __ret.asEnum(MultiMesh.PhysicsInterpolationQuality.self)
+		return __ret.asInt()
 	}
 	public func set_instance_transform(instance: Int, transform: Transform3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_instance_transform", args: [VariantBox(instance), VariantBox(transform)])
@@ -44547,9 +44547,9 @@ public class MultiMesh: Resource {
 		get { Host.shared.getProperty(object: ptr, name: "visible_instance_count").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "visible_instance_count", value: VariantBox(newValue)) }
 	}
-	public var mesh: GodotObject {
+	public var mesh: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "mesh").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "mesh", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "mesh", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var buffer: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "buffer") }
@@ -44693,9 +44693,9 @@ public class MultiplayerPeer: PacketPeer {
 		let __ret = Host.shared.callMethod(object: ptr, method: "disconnect_peer", args: [VariantBox(peer), VariantBox(force)])
 	}
 	@discardableResult
-	public func get_connection_status() -> MultiplayerPeer.ConnectionStatus {
+	public func get_connection_status() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_connection_status", args: [])
-		return __ret.asEnum(MultiplayerPeer.ConnectionStatus.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_unique_id() -> Int {
@@ -44881,21 +44881,21 @@ public class NavigationMesh: Resource {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_sample_partition_type(sample_partition_type: NavigationMesh.SamplePartitionType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_sample_partition_type", args: [VariantBox(sample_partition_type.rawValue)])
+	public func set_sample_partition_type(sample_partition_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_sample_partition_type", args: [VariantBox(sample_partition_type)])
 	}
 	@discardableResult
-	public func get_sample_partition_type() -> NavigationMesh.SamplePartitionType {
+	public func get_sample_partition_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_sample_partition_type", args: [])
-		return __ret.asEnum(NavigationMesh.SamplePartitionType.self)
+		return __ret.asInt()
 	}
-	public func set_parsed_geometry_type(geometry_type: NavigationMesh.ParsedGeometryType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_parsed_geometry_type", args: [VariantBox(geometry_type.rawValue)])
+	public func set_parsed_geometry_type(geometry_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_parsed_geometry_type", args: [VariantBox(geometry_type)])
 	}
 	@discardableResult
-	public func get_parsed_geometry_type() -> NavigationMesh.ParsedGeometryType {
+	public func get_parsed_geometry_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_parsed_geometry_type", args: [])
-		return __ret.asEnum(NavigationMesh.ParsedGeometryType.self)
+		return __ret.asInt()
 	}
 	public func set_collision_mask(mask: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_collision_mask", args: [VariantBox(mask)])
@@ -44913,13 +44913,13 @@ public class NavigationMesh: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_collision_mask_value", args: [VariantBox(layer_number)])
 		return __ret.asBool()
 	}
-	public func set_source_geometry_mode(mask: NavigationMesh.SourceGeometryMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_source_geometry_mode", args: [VariantBox(mask.rawValue)])
+	public func set_source_geometry_mode(mask: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_source_geometry_mode", args: [VariantBox(mask)])
 	}
 	@discardableResult
-	public func get_source_geometry_mode() -> NavigationMesh.SourceGeometryMode {
+	public func get_source_geometry_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_source_geometry_mode", args: [])
-		return __ret.asEnum(NavigationMesh.SourceGeometryMode.self)
+		return __ret.asInt()
 	}
 	public func set_source_group_name(mask: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_source_group_name", args: [VariantBox(mask)])
@@ -45669,21 +45669,21 @@ public class NavigationPolygon: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_border_size", args: [])
 		return __ret.asDouble()
 	}
-	public func set_sample_partition_type(sample_partition_type: NavigationPolygon.SamplePartitionType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_sample_partition_type", args: [VariantBox(sample_partition_type.rawValue)])
+	public func set_sample_partition_type(sample_partition_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_sample_partition_type", args: [VariantBox(sample_partition_type)])
 	}
 	@discardableResult
-	public func get_sample_partition_type() -> NavigationPolygon.SamplePartitionType {
+	public func get_sample_partition_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_sample_partition_type", args: [])
-		return __ret.asEnum(NavigationPolygon.SamplePartitionType.self)
+		return __ret.asInt()
 	}
-	public func set_parsed_geometry_type(geometry_type: NavigationPolygon.ParsedGeometryType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_parsed_geometry_type", args: [VariantBox(geometry_type.rawValue)])
+	public func set_parsed_geometry_type(geometry_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_parsed_geometry_type", args: [VariantBox(geometry_type)])
 	}
 	@discardableResult
-	public func get_parsed_geometry_type() -> NavigationPolygon.ParsedGeometryType {
+	public func get_parsed_geometry_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_parsed_geometry_type", args: [])
-		return __ret.asEnum(NavigationPolygon.ParsedGeometryType.self)
+		return __ret.asInt()
 	}
 	public func set_parsed_collision_mask(mask: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_parsed_collision_mask", args: [VariantBox(mask)])
@@ -45701,13 +45701,13 @@ public class NavigationPolygon: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_parsed_collision_mask_value", args: [VariantBox(layer_number)])
 		return __ret.asBool()
 	}
-	public func set_source_geometry_mode(geometry_mode: NavigationPolygon.SourceGeometryMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_source_geometry_mode", args: [VariantBox(geometry_mode.rawValue)])
+	public func set_source_geometry_mode(geometry_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_source_geometry_mode", args: [VariantBox(geometry_mode)])
 	}
 	@discardableResult
-	public func get_source_geometry_mode() -> NavigationPolygon.SourceGeometryMode {
+	public func get_source_geometry_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_source_geometry_mode", args: [])
-		return __ret.asEnum(NavigationPolygon.SourceGeometryMode.self)
+		return __ret.asInt()
 	}
 	public func set_source_geometry_group_name(group_name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_source_geometry_group_name", args: [VariantBox(group_name)])
@@ -45914,9 +45914,9 @@ public class NavigationRegion3D: Node3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_bounds", args: [])
 		return __ret.asAABB()
 	}
-	public var navigation_mesh: NavigationMesh {
+	public var navigation_mesh: NavigationMesh? {
 		get { Host.shared.getProperty(object: ptr, name: "navigation_mesh").asObject(NavigationMesh.self) }
-		set { Host.shared.setProperty(object: ptr, name: "navigation_mesh", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "navigation_mesh", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var enabled: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "enabled").asBool() }
@@ -46230,13 +46230,13 @@ public class OccluderPolygon2D: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_closed", args: [])
 		return __ret.asBool()
 	}
-	public func set_cull_mode(cull_mode: OccluderPolygon2D.CullMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_cull_mode", args: [VariantBox(cull_mode.rawValue)])
+	public func set_cull_mode(cull_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_cull_mode", args: [VariantBox(cull_mode)])
 	}
 	@discardableResult
-	public func get_cull_mode() -> OccluderPolygon2D.CullMode {
+	public func get_cull_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_cull_mode", args: [])
-		return __ret.asEnum(OccluderPolygon2D.CullMode.self)
+		return __ret.asInt()
 	}
 	public func set_polygon(polygon: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_polygon", args: [VariantBox(polygon)])
@@ -46329,13 +46329,13 @@ public class OpenXRAction: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_localized_name", args: [])
 		return __ret.asString()
 	}
-	public func set_action_type(action_type: OpenXRAction.ActionType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_action_type", args: [VariantBox(action_type.rawValue)])
+	public func set_action_type(action_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_action_type", args: [VariantBox(action_type)])
 	}
 	@discardableResult
-	public func get_action_type() -> OpenXRAction.ActionType {
+	public func get_action_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_action_type", args: [])
-		return __ret.asEnum(OpenXRAction.ActionType.self)
+		return __ret.asInt()
 	}
 	public func set_toplevel_paths(toplevel_paths: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_toplevel_paths", args: [VariantBox(toplevel_paths)])
@@ -46724,9 +46724,9 @@ public class OpenXRCompositionLayer: Node3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "intersects_ray", args: [VariantBox(origin), VariantBox(direction)])
 		return __ret.asVector2()
 	}
-	public var layer_viewport: GodotObject {
+	public var layer_viewport: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "layer_viewport").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "layer_viewport", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "layer_viewport", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var use_android_surface: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "use_android_surface").asBool() }
@@ -46834,13 +46834,13 @@ public class OpenXRHand: Node3D {
 		case rotationOnly = 1
 		case max = 2
 	}
-	public func set_hand(hand: OpenXRHand.Hands) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_hand", args: [VariantBox(hand.rawValue)])
+	public func set_hand(hand: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_hand", args: [VariantBox(hand)])
 	}
 	@discardableResult
-	public func get_hand() -> OpenXRHand.Hands {
+	public func get_hand() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_hand", args: [])
-		return __ret.asEnum(OpenXRHand.Hands.self)
+		return __ret.asInt()
 	}
 	public func set_hand_skeleton(hand_skeleton: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_hand_skeleton", args: [VariantBox(hand_skeleton)])
@@ -46974,9 +46974,9 @@ public class OpenXRIPBinding: Resource {
 	public func remove_path(path: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "remove_path", args: [VariantBox(path)])
 	}
-	public var action: OpenXRAction {
+	public var action: OpenXRAction? {
 		get { Host.shared.getProperty(object: ptr, name: "action").asObject(OpenXRAction.self) }
-		set { Host.shared.setProperty(object: ptr, name: "action", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "action", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var binding_path: String {
 		get { Host.shared.getProperty(object: ptr, name: "binding_path").asString() }
@@ -47240,33 +47240,33 @@ public class OpenXRInterface: XRInterface {
 		return __ret.asEnum(OpenXRInterface.HandTrackedSource.self)
 	}
 	@discardableResult
-	public func get_hand_joint_flags(hand: OpenXRInterface.Hand, joint: OpenXRInterface.HandJoints) -> OpenXRInterface.HandJointFlags {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_hand_joint_flags", args: [VariantBox(hand.rawValue), VariantBox(joint.rawValue)])
-		return __ret.asEnum(OpenXRInterface.HandJointFlags.self)
+	public func get_hand_joint_flags(hand: OpenXRInterface.Hand, joint: Int) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_hand_joint_flags", args: [VariantBox(hand.rawValue), VariantBox(joint)])
+		return __ret.asInt()
 	}
 	@discardableResult
-	public func get_hand_joint_rotation(hand: OpenXRInterface.Hand, joint: OpenXRInterface.HandJoints) -> Quaternion {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_hand_joint_rotation", args: [VariantBox(hand.rawValue), VariantBox(joint.rawValue)])
+	public func get_hand_joint_rotation(hand: OpenXRInterface.Hand, joint: Int) -> Quaternion {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_hand_joint_rotation", args: [VariantBox(hand.rawValue), VariantBox(joint)])
 		return __ret.asQuaternion()
 	}
 	@discardableResult
-	public func get_hand_joint_position(hand: OpenXRInterface.Hand, joint: OpenXRInterface.HandJoints) -> Vector3 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_hand_joint_position", args: [VariantBox(hand.rawValue), VariantBox(joint.rawValue)])
+	public func get_hand_joint_position(hand: OpenXRInterface.Hand, joint: Int) -> Vector3 {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_hand_joint_position", args: [VariantBox(hand.rawValue), VariantBox(joint)])
 		return __ret.asVector3()
 	}
 	@discardableResult
-	public func get_hand_joint_radius(hand: OpenXRInterface.Hand, joint: OpenXRInterface.HandJoints) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_hand_joint_radius", args: [VariantBox(hand.rawValue), VariantBox(joint.rawValue)])
+	public func get_hand_joint_radius(hand: OpenXRInterface.Hand, joint: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_hand_joint_radius", args: [VariantBox(hand.rawValue), VariantBox(joint)])
 		return __ret.asDouble()
 	}
 	@discardableResult
-	public func get_hand_joint_linear_velocity(hand: OpenXRInterface.Hand, joint: OpenXRInterface.HandJoints) -> Vector3 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_hand_joint_linear_velocity", args: [VariantBox(hand.rawValue), VariantBox(joint.rawValue)])
+	public func get_hand_joint_linear_velocity(hand: OpenXRInterface.Hand, joint: Int) -> Vector3 {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_hand_joint_linear_velocity", args: [VariantBox(hand.rawValue), VariantBox(joint)])
 		return __ret.asVector3()
 	}
 	@discardableResult
-	public func get_hand_joint_angular_velocity(hand: OpenXRInterface.Hand, joint: OpenXRInterface.HandJoints) -> Vector3 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_hand_joint_angular_velocity", args: [VariantBox(hand.rawValue), VariantBox(joint.rawValue)])
+	public func get_hand_joint_angular_velocity(hand: OpenXRInterface.Hand, joint: Int) -> Vector3 {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_hand_joint_angular_velocity", args: [VariantBox(hand.rawValue), VariantBox(joint)])
 		return __ret.asVector3()
 	}
 	@discardableResult
@@ -48098,9 +48098,9 @@ public class PacketPeerStream: PacketPeer {
 		get { Host.shared.getProperty(object: ptr, name: "output_buffer_max_size").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "output_buffer_max_size", value: VariantBox(newValue)) }
 	}
-	public var stream_peer: StreamPeer {
+	public var stream_peer: StreamPeer? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_peer").asObject(StreamPeer.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_peer", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_peer", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -48291,9 +48291,9 @@ public class Path3D: Node3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_debug_custom_color", args: [])
 		return __ret.asColor()
 	}
-	public var curve: Curve3D {
+	public var curve: Curve3D? {
 		get { Host.shared.getProperty(object: ptr, name: "curve").asObject(Curve3D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Debug_Shape: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Debug Shape") }
@@ -48352,13 +48352,13 @@ public class PathFollow3D: Node3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_progress_ratio", args: [])
 		return __ret.asDouble()
 	}
-	public func set_rotation_mode(rotation_mode: PathFollow3D.RotationMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_rotation_mode", args: [VariantBox(rotation_mode.rawValue)])
+	public func set_rotation_mode(rotation_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_rotation_mode", args: [VariantBox(rotation_mode)])
 	}
 	@discardableResult
-	public func get_rotation_mode() -> PathFollow3D.RotationMode {
+	public func get_rotation_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_rotation_mode", args: [])
-		return __ret.asEnum(PathFollow3D.RotationMode.self)
+		return __ret.asInt()
 	}
 	public func set_cubic_interpolation(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_cubic_interpolation", args: [VariantBox(enabled)])
@@ -48393,8 +48393,8 @@ public class PathFollow3D: Node3D {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func correct_posture(transform: Transform3D, rotation_mode: PathFollow3D.RotationMode) -> Transform3D {
-		let __ret = Host.shared.callMethod(object: ptr, method: "correct_posture", args: [VariantBox(transform), VariantBox(rotation_mode.rawValue)])
+	public func correct_posture(transform: Transform3D, rotation_mode: Int) -> Transform3D {
+		let __ret = Host.shared.callMethod(object: ptr, method: "correct_posture", args: [VariantBox(transform), VariantBox(rotation_mode)])
 		return __ret.asTransform3D()
 	}
 	public var progress: Double {
@@ -48578,13 +48578,13 @@ public class PropertyTweener: Tweener {
 		return __ret.asObject(PropertyTweener.self)
 	}
 	@discardableResult
-	public func set_trans(trans: Tween.TransitionType) -> PropertyTweener? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_trans", args: [VariantBox(trans.rawValue)])
+	public func set_trans(trans: Int) -> PropertyTweener? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_trans", args: [VariantBox(trans)])
 		return __ret.asObject(PropertyTweener.self)
 	}
 	@discardableResult
-	public func set_ease(ease: Tween.EaseType) -> PropertyTweener? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_ease", args: [VariantBox(ease.rawValue)])
+	public func set_ease(ease: Int) -> PropertyTweener? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_ease", args: [VariantBox(ease)])
 		return __ret.asObject(PropertyTweener.self)
 	}
 	@discardableResult
@@ -49174,9 +49174,9 @@ public class RenderSceneBuffersRD: RenderSceneBuffers {
 		return __ret.asVector2i()
 	}
 	@discardableResult
-	public func get_scaling_3d_mode() -> RenderingServer.ViewportScaling3DMode {
+	public func get_scaling_3d_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_scaling_3d_mode", args: [])
-		return __ret.asEnum(RenderingServer.ViewportScaling3DMode.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_fsr_sharpness() -> Double {
@@ -49184,9 +49184,9 @@ public class RenderSceneBuffersRD: RenderSceneBuffers {
 		return __ret.asDouble()
 	}
 	@discardableResult
-	public func get_msaa_3d() -> RenderingServer.ViewportMSAA {
+	public func get_msaa_3d() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_msaa_3d", args: [])
-		return __ret.asEnum(RenderingServer.ViewportMSAA.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_texture_samples() -> RenderingDevice.TextureSamples {
@@ -49194,9 +49194,9 @@ public class RenderSceneBuffersRD: RenderSceneBuffers {
 		return __ret.asEnum(RenderingDevice.TextureSamples.self)
 	}
 	@discardableResult
-	public func get_screen_space_aa() -> RenderingServer.ViewportScreenSpaceAA {
+	public func get_screen_space_aa() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_screen_space_aa", args: [])
-		return __ret.asEnum(RenderingServer.ViewportScreenSpaceAA.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_use_taa() -> Bool {
@@ -49936,9 +49936,9 @@ public class ShapeCast3D: Node3D {
 		get { Host.shared.getProperty(object: ptr, name: "enabled").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "enabled", value: VariantBox(newValue)) }
 	}
-	public var shape: Shape3D {
+	public var shape: Shape3D? {
 		get { Host.shared.getProperty(object: ptr, name: "shape").asObject(Shape3D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "shape", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "shape", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var exclude_parent: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "exclude_parent").asBool() }
@@ -50804,9 +50804,9 @@ public class Sky: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_material", args: [])
 		return __ret.asObject(Material.self)
 	}
-	public var sky_material: GodotObject {
+	public var sky_material: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "sky_material").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "sky_material", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "sky_material", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var process_mode: Int {
 		get { Host.shared.getProperty(object: ptr, name: "process_mode").asInt() }
@@ -50879,9 +50879,9 @@ public class SpringArm3D: Node3D {
 		get { Host.shared.getProperty(object: ptr, name: "collision_mask").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "collision_mask", value: VariantBox(newValue)) }
 	}
-	public var shape: Shape3D {
+	public var shape: Shape3D? {
 		get { Host.shared.getProperty(object: ptr, name: "shape").asObject(Shape3D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "shape", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "shape", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var spring_length: Double {
 		get { Host.shared.getProperty(object: ptr, name: "spring_length").asDouble() }
@@ -51008,13 +51008,13 @@ public class SpriteFrames: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_animation_loop", args: [VariantBox(anim)])
 		return __ret.asBool()
 	}
-	public func set_animation_loop_mode(anim: String, loop_mode: SpriteFrames.LoopMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_animation_loop_mode", args: [VariantBox(anim), VariantBox(loop_mode.rawValue)])
+	public func set_animation_loop_mode(anim: String, loop_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_animation_loop_mode", args: [VariantBox(anim), VariantBox(loop_mode)])
 	}
 	@discardableResult
-	public func get_animation_loop_mode(anim: String) -> SpriteFrames.LoopMode {
+	public func get_animation_loop_mode(anim: String) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_animation_loop_mode", args: [VariantBox(anim)])
-		return __ret.asEnum(SpriteFrames.LoopMode.self)
+		return __ret.asInt()
 	}
 	public func add_frame(anim: String, texture: Texture2D, duration: Double = 1.0, at_position: Int = -1) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_frame", args: [VariantBox(anim), VariantBox(texture), VariantBox(duration), VariantBox(at_position)])
@@ -51380,13 +51380,13 @@ public class SubViewport: Viewport {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_view_count", args: [])
 		return __ret.asInt()
 	}
-	public func set_update_mode(mode: SubViewport.UpdateMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_update_mode", args: [VariantBox(mode.rawValue)])
+	public func set_update_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_update_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_update_mode() -> SubViewport.UpdateMode {
+	public func get_update_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_update_mode", args: [])
-		return __ret.asEnum(SubViewport.UpdateMode.self)
+		return __ret.asInt()
 	}
 	public func set_clear_mode(mode: SubViewport.ClearMode) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_clear_mode", args: [VariantBox(mode.rawValue)])
@@ -51622,13 +51622,13 @@ public class TextServerExtension: TextServer {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_font_get_face_count", args: [VariantBox(font_rid)])
 		return __ret.asInt()
 	}
-	public func _font_set_style(font_rid: VariantBox, style: TextServer.FontStyle) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_font_set_style", args: [VariantBox(font_rid), VariantBox(style.rawValue)])
+	public func _font_set_style(font_rid: VariantBox, style: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_font_set_style", args: [VariantBox(font_rid), VariantBox(style)])
 	}
 	@discardableResult
-	public func _font_get_style(font_rid: VariantBox) -> TextServer.FontStyle {
+	public func _font_get_style(font_rid: VariantBox) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_font_get_style", args: [VariantBox(font_rid)])
-		return __ret.asEnum(TextServer.FontStyle.self)
+		return __ret.asInt()
 	}
 	public func _font_set_name(font_rid: VariantBox, name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_font_set_name", args: [VariantBox(font_rid), VariantBox(name)])
@@ -51723,13 +51723,13 @@ public class TextServerExtension: TextServer {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_font_get_fixed_size", args: [VariantBox(font_rid)])
 		return __ret.asInt()
 	}
-	public func _font_set_fixed_size_scale_mode(font_rid: VariantBox, fixed_size_scale_mode: TextServer.FixedSizeScaleMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_font_set_fixed_size_scale_mode", args: [VariantBox(font_rid), VariantBox(fixed_size_scale_mode.rawValue)])
+	public func _font_set_fixed_size_scale_mode(font_rid: VariantBox, fixed_size_scale_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_font_set_fixed_size_scale_mode", args: [VariantBox(font_rid), VariantBox(fixed_size_scale_mode)])
 	}
 	@discardableResult
-	public func _font_get_fixed_size_scale_mode(font_rid: VariantBox) -> TextServer.FixedSizeScaleMode {
+	public func _font_get_fixed_size_scale_mode(font_rid: VariantBox) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_font_get_fixed_size_scale_mode", args: [VariantBox(font_rid)])
-		return __ret.asEnum(TextServer.FixedSizeScaleMode.self)
+		return __ret.asInt()
 	}
 	public func _font_set_allow_system_fallback(font_rid: VariantBox, allow_system_fallback: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_font_set_allow_system_fallback", args: [VariantBox(font_rid), VariantBox(allow_system_fallback)])
@@ -51821,12 +51821,12 @@ public class TextServerExtension: TextServer {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_font_get_embolden", args: [VariantBox(font_rid)])
 		return __ret.asDouble()
 	}
-	public func _font_set_spacing(font_rid: VariantBox, spacing: TextServer.SpacingType, value: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_font_set_spacing", args: [VariantBox(font_rid), VariantBox(spacing.rawValue), VariantBox(value)])
+	public func _font_set_spacing(font_rid: VariantBox, spacing: Int, value: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_font_set_spacing", args: [VariantBox(font_rid), VariantBox(spacing), VariantBox(value)])
 	}
 	@discardableResult
-	public func _font_get_spacing(font_rid: VariantBox, spacing: TextServer.SpacingType) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_font_get_spacing", args: [VariantBox(font_rid), VariantBox(spacing.rawValue)])
+	public func _font_get_spacing(font_rid: VariantBox, spacing: Int) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_font_get_spacing", args: [VariantBox(font_rid), VariantBox(spacing)])
 		return __ret.asInt()
 	}
 	public func _font_set_baseline_offset(font_rid: VariantBox, baseline_offset: Double) {
@@ -52217,12 +52217,12 @@ public class TextServerExtension: TextServer {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_get_preserve_control", args: [VariantBox(shaped)])
 		return __ret.asBool()
 	}
-	public func _shaped_text_set_spacing(shaped: VariantBox, spacing: TextServer.SpacingType, value: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_set_spacing", args: [VariantBox(shaped), VariantBox(spacing.rawValue), VariantBox(value)])
+	public func _shaped_text_set_spacing(shaped: VariantBox, spacing: Int, value: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_set_spacing", args: [VariantBox(shaped), VariantBox(spacing), VariantBox(value)])
 	}
 	@discardableResult
-	public func _shaped_text_get_spacing(shaped: VariantBox, spacing: TextServer.SpacingType) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_get_spacing", args: [VariantBox(shaped), VariantBox(spacing.rawValue)])
+	public func _shaped_text_get_spacing(shaped: VariantBox, spacing: Int) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_get_spacing", args: [VariantBox(shaped), VariantBox(spacing)])
 		return __ret.asInt()
 	}
 	@discardableResult
@@ -52326,8 +52326,8 @@ public class TextServerExtension: TextServer {
 		return __ret
 	}
 	@discardableResult
-	public func _shaped_text_fit_to_width(shaped: VariantBox, width: Double, justification_flags: TextServer.JustificationFlag) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_fit_to_width", args: [VariantBox(shaped), VariantBox(width), VariantBox(justification_flags.rawValue)])
+	public func _shaped_text_fit_to_width(shaped: VariantBox, width: Double, justification_flags: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_fit_to_width", args: [VariantBox(shaped), VariantBox(width), VariantBox(justification_flags)])
 		return __ret.asDouble()
 	}
 	@discardableResult
@@ -52376,18 +52376,18 @@ public class TextServerExtension: TextServer {
 		return __ret.asVector2i()
 	}
 	@discardableResult
-	public func _shaped_text_get_line_breaks_adv(shaped: VariantBox, width: VariantBox, start: Int, once: Bool, break_flags: TextServer.LineBreakFlag) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_get_line_breaks_adv", args: [VariantBox(shaped), VariantBox(width), VariantBox(start), VariantBox(once), VariantBox(break_flags.rawValue)])
+	public func _shaped_text_get_line_breaks_adv(shaped: VariantBox, width: VariantBox, start: Int, once: Bool, break_flags: Int) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_get_line_breaks_adv", args: [VariantBox(shaped), VariantBox(width), VariantBox(start), VariantBox(once), VariantBox(break_flags)])
 		return __ret
 	}
 	@discardableResult
-	public func _shaped_text_get_line_breaks(shaped: VariantBox, width: Double, start: Int, break_flags: TextServer.LineBreakFlag) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_get_line_breaks", args: [VariantBox(shaped), VariantBox(width), VariantBox(start), VariantBox(break_flags.rawValue)])
+	public func _shaped_text_get_line_breaks(shaped: VariantBox, width: Double, start: Int, break_flags: Int) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_get_line_breaks", args: [VariantBox(shaped), VariantBox(width), VariantBox(start), VariantBox(break_flags)])
 		return __ret
 	}
 	@discardableResult
-	public func _shaped_text_get_word_breaks(shaped: VariantBox, grapheme_flags: TextServer.GraphemeFlag, skip_grapheme_flags: TextServer.GraphemeFlag) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_get_word_breaks", args: [VariantBox(shaped), VariantBox(grapheme_flags.rawValue), VariantBox(skip_grapheme_flags.rawValue)])
+	public func _shaped_text_get_word_breaks(shaped: VariantBox, grapheme_flags: Int, skip_grapheme_flags: Int) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_get_word_breaks", args: [VariantBox(shaped), VariantBox(grapheme_flags), VariantBox(skip_grapheme_flags)])
 		return __ret
 	}
 	@discardableResult
@@ -52410,8 +52410,8 @@ public class TextServerExtension: TextServer {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_get_ellipsis_glyphs", args: [VariantBox(shaped)])
 		return __ret.asInt()
 	}
-	public func _shaped_text_overrun_trim_to_width(shaped: VariantBox, width: Double, trim_flags: TextServer.TextOverrunFlag) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_overrun_trim_to_width", args: [VariantBox(shaped), VariantBox(width), VariantBox(trim_flags.rawValue)])
+	public func _shaped_text_overrun_trim_to_width(shaped: VariantBox, width: Double, trim_flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_overrun_trim_to_width", args: [VariantBox(shaped), VariantBox(width), VariantBox(trim_flags)])
 	}
 	@discardableResult
 	public func _shaped_text_get_objects(shaped: VariantBox) -> VariantBox {
@@ -52593,8 +52593,8 @@ public class TextServerExtension: TextServer {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func _parse_structured_text(parser_type: TextServer.StructuredTextParser, args: VariantBox, text: String) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_parse_structured_text", args: [VariantBox(parser_type.rawValue), VariantBox(args), VariantBox(text)])
+	public func _parse_structured_text(parser_type: Int, args: VariantBox, text: String) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_parse_structured_text", args: [VariantBox(parser_type), VariantBox(args), VariantBox(text)])
 		return __ret
 	}
 	public func _cleanup() {
@@ -52946,9 +52946,9 @@ public class Theme: Resource {
 		get { Host.shared.getProperty(object: ptr, name: "default_base_scale").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "default_base_scale", value: VariantBox(newValue)) }
 	}
-	public var default_font: Font {
+	public var default_font: Font? {
 		get { Host.shared.getProperty(object: ptr, name: "default_font").asObject(Font.self) }
-		set { Host.shared.setProperty(object: ptr, name: "default_font", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "default_font", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var default_font_size: Int {
 		get { Host.shared.getProperty(object: ptr, name: "default_font_size").asInt() }
@@ -54462,9 +54462,9 @@ public class WebRTCDataChannel: PacketPeer {
 		return __ret.asEnum(WebRTCDataChannel.WriteMode.self)
 	}
 	@discardableResult
-	public func get_ready_state() -> WebRTCDataChannel.ChannelState {
+	public func get_ready_state() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_ready_state", args: [])
-		return __ret.asEnum(WebRTCDataChannel.ChannelState.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_label() -> String {
@@ -54522,9 +54522,9 @@ public class WebRTCPeerConnectionExtension: WebRTCPeerConnection {
 		super.init(ptr: raw)
 	}
 	@discardableResult
-	public func _get_connection_state() -> WebRTCPeerConnection.ConnectionState {
+	public func _get_connection_state() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_connection_state", args: [])
-		return __ret.asEnum(WebRTCPeerConnection.ConnectionState.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func _get_gathering_state() -> WebRTCPeerConnection.GatheringState {
@@ -55045,12 +55045,12 @@ public class Window: Viewport {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_mode", args: [])
 		return __ret.asEnum(Window.Mode.self)
 	}
-	public func set_flag(flag: Window.Flags, enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_flag", args: [VariantBox(flag.rawValue), VariantBox(enabled)])
+	public func set_flag(flag: Int, enabled: Bool) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_flag", args: [VariantBox(flag), VariantBox(enabled)])
 	}
 	@discardableResult
-	public func get_flag(flag: Window.Flags) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_flag", args: [VariantBox(flag.rawValue)])
+	public func get_flag(flag: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_flag", args: [VariantBox(flag)])
 		return __ret.asBool()
 	}
 	public func set_hdr_output_requested(requested: Bool) {
@@ -55148,8 +55148,8 @@ public class Window: Viewport {
 	public func start_drag() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "start_drag", args: [])
 	}
-	public func start_resize(edge: DisplayServer.WindowResizeEdge) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "start_resize", args: [VariantBox(edge.rawValue)])
+	public func start_resize(edge: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "start_resize", args: [VariantBox(edge)])
 	}
 	public func set_ime_active(active: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_ime_active", args: [VariantBox(active)])
@@ -55711,9 +55711,9 @@ public class Window: Viewport {
 		get { Host.shared.getProperty(object: ptr, name: "Theme") }
 		set { Host.shared.setProperty(object: ptr, name: "Theme", value: VariantBox(newValue)) }
 	}
-	public var theme: Theme {
+	public var theme: Theme? {
 		get { Host.shared.getProperty(object: ptr, name: "theme").asObject(Theme.self) }
-		set { Host.shared.setProperty(object: ptr, name: "theme", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "theme", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var theme_type_variation: String {
 		get { Host.shared.getProperty(object: ptr, name: "theme_type_variation").asString() }
@@ -55810,9 +55810,9 @@ public class World2D: Resource {
 		get { Host.shared.getProperty(object: ptr, name: "space") }
 		set { Host.shared.setProperty(object: ptr, name: "space", value: VariantBox(newValue)) }
 	}
-	public var direct_space_state: PhysicsDirectSpaceState2D {
+	public var direct_space_state: PhysicsDirectSpaceState2D? {
 		get { Host.shared.getProperty(object: ptr, name: "direct_space_state").asObject(PhysicsDirectSpaceState2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "direct_space_state", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "direct_space_state", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -55869,17 +55869,17 @@ public class World3D: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_direct_space_state", args: [])
 		return __ret.asObject(PhysicsDirectSpaceState3D.self)
 	}
-	public var environment: Environment {
+	public var environment: Environment? {
 		get { Host.shared.getProperty(object: ptr, name: "environment").asObject(Environment.self) }
-		set { Host.shared.setProperty(object: ptr, name: "environment", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "environment", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var fallback_environment: Environment {
+	public var fallback_environment: Environment? {
 		get { Host.shared.getProperty(object: ptr, name: "fallback_environment").asObject(Environment.self) }
-		set { Host.shared.setProperty(object: ptr, name: "fallback_environment", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "fallback_environment", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var camera_attributes: GodotObject {
+	public var camera_attributes: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "camera_attributes").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "camera_attributes", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "camera_attributes", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var space: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "space") }
@@ -55893,9 +55893,9 @@ public class World3D: Resource {
 		get { Host.shared.getProperty(object: ptr, name: "scenario") }
 		set { Host.shared.setProperty(object: ptr, name: "scenario", value: VariantBox(newValue)) }
 	}
-	public var direct_space_state: PhysicsDirectSpaceState3D {
+	public var direct_space_state: PhysicsDirectSpaceState3D? {
 		get { Host.shared.getProperty(object: ptr, name: "direct_space_state").asObject(PhysicsDirectSpaceState3D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "direct_space_state", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "direct_space_state", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -55975,12 +55975,12 @@ public class XRFaceTracker: XRTracker {
 		super.init(ptr: raw)
 	}
 	@discardableResult
-	public func get_blend_shape(blend_shape: XRFaceTracker.BlendShapeEntry) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_blend_shape", args: [VariantBox(blend_shape.rawValue)])
+	public func get_blend_shape(blend_shape: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_blend_shape", args: [VariantBox(blend_shape)])
 		return __ret.asDouble()
 	}
-	public func set_blend_shape(blend_shape: XRFaceTracker.BlendShapeEntry, weight: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_blend_shape", args: [VariantBox(blend_shape.rawValue), VariantBox(weight)])
+	public func set_blend_shape(blend_shape: Int, weight: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_blend_shape", args: [VariantBox(blend_shape), VariantBox(weight)])
 	}
 	@discardableResult
 	public func get_blend_shapes() -> VariantBox {
@@ -56057,18 +56057,18 @@ public class XRInterfaceExtension: XRInterface {
 		return __ret
 	}
 	@discardableResult
-	public func _supports_play_area_mode(mode: XRInterface.PlayAreaMode) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_supports_play_area_mode", args: [VariantBox(mode.rawValue)])
+	public func _supports_play_area_mode(mode: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_supports_play_area_mode", args: [VariantBox(mode)])
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func _get_play_area_mode() -> XRInterface.PlayAreaMode {
+	public func _get_play_area_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_play_area_mode", args: [])
-		return __ret.asEnum(XRInterface.PlayAreaMode.self)
+		return __ret.asInt()
 	}
 	@discardableResult
-	public func _set_play_area_mode(mode: XRInterface.PlayAreaMode) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_set_play_area_mode", args: [VariantBox(mode.rawValue)])
+	public func _set_play_area_mode(mode: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_set_play_area_mode", args: [VariantBox(mode)])
 		return __ret.asBool()
 	}
 	@discardableResult
@@ -56117,9 +56117,9 @@ public class XRInterfaceExtension: XRInterface {
 		return __ret
 	}
 	@discardableResult
-	public func _get_vrs_texture_format() -> XRInterface.VRSTextureFormat {
+	public func _get_vrs_texture_format() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_vrs_texture_format", args: [])
-		return __ret.asEnum(XRInterface.VRSTextureFormat.self)
+		return __ret.asInt()
 	}
 	public func _process() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_process", args: [])
@@ -56149,9 +56149,9 @@ public class XRInterfaceExtension: XRInterface {
 		return __ret
 	}
 	@discardableResult
-	public func _get_tracking_status() -> XRInterface.TrackingStatus {
+	public func _get_tracking_status() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_tracking_status", args: [])
-		return __ret.asEnum(XRInterface.TrackingStatus.self)
+		return __ret.asInt()
 	}
 	public func _trigger_haptic_pulse(action_name: String, tracker_name: String, frequency: Double, amplitude: Double, duration_sec: Double, delay_sec: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_trigger_haptic_pulse", args: [VariantBox(action_name), VariantBox(tracker_name), VariantBox(frequency), VariantBox(amplitude), VariantBox(duration_sec), VariantBox(delay_sec)])
@@ -56333,8 +56333,8 @@ public class XRPositionalTracker: XRTracker {
 	public func invalidate_pose(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "invalidate_pose", args: [VariantBox(name)])
 	}
-	public func set_pose(name: String, transform: Transform3D, linear_velocity: Vector3, angular_velocity: Vector3, tracking_confidence: XRPose.TrackingConfidence) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_pose", args: [VariantBox(name), VariantBox(transform), VariantBox(linear_velocity), VariantBox(angular_velocity), VariantBox(tracking_confidence.rawValue)])
+	public func set_pose(name: String, transform: Transform3D, linear_velocity: Vector3, angular_velocity: Vector3, tracking_confidence: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_pose", args: [VariantBox(name), VariantBox(transform), VariantBox(linear_velocity), VariantBox(angular_velocity), VariantBox(tracking_confidence)])
 	}
 	public func get_input(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_input", args: [VariantBox(name)])
@@ -56597,9 +56597,9 @@ public class AnimatedSprite2D: Node2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_playing_speed", args: [])
 		return __ret.asDouble()
 	}
-	public var sprite_frames: SpriteFrames {
+	public var sprite_frames: SpriteFrames? {
 		get { Host.shared.getProperty(object: ptr, name: "sprite_frames").asObject(SpriteFrames.self) }
-		set { Host.shared.setProperty(object: ptr, name: "sprite_frames", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "sprite_frames", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var animation: String {
 		get { Host.shared.getProperty(object: ptr, name: "animation").asString() }
@@ -57213,8 +57213,8 @@ public class ArrayMesh: Mesh {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_blend_shape_mode", args: [])
 		return __ret.asEnum(Mesh.BlendShapeMode.self)
 	}
-	public func add_surface_from_arrays(primitive: Mesh.PrimitiveType, arrays: VariantBox, blend_shapes: VariantBox, lods: VariantBox, flags: Mesh.ArrayFormat) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_surface_from_arrays", args: [VariantBox(primitive.rawValue), VariantBox(arrays), VariantBox(blend_shapes), VariantBox(lods), VariantBox(flags.rawValue)])
+	public func add_surface_from_arrays(primitive: Int, arrays: VariantBox, blend_shapes: VariantBox, lods: VariantBox, flags: Mesh.ArrayFormat) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_surface_from_arrays", args: [VariantBox(primitive), VariantBox(arrays), VariantBox(blend_shapes), VariantBox(lods), VariantBox(flags.rawValue)])
 	}
 	public func clear_surfaces() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "clear_surfaces", args: [])
@@ -57247,9 +57247,9 @@ public class ArrayMesh: Mesh {
 		return __ret.asEnum(Mesh.ArrayFormat.self)
 	}
 	@discardableResult
-	public func surface_get_primitive_type(surf_idx: Int) -> Mesh.PrimitiveType {
+	public func surface_get_primitive_type(surf_idx: Int) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "surface_get_primitive_type", args: [VariantBox(surf_idx)])
-		return __ret.asEnum(Mesh.PrimitiveType.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func surface_find_by_name(name: String) -> Int {
@@ -57320,9 +57320,9 @@ public class ArrayMesh: Mesh {
 		get { Host.shared.getProperty(object: ptr, name: "custom_aabb").asAABB() }
 		set { Host.shared.setProperty(object: ptr, name: "custom_aabb", value: VariantBox(newValue)) }
 	}
-	public var shadow_mesh: ArrayMesh {
+	public var shadow_mesh: ArrayMesh? {
 		get { Host.shared.getProperty(object: ptr, name: "shadow_mesh").asObject(ArrayMesh.self) }
-		set { Host.shared.setProperty(object: ptr, name: "shadow_mesh", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "shadow_mesh", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -58045,13 +58045,13 @@ public class AudioEffectFilter: AudioEffect {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_gain", args: [])
 		return __ret.asDouble()
 	}
-	public func set_db(amount: AudioEffectFilter.FilterDB) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_db", args: [VariantBox(amount.rawValue)])
+	public func set_db(amount: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_db", args: [VariantBox(amount)])
 	}
 	@discardableResult
-	public func get_db() -> AudioEffectFilter.FilterDB {
+	public func get_db() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_db", args: [])
-		return __ret.asEnum(AudioEffectFilter.FilterDB.self)
+		return __ret.asInt()
 	}
 	public var cutoff_hz: Double {
 		get { Host.shared.getProperty(object: ptr, name: "cutoff_hz").asDouble() }
@@ -58296,13 +58296,13 @@ public class AudioEffectPitchShift: AudioEffect {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_oversampling", args: [])
 		return __ret.asInt()
 	}
-	public func set_fft_size(size: AudioEffectPitchShift.FFTSize) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_fft_size", args: [VariantBox(size.rawValue)])
+	public func set_fft_size(size: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_fft_size", args: [VariantBox(size)])
 	}
 	@discardableResult
-	public func get_fft_size() -> AudioEffectPitchShift.FFTSize {
+	public func get_fft_size() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_fft_size", args: [])
-		return __ret.asEnum(AudioEffectPitchShift.FFTSize.self)
+		return __ret.asInt()
 	}
 	public var pitch_scale: Double {
 		get { Host.shared.getProperty(object: ptr, name: "pitch_scale").asDouble() }
@@ -58486,13 +58486,13 @@ public class AudioEffectSpectrumAnalyzer: AudioEffect {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_buffer_length", args: [])
 		return __ret.asDouble()
 	}
-	public func set_fft_size(size: AudioEffectSpectrumAnalyzer.FFTSize) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_fft_size", args: [VariantBox(size.rawValue)])
+	public func set_fft_size(size: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_fft_size", args: [VariantBox(size)])
 	}
 	@discardableResult
-	public func get_fft_size() -> AudioEffectSpectrumAnalyzer.FFTSize {
+	public func get_fft_size() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_fft_size", args: [])
-		return __ret.asEnum(AudioEffectSpectrumAnalyzer.FFTSize.self)
+		return __ret.asInt()
 	}
 	public var buffer_length: Double {
 		get { Host.shared.getProperty(object: ptr, name: "buffer_length").asDouble() }
@@ -58590,13 +58590,13 @@ public class AudioStreamGenerator: AudioStream {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_mix_rate", args: [])
 		return __ret.asDouble()
 	}
-	public func set_mix_rate_mode(mode: AudioStreamGenerator.AudioStreamGeneratorMixRate) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_mix_rate_mode", args: [VariantBox(mode.rawValue)])
+	public func set_mix_rate_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_mix_rate_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_mix_rate_mode() -> AudioStreamGenerator.AudioStreamGeneratorMixRate {
+	public func get_mix_rate_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_mix_rate_mode", args: [])
-		return __ret.asEnum(AudioStreamGenerator.AudioStreamGeneratorMixRate.self)
+		return __ret.asInt()
 	}
 	public func set_buffer_length(seconds: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_buffer_length", args: [VariantBox(seconds)])
@@ -58711,13 +58711,13 @@ public class AudioStreamInteractive: AudioStream {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_clip_stream", args: [VariantBox(clip_index)])
 		return __ret.asObject(AudioStream.self)
 	}
-	public func set_clip_auto_advance(clip_index: Int, mode: AudioStreamInteractive.AutoAdvanceMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_clip_auto_advance", args: [VariantBox(clip_index), VariantBox(mode.rawValue)])
+	public func set_clip_auto_advance(clip_index: Int, mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_clip_auto_advance", args: [VariantBox(clip_index), VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_clip_auto_advance(clip_index: Int) -> AudioStreamInteractive.AutoAdvanceMode {
+	public func get_clip_auto_advance(clip_index: Int) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_clip_auto_advance", args: [VariantBox(clip_index)])
-		return __ret.asEnum(AudioStreamInteractive.AutoAdvanceMode.self)
+		return __ret.asInt()
 	}
 	public func set_clip_auto_advance_next_clip(clip_index: Int, auto_advance_next_clip: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_clip_auto_advance_next_clip", args: [VariantBox(clip_index), VariantBox(auto_advance_next_clip)])
@@ -58727,8 +58727,8 @@ public class AudioStreamInteractive: AudioStream {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_clip_auto_advance_next_clip", args: [VariantBox(clip_index)])
 		return __ret.asInt()
 	}
-	public func add_transition(from_clip: Int, to_clip: Int, from_time: AudioStreamInteractive.TransitionFromTime, to_time: AudioStreamInteractive.TransitionToTime, fade_mode: AudioStreamInteractive.FadeMode, fade_beats: Double, use_filler_clip: Bool = false, filler_clip: Int = -1, hold_previous: Bool = false) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_transition", args: [VariantBox(from_clip), VariantBox(to_clip), VariantBox(from_time.rawValue), VariantBox(to_time.rawValue), VariantBox(fade_mode.rawValue), VariantBox(fade_beats), VariantBox(use_filler_clip), VariantBox(filler_clip), VariantBox(hold_previous)])
+	public func add_transition(from_clip: Int, to_clip: Int, from_time: AudioStreamInteractive.TransitionFromTime, to_time: AudioStreamInteractive.TransitionToTime, fade_mode: Int, fade_beats: Double, use_filler_clip: Bool = false, filler_clip: Int = -1, hold_previous: Bool = false) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_transition", args: [VariantBox(from_clip), VariantBox(to_clip), VariantBox(from_time.rawValue), VariantBox(to_time.rawValue), VariantBox(fade_mode), VariantBox(fade_beats), VariantBox(use_filler_clip), VariantBox(filler_clip), VariantBox(hold_previous)])
 	}
 	@discardableResult
 	public func has_transition(from_clip: Int, to_clip: Int) -> Bool {
@@ -58754,9 +58754,9 @@ public class AudioStreamInteractive: AudioStream {
 		return __ret.asEnum(AudioStreamInteractive.TransitionToTime.self)
 	}
 	@discardableResult
-	public func get_transition_fade_mode(from_clip: Int, to_clip: Int) -> AudioStreamInteractive.FadeMode {
+	public func get_transition_fade_mode(from_clip: Int, to_clip: Int) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_transition_fade_mode", args: [VariantBox(from_clip), VariantBox(to_clip)])
-		return __ret.asEnum(AudioStreamInteractive.FadeMode.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_transition_fade_beats(from_clip: Int, to_clip: Int) -> Double {
@@ -58794,9 +58794,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_0/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_0/name", value: VariantBox(newValue)) }
 	}
-	public var clip_0_stream: AudioStream {
+	public var clip_0_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_0/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_0/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_0/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_0_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_0/auto_advance").asInt() }
@@ -58810,9 +58810,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_1/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_1/name", value: VariantBox(newValue)) }
 	}
-	public var clip_1_stream: AudioStream {
+	public var clip_1_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_1/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_1/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_1/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_1_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_1/auto_advance").asInt() }
@@ -58826,9 +58826,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_2/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_2/name", value: VariantBox(newValue)) }
 	}
-	public var clip_2_stream: AudioStream {
+	public var clip_2_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_2/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_2/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_2/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_2_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_2/auto_advance").asInt() }
@@ -58842,9 +58842,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_3/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_3/name", value: VariantBox(newValue)) }
 	}
-	public var clip_3_stream: AudioStream {
+	public var clip_3_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_3/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_3/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_3/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_3_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_3/auto_advance").asInt() }
@@ -58858,9 +58858,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_4/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_4/name", value: VariantBox(newValue)) }
 	}
-	public var clip_4_stream: AudioStream {
+	public var clip_4_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_4/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_4/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_4/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_4_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_4/auto_advance").asInt() }
@@ -58874,9 +58874,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_5/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_5/name", value: VariantBox(newValue)) }
 	}
-	public var clip_5_stream: AudioStream {
+	public var clip_5_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_5/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_5/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_5/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_5_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_5/auto_advance").asInt() }
@@ -58890,9 +58890,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_6/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_6/name", value: VariantBox(newValue)) }
 	}
-	public var clip_6_stream: AudioStream {
+	public var clip_6_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_6/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_6/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_6/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_6_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_6/auto_advance").asInt() }
@@ -58906,9 +58906,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_7/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_7/name", value: VariantBox(newValue)) }
 	}
-	public var clip_7_stream: AudioStream {
+	public var clip_7_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_7/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_7/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_7/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_7_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_7/auto_advance").asInt() }
@@ -58922,9 +58922,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_8/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_8/name", value: VariantBox(newValue)) }
 	}
-	public var clip_8_stream: AudioStream {
+	public var clip_8_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_8/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_8/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_8/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_8_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_8/auto_advance").asInt() }
@@ -58938,9 +58938,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_9/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_9/name", value: VariantBox(newValue)) }
 	}
-	public var clip_9_stream: AudioStream {
+	public var clip_9_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_9/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_9/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_9/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_9_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_9/auto_advance").asInt() }
@@ -58954,9 +58954,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_10/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_10/name", value: VariantBox(newValue)) }
 	}
-	public var clip_10_stream: AudioStream {
+	public var clip_10_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_10/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_10/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_10/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_10_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_10/auto_advance").asInt() }
@@ -58970,9 +58970,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_11/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_11/name", value: VariantBox(newValue)) }
 	}
-	public var clip_11_stream: AudioStream {
+	public var clip_11_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_11/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_11/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_11/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_11_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_11/auto_advance").asInt() }
@@ -58986,9 +58986,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_12/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_12/name", value: VariantBox(newValue)) }
 	}
-	public var clip_12_stream: AudioStream {
+	public var clip_12_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_12/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_12/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_12/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_12_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_12/auto_advance").asInt() }
@@ -59002,9 +59002,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_13/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_13/name", value: VariantBox(newValue)) }
 	}
-	public var clip_13_stream: AudioStream {
+	public var clip_13_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_13/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_13/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_13/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_13_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_13/auto_advance").asInt() }
@@ -59018,9 +59018,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_14/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_14/name", value: VariantBox(newValue)) }
 	}
-	public var clip_14_stream: AudioStream {
+	public var clip_14_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_14/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_14/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_14/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_14_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_14/auto_advance").asInt() }
@@ -59034,9 +59034,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_15/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_15/name", value: VariantBox(newValue)) }
 	}
-	public var clip_15_stream: AudioStream {
+	public var clip_15_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_15/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_15/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_15/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_15_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_15/auto_advance").asInt() }
@@ -59050,9 +59050,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_16/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_16/name", value: VariantBox(newValue)) }
 	}
-	public var clip_16_stream: AudioStream {
+	public var clip_16_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_16/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_16/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_16/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_16_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_16/auto_advance").asInt() }
@@ -59066,9 +59066,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_17/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_17/name", value: VariantBox(newValue)) }
 	}
-	public var clip_17_stream: AudioStream {
+	public var clip_17_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_17/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_17/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_17/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_17_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_17/auto_advance").asInt() }
@@ -59082,9 +59082,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_18/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_18/name", value: VariantBox(newValue)) }
 	}
-	public var clip_18_stream: AudioStream {
+	public var clip_18_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_18/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_18/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_18/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_18_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_18/auto_advance").asInt() }
@@ -59098,9 +59098,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_19/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_19/name", value: VariantBox(newValue)) }
 	}
-	public var clip_19_stream: AudioStream {
+	public var clip_19_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_19/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_19/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_19/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_19_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_19/auto_advance").asInt() }
@@ -59114,9 +59114,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_20/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_20/name", value: VariantBox(newValue)) }
 	}
-	public var clip_20_stream: AudioStream {
+	public var clip_20_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_20/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_20/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_20/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_20_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_20/auto_advance").asInt() }
@@ -59130,9 +59130,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_21/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_21/name", value: VariantBox(newValue)) }
 	}
-	public var clip_21_stream: AudioStream {
+	public var clip_21_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_21/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_21/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_21/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_21_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_21/auto_advance").asInt() }
@@ -59146,9 +59146,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_22/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_22/name", value: VariantBox(newValue)) }
 	}
-	public var clip_22_stream: AudioStream {
+	public var clip_22_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_22/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_22/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_22/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_22_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_22/auto_advance").asInt() }
@@ -59162,9 +59162,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_23/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_23/name", value: VariantBox(newValue)) }
 	}
-	public var clip_23_stream: AudioStream {
+	public var clip_23_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_23/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_23/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_23/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_23_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_23/auto_advance").asInt() }
@@ -59178,9 +59178,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_24/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_24/name", value: VariantBox(newValue)) }
 	}
-	public var clip_24_stream: AudioStream {
+	public var clip_24_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_24/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_24/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_24/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_24_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_24/auto_advance").asInt() }
@@ -59194,9 +59194,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_25/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_25/name", value: VariantBox(newValue)) }
 	}
-	public var clip_25_stream: AudioStream {
+	public var clip_25_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_25/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_25/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_25/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_25_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_25/auto_advance").asInt() }
@@ -59210,9 +59210,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_26/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_26/name", value: VariantBox(newValue)) }
 	}
-	public var clip_26_stream: AudioStream {
+	public var clip_26_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_26/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_26/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_26/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_26_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_26/auto_advance").asInt() }
@@ -59226,9 +59226,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_27/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_27/name", value: VariantBox(newValue)) }
 	}
-	public var clip_27_stream: AudioStream {
+	public var clip_27_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_27/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_27/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_27/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_27_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_27/auto_advance").asInt() }
@@ -59242,9 +59242,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_28/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_28/name", value: VariantBox(newValue)) }
 	}
-	public var clip_28_stream: AudioStream {
+	public var clip_28_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_28/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_28/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_28/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_28_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_28/auto_advance").asInt() }
@@ -59258,9 +59258,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_29/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_29/name", value: VariantBox(newValue)) }
 	}
-	public var clip_29_stream: AudioStream {
+	public var clip_29_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_29/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_29/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_29/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_29_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_29/auto_advance").asInt() }
@@ -59274,9 +59274,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_30/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_30/name", value: VariantBox(newValue)) }
 	}
-	public var clip_30_stream: AudioStream {
+	public var clip_30_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_30/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_30/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_30/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_30_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_30/auto_advance").asInt() }
@@ -59290,9 +59290,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_31/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_31/name", value: VariantBox(newValue)) }
 	}
-	public var clip_31_stream: AudioStream {
+	public var clip_31_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_31/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_31/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_31/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_31_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_31/auto_advance").asInt() }
@@ -59306,9 +59306,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_32/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_32/name", value: VariantBox(newValue)) }
 	}
-	public var clip_32_stream: AudioStream {
+	public var clip_32_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_32/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_32/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_32/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_32_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_32/auto_advance").asInt() }
@@ -59322,9 +59322,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_33/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_33/name", value: VariantBox(newValue)) }
 	}
-	public var clip_33_stream: AudioStream {
+	public var clip_33_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_33/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_33/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_33/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_33_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_33/auto_advance").asInt() }
@@ -59338,9 +59338,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_34/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_34/name", value: VariantBox(newValue)) }
 	}
-	public var clip_34_stream: AudioStream {
+	public var clip_34_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_34/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_34/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_34/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_34_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_34/auto_advance").asInt() }
@@ -59354,9 +59354,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_35/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_35/name", value: VariantBox(newValue)) }
 	}
-	public var clip_35_stream: AudioStream {
+	public var clip_35_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_35/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_35/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_35/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_35_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_35/auto_advance").asInt() }
@@ -59370,9 +59370,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_36/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_36/name", value: VariantBox(newValue)) }
 	}
-	public var clip_36_stream: AudioStream {
+	public var clip_36_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_36/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_36/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_36/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_36_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_36/auto_advance").asInt() }
@@ -59386,9 +59386,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_37/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_37/name", value: VariantBox(newValue)) }
 	}
-	public var clip_37_stream: AudioStream {
+	public var clip_37_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_37/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_37/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_37/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_37_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_37/auto_advance").asInt() }
@@ -59402,9 +59402,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_38/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_38/name", value: VariantBox(newValue)) }
 	}
-	public var clip_38_stream: AudioStream {
+	public var clip_38_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_38/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_38/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_38/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_38_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_38/auto_advance").asInt() }
@@ -59418,9 +59418,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_39/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_39/name", value: VariantBox(newValue)) }
 	}
-	public var clip_39_stream: AudioStream {
+	public var clip_39_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_39/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_39/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_39/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_39_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_39/auto_advance").asInt() }
@@ -59434,9 +59434,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_40/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_40/name", value: VariantBox(newValue)) }
 	}
-	public var clip_40_stream: AudioStream {
+	public var clip_40_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_40/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_40/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_40/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_40_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_40/auto_advance").asInt() }
@@ -59450,9 +59450,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_41/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_41/name", value: VariantBox(newValue)) }
 	}
-	public var clip_41_stream: AudioStream {
+	public var clip_41_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_41/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_41/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_41/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_41_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_41/auto_advance").asInt() }
@@ -59466,9 +59466,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_42/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_42/name", value: VariantBox(newValue)) }
 	}
-	public var clip_42_stream: AudioStream {
+	public var clip_42_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_42/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_42/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_42/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_42_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_42/auto_advance").asInt() }
@@ -59482,9 +59482,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_43/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_43/name", value: VariantBox(newValue)) }
 	}
-	public var clip_43_stream: AudioStream {
+	public var clip_43_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_43/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_43/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_43/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_43_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_43/auto_advance").asInt() }
@@ -59498,9 +59498,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_44/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_44/name", value: VariantBox(newValue)) }
 	}
-	public var clip_44_stream: AudioStream {
+	public var clip_44_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_44/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_44/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_44/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_44_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_44/auto_advance").asInt() }
@@ -59514,9 +59514,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_45/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_45/name", value: VariantBox(newValue)) }
 	}
-	public var clip_45_stream: AudioStream {
+	public var clip_45_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_45/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_45/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_45/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_45_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_45/auto_advance").asInt() }
@@ -59530,9 +59530,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_46/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_46/name", value: VariantBox(newValue)) }
 	}
-	public var clip_46_stream: AudioStream {
+	public var clip_46_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_46/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_46/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_46/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_46_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_46/auto_advance").asInt() }
@@ -59546,9 +59546,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_47/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_47/name", value: VariantBox(newValue)) }
 	}
-	public var clip_47_stream: AudioStream {
+	public var clip_47_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_47/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_47/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_47/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_47_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_47/auto_advance").asInt() }
@@ -59562,9 +59562,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_48/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_48/name", value: VariantBox(newValue)) }
 	}
-	public var clip_48_stream: AudioStream {
+	public var clip_48_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_48/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_48/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_48/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_48_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_48/auto_advance").asInt() }
@@ -59578,9 +59578,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_49/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_49/name", value: VariantBox(newValue)) }
 	}
-	public var clip_49_stream: AudioStream {
+	public var clip_49_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_49/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_49/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_49/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_49_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_49/auto_advance").asInt() }
@@ -59594,9 +59594,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_50/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_50/name", value: VariantBox(newValue)) }
 	}
-	public var clip_50_stream: AudioStream {
+	public var clip_50_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_50/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_50/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_50/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_50_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_50/auto_advance").asInt() }
@@ -59610,9 +59610,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_51/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_51/name", value: VariantBox(newValue)) }
 	}
-	public var clip_51_stream: AudioStream {
+	public var clip_51_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_51/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_51/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_51/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_51_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_51/auto_advance").asInt() }
@@ -59626,9 +59626,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_52/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_52/name", value: VariantBox(newValue)) }
 	}
-	public var clip_52_stream: AudioStream {
+	public var clip_52_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_52/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_52/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_52/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_52_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_52/auto_advance").asInt() }
@@ -59642,9 +59642,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_53/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_53/name", value: VariantBox(newValue)) }
 	}
-	public var clip_53_stream: AudioStream {
+	public var clip_53_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_53/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_53/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_53/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_53_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_53/auto_advance").asInt() }
@@ -59658,9 +59658,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_54/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_54/name", value: VariantBox(newValue)) }
 	}
-	public var clip_54_stream: AudioStream {
+	public var clip_54_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_54/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_54/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_54/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_54_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_54/auto_advance").asInt() }
@@ -59674,9 +59674,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_55/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_55/name", value: VariantBox(newValue)) }
 	}
-	public var clip_55_stream: AudioStream {
+	public var clip_55_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_55/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_55/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_55/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_55_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_55/auto_advance").asInt() }
@@ -59690,9 +59690,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_56/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_56/name", value: VariantBox(newValue)) }
 	}
-	public var clip_56_stream: AudioStream {
+	public var clip_56_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_56/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_56/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_56/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_56_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_56/auto_advance").asInt() }
@@ -59706,9 +59706,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_57/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_57/name", value: VariantBox(newValue)) }
 	}
-	public var clip_57_stream: AudioStream {
+	public var clip_57_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_57/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_57/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_57/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_57_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_57/auto_advance").asInt() }
@@ -59722,9 +59722,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_58/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_58/name", value: VariantBox(newValue)) }
 	}
-	public var clip_58_stream: AudioStream {
+	public var clip_58_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_58/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_58/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_58/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_58_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_58/auto_advance").asInt() }
@@ -59738,9 +59738,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_59/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_59/name", value: VariantBox(newValue)) }
 	}
-	public var clip_59_stream: AudioStream {
+	public var clip_59_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_59/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_59/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_59/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_59_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_59/auto_advance").asInt() }
@@ -59754,9 +59754,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_60/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_60/name", value: VariantBox(newValue)) }
 	}
-	public var clip_60_stream: AudioStream {
+	public var clip_60_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_60/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_60/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_60/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_60_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_60/auto_advance").asInt() }
@@ -59770,9 +59770,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_61/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_61/name", value: VariantBox(newValue)) }
 	}
-	public var clip_61_stream: AudioStream {
+	public var clip_61_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_61/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_61/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_61/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_61_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_61/auto_advance").asInt() }
@@ -59786,9 +59786,9 @@ public class AudioStreamInteractive: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "clip_62/name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "clip_62/name", value: VariantBox(newValue)) }
 	}
-	public var clip_62_stream: AudioStream {
+	public var clip_62_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "clip_62/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clip_62/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clip_62/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var clip_62_auto_advance: Int {
 		get { Host.shared.getProperty(object: ptr, name: "clip_62/auto_advance").asInt() }
@@ -59987,9 +59987,9 @@ public class AudioStreamOggVorbis: AudioStream {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tags", args: [])
 		return __ret
 	}
-	public var packet_sequence: GodotObject {
+	public var packet_sequence: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "packet_sequence").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "packet_sequence", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "packet_sequence", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var bpm: Double {
 		get { Host.shared.getProperty(object: ptr, name: "bpm").asDouble() }
@@ -60173,9 +60173,9 @@ public class AudioStreamPlayer2D: Node2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_playback_type", args: [])
 		return __ret.asEnum(AudioServer.PlaybackType.self)
 	}
-	public var stream: AudioStream {
+	public var stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var volume_db: Double {
 		get { Host.shared.getProperty(object: ptr, name: "volume_db").asDouble() }
@@ -60304,261 +60304,261 @@ public class AudioStreamPlaylist: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "stream_count").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_count", value: VariantBox(newValue)) }
 	}
-	public var stream_0: AudioStream {
+	public var stream_0: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_0").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_0", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_0", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_1: AudioStream {
+	public var stream_1: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_1").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_1", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_1", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_2: AudioStream {
+	public var stream_2: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_2").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_2", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_2", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_3: AudioStream {
+	public var stream_3: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_3").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_3", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_3", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_4: AudioStream {
+	public var stream_4: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_4").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_4", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_4", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_5: AudioStream {
+	public var stream_5: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_5").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_5", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_5", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_6: AudioStream {
+	public var stream_6: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_6").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_6", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_6", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_7: AudioStream {
+	public var stream_7: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_7").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_7", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_7", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_8: AudioStream {
+	public var stream_8: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_8").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_8", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_8", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_9: AudioStream {
+	public var stream_9: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_9").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_9", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_9", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_10: AudioStream {
+	public var stream_10: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_10").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_10", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_10", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_11: AudioStream {
+	public var stream_11: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_11").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_11", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_11", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_12: AudioStream {
+	public var stream_12: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_12").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_12", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_12", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_13: AudioStream {
+	public var stream_13: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_13").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_13", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_13", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_14: AudioStream {
+	public var stream_14: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_14").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_14", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_14", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_15: AudioStream {
+	public var stream_15: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_15").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_15", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_15", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_16: AudioStream {
+	public var stream_16: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_16").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_16", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_16", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_17: AudioStream {
+	public var stream_17: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_17").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_17", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_17", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_18: AudioStream {
+	public var stream_18: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_18").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_18", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_18", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_19: AudioStream {
+	public var stream_19: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_19").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_19", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_19", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_20: AudioStream {
+	public var stream_20: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_20").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_20", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_20", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_21: AudioStream {
+	public var stream_21: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_21").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_21", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_21", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_22: AudioStream {
+	public var stream_22: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_22").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_22", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_22", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_23: AudioStream {
+	public var stream_23: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_23").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_23", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_23", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_24: AudioStream {
+	public var stream_24: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_24").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_24", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_24", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_25: AudioStream {
+	public var stream_25: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_25").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_25", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_25", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_26: AudioStream {
+	public var stream_26: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_26").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_26", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_26", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_27: AudioStream {
+	public var stream_27: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_27").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_27", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_27", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_28: AudioStream {
+	public var stream_28: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_28").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_28", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_28", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_29: AudioStream {
+	public var stream_29: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_29").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_29", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_29", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_30: AudioStream {
+	public var stream_30: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_30").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_30", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_30", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_31: AudioStream {
+	public var stream_31: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_31").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_31", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_31", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_32: AudioStream {
+	public var stream_32: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_32").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_32", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_32", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_33: AudioStream {
+	public var stream_33: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_33").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_33", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_33", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_34: AudioStream {
+	public var stream_34: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_34").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_34", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_34", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_35: AudioStream {
+	public var stream_35: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_35").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_35", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_35", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_36: AudioStream {
+	public var stream_36: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_36").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_36", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_36", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_37: AudioStream {
+	public var stream_37: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_37").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_37", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_37", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_38: AudioStream {
+	public var stream_38: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_38").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_38", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_38", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_39: AudioStream {
+	public var stream_39: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_39").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_39", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_39", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_40: AudioStream {
+	public var stream_40: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_40").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_40", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_40", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_41: AudioStream {
+	public var stream_41: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_41").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_41", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_41", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_42: AudioStream {
+	public var stream_42: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_42").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_42", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_42", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_43: AudioStream {
+	public var stream_43: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_43").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_43", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_43", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_44: AudioStream {
+	public var stream_44: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_44").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_44", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_44", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_45: AudioStream {
+	public var stream_45: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_45").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_45", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_45", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_46: AudioStream {
+	public var stream_46: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_46").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_46", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_46", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_47: AudioStream {
+	public var stream_47: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_47").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_47", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_47", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_48: AudioStream {
+	public var stream_48: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_48").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_48", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_48", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_49: AudioStream {
+	public var stream_49: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_49").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_49", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_49", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_50: AudioStream {
+	public var stream_50: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_50").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_50", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_50", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_51: AudioStream {
+	public var stream_51: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_51").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_51", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_51", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_52: AudioStream {
+	public var stream_52: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_52").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_52", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_52", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_53: AudioStream {
+	public var stream_53: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_53").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_53", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_53", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_54: AudioStream {
+	public var stream_54: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_54").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_54", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_54", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_55: AudioStream {
+	public var stream_55: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_55").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_55", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_55", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_56: AudioStream {
+	public var stream_56: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_56").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_56", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_56", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_57: AudioStream {
+	public var stream_57: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_57").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_57", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_57", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_58: AudioStream {
+	public var stream_58: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_58").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_58", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_58", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_59: AudioStream {
+	public var stream_59: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_59").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_59", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_59", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_60: AudioStream {
+	public var stream_60: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_60").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_60", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_60", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_61: AudioStream {
+	public var stream_61: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_61").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_61", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_61", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_62: AudioStream {
+	public var stream_62: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_62").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_62", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_62", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var stream_63: AudioStream {
+	public var stream_63: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_63").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_63", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_63", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -60651,13 +60651,13 @@ public class AudioStreamRandomizer: AudioStream {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_random_volume_offset_db", args: [])
 		return __ret.asDouble()
 	}
-	public func set_playback_mode(mode: AudioStreamRandomizer.PlaybackMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_playback_mode", args: [VariantBox(mode.rawValue)])
+	public func set_playback_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_playback_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_playback_mode() -> AudioStreamRandomizer.PlaybackMode {
+	public func get_playback_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_playback_mode", args: [])
-		return __ret.asEnum(AudioStreamRandomizer.PlaybackMode.self)
+		return __ret.asInt()
 	}
 	public var playback_mode: Int {
 		get { Host.shared.getProperty(object: ptr, name: "playback_mode").asInt() }
@@ -60722,257 +60722,257 @@ public class AudioStreamSynchronized: AudioStream {
 		get { Host.shared.getProperty(object: ptr, name: "stream_count").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_count", value: VariantBox(newValue)) }
 	}
-	public var stream_0_stream: AudioStream {
+	public var stream_0_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_0/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_0/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_0/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_0_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_0/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_0/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_1_stream: AudioStream {
+	public var stream_1_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_1/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_1/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_1/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_1_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_1/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_1/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_2_stream: AudioStream {
+	public var stream_2_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_2/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_2/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_2/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_2_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_2/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_2/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_3_stream: AudioStream {
+	public var stream_3_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_3/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_3/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_3/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_3_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_3/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_3/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_4_stream: AudioStream {
+	public var stream_4_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_4/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_4/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_4/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_4_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_4/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_4/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_5_stream: AudioStream {
+	public var stream_5_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_5/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_5/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_5/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_5_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_5/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_5/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_6_stream: AudioStream {
+	public var stream_6_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_6/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_6/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_6/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_6_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_6/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_6/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_7_stream: AudioStream {
+	public var stream_7_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_7/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_7/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_7/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_7_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_7/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_7/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_8_stream: AudioStream {
+	public var stream_8_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_8/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_8/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_8/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_8_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_8/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_8/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_9_stream: AudioStream {
+	public var stream_9_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_9/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_9/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_9/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_9_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_9/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_9/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_10_stream: AudioStream {
+	public var stream_10_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_10/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_10/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_10/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_10_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_10/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_10/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_11_stream: AudioStream {
+	public var stream_11_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_11/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_11/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_11/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_11_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_11/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_11/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_12_stream: AudioStream {
+	public var stream_12_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_12/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_12/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_12/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_12_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_12/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_12/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_13_stream: AudioStream {
+	public var stream_13_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_13/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_13/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_13/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_13_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_13/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_13/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_14_stream: AudioStream {
+	public var stream_14_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_14/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_14/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_14/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_14_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_14/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_14/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_15_stream: AudioStream {
+	public var stream_15_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_15/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_15/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_15/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_15_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_15/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_15/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_16_stream: AudioStream {
+	public var stream_16_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_16/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_16/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_16/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_16_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_16/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_16/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_17_stream: AudioStream {
+	public var stream_17_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_17/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_17/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_17/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_17_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_17/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_17/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_18_stream: AudioStream {
+	public var stream_18_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_18/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_18/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_18/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_18_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_18/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_18/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_19_stream: AudioStream {
+	public var stream_19_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_19/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_19/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_19/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_19_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_19/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_19/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_20_stream: AudioStream {
+	public var stream_20_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_20/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_20/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_20/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_20_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_20/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_20/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_21_stream: AudioStream {
+	public var stream_21_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_21/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_21/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_21/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_21_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_21/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_21/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_22_stream: AudioStream {
+	public var stream_22_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_22/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_22/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_22/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_22_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_22/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_22/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_23_stream: AudioStream {
+	public var stream_23_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_23/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_23/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_23/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_23_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_23/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_23/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_24_stream: AudioStream {
+	public var stream_24_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_24/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_24/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_24/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_24_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_24/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_24/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_25_stream: AudioStream {
+	public var stream_25_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_25/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_25/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_25/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_25_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_25/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_25/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_26_stream: AudioStream {
+	public var stream_26_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_26/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_26/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_26/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_26_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_26/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_26/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_27_stream: AudioStream {
+	public var stream_27_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_27/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_27/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_27/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_27_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_27/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_27/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_28_stream: AudioStream {
+	public var stream_28_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_28/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_28/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_28/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_28_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_28/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_28/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_29_stream: AudioStream {
+	public var stream_29_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_29/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_29/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_29/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_29_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_29/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_29/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_30_stream: AudioStream {
+	public var stream_30_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_30/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_30/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_30/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_30_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_30/volume").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "stream_30/volume", value: VariantBox(newValue)) }
 	}
-	public var stream_31_stream: AudioStream {
+	public var stream_31_stream: AudioStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream_31/stream").asObject(AudioStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream_31/stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream_31/stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var stream_31_volume: Double {
 		get { Host.shared.getProperty(object: ptr, name: "stream_31/volume").asDouble() }
@@ -61021,13 +61021,13 @@ public class AudioStreamWAV: AudioStream {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_format", args: [])
 		return __ret.asEnum(AudioStreamWAV.Format.self)
 	}
-	public func set_loop_mode(loop_mode: AudioStreamWAV.LoopMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_loop_mode", args: [VariantBox(loop_mode.rawValue)])
+	public func set_loop_mode(loop_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_loop_mode", args: [VariantBox(loop_mode)])
 	}
 	@discardableResult
-	public func get_loop_mode() -> AudioStreamWAV.LoopMode {
+	public func get_loop_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_loop_mode", args: [])
-		return __ret.asEnum(AudioStreamWAV.LoopMode.self)
+		return __ret.asInt()
 	}
 	public func set_loop_begin(loop_begin: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_loop_begin", args: [VariantBox(loop_begin)])
@@ -61221,9 +61221,9 @@ public class BaseButton: Control {
 		return __ret.asEnum(MouseButtonMask.self)
 	}
 	@discardableResult
-	public func get_draw_mode() -> BaseButton.DrawMode {
+	public func get_draw_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_draw_mode", args: [])
-		return __ret.asEnum(BaseButton.DrawMode.self)
+		return __ret.asInt()
 	}
 	public func set_keep_pressed_outside(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_keep_pressed_outside", args: [VariantBox(enabled)])
@@ -61287,17 +61287,17 @@ public class BaseButton: Control {
 		get { Host.shared.getProperty(object: ptr, name: "keep_pressed_outside").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "keep_pressed_outside", value: VariantBox(newValue)) }
 	}
-	public var button_group: ButtonGroup {
+	public var button_group: ButtonGroup? {
 		get { Host.shared.getProperty(object: ptr, name: "button_group").asObject(ButtonGroup.self) }
-		set { Host.shared.setProperty(object: ptr, name: "button_group", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "button_group", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Shortcut: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Shortcut") }
 		set { Host.shared.setProperty(object: ptr, name: "Shortcut", value: VariantBox(newValue)) }
 	}
-	public var shortcut: Shortcut {
+	public var shortcut: Shortcut? {
 		get { Host.shared.getProperty(object: ptr, name: "shortcut").asObject(Shortcut.self) }
-		set { Host.shared.setProperty(object: ptr, name: "shortcut", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "shortcut", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var shortcut_feedback: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "shortcut_feedback").asBool() }
@@ -61419,13 +61419,13 @@ public class BaseMaterial3D: Material {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_transparency", args: [])
 		return __ret.asEnum(BaseMaterial3D.Transparency.self)
 	}
-	public func set_alpha_antialiasing(alpha_aa: BaseMaterial3D.AlphaAntiAliasing) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_alpha_antialiasing", args: [VariantBox(alpha_aa.rawValue)])
+	public func set_alpha_antialiasing(alpha_aa: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_alpha_antialiasing", args: [VariantBox(alpha_aa)])
 	}
 	@discardableResult
-	public func get_alpha_antialiasing() -> BaseMaterial3D.AlphaAntiAliasing {
+	public func get_alpha_antialiasing() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_alpha_antialiasing", args: [])
-		return __ret.asEnum(BaseMaterial3D.AlphaAntiAliasing.self)
+		return __ret.asInt()
 	}
 	public func set_alpha_antialiasing_edge(edge: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_alpha_antialiasing_edge", args: [VariantBox(edge)])
@@ -61603,13 +61603,13 @@ public class BaseMaterial3D: Material {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_point_size", args: [])
 		return __ret.asDouble()
 	}
-	public func set_detail_uv(detail_uv: BaseMaterial3D.DetailUV) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_detail_uv", args: [VariantBox(detail_uv.rawValue)])
+	public func set_detail_uv(detail_uv: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_detail_uv", args: [VariantBox(detail_uv)])
 	}
 	@discardableResult
-	public func get_detail_uv() -> BaseMaterial3D.DetailUV {
+	public func get_detail_uv() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_detail_uv", args: [])
-		return __ret.asEnum(BaseMaterial3D.DetailUV.self)
+		return __ret.asInt()
 	}
 	public func set_blend_mode(blend_mode: BaseMaterial3D.BlendMode) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_blend_mode", args: [VariantBox(blend_mode.rawValue)])
@@ -61619,13 +61619,13 @@ public class BaseMaterial3D: Material {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_blend_mode", args: [])
 		return __ret.asEnum(BaseMaterial3D.BlendMode.self)
 	}
-	public func set_depth_draw_mode(depth_draw_mode: BaseMaterial3D.DepthDrawMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_depth_draw_mode", args: [VariantBox(depth_draw_mode.rawValue)])
+	public func set_depth_draw_mode(depth_draw_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_depth_draw_mode", args: [VariantBox(depth_draw_mode)])
 	}
 	@discardableResult
-	public func get_depth_draw_mode() -> BaseMaterial3D.DepthDrawMode {
+	public func get_depth_draw_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_depth_draw_mode", args: [])
-		return __ret.asEnum(BaseMaterial3D.DepthDrawMode.self)
+		return __ret.asInt()
 	}
 	public func set_depth_test(depth_test: BaseMaterial3D.DepthTest) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_depth_test", args: [VariantBox(depth_test.rawValue)])
@@ -61635,36 +61635,36 @@ public class BaseMaterial3D: Material {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_depth_test", args: [])
 		return __ret.asEnum(BaseMaterial3D.DepthTest.self)
 	}
-	public func set_cull_mode(cull_mode: BaseMaterial3D.CullMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_cull_mode", args: [VariantBox(cull_mode.rawValue)])
+	public func set_cull_mode(cull_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_cull_mode", args: [VariantBox(cull_mode)])
 	}
 	@discardableResult
-	public func get_cull_mode() -> BaseMaterial3D.CullMode {
+	public func get_cull_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_cull_mode", args: [])
-		return __ret.asEnum(BaseMaterial3D.CullMode.self)
+		return __ret.asInt()
 	}
-	public func set_diffuse_mode(diffuse_mode: BaseMaterial3D.DiffuseMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_diffuse_mode", args: [VariantBox(diffuse_mode.rawValue)])
+	public func set_diffuse_mode(diffuse_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_diffuse_mode", args: [VariantBox(diffuse_mode)])
 	}
 	@discardableResult
-	public func get_diffuse_mode() -> BaseMaterial3D.DiffuseMode {
+	public func get_diffuse_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_diffuse_mode", args: [])
-		return __ret.asEnum(BaseMaterial3D.DiffuseMode.self)
+		return __ret.asInt()
 	}
-	public func set_specular_mode(specular_mode: BaseMaterial3D.SpecularMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_specular_mode", args: [VariantBox(specular_mode.rawValue)])
+	public func set_specular_mode(specular_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_specular_mode", args: [VariantBox(specular_mode)])
 	}
 	@discardableResult
-	public func get_specular_mode() -> BaseMaterial3D.SpecularMode {
+	public func get_specular_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_specular_mode", args: [])
-		return __ret.asEnum(BaseMaterial3D.SpecularMode.self)
+		return __ret.asInt()
 	}
-	public func set_flag(flag: BaseMaterial3D.Flags, enable: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_flag", args: [VariantBox(flag.rawValue), VariantBox(enable)])
+	public func set_flag(flag: Int, enable: Bool) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_flag", args: [VariantBox(flag), VariantBox(enable)])
 	}
 	@discardableResult
-	public func get_flag(flag: BaseMaterial3D.Flags) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_flag", args: [VariantBox(flag.rawValue)])
+	public func get_flag(flag: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_flag", args: [VariantBox(flag)])
 		return __ret.asBool()
 	}
 	public func set_texture_filter(mode: BaseMaterial3D.TextureFilter) {
@@ -61683,12 +61683,12 @@ public class BaseMaterial3D: Material {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_feature", args: [VariantBox(feature.rawValue)])
 		return __ret.asBool()
 	}
-	public func set_texture(param: BaseMaterial3D.TextureParam, texture: Texture2D) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture", args: [VariantBox(param.rawValue), VariantBox(texture)])
+	public func set_texture(param: Int, texture: Texture2D) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture", args: [VariantBox(param), VariantBox(texture)])
 	}
 	@discardableResult
-	public func get_texture(param: BaseMaterial3D.TextureParam) -> Texture2D? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture", args: [VariantBox(param.rawValue)])
+	public func get_texture(param: Int) -> Texture2D? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture", args: [VariantBox(param)])
 		return __ret.asObject(Texture2D.self)
 	}
 	public func set_detail_blend_mode(detail_blend_mode: BaseMaterial3D.BlendMode) {
@@ -61747,13 +61747,13 @@ public class BaseMaterial3D: Material {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_uv2_triplanar_blend_sharpness", args: [])
 		return __ret.asDouble()
 	}
-	public func set_billboard_mode(mode: BaseMaterial3D.BillboardMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_billboard_mode", args: [VariantBox(mode.rawValue)])
+	public func set_billboard_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_billboard_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_billboard_mode() -> BaseMaterial3D.BillboardMode {
+	public func get_billboard_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_billboard_mode", args: [])
-		return __ret.asEnum(BaseMaterial3D.BillboardMode.self)
+		return __ret.asInt()
 	}
 	public func set_particles_anim_h_frames(frames: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_particles_anim_h_frames", args: [VariantBox(frames)])
@@ -61827,13 +61827,13 @@ public class BaseMaterial3D: Material {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_grow", args: [])
 		return __ret.asDouble()
 	}
-	public func set_emission_operator(operator_: BaseMaterial3D.EmissionOperator) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_emission_operator", args: [VariantBox(operator_.rawValue)])
+	public func set_emission_operator(operator_: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_emission_operator", args: [VariantBox(operator_)])
 	}
 	@discardableResult
-	public func get_emission_operator() -> BaseMaterial3D.EmissionOperator {
+	public func get_emission_operator() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_emission_operator", args: [])
-		return __ret.asEnum(BaseMaterial3D.EmissionOperator.self)
+		return __ret.asInt()
 	}
 	public func set_ao_light_affect(amount: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_ao_light_affect", args: [VariantBox(amount)])
@@ -61931,13 +61931,13 @@ public class BaseMaterial3D: Material {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_msdf_outline_size", args: [])
 		return __ret.asDouble()
 	}
-	public func set_distance_fade(mode: BaseMaterial3D.DistanceFadeMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_distance_fade", args: [VariantBox(mode.rawValue)])
+	public func set_distance_fade(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_distance_fade", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_distance_fade() -> BaseMaterial3D.DistanceFadeMode {
+	public func get_distance_fade() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_distance_fade", args: [])
-		return __ret.asEnum(BaseMaterial3D.DistanceFadeMode.self)
+		return __ret.asInt()
 	}
 	public func set_distance_fade_max_distance(distance: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_distance_fade_max_distance", args: [VariantBox(distance)])
@@ -62111,9 +62111,9 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "albedo_color").asColor() }
 		set { Host.shared.setProperty(object: ptr, name: "albedo_color", value: VariantBox(newValue)) }
 	}
-	public var albedo_texture: Texture2D {
+	public var albedo_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "albedo_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "albedo_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "albedo_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var albedo_texture_force_srgb: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "albedo_texture_force_srgb").asBool() }
@@ -62127,9 +62127,9 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "ORM") }
 		set { Host.shared.setProperty(object: ptr, name: "ORM", value: VariantBox(newValue)) }
 	}
-	public var orm_texture: Texture2D {
+	public var orm_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "orm_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "orm_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "orm_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Metallic: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Metallic") }
@@ -62143,9 +62143,9 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "metallic_specular").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "metallic_specular", value: VariantBox(newValue)) }
 	}
-	public var metallic_texture: Texture2D {
+	public var metallic_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "metallic_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "metallic_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "metallic_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var metallic_texture_channel: Int {
 		get { Host.shared.getProperty(object: ptr, name: "metallic_texture_channel").asInt() }
@@ -62159,9 +62159,9 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "roughness").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "roughness", value: VariantBox(newValue)) }
 	}
-	public var roughness_texture: Texture2D {
+	public var roughness_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "roughness_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "roughness_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "roughness_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var roughness_texture_channel: Int {
 		get { Host.shared.getProperty(object: ptr, name: "roughness_texture_channel").asInt() }
@@ -62195,9 +62195,9 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "emission_on_uv2").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "emission_on_uv2", value: VariantBox(newValue)) }
 	}
-	public var emission_texture: Texture2D {
+	public var emission_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "emission_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "emission_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "emission_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Normal_Map: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Normal Map") }
@@ -62211,9 +62211,9 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "normal_scale").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "normal_scale", value: VariantBox(newValue)) }
 	}
-	public var normal_texture: Texture2D {
+	public var normal_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "normal_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "normal_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "normal_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Bent_Normal_Map: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Bent Normal Map") }
@@ -62223,9 +62223,9 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "bent_normal_enabled").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "bent_normal_enabled", value: VariantBox(newValue)) }
 	}
-	public var bent_normal_texture: Texture2D {
+	public var bent_normal_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "bent_normal_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "bent_normal_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "bent_normal_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Rim: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Rim") }
@@ -62243,9 +62243,9 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "rim_tint").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "rim_tint", value: VariantBox(newValue)) }
 	}
-	public var rim_texture: Texture2D {
+	public var rim_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "rim_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "rim_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "rim_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Clearcoat: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Clearcoat") }
@@ -62263,9 +62263,9 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "clearcoat_roughness").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "clearcoat_roughness", value: VariantBox(newValue)) }
 	}
-	public var clearcoat_texture: Texture2D {
+	public var clearcoat_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "clearcoat_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "clearcoat_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "clearcoat_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Anisotropy: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Anisotropy") }
@@ -62279,9 +62279,9 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "anisotropy").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "anisotropy", value: VariantBox(newValue)) }
 	}
-	public var anisotropy_flowmap: Texture2D {
+	public var anisotropy_flowmap: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "anisotropy_flowmap").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "anisotropy_flowmap", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "anisotropy_flowmap", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Ambient_Occlusion: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Ambient Occlusion") }
@@ -62295,9 +62295,9 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "ao_light_affect").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "ao_light_affect", value: VariantBox(newValue)) }
 	}
-	public var ao_texture: Texture2D {
+	public var ao_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "ao_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "ao_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "ao_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var ao_on_uv2: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "ao_on_uv2").asBool() }
@@ -62339,9 +62339,9 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "heightmap_flip_binormal").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "heightmap_flip_binormal", value: VariantBox(newValue)) }
 	}
-	public var heightmap_texture: Texture2D {
+	public var heightmap_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "heightmap_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "heightmap_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "heightmap_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var heightmap_flip_texture: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "heightmap_flip_texture").asBool() }
@@ -62363,9 +62363,9 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "subsurf_scatter_skin_mode").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "subsurf_scatter_skin_mode", value: VariantBox(newValue)) }
 	}
-	public var subsurf_scatter_texture: Texture2D {
+	public var subsurf_scatter_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "subsurf_scatter_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "subsurf_scatter_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "subsurf_scatter_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Transmittance: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Transmittance") }
@@ -62379,9 +62379,9 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "subsurf_scatter_transmittance_color").asColor() }
 		set { Host.shared.setProperty(object: ptr, name: "subsurf_scatter_transmittance_color", value: VariantBox(newValue)) }
 	}
-	public var subsurf_scatter_transmittance_texture: Texture2D {
+	public var subsurf_scatter_transmittance_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "subsurf_scatter_transmittance_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "subsurf_scatter_transmittance_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "subsurf_scatter_transmittance_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var subsurf_scatter_transmittance_depth: Double {
 		get { Host.shared.getProperty(object: ptr, name: "subsurf_scatter_transmittance_depth").asDouble() }
@@ -62403,9 +62403,9 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "backlight").asColor() }
 		set { Host.shared.setProperty(object: ptr, name: "backlight", value: VariantBox(newValue)) }
 	}
-	public var backlight_texture: Texture2D {
+	public var backlight_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "backlight_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "backlight_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "backlight_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Refraction: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Refraction") }
@@ -62419,9 +62419,9 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "refraction_scale").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "refraction_scale", value: VariantBox(newValue)) }
 	}
-	public var refraction_texture: Texture2D {
+	public var refraction_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "refraction_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "refraction_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "refraction_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var refraction_texture_channel: Int {
 		get { Host.shared.getProperty(object: ptr, name: "refraction_texture_channel").asInt() }
@@ -62435,9 +62435,9 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "detail_enabled").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "detail_enabled", value: VariantBox(newValue)) }
 	}
-	public var detail_mask: Texture2D {
+	public var detail_mask: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "detail_mask").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "detail_mask", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "detail_mask", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var detail_blend_mode: Int {
 		get { Host.shared.getProperty(object: ptr, name: "detail_blend_mode").asInt() }
@@ -62447,13 +62447,13 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "detail_uv_layer").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "detail_uv_layer", value: VariantBox(newValue)) }
 	}
-	public var detail_albedo: Texture2D {
+	public var detail_albedo: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "detail_albedo").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "detail_albedo", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "detail_albedo", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var detail_normal: Texture2D {
+	public var detail_normal: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "detail_normal").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "detail_normal", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "detail_normal", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var UV1: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "UV1") }
@@ -63303,28 +63303,28 @@ public class CPUParticles2D: Node2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_spread", args: [])
 		return __ret.asDouble()
 	}
-	public func set_param_min(param: CPUParticles2D.Parameter, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_min", args: [VariantBox(param.rawValue), VariantBox(value)])
+	public func set_param_min(param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_min", args: [VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func get_param_min(param: CPUParticles2D.Parameter) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_min", args: [VariantBox(param.rawValue)])
+	public func get_param_min(param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_min", args: [VariantBox(param)])
 		return __ret.asDouble()
 	}
-	public func set_param_max(param: CPUParticles2D.Parameter, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_max", args: [VariantBox(param.rawValue), VariantBox(value)])
+	public func set_param_max(param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_max", args: [VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func get_param_max(param: CPUParticles2D.Parameter) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_max", args: [VariantBox(param.rawValue)])
+	public func get_param_max(param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_max", args: [VariantBox(param)])
 		return __ret.asDouble()
 	}
-	public func set_param_curve(param: CPUParticles2D.Parameter, curve: Curve) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_curve", args: [VariantBox(param.rawValue), VariantBox(curve)])
+	public func set_param_curve(param: Int, curve: Curve) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_curve", args: [VariantBox(param), VariantBox(curve)])
 	}
 	@discardableResult
-	public func get_param_curve(param: CPUParticles2D.Parameter) -> Curve? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_curve", args: [VariantBox(param.rawValue)])
+	public func get_param_curve(param: Int) -> Curve? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_curve", args: [VariantBox(param)])
 		return __ret.asObject(Curve.self)
 	}
 	public func set_color(color: Color) {
@@ -63351,12 +63351,12 @@ public class CPUParticles2D: Node2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_color_initial_ramp", args: [])
 		return __ret.asObject(Gradient.self)
 	}
-	public func set_particle_flag(particle_flag: CPUParticles2D.ParticleFlags, enable: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_particle_flag", args: [VariantBox(particle_flag.rawValue), VariantBox(enable)])
+	public func set_particle_flag(particle_flag: Int, enable: Bool) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_particle_flag", args: [VariantBox(particle_flag), VariantBox(enable)])
 	}
 	@discardableResult
-	public func get_particle_flag(particle_flag: CPUParticles2D.ParticleFlags) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_particle_flag", args: [VariantBox(particle_flag.rawValue)])
+	public func get_particle_flag(particle_flag: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_particle_flag", args: [VariantBox(particle_flag)])
 		return __ret.asBool()
 	}
 	public func set_emission_shape(shape: CPUParticles2D.EmissionShape) {
@@ -63466,9 +63466,9 @@ public class CPUParticles2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "amount").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "amount", value: VariantBox(newValue)) }
 	}
-	public var texture: Texture2D {
+	public var texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Time: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Time") }
@@ -63618,9 +63618,9 @@ public class CPUParticles2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "angular_velocity_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "angular_velocity_max", value: VariantBox(newValue)) }
 	}
-	public var angular_velocity_curve: Curve {
+	public var angular_velocity_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "angular_velocity_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "angular_velocity_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "angular_velocity_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Orbit_Velocity: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Orbit Velocity") }
@@ -63634,9 +63634,9 @@ public class CPUParticles2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "orbit_velocity_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "orbit_velocity_max", value: VariantBox(newValue)) }
 	}
-	public var orbit_velocity_curve: Curve {
+	public var orbit_velocity_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "orbit_velocity_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "orbit_velocity_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "orbit_velocity_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Linear_Accel: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Linear Accel") }
@@ -63650,9 +63650,9 @@ public class CPUParticles2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "linear_accel_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "linear_accel_max", value: VariantBox(newValue)) }
 	}
-	public var linear_accel_curve: Curve {
+	public var linear_accel_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "linear_accel_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "linear_accel_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "linear_accel_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Radial_Accel: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Radial Accel") }
@@ -63666,9 +63666,9 @@ public class CPUParticles2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "radial_accel_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "radial_accel_max", value: VariantBox(newValue)) }
 	}
-	public var radial_accel_curve: Curve {
+	public var radial_accel_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "radial_accel_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "radial_accel_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "radial_accel_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Tangential_Accel: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Tangential Accel") }
@@ -63682,9 +63682,9 @@ public class CPUParticles2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "tangential_accel_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "tangential_accel_max", value: VariantBox(newValue)) }
 	}
-	public var tangential_accel_curve: Curve {
+	public var tangential_accel_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "tangential_accel_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "tangential_accel_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "tangential_accel_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Damping: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Damping") }
@@ -63698,9 +63698,9 @@ public class CPUParticles2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "damping_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "damping_max", value: VariantBox(newValue)) }
 	}
-	public var damping_curve: Curve {
+	public var damping_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "damping_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "damping_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "damping_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Angle: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Angle") }
@@ -63714,9 +63714,9 @@ public class CPUParticles2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "angle_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "angle_max", value: VariantBox(newValue)) }
 	}
-	public var angle_curve: Curve {
+	public var angle_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "angle_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "angle_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "angle_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Scale: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Scale") }
@@ -63730,21 +63730,21 @@ public class CPUParticles2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "scale_amount_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "scale_amount_max", value: VariantBox(newValue)) }
 	}
-	public var scale_amount_curve: Curve {
+	public var scale_amount_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "scale_amount_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "scale_amount_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "scale_amount_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var split_scale: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "split_scale").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "split_scale", value: VariantBox(newValue)) }
 	}
-	public var scale_curve_x: Curve {
+	public var scale_curve_x: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "scale_curve_x").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "scale_curve_x", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "scale_curve_x", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var scale_curve_y: Curve {
+	public var scale_curve_y: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "scale_curve_y").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "scale_curve_y", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "scale_curve_y", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Color: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Color") }
@@ -63754,13 +63754,13 @@ public class CPUParticles2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "color").asColor() }
 		set { Host.shared.setProperty(object: ptr, name: "color", value: VariantBox(newValue)) }
 	}
-	public var color_ramp: Gradient {
+	public var color_ramp: Gradient? {
 		get { Host.shared.getProperty(object: ptr, name: "color_ramp").asObject(Gradient.self) }
-		set { Host.shared.setProperty(object: ptr, name: "color_ramp", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "color_ramp", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var color_initial_ramp: Gradient {
+	public var color_initial_ramp: Gradient? {
 		get { Host.shared.getProperty(object: ptr, name: "color_initial_ramp").asObject(Gradient.self) }
-		set { Host.shared.setProperty(object: ptr, name: "color_initial_ramp", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "color_initial_ramp", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Hue_Variation: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Hue Variation") }
@@ -63774,9 +63774,9 @@ public class CPUParticles2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "hue_variation_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "hue_variation_max", value: VariantBox(newValue)) }
 	}
-	public var hue_variation_curve: Curve {
+	public var hue_variation_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "hue_variation_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "hue_variation_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "hue_variation_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Animation: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Animation") }
@@ -63790,9 +63790,9 @@ public class CPUParticles2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "anim_speed_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "anim_speed_max", value: VariantBox(newValue)) }
 	}
-	public var anim_speed_curve: Curve {
+	public var anim_speed_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "anim_speed_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "anim_speed_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "anim_speed_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var anim_offset_min: Double {
 		get { Host.shared.getProperty(object: ptr, name: "anim_offset_min").asDouble() }
@@ -63802,9 +63802,9 @@ public class CPUParticles2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "anim_offset_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "anim_offset_max", value: VariantBox(newValue)) }
 	}
-	public var anim_offset_curve: Curve {
+	public var anim_offset_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "anim_offset_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "anim_offset_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "anim_offset_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public func emit_finished() {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("finished")])
@@ -63851,13 +63851,13 @@ public class Camera2D: Node2D {
 	public func _update_scroll() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_update_scroll", args: [])
 	}
-	public func set_process_callback(mode: Camera2D.Camera2DProcessCallback) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_process_callback", args: [VariantBox(mode.rawValue)])
+	public func set_process_callback(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_process_callback", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_process_callback() -> Camera2D.Camera2DProcessCallback {
+	public func get_process_callback() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_process_callback", args: [])
-		return __ret.asEnum(Camera2D.Camera2DProcessCallback.self)
+		return __ret.asInt()
 	}
 	public func set_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_enabled", args: [VariantBox(enabled)])
@@ -64061,9 +64061,9 @@ public class Camera2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "zoom").asVector2() }
 		set { Host.shared.setProperty(object: ptr, name: "zoom", value: VariantBox(newValue)) }
 	}
-	public var custom_viewport: Viewport {
+	public var custom_viewport: Viewport? {
 		get { Host.shared.getProperty(object: ptr, name: "custom_viewport").asObject(Viewport.self) }
-		set { Host.shared.setProperty(object: ptr, name: "custom_viewport", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "custom_viewport", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var process_callback: Int {
 		get { Host.shared.getProperty(object: ptr, name: "process_callback").asInt() }
@@ -65086,13 +65086,13 @@ public class CollisionPolygon2D: Node2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_polygon", args: [])
 		return __ret
 	}
-	public func set_build_mode(build_mode: CollisionPolygon2D.BuildMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_build_mode", args: [VariantBox(build_mode.rawValue)])
+	public func set_build_mode(build_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_build_mode", args: [VariantBox(build_mode)])
 	}
 	@discardableResult
-	public func get_build_mode() -> CollisionPolygon2D.BuildMode {
+	public func get_build_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_build_mode", args: [])
-		return __ret.asEnum(CollisionPolygon2D.BuildMode.self)
+		return __ret.asInt()
 	}
 	public func set_disabled(disabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_disabled", args: [VariantBox(disabled)])
@@ -65213,9 +65213,9 @@ public class CollisionShape2D: Node2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_debug_color", args: [])
 		return __ret.asColor()
 	}
-	public var shape: GodotObject {
+	public var shape: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "shape").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "shape", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "shape", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var disabled: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "disabled").asBool() }
@@ -65517,12 +65517,12 @@ public class Decal: VisualInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_size", args: [])
 		return __ret.asVector3()
 	}
-	public func set_texture(type: Decal.DecalTexture, texture: Texture2D) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture", args: [VariantBox(type.rawValue), VariantBox(texture)])
+	public func set_texture(type: Int, texture: Texture2D) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture", args: [VariantBox(type), VariantBox(texture)])
 	}
 	@discardableResult
-	public func get_texture(type: Decal.DecalTexture) -> Texture2D? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture", args: [VariantBox(type.rawValue)])
+	public func get_texture(type: Int) -> Texture2D? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture", args: [VariantBox(type)])
 		return __ret.asObject(Texture2D.self)
 	}
 	public func set_emission_energy(energy: Double) {
@@ -65613,21 +65613,21 @@ public class Decal: VisualInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "Textures") }
 		set { Host.shared.setProperty(object: ptr, name: "Textures", value: VariantBox(newValue)) }
 	}
-	public var texture_albedo: GodotObject {
+	public var texture_albedo: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "texture_albedo").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture_albedo", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture_albedo", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var texture_normal: GodotObject {
+	public var texture_normal: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "texture_normal").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture_normal", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture_normal", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var texture_orm: GodotObject {
+	public var texture_orm: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "texture_orm").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture_orm", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture_orm", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var texture_emission: GodotObject {
+	public var texture_emission: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "texture_emission").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture_emission", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture_emission", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Parameters: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Parameters") }
@@ -65729,9 +65729,9 @@ public class ENetMultiplayerPeer: MultiplayerPeer {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_peer", args: [VariantBox(id)])
 		return __ret.asObject(ENetPacketPeer.self)
 	}
-	public var host: ENetConnection {
+	public var host: ENetConnection? {
 		get { Host.shared.getProperty(object: ptr, name: "host").asObject(ENetConnection.self) }
-		set { Host.shared.setProperty(object: ptr, name: "host", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "host", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -65778,13 +65778,13 @@ public class FastNoiseLite: Noise {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_noise_type(type: FastNoiseLite.NoiseType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_noise_type", args: [VariantBox(type.rawValue)])
+	public func set_noise_type(type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_noise_type", args: [VariantBox(type)])
 	}
 	@discardableResult
-	public func get_noise_type() -> FastNoiseLite.NoiseType {
+	public func get_noise_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_noise_type", args: [])
-		return __ret.asEnum(FastNoiseLite.NoiseType.self)
+		return __ret.asInt()
 	}
 	public func set_seed(seed: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_seed", args: [VariantBox(seed)])
@@ -65810,13 +65810,13 @@ public class FastNoiseLite: Noise {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_offset", args: [])
 		return __ret.asVector3()
 	}
-	public func set_fractal_type(type: FastNoiseLite.FractalType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_fractal_type", args: [VariantBox(type.rawValue)])
+	public func set_fractal_type(type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_fractal_type", args: [VariantBox(type)])
 	}
 	@discardableResult
-	public func get_fractal_type() -> FastNoiseLite.FractalType {
+	public func get_fractal_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_fractal_type", args: [])
-		return __ret.asEnum(FastNoiseLite.FractalType.self)
+		return __ret.asInt()
 	}
 	public func set_fractal_octaves(octave_count: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_fractal_octaves", args: [VariantBox(octave_count)])
@@ -65858,13 +65858,13 @@ public class FastNoiseLite: Noise {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_fractal_ping_pong_strength", args: [])
 		return __ret.asDouble()
 	}
-	public func set_cellular_distance_function(func_: FastNoiseLite.CellularDistanceFunction) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_cellular_distance_function", args: [VariantBox(func_.rawValue)])
+	public func set_cellular_distance_function(func_: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_cellular_distance_function", args: [VariantBox(func_)])
 	}
 	@discardableResult
-	public func get_cellular_distance_function() -> FastNoiseLite.CellularDistanceFunction {
+	public func get_cellular_distance_function() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_cellular_distance_function", args: [])
-		return __ret.asEnum(FastNoiseLite.CellularDistanceFunction.self)
+		return __ret.asInt()
 	}
 	public func set_cellular_jitter(jitter: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_cellular_jitter", args: [VariantBox(jitter)])
@@ -65874,13 +65874,13 @@ public class FastNoiseLite: Noise {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_cellular_jitter", args: [])
 		return __ret.asDouble()
 	}
-	public func set_cellular_return_type(ret: FastNoiseLite.CellularReturnType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_cellular_return_type", args: [VariantBox(ret.rawValue)])
+	public func set_cellular_return_type(ret: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_cellular_return_type", args: [VariantBox(ret)])
 	}
 	@discardableResult
-	public func get_cellular_return_type() -> FastNoiseLite.CellularReturnType {
+	public func get_cellular_return_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_cellular_return_type", args: [])
-		return __ret.asEnum(FastNoiseLite.CellularReturnType.self)
+		return __ret.asInt()
 	}
 	public func set_domain_warp_enabled(domain_warp_enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_domain_warp_enabled", args: [VariantBox(domain_warp_enabled)])
@@ -65890,13 +65890,13 @@ public class FastNoiseLite: Noise {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_domain_warp_enabled", args: [])
 		return __ret.asBool()
 	}
-	public func set_domain_warp_type(domain_warp_type: FastNoiseLite.DomainWarpType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_domain_warp_type", args: [VariantBox(domain_warp_type.rawValue)])
+	public func set_domain_warp_type(domain_warp_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_domain_warp_type", args: [VariantBox(domain_warp_type)])
 	}
 	@discardableResult
-	public func get_domain_warp_type() -> FastNoiseLite.DomainWarpType {
+	public func get_domain_warp_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_domain_warp_type", args: [])
-		return __ret.asEnum(FastNoiseLite.DomainWarpType.self)
+		return __ret.asInt()
 	}
 	public func set_domain_warp_amplitude(domain_warp_amplitude: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_domain_warp_amplitude", args: [VariantBox(domain_warp_amplitude)])
@@ -65914,13 +65914,13 @@ public class FastNoiseLite: Noise {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_domain_warp_frequency", args: [])
 		return __ret.asDouble()
 	}
-	public func set_domain_warp_fractal_type(domain_warp_fractal_type: FastNoiseLite.DomainWarpFractalType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_domain_warp_fractal_type", args: [VariantBox(domain_warp_fractal_type.rawValue)])
+	public func set_domain_warp_fractal_type(domain_warp_fractal_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_domain_warp_fractal_type", args: [VariantBox(domain_warp_fractal_type)])
 	}
 	@discardableResult
-	public func get_domain_warp_fractal_type() -> FastNoiseLite.DomainWarpFractalType {
+	public func get_domain_warp_fractal_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_domain_warp_fractal_type", args: [])
-		return __ret.asEnum(FastNoiseLite.DomainWarpFractalType.self)
+		return __ret.asInt()
 	}
 	public func set_domain_warp_fractal_octaves(domain_warp_octave_count: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_domain_warp_fractal_octaves", args: [VariantBox(domain_warp_octave_count)])
@@ -66124,9 +66124,9 @@ public class FogMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "edge_fade").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "edge_fade", value: VariantBox(newValue)) }
 	}
-	public var density_texture: Texture3D {
+	public var density_texture: Texture3D? {
 		get { Host.shared.getProperty(object: ptr, name: "density_texture").asObject(Texture3D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "density_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "density_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -66171,9 +66171,9 @@ public class FogVolume: VisualInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "shape").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "shape", value: VariantBox(newValue)) }
 	}
-	public var material: GodotObject {
+	public var material: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "material").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "material", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "material", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -66210,8 +66210,8 @@ public class FontFile: Font {
 	public func set_font_style_name(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_font_style_name", args: [VariantBox(name)])
 	}
-	public func set_font_style(style: TextServer.FontStyle) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_font_style", args: [VariantBox(style.rawValue)])
+	public func set_font_style(style: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_font_style", args: [VariantBox(style)])
 	}
 	public func set_font_weight(weight: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_font_weight", args: [VariantBox(weight)])
@@ -66275,13 +66275,13 @@ public class FontFile: Font {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_fixed_size", args: [])
 		return __ret.asInt()
 	}
-	public func set_fixed_size_scale_mode(fixed_size_scale_mode: TextServer.FixedSizeScaleMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_fixed_size_scale_mode", args: [VariantBox(fixed_size_scale_mode.rawValue)])
+	public func set_fixed_size_scale_mode(fixed_size_scale_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_fixed_size_scale_mode", args: [VariantBox(fixed_size_scale_mode)])
 	}
 	@discardableResult
-	public func get_fixed_size_scale_mode() -> TextServer.FixedSizeScaleMode {
+	public func get_fixed_size_scale_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_fixed_size_scale_mode", args: [])
-		return __ret.asEnum(TextServer.FixedSizeScaleMode.self)
+		return __ret.asInt()
 	}
 	public func set_allow_system_fallback(allow_system_fallback: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_allow_system_fallback", args: [VariantBox(allow_system_fallback)])
@@ -66385,12 +66385,12 @@ public class FontFile: Font {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_transform", args: [VariantBox(cache_index)])
 		return __ret.asTransform2D()
 	}
-	public func set_extra_spacing(cache_index: Int, spacing: TextServer.SpacingType, value: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_extra_spacing", args: [VariantBox(cache_index), VariantBox(spacing.rawValue), VariantBox(value)])
+	public func set_extra_spacing(cache_index: Int, spacing: Int, value: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_extra_spacing", args: [VariantBox(cache_index), VariantBox(spacing), VariantBox(value)])
 	}
 	@discardableResult
-	public func get_extra_spacing(cache_index: Int, spacing: TextServer.SpacingType) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_extra_spacing", args: [VariantBox(cache_index), VariantBox(spacing.rawValue)])
+	public func get_extra_spacing(cache_index: Int, spacing: Int) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_extra_spacing", args: [VariantBox(cache_index), VariantBox(spacing)])
 		return __ret.asInt()
 	}
 	public func set_extra_baseline_offset(cache_index: Int, baseline_offset: Double) {
@@ -66744,8 +66744,8 @@ public class FontVariation: Font {
 	public func set_opentype_features(features: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_opentype_features", args: [VariantBox(features)])
 	}
-	public func set_spacing(spacing: TextServer.SpacingType, value: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_spacing", args: [VariantBox(spacing.rawValue), VariantBox(value)])
+	public func set_spacing(spacing: Int, value: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_spacing", args: [VariantBox(spacing), VariantBox(value)])
 	}
 	public func set_baseline_offset(baseline_offset: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_baseline_offset", args: [VariantBox(baseline_offset)])
@@ -66771,9 +66771,9 @@ public class FontVariation: Font {
 	public func set_palette_custom_colors(colors: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_palette_custom_colors", args: [VariantBox(colors)])
 	}
-	public var base_font: Font {
+	public var base_font: Font? {
 		get { Host.shared.getProperty(object: ptr, name: "base_font").asObject(Font.self) }
-		set { Host.shared.setProperty(object: ptr, name: "base_font", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "base_font", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Variation: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Variation") }
@@ -67158,9 +67158,9 @@ public class GPUParticles2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "sub_emitter").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "sub_emitter", value: VariantBox(newValue)) }
 	}
-	public var texture: Texture2D {
+	public var texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Time: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Time") }
@@ -67262,9 +67262,9 @@ public class GPUParticles2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "Process Material") }
 		set { Host.shared.setProperty(object: ptr, name: "Process Material", value: VariantBox(newValue)) }
 	}
-	public var process_material: GodotObject {
+	public var process_material: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "process_material").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "process_material", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "process_material", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public func emit_finished() {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("finished")])
@@ -67950,13 +67950,13 @@ public class GeometryInstance3D: VisualInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_visibility_range_begin", args: [])
 		return __ret.asDouble()
 	}
-	public func set_visibility_range_fade_mode(mode: GeometryInstance3D.VisibilityRangeFadeMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_visibility_range_fade_mode", args: [VariantBox(mode.rawValue)])
+	public func set_visibility_range_fade_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_visibility_range_fade_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_visibility_range_fade_mode() -> GeometryInstance3D.VisibilityRangeFadeMode {
+	public func get_visibility_range_fade_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_visibility_range_fade_mode", args: [])
-		return __ret.asEnum(GeometryInstance3D.VisibilityRangeFadeMode.self)
+		return __ret.asInt()
 	}
 	public func set_instance_shader_parameter(name: String, value: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_instance_shader_parameter", args: [VariantBox(name), VariantBox(value)])
@@ -67988,13 +67988,13 @@ public class GeometryInstance3D: VisualInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_lightmap_scale", args: [])
 		return __ret.asEnum(GeometryInstance3D.LightmapScale.self)
 	}
-	public func set_gi_mode(mode: GeometryInstance3D.GIMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_gi_mode", args: [VariantBox(mode.rawValue)])
+	public func set_gi_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_gi_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_gi_mode() -> GeometryInstance3D.GIMode {
+	public func get_gi_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_gi_mode", args: [])
-		return __ret.asEnum(GeometryInstance3D.GIMode.self)
+		return __ret.asInt()
 	}
 	public func set_ignore_occlusion_culling(ignore_culling: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_ignore_occlusion_culling", args: [VariantBox(ignore_culling)])
@@ -68016,13 +68016,13 @@ public class GeometryInstance3D: VisualInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "Geometry") }
 		set { Host.shared.setProperty(object: ptr, name: "Geometry", value: VariantBox(newValue)) }
 	}
-	public var material_override: GodotObject {
+	public var material_override: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "material_override").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "material_override", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "material_override", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var material_overlay: GodotObject {
+	public var material_overlay: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "material_overlay").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "material_overlay", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "material_overlay", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var transparency: Double {
 		get { Host.shared.getProperty(object: ptr, name: "transparency").asDouble() }
@@ -68205,13 +68205,13 @@ public class GraphEdit: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_attached_nodes_of_frame", args: [VariantBox(frame)])
 		return __ret
 	}
-	public func set_panning_scheme(scheme: GraphEdit.PanningScheme) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_panning_scheme", args: [VariantBox(scheme.rawValue)])
+	public func set_panning_scheme(scheme: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_panning_scheme", args: [VariantBox(scheme)])
 	}
 	@discardableResult
-	public func get_panning_scheme() -> GraphEdit.PanningScheme {
+	public func get_panning_scheme() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_panning_scheme", args: [])
-		return __ret.asEnum(GraphEdit.PanningScheme.self)
+		return __ret.asInt()
 	}
 	public func set_zoom(zoom: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_zoom", args: [VariantBox(zoom)])
@@ -68784,8 +68784,8 @@ public class ImmediateMesh: Mesh {
 		}
 		super.init(ptr: raw)
 	}
-	public func surface_begin(primitive: Mesh.PrimitiveType, material: Material) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "surface_begin", args: [VariantBox(primitive.rawValue), VariantBox(material)])
+	public func surface_begin(primitive: Int, material: Material) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "surface_begin", args: [VariantBox(primitive), VariantBox(material)])
 	}
 	public func surface_set_color(color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "surface_set_color", args: [VariantBox(color)])
@@ -69094,9 +69094,9 @@ public class InputEventShortcut: InputEvent {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_shortcut", args: [])
 		return __ret.asObject(Shortcut.self)
 	}
-	public var shortcut: Shortcut {
+	public var shortcut: Shortcut? {
 		get { Host.shared.getProperty(object: ptr, name: "shortcut").asObject(Shortcut.self) }
-		set { Host.shared.setProperty(object: ptr, name: "shortcut", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "shortcut", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -69323,13 +69323,13 @@ public class ItemList: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_columns", args: [])
 		return __ret.asInt()
 	}
-	public func set_select_mode(mode: ItemList.SelectMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_select_mode", args: [VariantBox(mode.rawValue)])
+	public func set_select_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_select_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_select_mode() -> ItemList.SelectMode {
+	public func get_select_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_select_mode", args: [])
-		return __ret.asEnum(ItemList.SelectMode.self)
+		return __ret.asInt()
 	}
 	public func set_icon_mode(mode: ItemList.IconMode) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_icon_mode", args: [VariantBox(mode.rawValue)])
@@ -69437,13 +69437,13 @@ public class ItemList: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_scroll_hint_tiled", args: [])
 		return __ret.asBool()
 	}
-	public func set_text_overrun_behavior(overrun_behavior: TextServer.OverrunBehavior) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_overrun_behavior", args: [VariantBox(overrun_behavior.rawValue)])
+	public func set_text_overrun_behavior(overrun_behavior: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_overrun_behavior", args: [VariantBox(overrun_behavior)])
 	}
 	@discardableResult
-	public func get_text_overrun_behavior() -> TextServer.OverrunBehavior {
+	public func get_text_overrun_behavior() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_text_overrun_behavior", args: [])
-		return __ret.asEnum(TextServer.OverrunBehavior.self)
+		return __ret.asInt()
 	}
 	public func set_wraparound_items(enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_wraparound_items", args: [VariantBox(enable)])
@@ -69705,29 +69705,29 @@ public class Label: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_paragraph_separator", args: [])
 		return __ret.asString()
 	}
-	public func set_autowrap_mode(autowrap_mode: TextServer.AutowrapMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_mode", args: [VariantBox(autowrap_mode.rawValue)])
+	public func set_autowrap_mode(autowrap_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_mode", args: [VariantBox(autowrap_mode)])
 	}
 	@discardableResult
-	public func get_autowrap_mode() -> TextServer.AutowrapMode {
+	public func get_autowrap_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_autowrap_mode", args: [])
-		return __ret.asEnum(TextServer.AutowrapMode.self)
+		return __ret.asInt()
 	}
-	public func set_autowrap_trim_flags(autowrap_trim_flags: TextServer.LineBreakFlag) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_trim_flags", args: [VariantBox(autowrap_trim_flags.rawValue)])
+	public func set_autowrap_trim_flags(autowrap_trim_flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_trim_flags", args: [VariantBox(autowrap_trim_flags)])
 	}
 	@discardableResult
-	public func get_autowrap_trim_flags() -> TextServer.LineBreakFlag {
+	public func get_autowrap_trim_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_autowrap_trim_flags", args: [])
-		return __ret.asEnum(TextServer.LineBreakFlag.self)
+		return __ret.asInt()
 	}
-	public func set_justification_flags(justification_flags: TextServer.JustificationFlag) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_justification_flags", args: [VariantBox(justification_flags.rawValue)])
+	public func set_justification_flags(justification_flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_justification_flags", args: [VariantBox(justification_flags)])
 	}
 	@discardableResult
-	public func get_justification_flags() -> TextServer.JustificationFlag {
+	public func get_justification_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_justification_flags", args: [])
-		return __ret.asEnum(TextServer.JustificationFlag.self)
+		return __ret.asInt()
 	}
 	public func set_clip_text(enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_clip_text", args: [VariantBox(enable)])
@@ -69745,13 +69745,13 @@ public class Label: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tab_stops", args: [])
 		return __ret
 	}
-	public func set_text_overrun_behavior(overrun_behavior: TextServer.OverrunBehavior) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_overrun_behavior", args: [VariantBox(overrun_behavior.rawValue)])
+	public func set_text_overrun_behavior(overrun_behavior: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_overrun_behavior", args: [VariantBox(overrun_behavior)])
 	}
 	@discardableResult
-	public func get_text_overrun_behavior() -> TextServer.OverrunBehavior {
+	public func get_text_overrun_behavior() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_text_overrun_behavior", args: [])
-		return __ret.asEnum(TextServer.OverrunBehavior.self)
+		return __ret.asInt()
 	}
 	public func set_ellipsis_char(char: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_ellipsis_char", args: [VariantBox(char)])
@@ -69798,12 +69798,12 @@ public class Label: Control {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func get_visible_characters_behavior() -> TextServer.VisibleCharactersBehavior {
+	public func get_visible_characters_behavior() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_visible_characters_behavior", args: [])
-		return __ret.asEnum(TextServer.VisibleCharactersBehavior.self)
+		return __ret.asInt()
 	}
-	public func set_visible_characters_behavior(behavior: TextServer.VisibleCharactersBehavior) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_visible_characters_behavior", args: [VariantBox(behavior.rawValue)])
+	public func set_visible_characters_behavior(behavior: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_visible_characters_behavior", args: [VariantBox(behavior)])
 	}
 	public func set_visible_ratio(ratio: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_visible_ratio", args: [VariantBox(ratio)])
@@ -69829,13 +69829,13 @@ public class Label: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_lines_visible", args: [])
 		return __ret.asInt()
 	}
-	public func set_structured_text_bidi_override(parser: TextServer.StructuredTextParser) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override", args: [VariantBox(parser.rawValue)])
+	public func set_structured_text_bidi_override(parser: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override", args: [VariantBox(parser)])
 	}
 	@discardableResult
-	public func get_structured_text_bidi_override() -> TextServer.StructuredTextParser {
+	public func get_structured_text_bidi_override() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_structured_text_bidi_override", args: [])
-		return __ret.asEnum(TextServer.StructuredTextParser.self)
+		return __ret.asInt()
 	}
 	public func set_structured_text_bidi_override_options(args: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override_options", args: [VariantBox(args)])
@@ -69883,9 +69883,9 @@ public class Label: Control {
 		get { Host.shared.getProperty(object: ptr, name: "text").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "text", value: VariantBox(newValue)) }
 	}
-	public var label_settings: LabelSettings {
+	public var label_settings: LabelSettings? {
 		get { Host.shared.getProperty(object: ptr, name: "label_settings").asObject(LabelSettings.self) }
-		set { Host.shared.setProperty(object: ptr, name: "label_settings", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "label_settings", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var horizontal_alignment: Int {
 		get { Host.shared.getProperty(object: ptr, name: "horizontal_alignment").asInt() }
@@ -70348,13 +70348,13 @@ public class Light3D: VisualInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_allow_contact_shadows", args: [])
 		return __ret.asBool()
 	}
-	public func set_bake_mode(bake_mode: Light3D.BakeMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_bake_mode", args: [VariantBox(bake_mode.rawValue)])
+	public func set_bake_mode(bake_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_bake_mode", args: [VariantBox(bake_mode)])
 	}
 	@discardableResult
-	public func get_bake_mode() -> Light3D.BakeMode {
+	public func get_bake_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_bake_mode", args: [])
-		return __ret.asEnum(Light3D.BakeMode.self)
+		return __ret.asInt()
 	}
 	public func set_projector(projector: Texture2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_projector", args: [VariantBox(projector)])
@@ -70409,9 +70409,9 @@ public class Light3D: VisualInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "light_volumetric_fog_energy").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "light_volumetric_fog_energy", value: VariantBox(newValue)) }
 	}
-	public var light_projector: GodotObject {
+	public var light_projector: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "light_projector").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "light_projector", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "light_projector", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var light_size: Double {
 		get { Host.shared.getProperty(object: ptr, name: "light_size").asDouble() }
@@ -70556,9 +70556,9 @@ public class LightOccluder2D: Node2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_set_as_sdf_collision", args: [])
 		return __ret.asBool()
 	}
-	public var occluder: OccluderPolygon2D {
+	public var occluder: OccluderPolygon2D? {
 		get { Host.shared.getProperty(object: ptr, name: "occluder").asObject(OccluderPolygon2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "occluder", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "occluder", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var sdf_collision: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "sdf_collision").asBool() }
@@ -70873,9 +70873,9 @@ public class LightmapGI: VisualInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "environment_mode").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "environment_mode", value: VariantBox(newValue)) }
 	}
-	public var environment_custom_sky: Sky {
+	public var environment_custom_sky: Sky? {
 		get { Host.shared.getProperty(object: ptr, name: "environment_custom_sky").asObject(Sky.self) }
-		set { Host.shared.setProperty(object: ptr, name: "environment_custom_sky", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "environment_custom_sky", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var environment_custom_color: Color {
 		get { Host.shared.getProperty(object: ptr, name: "environment_custom_color").asColor() }
@@ -70885,9 +70885,9 @@ public class LightmapGI: VisualInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "environment_custom_energy").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "environment_custom_energy", value: VariantBox(newValue)) }
 	}
-	public var camera_attributes: GodotObject {
+	public var camera_attributes: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "camera_attributes").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "camera_attributes", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "camera_attributes", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Gen_Probes: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Gen Probes") }
@@ -70901,9 +70901,9 @@ public class LightmapGI: VisualInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "Data") }
 		set { Host.shared.setProperty(object: ptr, name: "Data", value: VariantBox(newValue)) }
 	}
-	public var light_data: LightmapGIData {
+	public var light_data: LightmapGIData? {
 		get { Host.shared.getProperty(object: ptr, name: "light_data").asObject(LightmapGIData.self) }
-		set { Host.shared.setProperty(object: ptr, name: "light_data", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "light_data", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -71088,37 +71088,37 @@ public class Line2D: Node2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture", args: [])
 		return __ret.asObject(Texture2D.self)
 	}
-	public func set_texture_mode(mode: Line2D.LineTextureMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_mode", args: [VariantBox(mode.rawValue)])
+	public func set_texture_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_texture_mode() -> Line2D.LineTextureMode {
+	public func get_texture_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture_mode", args: [])
-		return __ret.asEnum(Line2D.LineTextureMode.self)
+		return __ret.asInt()
 	}
-	public func set_joint_mode(mode: Line2D.LineJointMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_joint_mode", args: [VariantBox(mode.rawValue)])
+	public func set_joint_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_joint_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_joint_mode() -> Line2D.LineJointMode {
+	public func get_joint_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_joint_mode", args: [])
-		return __ret.asEnum(Line2D.LineJointMode.self)
+		return __ret.asInt()
 	}
-	public func set_begin_cap_mode(mode: Line2D.LineCapMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_begin_cap_mode", args: [VariantBox(mode.rawValue)])
+	public func set_begin_cap_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_begin_cap_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_begin_cap_mode() -> Line2D.LineCapMode {
+	public func get_begin_cap_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_begin_cap_mode", args: [])
-		return __ret.asEnum(Line2D.LineCapMode.self)
+		return __ret.asInt()
 	}
-	public func set_end_cap_mode(mode: Line2D.LineCapMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_end_cap_mode", args: [VariantBox(mode.rawValue)])
+	public func set_end_cap_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_end_cap_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_end_cap_mode() -> Line2D.LineCapMode {
+	public func get_end_cap_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_end_cap_mode", args: [])
-		return __ret.asEnum(Line2D.LineCapMode.self)
+		return __ret.asInt()
 	}
 	public func set_sharp_limit(limit: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_sharp_limit", args: [VariantBox(limit)])
@@ -71156,9 +71156,9 @@ public class Line2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "width").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "width", value: VariantBox(newValue)) }
 	}
-	public var width_curve: Curve {
+	public var width_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "width_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "width_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "width_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var default_color: Color {
 		get { Host.shared.getProperty(object: ptr, name: "default_color").asColor() }
@@ -71168,13 +71168,13 @@ public class Line2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "Fill") }
 		set { Host.shared.setProperty(object: ptr, name: "Fill", value: VariantBox(newValue)) }
 	}
-	public var gradient: Gradient {
+	public var gradient: Gradient? {
 		get { Host.shared.getProperty(object: ptr, name: "gradient").asObject(Gradient.self) }
-		set { Host.shared.setProperty(object: ptr, name: "gradient", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "gradient", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var texture: Texture2D {
+	public var texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var texture_mode: Int {
 		get { Host.shared.getProperty(object: ptr, name: "texture_mode").asInt() }
@@ -71343,13 +71343,13 @@ public class LineEdit: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_language", args: [])
 		return __ret.asString()
 	}
-	public func set_structured_text_bidi_override(parser: TextServer.StructuredTextParser) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override", args: [VariantBox(parser.rawValue)])
+	public func set_structured_text_bidi_override(parser: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override", args: [VariantBox(parser)])
 	}
 	@discardableResult
-	public func get_structured_text_bidi_override() -> TextServer.StructuredTextParser {
+	public func get_structured_text_bidi_override() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_structured_text_bidi_override", args: [])
-		return __ret.asEnum(TextServer.StructuredTextParser.self)
+		return __ret.asInt()
 	}
 	public func set_structured_text_bidi_override_options(args: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override_options", args: [VariantBox(args)])
@@ -71524,13 +71524,13 @@ public class LineEdit: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_virtual_keyboard_show_on_focus", args: [])
 		return __ret.asBool()
 	}
-	public func set_virtual_keyboard_type(type: LineEdit.VirtualKeyboardType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_virtual_keyboard_type", args: [VariantBox(type.rawValue)])
+	public func set_virtual_keyboard_type(type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_virtual_keyboard_type", args: [VariantBox(type)])
 	}
 	@discardableResult
-	public func get_virtual_keyboard_type() -> LineEdit.VirtualKeyboardType {
+	public func get_virtual_keyboard_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_virtual_keyboard_type", args: [])
-		return __ret.asEnum(LineEdit.VirtualKeyboardType.self)
+		return __ret.asInt()
 	}
 	public func set_clear_button_enabled(enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_clear_button_enabled", args: [VariantBox(enable)])
@@ -71772,9 +71772,9 @@ public class LineEdit: Control {
 		get { Host.shared.getProperty(object: ptr, name: "Icon") }
 		set { Host.shared.setProperty(object: ptr, name: "Icon", value: VariantBox(newValue)) }
 	}
-	public var right_icon: Texture2D {
+	public var right_icon: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "right_icon").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "right_icon", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "right_icon", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var icon_expand_mode: Int {
 		get { Host.shared.getProperty(object: ptr, name: "icon_expand_mode").asInt() }
@@ -71924,21 +71924,21 @@ public class LookAtModifier3D: SkeletonModifier3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_duration", args: [])
 		return __ret.asDouble()
 	}
-	public func set_transition_type(transition_type: Tween.TransitionType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_transition_type", args: [VariantBox(transition_type.rawValue)])
+	public func set_transition_type(transition_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_transition_type", args: [VariantBox(transition_type)])
 	}
 	@discardableResult
-	public func get_transition_type() -> Tween.TransitionType {
+	public func get_transition_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_transition_type", args: [])
-		return __ret.asEnum(Tween.TransitionType.self)
+		return __ret.asInt()
 	}
-	public func set_ease_type(ease_type: Tween.EaseType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_ease_type", args: [VariantBox(ease_type.rawValue)])
+	public func set_ease_type(ease_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_ease_type", args: [VariantBox(ease_type)])
 	}
 	@discardableResult
-	public func get_ease_type() -> Tween.EaseType {
+	public func get_ease_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_ease_type", args: [])
-		return __ret.asEnum(Tween.EaseType.self)
+		return __ret.asInt()
 	}
 	public func set_use_angle_limitation(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_use_angle_limitation", args: [VariantBox(enabled)])
@@ -72398,13 +72398,13 @@ public class MeshInstance2D: Node2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture", args: [])
 		return __ret.asObject(Texture2D.self)
 	}
-	public var mesh: GodotObject {
+	public var mesh: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "mesh").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "mesh", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "mesh", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var texture: Texture2D {
+	public var texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public func emit_texture_changed() {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("texture_changed")])
@@ -72471,13 +72471,13 @@ public class MultiMeshInstance2D: Node2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture", args: [])
 		return __ret.asObject(Texture2D.self)
 	}
-	public var multimesh: MultiMesh {
+	public var multimesh: MultiMesh? {
 		get { Host.shared.getProperty(object: ptr, name: "multimesh").asObject(MultiMesh.self) }
-		set { Host.shared.setProperty(object: ptr, name: "multimesh", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "multimesh", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var texture: Texture2D {
+	public var texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public func emit_texture_changed() {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("texture_changed")])
@@ -72590,9 +72590,9 @@ public class MultiplayerPeerExtension: MultiplayerPeer {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func _get_connection_status() -> MultiplayerPeer.ConnectionStatus {
+	public func _get_connection_status() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_connection_status", args: [])
-		return __ret.asEnum(MultiplayerPeer.ConnectionStatus.self)
+		return __ret.asInt()
 	}
 }
 
@@ -72951,9 +72951,9 @@ public class NavigationRegion2D: Node2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_bounds", args: [])
 		return __ret.asRect2()
 	}
-	public var navigation_polygon: NavigationPolygon {
+	public var navigation_polygon: NavigationPolygon? {
 		get { Host.shared.getProperty(object: ptr, name: "navigation_polygon").asObject(NavigationPolygon.self) }
-		set { Host.shared.setProperty(object: ptr, name: "navigation_polygon", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "navigation_polygon", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var enabled: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "enabled").asBool() }
@@ -73045,9 +73045,9 @@ public class NinePatchRect: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_v_axis_stretch_mode", args: [])
 		return __ret.asEnum(NinePatchRect.AxisStretchMode.self)
 	}
-	public var texture: Texture2D {
+	public var texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var draw_center: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "draw_center").asBool() }
@@ -73145,9 +73145,9 @@ public class OccluderInstance3D: VisualInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_editable_3d_polygon_resource", args: [])
 		return __ret.asObject(Resource.self)
 	}
-	public var occluder: Occluder3D {
+	public var occluder: Occluder3D? {
 		get { Host.shared.getProperty(object: ptr, name: "occluder").asObject(Occluder3D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "occluder", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "occluder", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Bake: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Bake") }
@@ -73553,9 +73553,9 @@ public class PanoramaSkyMaterial: Material {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_energy_multiplier", args: [])
 		return __ret.asDouble()
 	}
-	public var panorama: Texture2D {
+	public var panorama: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "panorama").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "panorama", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "panorama", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var filter: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "filter").asBool() }
@@ -73815,36 +73815,36 @@ public class ParticleProcessMaterial: Material {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_flatness", args: [])
 		return __ret.asDouble()
 	}
-	public func set_param(param: ParticleProcessMaterial.Parameter, value: Vector2) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_param", args: [VariantBox(param.rawValue), VariantBox(value)])
+	public func set_param(param: Int, value: Vector2) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_param", args: [VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func get_param(param: ParticleProcessMaterial.Parameter) -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_param", args: [VariantBox(param.rawValue)])
+	public func get_param(param: Int) -> Vector2 {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_param", args: [VariantBox(param)])
 		return __ret.asVector2()
 	}
-	public func set_param_min(param: ParticleProcessMaterial.Parameter, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_min", args: [VariantBox(param.rawValue), VariantBox(value)])
+	public func set_param_min(param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_min", args: [VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func get_param_min(param: ParticleProcessMaterial.Parameter) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_min", args: [VariantBox(param.rawValue)])
+	public func get_param_min(param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_min", args: [VariantBox(param)])
 		return __ret.asDouble()
 	}
-	public func set_param_max(param: ParticleProcessMaterial.Parameter, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_max", args: [VariantBox(param.rawValue), VariantBox(value)])
+	public func set_param_max(param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_max", args: [VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func get_param_max(param: ParticleProcessMaterial.Parameter) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_max", args: [VariantBox(param.rawValue)])
+	public func get_param_max(param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_max", args: [VariantBox(param)])
 		return __ret.asDouble()
 	}
-	public func set_param_texture(param: ParticleProcessMaterial.Parameter, texture: Texture2D) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_texture", args: [VariantBox(param.rawValue), VariantBox(texture)])
+	public func set_param_texture(param: Int, texture: Texture2D) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_texture", args: [VariantBox(param), VariantBox(texture)])
 	}
 	@discardableResult
-	public func get_param_texture(param: ParticleProcessMaterial.Parameter) -> Texture2D? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_texture", args: [VariantBox(param.rawValue)])
+	public func get_param_texture(param: Int) -> Texture2D? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_texture", args: [VariantBox(param)])
 		return __ret.asObject(Texture2D.self)
 	}
 	public func set_color(color: Color) {
@@ -73943,12 +73943,12 @@ public class ParticleProcessMaterial: Material {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_velocity_limit_curve", args: [])
 		return __ret.asObject(Texture2D.self)
 	}
-	public func set_particle_flag(particle_flag: ParticleProcessMaterial.ParticleFlags, enable: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_particle_flag", args: [VariantBox(particle_flag.rawValue), VariantBox(enable)])
+	public func set_particle_flag(particle_flag: Int, enable: Bool) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_particle_flag", args: [VariantBox(particle_flag), VariantBox(enable)])
 	}
 	@discardableResult
-	public func get_particle_flag(particle_flag: ParticleProcessMaterial.ParticleFlags) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_particle_flag", args: [VariantBox(particle_flag.rawValue)])
+	public func get_particle_flag(particle_flag: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_particle_flag", args: [VariantBox(particle_flag)])
 		return __ret.asBool()
 	}
 	public func set_velocity_pivot(pivot: Vector3) {
@@ -74128,12 +74128,12 @@ public class ParticleProcessMaterial: Material {
 		return __ret.asDouble()
 	}
 	@discardableResult
-	public func get_sub_emitter_mode() -> ParticleProcessMaterial.SubEmitterMode {
+	public func get_sub_emitter_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_sub_emitter_mode", args: [])
-		return __ret.asEnum(ParticleProcessMaterial.SubEmitterMode.self)
+		return __ret.asInt()
 	}
-	public func set_sub_emitter_mode(mode: ParticleProcessMaterial.SubEmitterMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_sub_emitter_mode", args: [VariantBox(mode.rawValue)])
+	public func set_sub_emitter_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_sub_emitter_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
 	public func get_sub_emitter_frequency() -> Double {
@@ -74183,13 +74183,13 @@ public class ParticleProcessMaterial: Material {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_attractor_interaction_enabled", args: [])
 		return __ret.asBool()
 	}
-	public func set_collision_mode(mode: ParticleProcessMaterial.CollisionMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_collision_mode", args: [VariantBox(mode.rawValue)])
+	public func set_collision_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_collision_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_collision_mode() -> ParticleProcessMaterial.CollisionMode {
+	public func get_collision_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_collision_mode", args: [])
-		return __ret.asEnum(ParticleProcessMaterial.CollisionMode.self)
+		return __ret.asInt()
 	}
 	public func set_collision_use_scale(radius: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_collision_use_scale", args: [VariantBox(radius)])
@@ -74307,17 +74307,17 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "emission_box_extents").asVector3() }
 		set { Host.shared.setProperty(object: ptr, name: "emission_box_extents", value: VariantBox(newValue)) }
 	}
-	public var emission_point_texture: Texture2D {
+	public var emission_point_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "emission_point_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "emission_point_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "emission_point_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var emission_normal_texture: Texture2D {
+	public var emission_normal_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "emission_normal_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "emission_normal_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "emission_normal_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var emission_color_texture: Texture2D {
+	public var emission_color_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "emission_color_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "emission_color_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "emission_color_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var emission_point_count: Int {
 		get { Host.shared.getProperty(object: ptr, name: "emission_point_count").asInt() }
@@ -74359,9 +74359,9 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "angle_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "angle_max", value: VariantBox(newValue)) }
 	}
-	public var angle_curve: CurveTexture {
+	public var angle_curve: CurveTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "angle_curve").asObject(CurveTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "angle_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "angle_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Rotation_3D: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Rotation 3D") }
@@ -74439,9 +74439,9 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "angular_velocity_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "angular_velocity_max", value: VariantBox(newValue)) }
 	}
-	public var angular_velocity_curve: CurveTexture {
+	public var angular_velocity_curve: CurveTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "angular_velocity_curve").asObject(CurveTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "angular_velocity_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "angular_velocity_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Directional_Velocity: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Directional Velocity") }
@@ -74459,9 +74459,9 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "directional_velocity_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "directional_velocity_max", value: VariantBox(newValue)) }
 	}
-	public var directional_velocity_curve: CurveXYZTexture {
+	public var directional_velocity_curve: CurveXYZTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "directional_velocity_curve").asObject(CurveXYZTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "directional_velocity_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "directional_velocity_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Orbit_Velocity: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Orbit Velocity") }
@@ -74479,9 +74479,9 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "orbit_velocity_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "orbit_velocity_max", value: VariantBox(newValue)) }
 	}
-	public var orbit_velocity_curve: GodotObject {
+	public var orbit_velocity_curve: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "orbit_velocity_curve").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "orbit_velocity_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "orbit_velocity_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Radial_Velocity: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Radial Velocity") }
@@ -74499,17 +74499,17 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "radial_velocity_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "radial_velocity_max", value: VariantBox(newValue)) }
 	}
-	public var radial_velocity_curve: CurveTexture {
+	public var radial_velocity_curve: CurveTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "radial_velocity_curve").asObject(CurveTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "radial_velocity_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "radial_velocity_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Velocity_Limit: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Velocity Limit") }
 		set { Host.shared.setProperty(object: ptr, name: "Velocity Limit", value: VariantBox(newValue)) }
 	}
-	public var velocity_limit_curve: CurveTexture {
+	public var velocity_limit_curve: CurveTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "velocity_limit_curve").asObject(CurveTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "velocity_limit_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "velocity_limit_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Rotation_Velocity_3D: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Rotation Velocity 3D") }
@@ -74527,9 +74527,9 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "rotation_velocity_3d_max").asVector3() }
 		set { Host.shared.setProperty(object: ptr, name: "rotation_velocity_3d_max", value: VariantBox(newValue)) }
 	}
-	public var rotation_velocity_3d_curve: CurveXYZTexture {
+	public var rotation_velocity_3d_curve: CurveXYZTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "rotation_velocity_3d_curve").asObject(CurveXYZTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "rotation_velocity_3d_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "rotation_velocity_3d_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Accelerations: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Accelerations") }
@@ -74559,9 +74559,9 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "linear_accel_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "linear_accel_max", value: VariantBox(newValue)) }
 	}
-	public var linear_accel_curve: CurveTexture {
+	public var linear_accel_curve: CurveTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "linear_accel_curve").asObject(CurveTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "linear_accel_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "linear_accel_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Radial_Accel: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Radial Accel") }
@@ -74579,9 +74579,9 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "radial_accel_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "radial_accel_max", value: VariantBox(newValue)) }
 	}
-	public var radial_accel_curve: CurveTexture {
+	public var radial_accel_curve: CurveTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "radial_accel_curve").asObject(CurveTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "radial_accel_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "radial_accel_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Tangential_Accel: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Tangential Accel") }
@@ -74599,9 +74599,9 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "tangential_accel_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "tangential_accel_max", value: VariantBox(newValue)) }
 	}
-	public var tangential_accel_curve: CurveTexture {
+	public var tangential_accel_curve: CurveTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "tangential_accel_curve").asObject(CurveTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "tangential_accel_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "tangential_accel_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Damping: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Damping") }
@@ -74619,9 +74619,9 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "damping_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "damping_max", value: VariantBox(newValue)) }
 	}
-	public var damping_curve: CurveTexture {
+	public var damping_curve: CurveTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "damping_curve").asObject(CurveTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "damping_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "damping_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Attractor_Interaction: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Attractor Interaction") }
@@ -74663,9 +74663,9 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "scale_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "scale_max", value: VariantBox(newValue)) }
 	}
-	public var scale_curve: GodotObject {
+	public var scale_curve: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "scale_curve").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "scale_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "scale_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Scale_Over_Velocity: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Scale Over Velocity") }
@@ -74683,9 +74683,9 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "scale_over_velocity_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "scale_over_velocity_max", value: VariantBox(newValue)) }
 	}
-	public var scale_over_velocity_curve: GodotObject {
+	public var scale_over_velocity_curve: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "scale_over_velocity_curve").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "scale_over_velocity_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "scale_over_velocity_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Color_Curves: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Color Curves") }
@@ -74695,21 +74695,21 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "color").asColor() }
 		set { Host.shared.setProperty(object: ptr, name: "color", value: VariantBox(newValue)) }
 	}
-	public var color_ramp: GradientTexture1D {
+	public var color_ramp: GradientTexture1D? {
 		get { Host.shared.getProperty(object: ptr, name: "color_ramp").asObject(GradientTexture1D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "color_ramp", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "color_ramp", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var color_initial_ramp: GradientTexture1D {
+	public var color_initial_ramp: GradientTexture1D? {
 		get { Host.shared.getProperty(object: ptr, name: "color_initial_ramp").asObject(GradientTexture1D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "color_initial_ramp", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "color_initial_ramp", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var alpha_curve: CurveTexture {
+	public var alpha_curve: CurveTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "alpha_curve").asObject(CurveTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "alpha_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "alpha_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var emission_curve: CurveTexture {
+	public var emission_curve: CurveTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "emission_curve").asObject(CurveTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "emission_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "emission_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Hue_Variation: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Hue Variation") }
@@ -74727,9 +74727,9 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "hue_variation_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "hue_variation_max", value: VariantBox(newValue)) }
 	}
-	public var hue_variation_curve: CurveTexture {
+	public var hue_variation_curve: CurveTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "hue_variation_curve").asObject(CurveTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "hue_variation_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "hue_variation_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Animation: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Animation") }
@@ -74747,9 +74747,9 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "anim_speed_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "anim_speed_max", value: VariantBox(newValue)) }
 	}
-	public var anim_speed_curve: CurveTexture {
+	public var anim_speed_curve: CurveTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "anim_speed_curve").asObject(CurveTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "anim_speed_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "anim_speed_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var anim_offset: Vector2 {
 		get { Host.shared.getProperty(object: ptr, name: "anim_offset").asVector2() }
@@ -74763,9 +74763,9 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "anim_offset_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "anim_offset_max", value: VariantBox(newValue)) }
 	}
-	public var anim_offset_curve: CurveTexture {
+	public var anim_offset_curve: CurveTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "anim_offset_curve").asObject(CurveTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "anim_offset_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "anim_offset_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Turbulence: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Turbulence") }
@@ -74815,9 +74815,9 @@ public class ParticleProcessMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "turbulence_initial_displacement_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "turbulence_initial_displacement_max", value: VariantBox(newValue)) }
 	}
-	public var turbulence_influence_over_life: CurveTexture {
+	public var turbulence_influence_over_life: CurveTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "turbulence_influence_over_life").asObject(CurveTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "turbulence_influence_over_life", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "turbulence_influence_over_life", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Collision: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Collision") }
@@ -74889,9 +74889,9 @@ public class Path2D: Node2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_curve", args: [])
 		return __ret.asObject(Curve2D.self)
 	}
-	public var curve: Curve2D {
+	public var curve: Curve2D? {
 		get { Host.shared.getProperty(object: ptr, name: "curve").asObject(Curve2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -75163,9 +75163,9 @@ public class PhysicalSkyMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "use_debanding").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "use_debanding", value: VariantBox(newValue)) }
 	}
-	public var night_sky: Texture2D {
+	public var night_sky: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "night_sky").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "night_sky", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "night_sky", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -75486,9 +75486,9 @@ public class Polygon2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "antialiased").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "antialiased", value: VariantBox(newValue)) }
 	}
-	public var texture: Texture2D {
+	public var texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var texture_offset: Vector2 {
 		get { Host.shared.getProperty(object: ptr, name: "texture_offset").asVector2() }
@@ -75656,9 +75656,9 @@ public class PrimitiveMesh: Mesh {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_create_mesh_array", args: [])
 		return __ret
 	}
-	public var material: GodotObject {
+	public var material: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "material").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "material", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "material", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var custom_aabb: AABB {
 		get { Host.shared.getProperty(object: ptr, name: "custom_aabb").asAABB() }
@@ -75819,9 +75819,9 @@ public class ProceduralSkyMaterial: Material {
 		get { Host.shared.getProperty(object: ptr, name: "sky_energy_multiplier").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "sky_energy_multiplier", value: VariantBox(newValue)) }
 	}
-	public var sky_cover: Texture2D {
+	public var sky_cover: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "sky_cover").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "sky_cover", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "sky_cover", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var sky_cover_modulate: Color {
 		get { Host.shared.getProperty(object: ptr, name: "sky_cover_modulate").asColor() }
@@ -76295,13 +76295,13 @@ public class ReflectionProbe: VisualInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_blend_distance", args: [])
 		return __ret.asDouble()
 	}
-	public func set_ambient_mode(ambient: ReflectionProbe.AmbientMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_ambient_mode", args: [VariantBox(ambient.rawValue)])
+	public func set_ambient_mode(ambient: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_ambient_mode", args: [VariantBox(ambient)])
 	}
 	@discardableResult
-	public func get_ambient_mode() -> ReflectionProbe.AmbientMode {
+	public func get_ambient_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_ambient_mode", args: [])
-		return __ret.asEnum(ReflectionProbe.AmbientMode.self)
+		return __ret.asInt()
 	}
 	public func set_ambient_color(ambient: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_ambient_color", args: [VariantBox(ambient)])
@@ -76391,13 +76391,13 @@ public class ReflectionProbe: VisualInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_reflection_mask", args: [])
 		return __ret.asInt()
 	}
-	public func set_update_mode(mode: ReflectionProbe.UpdateMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_update_mode", args: [VariantBox(mode.rawValue)])
+	public func set_update_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_update_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_update_mode() -> ReflectionProbe.UpdateMode {
+	public func get_update_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_update_mode", args: [])
-		return __ret.asEnum(ReflectionProbe.UpdateMode.self)
+		return __ret.asInt()
 	}
 	public var update_mode: Int {
 		get { Host.shared.getProperty(object: ptr, name: "update_mode").asInt() }
@@ -76614,9 +76614,9 @@ public class RetargetModifier3D: SkeletonModifier3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_scale_enabled", args: [])
 		return __ret.asBool()
 	}
-	public var profile: SkeletonProfile {
+	public var profile: SkeletonProfile? {
 		get { Host.shared.getProperty(object: ptr, name: "profile").asObject(SkeletonProfile.self) }
-		set { Host.shared.setProperty(object: ptr, name: "profile", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "profile", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var copy_bone_skin_scale: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "copy_bone_skin_scale").asBool() }
@@ -76668,8 +76668,8 @@ public class RichTextLabel: Control {
 	public func add_image(image: Texture2D, width: Double = 0, height: Double = 0, color: Color, inline_align: InlineAlignment = .center, region: Rect2, key: VariantBox, pad: Bool = false, tooltip: String, width_unit: RichTextLabel.ImageUnit = .pixel, height_unit: RichTextLabel.ImageUnit = .pixel, alt_text: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_image", args: [VariantBox(image), VariantBox(width), VariantBox(height), VariantBox(color), VariantBox(inline_align.rawValue), VariantBox(region), VariantBox(key), VariantBox(pad), VariantBox(tooltip), VariantBox(width_unit.rawValue), VariantBox(height_unit.rawValue), VariantBox(alt_text)])
 	}
-	public func update_image(key: VariantBox, mask: RichTextLabel.ImageUpdateMask, image: Texture2D, width: Double = 0, height: Double = 0, color: Color, inline_align: InlineAlignment = .center, region: Rect2, pad: Bool = false, tooltip: String, width_unit: RichTextLabel.ImageUnit = .pixel, height_unit: RichTextLabel.ImageUnit = .pixel) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "update_image", args: [VariantBox(key), VariantBox(mask.rawValue), VariantBox(image), VariantBox(width), VariantBox(height), VariantBox(color), VariantBox(inline_align.rawValue), VariantBox(region), VariantBox(pad), VariantBox(tooltip), VariantBox(width_unit.rawValue), VariantBox(height_unit.rawValue)])
+	public func update_image(key: VariantBox, mask: Int, image: Texture2D, width: Double = 0, height: Double = 0, color: Color, inline_align: InlineAlignment = .center, region: Rect2, pad: Bool = false, tooltip: String, width_unit: RichTextLabel.ImageUnit = .pixel, height_unit: RichTextLabel.ImageUnit = .pixel) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "update_image", args: [VariantBox(key), VariantBox(mask), VariantBox(image), VariantBox(width), VariantBox(height), VariantBox(color), VariantBox(inline_align.rawValue), VariantBox(region), VariantBox(pad), VariantBox(tooltip), VariantBox(width_unit.rawValue), VariantBox(height_unit.rawValue)])
 	}
 	public func newline() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "newline", args: [])
@@ -76714,14 +76714,14 @@ public class RichTextLabel: Control {
 	public func push_outline_color(color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "push_outline_color", args: [VariantBox(color)])
 	}
-	public func push_paragraph(alignment: HorizontalAlignment, base_direction: Control.TextDirection = .auto, language: String, st_parser: TextServer.StructuredTextParser, justification_flags: TextServer.JustificationFlag, tab_stops: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "push_paragraph", args: [VariantBox(alignment.rawValue), VariantBox(base_direction.rawValue), VariantBox(language), VariantBox(st_parser.rawValue), VariantBox(justification_flags.rawValue), VariantBox(tab_stops)])
+	public func push_paragraph(alignment: HorizontalAlignment, base_direction: Control.TextDirection = .auto, language: String, st_parser: Int = 0, justification_flags: Int = 163, tab_stops: VariantBox) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "push_paragraph", args: [VariantBox(alignment.rawValue), VariantBox(base_direction.rawValue), VariantBox(language), VariantBox(st_parser), VariantBox(justification_flags), VariantBox(tab_stops)])
 	}
 	public func push_indent(level: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "push_indent", args: [VariantBox(level)])
 	}
-	public func push_list(level: Int, type: RichTextLabel.ListType, capitalize: Bool, bullet: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "push_list", args: [VariantBox(level), VariantBox(type.rawValue), VariantBox(capitalize), VariantBox(bullet)])
+	public func push_list(level: Int, type: Int, capitalize: Bool, bullet: String) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "push_list", args: [VariantBox(level), VariantBox(type), VariantBox(capitalize), VariantBox(bullet)])
 	}
 	public func push_meta(data: VariantBox, underline_mode: RichTextLabel.MetaUnderline = .always, tooltip: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "push_meta", args: [VariantBox(data), VariantBox(underline_mode.rawValue), VariantBox(tooltip)])
@@ -76789,13 +76789,13 @@ public class RichTextLabel: Control {
 	public func clear() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "clear", args: [])
 	}
-	public func set_structured_text_bidi_override(parser: TextServer.StructuredTextParser) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override", args: [VariantBox(parser.rawValue)])
+	public func set_structured_text_bidi_override(parser: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override", args: [VariantBox(parser)])
 	}
 	@discardableResult
-	public func get_structured_text_bidi_override() -> TextServer.StructuredTextParser {
+	public func get_structured_text_bidi_override() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_structured_text_bidi_override", args: [])
-		return __ret.asEnum(TextServer.StructuredTextParser.self)
+		return __ret.asInt()
 	}
 	public func set_structured_text_bidi_override_options(args: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override_options", args: [VariantBox(args)])
@@ -76837,13 +76837,13 @@ public class RichTextLabel: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_vertical_alignment", args: [])
 		return __ret.asEnum(VerticalAlignment.self)
 	}
-	public func set_justification_flags(justification_flags: TextServer.JustificationFlag) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_justification_flags", args: [VariantBox(justification_flags.rawValue)])
+	public func set_justification_flags(justification_flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_justification_flags", args: [VariantBox(justification_flags)])
 	}
 	@discardableResult
-	public func get_justification_flags() -> TextServer.JustificationFlag {
+	public func get_justification_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_justification_flags", args: [])
-		return __ret.asEnum(TextServer.JustificationFlag.self)
+		return __ret.asInt()
 	}
 	public func set_tab_stops(tab_stops: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_tab_stops", args: [VariantBox(tab_stops)])
@@ -76853,21 +76853,21 @@ public class RichTextLabel: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tab_stops", args: [])
 		return __ret
 	}
-	public func set_autowrap_mode(autowrap_mode: TextServer.AutowrapMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_mode", args: [VariantBox(autowrap_mode.rawValue)])
+	public func set_autowrap_mode(autowrap_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_mode", args: [VariantBox(autowrap_mode)])
 	}
 	@discardableResult
-	public func get_autowrap_mode() -> TextServer.AutowrapMode {
+	public func get_autowrap_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_autowrap_mode", args: [])
-		return __ret.asEnum(TextServer.AutowrapMode.self)
+		return __ret.asInt()
 	}
-	public func set_autowrap_trim_flags(autowrap_trim_flags: TextServer.LineBreakFlag) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_trim_flags", args: [VariantBox(autowrap_trim_flags.rawValue)])
+	public func set_autowrap_trim_flags(autowrap_trim_flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_trim_flags", args: [VariantBox(autowrap_trim_flags)])
 	}
 	@discardableResult
-	public func get_autowrap_trim_flags() -> TextServer.LineBreakFlag {
+	public func get_autowrap_trim_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_autowrap_trim_flags", args: [])
-		return __ret.asEnum(TextServer.LineBreakFlag.self)
+		return __ret.asInt()
 	}
 	public func set_meta_underline(enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_meta_underline", args: [VariantBox(enable)])
@@ -77080,12 +77080,12 @@ public class RichTextLabel: Control {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func get_visible_characters_behavior() -> TextServer.VisibleCharactersBehavior {
+	public func get_visible_characters_behavior() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_visible_characters_behavior", args: [])
-		return __ret.asEnum(TextServer.VisibleCharactersBehavior.self)
+		return __ret.asInt()
 	}
-	public func set_visible_characters_behavior(behavior: TextServer.VisibleCharactersBehavior) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_visible_characters_behavior", args: [VariantBox(behavior.rawValue)])
+	public func set_visible_characters_behavior(behavior: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_visible_characters_behavior", args: [VariantBox(behavior)])
 	}
 	public func set_visible_ratio(ratio: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_visible_ratio", args: [VariantBox(ratio)])
@@ -77211,12 +77211,12 @@ public class RichTextLabel: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "menu_option", args: [VariantBox(option)])
 	}
 	@discardableResult
-	public func get_resource_access_flags() -> RichTextLabel.ResourceAccessFlag {
+	public func get_resource_access_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_resource_access_flags", args: [])
-		return __ret.asEnum(RichTextLabel.ResourceAccessFlag.self)
+		return __ret.asInt()
 	}
-	public func set_resource_access_flags(flags: RichTextLabel.ResourceAccessFlag) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_resource_access_flags", args: [VariantBox(flags.rawValue)])
+	public func set_resource_access_flags(flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_resource_access_flags", args: [VariantBox(flags)])
 	}
 	public var resource_access_flags: Int {
 		get { Host.shared.getProperty(object: ptr, name: "resource_access_flags").asInt() }
@@ -77786,9 +77786,9 @@ public class ShaderMaterial: Material {
 	public func get_shader_parameter(param: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_shader_parameter", args: [VariantBox(param)])
 	}
-	public var shader: Shader {
+	public var shader: Shader? {
 		get { Host.shared.getProperty(object: ptr, name: "shader").asObject(Shader.self) }
-		set { Host.shared.setProperty(object: ptr, name: "shader", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "shader", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -77953,9 +77953,9 @@ public class ShapeCast2D: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "enabled").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "enabled", value: VariantBox(newValue)) }
 	}
-	public var shape: Shape2D {
+	public var shape: Shape2D? {
 		get { Host.shared.getProperty(object: ptr, name: "shape").asObject(Shape2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "shape", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "shape", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var exclude_parent: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "exclude_parent").asBool() }
@@ -79555,9 +79555,9 @@ public class Sprite2D: Node2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_rect", args: [])
 		return __ret.asRect2()
 	}
-	public var texture: Texture2D {
+	public var texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Offset: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Offset") }
@@ -80107,9 +80107,9 @@ public class StyleBoxTexture: StyleBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_v_axis_stretch_mode", args: [])
 		return __ret.asEnum(StyleBoxTexture.AxisStretchMode.self)
 	}
-	public var texture: Texture2D {
+	public var texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Texture_Margins: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Texture Margins") }
@@ -80530,21 +80530,21 @@ public class TabBar: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tab_idx_at_point", args: [VariantBox(point)])
 		return __ret.asInt()
 	}
-	public func set_tab_alignment(alignment: TabBar.AlignmentMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_tab_alignment", args: [VariantBox(alignment.rawValue)])
+	public func set_tab_alignment(alignment: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_tab_alignment", args: [VariantBox(alignment)])
 	}
 	@discardableResult
-	public func get_tab_alignment() -> TabBar.AlignmentMode {
+	public func get_tab_alignment() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tab_alignment", args: [])
-		return __ret.asEnum(TabBar.AlignmentMode.self)
+		return __ret.asInt()
 	}
-	public func set_tab_sizing(tab_sizing: TabBar.SizingMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_tab_sizing", args: [VariantBox(tab_sizing.rawValue)])
+	public func set_tab_sizing(tab_sizing: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_tab_sizing", args: [VariantBox(tab_sizing)])
 	}
 	@discardableResult
-	public func get_tab_sizing() -> TabBar.SizingMode {
+	public func get_tab_sizing() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tab_sizing", args: [])
-		return __ret.asEnum(TabBar.SizingMode.self)
+		return __ret.asInt()
 	}
 	public func set_clip_tabs(clip_tabs: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_clip_tabs", args: [VariantBox(clip_tabs)])
@@ -80583,13 +80583,13 @@ public class TabBar: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_close_with_middle_mouse", args: [])
 		return __ret.asBool()
 	}
-	public func set_tab_close_display_policy(policy: TabBar.CloseButtonDisplayPolicy) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_tab_close_display_policy", args: [VariantBox(policy.rawValue)])
+	public func set_tab_close_display_policy(policy: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_tab_close_display_policy", args: [VariantBox(policy)])
 	}
 	@discardableResult
-	public func get_tab_close_display_policy() -> TabBar.CloseButtonDisplayPolicy {
+	public func get_tab_close_display_policy() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tab_close_display_policy", args: [])
-		return __ret.asEnum(TabBar.CloseButtonDisplayPolicy.self)
+		return __ret.asInt()
 	}
 	public func set_max_tab_width(width: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_max_tab_width", args: [VariantBox(width)])
@@ -80807,13 +80807,13 @@ public class TextEdit: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_language", args: [])
 		return __ret.asString()
 	}
-	public func set_structured_text_bidi_override(parser: TextServer.StructuredTextParser) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override", args: [VariantBox(parser.rawValue)])
+	public func set_structured_text_bidi_override(parser: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override", args: [VariantBox(parser)])
 	}
 	@discardableResult
-	public func get_structured_text_bidi_override() -> TextServer.StructuredTextParser {
+	public func get_structured_text_bidi_override() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_structured_text_bidi_override", args: [])
-		return __ret.asEnum(TextServer.StructuredTextParser.self)
+		return __ret.asInt()
 	}
 	public func set_structured_text_bidi_override_options(args: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override_options", args: [VariantBox(args)])
@@ -81024,8 +81024,8 @@ public class TextEdit: Control {
 	public func paste_primary_clipboard(caret_index: Int = -1) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "paste_primary_clipboard", args: [VariantBox(caret_index)])
 	}
-	public func start_action(action: TextEdit.EditAction) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "start_action", args: [VariantBox(action.rawValue)])
+	public func start_action(action: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "start_action", args: [VariantBox(action)])
 	}
 	public func end_action() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "end_action", args: [])
@@ -81416,21 +81416,21 @@ public class TextEdit: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_selection_handle_enabled", args: [])
 		return __ret.asBool()
 	}
-	public func set_line_wrapping_mode(mode: TextEdit.LineWrappingMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_line_wrapping_mode", args: [VariantBox(mode.rawValue)])
+	public func set_line_wrapping_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_line_wrapping_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_line_wrapping_mode() -> TextEdit.LineWrappingMode {
+	public func get_line_wrapping_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_line_wrapping_mode", args: [])
-		return __ret.asEnum(TextEdit.LineWrappingMode.self)
+		return __ret.asInt()
 	}
-	public func set_autowrap_mode(autowrap_mode: TextServer.AutowrapMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_mode", args: [VariantBox(autowrap_mode.rawValue)])
+	public func set_autowrap_mode(autowrap_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_mode", args: [VariantBox(autowrap_mode)])
 	}
 	@discardableResult
-	public func get_autowrap_mode() -> TextServer.AutowrapMode {
+	public func get_autowrap_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_autowrap_mode", args: [])
-		return __ret.asEnum(TextServer.AutowrapMode.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func is_line_wrapped(line: Int) -> Bool {
@@ -81983,9 +81983,9 @@ public class TextEdit: Control {
 		get { Host.shared.getProperty(object: ptr, name: "Highlighting") }
 		set { Host.shared.setProperty(object: ptr, name: "Highlighting", value: VariantBox(newValue)) }
 	}
-	public var syntax_highlighter: SyntaxHighlighter {
+	public var syntax_highlighter: SyntaxHighlighter? {
 		get { Host.shared.getProperty(object: ptr, name: "syntax_highlighter").asObject(SyntaxHighlighter.self) }
-		set { Host.shared.setProperty(object: ptr, name: "syntax_highlighter", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "syntax_highlighter", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var highlight_all_occurrences: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "highlight_all_occurrences").asBool() }
@@ -82373,13 +82373,13 @@ public class TextureRect: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture", args: [])
 		return __ret.asObject(Texture2D.self)
 	}
-	public func set_expand_mode(expand_mode: TextureRect.ExpandMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_expand_mode", args: [VariantBox(expand_mode.rawValue)])
+	public func set_expand_mode(expand_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_expand_mode", args: [VariantBox(expand_mode)])
 	}
 	@discardableResult
-	public func get_expand_mode() -> TextureRect.ExpandMode {
+	public func get_expand_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_expand_mode", args: [])
-		return __ret.asEnum(TextureRect.ExpandMode.self)
+		return __ret.asInt()
 	}
 	public func set_flip_h(enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_flip_h", args: [VariantBox(enable)])
@@ -82397,17 +82397,17 @@ public class TextureRect: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_flipped_v", args: [])
 		return __ret.asBool()
 	}
-	public func set_stretch_mode(stretch_mode: TextureRect.StretchMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_stretch_mode", args: [VariantBox(stretch_mode.rawValue)])
+	public func set_stretch_mode(stretch_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_stretch_mode", args: [VariantBox(stretch_mode)])
 	}
 	@discardableResult
-	public func get_stretch_mode() -> TextureRect.StretchMode {
+	public func get_stretch_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_stretch_mode", args: [])
-		return __ret.asEnum(TextureRect.StretchMode.self)
+		return __ret.asInt()
 	}
-	public var texture: Texture2D {
+	public var texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var expand_mode: Int {
 		get { Host.shared.getProperty(object: ptr, name: "expand_mode").asInt() }
@@ -82698,9 +82698,9 @@ public class TileMap: Node2D {
 	public func _tile_data_runtime_update(layer: Int, coords: Vector2i, tile_data: TileData) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_tile_data_runtime_update", args: [VariantBox(layer), VariantBox(coords), VariantBox(tile_data)])
 	}
-	public var tile_set: TileSet {
+	public var tile_set: TileSet? {
 		get { Host.shared.getProperty(object: ptr, name: "tile_set").asObject(TileSet.self) }
-		set { Host.shared.setProperty(object: ptr, name: "tile_set", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "tile_set", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var rendering_quadrant_size: Int {
 		get { Host.shared.getProperty(object: ptr, name: "rendering_quadrant_size").asInt() }
@@ -82989,9 +82989,9 @@ public class TileMapLayer: Node2D {
 		get { Host.shared.getProperty(object: ptr, name: "enabled").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "enabled", value: VariantBox(newValue)) }
 	}
-	public var tile_set: TileSet {
+	public var tile_set: TileSet? {
 		get { Host.shared.getProperty(object: ptr, name: "tile_set").asObject(TileSet.self) }
-		set { Host.shared.setProperty(object: ptr, name: "tile_set", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "tile_set", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Rendering: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Rendering") }
@@ -83235,9 +83235,9 @@ public class TileSetAtlasSource: TileSetSource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_runtime_tile_texture_region", args: [VariantBox(atlas_coords), VariantBox(frame)])
 		return __ret.asRect2i()
 	}
-	public var texture: Texture2D {
+	public var texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var margins: Vector2i {
 		get { Host.shared.getProperty(object: ptr, name: "margins").asVector2i() }
@@ -83380,13 +83380,13 @@ public class TouchScreenButton: Node2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_action", args: [])
 		return __ret.asString()
 	}
-	public func set_visibility_mode(mode: TouchScreenButton.VisibilityMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_visibility_mode", args: [VariantBox(mode.rawValue)])
+	public func set_visibility_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_visibility_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_visibility_mode() -> TouchScreenButton.VisibilityMode {
+	public func get_visibility_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_visibility_mode", args: [])
-		return __ret.asEnum(TouchScreenButton.VisibilityMode.self)
+		return __ret.asInt()
 	}
 	public func set_passby_press(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_passby_press", args: [VariantBox(enabled)])
@@ -83401,21 +83401,21 @@ public class TouchScreenButton: Node2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_pressed", args: [])
 		return __ret.asBool()
 	}
-	public var texture_normal: Texture2D {
+	public var texture_normal: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture_normal").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture_normal", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture_normal", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var texture_pressed: Texture2D {
+	public var texture_pressed: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture_pressed").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture_pressed", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture_pressed", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var bitmask: BitMap {
+	public var bitmask: BitMap? {
 		get { Host.shared.getProperty(object: ptr, name: "bitmask").asObject(BitMap.self) }
-		set { Host.shared.setProperty(object: ptr, name: "bitmask", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "bitmask", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var shape: Shape2D {
+	public var shape: Shape2D? {
 		get { Host.shared.getProperty(object: ptr, name: "shape").asObject(Shape2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "shape", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "shape", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var shape_centered: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "shape_centered").asBool() }
@@ -83541,13 +83541,13 @@ public class Tree: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_pressed_button", args: [])
 		return __ret.asInt()
 	}
-	public func set_select_mode(mode: Tree.SelectMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_select_mode", args: [VariantBox(mode.rawValue)])
+	public func set_select_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_select_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_select_mode() -> Tree.SelectMode {
+	public func get_select_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_select_mode", args: [])
-		return __ret.asEnum(Tree.SelectMode.self)
+		return __ret.asInt()
 	}
 	public func deselect_all() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "deselect_all", args: [])
@@ -84010,9 +84010,9 @@ public class VideoStreamPlayer: Control {
 		get { Host.shared.getProperty(object: ptr, name: "audio_track").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "audio_track", value: VariantBox(newValue)) }
 	}
-	public var stream: VideoStream {
+	public var stream: VideoStream? {
 		get { Host.shared.getProperty(object: ptr, name: "stream").asObject(VideoStream.self) }
-		set { Host.shared.setProperty(object: ptr, name: "stream", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "stream", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var volume_db: Double {
 		get { Host.shared.getProperty(object: ptr, name: "volume_db").asDouble() }
@@ -84079,13 +84079,13 @@ public class VirtualJoystick: Control {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_joystick_mode(mode: VirtualJoystick.JoystickMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_joystick_mode", args: [VariantBox(mode.rawValue)])
+	public func set_joystick_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_joystick_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_joystick_mode() -> VirtualJoystick.JoystickMode {
+	public func get_joystick_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_joystick_mode", args: [])
-		return __ret.asEnum(VirtualJoystick.JoystickMode.self)
+		return __ret.asInt()
 	}
 	public func set_joystick_size(size: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_joystick_size", args: [VariantBox(size)])
@@ -84159,13 +84159,13 @@ public class VirtualJoystick: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_action_down", args: [])
 		return __ret.asString()
 	}
-	public func set_visibility_mode(mode: VirtualJoystick.VisibilityMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_visibility_mode", args: [VariantBox(mode.rawValue)])
+	public func set_visibility_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_visibility_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_visibility_mode() -> VirtualJoystick.VisibilityMode {
+	public func get_visibility_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_visibility_mode", args: [])
-		return __ret.asEnum(VirtualJoystick.VisibilityMode.self)
+		return __ret.asInt()
 	}
 	public var joystick_mode: Int {
 		get { Host.shared.getProperty(object: ptr, name: "joystick_mode").asInt() }
@@ -84531,13 +84531,13 @@ public class VisualShaderNodeColorFunc: VisualShaderNode {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_function(func_: VisualShaderNodeColorFunc.Function) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
+	public func set_function(func_: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_)])
 	}
 	@discardableResult
-	public func get_function() -> VisualShaderNodeColorFunc.Function {
+	public func get_function() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_function", args: [])
-		return __ret.asEnum(VisualShaderNodeColorFunc.Function.self)
+		return __ret.asInt()
 	}
 	public var function: Int {
 		get { Host.shared.getProperty(object: ptr, name: "function").asInt() }
@@ -84554,13 +84554,13 @@ public class VisualShaderNodeColorOp: VisualShaderNode {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_operator(op: VisualShaderNodeColorOp.Operator) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op.rawValue)])
+	public func set_operator(op: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op)])
 	}
 	@discardableResult
-	public func get_operator() -> VisualShaderNodeColorOp.Operator {
+	public func get_operator() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_operator", args: [])
-		return __ret.asEnum(VisualShaderNodeColorOp.Operator.self)
+		return __ret.asInt()
 	}
 	public var operator_: Int {
 		get { Host.shared.getProperty(object: ptr, name: "operator").asInt() }
@@ -84577,29 +84577,29 @@ public class VisualShaderNodeCompare: VisualShaderNode {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_comparison_type(type: VisualShaderNodeCompare.ComparisonType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_comparison_type", args: [VariantBox(type.rawValue)])
+	public func set_comparison_type(type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_comparison_type", args: [VariantBox(type)])
 	}
 	@discardableResult
-	public func get_comparison_type() -> VisualShaderNodeCompare.ComparisonType {
+	public func get_comparison_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_comparison_type", args: [])
-		return __ret.asEnum(VisualShaderNodeCompare.ComparisonType.self)
+		return __ret.asInt()
 	}
-	public func set_function(func_: VisualShaderNodeCompare.Function) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
+	public func set_function(func_: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_)])
 	}
 	@discardableResult
-	public func get_function() -> VisualShaderNodeCompare.Function {
+	public func get_function() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_function", args: [])
-		return __ret.asEnum(VisualShaderNodeCompare.Function.self)
+		return __ret.asInt()
 	}
-	public func set_condition(condition: VisualShaderNodeCompare.Condition) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_condition", args: [VariantBox(condition.rawValue)])
+	public func set_condition(condition: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_condition", args: [VariantBox(condition)])
 	}
 	@discardableResult
-	public func get_condition() -> VisualShaderNodeCompare.Condition {
+	public func get_condition() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_condition", args: [])
-		return __ret.asEnum(VisualShaderNodeCompare.Condition.self)
+		return __ret.asInt()
 	}
 	public var type: Int {
 		get { Host.shared.getProperty(object: ptr, name: "type").asInt() }
@@ -84656,21 +84656,21 @@ public class VisualShaderNodeCubemap: VisualShaderNode {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_cube_map", args: [])
 		return __ret.asObject(TextureLayered.self)
 	}
-	public func set_texture_type(value: VisualShaderNodeCubemap.TextureType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_type", args: [VariantBox(value.rawValue)])
+	public func set_texture_type(value: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_type", args: [VariantBox(value)])
 	}
 	@discardableResult
-	public func get_texture_type() -> VisualShaderNodeCubemap.TextureType {
+	public func get_texture_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture_type", args: [])
-		return __ret.asEnum(VisualShaderNodeCubemap.TextureType.self)
+		return __ret.asInt()
 	}
 	public var source: Int {
 		get { Host.shared.getProperty(object: ptr, name: "source").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "source", value: VariantBox(newValue)) }
 	}
-	public var cube_map: GodotObject {
+	public var cube_map: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "cube_map").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "cube_map", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "cube_map", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var texture_type: Int {
 		get { Host.shared.getProperty(object: ptr, name: "texture_type").asInt() }
@@ -84857,13 +84857,13 @@ public class VisualShaderNodeDerivativeFunc: VisualShaderNode {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_op_type", args: [])
 		return __ret.asEnum(VisualShaderNodeDerivativeFunc.OpType.self)
 	}
-	public func set_function(func_: VisualShaderNodeDerivativeFunc.Function) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
+	public func set_function(func_: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_)])
 	}
 	@discardableResult
-	public func get_function() -> VisualShaderNodeDerivativeFunc.Function {
+	public func get_function() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_function", args: [])
-		return __ret.asEnum(VisualShaderNodeDerivativeFunc.Function.self)
+		return __ret.asInt()
 	}
 	public func set_precision(precision: VisualShaderNodeDerivativeFunc.Precision) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_precision", args: [VariantBox(precision.rawValue)])
@@ -84929,13 +84929,13 @@ public class VisualShaderNodeFloatFunc: VisualShaderNode {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_function(func_: VisualShaderNodeFloatFunc.Function) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
+	public func set_function(func_: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_)])
 	}
 	@discardableResult
-	public func get_function() -> VisualShaderNodeFloatFunc.Function {
+	public func get_function() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_function", args: [])
-		return __ret.asEnum(VisualShaderNodeFloatFunc.Function.self)
+		return __ret.asInt()
 	}
 	public var function: Int {
 		get { Host.shared.getProperty(object: ptr, name: "function").asInt() }
@@ -84952,13 +84952,13 @@ public class VisualShaderNodeFloatOp: VisualShaderNode {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_operator(op: VisualShaderNodeFloatOp.Operator) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op.rawValue)])
+	public func set_operator(op: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op)])
 	}
 	@discardableResult
-	public func get_operator() -> VisualShaderNodeFloatOp.Operator {
+	public func get_operator() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_operator", args: [])
-		return __ret.asEnum(VisualShaderNodeFloatOp.Operator.self)
+		return __ret.asInt()
 	}
 	public var operator_: Int {
 		get { Host.shared.getProperty(object: ptr, name: "operator").asInt() }
@@ -84994,9 +84994,9 @@ public class VisualShaderNodeGroup: VisualShaderNode {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_group", args: [])
 		return __ret.asObject(VisualShaderGroup.self)
 	}
-	public var group: VisualShaderGroup {
+	public var group: VisualShaderGroup? {
 		get { Host.shared.getProperty(object: ptr, name: "group").asObject(VisualShaderGroup.self) }
-		set { Host.shared.setProperty(object: ptr, name: "group", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "group", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -85073,13 +85073,13 @@ public class VisualShaderNodeIntFunc: VisualShaderNode {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_function(func_: VisualShaderNodeIntFunc.Function) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
+	public func set_function(func_: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_)])
 	}
 	@discardableResult
-	public func get_function() -> VisualShaderNodeIntFunc.Function {
+	public func get_function() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_function", args: [])
-		return __ret.asEnum(VisualShaderNodeIntFunc.Function.self)
+		return __ret.asInt()
 	}
 	public var function: Int {
 		get { Host.shared.getProperty(object: ptr, name: "function").asInt() }
@@ -85096,13 +85096,13 @@ public class VisualShaderNodeIntOp: VisualShaderNode {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_operator(op: VisualShaderNodeIntOp.Operator) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op.rawValue)])
+	public func set_operator(op: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op)])
 	}
 	@discardableResult
-	public func get_operator() -> VisualShaderNodeIntOp.Operator {
+	public func get_operator() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_operator", args: [])
-		return __ret.asEnum(VisualShaderNodeIntOp.Operator.self)
+		return __ret.asInt()
 	}
 	public var operator_: Int {
 		get { Host.shared.getProperty(object: ptr, name: "operator").asInt() }
@@ -85119,13 +85119,13 @@ public class VisualShaderNodeIs: VisualShaderNode {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_function(func_: VisualShaderNodeIs.Function) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
+	public func set_function(func_: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_)])
 	}
 	@discardableResult
-	public func get_function() -> VisualShaderNodeIs.Function {
+	public func get_function() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_function", args: [])
-		return __ret.asEnum(VisualShaderNodeIs.Function.self)
+		return __ret.asInt()
 	}
 	public var function: Int {
 		get { Host.shared.getProperty(object: ptr, name: "function").asInt() }
@@ -85246,13 +85246,13 @@ public class VisualShaderNodeParameter: VisualShaderNode {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_parameter_name", args: [])
 		return __ret.asString()
 	}
-	public func set_qualifier(qualifier: VisualShaderNodeParameter.Qualifier) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_qualifier", args: [VariantBox(qualifier.rawValue)])
+	public func set_qualifier(qualifier: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_qualifier", args: [VariantBox(qualifier)])
 	}
 	@discardableResult
-	public func get_qualifier() -> VisualShaderNodeParameter.Qualifier {
+	public func get_qualifier() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_qualifier", args: [])
-		return __ret.asEnum(VisualShaderNodeParameter.Qualifier.self)
+		return __ret.asInt()
 	}
 	public func set_instance_index(instance_index: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_instance_index", args: [VariantBox(instance_index)])
@@ -85360,13 +85360,13 @@ public class VisualShaderNodeParticleEmit: VisualShaderNode {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_flags(flags: VisualShaderNodeParticleEmit.EmitFlags) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_flags", args: [VariantBox(flags.rawValue)])
+	public func set_flags(flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_flags", args: [VariantBox(flags)])
 	}
 	@discardableResult
-	public func get_flags() -> VisualShaderNodeParticleEmit.EmitFlags {
+	public func get_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_flags", args: [])
-		return __ret.asEnum(VisualShaderNodeParticleEmit.EmitFlags.self)
+		return __ret.asInt()
 	}
 	public var flags: Int {
 		get { Host.shared.getProperty(object: ptr, name: "flags").asInt() }
@@ -85770,21 +85770,21 @@ public class VisualShaderNodeTexture: VisualShaderNode {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture", args: [])
 		return __ret.asObject(Texture2D.self)
 	}
-	public func set_texture_type(value: VisualShaderNodeTexture.TextureType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_type", args: [VariantBox(value.rawValue)])
+	public func set_texture_type(value: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_type", args: [VariantBox(value)])
 	}
 	@discardableResult
-	public func get_texture_type() -> VisualShaderNodeTexture.TextureType {
+	public func get_texture_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture_type", args: [])
-		return __ret.asEnum(VisualShaderNodeTexture.TextureType.self)
+		return __ret.asInt()
 	}
 	public var source: Int {
 		get { Host.shared.getProperty(object: ptr, name: "source").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "source", value: VariantBox(newValue)) }
 	}
-	public var texture: Texture2D {
+	public var texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var texture_type: Int {
 		get { Host.shared.getProperty(object: ptr, name: "texture_type").asInt() }
@@ -85845,13 +85845,13 @@ public class VisualShaderNodeTransformFunc: VisualShaderNode {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_function(func_: VisualShaderNodeTransformFunc.Function) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
+	public func set_function(func_: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_)])
 	}
 	@discardableResult
-	public func get_function() -> VisualShaderNodeTransformFunc.Function {
+	public func get_function() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_function", args: [])
-		return __ret.asEnum(VisualShaderNodeTransformFunc.Function.self)
+		return __ret.asInt()
 	}
 	public var function: Int {
 		get { Host.shared.getProperty(object: ptr, name: "function").asInt() }
@@ -85868,13 +85868,13 @@ public class VisualShaderNodeTransformOp: VisualShaderNode {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_operator(op: VisualShaderNodeTransformOp.Operator) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op.rawValue)])
+	public func set_operator(op: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op)])
 	}
 	@discardableResult
-	public func get_operator() -> VisualShaderNodeTransformOp.Operator {
+	public func get_operator() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_operator", args: [])
-		return __ret.asEnum(VisualShaderNodeTransformOp.Operator.self)
+		return __ret.asInt()
 	}
 	public var operator_: Int {
 		get { Host.shared.getProperty(object: ptr, name: "operator").asInt() }
@@ -85891,13 +85891,13 @@ public class VisualShaderNodeTransformVecMult: VisualShaderNode {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_operator(op: VisualShaderNodeTransformVecMult.Operator) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op.rawValue)])
+	public func set_operator(op: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op)])
 	}
 	@discardableResult
-	public func get_operator() -> VisualShaderNodeTransformVecMult.Operator {
+	public func get_operator() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_operator", args: [])
-		return __ret.asEnum(VisualShaderNodeTransformVecMult.Operator.self)
+		return __ret.asInt()
 	}
 	public var operator_: Int {
 		get { Host.shared.getProperty(object: ptr, name: "operator").asInt() }
@@ -85914,13 +85914,13 @@ public class VisualShaderNodeUIntFunc: VisualShaderNode {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_function(func_: VisualShaderNodeUIntFunc.Function) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
+	public func set_function(func_: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_)])
 	}
 	@discardableResult
-	public func get_function() -> VisualShaderNodeUIntFunc.Function {
+	public func get_function() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_function", args: [])
-		return __ret.asEnum(VisualShaderNodeUIntFunc.Function.self)
+		return __ret.asInt()
 	}
 	public var function: Int {
 		get { Host.shared.getProperty(object: ptr, name: "function").asInt() }
@@ -85937,13 +85937,13 @@ public class VisualShaderNodeUIntOp: VisualShaderNode {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_operator(op: VisualShaderNodeUIntOp.Operator) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op.rawValue)])
+	public func set_operator(op: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op)])
 	}
 	@discardableResult
-	public func get_operator() -> VisualShaderNodeUIntOp.Operator {
+	public func get_operator() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_operator", args: [])
-		return __ret.asEnum(VisualShaderNodeUIntOp.Operator.self)
+		return __ret.asInt()
 	}
 	public var operator_: Int {
 		get { Host.shared.getProperty(object: ptr, name: "operator").asInt() }
@@ -85960,13 +85960,13 @@ public class VisualShaderNodeUVFunc: VisualShaderNode {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_function(func_: VisualShaderNodeUVFunc.Function) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
+	public func set_function(func_: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_)])
 	}
 	@discardableResult
-	public func get_function() -> VisualShaderNodeUVFunc.Function {
+	public func get_function() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_function", args: [])
-		return __ret.asEnum(VisualShaderNodeUVFunc.Function.self)
+		return __ret.asInt()
 	}
 	public var function: Int {
 		get { Host.shared.getProperty(object: ptr, name: "function").asInt() }
@@ -86122,13 +86122,13 @@ public class VoxelGI: VisualInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "size").asVector3() }
 		set { Host.shared.setProperty(object: ptr, name: "size", value: VariantBox(newValue)) }
 	}
-	public var camera_attributes: GodotObject {
+	public var camera_attributes: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "camera_attributes").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "camera_attributes", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "camera_attributes", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var data: VoxelGIData {
+	public var data: VoxelGIData? {
 		get { Host.shared.getProperty(object: ptr, name: "data").asObject(VoxelGIData.self) }
-		set { Host.shared.setProperty(object: ptr, name: "data", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "data", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -86183,9 +86183,9 @@ public class WebRTCDataChannelExtension: WebRTCDataChannel {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func _get_ready_state() -> WebRTCDataChannel.ChannelState {
+	public func _get_ready_state() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_ready_state", args: [])
-		return __ret.asEnum(WebRTCDataChannel.ChannelState.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func _get_label() -> String {
@@ -86629,21 +86629,21 @@ public class XRBodyTracker: XRPositionalTracker {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_has_tracking_data", args: [])
 		return __ret.asBool()
 	}
-	public func set_body_flags(flags: XRBodyTracker.BodyFlags) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_body_flags", args: [VariantBox(flags.rawValue)])
+	public func set_body_flags(flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_body_flags", args: [VariantBox(flags)])
 	}
 	@discardableResult
-	public func get_body_flags() -> XRBodyTracker.BodyFlags {
+	public func get_body_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_body_flags", args: [])
-		return __ret.asEnum(XRBodyTracker.BodyFlags.self)
+		return __ret.asInt()
 	}
-	public func set_joint_flags(joint: XRBodyTracker.Joint, flags: XRBodyTracker.JointFlags) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_joint_flags", args: [VariantBox(joint.rawValue), VariantBox(flags.rawValue)])
+	public func set_joint_flags(joint: XRBodyTracker.Joint, flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_joint_flags", args: [VariantBox(joint.rawValue), VariantBox(flags)])
 	}
 	@discardableResult
-	public func get_joint_flags(joint: XRBodyTracker.Joint) -> XRBodyTracker.JointFlags {
+	public func get_joint_flags(joint: XRBodyTracker.Joint) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_joint_flags", args: [VariantBox(joint.rawValue)])
-		return __ret.asEnum(XRBodyTracker.JointFlags.self)
+		return __ret.asInt()
 	}
 	public func set_joint_transform(joint: XRBodyTracker.Joint, transform: Transform3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_joint_transform", args: [VariantBox(joint.rawValue), VariantBox(transform)])
@@ -86848,13 +86848,13 @@ public class XRHandTracker: XRPositionalTracker {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_hand_tracking_source", args: [])
 		return __ret.asEnum(XRHandTracker.HandTrackingSource.self)
 	}
-	public func set_hand_joint_flags(joint: XRHandTracker.HandJoint, flags: XRHandTracker.HandJointFlags) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_hand_joint_flags", args: [VariantBox(joint.rawValue), VariantBox(flags.rawValue)])
+	public func set_hand_joint_flags(joint: XRHandTracker.HandJoint, flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_hand_joint_flags", args: [VariantBox(joint.rawValue), VariantBox(flags)])
 	}
 	@discardableResult
-	public func get_hand_joint_flags(joint: XRHandTracker.HandJoint) -> XRHandTracker.HandJointFlags {
+	public func get_hand_joint_flags(joint: XRHandTracker.HandJoint) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_hand_joint_flags", args: [VariantBox(joint.rawValue)])
-		return __ret.asEnum(XRHandTracker.HandJointFlags.self)
+		return __ret.asInt()
 	}
 	public func set_hand_joint_transform(joint: XRHandTracker.HandJoint, transform: Transform3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_hand_joint_transform", args: [VariantBox(joint.rawValue), VariantBox(transform)])
@@ -87038,2049 +87038,2049 @@ public class AnimatedTexture: Texture2D {
 		get { Host.shared.getProperty(object: ptr, name: "speed_scale").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "speed_scale", value: VariantBox(newValue)) }
 	}
-	public var frame_0_texture: Texture2D {
+	public var frame_0_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_0/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_0/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_0/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_0_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_0/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_0/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_1_texture: Texture2D {
+	public var frame_1_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_1/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_1/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_1/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_1_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_1/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_1/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_2_texture: Texture2D {
+	public var frame_2_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_2/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_2/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_2/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_2_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_2/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_2/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_3_texture: Texture2D {
+	public var frame_3_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_3/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_3/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_3/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_3_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_3/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_3/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_4_texture: Texture2D {
+	public var frame_4_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_4/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_4/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_4/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_4_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_4/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_4/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_5_texture: Texture2D {
+	public var frame_5_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_5/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_5/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_5/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_5_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_5/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_5/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_6_texture: Texture2D {
+	public var frame_6_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_6/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_6/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_6/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_6_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_6/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_6/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_7_texture: Texture2D {
+	public var frame_7_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_7/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_7/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_7/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_7_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_7/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_7/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_8_texture: Texture2D {
+	public var frame_8_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_8/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_8/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_8/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_8_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_8/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_8/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_9_texture: Texture2D {
+	public var frame_9_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_9/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_9/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_9/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_9_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_9/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_9/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_10_texture: Texture2D {
+	public var frame_10_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_10/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_10/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_10/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_10_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_10/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_10/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_11_texture: Texture2D {
+	public var frame_11_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_11/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_11/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_11/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_11_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_11/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_11/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_12_texture: Texture2D {
+	public var frame_12_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_12/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_12/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_12/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_12_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_12/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_12/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_13_texture: Texture2D {
+	public var frame_13_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_13/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_13/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_13/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_13_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_13/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_13/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_14_texture: Texture2D {
+	public var frame_14_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_14/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_14/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_14/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_14_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_14/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_14/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_15_texture: Texture2D {
+	public var frame_15_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_15/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_15/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_15/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_15_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_15/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_15/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_16_texture: Texture2D {
+	public var frame_16_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_16/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_16/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_16/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_16_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_16/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_16/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_17_texture: Texture2D {
+	public var frame_17_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_17/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_17/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_17/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_17_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_17/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_17/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_18_texture: Texture2D {
+	public var frame_18_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_18/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_18/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_18/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_18_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_18/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_18/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_19_texture: Texture2D {
+	public var frame_19_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_19/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_19/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_19/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_19_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_19/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_19/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_20_texture: Texture2D {
+	public var frame_20_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_20/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_20/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_20/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_20_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_20/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_20/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_21_texture: Texture2D {
+	public var frame_21_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_21/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_21/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_21/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_21_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_21/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_21/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_22_texture: Texture2D {
+	public var frame_22_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_22/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_22/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_22/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_22_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_22/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_22/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_23_texture: Texture2D {
+	public var frame_23_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_23/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_23/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_23/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_23_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_23/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_23/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_24_texture: Texture2D {
+	public var frame_24_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_24/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_24/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_24/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_24_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_24/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_24/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_25_texture: Texture2D {
+	public var frame_25_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_25/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_25/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_25/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_25_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_25/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_25/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_26_texture: Texture2D {
+	public var frame_26_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_26/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_26/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_26/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_26_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_26/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_26/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_27_texture: Texture2D {
+	public var frame_27_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_27/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_27/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_27/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_27_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_27/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_27/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_28_texture: Texture2D {
+	public var frame_28_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_28/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_28/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_28/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_28_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_28/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_28/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_29_texture: Texture2D {
+	public var frame_29_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_29/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_29/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_29/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_29_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_29/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_29/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_30_texture: Texture2D {
+	public var frame_30_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_30/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_30/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_30/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_30_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_30/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_30/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_31_texture: Texture2D {
+	public var frame_31_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_31/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_31/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_31/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_31_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_31/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_31/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_32_texture: Texture2D {
+	public var frame_32_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_32/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_32/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_32/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_32_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_32/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_32/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_33_texture: Texture2D {
+	public var frame_33_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_33/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_33/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_33/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_33_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_33/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_33/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_34_texture: Texture2D {
+	public var frame_34_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_34/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_34/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_34/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_34_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_34/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_34/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_35_texture: Texture2D {
+	public var frame_35_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_35/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_35/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_35/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_35_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_35/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_35/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_36_texture: Texture2D {
+	public var frame_36_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_36/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_36/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_36/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_36_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_36/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_36/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_37_texture: Texture2D {
+	public var frame_37_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_37/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_37/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_37/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_37_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_37/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_37/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_38_texture: Texture2D {
+	public var frame_38_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_38/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_38/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_38/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_38_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_38/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_38/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_39_texture: Texture2D {
+	public var frame_39_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_39/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_39/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_39/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_39_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_39/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_39/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_40_texture: Texture2D {
+	public var frame_40_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_40/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_40/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_40/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_40_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_40/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_40/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_41_texture: Texture2D {
+	public var frame_41_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_41/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_41/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_41/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_41_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_41/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_41/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_42_texture: Texture2D {
+	public var frame_42_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_42/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_42/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_42/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_42_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_42/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_42/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_43_texture: Texture2D {
+	public var frame_43_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_43/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_43/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_43/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_43_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_43/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_43/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_44_texture: Texture2D {
+	public var frame_44_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_44/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_44/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_44/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_44_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_44/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_44/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_45_texture: Texture2D {
+	public var frame_45_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_45/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_45/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_45/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_45_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_45/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_45/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_46_texture: Texture2D {
+	public var frame_46_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_46/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_46/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_46/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_46_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_46/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_46/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_47_texture: Texture2D {
+	public var frame_47_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_47/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_47/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_47/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_47_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_47/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_47/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_48_texture: Texture2D {
+	public var frame_48_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_48/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_48/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_48/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_48_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_48/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_48/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_49_texture: Texture2D {
+	public var frame_49_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_49/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_49/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_49/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_49_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_49/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_49/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_50_texture: Texture2D {
+	public var frame_50_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_50/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_50/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_50/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_50_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_50/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_50/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_51_texture: Texture2D {
+	public var frame_51_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_51/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_51/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_51/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_51_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_51/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_51/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_52_texture: Texture2D {
+	public var frame_52_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_52/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_52/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_52/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_52_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_52/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_52/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_53_texture: Texture2D {
+	public var frame_53_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_53/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_53/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_53/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_53_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_53/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_53/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_54_texture: Texture2D {
+	public var frame_54_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_54/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_54/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_54/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_54_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_54/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_54/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_55_texture: Texture2D {
+	public var frame_55_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_55/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_55/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_55/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_55_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_55/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_55/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_56_texture: Texture2D {
+	public var frame_56_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_56/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_56/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_56/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_56_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_56/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_56/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_57_texture: Texture2D {
+	public var frame_57_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_57/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_57/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_57/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_57_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_57/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_57/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_58_texture: Texture2D {
+	public var frame_58_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_58/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_58/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_58/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_58_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_58/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_58/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_59_texture: Texture2D {
+	public var frame_59_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_59/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_59/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_59/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_59_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_59/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_59/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_60_texture: Texture2D {
+	public var frame_60_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_60/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_60/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_60/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_60_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_60/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_60/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_61_texture: Texture2D {
+	public var frame_61_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_61/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_61/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_61/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_61_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_61/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_61/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_62_texture: Texture2D {
+	public var frame_62_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_62/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_62/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_62/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_62_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_62/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_62/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_63_texture: Texture2D {
+	public var frame_63_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_63/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_63/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_63/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_63_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_63/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_63/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_64_texture: Texture2D {
+	public var frame_64_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_64/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_64/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_64/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_64_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_64/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_64/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_65_texture: Texture2D {
+	public var frame_65_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_65/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_65/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_65/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_65_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_65/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_65/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_66_texture: Texture2D {
+	public var frame_66_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_66/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_66/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_66/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_66_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_66/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_66/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_67_texture: Texture2D {
+	public var frame_67_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_67/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_67/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_67/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_67_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_67/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_67/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_68_texture: Texture2D {
+	public var frame_68_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_68/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_68/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_68/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_68_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_68/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_68/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_69_texture: Texture2D {
+	public var frame_69_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_69/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_69/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_69/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_69_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_69/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_69/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_70_texture: Texture2D {
+	public var frame_70_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_70/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_70/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_70/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_70_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_70/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_70/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_71_texture: Texture2D {
+	public var frame_71_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_71/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_71/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_71/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_71_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_71/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_71/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_72_texture: Texture2D {
+	public var frame_72_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_72/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_72/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_72/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_72_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_72/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_72/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_73_texture: Texture2D {
+	public var frame_73_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_73/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_73/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_73/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_73_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_73/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_73/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_74_texture: Texture2D {
+	public var frame_74_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_74/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_74/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_74/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_74_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_74/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_74/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_75_texture: Texture2D {
+	public var frame_75_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_75/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_75/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_75/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_75_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_75/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_75/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_76_texture: Texture2D {
+	public var frame_76_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_76/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_76/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_76/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_76_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_76/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_76/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_77_texture: Texture2D {
+	public var frame_77_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_77/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_77/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_77/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_77_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_77/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_77/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_78_texture: Texture2D {
+	public var frame_78_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_78/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_78/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_78/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_78_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_78/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_78/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_79_texture: Texture2D {
+	public var frame_79_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_79/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_79/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_79/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_79_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_79/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_79/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_80_texture: Texture2D {
+	public var frame_80_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_80/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_80/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_80/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_80_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_80/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_80/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_81_texture: Texture2D {
+	public var frame_81_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_81/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_81/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_81/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_81_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_81/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_81/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_82_texture: Texture2D {
+	public var frame_82_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_82/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_82/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_82/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_82_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_82/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_82/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_83_texture: Texture2D {
+	public var frame_83_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_83/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_83/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_83/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_83_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_83/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_83/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_84_texture: Texture2D {
+	public var frame_84_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_84/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_84/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_84/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_84_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_84/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_84/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_85_texture: Texture2D {
+	public var frame_85_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_85/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_85/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_85/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_85_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_85/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_85/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_86_texture: Texture2D {
+	public var frame_86_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_86/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_86/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_86/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_86_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_86/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_86/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_87_texture: Texture2D {
+	public var frame_87_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_87/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_87/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_87/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_87_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_87/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_87/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_88_texture: Texture2D {
+	public var frame_88_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_88/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_88/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_88/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_88_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_88/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_88/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_89_texture: Texture2D {
+	public var frame_89_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_89/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_89/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_89/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_89_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_89/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_89/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_90_texture: Texture2D {
+	public var frame_90_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_90/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_90/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_90/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_90_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_90/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_90/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_91_texture: Texture2D {
+	public var frame_91_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_91/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_91/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_91/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_91_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_91/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_91/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_92_texture: Texture2D {
+	public var frame_92_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_92/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_92/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_92/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_92_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_92/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_92/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_93_texture: Texture2D {
+	public var frame_93_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_93/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_93/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_93/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_93_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_93/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_93/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_94_texture: Texture2D {
+	public var frame_94_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_94/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_94/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_94/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_94_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_94/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_94/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_95_texture: Texture2D {
+	public var frame_95_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_95/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_95/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_95/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_95_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_95/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_95/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_96_texture: Texture2D {
+	public var frame_96_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_96/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_96/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_96/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_96_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_96/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_96/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_97_texture: Texture2D {
+	public var frame_97_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_97/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_97/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_97/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_97_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_97/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_97/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_98_texture: Texture2D {
+	public var frame_98_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_98/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_98/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_98/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_98_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_98/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_98/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_99_texture: Texture2D {
+	public var frame_99_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_99/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_99/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_99/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_99_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_99/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_99/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_100_texture: Texture2D {
+	public var frame_100_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_100/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_100/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_100/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_100_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_100/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_100/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_101_texture: Texture2D {
+	public var frame_101_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_101/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_101/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_101/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_101_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_101/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_101/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_102_texture: Texture2D {
+	public var frame_102_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_102/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_102/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_102/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_102_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_102/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_102/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_103_texture: Texture2D {
+	public var frame_103_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_103/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_103/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_103/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_103_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_103/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_103/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_104_texture: Texture2D {
+	public var frame_104_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_104/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_104/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_104/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_104_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_104/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_104/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_105_texture: Texture2D {
+	public var frame_105_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_105/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_105/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_105/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_105_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_105/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_105/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_106_texture: Texture2D {
+	public var frame_106_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_106/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_106/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_106/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_106_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_106/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_106/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_107_texture: Texture2D {
+	public var frame_107_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_107/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_107/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_107/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_107_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_107/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_107/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_108_texture: Texture2D {
+	public var frame_108_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_108/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_108/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_108/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_108_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_108/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_108/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_109_texture: Texture2D {
+	public var frame_109_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_109/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_109/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_109/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_109_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_109/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_109/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_110_texture: Texture2D {
+	public var frame_110_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_110/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_110/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_110/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_110_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_110/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_110/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_111_texture: Texture2D {
+	public var frame_111_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_111/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_111/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_111/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_111_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_111/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_111/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_112_texture: Texture2D {
+	public var frame_112_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_112/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_112/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_112/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_112_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_112/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_112/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_113_texture: Texture2D {
+	public var frame_113_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_113/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_113/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_113/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_113_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_113/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_113/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_114_texture: Texture2D {
+	public var frame_114_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_114/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_114/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_114/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_114_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_114/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_114/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_115_texture: Texture2D {
+	public var frame_115_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_115/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_115/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_115/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_115_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_115/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_115/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_116_texture: Texture2D {
+	public var frame_116_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_116/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_116/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_116/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_116_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_116/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_116/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_117_texture: Texture2D {
+	public var frame_117_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_117/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_117/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_117/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_117_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_117/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_117/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_118_texture: Texture2D {
+	public var frame_118_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_118/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_118/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_118/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_118_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_118/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_118/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_119_texture: Texture2D {
+	public var frame_119_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_119/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_119/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_119/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_119_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_119/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_119/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_120_texture: Texture2D {
+	public var frame_120_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_120/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_120/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_120/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_120_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_120/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_120/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_121_texture: Texture2D {
+	public var frame_121_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_121/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_121/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_121/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_121_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_121/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_121/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_122_texture: Texture2D {
+	public var frame_122_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_122/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_122/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_122/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_122_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_122/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_122/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_123_texture: Texture2D {
+	public var frame_123_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_123/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_123/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_123/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_123_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_123/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_123/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_124_texture: Texture2D {
+	public var frame_124_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_124/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_124/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_124/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_124_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_124/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_124/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_125_texture: Texture2D {
+	public var frame_125_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_125/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_125/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_125/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_125_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_125/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_125/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_126_texture: Texture2D {
+	public var frame_126_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_126/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_126/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_126/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_126_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_126/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_126/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_127_texture: Texture2D {
+	public var frame_127_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_127/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_127/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_127/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_127_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_127/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_127/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_128_texture: Texture2D {
+	public var frame_128_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_128/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_128/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_128/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_128_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_128/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_128/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_129_texture: Texture2D {
+	public var frame_129_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_129/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_129/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_129/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_129_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_129/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_129/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_130_texture: Texture2D {
+	public var frame_130_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_130/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_130/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_130/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_130_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_130/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_130/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_131_texture: Texture2D {
+	public var frame_131_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_131/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_131/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_131/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_131_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_131/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_131/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_132_texture: Texture2D {
+	public var frame_132_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_132/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_132/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_132/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_132_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_132/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_132/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_133_texture: Texture2D {
+	public var frame_133_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_133/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_133/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_133/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_133_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_133/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_133/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_134_texture: Texture2D {
+	public var frame_134_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_134/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_134/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_134/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_134_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_134/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_134/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_135_texture: Texture2D {
+	public var frame_135_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_135/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_135/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_135/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_135_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_135/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_135/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_136_texture: Texture2D {
+	public var frame_136_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_136/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_136/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_136/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_136_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_136/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_136/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_137_texture: Texture2D {
+	public var frame_137_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_137/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_137/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_137/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_137_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_137/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_137/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_138_texture: Texture2D {
+	public var frame_138_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_138/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_138/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_138/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_138_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_138/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_138/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_139_texture: Texture2D {
+	public var frame_139_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_139/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_139/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_139/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_139_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_139/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_139/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_140_texture: Texture2D {
+	public var frame_140_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_140/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_140/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_140/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_140_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_140/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_140/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_141_texture: Texture2D {
+	public var frame_141_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_141/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_141/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_141/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_141_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_141/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_141/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_142_texture: Texture2D {
+	public var frame_142_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_142/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_142/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_142/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_142_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_142/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_142/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_143_texture: Texture2D {
+	public var frame_143_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_143/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_143/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_143/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_143_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_143/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_143/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_144_texture: Texture2D {
+	public var frame_144_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_144/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_144/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_144/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_144_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_144/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_144/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_145_texture: Texture2D {
+	public var frame_145_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_145/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_145/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_145/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_145_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_145/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_145/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_146_texture: Texture2D {
+	public var frame_146_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_146/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_146/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_146/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_146_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_146/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_146/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_147_texture: Texture2D {
+	public var frame_147_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_147/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_147/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_147/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_147_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_147/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_147/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_148_texture: Texture2D {
+	public var frame_148_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_148/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_148/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_148/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_148_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_148/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_148/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_149_texture: Texture2D {
+	public var frame_149_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_149/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_149/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_149/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_149_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_149/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_149/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_150_texture: Texture2D {
+	public var frame_150_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_150/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_150/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_150/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_150_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_150/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_150/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_151_texture: Texture2D {
+	public var frame_151_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_151/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_151/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_151/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_151_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_151/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_151/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_152_texture: Texture2D {
+	public var frame_152_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_152/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_152/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_152/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_152_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_152/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_152/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_153_texture: Texture2D {
+	public var frame_153_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_153/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_153/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_153/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_153_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_153/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_153/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_154_texture: Texture2D {
+	public var frame_154_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_154/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_154/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_154/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_154_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_154/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_154/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_155_texture: Texture2D {
+	public var frame_155_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_155/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_155/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_155/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_155_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_155/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_155/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_156_texture: Texture2D {
+	public var frame_156_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_156/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_156/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_156/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_156_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_156/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_156/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_157_texture: Texture2D {
+	public var frame_157_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_157/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_157/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_157/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_157_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_157/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_157/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_158_texture: Texture2D {
+	public var frame_158_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_158/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_158/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_158/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_158_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_158/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_158/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_159_texture: Texture2D {
+	public var frame_159_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_159/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_159/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_159/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_159_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_159/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_159/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_160_texture: Texture2D {
+	public var frame_160_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_160/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_160/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_160/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_160_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_160/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_160/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_161_texture: Texture2D {
+	public var frame_161_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_161/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_161/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_161/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_161_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_161/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_161/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_162_texture: Texture2D {
+	public var frame_162_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_162/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_162/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_162/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_162_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_162/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_162/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_163_texture: Texture2D {
+	public var frame_163_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_163/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_163/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_163/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_163_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_163/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_163/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_164_texture: Texture2D {
+	public var frame_164_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_164/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_164/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_164/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_164_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_164/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_164/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_165_texture: Texture2D {
+	public var frame_165_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_165/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_165/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_165/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_165_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_165/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_165/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_166_texture: Texture2D {
+	public var frame_166_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_166/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_166/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_166/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_166_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_166/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_166/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_167_texture: Texture2D {
+	public var frame_167_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_167/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_167/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_167/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_167_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_167/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_167/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_168_texture: Texture2D {
+	public var frame_168_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_168/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_168/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_168/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_168_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_168/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_168/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_169_texture: Texture2D {
+	public var frame_169_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_169/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_169/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_169/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_169_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_169/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_169/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_170_texture: Texture2D {
+	public var frame_170_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_170/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_170/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_170/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_170_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_170/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_170/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_171_texture: Texture2D {
+	public var frame_171_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_171/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_171/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_171/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_171_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_171/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_171/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_172_texture: Texture2D {
+	public var frame_172_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_172/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_172/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_172/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_172_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_172/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_172/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_173_texture: Texture2D {
+	public var frame_173_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_173/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_173/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_173/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_173_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_173/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_173/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_174_texture: Texture2D {
+	public var frame_174_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_174/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_174/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_174/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_174_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_174/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_174/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_175_texture: Texture2D {
+	public var frame_175_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_175/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_175/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_175/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_175_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_175/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_175/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_176_texture: Texture2D {
+	public var frame_176_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_176/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_176/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_176/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_176_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_176/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_176/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_177_texture: Texture2D {
+	public var frame_177_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_177/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_177/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_177/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_177_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_177/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_177/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_178_texture: Texture2D {
+	public var frame_178_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_178/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_178/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_178/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_178_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_178/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_178/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_179_texture: Texture2D {
+	public var frame_179_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_179/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_179/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_179/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_179_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_179/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_179/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_180_texture: Texture2D {
+	public var frame_180_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_180/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_180/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_180/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_180_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_180/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_180/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_181_texture: Texture2D {
+	public var frame_181_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_181/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_181/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_181/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_181_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_181/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_181/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_182_texture: Texture2D {
+	public var frame_182_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_182/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_182/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_182/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_182_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_182/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_182/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_183_texture: Texture2D {
+	public var frame_183_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_183/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_183/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_183/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_183_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_183/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_183/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_184_texture: Texture2D {
+	public var frame_184_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_184/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_184/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_184/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_184_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_184/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_184/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_185_texture: Texture2D {
+	public var frame_185_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_185/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_185/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_185/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_185_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_185/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_185/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_186_texture: Texture2D {
+	public var frame_186_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_186/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_186/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_186/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_186_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_186/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_186/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_187_texture: Texture2D {
+	public var frame_187_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_187/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_187/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_187/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_187_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_187/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_187/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_188_texture: Texture2D {
+	public var frame_188_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_188/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_188/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_188/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_188_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_188/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_188/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_189_texture: Texture2D {
+	public var frame_189_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_189/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_189/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_189/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_189_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_189/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_189/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_190_texture: Texture2D {
+	public var frame_190_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_190/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_190/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_190/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_190_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_190/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_190/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_191_texture: Texture2D {
+	public var frame_191_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_191/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_191/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_191/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_191_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_191/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_191/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_192_texture: Texture2D {
+	public var frame_192_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_192/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_192/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_192/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_192_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_192/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_192/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_193_texture: Texture2D {
+	public var frame_193_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_193/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_193/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_193/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_193_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_193/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_193/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_194_texture: Texture2D {
+	public var frame_194_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_194/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_194/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_194/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_194_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_194/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_194/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_195_texture: Texture2D {
+	public var frame_195_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_195/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_195/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_195/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_195_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_195/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_195/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_196_texture: Texture2D {
+	public var frame_196_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_196/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_196/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_196/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_196_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_196/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_196/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_197_texture: Texture2D {
+	public var frame_197_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_197/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_197/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_197/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_197_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_197/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_197/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_198_texture: Texture2D {
+	public var frame_198_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_198/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_198/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_198/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_198_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_198/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_198/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_199_texture: Texture2D {
+	public var frame_199_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_199/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_199/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_199/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_199_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_199/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_199/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_200_texture: Texture2D {
+	public var frame_200_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_200/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_200/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_200/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_200_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_200/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_200/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_201_texture: Texture2D {
+	public var frame_201_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_201/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_201/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_201/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_201_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_201/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_201/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_202_texture: Texture2D {
+	public var frame_202_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_202/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_202/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_202/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_202_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_202/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_202/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_203_texture: Texture2D {
+	public var frame_203_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_203/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_203/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_203/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_203_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_203/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_203/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_204_texture: Texture2D {
+	public var frame_204_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_204/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_204/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_204/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_204_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_204/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_204/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_205_texture: Texture2D {
+	public var frame_205_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_205/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_205/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_205/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_205_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_205/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_205/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_206_texture: Texture2D {
+	public var frame_206_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_206/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_206/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_206/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_206_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_206/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_206/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_207_texture: Texture2D {
+	public var frame_207_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_207/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_207/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_207/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_207_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_207/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_207/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_208_texture: Texture2D {
+	public var frame_208_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_208/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_208/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_208/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_208_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_208/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_208/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_209_texture: Texture2D {
+	public var frame_209_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_209/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_209/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_209/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_209_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_209/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_209/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_210_texture: Texture2D {
+	public var frame_210_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_210/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_210/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_210/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_210_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_210/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_210/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_211_texture: Texture2D {
+	public var frame_211_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_211/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_211/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_211/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_211_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_211/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_211/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_212_texture: Texture2D {
+	public var frame_212_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_212/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_212/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_212/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_212_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_212/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_212/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_213_texture: Texture2D {
+	public var frame_213_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_213/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_213/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_213/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_213_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_213/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_213/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_214_texture: Texture2D {
+	public var frame_214_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_214/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_214/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_214/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_214_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_214/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_214/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_215_texture: Texture2D {
+	public var frame_215_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_215/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_215/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_215/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_215_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_215/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_215/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_216_texture: Texture2D {
+	public var frame_216_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_216/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_216/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_216/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_216_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_216/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_216/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_217_texture: Texture2D {
+	public var frame_217_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_217/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_217/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_217/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_217_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_217/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_217/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_218_texture: Texture2D {
+	public var frame_218_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_218/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_218/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_218/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_218_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_218/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_218/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_219_texture: Texture2D {
+	public var frame_219_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_219/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_219/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_219/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_219_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_219/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_219/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_220_texture: Texture2D {
+	public var frame_220_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_220/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_220/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_220/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_220_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_220/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_220/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_221_texture: Texture2D {
+	public var frame_221_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_221/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_221/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_221/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_221_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_221/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_221/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_222_texture: Texture2D {
+	public var frame_222_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_222/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_222/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_222/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_222_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_222/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_222/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_223_texture: Texture2D {
+	public var frame_223_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_223/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_223/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_223/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_223_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_223/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_223/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_224_texture: Texture2D {
+	public var frame_224_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_224/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_224/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_224/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_224_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_224/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_224/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_225_texture: Texture2D {
+	public var frame_225_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_225/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_225/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_225/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_225_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_225/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_225/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_226_texture: Texture2D {
+	public var frame_226_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_226/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_226/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_226/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_226_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_226/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_226/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_227_texture: Texture2D {
+	public var frame_227_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_227/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_227/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_227/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_227_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_227/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_227/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_228_texture: Texture2D {
+	public var frame_228_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_228/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_228/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_228/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_228_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_228/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_228/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_229_texture: Texture2D {
+	public var frame_229_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_229/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_229/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_229/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_229_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_229/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_229/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_230_texture: Texture2D {
+	public var frame_230_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_230/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_230/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_230/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_230_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_230/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_230/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_231_texture: Texture2D {
+	public var frame_231_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_231/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_231/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_231/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_231_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_231/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_231/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_232_texture: Texture2D {
+	public var frame_232_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_232/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_232/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_232/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_232_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_232/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_232/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_233_texture: Texture2D {
+	public var frame_233_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_233/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_233/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_233/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_233_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_233/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_233/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_234_texture: Texture2D {
+	public var frame_234_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_234/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_234/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_234/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_234_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_234/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_234/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_235_texture: Texture2D {
+	public var frame_235_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_235/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_235/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_235/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_235_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_235/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_235/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_236_texture: Texture2D {
+	public var frame_236_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_236/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_236/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_236/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_236_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_236/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_236/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_237_texture: Texture2D {
+	public var frame_237_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_237/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_237/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_237/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_237_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_237/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_237/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_238_texture: Texture2D {
+	public var frame_238_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_238/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_238/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_238/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_238_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_238/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_238/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_239_texture: Texture2D {
+	public var frame_239_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_239/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_239/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_239/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_239_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_239/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_239/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_240_texture: Texture2D {
+	public var frame_240_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_240/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_240/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_240/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_240_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_240/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_240/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_241_texture: Texture2D {
+	public var frame_241_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_241/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_241/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_241/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_241_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_241/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_241/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_242_texture: Texture2D {
+	public var frame_242_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_242/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_242/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_242/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_242_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_242/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_242/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_243_texture: Texture2D {
+	public var frame_243_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_243/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_243/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_243/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_243_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_243/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_243/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_244_texture: Texture2D {
+	public var frame_244_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_244/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_244/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_244/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_244_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_244/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_244/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_245_texture: Texture2D {
+	public var frame_245_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_245/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_245/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_245/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_245_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_245/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_245/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_246_texture: Texture2D {
+	public var frame_246_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_246/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_246/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_246/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_246_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_246/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_246/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_247_texture: Texture2D {
+	public var frame_247_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_247/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_247/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_247/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_247_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_247/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_247/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_248_texture: Texture2D {
+	public var frame_248_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_248/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_248/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_248/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_248_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_248/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_248/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_249_texture: Texture2D {
+	public var frame_249_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_249/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_249/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_249/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_249_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_249/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_249/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_250_texture: Texture2D {
+	public var frame_250_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_250/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_250/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_250/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_250_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_250/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_250/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_251_texture: Texture2D {
+	public var frame_251_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_251/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_251/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_251/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_251_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_251/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_251/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_252_texture: Texture2D {
+	public var frame_252_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_252/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_252/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_252/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_252_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_252/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_252/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_253_texture: Texture2D {
+	public var frame_253_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_253/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_253/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_253/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_253_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_253/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_253/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_254_texture: Texture2D {
+	public var frame_254_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_254/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_254/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_254/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_254_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_254/duration").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "frame_254/duration", value: VariantBox(newValue)) }
 	}
-	public var frame_255_texture: Texture2D {
+	public var frame_255_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "frame_255/texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "frame_255/texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "frame_255/texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var frame_255_duration: Double {
 		get { Host.shared.getProperty(object: ptr, name: "frame_255/duration").asDouble() }
@@ -89179,13 +89179,13 @@ public class AnimationNodeAnimation: AnimationRootNode {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_start_offset", args: [])
 		return __ret.asDouble()
 	}
-	public func set_loop_mode(loop_mode: Animation.LoopMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_loop_mode", args: [VariantBox(loop_mode.rawValue)])
+	public func set_loop_mode(loop_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_loop_mode", args: [VariantBox(loop_mode)])
 	}
 	@discardableResult
-	public func get_loop_mode() -> Animation.LoopMode {
+	public func get_loop_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_loop_mode", args: [])
-		return __ret.asEnum(Animation.LoopMode.self)
+		return __ret.asInt()
 	}
 	public var animation: String {
 		get { Host.shared.getProperty(object: ptr, name: "animation").asString() }
@@ -89787,17 +89787,17 @@ public class AnimationNodeOneShot: AnimationNodeSync {
 		get { Host.shared.getProperty(object: ptr, name: "fadein_time").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "fadein_time", value: VariantBox(newValue)) }
 	}
-	public var fadein_curve: Curve {
+	public var fadein_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "fadein_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "fadein_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "fadein_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var fadeout_time: Double {
 		get { Host.shared.getProperty(object: ptr, name: "fadeout_time").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "fadeout_time", value: VariantBox(newValue)) }
 	}
-	public var fadeout_curve: Curve {
+	public var fadeout_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "fadeout_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "fadeout_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "fadeout_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var break_loop_at_end: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "break_loop_at_end").asBool() }
@@ -90034,9 +90034,9 @@ public class AnimationNodeTransition: AnimationNodeSync {
 		get { Host.shared.getProperty(object: ptr, name: "xfade_time").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "xfade_time", value: VariantBox(newValue)) }
 	}
-	public var xfade_curve: Curve {
+	public var xfade_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "xfade_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "xfade_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "xfade_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var allow_transition_to_self: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "allow_transition_to_self").asBool() }
@@ -90369,9 +90369,9 @@ public class AreaLight3D: Light3D {
 		get { Host.shared.getProperty(object: ptr, name: "area_size").asVector2() }
 		set { Host.shared.setProperty(object: ptr, name: "area_size", value: VariantBox(newValue)) }
 	}
-	public var area_texture: GodotObject {
+	public var area_texture: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "area_texture").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "area_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "area_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -90392,29 +90392,29 @@ public class AspectRatioContainer: Container {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_ratio", args: [])
 		return __ret.asDouble()
 	}
-	public func set_stretch_mode(stretch_mode: AspectRatioContainer.StretchMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_stretch_mode", args: [VariantBox(stretch_mode.rawValue)])
+	public func set_stretch_mode(stretch_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_stretch_mode", args: [VariantBox(stretch_mode)])
 	}
 	@discardableResult
-	public func get_stretch_mode() -> AspectRatioContainer.StretchMode {
+	public func get_stretch_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_stretch_mode", args: [])
-		return __ret.asEnum(AspectRatioContainer.StretchMode.self)
+		return __ret.asInt()
 	}
-	public func set_alignment_horizontal(alignment_horizontal: AspectRatioContainer.AlignmentMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_alignment_horizontal", args: [VariantBox(alignment_horizontal.rawValue)])
+	public func set_alignment_horizontal(alignment_horizontal: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_alignment_horizontal", args: [VariantBox(alignment_horizontal)])
 	}
 	@discardableResult
-	public func get_alignment_horizontal() -> AspectRatioContainer.AlignmentMode {
+	public func get_alignment_horizontal() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_alignment_horizontal", args: [])
-		return __ret.asEnum(AspectRatioContainer.AlignmentMode.self)
+		return __ret.asInt()
 	}
-	public func set_alignment_vertical(alignment_vertical: AspectRatioContainer.AlignmentMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_alignment_vertical", args: [VariantBox(alignment_vertical.rawValue)])
+	public func set_alignment_vertical(alignment_vertical: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_alignment_vertical", args: [VariantBox(alignment_vertical)])
 	}
 	@discardableResult
-	public func get_alignment_vertical() -> AspectRatioContainer.AlignmentMode {
+	public func get_alignment_vertical() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_alignment_vertical", args: [])
-		return __ret.asEnum(AspectRatioContainer.AlignmentMode.self)
+		return __ret.asInt()
 	}
 	public var ratio: Double {
 		get { Host.shared.getProperty(object: ptr, name: "ratio").asDouble() }
@@ -90479,9 +90479,9 @@ public class AtlasTexture: Texture2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "has_filter_clip", args: [])
 		return __ret.asBool()
 	}
-	public var atlas: Texture2D {
+	public var atlas: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "atlas").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "atlas", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "atlas", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var region: Rect2 {
 		get { Host.shared.getProperty(object: ptr, name: "region").asRect2() }
@@ -90621,13 +90621,13 @@ public class BoxContainer: Container {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_spacer", args: [VariantBox(begin)])
 		return __ret.asObject(Control.self)
 	}
-	public func set_alignment(alignment: BoxContainer.AlignmentMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_alignment", args: [VariantBox(alignment.rawValue)])
+	public func set_alignment(alignment: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_alignment", args: [VariantBox(alignment)])
 	}
 	@discardableResult
-	public func get_alignment() -> BoxContainer.AlignmentMode {
+	public func get_alignment() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_alignment", args: [])
-		return __ret.asEnum(BoxContainer.AlignmentMode.self)
+		return __ret.asInt()
 	}
 	public func set_vertical(vertical: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_vertical", args: [VariantBox(vertical)])
@@ -90735,29 +90735,29 @@ public class Button: BaseButton {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_text", args: [])
 		return __ret.asString()
 	}
-	public func set_text_overrun_behavior(overrun_behavior: TextServer.OverrunBehavior) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_overrun_behavior", args: [VariantBox(overrun_behavior.rawValue)])
+	public func set_text_overrun_behavior(overrun_behavior: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_overrun_behavior", args: [VariantBox(overrun_behavior)])
 	}
 	@discardableResult
-	public func get_text_overrun_behavior() -> TextServer.OverrunBehavior {
+	public func get_text_overrun_behavior() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_text_overrun_behavior", args: [])
-		return __ret.asEnum(TextServer.OverrunBehavior.self)
+		return __ret.asInt()
 	}
-	public func set_autowrap_mode(autowrap_mode: TextServer.AutowrapMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_mode", args: [VariantBox(autowrap_mode.rawValue)])
+	public func set_autowrap_mode(autowrap_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_mode", args: [VariantBox(autowrap_mode)])
 	}
 	@discardableResult
-	public func get_autowrap_mode() -> TextServer.AutowrapMode {
+	public func get_autowrap_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_autowrap_mode", args: [])
-		return __ret.asEnum(TextServer.AutowrapMode.self)
+		return __ret.asInt()
 	}
-	public func set_autowrap_trim_flags(autowrap_trim_flags: TextServer.LineBreakFlag) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_trim_flags", args: [VariantBox(autowrap_trim_flags.rawValue)])
+	public func set_autowrap_trim_flags(autowrap_trim_flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_trim_flags", args: [VariantBox(autowrap_trim_flags)])
 	}
 	@discardableResult
-	public func get_autowrap_trim_flags() -> TextServer.LineBreakFlag {
+	public func get_autowrap_trim_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_autowrap_trim_flags", args: [])
-		return __ret.asEnum(TextServer.LineBreakFlag.self)
+		return __ret.asInt()
 	}
 	public func set_text_direction(direction: Control.TextDirection) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_direction", args: [VariantBox(direction.rawValue)])
@@ -90835,9 +90835,9 @@ public class Button: BaseButton {
 		get { Host.shared.getProperty(object: ptr, name: "text").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "text", value: VariantBox(newValue)) }
 	}
-	public var icon: Texture2D {
+	public var icon: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "icon").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "icon", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "icon", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var flat: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "flat").asBool() }
@@ -91092,28 +91092,28 @@ public class CPUParticles3D: GeometryInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_flatness", args: [])
 		return __ret.asDouble()
 	}
-	public func set_param_min(param: CPUParticles3D.Parameter, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_min", args: [VariantBox(param.rawValue), VariantBox(value)])
+	public func set_param_min(param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_min", args: [VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func get_param_min(param: CPUParticles3D.Parameter) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_min", args: [VariantBox(param.rawValue)])
+	public func get_param_min(param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_min", args: [VariantBox(param)])
 		return __ret.asDouble()
 	}
-	public func set_param_max(param: CPUParticles3D.Parameter, value: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_max", args: [VariantBox(param.rawValue), VariantBox(value)])
+	public func set_param_max(param: Int, value: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_max", args: [VariantBox(param), VariantBox(value)])
 	}
 	@discardableResult
-	public func get_param_max(param: CPUParticles3D.Parameter) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_max", args: [VariantBox(param.rawValue)])
+	public func get_param_max(param: Int) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_max", args: [VariantBox(param)])
 		return __ret.asDouble()
 	}
-	public func set_param_curve(param: CPUParticles3D.Parameter, curve: Curve) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_curve", args: [VariantBox(param.rawValue), VariantBox(curve)])
+	public func set_param_curve(param: Int, curve: Curve) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_param_curve", args: [VariantBox(param), VariantBox(curve)])
 	}
 	@discardableResult
-	public func get_param_curve(param: CPUParticles3D.Parameter) -> Curve? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_curve", args: [VariantBox(param.rawValue)])
+	public func get_param_curve(param: Int) -> Curve? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_param_curve", args: [VariantBox(param)])
 		return __ret.asObject(Curve.self)
 	}
 	public func set_color(color: Color) {
@@ -91140,12 +91140,12 @@ public class CPUParticles3D: GeometryInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_color_initial_ramp", args: [])
 		return __ret.asObject(Gradient.self)
 	}
-	public func set_particle_flag(particle_flag: CPUParticles3D.ParticleFlags, enable: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_particle_flag", args: [VariantBox(particle_flag.rawValue), VariantBox(enable)])
+	public func set_particle_flag(particle_flag: Int, enable: Bool) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_particle_flag", args: [VariantBox(particle_flag), VariantBox(enable)])
 	}
 	@discardableResult
-	public func get_particle_flag(particle_flag: CPUParticles3D.ParticleFlags) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_particle_flag", args: [VariantBox(particle_flag.rawValue)])
+	public func get_particle_flag(particle_flag: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_particle_flag", args: [VariantBox(particle_flag)])
 		return __ret.asBool()
 	}
 	public func set_emission_shape(shape: CPUParticles3D.EmissionShape) {
@@ -91351,9 +91351,9 @@ public class CPUParticles3D: GeometryInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "draw_order").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "draw_order", value: VariantBox(newValue)) }
 	}
-	public var mesh: GodotObject {
+	public var mesh: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "mesh").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "mesh", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "mesh", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Emission_Shape: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Emission Shape") }
@@ -91467,9 +91467,9 @@ public class CPUParticles3D: GeometryInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "angular_velocity_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "angular_velocity_max", value: VariantBox(newValue)) }
 	}
-	public var angular_velocity_curve: Curve {
+	public var angular_velocity_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "angular_velocity_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "angular_velocity_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "angular_velocity_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Orbit_Velocity: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Orbit Velocity") }
@@ -91483,9 +91483,9 @@ public class CPUParticles3D: GeometryInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "orbit_velocity_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "orbit_velocity_max", value: VariantBox(newValue)) }
 	}
-	public var orbit_velocity_curve: Curve {
+	public var orbit_velocity_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "orbit_velocity_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "orbit_velocity_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "orbit_velocity_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Linear_Accel: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Linear Accel") }
@@ -91499,9 +91499,9 @@ public class CPUParticles3D: GeometryInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "linear_accel_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "linear_accel_max", value: VariantBox(newValue)) }
 	}
-	public var linear_accel_curve: Curve {
+	public var linear_accel_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "linear_accel_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "linear_accel_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "linear_accel_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Radial_Accel: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Radial Accel") }
@@ -91515,9 +91515,9 @@ public class CPUParticles3D: GeometryInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "radial_accel_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "radial_accel_max", value: VariantBox(newValue)) }
 	}
-	public var radial_accel_curve: Curve {
+	public var radial_accel_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "radial_accel_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "radial_accel_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "radial_accel_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Tangential_Accel: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Tangential Accel") }
@@ -91531,9 +91531,9 @@ public class CPUParticles3D: GeometryInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "tangential_accel_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "tangential_accel_max", value: VariantBox(newValue)) }
 	}
-	public var tangential_accel_curve: Curve {
+	public var tangential_accel_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "tangential_accel_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "tangential_accel_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "tangential_accel_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Damping: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Damping") }
@@ -91547,9 +91547,9 @@ public class CPUParticles3D: GeometryInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "damping_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "damping_max", value: VariantBox(newValue)) }
 	}
-	public var damping_curve: Curve {
+	public var damping_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "damping_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "damping_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "damping_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Angle: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Angle") }
@@ -91563,9 +91563,9 @@ public class CPUParticles3D: GeometryInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "angle_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "angle_max", value: VariantBox(newValue)) }
 	}
-	public var angle_curve: Curve {
+	public var angle_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "angle_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "angle_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "angle_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Scale: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Scale") }
@@ -91579,25 +91579,25 @@ public class CPUParticles3D: GeometryInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "scale_amount_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "scale_amount_max", value: VariantBox(newValue)) }
 	}
-	public var scale_amount_curve: Curve {
+	public var scale_amount_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "scale_amount_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "scale_amount_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "scale_amount_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var split_scale: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "split_scale").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "split_scale", value: VariantBox(newValue)) }
 	}
-	public var scale_curve_x: Curve {
+	public var scale_curve_x: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "scale_curve_x").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "scale_curve_x", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "scale_curve_x", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var scale_curve_y: Curve {
+	public var scale_curve_y: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "scale_curve_y").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "scale_curve_y", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "scale_curve_y", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var scale_curve_z: Curve {
+	public var scale_curve_z: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "scale_curve_z").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "scale_curve_z", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "scale_curve_z", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Color: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Color") }
@@ -91607,13 +91607,13 @@ public class CPUParticles3D: GeometryInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "color").asColor() }
 		set { Host.shared.setProperty(object: ptr, name: "color", value: VariantBox(newValue)) }
 	}
-	public var color_ramp: Gradient {
+	public var color_ramp: Gradient? {
 		get { Host.shared.getProperty(object: ptr, name: "color_ramp").asObject(Gradient.self) }
-		set { Host.shared.setProperty(object: ptr, name: "color_ramp", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "color_ramp", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var color_initial_ramp: Gradient {
+	public var color_initial_ramp: Gradient? {
 		get { Host.shared.getProperty(object: ptr, name: "color_initial_ramp").asObject(Gradient.self) }
-		set { Host.shared.setProperty(object: ptr, name: "color_initial_ramp", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "color_initial_ramp", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Hue_Variation: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Hue Variation") }
@@ -91627,9 +91627,9 @@ public class CPUParticles3D: GeometryInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "hue_variation_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "hue_variation_max", value: VariantBox(newValue)) }
 	}
-	public var hue_variation_curve: Curve {
+	public var hue_variation_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "hue_variation_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "hue_variation_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "hue_variation_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Animation: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Animation") }
@@ -91643,9 +91643,9 @@ public class CPUParticles3D: GeometryInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "anim_speed_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "anim_speed_max", value: VariantBox(newValue)) }
 	}
-	public var anim_speed_curve: Curve {
+	public var anim_speed_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "anim_speed_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "anim_speed_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "anim_speed_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var anim_offset_min: Double {
 		get { Host.shared.getProperty(object: ptr, name: "anim_offset_min").asDouble() }
@@ -91655,9 +91655,9 @@ public class CPUParticles3D: GeometryInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "anim_offset_max").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "anim_offset_max", value: VariantBox(newValue)) }
 	}
-	public var anim_offset_curve: Curve {
+	public var anim_offset_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "anim_offset_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "anim_offset_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "anim_offset_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public func emit_finished() {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("finished")])
@@ -91853,13 +91853,13 @@ public class CameraTexture: Texture2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_camera_feed_id", args: [])
 		return __ret.asInt()
 	}
-	public func set_which_feed(which_feed: CameraServer.FeedImage) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_which_feed", args: [VariantBox(which_feed.rawValue)])
+	public func set_which_feed(which_feed: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_which_feed", args: [VariantBox(which_feed)])
 	}
 	@discardableResult
-	public func get_which_feed() -> CameraServer.FeedImage {
+	public func get_which_feed() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_which_feed", args: [])
-		return __ret.asEnum(CameraServer.FeedImage.self)
+		return __ret.asInt()
 	}
 	public func set_camera_active(active: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_camera_active", args: [VariantBox(active)])
@@ -91952,25 +91952,25 @@ public class CanvasTexture: Texture2D {
 		get { Host.shared.getProperty(object: ptr, name: "Diffuse") }
 		set { Host.shared.setProperty(object: ptr, name: "Diffuse", value: VariantBox(newValue)) }
 	}
-	public var diffuse_texture: Texture2D {
+	public var diffuse_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "diffuse_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "diffuse_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "diffuse_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var NormalMap: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "NormalMap") }
 		set { Host.shared.setProperty(object: ptr, name: "NormalMap", value: VariantBox(newValue)) }
 	}
-	public var normal_texture: Texture2D {
+	public var normal_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "normal_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "normal_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "normal_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Specular: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Specular") }
 		set { Host.shared.setProperty(object: ptr, name: "Specular", value: VariantBox(newValue)) }
 	}
-	public var specular_texture: Texture2D {
+	public var specular_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "specular_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "specular_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "specular_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var specular_color: Color {
 		get { Host.shared.getProperty(object: ptr, name: "specular_color").asColor() }
@@ -92813,8 +92813,8 @@ public class CodeEdit: TextEdit {
 	public func request_code_completion(force: Bool = false) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "request_code_completion", args: [VariantBox(force)])
 	}
-	public func add_code_completion_option(type: CodeEdit.CodeCompletionKind, display_text: String, insert_text: String, text_color: Color, icon: Resource, value: VariantBox, location: Int = 1024) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_code_completion_option", args: [VariantBox(type.rawValue), VariantBox(display_text), VariantBox(insert_text), VariantBox(text_color), VariantBox(icon), VariantBox(value), VariantBox(location)])
+	public func add_code_completion_option(type: Int, display_text: String, insert_text: String, text_color: Color, icon: Resource, value: VariantBox, location: Int = 1024) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_code_completion_option", args: [VariantBox(type), VariantBox(display_text), VariantBox(insert_text), VariantBox(text_color), VariantBox(icon), VariantBox(value), VariantBox(location)])
 	}
 	public func update_code_completion_options(force: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update_code_completion_options", args: [VariantBox(force)])
@@ -93448,9 +93448,9 @@ public class CurveTexture: Texture2D {
 		get { Host.shared.getProperty(object: ptr, name: "texture_mode").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "texture_mode", value: VariantBox(newValue)) }
 	}
-	public var curve: Curve {
+	public var curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -93494,17 +93494,17 @@ public class CurveXYZTexture: Texture2D {
 		get { Host.shared.getProperty(object: ptr, name: "width").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "width", value: VariantBox(newValue)) }
 	}
-	public var curve_x: Curve {
+	public var curve_x: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "curve_x").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "curve_x", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "curve_x", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var curve_y: Curve {
+	public var curve_y: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "curve_y").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "curve_y", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "curve_y", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var curve_z: Curve {
+	public var curve_z: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "curve_z").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "curve_z", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "curve_z", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -93799,13 +93799,13 @@ public class DirectionalLight3D: Light3D {
 		case lightOnly = 1
 		case skyOnly = 2
 	}
-	public func set_shadow_mode(mode: DirectionalLight3D.ShadowMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_shadow_mode", args: [VariantBox(mode.rawValue)])
+	public func set_shadow_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_shadow_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_shadow_mode() -> DirectionalLight3D.ShadowMode {
+	public func get_shadow_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_shadow_mode", args: [])
-		return __ret.asEnum(DirectionalLight3D.ShadowMode.self)
+		return __ret.asInt()
 	}
 	public func set_blend_splits(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_blend_splits", args: [VariantBox(enabled)])
@@ -93945,21 +93945,21 @@ public class FlowContainer: Container {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_line_count", args: [])
 		return __ret.asInt()
 	}
-	public func set_alignment(alignment: FlowContainer.AlignmentMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_alignment", args: [VariantBox(alignment.rawValue)])
+	public func set_alignment(alignment: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_alignment", args: [VariantBox(alignment)])
 	}
 	@discardableResult
-	public func get_alignment() -> FlowContainer.AlignmentMode {
+	public func get_alignment() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_alignment", args: [])
-		return __ret.asEnum(FlowContainer.AlignmentMode.self)
+		return __ret.asInt()
 	}
-	public func set_last_wrap_alignment(last_wrap_alignment: FlowContainer.LastWrapAlignmentMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_last_wrap_alignment", args: [VariantBox(last_wrap_alignment.rawValue)])
+	public func set_last_wrap_alignment(last_wrap_alignment: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_last_wrap_alignment", args: [VariantBox(last_wrap_alignment)])
 	}
 	@discardableResult
-	public func get_last_wrap_alignment() -> FlowContainer.LastWrapAlignmentMode {
+	public func get_last_wrap_alignment() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_last_wrap_alignment", args: [])
-		return __ret.asEnum(FlowContainer.LastWrapAlignmentMode.self)
+		return __ret.asInt()
 	}
 	public func set_vertical(vertical: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_vertical", args: [VariantBox(vertical)])
@@ -94058,21 +94058,21 @@ public class FoldableContainer: Container {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_title_text_direction", args: [])
 		return __ret.asEnum(Control.TextDirection.self)
 	}
-	public func set_title_text_overrun_behavior(overrun_behavior: TextServer.OverrunBehavior) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_title_text_overrun_behavior", args: [VariantBox(overrun_behavior.rawValue)])
+	public func set_title_text_overrun_behavior(overrun_behavior: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_title_text_overrun_behavior", args: [VariantBox(overrun_behavior)])
 	}
 	@discardableResult
-	public func get_title_text_overrun_behavior() -> TextServer.OverrunBehavior {
+	public func get_title_text_overrun_behavior() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_title_text_overrun_behavior", args: [])
-		return __ret.asEnum(TextServer.OverrunBehavior.self)
+		return __ret.asInt()
 	}
-	public func set_title_position(title_position: FoldableContainer.TitlePosition) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_title_position", args: [VariantBox(title_position.rawValue)])
+	public func set_title_position(title_position: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_title_position", args: [VariantBox(title_position)])
 	}
 	@discardableResult
-	public func get_title_position() -> FoldableContainer.TitlePosition {
+	public func get_title_position() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_title_position", args: [])
-		return __ret.asEnum(FoldableContainer.TitlePosition.self)
+		return __ret.asInt()
 	}
 	public func add_title_bar_control(control: Control) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_title_bar_control", args: [VariantBox(control)])
@@ -94110,9 +94110,9 @@ public class FoldableContainer: Container {
 		get { Host.shared.getProperty(object: ptr, name: "title_text_overrun_behavior").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "title_text_overrun_behavior", value: VariantBox(newValue)) }
 	}
-	public var foldable_group: FoldableGroup {
+	public var foldable_group: FoldableGroup? {
 		get { Host.shared.getProperty(object: ptr, name: "foldable_group").asObject(FoldableGroup.self) }
-		set { Host.shared.setProperty(object: ptr, name: "foldable_group", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "foldable_group", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var BiDi: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "BiDi") }
@@ -94372,21 +94372,21 @@ public class GPUParticles3D: GeometryInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_transform_align", args: [])
 		return __ret.asEnum(GPUParticles3D.TransformAlign.self)
 	}
-	public func set_transform_align_channel_filter(channel_filter: RenderingServer.ParticlesTransformAlignCustomSrc) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_transform_align_channel_filter", args: [VariantBox(channel_filter.rawValue)])
+	public func set_transform_align_channel_filter(channel_filter: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_transform_align_channel_filter", args: [VariantBox(channel_filter)])
 	}
 	@discardableResult
-	public func get_transform_align_channel_filter() -> RenderingServer.ParticlesTransformAlignCustomSrc {
+	public func get_transform_align_channel_filter() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_transform_align_channel_filter", args: [])
-		return __ret.asEnum(RenderingServer.ParticlesTransformAlignCustomSrc.self)
+		return __ret.asInt()
 	}
-	public func set_transform_align_axis(align: RenderingServer.ParticlesTransformAlignAxis) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_transform_align_axis", args: [VariantBox(align.rawValue)])
+	public func set_transform_align_axis(align: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_transform_align_axis", args: [VariantBox(align)])
 	}
 	@discardableResult
-	public func get_transform_align_axis() -> RenderingServer.ParticlesTransformAlignAxis {
+	public func get_transform_align_axis() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_transform_align_axis", args: [])
-		return __ret.asEnum(RenderingServer.ParticlesTransformAlignAxis.self)
+		return __ret.asInt()
 	}
 	public func convert_from_particles(particles: Node) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "convert_from_particles", args: [VariantBox(particles)])
@@ -94526,9 +94526,9 @@ public class GPUParticles3D: GeometryInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "Process Material") }
 		set { Host.shared.setProperty(object: ptr, name: "Process Material", value: VariantBox(newValue)) }
 	}
-	public var process_material: GodotObject {
+	public var process_material: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "process_material").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "process_material", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "process_material", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Draw_Passes: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Draw Passes") }
@@ -94538,25 +94538,25 @@ public class GPUParticles3D: GeometryInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "draw_passes").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "draw_passes", value: VariantBox(newValue)) }
 	}
-	public var draw_pass_1: GodotObject {
+	public var draw_pass_1: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "draw_pass_1").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "draw_pass_1", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "draw_pass_1", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var draw_pass_2: GodotObject {
+	public var draw_pass_2: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "draw_pass_2").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "draw_pass_2", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "draw_pass_2", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var draw_pass_3: GodotObject {
+	public var draw_pass_3: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "draw_pass_3").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "draw_pass_3", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "draw_pass_3", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var draw_pass_4: GodotObject {
+	public var draw_pass_4: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "draw_pass_4").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "draw_pass_4", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "draw_pass_4", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var draw_skin: Skin {
+	public var draw_skin: Skin? {
 		get { Host.shared.getProperty(object: ptr, name: "draw_skin").asObject(Skin.self) }
-		set { Host.shared.setProperty(object: ptr, name: "draw_skin", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "draw_skin", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public func emit_finished() {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("finished")])
@@ -94638,9 +94638,9 @@ public class GPUParticlesAttractorVectorField3D: GPUParticlesAttractor3D {
 		get { Host.shared.getProperty(object: ptr, name: "size").asVector3() }
 		set { Host.shared.setProperty(object: ptr, name: "size", value: VariantBox(newValue)) }
 	}
-	public var texture: Texture3D {
+	public var texture: Texture3D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(Texture3D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -94841,9 +94841,9 @@ public class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
 		get { Host.shared.getProperty(object: ptr, name: "bake_mask").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "bake_mask", value: VariantBox(newValue)) }
 	}
-	public var texture: Texture3D {
+	public var texture: Texture3D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(Texture3D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -94898,9 +94898,9 @@ public class GradientTexture1D: Texture2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_using_hdr", args: [])
 		return __ret.asBool()
 	}
-	public var gradient: Gradient {
+	public var gradient: Gradient? {
 		get { Host.shared.getProperty(object: ptr, name: "gradient").asObject(Gradient.self) }
-		set { Host.shared.setProperty(object: ptr, name: "gradient", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "gradient", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var width: Int {
 		get { Host.shared.getProperty(object: ptr, name: "width").asInt() }
@@ -94985,9 +94985,9 @@ public class GradientTexture2D: Texture2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_repeat", args: [])
 		return __ret.asEnum(GradientTexture2D.Repeat.self)
 	}
-	public var gradient: Gradient {
+	public var gradient: Gradient? {
 		get { Host.shared.getProperty(object: ptr, name: "gradient").asObject(Gradient.self) }
-		set { Host.shared.setProperty(object: ptr, name: "gradient", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "gradient", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var width: Int {
 		get { Host.shared.getProperty(object: ptr, name: "width").asInt() }
@@ -95229,9 +95229,9 @@ public class ImageTexture: Texture2D {
 	public func _set_image(image: Image) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_set_image", args: [VariantBox(image)])
 	}
-	public var image: Image {
+	public var image: Image? {
 		get { Host.shared.getProperty(object: ptr, name: "image").asObject(Image.self) }
-		set { Host.shared.setProperty(object: ptr, name: "image", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "image", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -95635,13 +95635,13 @@ public class Label3D: GeometryInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_language", args: [])
 		return __ret.asString()
 	}
-	public func set_structured_text_bidi_override(parser: TextServer.StructuredTextParser) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override", args: [VariantBox(parser.rawValue)])
+	public func set_structured_text_bidi_override(parser: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override", args: [VariantBox(parser)])
 	}
 	@discardableResult
-	public func get_structured_text_bidi_override() -> TextServer.StructuredTextParser {
+	public func get_structured_text_bidi_override() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_structured_text_bidi_override", args: [])
-		return __ret.asEnum(TextServer.StructuredTextParser.self)
+		return __ret.asInt()
 	}
 	public func set_structured_text_bidi_override_options(args: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override_options", args: [VariantBox(args)])
@@ -95707,29 +95707,29 @@ public class Label3D: GeometryInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_line_spacing", args: [])
 		return __ret.asDouble()
 	}
-	public func set_autowrap_mode(autowrap_mode: TextServer.AutowrapMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_mode", args: [VariantBox(autowrap_mode.rawValue)])
+	public func set_autowrap_mode(autowrap_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_mode", args: [VariantBox(autowrap_mode)])
 	}
 	@discardableResult
-	public func get_autowrap_mode() -> TextServer.AutowrapMode {
+	public func get_autowrap_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_autowrap_mode", args: [])
-		return __ret.asEnum(TextServer.AutowrapMode.self)
+		return __ret.asInt()
 	}
-	public func set_autowrap_trim_flags(autowrap_trim_flags: TextServer.LineBreakFlag) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_trim_flags", args: [VariantBox(autowrap_trim_flags.rawValue)])
+	public func set_autowrap_trim_flags(autowrap_trim_flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_trim_flags", args: [VariantBox(autowrap_trim_flags)])
 	}
 	@discardableResult
-	public func get_autowrap_trim_flags() -> TextServer.LineBreakFlag {
+	public func get_autowrap_trim_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_autowrap_trim_flags", args: [])
-		return __ret.asEnum(TextServer.LineBreakFlag.self)
+		return __ret.asInt()
 	}
-	public func set_justification_flags(justification_flags: TextServer.JustificationFlag) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_justification_flags", args: [VariantBox(justification_flags.rawValue)])
+	public func set_justification_flags(justification_flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_justification_flags", args: [VariantBox(justification_flags)])
 	}
 	@discardableResult
-	public func get_justification_flags() -> TextServer.JustificationFlag {
+	public func get_justification_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_justification_flags", args: [])
-		return __ret.asEnum(TextServer.JustificationFlag.self)
+		return __ret.asInt()
 	}
 	public func set_width(width: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_width", args: [VariantBox(width)])
@@ -95755,29 +95755,29 @@ public class Label3D: GeometryInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_offset", args: [])
 		return __ret.asVector2()
 	}
-	public func set_draw_flag(flag: Label3D.DrawFlags, enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_draw_flag", args: [VariantBox(flag.rawValue), VariantBox(enabled)])
+	public func set_draw_flag(flag: Int, enabled: Bool) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_draw_flag", args: [VariantBox(flag), VariantBox(enabled)])
 	}
 	@discardableResult
-	public func get_draw_flag(flag: Label3D.DrawFlags) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_draw_flag", args: [VariantBox(flag.rawValue)])
+	public func get_draw_flag(flag: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_draw_flag", args: [VariantBox(flag)])
 		return __ret.asBool()
 	}
-	public func set_billboard_mode(mode: BaseMaterial3D.BillboardMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_billboard_mode", args: [VariantBox(mode.rawValue)])
+	public func set_billboard_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_billboard_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_billboard_mode() -> BaseMaterial3D.BillboardMode {
+	public func get_billboard_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_billboard_mode", args: [])
-		return __ret.asEnum(BaseMaterial3D.BillboardMode.self)
+		return __ret.asInt()
 	}
-	public func set_alpha_cut_mode(mode: Label3D.AlphaCutMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_alpha_cut_mode", args: [VariantBox(mode.rawValue)])
+	public func set_alpha_cut_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_alpha_cut_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_alpha_cut_mode() -> Label3D.AlphaCutMode {
+	public func get_alpha_cut_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_alpha_cut_mode", args: [])
-		return __ret.asEnum(Label3D.AlphaCutMode.self)
+		return __ret.asInt()
 	}
 	public func set_alpha_scissor_threshold(threshold: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_alpha_scissor_threshold", args: [VariantBox(threshold)])
@@ -95795,13 +95795,13 @@ public class Label3D: GeometryInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_alpha_hash_scale", args: [])
 		return __ret.asDouble()
 	}
-	public func set_alpha_antialiasing(alpha_aa: BaseMaterial3D.AlphaAntiAliasing) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_alpha_antialiasing", args: [VariantBox(alpha_aa.rawValue)])
+	public func set_alpha_antialiasing(alpha_aa: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_alpha_antialiasing", args: [VariantBox(alpha_aa)])
 	}
 	@discardableResult
-	public func get_alpha_antialiasing() -> BaseMaterial3D.AlphaAntiAliasing {
+	public func get_alpha_antialiasing() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_alpha_antialiasing", args: [])
-		return __ret.asEnum(BaseMaterial3D.AlphaAntiAliasing.self)
+		return __ret.asInt()
 	}
 	public func set_alpha_antialiasing_edge(edge: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_alpha_antialiasing_edge", args: [VariantBox(edge)])
@@ -95904,9 +95904,9 @@ public class Label3D: GeometryInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "text").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "text", value: VariantBox(newValue)) }
 	}
-	public var font: Font {
+	public var font: Font? {
 		get { Host.shared.getProperty(object: ptr, name: "font").asObject(Font.self) }
-		set { Host.shared.setProperty(object: ptr, name: "font", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "font", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var font_size: Int {
 		get { Host.shared.getProperty(object: ptr, name: "font_size").asInt() }
@@ -96018,13 +96018,13 @@ public class LinkButton: BaseButton {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_text", args: [])
 		return __ret.asString()
 	}
-	public func set_text_overrun_behavior(overrun_behavior: TextServer.OverrunBehavior) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_overrun_behavior", args: [VariantBox(overrun_behavior.rawValue)])
+	public func set_text_overrun_behavior(overrun_behavior: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_overrun_behavior", args: [VariantBox(overrun_behavior)])
 	}
 	@discardableResult
-	public func get_text_overrun_behavior() -> TextServer.OverrunBehavior {
+	public func get_text_overrun_behavior() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_text_overrun_behavior", args: [])
-		return __ret.asEnum(TextServer.OverrunBehavior.self)
+		return __ret.asInt()
 	}
 	public func set_ellipsis_char(char: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_ellipsis_char", args: [VariantBox(char)])
@@ -96066,13 +96066,13 @@ public class LinkButton: BaseButton {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_underline_mode", args: [])
 		return __ret.asEnum(LinkButton.UnderlineMode.self)
 	}
-	public func set_structured_text_bidi_override(parser: TextServer.StructuredTextParser) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override", args: [VariantBox(parser.rawValue)])
+	public func set_structured_text_bidi_override(parser: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override", args: [VariantBox(parser)])
 	}
 	@discardableResult
-	public func get_structured_text_bidi_override() -> TextServer.StructuredTextParser {
+	public func get_structured_text_bidi_override() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_structured_text_bidi_override", args: [])
-		return __ret.asEnum(TextServer.StructuredTextParser.self)
+		return __ret.asInt()
 	}
 	public func set_structured_text_bidi_override_options(args: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override_options", args: [VariantBox(args)])
@@ -96235,17 +96235,17 @@ public class MeshInstance3D: GeometryInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "bake_mesh_from_current_skeleton_pose", args: [VariantBox(existing)])
 		return __ret.asObject(ArrayMesh.self)
 	}
-	public var mesh: GodotObject {
+	public var mesh: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "mesh").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "mesh", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "mesh", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Skeleton: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Skeleton") }
 		set { Host.shared.setProperty(object: ptr, name: "Skeleton", value: VariantBox(newValue)) }
 	}
-	public var skin: Skin {
+	public var skin: Skin? {
 		get { Host.shared.getProperty(object: ptr, name: "skin").asObject(Skin.self) }
-		set { Host.shared.setProperty(object: ptr, name: "skin", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "skin", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var skeleton: String {
 		get { Host.shared.getProperty(object: ptr, name: "skeleton").asString() }
@@ -96290,13 +96290,13 @@ public class MeshTexture: Texture2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_base_texture", args: [])
 		return __ret.asObject(Texture2D.self)
 	}
-	public var mesh: Mesh {
+	public var mesh: Mesh? {
 		get { Host.shared.getProperty(object: ptr, name: "mesh").asObject(Mesh.self) }
-		set { Host.shared.setProperty(object: ptr, name: "mesh", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "mesh", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var base_texture: Texture2D {
+	public var base_texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "base_texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "base_texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "base_texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var image_size: Vector2 {
 		get { Host.shared.getProperty(object: ptr, name: "image_size").asVector2() }
@@ -96321,9 +96321,9 @@ public class MultiMeshInstance3D: GeometryInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_multimesh", args: [])
 		return __ret.asObject(MultiMesh.self)
 	}
-	public var multimesh: MultiMesh {
+	public var multimesh: MultiMesh? {
 		get { Host.shared.getProperty(object: ptr, name: "multimesh").asObject(MultiMesh.self) }
-		set { Host.shared.setProperty(object: ptr, name: "multimesh", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "multimesh", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -96434,13 +96434,13 @@ public class NoiseTexture2D: Texture2D {
 		get { Host.shared.getProperty(object: ptr, name: "generate_mipmaps").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "generate_mipmaps", value: VariantBox(newValue)) }
 	}
-	public var noise: GodotObject {
+	public var noise: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "noise").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "noise", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "noise", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var color_ramp: Gradient {
+	public var color_ramp: Gradient? {
 		get { Host.shared.getProperty(object: ptr, name: "color_ramp").asObject(Gradient.self) }
-		set { Host.shared.setProperty(object: ptr, name: "color_ramp", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "color_ramp", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var seamless: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "seamless").asBool() }
@@ -96550,13 +96550,13 @@ public class NoiseTexture3D: Texture3D {
 		get { Host.shared.getProperty(object: ptr, name: "depth").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "depth", value: VariantBox(newValue)) }
 	}
-	public var noise: GodotObject {
+	public var noise: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "noise").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "noise", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "noise", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var color_ramp: Gradient {
+	public var color_ramp: Gradient? {
 		get { Host.shared.getProperty(object: ptr, name: "color_ramp").asObject(Gradient.self) }
-		set { Host.shared.setProperty(object: ptr, name: "color_ramp", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "color_ramp", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var seamless: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "seamless").asBool() }
@@ -96596,13 +96596,13 @@ public class OmniLight3D: Light3D {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_shadow_mode(mode: OmniLight3D.ShadowMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_shadow_mode", args: [VariantBox(mode.rawValue)])
+	public func set_shadow_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_shadow_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_shadow_mode() -> OmniLight3D.ShadowMode {
+	public func get_shadow_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_shadow_mode", args: [])
-		return __ret.asEnum(OmniLight3D.ShadowMode.self)
+		return __ret.asInt()
 	}
 	public var Omni: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Omni") }
@@ -96671,13 +96671,13 @@ public class OpenXRAnalogThresholdModifier: OpenXRActionBindingModifier {
 		get { Host.shared.getProperty(object: ptr, name: "off_threshold").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "off_threshold", value: VariantBox(newValue)) }
 	}
-	public var on_haptic: OpenXRHapticBase {
+	public var on_haptic: OpenXRHapticBase? {
 		get { Host.shared.getProperty(object: ptr, name: "on_haptic").asObject(OpenXRHapticBase.self) }
-		set { Host.shared.setProperty(object: ptr, name: "on_haptic", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "on_haptic", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var off_haptic: OpenXRHapticBase {
+	public var off_haptic: OpenXRHapticBase? {
 		get { Host.shared.getProperty(object: ptr, name: "off_haptic").asObject(OpenXRHapticBase.self) }
-		set { Host.shared.setProperty(object: ptr, name: "off_haptic", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "off_haptic", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -96793,9 +96793,9 @@ public class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_off_haptic", args: [])
 		return __ret.asObject(OpenXRHapticBase.self)
 	}
-	public var action_set: OpenXRActionSet {
+	public var action_set: OpenXRActionSet? {
 		get { Host.shared.getProperty(object: ptr, name: "action_set").asObject(OpenXRActionSet.self) }
-		set { Host.shared.setProperty(object: ptr, name: "action_set", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "action_set", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var input_path: String {
 		get { Host.shared.getProperty(object: ptr, name: "input_path").asString() }
@@ -96821,13 +96821,13 @@ public class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
 		get { Host.shared.getProperty(object: ptr, name: "is_sticky").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "is_sticky", value: VariantBox(newValue)) }
 	}
-	public var on_haptic: OpenXRHapticBase {
+	public var on_haptic: OpenXRHapticBase? {
 		get { Host.shared.getProperty(object: ptr, name: "on_haptic").asObject(OpenXRHapticBase.self) }
-		set { Host.shared.setProperty(object: ptr, name: "on_haptic", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "on_haptic", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var off_haptic: OpenXRHapticBase {
+	public var off_haptic: OpenXRHapticBase? {
 		get { Host.shared.getProperty(object: ptr, name: "off_haptic").asObject(OpenXRHapticBase.self) }
-		set { Host.shared.setProperty(object: ptr, name: "off_haptic", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "off_haptic", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -97464,13 +97464,13 @@ public class PlaneMesh: PrimitiveMesh {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_center_offset", args: [])
 		return __ret.asVector3()
 	}
-	public func set_orientation(orientation: PlaneMesh.Orientation) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_orientation", args: [VariantBox(orientation.rawValue)])
+	public func set_orientation(orientation: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_orientation", args: [VariantBox(orientation)])
 	}
 	@discardableResult
-	public func get_orientation() -> PlaneMesh.Orientation {
+	public func get_orientation() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_orientation", args: [])
-		return __ret.asEnum(PlaneMesh.Orientation.self)
+		return __ret.asInt()
 	}
 	public var size: Vector2 {
 		get { Host.shared.getProperty(object: ptr, name: "size").asVector2() }
@@ -97527,9 +97527,9 @@ public class PointLight2D: Light2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture_scale", args: [])
 		return __ret.asDouble()
 	}
-	public var texture: GodotObject {
+	public var texture: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var offset: Vector2 {
 		get { Host.shared.getProperty(object: ptr, name: "offset").asVector2() }
@@ -97905,13 +97905,13 @@ public class PopupMenu: Popup {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_system_menu", args: [])
 		return __ret.asBool()
 	}
-	public func set_system_menu(system_menu_id: NativeMenu.SystemMenus) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_system_menu", args: [VariantBox(system_menu_id.rawValue)])
+	public func set_system_menu(system_menu_id: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_system_menu", args: [VariantBox(system_menu_id)])
 	}
 	@discardableResult
-	public func get_system_menu() -> NativeMenu.SystemMenus {
+	public func get_system_menu() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_system_menu", args: [])
-		return __ret.asEnum(NativeMenu.SystemMenus.self)
+		return __ret.asInt()
 	}
 	public func set_search_bar_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_search_bar_enabled", args: [VariantBox(enabled)])
@@ -98336,9 +98336,9 @@ public class RibbonTrailMesh: PrimitiveMesh {
 		get { Host.shared.getProperty(object: ptr, name: "section_segments").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "section_segments", value: VariantBox(newValue)) }
 	}
-	public var curve: Curve {
+	public var curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -98609,9 +98609,9 @@ public class RigidBody3D: PhysicsBody3D {
 		get { Host.shared.getProperty(object: ptr, name: "mass").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "mass", value: VariantBox(newValue)) }
 	}
-	public var physics_material_override: PhysicsMaterial {
+	public var physics_material_override: PhysicsMaterial? {
 		get { Host.shared.getProperty(object: ptr, name: "physics_material_override").asObject(PhysicsMaterial.self) }
-		set { Host.shared.setProperty(object: ptr, name: "physics_material_override", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "physics_material_override", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var gravity_scale: Double {
 		get { Host.shared.getProperty(object: ptr, name: "gravity_scale").asDouble() }
@@ -99303,13 +99303,13 @@ public class SplitContainer: Container {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_collapsed", args: [])
 		return __ret.asBool()
 	}
-	public func set_dragger_visibility(mode: SplitContainer.DraggerVisibility) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_dragger_visibility", args: [VariantBox(mode.rawValue)])
+	public func set_dragger_visibility(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_dragger_visibility", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_dragger_visibility() -> SplitContainer.DraggerVisibility {
+	public func get_dragger_visibility() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_dragger_visibility", args: [])
-		return __ret.asEnum(SplitContainer.DraggerVisibility.self)
+		return __ret.asInt()
 	}
 	public func set_vertical(vertical: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_vertical", args: [VariantBox(vertical)])
@@ -99560,21 +99560,21 @@ public class SpriteBase3D: GeometryInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_axis", args: [])
 		return __ret.asInt()
 	}
-	public func set_draw_flag(flag: SpriteBase3D.DrawFlags, enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_draw_flag", args: [VariantBox(flag.rawValue), VariantBox(enabled)])
+	public func set_draw_flag(flag: Int, enabled: Bool) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_draw_flag", args: [VariantBox(flag), VariantBox(enabled)])
 	}
 	@discardableResult
-	public func get_draw_flag(flag: SpriteBase3D.DrawFlags) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_draw_flag", args: [VariantBox(flag.rawValue)])
+	public func get_draw_flag(flag: Int) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_draw_flag", args: [VariantBox(flag)])
 		return __ret.asBool()
 	}
-	public func set_alpha_cut_mode(mode: SpriteBase3D.AlphaCutMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_alpha_cut_mode", args: [VariantBox(mode.rawValue)])
+	public func set_alpha_cut_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_alpha_cut_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_alpha_cut_mode() -> SpriteBase3D.AlphaCutMode {
+	public func get_alpha_cut_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_alpha_cut_mode", args: [])
-		return __ret.asEnum(SpriteBase3D.AlphaCutMode.self)
+		return __ret.asInt()
 	}
 	public func set_alpha_scissor_threshold(threshold: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_alpha_scissor_threshold", args: [VariantBox(threshold)])
@@ -99592,13 +99592,13 @@ public class SpriteBase3D: GeometryInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_alpha_hash_scale", args: [])
 		return __ret.asDouble()
 	}
-	public func set_alpha_antialiasing(alpha_aa: BaseMaterial3D.AlphaAntiAliasing) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_alpha_antialiasing", args: [VariantBox(alpha_aa.rawValue)])
+	public func set_alpha_antialiasing(alpha_aa: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_alpha_antialiasing", args: [VariantBox(alpha_aa)])
 	}
 	@discardableResult
-	public func get_alpha_antialiasing() -> BaseMaterial3D.AlphaAntiAliasing {
+	public func get_alpha_antialiasing() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_alpha_antialiasing", args: [])
-		return __ret.asEnum(BaseMaterial3D.AlphaAntiAliasing.self)
+		return __ret.asInt()
 	}
 	public func set_alpha_antialiasing_edge(edge: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_alpha_antialiasing_edge", args: [VariantBox(edge)])
@@ -99608,13 +99608,13 @@ public class SpriteBase3D: GeometryInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_alpha_antialiasing_edge", args: [])
 		return __ret.asDouble()
 	}
-	public func set_billboard_mode(mode: BaseMaterial3D.BillboardMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_billboard_mode", args: [VariantBox(mode.rawValue)])
+	public func set_billboard_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_billboard_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_billboard_mode() -> BaseMaterial3D.BillboardMode {
+	public func get_billboard_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_billboard_mode", args: [])
-		return __ret.asEnum(BaseMaterial3D.BillboardMode.self)
+		return __ret.asInt()
 	}
 	public func set_texture_filter(mode: BaseMaterial3D.TextureFilter) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_filter", args: [VariantBox(mode.rawValue)])
@@ -99764,9 +99764,9 @@ public class StaticBody3D: PhysicsBody3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_physics_material_override", args: [])
 		return __ret.asObject(PhysicsMaterial.self)
 	}
-	public var physics_material_override: PhysicsMaterial {
+	public var physics_material_override: PhysicsMaterial? {
 		get { Host.shared.getProperty(object: ptr, name: "physics_material_override").asObject(PhysicsMaterial.self) }
-		set { Host.shared.setProperty(object: ptr, name: "physics_material_override", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "physics_material_override", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var constant_linear_velocity: Vector3 {
 		get { Host.shared.getProperty(object: ptr, name: "constant_linear_velocity").asVector3() }
@@ -99931,29 +99931,29 @@ public class TabContainer: Container {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tab_control", args: [VariantBox(tab_idx)])
 		return __ret.asObject(Control.self)
 	}
-	public func set_tab_alignment(alignment: TabBar.AlignmentMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_tab_alignment", args: [VariantBox(alignment.rawValue)])
+	public func set_tab_alignment(alignment: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_tab_alignment", args: [VariantBox(alignment)])
 	}
 	@discardableResult
-	public func get_tab_alignment() -> TabBar.AlignmentMode {
+	public func get_tab_alignment() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tab_alignment", args: [])
-		return __ret.asEnum(TabBar.AlignmentMode.self)
+		return __ret.asInt()
 	}
-	public func set_tab_sizing(tab_sizing: TabBar.SizingMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_tab_sizing", args: [VariantBox(tab_sizing.rawValue)])
+	public func set_tab_sizing(tab_sizing: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_tab_sizing", args: [VariantBox(tab_sizing)])
 	}
 	@discardableResult
-	public func get_tab_sizing() -> TabBar.SizingMode {
+	public func get_tab_sizing() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tab_sizing", args: [])
-		return __ret.asEnum(TabBar.SizingMode.self)
+		return __ret.asInt()
 	}
-	public func set_tabs_position(tabs_position: TabContainer.TabPosition) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_tabs_position", args: [VariantBox(tabs_position.rawValue)])
+	public func set_tabs_position(tabs_position: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_tabs_position", args: [VariantBox(tabs_position)])
 	}
 	@discardableResult
-	public func get_tabs_position() -> TabContainer.TabPosition {
+	public func get_tabs_position() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tabs_position", args: [])
-		return __ret.asEnum(TabContainer.TabPosition.self)
+		return __ret.asInt()
 	}
 	public func set_clip_tabs(clip_tabs: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_clip_tabs", args: [VariantBox(clip_tabs)])
@@ -100091,13 +100091,13 @@ public class TabContainer: Container {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_use_hidden_tabs_for_min_size", args: [])
 		return __ret.asBool()
 	}
-	public func set_tab_focus_mode(focus_mode: Control.FocusMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_tab_focus_mode", args: [VariantBox(focus_mode.rawValue)])
+	public func set_tab_focus_mode(focus_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_tab_focus_mode", args: [VariantBox(focus_mode)])
 	}
 	@discardableResult
-	public func get_tab_focus_mode() -> Control.FocusMode {
+	public func get_tab_focus_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tab_focus_mode", args: [])
-		return __ret.asEnum(Control.FocusMode.self)
+		return __ret.asInt()
 	}
 	public func set_deselect_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_deselect_enabled", args: [VariantBox(enabled)])
@@ -100239,21 +100239,21 @@ public class TextMesh: PrimitiveMesh {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_line_spacing", args: [])
 		return __ret.asDouble()
 	}
-	public func set_autowrap_mode(autowrap_mode: TextServer.AutowrapMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_mode", args: [VariantBox(autowrap_mode.rawValue)])
+	public func set_autowrap_mode(autowrap_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_autowrap_mode", args: [VariantBox(autowrap_mode)])
 	}
 	@discardableResult
-	public func get_autowrap_mode() -> TextServer.AutowrapMode {
+	public func get_autowrap_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_autowrap_mode", args: [])
-		return __ret.asEnum(TextServer.AutowrapMode.self)
+		return __ret.asInt()
 	}
-	public func set_justification_flags(justification_flags: TextServer.JustificationFlag) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_justification_flags", args: [VariantBox(justification_flags.rawValue)])
+	public func set_justification_flags(justification_flags: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_justification_flags", args: [VariantBox(justification_flags)])
 	}
 	@discardableResult
-	public func get_justification_flags() -> TextServer.JustificationFlag {
+	public func get_justification_flags() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_justification_flags", args: [])
-		return __ret.asEnum(TextServer.JustificationFlag.self)
+		return __ret.asInt()
 	}
 	public func set_depth(depth: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_depth", args: [VariantBox(depth)])
@@ -100311,13 +100311,13 @@ public class TextMesh: PrimitiveMesh {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_language", args: [])
 		return __ret.asString()
 	}
-	public func set_structured_text_bidi_override(parser: TextServer.StructuredTextParser) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override", args: [VariantBox(parser.rawValue)])
+	public func set_structured_text_bidi_override(parser: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override", args: [VariantBox(parser)])
 	}
 	@discardableResult
-	public func get_structured_text_bidi_override() -> TextServer.StructuredTextParser {
+	public func get_structured_text_bidi_override() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_structured_text_bidi_override", args: [])
-		return __ret.asEnum(TextServer.StructuredTextParser.self)
+		return __ret.asInt()
 	}
 	public func set_structured_text_bidi_override_options(args: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_structured_text_bidi_override_options", args: [VariantBox(args)])
@@ -100343,9 +100343,9 @@ public class TextMesh: PrimitiveMesh {
 		get { Host.shared.getProperty(object: ptr, name: "text").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "text", value: VariantBox(newValue)) }
 	}
-	public var font: Font {
+	public var font: Font? {
 		get { Host.shared.getProperty(object: ptr, name: "font").asObject(Font.self) }
-		set { Host.shared.setProperty(object: ptr, name: "font", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "font", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var font_size: Int {
 		get { Host.shared.getProperty(object: ptr, name: "font_size").asInt() }
@@ -100497,8 +100497,8 @@ public class TextureButton: BaseButton {
 	public func set_ignore_texture_size(ignore: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_ignore_texture_size", args: [VariantBox(ignore)])
 	}
-	public func set_stretch_mode(mode: TextureButton.StretchMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_stretch_mode", args: [VariantBox(mode.rawValue)])
+	public func set_stretch_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_stretch_mode", args: [VariantBox(mode)])
 	}
 	public func set_flip_h(enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_flip_h", args: [VariantBox(enable)])
@@ -100552,37 +100552,37 @@ public class TextureButton: BaseButton {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func get_stretch_mode() -> TextureButton.StretchMode {
+	public func get_stretch_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_stretch_mode", args: [])
-		return __ret.asEnum(TextureButton.StretchMode.self)
+		return __ret.asInt()
 	}
 	public var Textures: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Textures") }
 		set { Host.shared.setProperty(object: ptr, name: "Textures", value: VariantBox(newValue)) }
 	}
-	public var texture_normal: Texture2D {
+	public var texture_normal: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture_normal").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture_normal", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture_normal", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var texture_pressed: Texture2D {
+	public var texture_pressed: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture_pressed").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture_pressed", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture_pressed", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var texture_hover: Texture2D {
+	public var texture_hover: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture_hover").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture_hover", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture_hover", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var texture_disabled: Texture2D {
+	public var texture_disabled: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture_disabled").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture_disabled", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture_disabled", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var texture_focused: Texture2D {
+	public var texture_focused: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture_focused").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture_focused", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture_focused", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var texture_click_mask: BitMap {
+	public var texture_click_mask: BitMap? {
 		get { Host.shared.getProperty(object: ptr, name: "texture_click_mask").asObject(BitMap.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture_click_mask", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture_click_mask", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var ignore_texture_size: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "ignore_texture_size").asBool() }
@@ -100790,17 +100790,17 @@ public class TextureProgressBar: Range {
 		get { Host.shared.getProperty(object: ptr, name: "Textures") }
 		set { Host.shared.setProperty(object: ptr, name: "Textures", value: VariantBox(newValue)) }
 	}
-	public var texture_under: Texture2D {
+	public var texture_under: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture_under").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture_under", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture_under", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var texture_over: Texture2D {
+	public var texture_over: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture_over").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture_over", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture_over", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var texture_progress: Texture2D {
+	public var texture_progress: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture_progress").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture_progress", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture_progress", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var texture_progress_offset: Vector2 {
 		get { Host.shared.getProperty(object: ptr, name: "texture_progress_offset").asVector2() }
@@ -100984,9 +100984,9 @@ public class TubeTrailMesh: PrimitiveMesh {
 		get { Host.shared.getProperty(object: ptr, name: "cap_bottom").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "cap_bottom", value: VariantBox(newValue)) }
 	}
-	public var curve: Curve {
+	public var curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -101372,9 +101372,9 @@ public class VisualShaderNodeCurveTexture: VisualShaderNodeResizableBase {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture", args: [])
 		return __ret.asObject(CurveTexture.self)
 	}
-	public var texture: CurveTexture {
+	public var texture: CurveTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(CurveTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -101395,9 +101395,9 @@ public class VisualShaderNodeCurveXYZTexture: VisualShaderNodeResizableBase {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture", args: [])
 		return __ret.asObject(CurveXYZTexture.self)
 	}
-	public var texture: CurveXYZTexture {
+	public var texture: CurveXYZTexture? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(CurveXYZTexture.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -101862,9 +101862,9 @@ public class VisualShaderNodeParticleMeshEmitter: VisualShaderNodeParticleEmitte
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_surface_index", args: [])
 		return __ret.asInt()
 	}
-	public var mesh: Mesh {
+	public var mesh: Mesh? {
 		get { Host.shared.getProperty(object: ptr, name: "mesh").asObject(Mesh.self) }
-		set { Host.shared.setProperty(object: ptr, name: "mesh", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "mesh", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var use_all_surfaces: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "use_all_surfaces").asBool() }
@@ -101926,9 +101926,9 @@ public class VisualShaderNodeTexture2DArray: VisualShaderNodeSample3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture_array", args: [])
 		return __ret.asObject(TextureLayered.self)
 	}
-	public var texture_array: GodotObject {
+	public var texture_array: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "texture_array").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture_array", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture_array", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -101949,9 +101949,9 @@ public class VisualShaderNodeTexture3D: VisualShaderNodeSample3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture", args: [])
 		return __ret.asObject(Texture3D.self)
 	}
-	public var texture: Texture3D {
+	public var texture: Texture3D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(Texture3D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -101970,13 +101970,13 @@ public class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
 		case transparent = 2
 		case max = 3
 	}
-	public func set_texture_type(type: VisualShaderNodeTextureParameter.TextureType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_type", args: [VariantBox(type.rawValue)])
+	public func set_texture_type(type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_type", args: [VariantBox(type)])
 	}
 	@discardableResult
-	public func get_texture_type() -> VisualShaderNodeTextureParameter.TextureType {
+	public func get_texture_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture_type", args: [])
-		return __ret.asEnum(VisualShaderNodeTextureParameter.TextureType.self)
+		return __ret.asInt()
 	}
 	public func set_color_default(color: VisualShaderNodeTextureParameter.ColorDefault) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_color_default", args: [VariantBox(color.rawValue)])
@@ -101986,29 +101986,29 @@ public class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_color_default", args: [])
 		return __ret.asEnum(VisualShaderNodeTextureParameter.ColorDefault.self)
 	}
-	public func set_texture_filter(filter: VisualShaderNodeTextureParameter.TextureFilter) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_filter", args: [VariantBox(filter.rawValue)])
+	public func set_texture_filter(filter: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_filter", args: [VariantBox(filter)])
 	}
 	@discardableResult
-	public func get_texture_filter() -> VisualShaderNodeTextureParameter.TextureFilter {
+	public func get_texture_filter() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture_filter", args: [])
-		return __ret.asEnum(VisualShaderNodeTextureParameter.TextureFilter.self)
+		return __ret.asInt()
 	}
-	public func set_texture_repeat(repeat_: VisualShaderNodeTextureParameter.TextureRepeat) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_repeat", args: [VariantBox(repeat_.rawValue)])
+	public func set_texture_repeat(repeat_: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_repeat", args: [VariantBox(repeat_)])
 	}
 	@discardableResult
-	public func get_texture_repeat() -> VisualShaderNodeTextureParameter.TextureRepeat {
+	public func get_texture_repeat() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture_repeat", args: [])
-		return __ret.asEnum(VisualShaderNodeTextureParameter.TextureRepeat.self)
+		return __ret.asInt()
 	}
-	public func set_texture_source(source: VisualShaderNodeTextureParameter.TextureSource) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_source", args: [VariantBox(source.rawValue)])
+	public func set_texture_source(source: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_source", args: [VariantBox(source)])
 	}
 	@discardableResult
-	public func get_texture_source() -> VisualShaderNodeTextureParameter.TextureSource {
+	public func get_texture_source() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture_source", args: [])
-		return __ret.asEnum(VisualShaderNodeTextureParameter.TextureSource.self)
+		return __ret.asInt()
 	}
 	public var texture_type: Int {
 		get { Host.shared.getProperty(object: ptr, name: "texture_type").asInt() }
@@ -102398,13 +102398,13 @@ public class VisualShaderNodeVectorFunc: VisualShaderNodeVectorBase {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_function(func_: VisualShaderNodeVectorFunc.Function) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
+	public func set_function(func_: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_)])
 	}
 	@discardableResult
-	public func get_function() -> VisualShaderNodeVectorFunc.Function {
+	public func get_function() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_function", args: [])
-		return __ret.asEnum(VisualShaderNodeVectorFunc.Function.self)
+		return __ret.asInt()
 	}
 	public var function: Int {
 		get { Host.shared.getProperty(object: ptr, name: "function").asInt() }
@@ -102432,13 +102432,13 @@ public class VisualShaderNodeVectorOp: VisualShaderNodeVectorBase {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_operator(op: VisualShaderNodeVectorOp.Operator) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op.rawValue)])
+	public func set_operator(op: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op)])
 	}
 	@discardableResult
-	public func get_operator() -> VisualShaderNodeVectorOp.Operator {
+	public func get_operator() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_operator", args: [])
-		return __ret.asEnum(VisualShaderNodeVectorOp.Operator.self)
+		return __ret.asInt()
 	}
 	public var operator_: Int {
 		get { Host.shared.getProperty(object: ptr, name: "operator").asInt() }
@@ -102565,9 +102565,9 @@ public class AnimatedSprite3D: SpriteBase3D {
 	public func _res_changed() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_res_changed", args: [])
 	}
-	public var sprite_frames: SpriteFrames {
+	public var sprite_frames: SpriteFrames? {
 		get { Host.shared.getProperty(object: ptr, name: "sprite_frames").asObject(SpriteFrames.self) }
-		set { Host.shared.setProperty(object: ptr, name: "sprite_frames", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "sprite_frames", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var animation: String {
 		get { Host.shared.getProperty(object: ptr, name: "animation").asString() }
@@ -103227,13 +103227,13 @@ public class FileDialog: ConfirmationDialog {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_file_mode", args: [])
 		return __ret.asEnum(FileDialog.FileMode.self)
 	}
-	public func set_display_mode(mode: FileDialog.DisplayMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_display_mode", args: [VariantBox(mode.rawValue)])
+	public func set_display_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_display_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_display_mode() -> FileDialog.DisplayMode {
+	public func get_display_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_display_mode", args: [])
-		return __ret.asEnum(FileDialog.DisplayMode.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_vbox() -> VBoxContainer? {
@@ -103656,13 +103656,13 @@ public class GraphNode: GraphElement {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_ignoring_valid_connection_type", args: [])
 		return __ret.asBool()
 	}
-	public func set_slots_focus_mode(focus_mode: Control.FocusMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_slots_focus_mode", args: [VariantBox(focus_mode.rawValue)])
+	public func set_slots_focus_mode(focus_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_slots_focus_mode", args: [VariantBox(focus_mode)])
 	}
 	@discardableResult
-	public func get_slots_focus_mode() -> Control.FocusMode {
+	public func get_slots_focus_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_slots_focus_mode", args: [])
-		return __ret.asEnum(Control.FocusMode.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_input_port_count() -> Int {
@@ -104576,13 +104576,13 @@ public class RigidBody2D: PhysicsBody2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_contact_monitor_enabled", args: [])
 		return __ret.asBool()
 	}
-	public func set_continuous_collision_detection_mode(mode: RigidBody2D.CCDMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_continuous_collision_detection_mode", args: [VariantBox(mode.rawValue)])
+	public func set_continuous_collision_detection_mode(mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_continuous_collision_detection_mode", args: [VariantBox(mode)])
 	}
 	@discardableResult
-	public func get_continuous_collision_detection_mode() -> RigidBody2D.CCDMode {
+	public func get_continuous_collision_detection_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_continuous_collision_detection_mode", args: [])
-		return __ret.asEnum(RigidBody2D.CCDMode.self)
+		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_velocity_at_local_position(local_position: Vector2) -> Vector2 {
@@ -104692,9 +104692,9 @@ public class RigidBody2D: PhysicsBody2D {
 		get { Host.shared.getProperty(object: ptr, name: "mass").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "mass", value: VariantBox(newValue)) }
 	}
-	public var physics_material_override: PhysicsMaterial {
+	public var physics_material_override: PhysicsMaterial? {
 		get { Host.shared.getProperty(object: ptr, name: "physics_material_override").asObject(PhysicsMaterial.self) }
-		set { Host.shared.setProperty(object: ptr, name: "physics_material_override", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "physics_material_override", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var gravity_scale: Double {
 		get { Host.shared.getProperty(object: ptr, name: "gravity_scale").asDouble() }
@@ -105162,9 +105162,9 @@ public class Sprite3D: SpriteBase3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_hframes", args: [])
 		return __ret.asInt()
 	}
-	public var texture: Texture2D {
+	public var texture: Texture2D? {
 		get { Host.shared.getProperty(object: ptr, name: "texture").asObject(Texture2D.self) }
-		set { Host.shared.setProperty(object: ptr, name: "texture", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "texture", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var Animation: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Animation") }
@@ -105239,9 +105239,9 @@ public class StaticBody2D: PhysicsBody2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_physics_material_override", args: [])
 		return __ret.asObject(PhysicsMaterial.self)
 	}
-	public var physics_material_override: PhysicsMaterial {
+	public var physics_material_override: PhysicsMaterial? {
 		get { Host.shared.getProperty(object: ptr, name: "physics_material_override").asObject(PhysicsMaterial.self) }
-		set { Host.shared.setProperty(object: ptr, name: "physics_material_override", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "physics_material_override", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var constant_linear_velocity: Vector2 {
 		get { Host.shared.getProperty(object: ptr, name: "constant_linear_velocity").asVector2() }
@@ -105464,17 +105464,17 @@ public class Trail3D: LineBase3D {
 		get { Host.shared.getProperty(object: ptr, name: "width").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "width", value: VariantBox(newValue)) }
 	}
-	public var width_curve: Curve {
+	public var width_curve: Curve? {
 		get { Host.shared.getProperty(object: ptr, name: "width_curve").asObject(Curve.self) }
-		set { Host.shared.setProperty(object: ptr, name: "width_curve", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "width_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var color: Color {
 		get { Host.shared.getProperty(object: ptr, name: "color").asColor() }
 		set { Host.shared.setProperty(object: ptr, name: "color", value: VariantBox(newValue)) }
 	}
-	public var color_gradient: Gradient {
+	public var color_gradient: Gradient? {
 		get { Host.shared.getProperty(object: ptr, name: "color_gradient").asObject(Gradient.self) }
-		set { Host.shared.setProperty(object: ptr, name: "color_gradient", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "color_gradient", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var mesh_alignment: Int {
 		get { Host.shared.getProperty(object: ptr, name: "mesh_alignment").asInt() }
@@ -105484,9 +105484,9 @@ public class Trail3D: LineBase3D {
 		get { Host.shared.getProperty(object: ptr, name: "material_mode").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "material_mode", value: VariantBox(newValue)) }
 	}
-	public var material: ShaderMaterial {
+	public var material: ShaderMaterial? {
 		get { Host.shared.getProperty(object: ptr, name: "material").asObject(ShaderMaterial.self) }
-		set { Host.shared.setProperty(object: ptr, name: "material", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "material", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public var tiling_mode: Int {
 		get { Host.shared.getProperty(object: ptr, name: "tiling_mode").asInt() }
@@ -105776,9 +105776,9 @@ public class CSGBox3D: CSGPrimitive3D {
 		get { Host.shared.getProperty(object: ptr, name: "size").asVector3() }
 		set { Host.shared.setProperty(object: ptr, name: "size", value: VariantBox(newValue)) }
 	}
-	public var material: GodotObject {
+	public var material: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "material").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "material", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "material", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -105859,9 +105859,9 @@ public class CSGCylinder3D: CSGPrimitive3D {
 		get { Host.shared.getProperty(object: ptr, name: "smooth_faces").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "smooth_faces", value: VariantBox(newValue)) }
 	}
-	public var material: GodotObject {
+	public var material: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "material").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "material", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "material", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -105890,13 +105890,13 @@ public class CSGMesh3D: CSGPrimitive3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_material", args: [])
 		return __ret.asObject(Material.self)
 	}
-	public var mesh: GodotObject {
+	public var mesh: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "mesh").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "mesh", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "mesh", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
-	public var material: GodotObject {
+	public var material: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "material").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "material", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "material", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -105967,13 +105967,13 @@ public class CSGPolygon3D: CSGPrimitive3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_path_node", args: [])
 		return __ret.asString()
 	}
-	public func set_path_interval_type(interval_type: CSGPolygon3D.PathIntervalType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_path_interval_type", args: [VariantBox(interval_type.rawValue)])
+	public func set_path_interval_type(interval_type: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_path_interval_type", args: [VariantBox(interval_type)])
 	}
 	@discardableResult
-	public func get_path_interval_type() -> CSGPolygon3D.PathIntervalType {
+	public func get_path_interval_type() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_path_interval_type", args: [])
-		return __ret.asEnum(CSGPolygon3D.PathIntervalType.self)
+		return __ret.asInt()
 	}
 	public func set_path_interval(interval: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_path_interval", args: [VariantBox(interval)])
@@ -106129,9 +106129,9 @@ public class CSGPolygon3D: CSGPrimitive3D {
 		get { Host.shared.getProperty(object: ptr, name: "smooth_faces").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "smooth_faces", value: VariantBox(newValue)) }
 	}
-	public var material: GodotObject {
+	public var material: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "material").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "material", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "material", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -106200,9 +106200,9 @@ public class CSGSphere3D: CSGPrimitive3D {
 		get { Host.shared.getProperty(object: ptr, name: "smooth_faces").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "smooth_faces", value: VariantBox(newValue)) }
 	}
-	public var material: GodotObject {
+	public var material: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "material").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "material", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "material", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -106283,9 +106283,9 @@ public class CSGTorus3D: CSGPrimitive3D {
 		get { Host.shared.getProperty(object: ptr, name: "smooth_faces").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "smooth_faces", value: VariantBox(newValue)) }
 	}
-	public var material: GodotObject {
+	public var material: GodotObject? {
 		get { Host.shared.getProperty(object: ptr, name: "material").asObject(GodotObject.self) }
-		set { Host.shared.setProperty(object: ptr, name: "material", value: VariantBox(newValue)) }
+		set { Host.shared.setProperty(object: ptr, name: "material", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 }
 
@@ -106314,13 +106314,13 @@ public class ColorPicker: VBoxContainer {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_deferred_mode", args: [])
 		return __ret.asBool()
 	}
-	public func set_color_mode(color_mode: ColorPicker.ColorModeType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_color_mode", args: [VariantBox(color_mode.rawValue)])
+	public func set_color_mode(color_mode: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_color_mode", args: [VariantBox(color_mode)])
 	}
 	@discardableResult
-	public func get_color_mode() -> ColorPicker.ColorModeType {
+	public func get_color_mode() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_color_mode", args: [])
-		return __ret.asEnum(ColorPicker.ColorModeType.self)
+		return __ret.asInt()
 	}
 	public func set_edit_alpha(show: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_edit_alpha", args: [VariantBox(show)])
@@ -106408,13 +106408,13 @@ public class ColorPicker: VBoxContainer {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_recent_presets", args: [])
 		return __ret
 	}
-	public func set_picker_shape(shape: ColorPicker.PickerShapeType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_picker_shape", args: [VariantBox(shape.rawValue)])
+	public func set_picker_shape(shape: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_picker_shape", args: [VariantBox(shape)])
 	}
 	@discardableResult
-	public func get_picker_shape() -> ColorPicker.PickerShapeType {
+	public func get_picker_shape() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_picker_shape", args: [])
-		return __ret.asEnum(ColorPicker.PickerShapeType.self)
+		return __ret.asInt()
 	}
 	public var color: Color {
 		get { Host.shared.getProperty(object: ptr, name: "color").asColor() }
