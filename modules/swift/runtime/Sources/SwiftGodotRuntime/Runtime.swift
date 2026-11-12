@@ -314,9 +314,9 @@ public final class Runtime {
 
 	// NSRange -> String without Range(_:in:) (unreliable overload resolution).
 	private func substring(of source: String, _ r: NSRange) -> String? {
-		guard let start = String.Index(utf16Offset: r.location, in: source),
-			let end = String.Index(utf16Offset: r.location + r.length, in: source)
-		else { return nil }
+		guard r.location >= 0, r.location + r.length <= source.utf16.count else { return nil }
+		let start = String.Index(utf16Offset: r.location, in: source)
+		let end = String.Index(utf16Offset: r.location + r.length, in: source)
 		return String(source[start..<end])
 	}
 
