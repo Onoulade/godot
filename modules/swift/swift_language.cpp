@@ -39,6 +39,7 @@
 
 #include "core/io/file_access.h"
 #include "core/os/memory.h"
+#include "core/os/os.h"
 #include "core/string/regex.h"
 
 void SwiftLanguage::_bind_methods() {
@@ -228,6 +229,78 @@ void SwiftLanguage::reload_tool_script(const Ref<Script> &p_script) {
 	if (p_script.is_valid() && p_script->is_tool()) {
 		p_script->reload();
 	}
+}
+
+String SwiftLanguage::debug_get_error() const {
+	return last_error;
+}
+
+int SwiftLanguage::debug_get_stack_level_count() const {
+	return call_stack.size();
+}
+
+String SwiftLanguage::debug_get_stack_level_function(int p_level) const {
+	if (p_level < 0 || p_level >= call_stack.size()) {
+		return String();
+	}
+	return call_stack[p_level].func;
+}
+
+String SwiftLanguage::debug_get_stack_level_source(int p_level) const {
+	if (p_level < 0 || p_level >= call_stack.size()) {
+		return String();
+	}
+	return call_stack[p_level].file;
+}
+
+void SwiftLanguage::_call_enter(const StringName &p_method, const String &p_file) {
+	CallFrame frame;
+	frame.func = p_method;
+	frame.file = p_file;
+	frame.start_usec = OS::get_singleton()->get_ticks_usec();
+	call_stack.push_back(frame);
+}
+
+void SwiftLanguage::_call_exit(const StringName &p_method) {
+	if (call_stack.is_empty()) {
+		return;
+	}
+	CallFrame frame = call_stack[call_stack.size() - 1];
+	call_stack.remove_at(call_stack.size() - 1);
+	if (frame.func != p_method) {
+		return;
+	}
+	if (profiling_enabled) {
+		uint64_t elapsed = OS::get_singleton()->get_ticks_usec() - frame.start_usec;
+		prof_call_count[p_method] = (prof_call_count.has(p_method) ? prof_call_count[p_method] : 0) + 1;
+		prof_total_usec[p_method] = (prof_total_usec.has(p_method) ? prof_total_usec[p_method] : 0) + elapsed;
+	}
+}
+
+void SwiftLanguage::profiling_start() {
+	profiling_enabled = true;
+	prof_call_count.clear();
+	prof_total_usec.clear();
+}
+
+void SwiftLanguage::profiling_stop() {
+	profiling_enabled = false;
+}
+
+int SwiftLanguage::profiling_get_accumulated_data(ProfilingInfo *r_info_arr, int p_info_max) {
+	int i = 0;
+	for (const KeyValue<StringName, uint64_t> &E : prof_total_usec) {
+		if (i >= p_info_max) {
+			break;
+		}
+		r_info_arr[i].signature = E.key;
+		r_info_arr[i].call_count = prof_call_count.has(E.key) ? prof_call_count[E.key] : 0;
+		r_info_arr[i].total_time = E.value;
+		r_info_arr[i].self_time = E.value;
+		r_info_arr[i].internal_time = 0;
+		i++;
+	}
+	return i;
 }
 
 void SwiftLanguage::get_public_constants(List<Pair<String, Variant>> *r_constants) const {

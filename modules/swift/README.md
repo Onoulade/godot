@@ -56,9 +56,20 @@ returns `false` and a warning is printed.
    linking works through the generated bindings (`get_node`, properties,
    `emit_*` signals); `@export var` is detected and reported with editor
    property usage. `_process`/`_physics_process` receive the delta.
-   **Remaining:** typed value-type wrappers (Vector2/Color/... currently
-   opaque VariantBox), debugger/profiler hooks, CI jobs building the runtime
-   per platform, export templates, user docs.
+   The checked-in bindings cover the full runtime API (1002 classes,
+   regenerated in CI from `--dump-extension-api`); typed Swift value types
+   (`Vector2`, `Vector3`, `Color`, `Quaternion`, `Rect2`, `AABB`, `Plane`,
+   `Transform2D/3D`, `Basis`, `Projection`, ...) are marshaled through
+   dedicated host vtable entries (`ValueTypes.swift`).
+6. **Debugger/profiler, completion, export, CI** — call-stack tracking and
+   per-method profiling in `SwiftLanguage` (fed by `SwiftInstance::callp`),
+   editor completion (keywords, builtin types, global classes, owner
+   members) and symbol lookup in `SwiftEditorLanguage`, a `SwiftExportPlugin`
+   that bundles `.swift` sources and the runtime library into exports, and
+   `.github/workflows/swift_module.yml` (runtime build + symbol checks,
+   engine build with the module, bindings freshness check).
+   **Remaining:** per-platform runtime builds in CI, user docs, LSP-based
+   completion.
 
 ## Building
 

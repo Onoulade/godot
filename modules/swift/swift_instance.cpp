@@ -158,8 +158,14 @@ Variant SwiftInstance::callp(const StringName &p_method, const Variant **p_args,
 	for (int i = 0; i < p_argcount; i++) {
 		arg_ptrs.push_back((GDExtensionConstVariantPtr)p_args[i]);
 	}
+	if (script_language_swift != nullptr) {
+		script_language_swift->_call_enter(p_method, script->get_path());
+	}
 	GDExtensionCallError gde_error{};
 	GDExtensionBool ok = abi.instance_call(handle, method.get_data(), p_argcount > 0 ? arg_ptrs.ptrw() : nullptr, p_argcount, (GDExtensionVariantPtr)&ret, &gde_error);
+	if (script_language_swift != nullptr) {
+		script_language_swift->_call_exit(p_method);
+	}
 	if (ok == 0) {
 		r_error.error = Callable::CallError::CALL_ERROR_INVALID_METHOD;
 	} else {

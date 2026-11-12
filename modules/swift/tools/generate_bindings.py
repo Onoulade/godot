@@ -83,6 +83,28 @@ def is_void(jtype):
     return (jtype or "").lower() in ("void", "nil")
 
 
+VALUE_TYPES = {
+    "vector2": "Vector2",
+    "vector3": "Vector3",
+    "vector2i": "Vector2i",
+    "vector3i": "Vector3i",
+    "vector4": "Vector4",
+    "vector4i": "Vector4i",
+    "rect2": "Rect2",
+    "rect2i": "Rect2i",
+    "color": "Color",
+    "quaternion": "Quaternion",
+    "aabb": "AABB",
+    "plane": "Plane",
+    "transform2d": "Transform2D",
+    "transform3d": "Transform3D",
+    "basis": "Basis",
+    "projection": "Projection",
+}
+
+VALUE_TYPE_ACCESSORS = {v: "as" + v for v in VALUE_TYPES.values()}
+
+
 def swift_type(jtype, class_name, generated):
     t = (jtype or "").lower()
     if t == "bool":
@@ -93,6 +115,8 @@ def swift_type(jtype, class_name, generated):
         return "Double"
     if t in ("string", "stringname", "nodepath"):
         return "String"
+    if t in VALUE_TYPES:
+        return VALUE_TYPES[t]
     if t == "object":
         if class_name and class_name in generated:
             return class_name
@@ -153,6 +177,8 @@ def emit_method(m, generated):
         lines.append("\t\treturn __ret.asDouble()")
     elif ret_swift == "String":
         lines.append("\t\treturn __ret.asString()")
+    elif ret_swift in VALUE_TYPE_ACCESSORS:
+        lines.append(f"\t\treturn __ret.{VALUE_TYPE_ACCESSORS[ret_swift]}()")
     elif ret_swift == "VariantBox":
         lines.append("\t\treturn __ret")
     else:
@@ -167,11 +193,10 @@ def emit_property(p, method_names):
         return []
     st = swift_type(p.get("type"), p.get("class_name"), set())
     raw = p.get("name")
+    accessor = f".as{st}()" if st in ("Bool", "Int", "Double", "String") or st in VALUE_TYPE_ACCESSORS else ""
     lines = [
         f"\tpublic var {name}: {st} {{",
-        f'\t\tget {{ Host.shared.getProperty(object: ptr, name: "{raw}")'
-        + (f".as{st}()" if st in ("Bool", "Int", "Double", "String") else "")
-        + " }",
+        f'\t\tget {{ Host.shared.getProperty(object: ptr, name: "{raw}")' + accessor + " }",
         f'\t\tset {{ Host.shared.setProperty(object: ptr, name: "{raw}", value: VariantBox(newValue)) }}',
         "\t}",
     ]

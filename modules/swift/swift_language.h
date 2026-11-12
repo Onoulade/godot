@@ -42,13 +42,28 @@ class SwiftLanguage : public ScriptLanguage {
 	GDCLASS(SwiftLanguage, ScriptLanguage);
 
 	friend class SwiftScript;
+	friend class SwiftInstance;
 
 	HashMap<StringName, Variant> global_constants;
 	HashSet<SwiftScript *> scripts;
 
+	struct CallFrame {
+		StringName func;
+		String file;
+		uint64_t start_usec = 0;
+	};
+	Vector<CallFrame> call_stack;
+	bool profiling_enabled = false;
+	HashMap<StringName, uint64_t> prof_call_count;
+	HashMap<StringName, uint64_t> prof_total_usec;
+	String last_error;
+
 #ifdef TOOLS_ENABLED
 	EditorLanguage *editor_language = nullptr;
 #endif // TOOLS_ENABLED
+
+	void _call_enter(const StringName &p_method, const String &p_file);
+	void _call_exit(const StringName &p_method);
 
 protected:
 	static void _bind_methods();
@@ -76,11 +91,11 @@ public:
 	virtual ScriptNameCasing preferred_file_name_casing() const override { return SCRIPT_NAME_CASING_PASCAL_CASE; }
 	virtual void add_global_constant(const StringName &p_variable, const Variant &p_value) override;
 
-	virtual String debug_get_error() const override { return String(); }
-	virtual int debug_get_stack_level_count() const override { return 0; }
+	virtual String debug_get_error() const override;
+	virtual int debug_get_stack_level_count() const override;
 	virtual int debug_get_stack_level_line(int p_level) const override { return -1; }
-	virtual String debug_get_stack_level_function(int p_level) const override { return String(); }
-	virtual String debug_get_stack_level_source(int p_level) const override { return String(); }
+	virtual String debug_get_stack_level_function(int p_level) const override;
+	virtual String debug_get_stack_level_source(int p_level) const override;
 	virtual void debug_get_stack_level_locals(int p_level, List<String> *r_locals, List<Variant> *r_values, int p_max_subitems = -1, int p_max_depth = -1) override {}
 	virtual void debug_get_stack_level_members(int p_level, List<String> *r_members, List<Variant> *r_values, int p_max_subitems = -1, int p_max_depth = -1) override {}
 	virtual void debug_get_globals(List<String> *r_globals, List<Variant> *r_values, int p_max_subitems = -1, int p_max_depth = -1) override {}
@@ -94,10 +109,10 @@ public:
 	virtual void get_public_constants(List<Pair<String, Variant>> *r_constants) const override;
 	virtual void get_public_annotations(List<MethodInfo> *r_annotations) const override {}
 
-	virtual void profiling_start() override {}
-	virtual void profiling_stop() override {}
+	virtual void profiling_start() override;
+	virtual void profiling_stop() override;
 	virtual void profiling_set_save_native_calls(bool p_enable) override {}
-	virtual int profiling_get_accumulated_data(ProfilingInfo *r_info_arr, int p_info_max) override { return 0; }
+	virtual int profiling_get_accumulated_data(ProfilingInfo *r_info_arr, int p_info_max) override;
 	virtual int profiling_get_frame_data(ProfilingInfo *r_info_arr, int p_info_max) override { return 0; }
 
 	virtual bool handles_global_class_type(const String &p_type) const override { return p_type == "swift"; }
