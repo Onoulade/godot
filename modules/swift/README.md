@@ -79,9 +79,12 @@ returns `false` and a warning is printed.
    `@MainActor`, `async`/`await` and actors freely.
    **Remaining:** per-platform runtime builds in CI, precompiling scripts at
    export time (an exported game has no `swiftc`), user docs, LSP-based
-   completion. Class enums are generated as nested `enum: Int, Sendable,
-   CaseIterable` (e.g. `Node.ProcessMode.inherit`); global enums (Key,
-   Error, ...) currently stay `Int`.
+   completion. Class enums are nested `enum: Int, Sendable, CaseIterable`
+   (e.g. `Node.ProcessMode.inherit`); global enums (Key, Error,
+   MouseButton, PropertyHint, ...) are extracted from the core headers
+   (`tools/generate_bindings.py --global-enums-headers`) and emitted as
+   top-level `enum: Int, Sendable, CaseIterable`, with signatures mapped
+   to them (e.g. `is_key_pressed(key: Key)`, `-> Error`).
 
 ## Building
 

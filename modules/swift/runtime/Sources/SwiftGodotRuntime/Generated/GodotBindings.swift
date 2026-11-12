@@ -17,6 +17,597 @@ public class GodotObject {
 	}
 }
 
+public enum CacheMode: Int, Sendable, CaseIterable {
+	case ignore = 0
+	case reuse = 1
+	case replace = 2
+	case ignoreDeep = 3
+	case replaceDeep = 4
+}
+
+public enum ClockDirection: Int, Sendable, CaseIterable {
+	case clockwise = 0
+	case counterclockwise = 1
+}
+
+public enum Corner: Int, Sendable, CaseIterable {
+	case topLeft = 0
+	case topRight = 1
+	case bottomRight = 2
+	case bottomLeft = 3
+}
+
+public enum Error: Int, Sendable, CaseIterable {
+	case ok = 0
+	case failed = 1
+	case errUnavailable = 2
+	case errUnconfigured = 3
+	case errUnauthorized = 4
+	case errParameterRangeError = 5
+	case errOutOfMemory = 6
+	case errFileNotFound = 7
+	case errFileBadDrive = 8
+	case errFileBadPath = 9
+	case errFileNoPermission = 10
+	case errFileAlreadyInUse = 11
+	case errFileCantOpen = 12
+	case errFileCantWrite = 13
+	case errFileCantRead = 14
+	case errFileUnrecognized = 15
+	case errFileCorrupt = 16
+	case errFileMissingDependencies = 17
+	case errFileEof = 18
+	case errCantOpen = 19
+	case errCantCreate = 20
+	case errQueryFailed = 21
+	case errAlreadyInUse = 22
+	case errLocked = 23
+	case errTimeout = 24
+	case errCantConnect = 25
+	case errCantResolve = 26
+	case errConnectionError = 27
+	case errCantAcquireResource = 28
+	case errCantFork = 29
+	case errInvalidData = 30
+	case errInvalidParameter = 31
+	case errAlreadyExists = 32
+	case errDoesNotExist = 33
+	case errDatabaseCantRead = 34
+	case errDatabaseCantWrite = 35
+	case errCompilationFailed = 36
+	case errMethodNotFound = 37
+	case errLinkFailed = 38
+	case errScriptFailed = 39
+	case errCyclicLink = 40
+	case errInvalidDeclaration = 41
+	case errDuplicateSymbol = 42
+	case errParseError = 43
+	case errBusy = 44
+	case errSkip = 45
+	case errHelp = 46
+	case errBug = 47
+	case errPrinterOnFire = 48
+	case errMax = 49
+}
+
+public enum ErrorHandlerType: Int, Sendable, CaseIterable {
+	case errHandlerError = 0
+	case errHandlerWarning = 1
+	case errHandlerScript = 2
+	case errHandlerShader = 3
+}
+
+public enum EulerOrder: Int, Sendable, CaseIterable {
+	case xyz = 0
+	case xzy = 1
+	case yxz = 2
+	case yzx = 3
+	case zxy = 4
+	case zyx = 5
+}
+
+public enum HatDir: Int, Sendable, CaseIterable {
+	case up = 0
+	case right = 1
+	case down = 2
+	case left = 3
+	case max = 4
+}
+
+public enum HatMask: Int, Sendable, CaseIterable {
+	case center = 0
+	case up = 1
+	case right = 2
+	case down = 4
+	case left = 8
+}
+
+public enum HorizontalAlignment: Int, Sendable, CaseIterable {
+	case left = 0
+	case center = 1
+	case right = 2
+	case fill = 3
+}
+
+public enum InlineAlignment: Int, Sendable, CaseIterable {
+	case topTo = 0
+	case toTop = 0
+	case top = 0
+	case centerTo = 1
+	case bottomTo = 2
+	case baselineTo = 3
+	case imageMask = 3
+	case toCenter = 4
+	case center = 5
+	case toBaseline = 8
+	case toBottom = 12
+	case textMask = 12
+	case bottom = 14
+}
+
+public enum InputEventType: Int, Sendable, CaseIterable {
+	case invalid = -1
+	case key = 0
+	case mouseButton = 1
+	case mouseMotion = 2
+	case joyMotion = 3
+	case joyButton = 4
+	case screenTouch = 5
+	case screenDrag = 6
+	case magnifyGesture = 7
+	case panGesture = 8
+	case midi = 9
+	case shortcut = 10
+	case action = 11
+	case max = 12
+}
+
+public enum JoyAxis: Int, Sendable, CaseIterable {
+	case invalid = -1
+	case leftX = 0
+	case leftY = 1
+	case rightX = 2
+	case rightY = 3
+	case triggerLeft = 4
+	case triggerRight = 5
+	case sdlMax = 6
+	case max = 10
+}
+
+public enum JoyButton: Int, Sendable, CaseIterable {
+	case invalid = -1
+	case a = 0
+	case b = 1
+	case x = 2
+	case y = 3
+	case back = 4
+	case guide = 5
+	case start = 6
+	case leftStick = 7
+	case rightStick = 8
+	case leftShoulder = 9
+	case rightShoulder = 10
+	case dpadUp = 11
+	case dpadDown = 12
+	case dpadLeft = 13
+	case dpadRight = 14
+	case misc1 = 15
+	case paddle1 = 16
+	case paddle2 = 17
+	case paddle3 = 18
+	case paddle4 = 19
+	case touchpad = 20
+	case misc2 = 21
+	case misc3 = 22
+	case misc4 = 23
+	case misc5 = 24
+	case misc6 = 25
+	case sdlMax = 26
+	case max = 128
+}
+
+public enum Key: Int, Sendable, CaseIterable {
+	case none = 0
+	case space = 32
+	case exclam = 33
+	case quotedbl = 34
+	case numbersign = 35
+	case dollar = 36
+	case percent = 37
+	case ampersand = 38
+	case apostrophe = 39
+	case parenleft = 40
+	case parenright = 41
+	case asterisk = 42
+	case plus = 43
+	case comma = 44
+	case minus = 45
+	case period = 46
+	case slash = 47
+	case 0_ = 48
+	case 1_ = 49
+	case 2_ = 50
+	case 3_ = 51
+	case 4_ = 52
+	case 5_ = 53
+	case 6_ = 54
+	case 7_ = 55
+	case 8_ = 56
+	case 9_ = 57
+	case colon = 58
+	case semicolon = 59
+	case less = 60
+	case equal = 61
+	case greater = 62
+	case question = 63
+	case at = 64
+	case a = 65
+	case b = 66
+	case c = 67
+	case d = 68
+	case e = 69
+	case f = 70
+	case g = 71
+	case h = 72
+	case i = 73
+	case j = 74
+	case k = 75
+	case l = 76
+	case m = 77
+	case n = 78
+	case o = 79
+	case p = 80
+	case q = 81
+	case r = 82
+	case s = 83
+	case t = 84
+	case u = 85
+	case v = 86
+	case w = 87
+	case x = 88
+	case y = 89
+	case z = 90
+	case bracketleft = 91
+	case backslash = 92
+	case bracketright = 93
+	case asciicircum = 94
+	case underscore = 95
+	case quoteleft = 96
+	case braceleft = 123
+	case bar = 124
+	case braceright = 125
+	case asciitilde = 126
+	case yen = 165
+	case section = 167
+	case special = 4194304
+	case escape = 4194305
+	case tab = 4194306
+	case backtab = 4194307
+	case backspace = 4194308
+	case enter = 4194309
+	case kpEnter = 4194310
+	case insert = 4194311
+	case delete = 4194312
+	case pause = 4194313
+	case print = 4194314
+	case sysreq = 4194315
+	case clear = 4194316
+	case home = 4194317
+	case end = 4194318
+	case left = 4194319
+	case up = 4194320
+	case right = 4194321
+	case down = 4194322
+	case pageup = 4194323
+	case pagedown = 4194324
+	case shift = 4194325
+	case ctrl = 4194326
+	case meta = 4194327
+	case capslock = 4194329
+	case numlock = 4194330
+	case scrolllock = 4194331
+	case f1 = 4194332
+	case f2 = 4194333
+	case f3 = 4194334
+	case f4 = 4194335
+	case f5 = 4194336
+	case f6 = 4194337
+	case f7 = 4194338
+	case f8 = 4194339
+	case f9 = 4194340
+	case f10 = 4194341
+	case f11 = 4194342
+	case f12 = 4194343
+	case f13 = 4194344
+	case f14 = 4194345
+	case f15 = 4194346
+	case f16 = 4194347
+	case f17 = 4194348
+	case f18 = 4194349
+	case f19 = 4194350
+	case f20 = 4194351
+	case f21 = 4194352
+	case f22 = 4194353
+	case f23 = 4194354
+	case f24 = 4194355
+	case f25 = 4194356
+	case f26 = 4194357
+	case f27 = 4194358
+	case f28 = 4194359
+	case f29 = 4194360
+	case f30 = 4194361
+	case f31 = 4194362
+	case f32 = 4194363
+	case f33 = 4194364
+	case f34 = 4194365
+	case f35 = 4194366
+	case menu = 4194370
+	case hyper = 4194371
+	case help = 4194373
+	case back = 4194376
+	case forward = 4194377
+	case stop = 4194378
+	case refresh = 4194379
+	case volumedown = 4194380
+	case volumemute = 4194381
+	case volumeup = 4194382
+	case mediaplay = 4194388
+	case mediastop = 4194389
+	case mediaprevious = 4194390
+	case medianext = 4194391
+	case mediarecord = 4194392
+	case homepage = 4194393
+	case favorites = 4194394
+	case search = 4194395
+	case standby = 4194396
+	case openurl = 4194397
+	case launchmail = 4194398
+	case launchmedia = 4194399
+	case launch0 = 4194400
+	case launch1 = 4194401
+	case launch2 = 4194402
+	case launch3 = 4194403
+	case launch4 = 4194404
+	case launch5 = 4194405
+	case launch6 = 4194406
+	case launch7 = 4194407
+	case launch8 = 4194408
+	case launch9 = 4194409
+	case launcha = 4194410
+	case launchb = 4194411
+	case launchc = 4194412
+	case launchd = 4194413
+	case launche = 4194414
+	case launchf = 4194415
+	case globe = 4194416
+	case keyboard = 4194417
+	case jisEisu = 4194418
+	case jisKana = 4194419
+	case kpMultiply = 4194433
+	case kpDivide = 4194434
+	case kpSubtract = 4194435
+	case kpPeriod = 4194436
+	case kpAdd = 4194437
+	case kp0 = 4194438
+	case kp1 = 4194439
+	case kp2 = 4194440
+	case kp3 = 4194441
+	case kp4 = 4194442
+	case kp5 = 4194443
+	case kp6 = 4194444
+	case kp7 = 4194445
+	case kp8 = 4194446
+	case kp9 = 4194447
+	case unknown = 8388607
+}
+
+public enum KeyLocation: Int, Sendable, CaseIterable {
+	case unspecified = 0
+	case left = 1
+	case right = 2
+}
+
+public enum KeyModifierMask: Int, Sendable, CaseIterable {
+	case codeMask = 8388607
+	case cmdOrCtrl = 16777216
+	case shift = 33554432
+	case alt = 67108864
+	case meta = 134217728
+	case ctrl = 268435456
+	case kpad = 536870912
+	case groupSwitch = 1073741824
+	case modifierMask = 2130706432
+}
+
+public enum MIDIMessage: Int, Sendable, CaseIterable {
+	case none = 0
+	case noteOff = 8
+	case noteOn = 9
+	case aftertouch = 10
+	case controlChange = 11
+	case programChange = 12
+	case channelPressure = 13
+	case pitchBend = 14
+	case systemExclusive = 240
+	case quarterFrame = 241
+	case songPositionPointer = 242
+	case songSelect = 243
+	case tuneRequest = 246
+	case timingClock = 248
+	case start = 250
+	case continue_ = 251
+	case stop = 252
+	case activeSensing = 254
+	case systemReset = 255
+}
+
+public enum Metadata: Int, Sendable, CaseIterable {
+	case none = 0
+	case intIsInt8 = 1
+	case intIsInt16 = 2
+	case intIsInt32 = 3
+	case intIsInt64 = 4
+	case intIsUint8 = 5
+	case intIsUint16 = 6
+	case intIsUint32 = 7
+	case intIsUint64 = 8
+	case realIsFloat = 9
+	case realIsDouble = 10
+	case intIsChar16 = 11
+	case intIsChar32 = 12
+	case objectIsRequired = 13
+}
+
+public enum MethodFlags: Int, Sendable, CaseIterable {
+	case methodFlagNormal = 1
+	case default_ = 1
+	case methodFlagEditor = 2
+	case methodFlagConst = 4
+	case methodFlagVirtual = 8
+	case methodFlagVararg = 16
+	case methodFlagStatic = 32
+	case methodFlagObjectCore = 64
+	case methodFlagVirtualRequired = 128
+}
+
+public enum MouseButton: Int, Sendable, CaseIterable {
+	case none = 0
+	case left = 1
+	case right = 2
+	case middle = 3
+	case wheelUp = 4
+	case wheelDown = 5
+	case wheelLeft = 6
+	case wheelRight = 7
+	case mbXbutton1 = 8
+	case mbXbutton2 = 9
+}
+
+public enum MouseButtonMask: Int, Sendable, CaseIterable {
+	case none = 0
+	case left = 1
+	case right = 2
+	case middle = 4
+	case mbXbutton1 = 128
+	case mbXbutton2 = 256
+}
+
+public enum Orientation: Int, Sendable, CaseIterable {
+	case horizontal = 0
+	case vertical = 1
+}
+
+public enum PackFileFlags: Int, Sendable, CaseIterable {
+	case packFileEncrypted = 1
+	case packFileRemoval = 2
+	case packFileDelta = 4
+}
+
+public enum PackFlags: Int, Sendable, CaseIterable {
+	case packDirEncrypted = 1
+	case packRelFilebase = 2
+	case packSparseBundle = 4
+}
+
+public enum PropertyHint: Int, Sendable, CaseIterable {
+	case none = 0
+	case range = 1
+	case enum_ = 2
+	case enumSuggestion = 3
+	case expEasing = 4
+	case link = 5
+	case flags = 6
+	case layers2dRender = 7
+	case layers2dPhysics = 8
+	case layers2dNavigation = 9
+	case layers3dRender = 10
+	case layers3dPhysics = 11
+	case layers3dNavigation = 12
+	case file = 13
+	case dir = 14
+	case globalFile = 15
+	case globalDir = 16
+	case resourceType = 17
+	case multilineText = 18
+	case expression = 19
+	case placeholderText = 20
+	case colorNoAlpha = 21
+	case objectId = 22
+	case typeString = 23
+	case nodePathToEditedNode = 24
+	case objectTooBig = 25
+	case nodePathValidTypes = 26
+	case saveFile = 27
+	case globalSaveFile = 28
+	case intIsObjectid = 29
+	case intIsPointer = 30
+	case arrayType = 31
+	case localeId = 32
+	case localizableString = 33
+	case nodeType = 34
+	case hideQuaternionEdit = 35
+	case password = 36
+	case layersAvoidance = 37
+	case dictionaryType = 38
+	case toolButton = 39
+	case oneshot = 40
+	case noNodepath = 41
+	case groupEnable = 42
+	case inputName = 43
+	case filePath = 44
+	case audioBus = 45
+	case max = 46
+}
+
+public enum PropertyUsageFlags: Int, Sendable, CaseIterable {
+	case propertyUsageNone = 0
+	case propertyUsageStorage = 2
+	case propertyUsageNoEditor = 2
+	case propertyUsageEditor = 4
+	case propertyUsageDefault = 6
+	case propertyUsageInternal = 8
+	case propertyUsageCheckable = 16
+	case propertyUsageChecked = 32
+	case propertyUsageGroup = 64
+	case propertyUsageCategory = 128
+	case propertyUsageSubgroup = 256
+	case propertyUsageClassIsBitfield = 512
+	case propertyUsageNoInstanceState = 1024
+	case propertyUsageRestartIfChanged = 2048
+	case propertyUsageScriptVariable = 4096
+	case propertyUsageStoreIfNull = 8192
+	case propertyUsageUpdateAllIfModified = 16384
+	case propertyUsageScriptDefaultValue = 32768
+	case propertyUsageClassIsEnum = 65536
+	case propertyUsageNilIsVariant = 131072
+	case propertyUsageArray = 262144
+	case propertyUsageAlwaysDuplicate = 524288
+	case propertyUsageNeverDuplicate = 1048576
+	case propertyUsageHighEndGfx = 2097152
+	case propertyUsageNodePathFromSceneRoot = 4194304
+	case propertyUsageResourceNotPersistent = 8388608
+	case propertyUsageKeyingIncrements = 16777216
+	case propertyUsageDeferredSetResource = 33554432
+	case propertyUsageEditorInstantiateObject = 67108864
+	case propertyUsageEditorBasicSetting = 134217728
+	case propertyUsageReadOnly = 268435456
+	case propertyUsageSecret = 536870912
+}
+
+public enum Side: Int, Sendable, CaseIterable {
+	case left = 0
+	case top = 1
+	case right = 2
+	case bottom = 3
+}
+
+public enum VerticalAlignment: Int, Sendable, CaseIterable {
+	case top = 0
+	case center = 1
+	case bottom = 2
+	case fill = 3
+}
+
 @MainActor
 public class Object: GodotObject {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
@@ -110,9 +701,9 @@ public class Object: GodotObject {
 		let __ret = Host.shared.callMethod(object: ptr, method: "remove_user_signal", args: [VariantBox(signal)])
 	}
 	@discardableResult
-	public func emit_signal(signal: String) -> Int {
+	public func emit_signal(signal: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox(signal)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func call(method: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "call", args: [VariantBox(method)])
@@ -157,9 +748,9 @@ public class Object: GodotObject {
 		return __ret
 	}
 	@discardableResult
-	public func connect(signal: String, callable: VariantBox, flags: Int = 0) -> Int {
+	public func connect(signal: String, callable: VariantBox, flags: Int = 0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "connect", args: [VariantBox(signal), VariantBox(callable), VariantBox(flags)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func disconnect(signal: String, callable: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "disconnect", args: [VariantBox(signal), VariantBox(callable)])
@@ -444,8 +1035,8 @@ public class AccessibilityServer: Object {
 	public func update_set_text_decorations(id: VariantBox, underline: Bool, strikethrough: Bool, overline: Bool, color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_text_decorations", args: [VariantBox(id), VariantBox(underline), VariantBox(strikethrough), VariantBox(overline), VariantBox(color)])
 	}
-	public func update_set_text_align(id: VariantBox, align: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_text_align", args: [VariantBox(id), VariantBox(align)])
+	public func update_set_text_align(id: VariantBox, align: HorizontalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_text_align", args: [VariantBox(id), VariantBox(align.rawValue)])
 	}
 	public func update_set_text_selection(id: VariantBox, text_start_id: VariantBox, start_char: Int, text_end_id: VariantBox, end_char: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update_set_text_selection", args: [VariantBox(id), VariantBox(text_start_id), VariantBox(start_char), VariantBox(text_end_id), VariantBox(end_char)])
@@ -704,9 +1295,9 @@ public class AudioServer: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_input_device", args: [VariantBox(name)])
 	}
 	@discardableResult
-	public func set_input_device_active(active: Bool) -> Int {
+	public func set_input_device_active(active: Bool) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_input_device_active", args: [VariantBox(active)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_input_frames_available() -> Int {
@@ -888,9 +1479,9 @@ public class ClassDB: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "class_get_property", args: [VariantBox(object), VariantBox(property)])
 	}
 	@discardableResult
-	public func class_set_property(object: Object, property: String, value: VariantBox) -> Int {
+	public func class_set_property(object: Object, property: String, value: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "class_set_property", args: [VariantBox(object), VariantBox(property), VariantBox(value)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func class_get_property_default_value(class_: String, property: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "class_get_property_default_value", args: [VariantBox(class_), VariantBox(property)])
@@ -1075,38 +1666,38 @@ public class DisplayServer: Object {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func global_menu_add_item(menu_root: String, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Int = 0, index: Int = -1) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_item", args: [VariantBox(menu_root), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator), VariantBox(index)])
+	public func global_menu_add_item(menu_root: String, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_item", args: [VariantBox(menu_root), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func global_menu_add_check_item(menu_root: String, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Int = 0, index: Int = -1) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_check_item", args: [VariantBox(menu_root), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator), VariantBox(index)])
+	public func global_menu_add_check_item(menu_root: String, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_check_item", args: [VariantBox(menu_root), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func global_menu_add_icon_item(menu_root: String, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Int = 0, index: Int = -1) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_icon_item", args: [VariantBox(menu_root), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator), VariantBox(index)])
+	public func global_menu_add_icon_item(menu_root: String, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_icon_item", args: [VariantBox(menu_root), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func global_menu_add_icon_check_item(menu_root: String, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Int = 0, index: Int = -1) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_icon_check_item", args: [VariantBox(menu_root), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator), VariantBox(index)])
+	public func global_menu_add_icon_check_item(menu_root: String, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_icon_check_item", args: [VariantBox(menu_root), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func global_menu_add_radio_check_item(menu_root: String, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Int = 0, index: Int = -1) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_radio_check_item", args: [VariantBox(menu_root), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator), VariantBox(index)])
+	public func global_menu_add_radio_check_item(menu_root: String, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_radio_check_item", args: [VariantBox(menu_root), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func global_menu_add_icon_radio_check_item(menu_root: String, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Int = 0, index: Int = -1) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_icon_radio_check_item", args: [VariantBox(menu_root), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator), VariantBox(index)])
+	public func global_menu_add_icon_radio_check_item(menu_root: String, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_icon_radio_check_item", args: [VariantBox(menu_root), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func global_menu_add_multistate_item(menu_root: String, label: String, max_states: Int, default_state: Int, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Int = 0, index: Int = -1) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_multistate_item", args: [VariantBox(menu_root), VariantBox(label), VariantBox(max_states), VariantBox(default_state), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator), VariantBox(index)])
+	public func global_menu_add_multistate_item(menu_root: String, label: String, max_states: Int, default_state: Int, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_multistate_item", args: [VariantBox(menu_root), VariantBox(label), VariantBox(max_states), VariantBox(default_state), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
@@ -1163,9 +1754,9 @@ public class DisplayServer: Object {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func global_menu_get_item_accelerator(menu_root: String, idx: Int) -> Int {
+	public func global_menu_get_item_accelerator(menu_root: String, idx: Int) -> Key {
 		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_get_item_accelerator", args: [VariantBox(menu_root), VariantBox(idx)])
-		return __ret.asInt()
+		return __ret.asEnum(Key.self)
 	}
 	@discardableResult
 	public func global_menu_is_item_disabled(menu_root: String, idx: Int) -> Bool {
@@ -1229,8 +1820,8 @@ public class DisplayServer: Object {
 	public func global_menu_set_item_submenu(menu_root: String, idx: Int, submenu: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_set_item_submenu", args: [VariantBox(menu_root), VariantBox(idx), VariantBox(submenu)])
 	}
-	public func global_menu_set_item_accelerator(menu_root: String, idx: Int, keycode: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_set_item_accelerator", args: [VariantBox(menu_root), VariantBox(idx), VariantBox(keycode)])
+	public func global_menu_set_item_accelerator(menu_root: String, idx: Int, keycode: Key) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_set_item_accelerator", args: [VariantBox(menu_root), VariantBox(idx), VariantBox(keycode.rawValue)])
 	}
 	public func global_menu_set_item_disabled(menu_root: String, idx: Int, disabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_set_item_disabled", args: [VariantBox(menu_root), VariantBox(idx), VariantBox(disabled)])
@@ -1347,9 +1938,9 @@ public class DisplayServer: Object {
 		return __ret.asVector2i()
 	}
 	@discardableResult
-	public func mouse_get_button_state() -> Int {
+	public func mouse_get_button_state() -> MouseButtonMask {
 		let __ret = Host.shared.callMethod(object: ptr, method: "mouse_get_button_state", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(MouseButtonMask.self)
 	}
 	public func clipboard_set(clipboard: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "clipboard_set", args: [VariantBox(clipboard)])
@@ -1941,8 +2532,8 @@ public class DisplayServer: Object {
 	public func accessibility_update_set_text_decorations(id: VariantBox, underline: Bool, strikethrough: Bool, overline: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_text_decorations", args: [VariantBox(id), VariantBox(underline), VariantBox(strikethrough), VariantBox(overline)])
 	}
-	public func accessibility_update_set_text_align(id: VariantBox, align: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_text_align", args: [VariantBox(id), VariantBox(align)])
+	public func accessibility_update_set_text_align(id: VariantBox, align: HorizontalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_text_align", args: [VariantBox(id), VariantBox(align.rawValue)])
 	}
 	public func accessibility_update_set_text_selection(id: VariantBox, text_start_id: VariantBox, start_char: Int, text_end_id: VariantBox, end_char: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "accessibility_update_set_text_selection", args: [VariantBox(id), VariantBox(text_start_id), VariantBox(start_char), VariantBox(text_end_id), VariantBox(end_char)])
@@ -2043,24 +2634,24 @@ public class DisplayServer: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "enable_for_stealing_focus", args: [VariantBox(process_id)])
 	}
 	@discardableResult
-	public func dialog_show(title: String, description: String, buttons: VariantBox, callback: VariantBox) -> Int {
+	public func dialog_show(title: String, description: String, buttons: VariantBox, callback: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "dialog_show", args: [VariantBox(title), VariantBox(description), VariantBox(buttons), VariantBox(callback)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func dialog_input_text(title: String, description: String, existing_text: String, callback: VariantBox) -> Int {
+	public func dialog_input_text(title: String, description: String, existing_text: String, callback: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "dialog_input_text", args: [VariantBox(title), VariantBox(description), VariantBox(existing_text), VariantBox(callback)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func file_dialog_show(title: String, current_directory: String, filename: String, show_hidden: Bool, mode: DisplayServer.FileDialogMode, filters: VariantBox, callback: VariantBox, parent_window_id: Int = 0) -> Int {
+	public func file_dialog_show(title: String, current_directory: String, filename: String, show_hidden: Bool, mode: DisplayServer.FileDialogMode, filters: VariantBox, callback: VariantBox, parent_window_id: Int = 0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "file_dialog_show", args: [VariantBox(title), VariantBox(current_directory), VariantBox(filename), VariantBox(show_hidden), VariantBox(mode.rawValue), VariantBox(filters), VariantBox(callback), VariantBox(parent_window_id)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func file_dialog_with_options_show(title: String, current_directory: String, root: String, filename: String, show_hidden: Bool, mode: DisplayServer.FileDialogMode, filters: VariantBox, options: VariantBox, callback: VariantBox, parent_window_id: Int = 0) -> Int {
+	public func file_dialog_with_options_show(title: String, current_directory: String, root: String, filename: String, show_hidden: Bool, mode: DisplayServer.FileDialogMode, filters: VariantBox, options: VariantBox, callback: VariantBox, parent_window_id: Int = 0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "file_dialog_with_options_show", args: [VariantBox(title), VariantBox(current_directory), VariantBox(root), VariantBox(filename), VariantBox(show_hidden), VariantBox(mode.rawValue), VariantBox(filters), VariantBox(options), VariantBox(callback), VariantBox(parent_window_id)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func beep() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "beep", args: [])
@@ -2089,14 +2680,14 @@ public class DisplayServer: Object {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func keyboard_get_keycode_from_physical(keycode: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "keyboard_get_keycode_from_physical", args: [VariantBox(keycode)])
-		return __ret.asInt()
+	public func keyboard_get_keycode_from_physical(keycode: Key) -> Key {
+		let __ret = Host.shared.callMethod(object: ptr, method: "keyboard_get_keycode_from_physical", args: [VariantBox(keycode.rawValue)])
+		return __ret.asEnum(Key.self)
 	}
 	@discardableResult
-	public func keyboard_get_label_from_physical(keycode: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "keyboard_get_label_from_physical", args: [VariantBox(keycode)])
-		return __ret.asInt()
+	public func keyboard_get_label_from_physical(keycode: Key) -> Key {
+		let __ret = Host.shared.callMethod(object: ptr, method: "keyboard_get_label_from_physical", args: [VariantBox(keycode.rawValue)])
+		return __ret.asEnum(Key.self)
 	}
 	public func show_emoji_and_symbol_picker() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "show_emoji_and_symbol_picker", args: [])
@@ -2331,14 +2922,14 @@ public class Engine: Object {
 		return __ret
 	}
 	@discardableResult
-	public func register_script_language(language: ScriptLanguage) -> Int {
+	public func register_script_language(language: ScriptLanguage) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "register_script_language", args: [VariantBox(language)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func unregister_script_language(language: ScriptLanguage) -> Int {
+	public func unregister_script_language(language: ScriptLanguage) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "unregister_script_language", args: [VariantBox(language)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_script_language_count() -> Int {
@@ -2881,28 +3472,28 @@ public class Input: Object {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func is_key_pressed(keycode: Int) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_key_pressed", args: [VariantBox(keycode)])
+	public func is_key_pressed(keycode: Key) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "is_key_pressed", args: [VariantBox(keycode.rawValue)])
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func is_physical_key_pressed(keycode: Int) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_physical_key_pressed", args: [VariantBox(keycode)])
+	public func is_physical_key_pressed(keycode: Key) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "is_physical_key_pressed", args: [VariantBox(keycode.rawValue)])
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func is_key_label_pressed(keycode: Int) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_key_label_pressed", args: [VariantBox(keycode)])
+	public func is_key_label_pressed(keycode: Key) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "is_key_label_pressed", args: [VariantBox(keycode.rawValue)])
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func is_mouse_button_pressed(button: Int) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_mouse_button_pressed", args: [VariantBox(button)])
+	public func is_mouse_button_pressed(button: MouseButton) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "is_mouse_button_pressed", args: [VariantBox(button.rawValue)])
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func is_joy_button_pressed(device: Int, button: Int) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_joy_button_pressed", args: [VariantBox(device), VariantBox(button)])
+	public func is_joy_button_pressed(device: Int, button: JoyButton) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "is_joy_button_pressed", args: [VariantBox(device), VariantBox(button.rawValue)])
 		return __ret.asBool()
 	}
 	@discardableResult
@@ -2962,8 +3553,8 @@ public class Input: Object {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func get_joy_axis(device: Int, axis: Int) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_joy_axis", args: [VariantBox(device), VariantBox(axis)])
+	public func get_joy_axis(device: Int, axis: JoyAxis) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_joy_axis", args: [VariantBox(device), VariantBox(axis.rawValue)])
 		return __ret.asDouble()
 	}
 	@discardableResult
@@ -3180,9 +3771,9 @@ public class Input: Object {
 		return __ret.asVector2()
 	}
 	@discardableResult
-	public func get_mouse_button_mask() -> Int {
+	public func get_mouse_button_mask() -> MouseButtonMask {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_mouse_button_mask", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(MouseButtonMask.self)
 	}
 	public func set_mouse_mode(mode: Input.MouseMode) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_mouse_mode", args: [VariantBox(mode.rawValue)])
@@ -3440,9 +4031,9 @@ public class JavaScriptBridge: Object {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func pwa_update() -> Int {
+	public func pwa_update() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "pwa_update", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func force_fs_sync() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "force_fs_sync", args: [])
@@ -3536,14 +4127,14 @@ public class MovieWriter: Object {
 		return __ret
 	}
 	@discardableResult
-	public func _write_begin(movie_size: Vector2i, fps: Int, base_path: String) -> Int {
+	public func _write_begin(movie_size: Vector2i, fps: Int, base_path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_write_begin", args: [VariantBox(movie_size), VariantBox(fps), VariantBox(base_path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _write_frame(frame_image: Image, audio_frame_block: Int) -> Int {
+	public func _write_frame(frame_image: Image, audio_frame_block: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_write_frame", args: [VariantBox(frame_image), VariantBox(audio_frame_block)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func _write_end() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_write_end", args: [])
@@ -3647,38 +4238,38 @@ public class NativeMenu: Object {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func add_item(rid: VariantBox, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Int = 0, index: Int = -1) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_item", args: [VariantBox(rid), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator), VariantBox(index)])
+	public func add_item(rid: VariantBox, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_item", args: [VariantBox(rid), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func add_check_item(rid: VariantBox, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Int = 0, index: Int = -1) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_check_item", args: [VariantBox(rid), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator), VariantBox(index)])
+	public func add_check_item(rid: VariantBox, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_check_item", args: [VariantBox(rid), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func add_icon_item(rid: VariantBox, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Int = 0, index: Int = -1) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_item", args: [VariantBox(rid), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator), VariantBox(index)])
+	public func add_icon_item(rid: VariantBox, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_item", args: [VariantBox(rid), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func add_icon_check_item(rid: VariantBox, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Int = 0, index: Int = -1) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_check_item", args: [VariantBox(rid), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator), VariantBox(index)])
+	public func add_icon_check_item(rid: VariantBox, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_check_item", args: [VariantBox(rid), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func add_radio_check_item(rid: VariantBox, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Int = 0, index: Int = -1) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_radio_check_item", args: [VariantBox(rid), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator), VariantBox(index)])
+	public func add_radio_check_item(rid: VariantBox, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_radio_check_item", args: [VariantBox(rid), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func add_icon_radio_check_item(rid: VariantBox, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Int = 0, index: Int = -1) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_radio_check_item", args: [VariantBox(rid), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator), VariantBox(index)])
+	public func add_icon_radio_check_item(rid: VariantBox, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_radio_check_item", args: [VariantBox(rid), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func add_multistate_item(rid: VariantBox, label: String, max_states: Int, default_state: Int, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Int = 0, index: Int = -1) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_multistate_item", args: [VariantBox(rid), VariantBox(label), VariantBox(max_states), VariantBox(default_state), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator), VariantBox(index)])
+	public func add_multistate_item(rid: VariantBox, label: String, max_states: Int, default_state: Int, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_multistate_item", args: [VariantBox(rid), VariantBox(label), VariantBox(max_states), VariantBox(default_state), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
@@ -3745,9 +4336,9 @@ public class NativeMenu: Object {
 		return __ret
 	}
 	@discardableResult
-	public func get_item_accelerator(rid: VariantBox, idx: Int) -> Int {
+	public func get_item_accelerator(rid: VariantBox, idx: Int) -> Key {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_item_accelerator", args: [VariantBox(rid), VariantBox(idx)])
-		return __ret.asInt()
+		return __ret.asEnum(Key.self)
 	}
 	@discardableResult
 	public func is_item_disabled(rid: VariantBox, idx: Int) -> Bool {
@@ -3814,8 +4405,8 @@ public class NativeMenu: Object {
 	public func set_item_submenu(rid: VariantBox, idx: Int, submenu_rid: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_item_submenu", args: [VariantBox(rid), VariantBox(idx), VariantBox(submenu_rid)])
 	}
-	public func set_item_accelerator(rid: VariantBox, idx: Int, keycode: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_item_accelerator", args: [VariantBox(rid), VariantBox(idx), VariantBox(keycode)])
+	public func set_item_accelerator(rid: VariantBox, idx: Int, keycode: Key) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_item_accelerator", args: [VariantBox(rid), VariantBox(idx), VariantBox(keycode.rawValue)])
 	}
 	public func set_item_disabled(rid: VariantBox, idx: Int, disabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_item_disabled", args: [VariantBox(rid), VariantBox(idx), VariantBox(disabled)])
@@ -5634,14 +6225,14 @@ public class Node: Object {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func rpc(method: String) -> Int {
+	public func rpc(method: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "rpc", args: [VariantBox(method)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func rpc_id(peer_id: Int, method: String) -> Int {
+	public func rpc_id(peer_id: Int, method: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "rpc_id", args: [VariantBox(peer_id), VariantBox(method)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func update_configuration_warnings() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update_configuration_warnings", args: [])
@@ -5963,24 +6554,24 @@ public class OS: Object {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func open_with_program(program_path: String, paths: VariantBox) -> Int {
+	public func open_with_program(program_path: String, paths: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "open_with_program", args: [VariantBox(program_path), VariantBox(paths)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func kill(pid: Int) -> Int {
+	public func kill(pid: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "kill", args: [VariantBox(pid)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func shell_open(uri: String) -> Int {
+	public func shell_open(uri: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "shell_open", args: [VariantBox(uri)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func shell_show_in_file_manager(file_or_dir_path: String, open_folder: Bool = true) -> Int {
+	public func shell_show_in_file_manager(file_or_dir_path: String, open_folder: Bool = true) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "shell_show_in_file_manager", args: [VariantBox(file_or_dir_path), VariantBox(open_folder)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func is_process_running(pid: Int) -> Bool {
@@ -6118,9 +6709,9 @@ public class OS: Object {
 		return __ret
 	}
 	@discardableResult
-	public func move_to_trash(path: String) -> Int {
+	public func move_to_trash(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "move_to_trash", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_user_data_dir() -> String {
@@ -6158,8 +6749,8 @@ public class OS: Object {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func get_keycode_string(code: Int) -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_keycode_string", args: [VariantBox(code)])
+	public func get_keycode_string(code: Key) -> String {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_keycode_string", args: [VariantBox(code.rawValue)])
 		return __ret.asString()
 	}
 	@discardableResult
@@ -6168,17 +6759,17 @@ public class OS: Object {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func find_keycode_from_string(string: String) -> Int {
+	public func find_keycode_from_string(string: String) -> Key {
 		let __ret = Host.shared.callMethod(object: ptr, method: "find_keycode_from_string", args: [VariantBox(string)])
-		return __ret.asInt()
+		return __ret.asEnum(Key.self)
 	}
 	public func set_use_file_access_save_and_swap(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_use_file_access_save_and_swap", args: [VariantBox(enabled)])
 	}
 	@discardableResult
-	public func set_thread_name(name: String) -> Int {
+	public func set_thread_name(name: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_thread_name", args: [VariantBox(name)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_thread_caller_id() -> Int {
@@ -8522,9 +9113,9 @@ public class ProjectSettings: Object {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func save() -> Int {
+	public func save() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "save", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func load_resource_pack(pack: String, replace_files: Bool = true, offset: Int = 0) -> Bool {
@@ -8532,9 +9123,9 @@ public class ProjectSettings: Object {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func save_custom(file: String) -> Int {
+	public func save_custom(file: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "save_custom", args: [VariantBox(file)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_changed_settings() -> VariantBox {
@@ -9149,9 +9740,9 @@ public class RenderingDevice: Object {
 		return __ret
 	}
 	@discardableResult
-	public func texture_update(texture: VariantBox, layer: Int, data: VariantBox) -> Int {
+	public func texture_update(texture: VariantBox, layer: Int, data: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "texture_update", args: [VariantBox(texture), VariantBox(layer), VariantBox(data)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func texture_get_data(texture: VariantBox, layer: Int) -> VariantBox {
@@ -9159,9 +9750,9 @@ public class RenderingDevice: Object {
 		return __ret
 	}
 	@discardableResult
-	public func texture_get_data_async(texture: VariantBox, layer: Int, callback: VariantBox) -> Int {
+	public func texture_get_data_async(texture: VariantBox, layer: Int, callback: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "texture_get_data_async", args: [VariantBox(texture), VariantBox(layer), VariantBox(callback)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func texture_is_format_supported_for_usage(format: RenderingDevice.DataFormat, usage_flags: RenderingDevice.TextureUsageBits) -> Bool {
@@ -9187,19 +9778,19 @@ public class RenderingDevice: Object {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func texture_copy(from_texture: VariantBox, to_texture: VariantBox, from_pos: Vector3, to_pos: Vector3, size: Vector3, src_mipmap: Int, dst_mipmap: Int, src_layer: Int, dst_layer: Int) -> Int {
+	public func texture_copy(from_texture: VariantBox, to_texture: VariantBox, from_pos: Vector3, to_pos: Vector3, size: Vector3, src_mipmap: Int, dst_mipmap: Int, src_layer: Int, dst_layer: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "texture_copy", args: [VariantBox(from_texture), VariantBox(to_texture), VariantBox(from_pos), VariantBox(to_pos), VariantBox(size), VariantBox(src_mipmap), VariantBox(dst_mipmap), VariantBox(src_layer), VariantBox(dst_layer)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func texture_clear(texture: VariantBox, color: Color, base_mipmap: Int, mipmap_count: Int, base_layer: Int, layer_count: Int) -> Int {
+	public func texture_clear(texture: VariantBox, color: Color, base_mipmap: Int, mipmap_count: Int, base_layer: Int, layer_count: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "texture_clear", args: [VariantBox(texture), VariantBox(color), VariantBox(base_mipmap), VariantBox(mipmap_count), VariantBox(base_layer), VariantBox(layer_count)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func texture_resolve_multisample(from_texture: VariantBox, to_texture: VariantBox) -> Int {
+	public func texture_resolve_multisample(from_texture: VariantBox, to_texture: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "texture_resolve_multisample", args: [VariantBox(from_texture), VariantBox(to_texture)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func texture_get_format(texture: VariantBox) -> RDTextureFormat? {
@@ -9352,19 +9943,19 @@ public class RenderingDevice: Object {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func buffer_copy(src_buffer: VariantBox, dst_buffer: VariantBox, src_offset: Int, dst_offset: Int, size: Int) -> Int {
+	public func buffer_copy(src_buffer: VariantBox, dst_buffer: VariantBox, src_offset: Int, dst_offset: Int, size: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "buffer_copy", args: [VariantBox(src_buffer), VariantBox(dst_buffer), VariantBox(src_offset), VariantBox(dst_offset), VariantBox(size)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func buffer_update(buffer: VariantBox, offset: Int, size_bytes: Int, data: VariantBox) -> Int {
+	public func buffer_update(buffer: VariantBox, offset: Int, size_bytes: Int, data: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "buffer_update", args: [VariantBox(buffer), VariantBox(offset), VariantBox(size_bytes), VariantBox(data)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func buffer_clear(buffer: VariantBox, offset: Int, size_bytes: Int) -> Int {
+	public func buffer_clear(buffer: VariantBox, offset: Int, size_bytes: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "buffer_clear", args: [VariantBox(buffer), VariantBox(offset), VariantBox(size_bytes)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func buffer_get_data(buffer: VariantBox, offset_bytes: Int = 0, size_bytes: Int = 0) -> VariantBox {
@@ -9372,9 +9963,9 @@ public class RenderingDevice: Object {
 		return __ret
 	}
 	@discardableResult
-	public func buffer_get_data_async(buffer: VariantBox, callback: VariantBox, offset_bytes: Int = 0, size_bytes: Int = 0) -> Int {
+	public func buffer_get_data_async(buffer: VariantBox, callback: VariantBox, offset_bytes: Int = 0, size_bytes: Int = 0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "buffer_get_data_async", args: [VariantBox(buffer), VariantBox(callback), VariantBox(offset_bytes), VariantBox(size_bytes)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func buffer_get_device_address(buffer: VariantBox) -> Int {
@@ -9422,14 +10013,14 @@ public class RenderingDevice: Object {
 		return __ret
 	}
 	@discardableResult
-	public func blas_build(blas: VariantBox) -> Int {
+	public func blas_build(blas: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "blas_build", args: [VariantBox(blas)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func tlas_build(tlas: VariantBox, instances: VariantBox) -> Int {
+	public func tlas_build(tlas: VariantBox, instances: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "tlas_build", args: [VariantBox(tlas), VariantBox(instances)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func hit_sbt_create(raytracing_pipeline: VariantBox, initial_hit_group_capacity: Int) -> VariantBox {
@@ -9437,9 +10028,9 @@ public class RenderingDevice: Object {
 		return __ret
 	}
 	@discardableResult
-	public func hit_sbt_set_pipeline(hit_sbt: VariantBox, raytracing_pipeline: VariantBox) -> Int {
+	public func hit_sbt_set_pipeline(hit_sbt: VariantBox, raytracing_pipeline: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "hit_sbt_set_pipeline", args: [VariantBox(hit_sbt), VariantBox(raytracing_pipeline)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func hit_sbt_range_alloc(hit_sbt: VariantBox, hit_group_count: Int) -> Int {
@@ -9447,14 +10038,14 @@ public class RenderingDevice: Object {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func hit_sbt_range_free(hit_sbt: VariantBox, range: Int) -> Int {
+	public func hit_sbt_range_free(hit_sbt: VariantBox, range: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "hit_sbt_range_free", args: [VariantBox(hit_sbt), VariantBox(range)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func hit_sbt_range_update(hit_sbt: VariantBox, range: Int, offset: Int, hit_group_indices: VariantBox) -> Int {
+	public func hit_sbt_range_update(hit_sbt: VariantBox, range: Int, offset: Int, hit_group_indices: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "hit_sbt_range_update", args: [VariantBox(hit_sbt), VariantBox(range), VariantBox(offset), VariantBox(hit_group_indices)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func screen_get_width(screen: Int = 0) -> Int {
@@ -11950,9 +12541,9 @@ public class ResourceLoader: Object {
 		case replaceDeep = 4
 	}
 	@discardableResult
-	public func load_threaded_request(path: String, type_hint: String, use_sub_threads: Bool = false, cache_mode: ResourceLoader.CacheMode) -> Int {
+	public func load_threaded_request(path: String, type_hint: String, use_sub_threads: Bool = false, cache_mode: ResourceLoader.CacheMode) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_threaded_request", args: [VariantBox(path), VariantBox(type_hint), VariantBox(use_sub_threads), VariantBox(cache_mode.rawValue)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func load_threaded_get_status(path: String, progress: VariantBox) -> ResourceLoader.ThreadLoadStatus {
@@ -12024,14 +12615,14 @@ public class ResourceLoader: Object {
 public class ResourceSaver: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func save(resource: Resource, path: String, flags: ResourceSaver.SaverFlags) -> Int {
+	public func save(resource: Resource, path: String, flags: ResourceSaver.SaverFlags) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "save", args: [VariantBox(resource), VariantBox(path), VariantBox(flags.rawValue)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func set_uid(resource: String, uid: Int) -> Int {
+	public func set_uid(resource: String, uid: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_uid", args: [VariantBox(resource), VariantBox(uid)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_recognized_extensions(type: Resource) -> VariantBox {
@@ -13300,13 +13891,13 @@ public class TreeItem: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tooltip_text", args: [VariantBox(column)])
 		return __ret.asString()
 	}
-	public func set_text_alignment(column: Int, text_alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_alignment", args: [VariantBox(column), VariantBox(text_alignment)])
+	public func set_text_alignment(column: Int, text_alignment: HorizontalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_alignment", args: [VariantBox(column), VariantBox(text_alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_text_alignment(column: Int) -> Int {
+	public func get_text_alignment(column: Int) -> HorizontalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_text_alignment", args: [VariantBox(column)])
-		return __ret.asInt()
+		return __ret.asEnum(HorizontalAlignment.self)
 	}
 	public func set_expand_right(column: Int, enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_expand_right", args: [VariantBox(column), VariantBox(enable)])
@@ -13562,9 +14153,9 @@ public class WorkerThreadPool: Object {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func wait_for_task_completion(task_id: Int) -> Int {
+	public func wait_for_task_completion(task_id: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "wait_for_task_completion", args: [VariantBox(task_id)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_caller_task_id() -> Int {
@@ -13795,9 +14386,9 @@ public class AESContext: RefCounted {
 		case max = 4
 	}
 	@discardableResult
-	public func start(mode: AESContext.Mode, key: VariantBox, iv: VariantBox) -> Int {
+	public func start(mode: AESContext.Mode, key: VariantBox, iv: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "start", args: [VariantBox(mode.rawValue), VariantBox(key), VariantBox(iv)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func update(src: VariantBox) -> VariantBox {
@@ -14296,9 +14887,9 @@ public class AnimationMixer: Node {
 		case forceContinuous = 2
 	}
 	@discardableResult
-	public func add_animation_library(name: String, library: AnimationLibrary) -> Int {
+	public func add_animation_library(name: String, library: AnimationLibrary) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_animation_library", args: [VariantBox(name), VariantBox(library)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func remove_animation_library(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "remove_animation_library", args: [VariantBox(name)])
@@ -15118,17 +15709,17 @@ public class CanvasItem: Node {
 	public func draw_colored_polygon(points: VariantBox, color: Color, uvs: VariantBox, texture: Texture2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "draw_colored_polygon", args: [VariantBox(points), VariantBox(color), VariantBox(uvs), VariantBox(texture)])
 	}
-	public func draw_string(font: Font, pos: Vector2, text: String, alignment: Int = 0, width: Double = -1, font_size: Int = 16, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment), VariantBox(width), VariantBox(font_size), VariantBox(modulate), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
+	public func draw_string(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(modulate), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_multiline_string(font: Font, pos: Vector2, text: String, alignment: Int = 0, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(modulate), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
+	public func draw_multiline_string(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(modulate), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_string_outline(font: Font, pos: Vector2, text: String, alignment: Int = 0, width: Double = -1, font_size: Int = 16, size: Int = 1, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string_outline", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment), VariantBox(width), VariantBox(font_size), VariantBox(size), VariantBox(modulate), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
+	public func draw_string_outline(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, size: Int = 1, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string_outline", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(size), VariantBox(modulate), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_multiline_string_outline(font: Font, pos: Vector2, text: String, alignment: Int = 0, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, size: Int = 1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string_outline", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(size), VariantBox(modulate), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
+	public func draw_multiline_string_outline(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, size: Int = 1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string_outline", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(size), VariantBox(modulate), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
 	public func draw_char(font: Font, pos: Vector2, char: String, font_size: Int = 16, modulate: Color, oversampling: Double = 0.0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "draw_char", args: [VariantBox(font), VariantBox(pos), VariantBox(char), VariantBox(font_size), VariantBox(modulate), VariantBox(oversampling)])
@@ -15755,19 +16346,19 @@ public class ConfigFile: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "erase_section_key", args: [VariantBox(section), VariantBox(key)])
 	}
 	@discardableResult
-	public func load(path: String) -> Int {
+	public func load(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func parse(data: String) -> Int {
+	public func parse(data: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "parse", args: [VariantBox(data)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func save(path: String) -> Int {
+	public func save(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "save", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func encode_to_text() -> String {
@@ -15775,24 +16366,24 @@ public class ConfigFile: RefCounted {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func load_encrypted(path: String, key: VariantBox) -> Int {
+	public func load_encrypted(path: String, key: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_encrypted", args: [VariantBox(path), VariantBox(key)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func load_encrypted_pass(path: String, password: String) -> Int {
+	public func load_encrypted_pass(path: String, password: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_encrypted_pass", args: [VariantBox(path), VariantBox(password)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func save_encrypted(path: String, key: VariantBox) -> Int {
+	public func save_encrypted(path: String, key: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "save_encrypted", args: [VariantBox(path), VariantBox(key)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func save_encrypted_pass(path: String, password: String) -> Int {
+	public func save_encrypted_pass(path: String, password: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "save_encrypted_pass", args: [VariantBox(path), VariantBox(password)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func clear() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "clear", args: [])
@@ -15853,9 +16444,9 @@ public class Crypto: RefCounted {
 public class DTLSServer: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func setup(server_options: TLSOptions) -> Int {
+	public func setup(server_options: TLSOptions) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "setup", args: [VariantBox(server_options)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func take_connection(udp_peer: PacketPeerUDP) -> PacketPeerDTLS? {
@@ -15873,9 +16464,9 @@ public class DirAccess: RefCounted {
 		return __ret.asObject(DirAccess.self)
 	}
 	@discardableResult
-	public func get_open_error() -> Int {
+	public func get_open_error() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_open_error", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func create_temp(prefix: String, keep: Bool = false) -> DirAccess? {
@@ -15883,9 +16474,9 @@ public class DirAccess: RefCounted {
 		return __ret.asObject(DirAccess.self)
 	}
 	@discardableResult
-	public func list_dir_begin() -> Int {
+	public func list_dir_begin() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "list_dir_begin", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_next() -> String {
@@ -15941,9 +16532,9 @@ public class DirAccess: RefCounted {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func change_dir(to_dir: String) -> Int {
+	public func change_dir(to_dir: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "change_dir", args: [VariantBox(to_dir)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_current_dir(include_drive: Bool = true) -> String {
@@ -15951,24 +16542,24 @@ public class DirAccess: RefCounted {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func make_dir(path: String) -> Int {
+	public func make_dir(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "make_dir", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func make_dir_absolute(path: String) -> Int {
+	public func make_dir_absolute(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "make_dir_absolute", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func make_dir_recursive(path: String) -> Int {
+	public func make_dir_recursive(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "make_dir_recursive", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func make_dir_recursive_absolute(path: String) -> Int {
+	public func make_dir_recursive_absolute(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "make_dir_recursive_absolute", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func file_exists(path: String) -> Bool {
@@ -15991,34 +16582,34 @@ public class DirAccess: RefCounted {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func copy(from: String, to: String, chmod_flags: Int = -1) -> Int {
+	public func copy(from: String, to: String, chmod_flags: Int = -1) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "copy", args: [VariantBox(from), VariantBox(to), VariantBox(chmod_flags)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func copy_absolute(from: String, to: String, chmod_flags: Int = -1) -> Int {
+	public func copy_absolute(from: String, to: String, chmod_flags: Int = -1) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "copy_absolute", args: [VariantBox(from), VariantBox(to), VariantBox(chmod_flags)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func rename(from: String, to: String) -> Int {
+	public func rename(from: String, to: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "rename", args: [VariantBox(from), VariantBox(to)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func rename_absolute(from: String, to: String) -> Int {
+	public func rename_absolute(from: String, to: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "rename_absolute", args: [VariantBox(from), VariantBox(to)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func remove(path: String) -> Int {
+	public func remove(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "remove", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func remove_absolute(path: String) -> Int {
+	public func remove_absolute(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "remove_absolute", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func is_link(path: String) -> Bool {
@@ -16031,9 +16622,9 @@ public class DirAccess: RefCounted {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func create_link(source: String, target: String) -> Int {
+	public func create_link(source: String, target: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_link", args: [VariantBox(source), VariantBox(target)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func is_bundle(path: String) -> Bool {
@@ -16085,14 +16676,14 @@ public class DirAccess: RefCounted {
 public class ENetConnection: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func create_host_bound(bind_address: String, bind_port: Int, max_peers: Int = 32, max_channels: Int = 0, in_bandwidth: Int = 0, out_bandwidth: Int = 0) -> Int {
+	public func create_host_bound(bind_address: String, bind_port: Int, max_peers: Int = 32, max_channels: Int = 0, in_bandwidth: Int = 0, out_bandwidth: Int = 0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_host_bound", args: [VariantBox(bind_address), VariantBox(bind_port), VariantBox(max_peers), VariantBox(max_channels), VariantBox(in_bandwidth), VariantBox(out_bandwidth)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func create_host(max_peers: Int = 32, max_channels: Int = 0, in_bandwidth: Int = 0, out_bandwidth: Int = 0) -> Int {
+	public func create_host(max_peers: Int = 32, max_channels: Int = 0, in_bandwidth: Int = 0, out_bandwidth: Int = 0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_host", args: [VariantBox(max_peers), VariantBox(max_channels), VariantBox(in_bandwidth), VariantBox(out_bandwidth)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func destroy() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "destroy", args: [])
@@ -16123,14 +16714,14 @@ public class ENetConnection: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "compress", args: [VariantBox(mode.rawValue)])
 	}
 	@discardableResult
-	public func dtls_server_setup(server_options: TLSOptions) -> Int {
+	public func dtls_server_setup(server_options: TLSOptions) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "dtls_server_setup", args: [VariantBox(server_options)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func dtls_client_setup(hostname: String, client_options: TLSOptions) -> Int {
+	public func dtls_client_setup(hostname: String, client_options: TLSOptions) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "dtls_client_setup", args: [VariantBox(hostname), VariantBox(client_options)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func refuse_new_connections(refuse: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "refuse_new_connections", args: [VariantBox(refuse)])
@@ -16195,9 +16786,9 @@ public class EngineProfiler: RefCounted {
 public class Expression: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func parse(expression: String, input_names: VariantBox) -> Int {
+	public func parse(expression: String, input_names: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "parse", args: [VariantBox(expression), VariantBox(input_names)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func execute(inputs: VariantBox, base_instance: Object, show_error: Bool = true, const_calls_only: Bool = false) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "execute", args: [VariantBox(inputs), VariantBox(base_instance), VariantBox(show_error), VariantBox(const_calls_only)])
@@ -16238,9 +16829,9 @@ public class FileAccess: RefCounted {
 		return __ret.asObject(FileAccess.self)
 	}
 	@discardableResult
-	public func get_open_error() -> Int {
+	public func get_open_error() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_open_error", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func create_temp(mode_flags: FileAccess.ModeFlags, prefix: String, extension_: String, keep: Bool = false) -> FileAccess? {
@@ -16258,9 +16849,9 @@ public class FileAccess: RefCounted {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func resize(length: Int) -> Int {
+	public func resize(length: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "resize", args: [VariantBox(length)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func flush() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "flush", args: [])
@@ -16380,9 +16971,9 @@ public class FileAccess: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_big_endian", args: [VariantBox(big_endian)])
 	}
 	@discardableResult
-	public func get_error() -> Int {
+	public func get_error() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_error", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func get_var(allow_objects: Bool = false) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_var", args: [VariantBox(allow_objects)])
@@ -16491,9 +17082,9 @@ public class FileAccess: RefCounted {
 		return __ret.asEnum(FileAccess.UnixPermissionFlags.self)
 	}
 	@discardableResult
-	public func set_unix_permissions(file: String, permissions: FileAccess.UnixPermissionFlags) -> Int {
+	public func set_unix_permissions(file: String, permissions: FileAccess.UnixPermissionFlags) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_unix_permissions", args: [VariantBox(file), VariantBox(permissions.rawValue)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_hidden_attribute(file: String) -> Bool {
@@ -16501,14 +17092,14 @@ public class FileAccess: RefCounted {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func set_hidden_attribute(file: String, hidden: Bool) -> Int {
+	public func set_hidden_attribute(file: String, hidden: Bool) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_hidden_attribute", args: [VariantBox(file), VariantBox(hidden)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func set_read_only_attribute(file: String, ro: Bool) -> Int {
+	public func set_read_only_attribute(file: String, ro: Bool) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_read_only_attribute", args: [VariantBox(file), VariantBox(ro)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_read_only_attribute(file: String) -> Bool {
@@ -16526,19 +17117,19 @@ public class FileAccess: RefCounted {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func set_extended_attribute(file: String, attribute_name: String, data: VariantBox) -> Int {
+	public func set_extended_attribute(file: String, attribute_name: String, data: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_extended_attribute", args: [VariantBox(file), VariantBox(attribute_name), VariantBox(data)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func set_extended_attribute_string(file: String, attribute_name: String, data: String) -> Int {
+	public func set_extended_attribute_string(file: String, attribute_name: String, data: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_extended_attribute_string", args: [VariantBox(file), VariantBox(attribute_name), VariantBox(data)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func remove_extended_attribute(file: String, attribute_name: String) -> Int {
+	public func remove_extended_attribute(file: String, attribute_name: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "remove_extended_attribute", args: [VariantBox(file), VariantBox(attribute_name)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_extended_attributes_list(file: String) -> VariantBox {
@@ -16847,14 +17438,14 @@ public class GodotPhysicsServer3D: PhysicsServer3D {
 public class HMACContext: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func start(hash_type: HashingContext.HashType, key: VariantBox) -> Int {
+	public func start(hash_type: HashingContext.HashType, key: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "start", args: [VariantBox(hash_type.rawValue), VariantBox(key)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func update(data: VariantBox) -> Int {
+	public func update(data: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update", args: [VariantBox(data)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func finish() -> VariantBox {
@@ -16891,9 +17482,9 @@ public class HTTPClient: RefCounted {
 		case tlsHandshakeError = 9
 	}
 	@discardableResult
-	public func connect_to_host(host: String, port: Int = -1, tls_options: TLSOptions) -> Int {
+	public func connect_to_host(host: String, port: Int = -1, tls_options: TLSOptions) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "connect_to_host", args: [VariantBox(host), VariantBox(port), VariantBox(tls_options)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func set_connection(connection: StreamPeer) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_connection", args: [VariantBox(connection)])
@@ -16904,14 +17495,14 @@ public class HTTPClient: RefCounted {
 		return __ret.asObject(StreamPeer.self)
 	}
 	@discardableResult
-	public func request_raw(method: HTTPClient.Method, url: String, headers: VariantBox, body: VariantBox) -> Int {
+	public func request_raw(method: HTTPClient.Method, url: String, headers: VariantBox, body: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "request_raw", args: [VariantBox(method.rawValue), VariantBox(url), VariantBox(headers), VariantBox(body)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func request(method: HTTPClient.Method, url: String, headers: VariantBox, body: String) -> Int {
+	public func request(method: HTTPClient.Method, url: String, headers: VariantBox, body: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "request", args: [VariantBox(method.rawValue), VariantBox(url), VariantBox(headers), VariantBox(body)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func close() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "close", args: [])
@@ -16973,9 +17564,9 @@ public class HTTPClient: RefCounted {
 		return __ret.asEnum(HTTPClient.Status.self)
 	}
 	@discardableResult
-	public func poll() -> Int {
+	public func poll() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "poll", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func set_http_proxy(host: String, port: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_http_proxy", args: [VariantBox(host), VariantBox(port)])
@@ -17022,14 +17613,14 @@ public class HTTPRequest: Node {
 		case timeout = 13
 	}
 	@discardableResult
-	public func request(url: String, custom_headers: VariantBox, method: HTTPClient.Method, request_data: String) -> Int {
+	public func request(url: String, custom_headers: VariantBox, method: HTTPClient.Method, request_data: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "request", args: [VariantBox(url), VariantBox(custom_headers), VariantBox(method.rawValue), VariantBox(request_data)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func request_raw(url: String, custom_headers: VariantBox, method: HTTPClient.Method, request_data_raw: VariantBox) -> Int {
+	public func request_raw(url: String, custom_headers: VariantBox, method: HTTPClient.Method, request_data_raw: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "request_raw", args: [VariantBox(url), VariantBox(custom_headers), VariantBox(method.rawValue), VariantBox(request_data_raw)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func cancel_request() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "cancel_request", args: [])
@@ -17175,14 +17766,14 @@ public class HTTPRequest: Node {
 public class HashingContext: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func start(type: HashingContext.HashType) -> Int {
+	public func start(type: HashingContext.HashType) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "start", args: [VariantBox(type.rawValue)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func update(chunk: VariantBox) -> Int {
+	public func update(chunk: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update", args: [VariantBox(chunk)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func finish() -> VariantBox {
@@ -17596,14 +18187,14 @@ public class MeshDataTool: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "clear", args: [])
 	}
 	@discardableResult
-	public func create_from_surface(mesh: ArrayMesh, surface: Int) -> Int {
+	public func create_from_surface(mesh: ArrayMesh, surface: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_from_surface", args: [VariantBox(mesh), VariantBox(surface)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func commit_to_surface(mesh: ArrayMesh, compression_flags: Int = 0) -> Int {
+	public func commit_to_surface(mesh: ArrayMesh, compression_flags: Int = 0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "commit_to_surface", args: [VariantBox(mesh), VariantBox(compression_flags)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_format() -> Int {
@@ -17847,24 +18438,24 @@ public class MultiplayerAPI: RefCounted {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func poll() -> Int {
+	public func poll() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "poll", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func rpc(peer: Int, object: Object, method: String, arguments: VariantBox) -> Int {
+	public func rpc(peer: Int, object: Object, method: String, arguments: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "rpc", args: [VariantBox(peer), VariantBox(object), VariantBox(method), VariantBox(arguments)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func object_configuration_add(object: Object, configuration: VariantBox) -> Int {
+	public func object_configuration_add(object: Object, configuration: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "object_configuration_add", args: [VariantBox(object), VariantBox(configuration)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func object_configuration_remove(object: Object, configuration: VariantBox) -> Int {
+	public func object_configuration_remove(object: Object, configuration: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "object_configuration_remove", args: [VariantBox(object), VariantBox(configuration)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_peers() -> VariantBox {
@@ -19676,13 +20267,13 @@ public class Node3D: Node {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_rotation_degrees", args: [])
 		return __ret.asVector3()
 	}
-	public func set_rotation_order(order: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_rotation_order", args: [VariantBox(order)])
+	public func set_rotation_order(order: EulerOrder) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_rotation_order", args: [VariantBox(order.rawValue)])
 	}
 	@discardableResult
-	public func get_rotation_order() -> Int {
+	public func get_rotation_order() -> EulerOrder {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_rotation_order", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(EulerOrder.self)
 	}
 	public func set_rotation_edit_mode(edit_mode: Node3D.RotationEditMode) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_rotation_edit_mode", args: [VariantBox(edit_mode.rawValue)])
@@ -20877,29 +21468,29 @@ public class OpenXRStructureBase: RefCounted {
 public class PCKPacker: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func pck_start(pck_path: String, alignment: Int = 32, key: String = 0000000000000000000000000000000000000000000000000000000000000000, encrypt_directory: Bool = false) -> Int {
+	public func pck_start(pck_path: String, alignment: Int = 32, key: String = 0000000000000000000000000000000000000000000000000000000000000000, encrypt_directory: Bool = false) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "pck_start", args: [VariantBox(pck_path), VariantBox(alignment), VariantBox(key), VariantBox(encrypt_directory)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func add_file(target_path: String, source_path: String, encrypt: Bool = false) -> Int {
+	public func add_file(target_path: String, source_path: String, encrypt: Bool = false) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_file", args: [VariantBox(target_path), VariantBox(source_path), VariantBox(encrypt)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func add_file_from_buffer(target_path: String, data: VariantBox, encrypt: Bool = false) -> Int {
+	public func add_file_from_buffer(target_path: String, data: VariantBox, encrypt: Bool = false) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_file_from_buffer", args: [VariantBox(target_path), VariantBox(data), VariantBox(encrypt)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func add_file_removal(target_path: String) -> Int {
+	public func add_file_removal(target_path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_file_removal", args: [VariantBox(target_path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func flush(verbose: Bool = false) -> Int {
+	public func flush(verbose: Bool = false) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "flush", args: [VariantBox(verbose)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 }
 
@@ -20929,9 +21520,9 @@ public class PacketPeer: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_var", args: [VariantBox(allow_objects)])
 	}
 	@discardableResult
-	public func put_var(var_: VariantBox, full_objects: Bool = false) -> Int {
+	public func put_var(var_: VariantBox, full_objects: Bool = false) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "put_var", args: [VariantBox(var_), VariantBox(full_objects)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_packet() -> VariantBox {
@@ -20939,14 +21530,14 @@ public class PacketPeer: RefCounted {
 		return __ret
 	}
 	@discardableResult
-	public func put_packet(buffer: VariantBox) -> Int {
+	public func put_packet(buffer: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "put_packet", args: [VariantBox(buffer)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func get_packet_error() -> Int {
+	public func get_packet_error() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_packet_error", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_available_packet_count() -> Int {
@@ -25933,9 +26524,9 @@ public class RegEx: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "clear", args: [])
 	}
 	@discardableResult
-	public func compile(pattern: String, show_error: Bool = true) -> Int {
+	public func compile(pattern: String, show_error: Bool = true) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "compile", args: [VariantBox(pattern), VariantBox(show_error)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func search(subject: String, offset: Int = 0, end: Int = -1) -> RegExMatch? {
@@ -26318,9 +26909,9 @@ public class Resource: RefCounted {
 		return __ret.asObject(Resource.self)
 	}
 	@discardableResult
-	public func copy_from_resource(resource: Resource) -> Int {
+	public func copy_from_resource(resource: Resource) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "copy_from_resource", args: [VariantBox(resource)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func _setup_local_to_scene() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_setup_local_to_scene", args: [])
@@ -26410,9 +27001,9 @@ public class ResourceFormatLoader: RefCounted {
 		return __ret
 	}
 	@discardableResult
-	public func _rename_dependencies(path: String, renames: VariantBox) -> Int {
+	public func _rename_dependencies(path: String, renames: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_rename_dependencies", args: [VariantBox(path), VariantBox(renames)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func _exists(path: String) -> Bool {
@@ -26433,14 +27024,14 @@ public class ResourceFormatLoader: RefCounted {
 public class ResourceFormatSaver: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func _save(resource: Resource, path: String, flags: Int) -> Int {
+	public func _save(resource: Resource, path: String, flags: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_save", args: [VariantBox(resource), VariantBox(path), VariantBox(flags)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _set_uid(path: String, uid: Int) -> Int {
+	public func _set_uid(path: String, uid: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_set_uid", args: [VariantBox(path), VariantBox(uid)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func _recognize(resource: Resource) -> Bool {
@@ -26813,24 +27404,24 @@ public class SceneTree: MainLoop {
 		return __ret.asObject(Node.self)
 	}
 	@discardableResult
-	public func change_scene_to_file(path: String) -> Int {
+	public func change_scene_to_file(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "change_scene_to_file", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func change_scene_to_packed(packed_scene: PackedScene) -> Int {
+	public func change_scene_to_packed(packed_scene: PackedScene) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "change_scene_to_packed", args: [VariantBox(packed_scene)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func change_scene_to_node(node: Node) -> Int {
+	public func change_scene_to_node(node: Node) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "change_scene_to_node", args: [VariantBox(node)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func reload_current_scene() -> Int {
+	public func reload_current_scene() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "reload_current_scene", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func unload_current_scene() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "unload_current_scene", args: [])
@@ -27157,9 +27748,9 @@ public class ScriptLanguageExtension: ScriptLanguage {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func _open_in_external_editor(script: Script, line: Int, column: Int) -> Int {
+	public func _open_in_external_editor(script: Script, line: Int, column: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_open_in_external_editor", args: [VariantBox(script), VariantBox(line), VariantBox(column)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func _overrides_external_editor() -> Bool {
@@ -27441,9 +28032,9 @@ public class StatusIndicator: Node {
 public class StreamPeer: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func put_data(data: VariantBox) -> Int {
+	public func put_data(data: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "put_data", args: [VariantBox(data)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func put_partial_data(data: VariantBox) -> VariantBox {
@@ -27819,13 +28410,13 @@ public class TextLine: RefCounted {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func add_object(key: VariantBox, size: Vector2, inline_align: Int = 5, length: Int = 1, baseline: Double = 0.0) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_object", args: [VariantBox(key), VariantBox(size), VariantBox(inline_align), VariantBox(length), VariantBox(baseline)])
+	public func add_object(key: VariantBox, size: Vector2, inline_align: InlineAlignment, length: Int = 1, baseline: Double = 0.0) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_object", args: [VariantBox(key), VariantBox(size), VariantBox(inline_align.rawValue), VariantBox(length), VariantBox(baseline)])
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func resize_object(key: VariantBox, size: Vector2, inline_align: Int = 5, baseline: Double = 0.0) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "resize_object", args: [VariantBox(key), VariantBox(size), VariantBox(inline_align), VariantBox(baseline)])
+	public func resize_object(key: VariantBox, size: Vector2, inline_align: InlineAlignment, baseline: Double = 0.0) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "resize_object", args: [VariantBox(key), VariantBox(size), VariantBox(inline_align.rawValue), VariantBox(baseline)])
 		return __ret.asBool()
 	}
 	@discardableResult
@@ -27841,13 +28432,13 @@ public class TextLine: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_width", args: [])
 		return __ret.asDouble()
 	}
-	public func set_horizontal_alignment(alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment)])
+	public func set_horizontal_alignment(alignment: HorizontalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_horizontal_alignment() -> Int {
+	public func get_horizontal_alignment() -> HorizontalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_horizontal_alignment", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(HorizontalAlignment.self)
 	}
 	public func tab_align(tab_stops: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "tab_align", args: [VariantBox(tab_stops)])
@@ -28043,13 +28634,13 @@ public class TextParagraph: RefCounted {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func add_object(key: VariantBox, size: Vector2, inline_align: Int = 5, length: Int = 1, baseline: Double = 0.0) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_object", args: [VariantBox(key), VariantBox(size), VariantBox(inline_align), VariantBox(length), VariantBox(baseline)])
+	public func add_object(key: VariantBox, size: Vector2, inline_align: InlineAlignment, length: Int = 1, baseline: Double = 0.0) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_object", args: [VariantBox(key), VariantBox(size), VariantBox(inline_align.rawValue), VariantBox(length), VariantBox(baseline)])
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func resize_object(key: VariantBox, size: Vector2, inline_align: Int = 5, baseline: Double = 0.0) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "resize_object", args: [VariantBox(key), VariantBox(size), VariantBox(inline_align), VariantBox(baseline)])
+	public func resize_object(key: VariantBox, size: Vector2, inline_align: InlineAlignment, baseline: Double = 0.0) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "resize_object", args: [VariantBox(key), VariantBox(size), VariantBox(inline_align.rawValue), VariantBox(baseline)])
 		return __ret.asBool()
 	}
 	@discardableResult
@@ -28057,13 +28648,13 @@ public class TextParagraph: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "has_object", args: [VariantBox(key)])
 		return __ret.asBool()
 	}
-	public func set_alignment(alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_alignment", args: [VariantBox(alignment)])
+	public func set_alignment(alignment: HorizontalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_alignment", args: [VariantBox(alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_alignment() -> Int {
+	public func get_alignment() -> HorizontalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_alignment", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(HorizontalAlignment.self)
 	}
 	public func tab_align(tab_stops: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "tab_align", args: [VariantBox(tab_stops)])
@@ -29041,13 +29632,13 @@ public class TextServer: RefCounted {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func shaped_text_add_object(shaped: VariantBox, key: VariantBox, size: Vector2, inline_align: Int = 5, length: Int = 1, baseline: Double = 0.0) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_add_object", args: [VariantBox(shaped), VariantBox(key), VariantBox(size), VariantBox(inline_align), VariantBox(length), VariantBox(baseline)])
+	public func shaped_text_add_object(shaped: VariantBox, key: VariantBox, size: Vector2, inline_align: InlineAlignment, length: Int = 1, baseline: Double = 0.0) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_add_object", args: [VariantBox(shaped), VariantBox(key), VariantBox(size), VariantBox(inline_align.rawValue), VariantBox(length), VariantBox(baseline)])
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func shaped_text_resize_object(shaped: VariantBox, key: VariantBox, size: Vector2, inline_align: Int = 5, baseline: Double = 0.0) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_resize_object", args: [VariantBox(shaped), VariantBox(key), VariantBox(size), VariantBox(inline_align), VariantBox(baseline)])
+	public func shaped_text_resize_object(shaped: VariantBox, key: VariantBox, size: Vector2, inline_align: InlineAlignment, baseline: Double = 0.0) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_resize_object", args: [VariantBox(shaped), VariantBox(key), VariantBox(size), VariantBox(inline_align.rawValue), VariantBox(baseline)])
 		return __ret.asBool()
 	}
 	@discardableResult
@@ -29415,9 +30006,9 @@ public class Thread: RefCounted {
 		case high = 2
 	}
 	@discardableResult
-	public func start(callable: VariantBox, priority: Thread.Priority) -> Int {
+	public func start(callable: VariantBox, priority: Thread.Priority) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "start", args: [VariantBox(callable), VariantBox(priority.rawValue)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_id() -> String {
@@ -29910,14 +30501,14 @@ public class Tweener: RefCounted {
 public class UDPServer: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func listen(port: Int, bind_address: String) -> Int {
+	public func listen(port: Int, bind_address: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "listen", args: [VariantBox(port), VariantBox(bind_address)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func poll() -> Int {
+	public func poll() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "poll", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func is_connection_available() -> Bool {
@@ -31014,9 +31605,9 @@ public class WebRTCPeerConnection: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_default_extension", args: [VariantBox(extension_class)])
 	}
 	@discardableResult
-	public func initialize(configuration: VariantBox) -> Int {
+	public func initialize(configuration: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "initialize", args: [VariantBox(configuration)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func create_data_channel(label: String, options: VariantBox) -> WebRTCDataChannel? {
@@ -31024,29 +31615,29 @@ public class WebRTCPeerConnection: RefCounted {
 		return __ret.asObject(WebRTCDataChannel.self)
 	}
 	@discardableResult
-	public func create_offer() -> Int {
+	public func create_offer() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_offer", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func set_local_description(type: String, sdp: String) -> Int {
+	public func set_local_description(type: String, sdp: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_local_description", args: [VariantBox(type), VariantBox(sdp)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func set_remote_description(type: String, sdp: String) -> Int {
+	public func set_remote_description(type: String, sdp: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_remote_description", args: [VariantBox(type), VariantBox(sdp)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func add_ice_candidate(media: String, index: Int, name: String) -> Int {
+	public func add_ice_candidate(media: String, index: Int, name: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_ice_candidate", args: [VariantBox(media), VariantBox(index), VariantBox(name)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func poll() -> Int {
+	public func poll() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "poll", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func close() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "close", args: [])
@@ -31122,9 +31713,9 @@ public class WorldEnvironment: Node {
 public class XMLParser: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func read() -> Int {
+	public func read() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "read", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_node_type() -> XMLParser.NodeType {
@@ -31190,19 +31781,19 @@ public class XMLParser: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "skip_section", args: [])
 	}
 	@discardableResult
-	public func seek(position: Int) -> Int {
+	public func seek(position: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "seek", args: [VariantBox(position)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func open_(file: String) -> Int {
+	public func open_(file: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "open", args: [VariantBox(file)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func open_buffer(buffer: VariantBox) -> Int {
+	public func open_buffer(buffer: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "open_buffer", args: [VariantBox(buffer)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 }
 
@@ -31509,9 +32100,9 @@ public class XRTracker: RefCounted {
 public class ZIPPacker: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func open_(path: String, append: ZIPPacker.ZipAppend) -> Int {
+	public func open_(path: String, append: ZIPPacker.ZipAppend) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "open", args: [VariantBox(path), VariantBox(append.rawValue)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func set_compression_level(compression_level: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_compression_level", args: [VariantBox(compression_level)])
@@ -31522,29 +32113,29 @@ public class ZIPPacker: RefCounted {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func add_directory(path: String, permissions: FileAccess.UnixPermissionFlags, modified_time: Int = 0) -> Int {
+	public func add_directory(path: String, permissions: FileAccess.UnixPermissionFlags, modified_time: Int = 0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_directory", args: [VariantBox(path), VariantBox(permissions.rawValue), VariantBox(modified_time)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func start_file(path: String, permissions: FileAccess.UnixPermissionFlags, modified_time: Int = 0) -> Int {
+	public func start_file(path: String, permissions: FileAccess.UnixPermissionFlags, modified_time: Int = 0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "start_file", args: [VariantBox(path), VariantBox(permissions.rawValue), VariantBox(modified_time)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func write_file(data: VariantBox) -> Int {
+	public func write_file(data: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "write_file", args: [VariantBox(data)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func close_file() -> Int {
+	public func close_file() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "close_file", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func close() -> Int {
+	public func close() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "close", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public var compression_level: Int {
 		get { Host.shared.getProperty(object: ptr, name: "compression_level").asInt() }
@@ -31556,14 +32147,14 @@ public class ZIPPacker: RefCounted {
 public class ZIPReader: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func open_(path: String) -> Int {
+	public func open_(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "open", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func close() -> Int {
+	public func close() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "close", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_files() -> VariantBox {
@@ -31975,9 +32566,9 @@ public class Animation: Resource {
 public class AnimationLibrary: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func add_animation(name: String, animation: Animation) -> Int {
+	public func add_animation(name: String, animation: Animation) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_animation", args: [VariantBox(name), VariantBox(animation)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func remove_animation(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "remove_animation", args: [VariantBox(name)])
@@ -34396,27 +34987,27 @@ public class Control: CanvasItem {
 	public func set_anchors_and_offsets_preset(preset: Control.LayoutPreset, resize_mode: Control.LayoutPresetMode, margin: Int = 0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_anchors_and_offsets_preset", args: [VariantBox(preset.rawValue), VariantBox(resize_mode.rawValue), VariantBox(margin)])
 	}
-	public func _set_anchor(side: Int, anchor: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_set_anchor", args: [VariantBox(side), VariantBox(anchor)])
+	public func _set_anchor(side: Side, anchor: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_set_anchor", args: [VariantBox(side.rawValue), VariantBox(anchor)])
 	}
-	public func set_anchor(side: Int, anchor: Double, keep_offset: Bool = false, push_opposite_anchor: Bool = true) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_anchor", args: [VariantBox(side), VariantBox(anchor), VariantBox(keep_offset), VariantBox(push_opposite_anchor)])
-	}
-	@discardableResult
-	public func get_anchor(side: Int) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_anchor", args: [VariantBox(side)])
-		return __ret.asDouble()
-	}
-	public func set_offset(side: Int, offset: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_offset", args: [VariantBox(side), VariantBox(offset)])
+	public func set_anchor(side: Side, anchor: Double, keep_offset: Bool = false, push_opposite_anchor: Bool = true) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_anchor", args: [VariantBox(side.rawValue), VariantBox(anchor), VariantBox(keep_offset), VariantBox(push_opposite_anchor)])
 	}
 	@discardableResult
-	public func get_offset(offset: Int) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_offset", args: [VariantBox(offset)])
+	public func get_anchor(side: Side) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_anchor", args: [VariantBox(side.rawValue)])
 		return __ret.asDouble()
 	}
-	public func set_anchor_and_offset(side: Int, anchor: Double, offset: Double, push_opposite_anchor: Bool = false) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_anchor_and_offset", args: [VariantBox(side), VariantBox(anchor), VariantBox(offset), VariantBox(push_opposite_anchor)])
+	public func set_offset(side: Side, offset: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_offset", args: [VariantBox(side.rawValue), VariantBox(offset)])
+	}
+	@discardableResult
+	public func get_offset(offset: Side) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_offset", args: [VariantBox(offset.rawValue)])
+		return __ret.asDouble()
+	}
+	public func set_anchor_and_offset(side: Side, anchor: Double, offset: Double, push_opposite_anchor: Bool = false) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_anchor_and_offset", args: [VariantBox(side.rawValue), VariantBox(anchor), VariantBox(offset), VariantBox(push_opposite_anchor)])
 	}
 	public func set_begin(position: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_begin", args: [VariantBox(position)])
@@ -34594,8 +35185,8 @@ public class Control: CanvasItem {
 		return __ret.asObject(Control.self)
 	}
 	@discardableResult
-	public func find_valid_focus_neighbor(side: Int) -> Control? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "find_valid_focus_neighbor", args: [VariantBox(side)])
+	public func find_valid_focus_neighbor(side: Side) -> Control? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "find_valid_focus_neighbor", args: [VariantBox(side.rawValue)])
 		return __ret.asObject(Control.self)
 	}
 	public func play_theme_sound(stream: AudioStream) {
@@ -34936,12 +35527,12 @@ public class Control: CanvasItem {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_cursor_shape", args: [VariantBox(at_position)])
 		return __ret.asEnum(Control.CursorShape.self)
 	}
-	public func set_focus_neighbor(side: Int, neighbor: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_focus_neighbor", args: [VariantBox(side), VariantBox(neighbor)])
+	public func set_focus_neighbor(side: Side, neighbor: String) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_focus_neighbor", args: [VariantBox(side.rawValue), VariantBox(neighbor)])
 	}
 	@discardableResult
-	public func get_focus_neighbor(side: Int) -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_focus_neighbor", args: [VariantBox(side)])
+	public func get_focus_neighbor(side: Side) -> String {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_focus_neighbor", args: [VariantBox(side.rawValue)])
 		return __ret.asString()
 	}
 	public func set_focus_next(next: String) {
@@ -35536,14 +36127,14 @@ public class Control: CanvasItem {
 public class CryptoKey: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func save(path: String, public_only: Bool = false) -> Int {
+	public func save(path: String, public_only: Bool = false) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "save", args: [VariantBox(path), VariantBox(public_only)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func load(path: String, public_only: Bool = false) -> Int {
+	public func load(path: String, public_only: Bool = false) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load", args: [VariantBox(path), VariantBox(public_only)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func is_public_only() -> Bool {
@@ -35556,9 +36147,9 @@ public class CryptoKey: Resource {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func load_from_string(string_key: String, public_only: Bool = false) -> Int {
+	public func load_from_string(string_key: String, public_only: Bool = false) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_from_string", args: [VariantBox(string_key), VariantBox(public_only)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 }
 
@@ -36075,9 +36666,9 @@ public class ENetPacketPeer: PacketPeer {
 		let __ret = Host.shared.callMethod(object: ptr, method: "reset", args: [])
 	}
 	@discardableResult
-	public func send(channel: Int, packet: VariantBox, flags: Int) -> Int {
+	public func send(channel: Int, packet: VariantBox, flags: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "send", args: [VariantBox(channel), VariantBox(packet), VariantBox(flags)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func throttle_configure(interval: Int, acceleration: Int, deceleration: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "throttle_configure", args: [VariantBox(interval), VariantBox(acceleration), VariantBox(deceleration)])
@@ -37499,26 +38090,26 @@ public class Font: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_cache_capacity", args: [VariantBox(single_line), VariantBox(multi_line)])
 	}
 	@discardableResult
-	public func get_string_size(text: String, alignment: Int = 0, width: Double = -1, font_size: Int = 16, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation) -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_string_size", args: [VariantBox(text), VariantBox(alignment), VariantBox(width), VariantBox(font_size), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue)])
+	public func get_string_size(text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation) -> Vector2 {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_string_size", args: [VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue)])
 		return __ret.asVector2()
 	}
 	@discardableResult
-	public func get_multiline_string_size(text: String, alignment: Int = 0, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation) -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_multiline_string_size", args: [VariantBox(text), VariantBox(alignment), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue)])
+	public func get_multiline_string_size(text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation) -> Vector2 {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_multiline_string_size", args: [VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue)])
 		return __ret.asVector2()
 	}
-	public func draw_string(canvas_item: VariantBox, pos: Vector2, text: String, alignment: Int = 0, width: Double = -1, font_size: Int = 16, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment), VariantBox(width), VariantBox(font_size), VariantBox(modulate), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
+	public func draw_string(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(modulate), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_multiline_string(canvas_item: VariantBox, pos: Vector2, text: String, alignment: Int = 0, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(modulate), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
+	public func draw_multiline_string(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(modulate), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_string_outline(canvas_item: VariantBox, pos: Vector2, text: String, alignment: Int = 0, width: Double = -1, font_size: Int = 16, size: Int = 1, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string_outline", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment), VariantBox(width), VariantBox(font_size), VariantBox(size), VariantBox(modulate), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
+	public func draw_string_outline(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, size: Int = 1, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string_outline", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(size), VariantBox(modulate), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_multiline_string_outline(canvas_item: VariantBox, pos: Vector2, text: String, alignment: Int = 0, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, size: Int = 1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string_outline", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(size), VariantBox(modulate), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
+	public func draw_multiline_string_outline(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, size: Int = 1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string_outline", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(size), VariantBox(modulate), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
 	@discardableResult
 	public func get_char_size(char: Int, font_size: Int) -> Vector2 {
@@ -38078,19 +38669,19 @@ public class GLTFDocument: Resource {
 		return __ret.asEnum(GLTFDocument.VisibilityMode.self)
 	}
 	@discardableResult
-	public func append_from_file(path: String, state: GLTFState, flags: Int = 0, base_path: String) -> Int {
+	public func append_from_file(path: String, state: GLTFState, flags: Int = 0, base_path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "append_from_file", args: [VariantBox(path), VariantBox(state), VariantBox(flags), VariantBox(base_path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func append_from_buffer(bytes: VariantBox, base_path: String, state: GLTFState, flags: Int = 0) -> Int {
+	public func append_from_buffer(bytes: VariantBox, base_path: String, state: GLTFState, flags: Int = 0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "append_from_buffer", args: [VariantBox(bytes), VariantBox(base_path), VariantBox(state), VariantBox(flags)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func append_from_scene(node: Node, state: GLTFState, flags: Int = 0) -> Int {
+	public func append_from_scene(node: Node, state: GLTFState, flags: Int = 0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "append_from_scene", args: [VariantBox(node), VariantBox(state), VariantBox(flags)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func generate_scene(state: GLTFState, bake_fps: Double = 30, trimming: Bool = false, remove_immutable_tracks: Bool = true) -> Node? {
@@ -38103,9 +38694,9 @@ public class GLTFDocument: Resource {
 		return __ret
 	}
 	@discardableResult
-	public func write_to_filesystem(state: GLTFState, path: String) -> Int {
+	public func write_to_filesystem(state: GLTFState, path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "write_to_filesystem", args: [VariantBox(state), VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func import_object_model_property(state: GLTFState, json_pointer: String) -> GLTFObjectModelProperty? {
@@ -38162,9 +38753,9 @@ public class GLTFDocument: Resource {
 public class GLTFDocumentExtension: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func _import_preflight(state: GLTFState, extensions: VariantBox) -> Int {
+	public func _import_preflight(state: GLTFState, extensions: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_import_preflight", args: [VariantBox(state), VariantBox(extensions)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func _get_supported_extensions() -> VariantBox {
@@ -38172,14 +38763,14 @@ public class GLTFDocumentExtension: Resource {
 		return __ret
 	}
 	@discardableResult
-	public func _parse_node_extensions(state: GLTFState, gltf_node: GLTFNode, extensions: VariantBox) -> Int {
+	public func _parse_node_extensions(state: GLTFState, gltf_node: GLTFNode, extensions: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_parse_node_extensions", args: [VariantBox(state), VariantBox(gltf_node), VariantBox(extensions)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _parse_image_data(state: GLTFState, image_data: VariantBox, mime_type: String, ret_image: Image) -> Int {
+	public func _parse_image_data(state: GLTFState, image_data: VariantBox, mime_type: String, ret_image: Image) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_parse_image_data", args: [VariantBox(state), VariantBox(image_data), VariantBox(mime_type), VariantBox(ret_image)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func _get_image_file_extension() -> String {
@@ -38187,9 +38778,9 @@ public class GLTFDocumentExtension: Resource {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func _parse_texture_json(state: GLTFState, texture_json: VariantBox, ret_gltf_texture: GLTFTexture) -> Int {
+	public func _parse_texture_json(state: GLTFState, texture_json: VariantBox, ret_gltf_texture: GLTFTexture) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_parse_texture_json", args: [VariantBox(state), VariantBox(texture_json), VariantBox(ret_gltf_texture)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func _import_object_model_property(state: GLTFState, split_json_pointer: VariantBox, partial_paths: VariantBox) -> GLTFObjectModelProperty? {
@@ -38197,14 +38788,14 @@ public class GLTFDocumentExtension: Resource {
 		return __ret.asObject(GLTFObjectModelProperty.self)
 	}
 	@discardableResult
-	public func _import_post_parse(state: GLTFState) -> Int {
+	public func _import_post_parse(state: GLTFState) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_import_post_parse", args: [VariantBox(state)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _import_pre_generate(state: GLTFState) -> Int {
+	public func _import_pre_generate(state: GLTFState) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_import_pre_generate", args: [VariantBox(state)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func _generate_scene_node(state: GLTFState, gltf_node: GLTFNode, scene_parent: Node) -> Node3D? {
@@ -38212,14 +38803,14 @@ public class GLTFDocumentExtension: Resource {
 		return __ret.asObject(Node3D.self)
 	}
 	@discardableResult
-	public func _import_node(state: GLTFState, gltf_node: GLTFNode, json: VariantBox, node: Node) -> Int {
+	public func _import_node(state: GLTFState, gltf_node: GLTFNode, json: VariantBox, node: Node) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_import_node", args: [VariantBox(state), VariantBox(gltf_node), VariantBox(json), VariantBox(node)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _import_post(state: GLTFState, root: Node) -> Int {
+	public func _import_post(state: GLTFState, root: Node) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_import_post", args: [VariantBox(state), VariantBox(root)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func _export_get_property_list(root_node: Node) -> VariantBox {
@@ -38227,22 +38818,22 @@ public class GLTFDocumentExtension: Resource {
 		return __ret
 	}
 	@discardableResult
-	public func _export_preflight(state: GLTFState, root: Node) -> Int {
+	public func _export_preflight(state: GLTFState, root: Node) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_export_preflight", args: [VariantBox(state), VariantBox(root)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func _convert_scene_node(state: GLTFState, gltf_node: GLTFNode, scene_node: Node) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_convert_scene_node", args: [VariantBox(state), VariantBox(gltf_node), VariantBox(scene_node)])
 	}
 	@discardableResult
-	public func _export_post_convert(state: GLTFState, root: Node) -> Int {
+	public func _export_post_convert(state: GLTFState, root: Node) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_export_post_convert", args: [VariantBox(state), VariantBox(root)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _export_preserialize(state: GLTFState) -> Int {
+	public func _export_preserialize(state: GLTFState) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_export_preserialize", args: [VariantBox(state)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func _export_object_model_property(state: GLTFState, node_path: String, godot_node: Node, gltf_node_index: Int, target_object: Object, target_depth: Int) -> GLTFObjectModelProperty? {
@@ -38260,24 +38851,24 @@ public class GLTFDocumentExtension: Resource {
 		return __ret
 	}
 	@discardableResult
-	public func _save_image_at_path(state: GLTFState, image: Image, file_path: String, image_format: String, lossy_quality: Double) -> Int {
+	public func _save_image_at_path(state: GLTFState, image: Image, file_path: String, image_format: String, lossy_quality: Double) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_save_image_at_path", args: [VariantBox(state), VariantBox(image), VariantBox(file_path), VariantBox(image_format), VariantBox(lossy_quality)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _serialize_texture_json(state: GLTFState, texture_json: VariantBox, gltf_texture: GLTFTexture, image_format: String) -> Int {
+	public func _serialize_texture_json(state: GLTFState, texture_json: VariantBox, gltf_texture: GLTFTexture, image_format: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_serialize_texture_json", args: [VariantBox(state), VariantBox(texture_json), VariantBox(gltf_texture), VariantBox(image_format)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _export_node(state: GLTFState, gltf_node: GLTFNode, json: VariantBox, node: Node) -> Int {
+	public func _export_node(state: GLTFState, gltf_node: GLTFNode, json: VariantBox, node: Node) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_export_node", args: [VariantBox(state), VariantBox(gltf_node), VariantBox(json), VariantBox(node)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _export_post(state: GLTFState) -> Int {
+	public func _export_post(state: GLTFState) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_export_post", args: [VariantBox(state)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 }
 
@@ -40216,9 +40807,9 @@ public class Image: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "flip_y", args: [])
 	}
 	@discardableResult
-	public func generate_mipmaps(renormalize: Bool = false, preserve_alpha_test_coverage: Bool = false, alpha_test_threshold: Double = 0.5) -> Int {
+	public func generate_mipmaps(renormalize: Bool = false, preserve_alpha_test_coverage: Bool = false, alpha_test_threshold: Double = 0.5) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "generate_mipmaps", args: [VariantBox(renormalize), VariantBox(preserve_alpha_test_coverage), VariantBox(alpha_test_threshold)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func clear_mipmaps() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "clear_mipmaps", args: [])
@@ -40247,9 +40838,9 @@ public class Image: Resource {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func load(path: String) -> Int {
+	public func load(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func load_from_file(path: String) -> Image? {
@@ -40257,9 +40848,9 @@ public class Image: Resource {
 		return __ret.asObject(Image.self)
 	}
 	@discardableResult
-	public func save_png(path: String) -> Int {
+	public func save_png(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "save_png", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func save_png_to_buffer() -> VariantBox {
@@ -40267,9 +40858,9 @@ public class Image: Resource {
 		return __ret
 	}
 	@discardableResult
-	public func save_jpg(path: String, quality: Double = 0.75) -> Int {
+	public func save_jpg(path: String, quality: Double = 0.75) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "save_jpg", args: [VariantBox(path), VariantBox(quality)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func save_jpg_to_buffer(quality: Double = 0.75) -> VariantBox {
@@ -40277,9 +40868,9 @@ public class Image: Resource {
 		return __ret
 	}
 	@discardableResult
-	public func save_exr(path: String, grayscale: Bool = false, color_image: Bool = false, max_linear_value: Double = -1.0) -> Int {
+	public func save_exr(path: String, grayscale: Bool = false, color_image: Bool = false, max_linear_value: Double = -1.0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "save_exr", args: [VariantBox(path), VariantBox(grayscale), VariantBox(color_image), VariantBox(max_linear_value)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func save_exr_to_buffer(grayscale: Bool = false, color_image: Bool = false, max_linear_value: Double = -1.0) -> VariantBox {
@@ -40287,9 +40878,9 @@ public class Image: Resource {
 		return __ret
 	}
 	@discardableResult
-	public func save_dds(path: String) -> Int {
+	public func save_dds(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "save_dds", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func save_dds_to_buffer() -> VariantBox {
@@ -40297,9 +40888,9 @@ public class Image: Resource {
 		return __ret
 	}
 	@discardableResult
-	public func save_webp(path: String, lossy: Bool = false, quality: Double = 0.75) -> Int {
+	public func save_webp(path: String, lossy: Bool = false, quality: Double = 0.75) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "save_webp", args: [VariantBox(path), VariantBox(lossy), VariantBox(quality)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func save_webp_to_buffer(lossy: Bool = false, quality: Double = 0.75) -> VariantBox {
@@ -40322,27 +40913,27 @@ public class Image: Resource {
 		return __ret.asEnum(Image.UsedChannels.self)
 	}
 	@discardableResult
-	public func compress(mode: Image.CompressMode, source: Image.CompressSource, profile: Image.CompressProfile) -> Int {
+	public func compress(mode: Image.CompressMode, source: Image.CompressSource, profile: Image.CompressProfile) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "compress", args: [VariantBox(mode.rawValue), VariantBox(source.rawValue), VariantBox(profile.rawValue)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func compress_from_channels(mode: Image.CompressMode, channels: Image.UsedChannels, profile: Image.CompressProfile) -> Int {
+	public func compress_from_channels(mode: Image.CompressMode, channels: Image.UsedChannels, profile: Image.CompressProfile) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "compress_from_channels", args: [VariantBox(mode.rawValue), VariantBox(channels.rawValue), VariantBox(profile.rawValue)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func decompress() -> Int {
+	public func decompress() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "decompress", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func is_compressed() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_compressed", args: [])
 		return __ret.asBool()
 	}
-	public func rotate_90(direction: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "rotate_90", args: [VariantBox(direction)])
+	public func rotate_90(direction: ClockDirection) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "rotate_90", args: [VariantBox(direction.rawValue)])
 	}
 	public func rotate_180() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "rotate_180", args: [])
@@ -40434,54 +41025,54 @@ public class Image: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "adjust_bcs", args: [VariantBox(brightness), VariantBox(contrast), VariantBox(saturation)])
 	}
 	@discardableResult
-	public func load_png_from_buffer(buffer: VariantBox) -> Int {
+	public func load_png_from_buffer(buffer: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_png_from_buffer", args: [VariantBox(buffer)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func load_jpg_from_buffer(buffer: VariantBox) -> Int {
+	public func load_jpg_from_buffer(buffer: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_jpg_from_buffer", args: [VariantBox(buffer)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func load_webp_from_buffer(buffer: VariantBox) -> Int {
+	public func load_webp_from_buffer(buffer: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_webp_from_buffer", args: [VariantBox(buffer)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func load_tga_from_buffer(buffer: VariantBox) -> Int {
+	public func load_tga_from_buffer(buffer: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_tga_from_buffer", args: [VariantBox(buffer)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func load_bmp_from_buffer(buffer: VariantBox) -> Int {
+	public func load_bmp_from_buffer(buffer: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_bmp_from_buffer", args: [VariantBox(buffer)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func load_ktx_from_buffer(buffer: VariantBox) -> Int {
+	public func load_ktx_from_buffer(buffer: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_ktx_from_buffer", args: [VariantBox(buffer)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func load_dds_from_buffer(buffer: VariantBox) -> Int {
+	public func load_dds_from_buffer(buffer: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_dds_from_buffer", args: [VariantBox(buffer)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func load_exr_from_buffer(buffer: VariantBox) -> Int {
+	public func load_exr_from_buffer(buffer: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_exr_from_buffer", args: [VariantBox(buffer)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func load_svg_from_buffer(buffer: VariantBox, scale: Double = 1.0) -> Int {
+	public func load_svg_from_buffer(buffer: VariantBox, scale: Double = 1.0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_svg_from_buffer", args: [VariantBox(buffer), VariantBox(scale)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func load_svg_from_string(svg_str: String, scale: Double = 1.0) -> Int {
+	public func load_svg_from_string(svg_str: String, scale: Double = 1.0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_svg_from_string", args: [VariantBox(svg_str), VariantBox(scale)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public var data: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "data") }
@@ -40504,9 +41095,9 @@ public class ImageFormatLoaderExtension: ImageFormatLoader {
 		return __ret
 	}
 	@discardableResult
-	public func _load_image(image: Image, fileaccess: FileAccess, flags: ImageFormatLoader.LoaderFlags, scale: Double) -> Int {
+	public func _load_image(image: Image, fileaccess: FileAccess, flags: ImageFormatLoader.LoaderFlags, scale: Double) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_load_image", args: [VariantBox(image), VariantBox(fileaccess), VariantBox(flags.rawValue), VariantBox(scale)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 }
 
@@ -40864,9 +41455,9 @@ public class JSON: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "parse_string", args: [VariantBox(json_string)])
 	}
 	@discardableResult
-	public func parse(json_text: String, keep_text: Bool = false) -> Int {
+	public func parse(json_text: String, keep_text: Bool = false) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "parse", args: [VariantBox(json_text), VariantBox(keep_text)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func get_data() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_data", args: [])
@@ -42063,9 +42654,9 @@ public class MultiMesh: Resource {
 public class MultiplayerAPIExtension: MultiplayerAPI {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func _poll() -> Int {
+	public func _poll() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_poll", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func _set_multiplayer_peer(multiplayer_peer: MultiplayerPeer) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_set_multiplayer_peer", args: [VariantBox(multiplayer_peer)])
@@ -42086,9 +42677,9 @@ public class MultiplayerAPIExtension: MultiplayerAPI {
 		return __ret
 	}
 	@discardableResult
-	public func _rpc(peer: Int, object: Object, method: String, args: VariantBox) -> Int {
+	public func _rpc(peer: Int, object: Object, method: String, args: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_rpc", args: [VariantBox(peer), VariantBox(object), VariantBox(method), VariantBox(args)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func _get_remote_sender_id() -> Int {
@@ -42096,14 +42687,14 @@ public class MultiplayerAPIExtension: MultiplayerAPI {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func _object_configuration_add(object: Object, configuration: VariantBox) -> Int {
+	public func _object_configuration_add(object: Object, configuration: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_object_configuration_add", args: [VariantBox(object), VariantBox(configuration)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _object_configuration_remove(object: Object, configuration: VariantBox) -> Int {
+	public func _object_configuration_remove(object: Object, configuration: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_object_configuration_remove", args: [VariantBox(object), VariantBox(configuration)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 }
 
@@ -45146,9 +45737,9 @@ public class PackedDataContainer: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_iter_next", args: [VariantBox(_unnamed_arg0)])
 	}
 	@discardableResult
-	public func pack(value: VariantBox) -> Int {
+	public func pack(value: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "pack", args: [VariantBox(value)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func size() -> Int {
@@ -45171,9 +45762,9 @@ public class PackedScene: Resource {
 		case mainInherited = 3
 	}
 	@discardableResult
-	public func pack(path: Node) -> Int {
+	public func pack(path: Node) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "pack", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func instantiate(edit_state: PackedScene.GenEditState) -> Node? {
@@ -45218,9 +45809,9 @@ public class PacketPeerDTLS: PacketPeer {
 		let __ret = Host.shared.callMethod(object: ptr, method: "poll", args: [])
 	}
 	@discardableResult
-	public func connect_to_peer(packet_peer: PacketPeerUDP, hostname: String, client_options: TLSOptions) -> Int {
+	public func connect_to_peer(packet_peer: PacketPeerUDP, hostname: String, client_options: TLSOptions) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "connect_to_peer", args: [VariantBox(packet_peer), VariantBox(hostname), VariantBox(client_options)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_status() -> PacketPeerDTLS.Status {
@@ -45236,14 +45827,14 @@ public class PacketPeerDTLS: PacketPeer {
 public class PacketPeerExtension: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func _get_packet(r_buffer: Int, r_buffer_size: Int) -> Int {
+	public func _get_packet(r_buffer: Int, r_buffer_size: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_packet", args: [VariantBox(r_buffer), VariantBox(r_buffer_size)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _put_packet(buffer: Int, buffer_size: Int) -> Int {
+	public func _put_packet(buffer: Int, buffer_size: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_put_packet", args: [VariantBox(buffer), VariantBox(buffer_size)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func _get_available_packet_count() -> Int {
@@ -45302,17 +45893,17 @@ public class PacketPeerStream: PacketPeer {
 public class PacketPeerUDP: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func bind(port: Int, bind_address: String, recv_buf_size: Int = 65536) -> Int {
+	public func bind(port: Int, bind_address: String, recv_buf_size: Int = 65536) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "bind", args: [VariantBox(port), VariantBox(bind_address), VariantBox(recv_buf_size)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func close() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "close", args: [])
 	}
 	@discardableResult
-	public func wait() -> Int {
+	public func wait() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "wait", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func is_bound() -> Bool {
@@ -45320,9 +45911,9 @@ public class PacketPeerUDP: PacketPeer {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func connect_to_host(host: String, port: Int) -> Int {
+	public func connect_to_host(host: String, port: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "connect_to_host", args: [VariantBox(host), VariantBox(port)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func is_socket_connected() -> Bool {
@@ -45345,22 +45936,22 @@ public class PacketPeerUDP: PacketPeer {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func set_dest_address(host: String, port: Int) -> Int {
+	public func set_dest_address(host: String, port: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_dest_address", args: [VariantBox(host), VariantBox(port)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func set_broadcast_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_broadcast_enabled", args: [VariantBox(enabled)])
 	}
 	@discardableResult
-	public func join_multicast_group(multicast_address: String, interface_name: String) -> Int {
+	public func join_multicast_group(multicast_address: String, interface_name: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "join_multicast_group", args: [VariantBox(multicast_address), VariantBox(interface_name)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func leave_multicast_group(multicast_address: String, interface_name: String) -> Int {
+	public func leave_multicast_group(multicast_address: String, interface_name: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "leave_multicast_group", args: [VariantBox(multicast_address), VariantBox(interface_name)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 }
 
@@ -46364,14 +46955,14 @@ public class SceneMultiplayer: MultiplayerAPI {
 		return __ret
 	}
 	@discardableResult
-	public func send_auth(id: Int, data: VariantBox) -> Int {
+	public func send_auth(id: Int, data: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "send_auth", args: [VariantBox(id), VariantBox(data)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func complete_auth(id: Int) -> Int {
+	public func complete_auth(id: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "complete_auth", args: [VariantBox(id)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func set_auth_callback(callback: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_auth_callback", args: [VariantBox(callback)])
@@ -46414,9 +47005,9 @@ public class SceneMultiplayer: MultiplayerAPI {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func send_bytes(bytes: VariantBox, id: Int = 0, mode: MultiplayerPeer.TransferMode, channel: Int = 0) -> Int {
+	public func send_bytes(bytes: VariantBox, id: Int = 0, mode: MultiplayerPeer.TransferMode, channel: Int = 0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "send_bytes", args: [VariantBox(bytes), VariantBox(id), VariantBox(mode.rawValue), VariantBox(channel)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_max_sync_packet_size() -> Int {
@@ -46562,9 +47153,9 @@ public class Script: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_source_code", args: [VariantBox(source)])
 	}
 	@discardableResult
-	public func reload(keep_state: Bool = false) -> Int {
+	public func reload(keep_state: Bool = false) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "reload", args: [VariantBox(keep_state)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_base_script() -> Script? {
@@ -46703,9 +47294,9 @@ public class ShaderGraph: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "replace_node", args: [VariantBox(id), VariantBox(new_class)])
 	}
 	@discardableResult
-	public func connect_nodes(from_node: Int, from_port: Int, to_node: Int, to_port: Int) -> Int {
+	public func connect_nodes(from_node: Int, from_port: Int, to_node: Int, to_port: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "connect_nodes", args: [VariantBox(from_node), VariantBox(from_port), VariantBox(to_node), VariantBox(to_port)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func disconnect_nodes(from_node: Int, from_port: Int, to_node: Int, to_port: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "disconnect_nodes", args: [VariantBox(from_node), VariantBox(from_port), VariantBox(to_node), VariantBox(to_port)])
@@ -48089,24 +48680,24 @@ public class StreamPeerBuffer: StreamPeer {
 public class StreamPeerExtension: StreamPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func _get_data(r_buffer: Int, r_bytes: Int, r_received: Int) -> Int {
+	public func _get_data(r_buffer: Int, r_bytes: Int, r_received: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_data", args: [VariantBox(r_buffer), VariantBox(r_bytes), VariantBox(r_received)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _get_partial_data(r_buffer: Int, r_bytes: Int, r_received: Int) -> Int {
+	public func _get_partial_data(r_buffer: Int, r_bytes: Int, r_received: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_partial_data", args: [VariantBox(r_buffer), VariantBox(r_bytes), VariantBox(r_received)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _put_data(data: Int, bytes: Int, r_sent: Int) -> Int {
+	public func _put_data(data: Int, bytes: Int, r_sent: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_put_data", args: [VariantBox(data), VariantBox(bytes), VariantBox(r_sent)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _put_partial_data(data: Int, bytes: Int, r_sent: Int) -> Int {
+	public func _put_partial_data(data: Int, bytes: Int, r_sent: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_put_partial_data", args: [VariantBox(data), VariantBox(bytes), VariantBox(r_sent)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func _get_available_bytes() -> Int {
@@ -48119,19 +48710,19 @@ public class StreamPeerExtension: StreamPeer {
 public class StreamPeerGZIP: StreamPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func start_compression(use_deflate: Bool = false, buffer_size: Int = 65535) -> Int {
+	public func start_compression(use_deflate: Bool = false, buffer_size: Int = 65535) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "start_compression", args: [VariantBox(use_deflate), VariantBox(buffer_size)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func start_decompression(use_deflate: Bool = false, buffer_size: Int = 65535) -> Int {
+	public func start_decompression(use_deflate: Bool = false, buffer_size: Int = 65535) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "start_decompression", args: [VariantBox(use_deflate), VariantBox(buffer_size)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func finish() -> Int {
+	public func finish() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "finish", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func clear() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "clear", args: [])
@@ -48148,9 +48739,9 @@ public class StreamPeerSocket: StreamPeer {
 		case error = 3
 	}
 	@discardableResult
-	public func poll() -> Int {
+	public func poll() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "poll", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_status() -> StreamPeerSocket.Status {
@@ -48176,14 +48767,14 @@ public class StreamPeerTLS: StreamPeer {
 		let __ret = Host.shared.callMethod(object: ptr, method: "poll", args: [])
 	}
 	@discardableResult
-	public func accept_stream(stream: StreamPeer, server_options: TLSOptions) -> Int {
+	public func accept_stream(stream: StreamPeer, server_options: TLSOptions) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "accept_stream", args: [VariantBox(stream), VariantBox(server_options)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func connect_to_stream(stream: StreamPeer, common_name: String, client_options: TLSOptions) -> Int {
+	public func connect_to_stream(stream: StreamPeer, common_name: String, client_options: TLSOptions) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "connect_to_stream", args: [VariantBox(stream), VariantBox(common_name), VariantBox(client_options)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_status() -> StreamPeerTLS.Status {
@@ -48208,20 +48799,20 @@ public class StyleBox: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_minimum_size", args: [])
 		return __ret.asVector2()
 	}
-	public func set_content_margin(margin: Int, offset: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_content_margin", args: [VariantBox(margin), VariantBox(offset)])
+	public func set_content_margin(margin: Side, offset: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_content_margin", args: [VariantBox(margin.rawValue), VariantBox(offset)])
 	}
 	public func set_content_margin_all(offset: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_content_margin_all", args: [VariantBox(offset)])
 	}
 	@discardableResult
-	public func get_content_margin(margin: Int) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_content_margin", args: [VariantBox(margin)])
+	public func get_content_margin(margin: Side) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_content_margin", args: [VariantBox(margin.rawValue)])
 		return __ret.asDouble()
 	}
 	@discardableResult
-	public func get_margin(margin: Int) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_margin", args: [VariantBox(margin)])
+	public func get_margin(margin: Side) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_margin", args: [VariantBox(margin.rawValue)])
 		return __ret.asDouble()
 	}
 	@discardableResult
@@ -48414,9 +49005,9 @@ public class SyntaxHighlighter: Resource {
 public class TCPServer: SocketServer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func listen(port: Int, bind_address: String) -> Int {
+	public func listen(port: Int, bind_address: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "listen", args: [VariantBox(port), VariantBox(bind_address)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_local_port() -> Int {
@@ -49149,13 +49740,13 @@ public class TextServerExtension: TextServer {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func _shaped_text_add_object(shaped: VariantBox, key: VariantBox, size: Vector2, inline_align: Int, length: Int, baseline: Double) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_add_object", args: [VariantBox(shaped), VariantBox(key), VariantBox(size), VariantBox(inline_align), VariantBox(length), VariantBox(baseline)])
+	public func _shaped_text_add_object(shaped: VariantBox, key: VariantBox, size: Vector2, inline_align: InlineAlignment, length: Int, baseline: Double) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_add_object", args: [VariantBox(shaped), VariantBox(key), VariantBox(size), VariantBox(inline_align.rawValue), VariantBox(length), VariantBox(baseline)])
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func _shaped_text_resize_object(shaped: VariantBox, key: VariantBox, size: Vector2, inline_align: Int, baseline: Double) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_resize_object", args: [VariantBox(shaped), VariantBox(key), VariantBox(size), VariantBox(inline_align), VariantBox(baseline)])
+	public func _shaped_text_resize_object(shaped: VariantBox, key: VariantBox, size: Vector2, inline_align: InlineAlignment, baseline: Double) -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "_shaped_text_resize_object", args: [VariantBox(shaped), VariantBox(key), VariantBox(size), VariantBox(inline_align.rawValue), VariantBox(baseline)])
 		return __ret.asBool()
 	}
 	@discardableResult
@@ -50483,9 +51074,9 @@ public class Translation: Resource {
 public class UDSServer: SocketServer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func listen(path: String) -> Int {
+	public func listen(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "listen", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func take_connection() -> StreamPeerUDS? {
@@ -51002,9 +51593,9 @@ public class VisualShaderGroup: Resource {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func connect_nodes(from_node: Int, from_port: Int, to_node: Int, to_port: Int) -> Int {
+	public func connect_nodes(from_node: Int, from_port: Int, to_node: Int, to_port: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "connect_nodes", args: [VariantBox(from_node), VariantBox(from_port), VariantBox(to_node), VariantBox(to_port)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func disconnect_nodes(from_node: Int, from_port: Int, to_node: Int, to_port: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "disconnect_nodes", args: [VariantBox(from_node), VariantBox(from_port), VariantBox(to_node), VariantBox(to_port)])
@@ -51269,9 +51860,9 @@ public class WebRTCDataChannel: PacketPeer {
 		case binary = 1
 	}
 	@discardableResult
-	public func poll() -> Int {
+	public func poll() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "poll", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func close() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "close", args: [])
@@ -51359,9 +51950,9 @@ public class WebRTCPeerConnectionExtension: WebRTCPeerConnection {
 		return __ret.asEnum(WebRTCPeerConnection.SignalingState.self)
 	}
 	@discardableResult
-	public func _initialize(config: VariantBox) -> Int {
+	public func _initialize(config: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_initialize", args: [VariantBox(config)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func _create_data_channel(label: String, config: VariantBox) -> WebRTCDataChannel? {
@@ -51369,29 +51960,29 @@ public class WebRTCPeerConnectionExtension: WebRTCPeerConnection {
 		return __ret.asObject(WebRTCDataChannel.self)
 	}
 	@discardableResult
-	public func _create_offer() -> Int {
+	public func _create_offer() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_create_offer", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _set_remote_description(type: String, sdp: String) -> Int {
+	public func _set_remote_description(type: String, sdp: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_set_remote_description", args: [VariantBox(type), VariantBox(sdp)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _set_local_description(type: String, sdp: String) -> Int {
+	public func _set_local_description(type: String, sdp: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_set_local_description", args: [VariantBox(type), VariantBox(sdp)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _add_ice_candidate(sdp_mid_name: String, sdp_mline_index: Int, sdp_name: String) -> Int {
+	public func _add_ice_candidate(sdp_mid_name: String, sdp_mline_index: Int, sdp_name: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_add_ice_candidate", args: [VariantBox(sdp_mid_name), VariantBox(sdp_mline_index), VariantBox(sdp_name)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _poll() -> Int {
+	public func _poll() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_poll", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func _close() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_close", args: [])
@@ -51412,24 +52003,24 @@ public class WebSocketPeer: PacketPeer {
 		case closed = 3
 	}
 	@discardableResult
-	public func connect_to_url(url: String, tls_client_options: TLSOptions) -> Int {
+	public func connect_to_url(url: String, tls_client_options: TLSOptions) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "connect_to_url", args: [VariantBox(url), VariantBox(tls_client_options)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func accept_stream(stream: StreamPeer) -> Int {
+	public func accept_stream(stream: StreamPeer) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "accept_stream", args: [VariantBox(stream)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func send(message: VariantBox, write_mode: WebSocketPeer.WriteMode) -> Int {
+	public func send(message: VariantBox, write_mode: WebSocketPeer.WriteMode) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "send", args: [VariantBox(message), VariantBox(write_mode.rawValue)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func send_text(message: String) -> Int {
+	public func send_text(message: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "send_text", args: [VariantBox(message)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func was_string_packet() -> Bool {
@@ -52696,14 +53287,14 @@ public class World3D: Resource {
 public class X509Certificate: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func save(path: String) -> Int {
+	public func save(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "save", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func load(path: String) -> Int {
+	public func load(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func save_to_string() -> String {
@@ -52711,9 +53302,9 @@ public class X509Certificate: Resource {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func load_from_string(string: String) -> Int {
+	public func load_from_string(string: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_from_string", args: [VariantBox(string)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 }
 
@@ -53941,9 +54532,9 @@ public class ArrayMesh: Mesh {
 		let __ret = Host.shared.callMethod(object: ptr, method: "regen_normal_maps", args: [])
 	}
 	@discardableResult
-	public func lightmap_unwrap(transform: Transform3D, texel_size: Double) -> Int {
+	public func lightmap_unwrap(transform: Transform3D, texel_size: Double) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "lightmap_unwrap", args: [VariantBox(transform), VariantBox(texel_size)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func set_custom_aabb(aabb: AABB) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_custom_aabb", args: [VariantBox(aabb)])
@@ -57551,9 +58142,9 @@ public class AudioStreamWAV: AudioStream {
 		return __ret
 	}
 	@discardableResult
-	public func save_to_wav(path: String) -> Int {
+	public func save_to_wav(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "save_to_wav", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public var data: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "data") }
@@ -57681,13 +58272,13 @@ public class BaseButton: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_action_mode", args: [])
 		return __ret.asEnum(BaseButton.ActionMode.self)
 	}
-	public func set_button_mask(mask: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_button_mask", args: [VariantBox(mask)])
+	public func set_button_mask(mask: MouseButtonMask) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_button_mask", args: [VariantBox(mask.rawValue)])
 	}
 	@discardableResult
-	public func get_button_mask() -> Int {
+	public func get_button_mask() -> MouseButtonMask {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_button_mask", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(MouseButtonMask.self)
 	}
 	@discardableResult
 	public func get_draw_mode() -> BaseButton.DrawMode {
@@ -60295,12 +60886,12 @@ public class Camera2D: Node2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_limit_enabled", args: [])
 		return __ret.asBool()
 	}
-	public func set_limit(margin: Int, limit: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_limit", args: [VariantBox(margin), VariantBox(limit)])
+	public func set_limit(margin: Side, limit: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_limit", args: [VariantBox(margin.rawValue), VariantBox(limit)])
 	}
 	@discardableResult
-	public func get_limit(margin: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_limit", args: [VariantBox(margin)])
+	public func get_limit(margin: Side) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_limit", args: [VariantBox(margin.rawValue)])
 		return __ret.asInt()
 	}
 	public func _set_limit_rect(rect: Rect2i) {
@@ -60346,12 +60937,12 @@ public class Camera2D: Node2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_drag_horizontal_offset", args: [])
 		return __ret.asDouble()
 	}
-	public func set_drag_margin(margin: Int, drag_margin: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_drag_margin", args: [VariantBox(margin), VariantBox(drag_margin)])
+	public func set_drag_margin(margin: Side, drag_margin: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_drag_margin", args: [VariantBox(margin.rawValue), VariantBox(drag_margin)])
 	}
 	@discardableResult
-	public func get_drag_margin(margin: Int) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_drag_margin", args: [VariantBox(margin)])
+	public func get_drag_margin(margin: Side) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_drag_margin", args: [VariantBox(margin.rawValue)])
 		return __ret.asDouble()
 	}
 	@discardableResult
@@ -61986,24 +62577,24 @@ public class Decal: VisualInstance3D {
 public class ENetMultiplayerPeer: MultiplayerPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func create_server(port: Int, max_clients: Int = 32, max_channels: Int = 0, in_bandwidth: Int = 0, out_bandwidth: Int = 0) -> Int {
+	public func create_server(port: Int, max_clients: Int = 32, max_channels: Int = 0, in_bandwidth: Int = 0, out_bandwidth: Int = 0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_server", args: [VariantBox(port), VariantBox(max_clients), VariantBox(max_channels), VariantBox(in_bandwidth), VariantBox(out_bandwidth)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func create_client(address: String, port: Int, channel_count: Int = 0, in_bandwidth: Int = 0, out_bandwidth: Int = 0, local_port: Int = 0) -> Int {
+	public func create_client(address: String, port: Int, channel_count: Int = 0, in_bandwidth: Int = 0, out_bandwidth: Int = 0, local_port: Int = 0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_client", args: [VariantBox(address), VariantBox(port), VariantBox(channel_count), VariantBox(in_bandwidth), VariantBox(out_bandwidth), VariantBox(local_port)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func create_mesh(unique_id: Int) -> Int {
+	public func create_mesh(unique_id: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_mesh", args: [VariantBox(unique_id)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func add_mesh_peer(peer_id: Int, host: ENetConnection) -> Int {
+	public func add_mesh_peer(peer_id: Int, host: ENetConnection) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_mesh_peer", args: [VariantBox(peer_id), VariantBox(host)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func set_bind_ip(ip: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_bind_ip", args: [VariantBox(ip)])
@@ -62440,14 +63031,14 @@ public class FogVolume: VisualInstance3D {
 public class FontFile: Font {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func load_bitmap_font(path: String) -> Int {
+	public func load_bitmap_font(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_bitmap_font", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func load_dynamic_font(path: String) -> Int {
+	public func load_dynamic_font(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_dynamic_font", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func set_data(data: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_data", args: [VariantBox(data)])
@@ -64286,9 +64877,9 @@ public class GraphEdit: Control {
 		case dots = 1
 	}
 	@discardableResult
-	public func connect_node(from_node: String, from_port: Int, to_node: String, to_port: Int, keep_alive: Bool = false) -> Int {
+	public func connect_node(from_node: String, from_port: Int, to_node: String, to_port: Int, keep_alive: Bool = false) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "connect_node", args: [VariantBox(from_node), VariantBox(from_port), VariantBox(to_node), VariantBox(to_port), VariantBox(keep_alive)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func is_node_connected(from_node: String, from_port: Int, to_node: String, to_port: Int) -> Bool {
@@ -65042,13 +65633,13 @@ public class InputEventFromWindow: InputEvent {
 @MainActor
 public class InputEventJoypadButton: InputEvent {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public func set_button_index(button_index: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_button_index", args: [VariantBox(button_index)])
+	public func set_button_index(button_index: JoyButton) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_button_index", args: [VariantBox(button_index.rawValue)])
 	}
 	@discardableResult
-	public func get_button_index() -> Int {
+	public func get_button_index() -> JoyButton {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_button_index", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(JoyButton.self)
 	}
 	public func set_pressure(pressure: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_pressure", args: [VariantBox(pressure)])
@@ -65078,13 +65669,13 @@ public class InputEventJoypadButton: InputEvent {
 @MainActor
 public class InputEventJoypadMotion: InputEvent {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public func set_axis(axis: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_axis", args: [VariantBox(axis)])
+	public func set_axis(axis: JoyAxis) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_axis", args: [VariantBox(axis.rawValue)])
 	}
 	@discardableResult
-	public func get_axis() -> Int {
+	public func get_axis() -> JoyAxis {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_axis", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(JoyAxis.self)
 	}
 	public func set_axis_value(axis_value: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_axis_value", args: [VariantBox(axis_value)])
@@ -65115,13 +65706,13 @@ public class InputEventMIDI: InputEvent {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_channel", args: [])
 		return __ret.asInt()
 	}
-	public func set_message(message: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_message", args: [VariantBox(message)])
+	public func set_message(message: MIDIMessage) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_message", args: [VariantBox(message.rawValue)])
 	}
 	@discardableResult
-	public func get_message() -> Int {
+	public func get_message() -> MIDIMessage {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_message", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(MIDIMessage.self)
 	}
 	public func set_pitch(pitch: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_pitch", args: [VariantBox(pitch)])
@@ -65747,21 +66338,21 @@ public class JointLimitationCone3D: JointLimitation3D {
 @MainActor
 public class Label: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public func set_horizontal_alignment(alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment)])
+	public func set_horizontal_alignment(alignment: HorizontalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_horizontal_alignment() -> Int {
+	public func get_horizontal_alignment() -> HorizontalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_horizontal_alignment", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(HorizontalAlignment.self)
 	}
-	public func set_vertical_alignment(alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_vertical_alignment", args: [VariantBox(alignment)])
+	public func set_vertical_alignment(alignment: VerticalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_vertical_alignment", args: [VariantBox(alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_vertical_alignment() -> Int {
+	public func get_vertical_alignment() -> VerticalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_vertical_alignment", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(VerticalAlignment.self)
 	}
 	public func set_text(text: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_text", args: [VariantBox(text)])
@@ -67298,13 +67889,13 @@ public class LineEdit: Control {
 	public func apply_ime() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "apply_ime", args: [])
 	}
-	public func set_horizontal_alignment(alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment)])
+	public func set_horizontal_alignment(alignment: HorizontalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_horizontal_alignment() -> Int {
+	public func get_horizontal_alignment() -> HorizontalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_horizontal_alignment", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(HorizontalAlignment.self)
 	}
 	public func edit(hide_focus: Bool = false) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "edit", args: [VariantBox(hide_focus)])
@@ -68508,14 +69099,14 @@ public class MultiMeshInstance2D: Node2D {
 public class MultiplayerPeerExtension: MultiplayerPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func _get_packet(r_buffer: Int, r_buffer_size: Int) -> Int {
+	public func _get_packet(r_buffer: Int, r_buffer_size: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_packet", args: [VariantBox(r_buffer), VariantBox(r_buffer_size)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _put_packet(buffer: Int, buffer_size: Int) -> Int {
+	public func _put_packet(buffer: Int, buffer_size: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_put_packet", args: [VariantBox(buffer), VariantBox(buffer_size)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func _get_available_packet_count() -> Int {
@@ -68533,9 +69124,9 @@ public class MultiplayerPeerExtension: MultiplayerPeer {
 		return __ret
 	}
 	@discardableResult
-	public func _put_packet_script(buffer: VariantBox) -> Int {
+	public func _put_packet_script(buffer: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_put_packet_script", args: [VariantBox(buffer)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func _get_packet_channel() -> Int {
@@ -68995,12 +69586,12 @@ public class NinePatchRect: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture", args: [])
 		return __ret.asObject(Texture2D.self)
 	}
-	public func set_patch_margin(margin: Int, value: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_patch_margin", args: [VariantBox(margin), VariantBox(value)])
+	public func set_patch_margin(margin: Side, value: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_patch_margin", args: [VariantBox(margin.rawValue), VariantBox(value)])
 	}
 	@discardableResult
-	public func get_patch_margin(margin: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_patch_margin", args: [VariantBox(margin)])
+	public func get_patch_margin(margin: Side) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_patch_margin", args: [VariantBox(margin.rawValue)])
 		return __ret.asInt()
 	}
 	public func set_region_rect(rect: Rect2) {
@@ -72422,14 +73013,14 @@ public class RichTextLabel: Control {
 	public func set_text(text: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_text", args: [VariantBox(text)])
 	}
-	public func add_hr(width: Int = 90, height: Int = 2, color: Color, alignment: Int = 1, width_in_percent: Bool = true, height_in_percent: Bool = false) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_hr", args: [VariantBox(width), VariantBox(height), VariantBox(color), VariantBox(alignment), VariantBox(width_in_percent), VariantBox(height_in_percent)])
+	public func add_hr(width: Int = 90, height: Int = 2, color: Color, alignment: HorizontalAlignment, width_in_percent: Bool = true, height_in_percent: Bool = false) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_hr", args: [VariantBox(width), VariantBox(height), VariantBox(color), VariantBox(alignment.rawValue), VariantBox(width_in_percent), VariantBox(height_in_percent)])
 	}
-	public func add_image(image: Texture2D, width: Double = 0, height: Double = 0, color: Color, inline_align: Int = 5, region: Rect2, key: VariantBox, pad: Bool = false, tooltip: String, width_unit: RichTextLabel.ImageUnit, height_unit: RichTextLabel.ImageUnit, alt_text: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_image", args: [VariantBox(image), VariantBox(width), VariantBox(height), VariantBox(color), VariantBox(inline_align), VariantBox(region), VariantBox(key), VariantBox(pad), VariantBox(tooltip), VariantBox(width_unit.rawValue), VariantBox(height_unit.rawValue), VariantBox(alt_text)])
+	public func add_image(image: Texture2D, width: Double = 0, height: Double = 0, color: Color, inline_align: InlineAlignment, region: Rect2, key: VariantBox, pad: Bool = false, tooltip: String, width_unit: RichTextLabel.ImageUnit, height_unit: RichTextLabel.ImageUnit, alt_text: String) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_image", args: [VariantBox(image), VariantBox(width), VariantBox(height), VariantBox(color), VariantBox(inline_align.rawValue), VariantBox(region), VariantBox(key), VariantBox(pad), VariantBox(tooltip), VariantBox(width_unit.rawValue), VariantBox(height_unit.rawValue), VariantBox(alt_text)])
 	}
-	public func update_image(key: VariantBox, mask: RichTextLabel.ImageUpdateMask, image: Texture2D, width: Double = 0, height: Double = 0, color: Color, inline_align: Int = 5, region: Rect2, pad: Bool = false, tooltip: String, width_unit: RichTextLabel.ImageUnit, height_unit: RichTextLabel.ImageUnit) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "update_image", args: [VariantBox(key), VariantBox(mask.rawValue), VariantBox(image), VariantBox(width), VariantBox(height), VariantBox(color), VariantBox(inline_align), VariantBox(region), VariantBox(pad), VariantBox(tooltip), VariantBox(width_unit.rawValue), VariantBox(height_unit.rawValue)])
+	public func update_image(key: VariantBox, mask: RichTextLabel.ImageUpdateMask, image: Texture2D, width: Double = 0, height: Double = 0, color: Color, inline_align: InlineAlignment, region: Rect2, pad: Bool = false, tooltip: String, width_unit: RichTextLabel.ImageUnit, height_unit: RichTextLabel.ImageUnit) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "update_image", args: [VariantBox(key), VariantBox(mask.rawValue), VariantBox(image), VariantBox(width), VariantBox(height), VariantBox(color), VariantBox(inline_align.rawValue), VariantBox(region), VariantBox(pad), VariantBox(tooltip), VariantBox(width_unit.rawValue), VariantBox(height_unit.rawValue)])
 	}
 	public func newline() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "newline", args: [])
@@ -72474,8 +73065,8 @@ public class RichTextLabel: Control {
 	public func push_outline_color(color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "push_outline_color", args: [VariantBox(color)])
 	}
-	public func push_paragraph(alignment: Int, base_direction: Control.TextDirection, language: String, st_parser: TextServer.StructuredTextParser, justification_flags: TextServer.JustificationFlag, tab_stops: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "push_paragraph", args: [VariantBox(alignment), VariantBox(base_direction.rawValue), VariantBox(language), VariantBox(st_parser.rawValue), VariantBox(justification_flags.rawValue), VariantBox(tab_stops)])
+	public func push_paragraph(alignment: HorizontalAlignment, base_direction: Control.TextDirection, language: String, st_parser: TextServer.StructuredTextParser, justification_flags: TextServer.JustificationFlag, tab_stops: VariantBox) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "push_paragraph", args: [VariantBox(alignment.rawValue), VariantBox(base_direction.rawValue), VariantBox(language), VariantBox(st_parser.rawValue), VariantBox(justification_flags.rawValue), VariantBox(tab_stops)])
 	}
 	public func push_indent(level: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "push_indent", args: [VariantBox(level)])
@@ -72498,8 +73089,8 @@ public class RichTextLabel: Control {
 	public func push_strikethrough(color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "push_strikethrough", args: [VariantBox(color)])
 	}
-	public func push_table(columns: Int, inline_align: Int = 0, align_to_row: Int = -1, name: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "push_table", args: [VariantBox(columns), VariantBox(inline_align), VariantBox(align_to_row), VariantBox(name)])
+	public func push_table(columns: Int, inline_align: InlineAlignment, align_to_row: Int = -1, name: String) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "push_table", args: [VariantBox(columns), VariantBox(inline_align.rawValue), VariantBox(align_to_row), VariantBox(name)])
 	}
 	public func push_dropcap(string: String, font: Font, size: Int, dropcap_margins: Rect2, color: Color, outline_size: Int = 0, outline_color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "push_dropcap", args: [VariantBox(string), VariantBox(font), VariantBox(size), VariantBox(dropcap_margins), VariantBox(color), VariantBox(outline_size), VariantBox(outline_color)])
@@ -72581,21 +73172,21 @@ public class RichTextLabel: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_language", args: [])
 		return __ret.asString()
 	}
-	public func set_horizontal_alignment(alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment)])
+	public func set_horizontal_alignment(alignment: HorizontalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_horizontal_alignment() -> Int {
+	public func get_horizontal_alignment() -> HorizontalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_horizontal_alignment", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(HorizontalAlignment.self)
 	}
-	public func set_vertical_alignment(alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_vertical_alignment", args: [VariantBox(alignment)])
+	public func set_vertical_alignment(alignment: VerticalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_vertical_alignment", args: [VariantBox(alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_vertical_alignment() -> Int {
+	public func get_vertical_alignment() -> VerticalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_vertical_alignment", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(VerticalAlignment.self)
 	}
 	public func set_justification_flags(justification_flags: TextServer.JustificationFlag) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_justification_flags", args: [VariantBox(justification_flags.rawValue)])
@@ -73277,9 +73868,9 @@ public class ScriptExtension: Script {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_set_source_code", args: [VariantBox(code)])
 	}
 	@discardableResult
-	public func _reload(keep_state: Bool) -> Int {
+	public func _reload(keep_state: Bool) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_reload", args: [VariantBox(keep_state)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func _get_doc_class_name() -> String {
@@ -75231,14 +75822,14 @@ public class Sprite2D: Node2D {
 public class StreamPeerTCP: StreamPeerSocket {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func bind(port: Int, host: String) -> Int {
+	public func bind(port: Int, host: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "bind", args: [VariantBox(port), VariantBox(host)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func connect_to_host(host: String, port: Int) -> Int {
+	public func connect_to_host(host: String, port: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "connect_to_host", args: [VariantBox(host), VariantBox(port)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_connected_host() -> String {
@@ -75264,14 +75855,14 @@ public class StreamPeerTCP: StreamPeerSocket {
 public class StreamPeerUDS: StreamPeerSocket {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func bind(path: String) -> Int {
+	public func bind(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "bind", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func connect_to_host(path: String) -> Int {
+	public func connect_to_host(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "connect_to_host", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_connected_path() -> String {
@@ -75312,12 +75903,12 @@ public class StyleBoxFlat: StyleBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_border_width_min", args: [])
 		return __ret.asInt()
 	}
-	public func set_border_width(margin: Int, width: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_border_width", args: [VariantBox(margin), VariantBox(width)])
+	public func set_border_width(margin: Side, width: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_border_width", args: [VariantBox(margin.rawValue), VariantBox(width)])
 	}
 	@discardableResult
-	public func get_border_width(margin: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_border_width", args: [VariantBox(margin)])
+	public func get_border_width(margin: Side) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_border_width", args: [VariantBox(margin.rawValue)])
 		return __ret.asInt()
 	}
 	public func set_border_blend(blend: Bool) {
@@ -75331,23 +75922,23 @@ public class StyleBoxFlat: StyleBox {
 	public func set_corner_radius_all(radius: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_corner_radius_all", args: [VariantBox(radius)])
 	}
-	public func set_corner_radius(corner: Int, radius: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_corner_radius", args: [VariantBox(corner), VariantBox(radius)])
+	public func set_corner_radius(corner: Corner, radius: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_corner_radius", args: [VariantBox(corner.rawValue), VariantBox(radius)])
 	}
 	@discardableResult
-	public func get_corner_radius(corner: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_corner_radius", args: [VariantBox(corner)])
+	public func get_corner_radius(corner: Corner) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_corner_radius", args: [VariantBox(corner.rawValue)])
 		return __ret.asInt()
 	}
-	public func set_expand_margin(margin: Int, size: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_expand_margin", args: [VariantBox(margin), VariantBox(size)])
+	public func set_expand_margin(margin: Side, size: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_expand_margin", args: [VariantBox(margin.rawValue), VariantBox(size)])
 	}
 	public func set_expand_margin_all(size: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_expand_margin_all", args: [VariantBox(size)])
 	}
 	@discardableResult
-	public func get_expand_margin(margin: Int) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_expand_margin", args: [VariantBox(margin)])
+	public func get_expand_margin(margin: Side) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_expand_margin", args: [VariantBox(margin.rawValue)])
 		return __ret.asDouble()
 	}
 	public func set_draw_center(draw_center: Bool) {
@@ -75613,26 +76204,26 @@ public class StyleBoxTexture: StyleBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture", args: [])
 		return __ret.asObject(Texture2D.self)
 	}
-	public func set_texture_margin(margin: Int, size: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_margin", args: [VariantBox(margin), VariantBox(size)])
+	public func set_texture_margin(margin: Side, size: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_margin", args: [VariantBox(margin.rawValue), VariantBox(size)])
 	}
 	public func set_texture_margin_all(size: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_margin_all", args: [VariantBox(size)])
 	}
 	@discardableResult
-	public func get_texture_margin(margin: Int) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture_margin", args: [VariantBox(margin)])
+	public func get_texture_margin(margin: Side) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_texture_margin", args: [VariantBox(margin.rawValue)])
 		return __ret.asDouble()
 	}
-	public func set_expand_margin(margin: Int, size: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_expand_margin", args: [VariantBox(margin), VariantBox(size)])
+	public func set_expand_margin(margin: Side, size: Double) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_expand_margin", args: [VariantBox(margin.rawValue), VariantBox(size)])
 	}
 	public func set_expand_margin_all(size: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_expand_margin_all", args: [VariantBox(size)])
 	}
 	@discardableResult
-	public func get_expand_margin(margin: Int) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_expand_margin", args: [VariantBox(margin)])
+	public func get_expand_margin(margin: Side) -> Double {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_expand_margin", args: [VariantBox(margin.rawValue)])
 		return __ret.asDouble()
 	}
 	public func set_region_rect(region: Rect2) {
@@ -79104,13 +79695,13 @@ public class Tree: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_column_title_tooltip_text", args: [VariantBox(column)])
 		return __ret.asString()
 	}
-	public func set_column_title_alignment(column: Int, title_alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_column_title_alignment", args: [VariantBox(column), VariantBox(title_alignment)])
+	public func set_column_title_alignment(column: Int, title_alignment: HorizontalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_column_title_alignment", args: [VariantBox(column), VariantBox(title_alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_column_title_alignment(column: Int) -> Int {
+	public func get_column_title_alignment(column: Int) -> HorizontalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_column_title_alignment", args: [VariantBox(column)])
-		return __ret.asInt()
+		return __ret.asEnum(HorizontalAlignment.self)
 	}
 	public func set_column_title_direction(column: Int, direction: Control.TextDirection) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_column_title_direction", args: [VariantBox(column), VariantBox(direction.rawValue)])
@@ -79824,9 +80415,9 @@ public class VisualShader: Shader {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func connect_nodes(type: VisualShader.Type, from_node: Int, from_port: Int, to_node: Int, to_port: Int) -> Int {
+	public func connect_nodes(type: VisualShader.Type, from_node: Int, from_port: Int, to_node: Int, to_port: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "connect_nodes", args: [VariantBox(type.rawValue), VariantBox(from_node), VariantBox(from_port), VariantBox(to_node), VariantBox(to_port)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func disconnect_nodes(type: VisualShader.Type, from_node: Int, from_port: Int, to_node: Int, to_port: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "disconnect_nodes", args: [VariantBox(type.rawValue), VariantBox(from_node), VariantBox(from_port), VariantBox(to_node), VariantBox(to_port)])
@@ -81176,14 +81767,14 @@ public class VoxelGI: VisualInstance3D {
 public class WebRTCDataChannelExtension: WebRTCDataChannel {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func _get_packet(r_buffer: Int, r_buffer_size: Int) -> Int {
+	public func _get_packet(r_buffer: Int, r_buffer_size: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_packet", args: [VariantBox(r_buffer), VariantBox(r_buffer_size)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func _put_packet(buffer: Int, buffer_size: Int) -> Int {
+	public func _put_packet(buffer: Int, buffer_size: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_put_packet", args: [VariantBox(buffer), VariantBox(buffer_size)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func _get_available_packet_count() -> Int {
@@ -81196,9 +81787,9 @@ public class WebRTCDataChannelExtension: WebRTCDataChannel {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func _poll() -> Int {
+	public func _poll() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_poll", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func _close() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_close", args: [])
@@ -81267,24 +81858,24 @@ public class WebRTCDataChannelExtension: WebRTCDataChannel {
 public class WebRTCMultiplayerPeer: MultiplayerPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func create_server(channels_config: VariantBox) -> Int {
+	public func create_server(channels_config: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_server", args: [VariantBox(channels_config)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func create_client(peer_id: Int, channels_config: VariantBox) -> Int {
+	public func create_client(peer_id: Int, channels_config: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_client", args: [VariantBox(peer_id), VariantBox(channels_config)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func create_mesh(peer_id: Int, channels_config: VariantBox) -> Int {
+	public func create_mesh(peer_id: Int, channels_config: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_mesh", args: [VariantBox(peer_id), VariantBox(channels_config)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func add_peer(peer: WebRTCPeerConnection, peer_id: Int, unreliable_lifetime: Int = 1) -> Int {
+	public func add_peer(peer: WebRTCPeerConnection, peer_id: Int, unreliable_lifetime: Int = 1) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_peer", args: [VariantBox(peer), VariantBox(peer_id), VariantBox(unreliable_lifetime)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func remove_peer(peer_id: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "remove_peer", args: [VariantBox(peer_id)])
@@ -81310,14 +81901,14 @@ public class WebRTCMultiplayerPeer: MultiplayerPeer {
 public class WebSocketMultiplayerPeer: MultiplayerPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func create_client(url: String, tls_client_options: TLSOptions) -> Int {
+	public func create_client(url: String, tls_client_options: TLSOptions) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_client", args: [VariantBox(url), VariantBox(tls_client_options)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func create_server(port: Int, bind_address: String, tls_server_options: TLSOptions) -> Int {
+	public func create_server(port: Int, bind_address: String, tls_server_options: TLSOptions) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_server", args: [VariantBox(port), VariantBox(bind_address), VariantBox(tls_server_options)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_peer(peer_id: Int) -> WebSocketPeer? {
@@ -85584,29 +86175,29 @@ public class Button: BaseButton {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_clip_text", args: [])
 		return __ret.asBool()
 	}
-	public func set_text_alignment(alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_alignment", args: [VariantBox(alignment)])
+	public func set_text_alignment(alignment: HorizontalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_text_alignment", args: [VariantBox(alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_text_alignment() -> Int {
+	public func get_text_alignment() -> HorizontalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_text_alignment", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(HorizontalAlignment.self)
 	}
-	public func set_icon_alignment(icon_alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_icon_alignment", args: [VariantBox(icon_alignment)])
+	public func set_icon_alignment(icon_alignment: HorizontalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_icon_alignment", args: [VariantBox(icon_alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_icon_alignment() -> Int {
+	public func get_icon_alignment() -> HorizontalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_icon_alignment", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(HorizontalAlignment.self)
 	}
-	public func set_vertical_icon_alignment(vertical_icon_alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_vertical_icon_alignment", args: [VariantBox(vertical_icon_alignment)])
+	public func set_vertical_icon_alignment(vertical_icon_alignment: VerticalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_vertical_icon_alignment", args: [VariantBox(vertical_icon_alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_vertical_icon_alignment() -> Int {
+	public func get_vertical_icon_alignment() -> VerticalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_vertical_icon_alignment", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(VerticalAlignment.self)
 	}
 	public func set_expand_icon(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_expand_icon", args: [VariantBox(enabled)])
@@ -87789,9 +88380,9 @@ public class CodeEdit: TextEdit {
 public class CompressedTexture2D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func load(path: String) -> Int {
+	public func load(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_load_path() -> String {
@@ -87808,9 +88399,9 @@ public class CompressedTexture2D: Texture2D {
 public class CompressedTexture3D: Texture3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func load(path: String) -> Int {
+	public func load(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_load_path() -> String {
@@ -87827,9 +88418,9 @@ public class CompressedTexture3D: Texture3D {
 public class CompressedTextureLayered: TextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func load(path: String) -> Int {
+	public func load(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_load_path() -> String {
@@ -88667,13 +89258,13 @@ public class FoldableContainer: Container {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_title", args: [])
 		return __ret.asString()
 	}
-	public func set_title_alignment(alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_title_alignment", args: [VariantBox(alignment)])
+	public func set_title_alignment(alignment: HorizontalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_title_alignment", args: [VariantBox(alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_title_alignment() -> Int {
+	public func get_title_alignment() -> HorizontalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_title_alignment", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(HorizontalAlignment.self)
 	}
 	public func set_language(language: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_language", args: [VariantBox(language)])
@@ -89782,9 +90373,9 @@ public class ImageTexture: Texture2D {
 public class ImageTexture3D: Texture3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func create(format: Image.Format, width: Int, height: Int, depth: Int, use_mipmaps: Bool, data: VariantBox) -> Int {
+	public func create(format: Image.Format, width: Int, height: Int, depth: Int, use_mipmaps: Bool, data: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create", args: [VariantBox(format.rawValue), VariantBox(width), VariantBox(height), VariantBox(depth), VariantBox(use_mipmaps), VariantBox(data)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func update(data: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update", args: [VariantBox(data)])
@@ -89807,9 +90398,9 @@ public class ImageTexture3D: Texture3D {
 public class ImageTextureLayered: TextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func create_from_images(images: VariantBox) -> Int {
+	public func create_from_images(images: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_from_images", args: [VariantBox(images)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	public func update_layer(image: Image, layer: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update_layer", args: [VariantBox(image), VariantBox(layer)])
@@ -90057,9 +90648,9 @@ public class InputEventWithModifiers: InputEventFromWindow {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func get_modifiers_mask() -> Int {
+	public func get_modifiers_mask() -> KeyModifierMask {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_modifiers_mask", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(KeyModifierMask.self)
 	}
 	public var command_or_control_autoremap: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "command_or_control_autoremap").asBool() }
@@ -90086,21 +90677,21 @@ public class InputEventWithModifiers: InputEventFromWindow {
 @MainActor
 public class Label3D: GeometryInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public func set_horizontal_alignment(alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment)])
+	public func set_horizontal_alignment(alignment: HorizontalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_horizontal_alignment() -> Int {
+	public func get_horizontal_alignment() -> HorizontalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_horizontal_alignment", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(HorizontalAlignment.self)
 	}
-	public func set_vertical_alignment(alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_vertical_alignment", args: [VariantBox(alignment)])
+	public func set_vertical_alignment(alignment: VerticalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_vertical_alignment", args: [VariantBox(alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_vertical_alignment() -> Int {
+	public func get_vertical_alignment() -> VerticalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_vertical_alignment", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(VerticalAlignment.self)
 	}
 	public func set_modulate(modulate: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_modulate", args: [VariantBox(modulate)])
@@ -91934,26 +92525,26 @@ public class PopupMenu: Popup {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_native_menu", args: [])
 		return __ret.asBool()
 	}
-	public func add_item(label: String, id: Int = -1, accel: Int = 0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_item", args: [VariantBox(label), VariantBox(id), VariantBox(accel)])
+	public func add_item(label: String, id: Int = -1, accel: Key) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_item", args: [VariantBox(label), VariantBox(id), VariantBox(accel.rawValue)])
 	}
-	public func add_icon_item(texture: Texture2D, label: String, id: Int = -1, accel: Int = 0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_item", args: [VariantBox(texture), VariantBox(label), VariantBox(id), VariantBox(accel)])
+	public func add_icon_item(texture: Texture2D, label: String, id: Int = -1, accel: Key) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_item", args: [VariantBox(texture), VariantBox(label), VariantBox(id), VariantBox(accel.rawValue)])
 	}
-	public func add_check_item(label: String, id: Int = -1, accel: Int = 0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_check_item", args: [VariantBox(label), VariantBox(id), VariantBox(accel)])
+	public func add_check_item(label: String, id: Int = -1, accel: Key) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_check_item", args: [VariantBox(label), VariantBox(id), VariantBox(accel.rawValue)])
 	}
-	public func add_icon_check_item(texture: Texture2D, label: String, id: Int = -1, accel: Int = 0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_check_item", args: [VariantBox(texture), VariantBox(label), VariantBox(id), VariantBox(accel)])
+	public func add_icon_check_item(texture: Texture2D, label: String, id: Int = -1, accel: Key) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_check_item", args: [VariantBox(texture), VariantBox(label), VariantBox(id), VariantBox(accel.rawValue)])
 	}
-	public func add_radio_check_item(label: String, id: Int = -1, accel: Int = 0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_radio_check_item", args: [VariantBox(label), VariantBox(id), VariantBox(accel)])
+	public func add_radio_check_item(label: String, id: Int = -1, accel: Key) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_radio_check_item", args: [VariantBox(label), VariantBox(id), VariantBox(accel.rawValue)])
 	}
-	public func add_icon_radio_check_item(texture: Texture2D, label: String, id: Int = -1, accel: Int = 0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_radio_check_item", args: [VariantBox(texture), VariantBox(label), VariantBox(id), VariantBox(accel)])
+	public func add_icon_radio_check_item(texture: Texture2D, label: String, id: Int = -1, accel: Key) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_radio_check_item", args: [VariantBox(texture), VariantBox(label), VariantBox(id), VariantBox(accel.rawValue)])
 	}
-	public func add_multistate_item(label: String, max_states: Int, default_state: Int = 0, id: Int = -1, accel: Int = 0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_multistate_item", args: [VariantBox(label), VariantBox(max_states), VariantBox(default_state), VariantBox(id), VariantBox(accel)])
+	public func add_multistate_item(label: String, max_states: Int, default_state: Int = 0, id: Int = -1, accel: Key) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_multistate_item", args: [VariantBox(label), VariantBox(max_states), VariantBox(default_state), VariantBox(id), VariantBox(accel.rawValue)])
 	}
 	public func add_shortcut(shortcut: Shortcut, id: Int = -1, global: Bool = false, allow_echo: Bool = false) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_shortcut", args: [VariantBox(shortcut), VariantBox(id), VariantBox(global), VariantBox(allow_echo)])
@@ -92009,8 +92600,8 @@ public class PopupMenu: Popup {
 	public func set_item_id(index: Int, id: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_item_id", args: [VariantBox(index), VariantBox(id)])
 	}
-	public func set_item_accelerator(index: Int, accel: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_item_accelerator", args: [VariantBox(index), VariantBox(accel)])
+	public func set_item_accelerator(index: Int, accel: Key) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_item_accelerator", args: [VariantBox(index), VariantBox(accel.rawValue)])
 	}
 	public func set_item_metadata(index: Int, metadata: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_item_metadata", args: [VariantBox(index), VariantBox(metadata)])
@@ -92116,9 +92707,9 @@ public class PopupMenu: Popup {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func get_item_accelerator(index: Int) -> Int {
+	public func get_item_accelerator(index: Int) -> Key {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_item_accelerator", args: [VariantBox(index)])
-		return __ret.asInt()
+		return __ret.asEnum(Key.self)
 	}
 	public func get_item_metadata(index: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_item_metadata", args: [VariantBox(index)])
@@ -93414,13 +94005,13 @@ public class SphereMesh: PrimitiveMesh {
 @MainActor
 public class SpinBox: Range {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public func set_horizontal_alignment(alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment)])
+	public func set_horizontal_alignment(alignment: HorizontalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_horizontal_alignment() -> Int {
+	public func get_horizontal_alignment() -> HorizontalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_horizontal_alignment", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(HorizontalAlignment.self)
 	}
 	public func set_format(format: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_format", args: [VariantBox(format)])
@@ -94037,9 +94628,9 @@ public class StaticBody3D: PhysicsBody3D {
 public class StreamedTexture2D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
-	public func load(path: String) -> Int {
+	public func load(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load", args: [VariantBox(path)])
-		return __ret.asInt()
+		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
 	public func get_load_path() -> String {
@@ -94422,21 +95013,21 @@ public class TabContainer: Container {
 @MainActor
 public class TextMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public func set_horizontal_alignment(alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment)])
+	public func set_horizontal_alignment(alignment: HorizontalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_horizontal_alignment() -> Int {
+	public func get_horizontal_alignment() -> HorizontalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_horizontal_alignment", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(HorizontalAlignment.self)
 	}
-	public func set_vertical_alignment(alignment: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_vertical_alignment", args: [VariantBox(alignment)])
+	public func set_vertical_alignment(alignment: VerticalAlignment) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_vertical_alignment", args: [VariantBox(alignment.rawValue)])
 	}
 	@discardableResult
-	public func get_vertical_alignment() -> Int {
+	public func get_vertical_alignment() -> VerticalAlignment {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_vertical_alignment", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(VerticalAlignment.self)
 	}
 	public func set_text(text: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_text", args: [VariantBox(text)])
@@ -94923,12 +95514,12 @@ public class TextureProgressBar: Range {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_fill_degrees", args: [])
 		return __ret.asDouble()
 	}
-	public func set_stretch_margin(margin: Int, value: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_stretch_margin", args: [VariantBox(margin), VariantBox(value)])
+	public func set_stretch_margin(margin: Side, value: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_stretch_margin", args: [VariantBox(margin.rawValue), VariantBox(value)])
 	}
 	@discardableResult
-	public func get_stretch_margin(margin: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_stretch_margin", args: [VariantBox(margin)])
+	public func get_stretch_margin(margin: Side) -> Int {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_stretch_margin", args: [VariantBox(margin.rawValue)])
 		return __ret.asInt()
 	}
 	public func set_nine_patch_stretch(stretch: Bool) {
@@ -97612,29 +98203,29 @@ public class InputEventKey: InputEventWithModifiers {
 	public func set_pressed(pressed: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_pressed", args: [VariantBox(pressed)])
 	}
-	public func set_keycode(keycode: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_keycode", args: [VariantBox(keycode)])
+	public func set_keycode(keycode: Key) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_keycode", args: [VariantBox(keycode.rawValue)])
 	}
 	@discardableResult
-	public func get_keycode() -> Int {
+	public func get_keycode() -> Key {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_keycode", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Key.self)
 	}
-	public func set_physical_keycode(physical_keycode: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_physical_keycode", args: [VariantBox(physical_keycode)])
+	public func set_physical_keycode(physical_keycode: Key) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_physical_keycode", args: [VariantBox(physical_keycode.rawValue)])
 	}
 	@discardableResult
-	public func get_physical_keycode() -> Int {
+	public func get_physical_keycode() -> Key {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_physical_keycode", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Key.self)
 	}
-	public func set_key_label(key_label: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_key_label", args: [VariantBox(key_label)])
+	public func set_key_label(key_label: Key) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_key_label", args: [VariantBox(key_label.rawValue)])
 	}
 	@discardableResult
-	public func get_key_label() -> Int {
+	public func get_key_label() -> Key {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_key_label", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Key.self)
 	}
 	public func set_unicode(unicode: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_unicode", args: [VariantBox(unicode)])
@@ -97644,31 +98235,31 @@ public class InputEventKey: InputEventWithModifiers {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_unicode", args: [])
 		return __ret.asInt()
 	}
-	public func set_location(location: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_location", args: [VariantBox(location)])
+	public func set_location(location: KeyLocation) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_location", args: [VariantBox(location.rawValue)])
 	}
 	@discardableResult
-	public func get_location() -> Int {
+	public func get_location() -> KeyLocation {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_location", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(KeyLocation.self)
 	}
 	public func set_echo(echo: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_echo", args: [VariantBox(echo)])
 	}
 	@discardableResult
-	public func get_keycode_with_modifiers() -> Int {
+	public func get_keycode_with_modifiers() -> Key {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_keycode_with_modifiers", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Key.self)
 	}
 	@discardableResult
-	public func get_physical_keycode_with_modifiers() -> Int {
+	public func get_physical_keycode_with_modifiers() -> Key {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_physical_keycode_with_modifiers", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Key.self)
 	}
 	@discardableResult
-	public func get_key_label_with_modifiers() -> Int {
+	public func get_key_label_with_modifiers() -> Key {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_key_label_with_modifiers", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(Key.self)
 	}
 	@discardableResult
 	public func as_text_keycode() -> String {
@@ -97723,13 +98314,13 @@ public class InputEventKey: InputEventWithModifiers {
 @MainActor
 public class InputEventMouse: InputEventWithModifiers {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public func set_button_mask(button_mask: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_button_mask", args: [VariantBox(button_mask)])
+	public func set_button_mask(button_mask: MouseButtonMask) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_button_mask", args: [VariantBox(button_mask.rawValue)])
 	}
 	@discardableResult
-	public func get_button_mask() -> Int {
+	public func get_button_mask() -> MouseButtonMask {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_button_mask", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(MouseButtonMask.self)
 	}
 	public func set_position(position: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_position", args: [VariantBox(position)])
@@ -100057,13 +100648,13 @@ public class InputEventMouseButton: InputEventMouse {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_factor", args: [])
 		return __ret.asDouble()
 	}
-	public func set_button_index(button_index: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_button_index", args: [VariantBox(button_index)])
+	public func set_button_index(button_index: MouseButton) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_button_index", args: [VariantBox(button_index.rawValue)])
 	}
 	@discardableResult
-	public func get_button_index() -> Int {
+	public func get_button_index() -> MouseButton {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_button_index", args: [])
-		return __ret.asInt()
+		return __ret.asEnum(MouseButton.self)
 	}
 	public func set_pressed(pressed: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_pressed", args: [VariantBox(pressed)])
