@@ -107,10 +107,10 @@ jobs:
           udev=no libdecor=no touch=no vulkan=no -j"$(nproc)" progress=no
       - name: Dump extension_api.json and regenerate bindings
         run: |
-          mkdir -p /tmp/apidump && cd /tmp/apidump
-          cp "$GITHUB_WORKSPACE"/bin/godot.linuxbsd.editor.dev.x86_64* godot
-          printf 'config_version=5\n\n[application]\n\nconfig/name="apidump"\n' > project.godot
-          "$GITHUB_WORKSPACE"/bin/godot.linuxbsd.editor.dev.x86_64* --headless --dump-extension-api
-          python3 "$GITHUB_WORKSPACE"/modules/swift/tools/generate_bindings.py --api extension_api.json --all \
+          mkdir -p /tmp/apidump
+          cp "$GITHUB_WORKSPACE"/bin/godot.linuxbsd.editor.dev.x86_64* /tmp/apidump/godot
+          printf 'config_version=5\n\n[application]\n\nconfig/name="apidump"\n' > /tmp/apidump/project.godot
+          (cd /tmp/apidump && ./godot --headless --dump-extension-api)
+          python3 modules/swift/tools/generate_bindings.py --api /tmp/apidump/extension_api.json --all \
             --exclude SwiftViewHost --out /tmp/apidump/GodotBindings.swift
-          diff -q /tmp/apidump/GodotBindings.swift "$GITHUB_WORKSPACE"/modules/swift/runtime/Sources/SwiftGodotRuntime/Generated/GodotBindings.swift
+          diff -q /tmp/apidump/GodotBindings.swift modules/swift/runtime/Sources/SwiftGodotRuntime/Generated/GodotBindings.swift

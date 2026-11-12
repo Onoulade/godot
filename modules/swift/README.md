@@ -77,9 +77,7 @@ returns `false` and a warning is printed.
    calls scripts on the main thread). Value types are `Sendable`; their
    marshaling entry points are `@MainActor`. User scripts can therefore use
    `@MainActor`, `async`/`await` and actors freely.
-   **Remaining:** per-platform runtime builds in CI, precompiling scripts at
-   export time (an exported game has no `swiftc`), user docs, LSP-based
-   completion. Class enums are nested `enum: Int, Sendable, CaseIterable`
+   **Remaining:** user docs (separate documentation repo). Class enums are nested `enum: Int, Sendable, CaseIterable`
    (e.g. `Node.ProcessMode.inherit`); global enums (Key, Error,
    MouseButton, PropertyHint, ...) are extracted from the core headers
    (`tools/generate_bindings.py --global-enums-headers`) and emitted as
@@ -138,8 +136,31 @@ bundles the `.swiftbin` files into the export. The editor always recompiles
 from source, so a stale cache is never used there.
 
 **Status:** done except container wrappers (VStack/HStack/... on top of
-`TupleView`), LSP-based completion, typed Array/Dictionary wrappers, and
-user docs (separate documentation repo).
+`TupleView`) and user docs (separate documentation repo).
+
+## Editor completion (LSP) and typed collections
+
+- **LSP completion** — `swift_lsp.h/.cpp` (editor builds only) runs a
+  persistent `sourcekit-lsp` process (stdio pipes via `OS::execute_with_pipe`,
+  LSP 3.17 JSON-RPC with `Content-Length` framing) and answers
+  `textDocument/completion` for `.swift` files, merged with the local
+  keyword/type/global-class/owner-member lists in
+  `SwiftEditorLanguage::complete_code`. The binary is looked up in the
+  `swift/lsp_path` project setting, the `SOURCEKIT_LSP` environment variable,
+  then the `PATH`; documents are synced with `didOpen`/`didChange` (full
+  text) and the server is shut down with the editor. Without sourcekit-lsp,
+  completion silently falls back to the local lists.
+- **Typed Array/Dictionary wrappers** — the host vtable gained Array and
+  Dictionary variant operations, exposed in Swift as `GodotArray` /
+  `GodotDictionary` (`Collections.swift`) with `VariantBoxConvertible`
+  conformances for scalars, value types, engine objects and the collections
+  themselves; `VariantBox.asArray()` / `.asDictionary()` give borrowed views
+  of Array/Dictionary variants (e.g. method returns).
+- **CI fix** — Apple's Observation framework is part of the Swift toolchain
+  standard library (`stdlib/public/Observation` in swiftlang/swift) on all
+  platforms, so the runtime package has no external dependency: `import
+  Observation` resolves against the toolchain directly (the previously used
+  `apple/swift-observation` package URL does not exist and broke CI).
 
 ## Building
 

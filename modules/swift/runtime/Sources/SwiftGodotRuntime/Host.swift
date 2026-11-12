@@ -52,6 +52,16 @@ public struct SwiftGodotHostMirror {
 	public var print: (@convention(c) (UnsafePointer<CChar>?) -> Void)?
 	public var push_error: (@convention(c) (UnsafePointer<CChar>?) -> Void)?
 	public var object_create: (@convention(c) (UnsafePointer<CChar>?) -> UnsafeMutableRawPointer?)?
+	public var variant_new_array: (@convention(c) () -> UnsafeMutableRawPointer?)?
+	public var variant_array_size: (@convention(c) (UnsafeRawPointer?) -> Int32)?
+	public var variant_array_append: (@convention(c) (UnsafeMutableRawPointer?, UnsafeRawPointer?) -> Void)?
+	public var variant_array_get: (@convention(c) (UnsafeRawPointer?, Int32) -> UnsafeRawPointer?)?
+	public var variant_array_set: (@convention(c) (UnsafeMutableRawPointer?, Int32, UnsafeRawPointer?) -> Void)?
+	public var variant_new_dictionary: (@convention(c) () -> UnsafeMutableRawPointer?)?
+	public var variant_dictionary_size: (@convention(c) (UnsafeRawPointer?) -> Int32)?
+	public var variant_dictionary_has: (@convention(c) (UnsafeRawPointer?, UnsafeRawPointer?) -> UInt8)?
+	public var variant_dictionary_get: (@convention(c) (UnsafeRawPointer?, UnsafeRawPointer?) -> UnsafeRawPointer?)?
+	public var variant_dictionary_set: (@convention(c) (UnsafeMutableRawPointer?, UnsafeRawPointer?, UnsafeRawPointer?) -> Void)?
 }
 
 @MainActor
@@ -288,5 +298,45 @@ public final class Host {
 	// Instantiates a registered engine class (e.g. "Label") through ClassDB.
 	public func createObject(_ className: String) -> UnsafeMutableRawPointer? {
 		className.withCString { requireHost().pointee.object_create!($0) }
+	}
+
+	public func variantNewArray() -> UnsafeMutableRawPointer {
+		requireHost().pointee.variant_new_array!()
+	}
+
+	public func variantArraySize(_ ptr: UnsafeRawPointer?) -> Int {
+		Int(requireHost().pointee.variant_array_size!(ptr))
+	}
+
+	public func variantArrayAppend(_ ptr: UnsafeMutableRawPointer?, _ value: UnsafeRawPointer?) {
+		requireHost().pointee.variant_array_append!(ptr, value)
+	}
+
+	public func variantArrayGet(_ ptr: UnsafeRawPointer?, _ index: Int) -> UnsafeRawPointer? {
+		requireHost().pointee.variant_array_get!(ptr, Int32(index))
+	}
+
+	public func variantArraySet(_ ptr: UnsafeMutableRawPointer?, _ index: Int, _ value: UnsafeRawPointer?) {
+		requireHost().pointee.variant_array_set!(ptr, Int32(index), value)
+	}
+
+	public func variantNewDictionary() -> UnsafeMutableRawPointer {
+		requireHost().pointee.variant_new_dictionary!()
+	}
+
+	public func variantDictionarySize(_ ptr: UnsafeRawPointer?) -> Int {
+		Int(requireHost().pointee.variant_dictionary_size!(ptr))
+	}
+
+	public func variantDictionaryHas(_ ptr: UnsafeRawPointer?, _ key: UnsafeRawPointer?) -> Bool {
+		requireHost().pointee.variant_dictionary_has!(ptr, key) != 0
+	}
+
+	public func variantDictionaryGet(_ ptr: UnsafeRawPointer?, _ key: UnsafeRawPointer?) -> UnsafeRawPointer? {
+		requireHost().pointee.variant_dictionary_get!(ptr, key)
+	}
+
+	public func variantDictionarySet(_ ptr: UnsafeMutableRawPointer?, _ key: UnsafeRawPointer?, _ value: UnsafeRawPointer?) {
+		requireHost().pointee.variant_dictionary_set!(ptr, key, value)
 	}
 }

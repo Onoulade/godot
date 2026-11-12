@@ -91,6 +91,18 @@ struct SwiftGodotHost {
 
 	// Instantiates a registered engine class (ClassDB::instantiate), e.g. "Label".
 	GDExtensionObjectPtr (*object_create)(const char *p_class_name) = nullptr;
+
+	// Array / Dictionary variants (typed Swift wrappers in Collections.swift).
+	GDExtensionVariantPtr (*variant_new_array)() = nullptr;
+	int (*variant_array_size)(GDExtensionConstVariantPtr p_variant) = nullptr;
+	void (*variant_array_append)(GDExtensionVariantPtr p_variant, GDExtensionConstVariantPtr p_value) = nullptr;
+	GDExtensionConstVariantPtr (*variant_array_get)(GDExtensionConstVariantPtr p_variant, int p_index) = nullptr;
+	void (*variant_array_set)(GDExtensionVariantPtr p_variant, int p_index, GDExtensionConstVariantPtr p_value) = nullptr;
+	GDExtensionVariantPtr (*variant_new_dictionary)() = nullptr;
+	int (*variant_dictionary_size)(GDExtensionConstVariantPtr p_variant) = nullptr;
+	GDExtensionBool (*variant_dictionary_has)(GDExtensionConstVariantPtr p_variant, GDExtensionConstVariantPtr p_key) = nullptr;
+	GDExtensionConstVariantPtr (*variant_dictionary_get)(GDExtensionConstVariantPtr p_variant, GDExtensionConstVariantPtr p_key) = nullptr;
+	void (*variant_dictionary_set)(GDExtensionVariantPtr p_variant, GDExtensionConstVariantPtr p_key, GDExtensionConstVariantPtr p_value) = nullptr;
 };
 
 class SwiftHost {

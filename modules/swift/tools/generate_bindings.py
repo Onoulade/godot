@@ -13,8 +13,13 @@ Object-typed values are wrapped in generated Swift classes; value types
 import argparse
 import ast
 import json
+import os
 import re
 import sys
+
+# Repo root (modules/swift/tools/generate_bindings.py -> 3 levels up), used to
+# resolve the core headers no matter the current working directory.
+REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 
 GLOBAL_ENUM_HEADERS = [
     "core/math/math_defs.h",
@@ -95,6 +100,8 @@ ALL_CONSTS: dict[str, int] = {}
 
 
 def parse_header_enums(path):
+    if not os.path.exists(path):
+        path = os.path.join(REPO_ROOT, path)
     with open(path) as f:
         text = f.read()
     text = re.sub(r"//[^\n]*", "", text)

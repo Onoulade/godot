@@ -41,6 +41,8 @@
 #include "core/object/class_db.h"
 
 #ifdef TOOLS_ENABLED
+#include "swift_lsp.h"
+
 #include "core/io/file_access.h"
 #include "editor/editor_node.h"
 #include "editor/export/editor_export.h"
@@ -153,6 +155,7 @@ void uninitialize_swift_module(ModuleInitializationLevel p_level) {
 			EditorExport::get_singleton()->remove_export_plugin(swift_export_plugin);
 			swift_export_plugin.unref();
 		}
+		SwiftLSPClient::get_singleton()->stop();
 	}
 #endif // TOOLS_ENABLED
 }
