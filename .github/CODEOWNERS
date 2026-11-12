@@ -163,6 +163,11 @@
 /modules/mono/                                @godotengine/dotnet
 /modules/mono/doc_classes/                    @godotengine/dotnet @godotengine/documentation
 /modules/mono/editor/                         @godotengine/dotnet @godotengine/editor
+/modules/mono/editor/**/SCsub                 @godotengine/dotnet @godotengine/editor @godotengine/buildsystem
+/modules/swift/                               @godotengine/gdscript
+/modules/swift/**/*.py                        @godotengine/gdscript @godotengine/buildsystem
+/modules/swift/**/SCsub                       @godotengine/gdscript @godotengine/buildsystem
+/modules/swift/doc_classes/                   @godotengine/gdscript @godotengine/documentation
 
 ## Text
 /modules/freetype/                            @godotengine/buildsystem

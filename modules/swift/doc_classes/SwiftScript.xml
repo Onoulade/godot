@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="SwiftScript" inherits="Script" api_type="core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../doc/class.xsd">
+	<brief_description>
+		A script implemented in the Swift programming language, saved with the [code].swift[/code] extension (Swift-enabled builds only).
+	</brief_description>
+	<description>
+		This class represents a Swift script. It is the Swift equivalent of the [GDScript] class and is only available in builds with the [code]swift[/code] module enabled ([code]module_swift_enabled=yes[/code]).
+		Script execution additionally requires the Swift runtime library ([code]swiftgodot_runtime[/code]) to be found next to the executable or in [code]res://bin[/code]; without it, Swift scripts can be loaded and edited but not instantiated.
+	</description>
+	<tutorials>
+	</tutorials>
+</class>

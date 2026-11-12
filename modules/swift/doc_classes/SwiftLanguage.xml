@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="SwiftLanguage" inherits="ScriptLanguage" api_type="core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../doc/class.xsd">
+	<brief_description>
+		The built-in scripting language for Swift scripts.
+	</brief_description>
+	<description>
+		[SwiftLanguage] is the [ScriptLanguage] implementation registered for the [code].swift[/code] extension in builds with the [code]swift[/code] module enabled ([code]module_swift_enabled=yes[/code]). It recognizes [code].swift[/code] files, provides Swift syntax metadata (keywords, comment and string delimiters) to the editor, and delegates compilation and execution to the Swift runtime library through the C ABI bridge in [code]swift_bridge.h[/code].
+	</description>
+	<tutorials>
+	</tutorials>
+</class>
