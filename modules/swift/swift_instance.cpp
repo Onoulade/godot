@@ -75,7 +75,11 @@ void SwiftInstance::get_property_list(List<PropertyInfo> *r_properties) const {
 		if (abi.script_get_property_type != nullptr) {
 			type = (Variant::Type)abi.script_get_property_type(script_handle, i);
 		}
-		r_properties->push_back(PropertyInfo(type, String::utf8(name)));
+		uint32_t usage = PROPERTY_USAGE_STORAGE;
+		if (abi.script_get_property_usage != nullptr) {
+			usage = (uint32_t)abi.script_get_property_usage(script_handle, i);
+		}
+		r_properties->push_back(PropertyInfo(type, String::utf8(name), PROPERTY_HINT_NONE, "", usage));
 	}
 }
 

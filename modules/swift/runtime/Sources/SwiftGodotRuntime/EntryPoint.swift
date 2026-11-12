@@ -12,6 +12,11 @@ public func swiftgodot_init(_ getProcAddress: @convention(c) (UnsafePointer<CCha
 	Runtime.shared.initialize(getProcAddress: getProcAddress)
 }
 
+@_cdecl("swiftgodot_host_init")
+public func swiftgodot_host_init(_ host: UnsafePointer<SwiftGodotHostMirror>) {
+	Host.shared.setHost(host)
+}
+
 @_cdecl("swiftgodot_shutdown")
 public func swiftgodot_shutdown() {
 	Runtime.shared.shutdown()
@@ -90,6 +95,11 @@ public func swiftgodot_script_get_property_name(_ script: UnsafeMutableRawPointe
 @_cdecl("swiftgodot_script_get_property_type")
 public func swiftgodot_script_get_property_type(_ script: UnsafeMutableRawPointer?, _ index: Int32) -> Int32 {
 	return Runtime.shared.getScriptPropertyType(script, index: index)
+}
+
+@_cdecl("swiftgodot_script_get_property_usage")
+public func swiftgodot_script_get_property_usage(_ script: UnsafeMutableRawPointer?, _ index: Int32) -> Int32 {
+	return Runtime.shared.getScriptPropertyUsage(script, index: index)
 }
 
 @_cdecl("swiftgodot_instance_create")

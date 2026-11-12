@@ -45,10 +45,20 @@ returns `false` and a warning is printed.
    syntax highlighting via `EditorStandardSyntaxHighlighter` fed by the
    language metadata, global class cache from `class` declarations,
    built-in script template, PascalCase file naming. Done.
-5. **Remaining** — full Variant marshaling for method arguments (the ABI
-   carries them; the generated entry points currently ignore them),
-   debugger/profiler hooks (`debug_get_stack_level_*`, `profiling_*`),
-   CI jobs building the runtime per platform, export templates, docs.
+5. **Bindings, Variant marshaling and host services** — `swift_host.h/.cpp`
+   exposes a typed host vtable to the runtime (Variant scalars/copy/object,
+   `object_call`/`object_get`/`object_set`, `node_get_node`/`node_get_parent`,
+   print/errors), handed over via `swiftgodot_host_init`. On the Swift side,
+   `Host`/`VariantBox` wrap it, and `tools/generate_bindings.py` generates
+   Swift classes from `extension_api.json` (checked-in generated file:
+   `runtime/Sources/SwiftGodotRuntime/Generated/GodotBindings.swift`;
+   regenerate in CI with an editor build's `--dump-extension-api`). Scene
+   linking works through the generated bindings (`get_node`, properties,
+   `emit_*` signals); `@export var` is detected and reported with editor
+   property usage. `_process`/`_physics_process` receive the delta.
+   **Remaining:** typed value-type wrappers (Vector2/Color/... currently
+   opaque VariantBox), debugger/profiler hooks, CI jobs building the runtime
+   per platform, export templates, user docs.
 
 ## Building
 
@@ -63,4 +73,12 @@ cd modules/swift/runtime
 swift build -c release
 # then place the produced libswiftgodot_runtime.{so,dylib,dll}
 # next to the Godot executable or in res://bin of the project.
+```
+
+Regenerating the bindings (needs an editor build to dump the API):
+
+```sh
+godot --headless --dump-extension-api   # produces extension_api.json
+python3 modules/swift/tools/generate_bindings.py --api extension_api.json --all \
+    --out modules/swift/runtime/Sources/SwiftGodotRuntime/Generated/GodotBindings.swift
 ```

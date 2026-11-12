@@ -16,7 +16,7 @@ final class CompiledScript {
 	var isTool: Bool = false
 	var methods: [String] = []
 	var signals: [String] = []
-	var properties: [(name: String, type: Int32)] = []
+	var properties: [(name: String, type: Int32, usage: Int32)] = []
 	var error: String?
 	var libraryHandle: UnsafeMutableRawPointer?
 	var descriptor: UnsafePointer<SwiftGodotScriptDescriptor>?
@@ -161,11 +161,20 @@ public final class Runtime {
 		return properties[Int(index)].type
 	}
 
+	public func getScriptPropertyUsage(_ handle: UnsafeMutableRawPointer?, index: Int32) -> Int32 {
+		guard let properties = script(for: handle)?.properties, index >= 0, index < properties.count else { return 2 }
+		return properties[Int(index)].usage
+	}
+
 	// MARK: - Instance lifecycle
 
 	public func createInstance(script handle: UnsafeMutableRawPointer?, owner: UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? {
 		guard let script = script(for: handle) else { return nil }
-		let box = ScriptInstanceBox(script: script, owner: owner, object: nil)
+		var object: AnyObject?
+		if let descriptor = script.descriptor, let newInstance = descriptor.pointee.new_instance, let raw = newInstance() {
+			object = Unmanaged<AnyObject>.fromOpaque(raw).takeUnretainedValue()
+		}
+		let box = ScriptInstanceBox(script: script, owner: owner, object: object)
 		lock.lock()
 		let instanceHandle = UnsafeMutableRawPointer(bitPattern: ObjectIdentifier(box).hashValue & 0x7FFF_FFFF)!
 		instances[instanceHandle] = box
@@ -228,8 +237,10 @@ public final class Runtime {
 		for match in allMatches(of: "\\bsignal\\s+([A-Za-z_][A-Za-z0-9_]*)", in: source) {
 			script.signals.append(match)
 		}
-		for m in allMatchesWithGroups(of: "\\bvar\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*:\\s*([A-Za-z_][A-Za-z0-9_.]*)", in: source) {
-			script.properties.append((name: m[0], type: variantType(forSwiftType: m[1])))
+		for m in allMatchesWithGroups(of: "(@export\\s+)?\\bvar\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*:\\s*([A-Za-z_][A-Za-z0-9_.]*)", in: source) {
+			// PROPERTY_USAGE_STORAGE = 2, PROPERTY_USAGE_EDITOR = 4 (core/object/property_info.h).
+			let usage: Int32 = m[0].contains("@export") ? 6 : 2
+			script.properties.append((name: m[1], type: variantType(forSwiftType: m[2]), usage: usage))
 		}
 	}
 
