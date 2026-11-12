@@ -53,6 +53,33 @@ struct SwiftGodotHost {
 	void (*variant_set_object)(GDExtensionVariantPtr p_variant, GDExtensionObjectPtr p_object) = nullptr;
 	GDExtensionObjectPtr (*variant_get_object)(GDExtensionConstVariantPtr p_variant) = nullptr;
 
+	void (*variant_as_vector2)(GDExtensionConstVariantPtr p_variant, double *r_out) = nullptr;
+	void (*variant_set_vector2)(GDExtensionVariantPtr p_variant, double p_x, double p_y) = nullptr;
+	void (*variant_as_vector3)(GDExtensionConstVariantPtr p_variant, double *r_out) = nullptr;
+	void (*variant_set_vector3)(GDExtensionVariantPtr p_variant, double p_x, double p_y, double p_z) = nullptr;
+	void (*variant_as_vector2i)(GDExtensionConstVariantPtr p_variant, int64_t *r_out) = nullptr;
+	void (*variant_set_vector2i)(GDExtensionVariantPtr p_variant, int64_t p_x, int64_t p_y) = nullptr;
+	void (*variant_as_vector3i)(GDExtensionConstVariantPtr p_variant, int64_t *r_out) = nullptr;
+	void (*variant_set_vector3i)(GDExtensionVariantPtr p_variant, int64_t p_x, int64_t p_y, int64_t p_z) = nullptr;
+	void (*variant_as_color)(GDExtensionConstVariantPtr p_variant, float *r_out) = nullptr;
+	void (*variant_set_color)(GDExtensionVariantPtr p_variant, float p_r, float p_g, float p_b, float p_a) = nullptr;
+	void (*variant_as_quaternion)(GDExtensionConstVariantPtr p_variant, float *r_out) = nullptr;
+	void (*variant_set_quaternion)(GDExtensionVariantPtr p_variant, float p_x, float p_y, float p_z, float p_w) = nullptr;
+	void (*variant_as_rect2)(GDExtensionConstVariantPtr p_variant, float *r_out) = nullptr;
+	void (*variant_set_rect2)(GDExtensionVariantPtr p_variant, float p_px, float p_py, float p_sx, float p_sy) = nullptr;
+	void (*variant_as_aabb)(GDExtensionConstVariantPtr p_variant, float *r_out) = nullptr;
+	void (*variant_set_aabb)(GDExtensionVariantPtr p_variant, const float *p_in) = nullptr;
+	void (*variant_as_plane)(GDExtensionConstVariantPtr p_variant, float *r_out) = nullptr;
+	void (*variant_set_plane)(GDExtensionVariantPtr p_variant, float p_a, float p_b, float p_c, float p_d) = nullptr;
+	void (*variant_as_transform2d)(GDExtensionConstVariantPtr p_variant, float *r_out) = nullptr;
+	void (*variant_set_transform2d)(GDExtensionVariantPtr p_variant, const float *p_in) = nullptr;
+	void (*variant_as_transform3d)(GDExtensionConstVariantPtr p_variant, float *r_out) = nullptr;
+	void (*variant_set_transform3d)(GDExtensionVariantPtr p_variant, const float *p_in) = nullptr;
+	void (*variant_as_basis)(GDExtensionConstVariantPtr p_variant, float *r_out) = nullptr;
+	void (*variant_set_basis)(GDExtensionVariantPtr p_variant, const float *p_in) = nullptr;
+	void (*variant_as_projection)(GDExtensionConstVariantPtr p_variant, float *r_out) = nullptr;
+	void (*variant_set_projection)(GDExtensionVariantPtr p_variant, const float *p_in) = nullptr;
+
 	GDExtensionBool (*object_call)(GDExtensionObjectPtr p_object, const char *p_method, GDExtensionConstVariantPtr *p_args, int p_arg_count, GDExtensionVariantPtr r_ret, GDExtensionCallError *r_error) = nullptr;
 	GDExtensionBool (*object_get)(GDExtensionObjectPtr p_object, const char *p_name, GDExtensionVariantPtr r_ret) = nullptr;
 	GDExtensionBool (*object_set)(GDExtensionObjectPtr p_object, const char *p_name, GDExtensionConstVariantPtr p_value) = nullptr;

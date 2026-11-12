@@ -30,6 +30,7 @@
 
 #include "register_types.h"
 
+#include "swift_bridge.h"
 #include "swift_language.h"
 #include "swift_resource_format.h"
 #include "swift_script.h"
@@ -41,11 +42,42 @@
 #ifdef TOOLS_ENABLED
 #include "swift_editor_language.h"
 
+#include "core/io/file_access.h"
 #include "editor/editor_node.h"
+#include "editor/export/editor_export.h"
 #include "editor/script/script_editor_plugin.h"
 #include "editor/script/syntax_highlighters.h"
 
 static Ref<EditorSyntaxHighlighter> swift_syntax_highlighter;
+
+class SwiftExportPlugin : public EditorExportPlugin {
+	GDSOFTCLASS(SwiftExportPlugin, EditorExportPlugin);
+
+protected:
+	virtual void _export_begin(const HashSet<String> &p_features, bool p_debug, const String &p_path, int p_flags) override {
+		String runtime_path = OS::get_singleton()->get_executable_path().get_base_dir().path_join(SwiftBridge::get_runtime_library_name());
+		if (FileAccess::exists(runtime_path)) {
+			add_file(SwiftBridge::get_runtime_library_name(), FileAccess::get_file_as_bytes(runtime_path), true);
+		} else {
+			WARN_PRINT("Swift export: the Swift runtime library ('" + SwiftBridge::get_runtime_library_name() + "') was not found next to the editor binary; Swift scripts will not run in the exported project.");
+		}
+	}
+
+	virtual void _export_file(const String &p_path, const String &p_type, const HashSet<String> &p_features) override {
+		if (p_path.get_extension() != "swift") {
+			return;
+		}
+		Vector<uint8_t> file = FileAccess::get_file_as_bytes(p_path);
+		if (!file.is_empty()) {
+			add_file(p_path, file, true);
+		}
+	}
+
+public:
+	virtual String get_name() const override { return "Swift"; }
+};
+
+static Ref<SwiftExportPlugin> swift_export_plugin;
 
 static void _editor_init() {
 	Ref<EditorStandardSyntaxHighlighter> highlighter;
@@ -53,6 +85,9 @@ static void _editor_init() {
 	highlighter->_set_script_language(script_language_swift);
 	ScriptEditor::get_singleton()->register_syntax_highlighter(highlighter);
 	swift_syntax_highlighter = highlighter;
+
+	swift_export_plugin.instantiate();
+	EditorExport::get_singleton()->add_export_plugin(swift_export_plugin);
 }
 #endif // TOOLS_ENABLED
 
@@ -102,6 +137,10 @@ void uninitialize_swift_module(ModuleInitializationLevel p_level) {
 		if (swift_syntax_highlighter.is_valid()) {
 			ScriptEditor::get_singleton()->unregister_syntax_highlighter(swift_syntax_highlighter);
 			swift_syntax_highlighter.unref();
+		}
+		if (swift_export_plugin.is_valid()) {
+			EditorExport::get_singleton()->remove_export_plugin(swift_export_plugin);
+			swift_export_plugin.unref();
 		}
 		if (SwiftEditorLanguage::get_singleton() != nullptr) {
 			memdelete(SwiftEditorLanguage::get_singleton());

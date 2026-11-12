@@ -18,6 +18,32 @@ public struct SwiftGodotHostMirror {
 	public var variant_copy: (@convention(c) (UnsafeMutableRawPointer?, UnsafeRawPointer?) -> Void)?
 	public var variant_set_object: (@convention(c) (UnsafeMutableRawPointer?, UnsafeMutableRawPointer?) -> Void)?
 	public var variant_get_object: (@convention(c) (UnsafeRawPointer?) -> UnsafeMutableRawPointer?)?
+	public var variant_as_vector2: (@convention(c) (UnsafeRawPointer?, UnsafeMutablePointer<Double>?) -> Void)?
+	public var variant_set_vector2: (@convention(c) (UnsafeMutableRawPointer?, Double, Double) -> Void)?
+	public var variant_as_vector3: (@convention(c) (UnsafeRawPointer?, UnsafeMutablePointer<Double>?) -> Void)?
+	public var variant_set_vector3: (@convention(c) (UnsafeMutableRawPointer?, Double, Double, Double) -> Void)?
+	public var variant_as_vector2i: (@convention(c) (UnsafeRawPointer?, UnsafeMutablePointer<Int64>?) -> Void)?
+	public var variant_set_vector2i: (@convention(c) (UnsafeMutableRawPointer?, Int64, Int64) -> Void)?
+	public var variant_as_vector3i: (@convention(c) (UnsafeRawPointer?, UnsafeMutablePointer<Int64>?) -> Void)?
+	public var variant_set_vector3i: (@convention(c) (UnsafeMutableRawPointer?, Int64, Int64, Int64) -> Void)?
+	public var variant_as_color: (@convention(c) (UnsafeRawPointer?, UnsafeMutablePointer<Float>?) -> Void)?
+	public var variant_set_color: (@convention(c) (UnsafeMutableRawPointer?, Float, Float, Float, Float) -> Void)?
+	public var variant_as_quaternion: (@convention(c) (UnsafeRawPointer?, UnsafeMutablePointer<Float>?) -> Void)?
+	public var variant_set_quaternion: (@convention(c) (UnsafeMutableRawPointer?, Float, Float, Float, Float) -> Void)?
+	public var variant_as_rect2: (@convention(c) (UnsafeRawPointer?, UnsafeMutablePointer<Float>?) -> Void)?
+	public var variant_set_rect2: (@convention(c) (UnsafeMutableRawPointer?, Float, Float, Float, Float) -> Void)?
+	public var variant_as_aabb: (@convention(c) (UnsafeRawPointer?, UnsafeMutablePointer<Float>?) -> Void)?
+	public var variant_set_aabb: (@convention(c) (UnsafeMutableRawPointer?, UnsafePointer<Float>?) -> Void)?
+	public var variant_as_plane: (@convention(c) (UnsafeRawPointer?, UnsafeMutablePointer<Float>?) -> Void)?
+	public var variant_set_plane: (@convention(c) (UnsafeMutableRawPointer?, Float, Float, Float, Float) -> Void)?
+	public var variant_as_transform2d: (@convention(c) (UnsafeRawPointer?, UnsafeMutablePointer<Float>?) -> Void)?
+	public var variant_set_transform2d: (@convention(c) (UnsafeMutableRawPointer?, UnsafePointer<Float>?) -> Void)?
+	public var variant_as_transform3d: (@convention(c) (UnsafeRawPointer?, UnsafeMutablePointer<Float>?) -> Void)?
+	public var variant_set_transform3d: (@convention(c) (UnsafeMutableRawPointer?, UnsafePointer<Float>?) -> Void)?
+	public var variant_as_basis: (@convention(c) (UnsafeRawPointer?, UnsafeMutablePointer<Float>?) -> Void)?
+	public var variant_set_basis: (@convention(c) (UnsafeMutableRawPointer?, UnsafePointer<Float>?) -> Void)?
+	public var variant_as_projection: (@convention(c) (UnsafeRawPointer?, UnsafeMutablePointer<Float>?) -> Void)?
+	public var variant_set_projection: (@convention(c) (UnsafeMutableRawPointer?, UnsafePointer<Float>?) -> Void)?
 	public var object_call: (@convention(c) (UnsafeMutableRawPointer?, UnsafePointer<CChar>?, UnsafePointer<UnsafeRawPointer?>?, Int32, UnsafeMutableRawPointer?, UnsafeMutablePointer<GDExtensionCallErrorMirror>?) -> UInt8)?
 	public var object_get: (@convention(c) (UnsafeMutableRawPointer?, UnsafePointer<CChar>?, UnsafeMutableRawPointer?) -> UInt8)?
 	public var object_set: (@convention(c) (UnsafeMutableRawPointer?, UnsafePointer<CChar>?, UnsafeRawPointer?) -> UInt8)?
@@ -95,6 +121,136 @@ public final class Host {
 
 	public func variantGetObject(_ ptr: UnsafeRawPointer?) -> UnsafeMutableRawPointer? {
 		requireHost().pointee.variant_get_object!(ptr)
+	}
+
+	public func variantAsVector2(_ ptr: UnsafeRawPointer?) -> (Double, Double) {
+		var o = [Double](repeating: 0, count: 2)
+		requireHost().pointee.variant_as_vector2!(ptr, &o)
+		return (o[0], o[1])
+	}
+
+	public func variantSetVector2(_ ptr: UnsafeMutableRawPointer?, _ x: Double, _ y: Double) {
+		requireHost().pointee.variant_set_vector2!(ptr, x, y)
+	}
+
+	public func variantAsVector3(_ ptr: UnsafeRawPointer?) -> (Double, Double, Double) {
+		var o = [Double](repeating: 0, count: 3)
+		requireHost().pointee.variant_as_vector3!(ptr, &o)
+		return (o[0], o[1], o[2])
+	}
+
+	public func variantSetVector3(_ ptr: UnsafeMutableRawPointer?, _ x: Double, _ y: Double, _ z: Double) {
+		requireHost().pointee.variant_set_vector3!(ptr, x, y, z)
+	}
+
+	public func variantAsVector2i(_ ptr: UnsafeRawPointer?) -> (Int, Int) {
+		var o = [Int64](repeating: 0, count: 2)
+		requireHost().pointee.variant_as_vector2i!(ptr, &o)
+		return (Int(o[0]), Int(o[1]))
+	}
+
+	public func variantSetVector2i(_ ptr: UnsafeMutableRawPointer?, _ x: Int, _ y: Int) {
+		requireHost().pointee.variant_set_vector2i!(ptr, Int64(x), Int64(y))
+	}
+
+	public func variantAsVector3i(_ ptr: UnsafeRawPointer?) -> (Int, Int, Int) {
+		var o = [Int64](repeating: 0, count: 3)
+		requireHost().pointee.variant_as_vector3i!(ptr, &o)
+		return (Int(o[0]), Int(o[1]), Int(o[2]))
+	}
+
+	public func variantSetVector3i(_ ptr: UnsafeMutableRawPointer?, _ x: Int, _ y: Int, _ z: Int) {
+		requireHost().pointee.variant_set_vector3i!(ptr, Int64(x), Int64(y), Int64(z))
+	}
+
+	public func variantAsColor(_ ptr: UnsafeRawPointer?) -> (Float, Float, Float, Float) {
+		var o = [Float](repeating: 0, count: 4)
+		requireHost().pointee.variant_as_color!(ptr, &o)
+		return (o[0], o[1], o[2], o[3])
+	}
+
+	public func variantSetColor(_ ptr: UnsafeMutableRawPointer?, _ r: Float, _ g: Float, _ b: Float, _ a: Float) {
+		requireHost().pointee.variant_set_color!(ptr, r, g, b, a)
+	}
+
+	public func variantAsQuaternion(_ ptr: UnsafeRawPointer?) -> (Float, Float, Float, Float) {
+		var o = [Float](repeating: 0, count: 4)
+		requireHost().pointee.variant_as_quaternion!(ptr, &o)
+		return (o[0], o[1], o[2], o[3])
+	}
+
+	public func variantSetQuaternion(_ ptr: UnsafeMutableRawPointer?, _ x: Float, _ y: Float, _ z: Float, _ w: Float) {
+		requireHost().pointee.variant_set_quaternion!(ptr, x, y, z, w)
+	}
+
+	public func variantAsRect2(_ ptr: UnsafeRawPointer?) -> (Float, Float, Float, Float) {
+		var o = [Float](repeating: 0, count: 4)
+		requireHost().pointee.variant_as_rect2!(ptr, &o)
+		return (o[0], o[1], o[2], o[3])
+	}
+
+	public func variantSetRect2(_ ptr: UnsafeMutableRawPointer?, _ px: Float, _ py: Float, _ sx: Float, _ sy: Float) {
+		requireHost().pointee.variant_set_rect2!(ptr, px, py, sx, sy)
+	}
+
+	public func variantAsAABB(_ ptr: UnsafeRawPointer?) -> [Float] {
+		var o = [Float](repeating: 0, count: 6)
+		requireHost().pointee.variant_as_aabb!(ptr, &o)
+		return o
+	}
+
+	public func variantSetAABB(_ ptr: UnsafeMutableRawPointer?, _ v: [Float]) {
+		v.withUnsafeBufferPointer { requireHost().pointee.variant_set_aabb!(ptr, $0.baseAddress) }
+	}
+
+	public func variantAsPlane(_ ptr: UnsafeRawPointer?) -> (Float, Float, Float, Float) {
+		var o = [Float](repeating: 0, count: 4)
+		requireHost().pointee.variant_as_plane!(ptr, &o)
+		return (o[0], o[1], o[2], o[3])
+	}
+
+	public func variantSetPlane(_ ptr: UnsafeMutableRawPointer?, _ a: Float, _ b: Float, _ c: Float, _ d: Float) {
+		requireHost().pointee.variant_set_plane!(ptr, a, b, c, d)
+	}
+
+	public func variantAsTransform2D(_ ptr: UnsafeRawPointer?) -> [Float] {
+		var o = [Float](repeating: 0, count: 6)
+		requireHost().pointee.variant_as_transform2d!(ptr, &o)
+		return o
+	}
+
+	public func variantSetTransform2D(_ ptr: UnsafeMutableRawPointer?, _ v: [Float]) {
+		v.withUnsafeBufferPointer { requireHost().pointee.variant_set_transform2d!(ptr, $0.baseAddress) }
+	}
+
+	public func variantAsTransform3D(_ ptr: UnsafeRawPointer?) -> [Float] {
+		var o = [Float](repeating: 0, count: 12)
+		requireHost().pointee.variant_as_transform3d!(ptr, &o)
+		return o
+	}
+
+	public func variantSetTransform3D(_ ptr: UnsafeMutableRawPointer?, _ v: [Float]) {
+		v.withUnsafeBufferPointer { requireHost().pointee.variant_set_transform3d!(ptr, $0.baseAddress) }
+	}
+
+	public func variantAsBasis(_ ptr: UnsafeRawPointer?) -> [Float] {
+		var o = [Float](repeating: 0, count: 9)
+		requireHost().pointee.variant_as_basis!(ptr, &o)
+		return o
+	}
+
+	public func variantSetBasis(_ ptr: UnsafeMutableRawPointer?, _ v: [Float]) {
+		v.withUnsafeBufferPointer { requireHost().pointee.variant_set_basis!(ptr, $0.baseAddress) }
+	}
+
+	public func variantAsProjection(_ ptr: UnsafeRawPointer?) -> [Float] {
+		var o = [Float](repeating: 0, count: 16)
+		requireHost().pointee.variant_as_projection!(ptr, &o)
+		return o
+	}
+
+	public func variantSetProjection(_ ptr: UnsafeMutableRawPointer?, _ v: [Float]) {
+		v.withUnsafeBufferPointer { requireHost().pointee.variant_set_projection!(ptr, $0.baseAddress) }
 	}
 
 	@discardableResult

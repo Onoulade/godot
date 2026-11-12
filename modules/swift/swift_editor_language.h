@@ -44,9 +44,9 @@ public:
 
 	virtual bool validate(const String &p_code, const String &p_path, List<ScriptError> *r_errors, List<Warning> *r_warnings, List<String> *r_functions, HashSet<int> *r_safe_lines) const override;
 	virtual int32_t find_function(const String &p_function, const String &p_code) const override;
-	virtual Error complete_code(const String &p_code, const String &p_path, Object *p_owner, List<CompletionOption> *r_options, bool &r_force, String &r_call_hint) override { return ERR_UNAVAILABLE; }
-	virtual Error lookup_code(const String &p_code, const String &p_symbol, const String &p_path, Object *p_owner, LookupResult &r_result) override { return ERR_UNAVAILABLE; }
-	virtual Error lookup_code_for_rename(const String &p_code, const String &p_symbol, const String &p_path, LookupResult &r_result) override { return ERR_UNAVAILABLE; }
+	virtual Error complete_code(const String &p_code, const String &p_path, Object *p_owner, List<CompletionOption> *r_options, bool &r_force, String &r_call_hint) override;
+	virtual Error lookup_code(const String &p_code, const String &p_symbol, const String &p_path, Object *p_owner, LookupResult &r_result) override;
+	virtual Error lookup_code_for_rename(const String &p_code, const String &p_symbol, const String &p_path, LookupResult &r_result) override;
 
 	SwiftEditorLanguage() { singleton = this; }
 	~SwiftEditorLanguage() {
