@@ -3,6 +3,10 @@ import PackageDescription
 
 let package = Package(
 	name: "swiftgodot-runtime",
+	// Observation (@Observable / withObservationTracking) needs macOS 14+ on
+	// Apple platforms. On Linux/Windows it ships inside the Swift toolchain
+	// itself, so this only raises the Apple deployment target.
+	platforms: [.macOS(.v14)],
 	products: [
 		.library(name: "swiftgodot_runtime", type: .dynamic, targets: ["SwiftGodotRuntime"]),
 		.library(name: "SwiftGodotUI", type: .dynamic, targets: ["SwiftGodotUI"]),

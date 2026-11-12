@@ -160,7 +160,11 @@ from source, so a stale cache is never used there.
   standard library (`stdlib/public/Observation` in swiftlang/swift) on all
   platforms, so the runtime package has no external dependency: `import
   Observation` resolves against the toolchain directly (the previously used
-  `apple/swift-observation` package URL does not exist and broke CI).
+  `apple/swift-observation` package URL does not exist and broke CI). On
+  Apple platforms Observation requires macOS 14+, so `Package.swift` sets
+  `platforms: [.macOS(.v14)]` for the runtime libraries; the C++ module
+  itself still builds on older macOS (without the runtime dylib, scripts
+  just load but cannot run, with a startup warning).
 
 ## Building
 

@@ -105,7 +105,7 @@ public final class Host {
 	}
 
 	public func variantSetString(_ ptr: UnsafeMutableRawPointer?, _ v: String) {
-		v.withCString { requireHost().pointee.variant_set_string!(ptr, $0) }
+		_ = v.withCString { requireHost().pointee.variant_set_string!(ptr, $0) }
 	}
 
 	public func variantSetObject(_ ptr: UnsafeMutableRawPointer?, _ object: UnsafeMutableRawPointer?) {
@@ -131,7 +131,8 @@ public final class Host {
 	public func variantAsString(_ ptr: UnsafeRawPointer?) -> String {
 		var buffer = [CChar](repeating: 0, count: 4096)
 		requireHost().pointee.variant_as_string!(ptr, &buffer, Int32(buffer.count))
-		return String(cString: buffer)
+		let end = buffer.firstIndex(of: 0) ?? buffer.count
+		return String(decoding: buffer[..<end], as: UTF8.self)
 	}
 
 	public func variantGetObject(_ ptr: UnsafeRawPointer?) -> UnsafeMutableRawPointer? {
@@ -272,10 +273,12 @@ public final class Host {
 	public func callMethod(object: UnsafeMutableRawPointer, method: String, args: [VariantBox]) -> VariantBox {
 		let ret = VariantBox()
 		var err = GDExtensionCallErrorMirror()
-		method.withCString { m in
+		_ = method.withCString { m in
 			args.map { $0.borrowedPtr }.withUnsafeBufferPointer { buf in
 				let rawArgs = buf.baseAddress.map { UnsafeMutableRawPointer(mutating: UnsafeRawPointer($0)) }
-				_ = requireHost().pointee.object_call!(object, m, rawArgs, Int32(args.count), ret.ptr, UnsafeMutableRawPointer(&err))
+				withUnsafeMutableBytes(of: &err) { errBytes in
+					_ = requireHost().pointee.object_call!(object, m, rawArgs, Int32(args.count), ret.ptr, errBytes.baseAddress)
+				}
 			}
 		}
 		return ret
@@ -283,25 +286,25 @@ public final class Host {
 
 	public func getProperty(object: UnsafeMutableRawPointer, name: String) -> VariantBox {
 		let ret = VariantBox()
-		name.withCString { requireHost().pointee.object_get!(object, $0, ret.ptr) }
+		_ = name.withCString { requireHost().pointee.object_get!(object, $0, ret.ptr) }
 		return ret
 	}
 
 	public func setProperty(object: UnsafeMutableRawPointer, name: String, value: VariantBox) {
-		name.withCString { requireHost().pointee.object_set!(object, $0, value.borrowedPtr) }
+		_ = name.withCString { requireHost().pointee.object_set!(object, $0, value.borrowedPtr) }
 	}
 
 	public func getNode(_ node: UnsafeMutableRawPointer, _ path: String) -> UnsafeMutableRawPointer? {
-		path.withCString { requireHost().pointee.node_get_node!(node, $0) }
+		_ = path.withCString { requireHost().pointee.node_get_node!(node, $0) }
 	}
 
 	public func print(_ message: String) {
-		message.withCString { requireHost().pointee.print!($0) }
+		_ = message.withCString { requireHost().pointee.print!($0) }
 	}
 
 	// Instantiates a registered engine class (e.g. "Label") through ClassDB.
 	public func createObject(_ className: String) -> UnsafeMutableRawPointer? {
-		className.withCString { requireHost().pointee.object_create!($0) }
+		_ = className.withCString { requireHost().pointee.object_create!($0) }
 	}
 
 	public func variantNewArray() -> UnsafeMutableRawPointer {

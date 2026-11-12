@@ -83,6 +83,8 @@ public final class ScriptCompiler {
 	}
 
 	private func generateEntry(className: String?, methods: [String], rootView: String?) -> String {
+		// methods is empty when className is nil, so classNameText is never emitted then.
+		let classNameText = className ?? "AnyObject"
 		var lines: [String] = []
 		lines.append("import Foundation")
 		lines.append("import SwiftGodotRuntime")
@@ -100,7 +102,7 @@ public final class ScriptCompiler {
 			lines.append("\t{ instance, args, argCount, ret, error in")
 			lines.append("\t\treturn MainActor.assumeIsolated { () -> UInt8 in")
 			lines.append("\t\t\tguard let instance = instance else { return 0 }")
-			lines.append("\t\t\tlet object = instance.assumingMemoryBound(to: \(className).self).pointee")
+			lines.append("\t\t\tlet object = instance.assumingMemoryBound(to: \(classNameText).self).pointee")
 			if method == "_process" || method == "_physics_process" {
 				lines.append("\t\t\tlet delta = argCount > 0 && args != nil ? Host.shared.variantAsDouble(args!.assumingMemoryBound(to: UnsafeRawPointer?.self)[0]) : 0.0")
 				lines.append("\t\t\tobject.\(method)(delta: delta)")
