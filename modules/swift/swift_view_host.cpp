@@ -45,7 +45,7 @@ void SwiftViewHost::_notification(int p_what) {
 	if (p_what == Node::NOTIFICATION_READY && !scene_built) {
 		const SwiftBridge *bridge = SwiftBridge::get_singleton();
 		if (bridge->is_loaded() && bridge->get_abi().scene_build != nullptr) {
-			GDExtensionObjectPtr root = bridge->get_abi().scene_build((GDExtensionObjectPtr)this);
+			GDExtensionObjectPtr root = (GDExtensionObjectPtr)bridge->get_abi().scene_build((GDExtensionObjectPtr)this);
 			Node *root_node = Object::cast_to<Node>((Object *)root);
 			if (root_node != nullptr) {
 				add_child(root_node);

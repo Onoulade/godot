@@ -58,35 +58,35 @@ struct SwiftGodotABI {
 	void (*host_init)(const SwiftGodotHost *p_host) = nullptr;
 	void (*runtime_shutdown)() = nullptr;
 
-	SwiftGodotScriptHandle (*script_compile)(const char *p_path, const char *p_source) = nullptr;
+	uintptr_t (*script_compile)(const char *p_path, const char *p_source) = nullptr;
 	// Loads a precompiled script library (".swiftbin" next to the source,
 	// produced by the editor at compile time) instead of running swiftc;
 	// used in exported games, which have no Swift toolchain.
-	SwiftGodotScriptHandle (*script_load_precompiled)(const char *p_library_path, const char *p_path, const char *p_source) = nullptr;
+	uintptr_t (*script_load_precompiled)(const char *p_library_path, const char *p_path, const char *p_source) = nullptr;
 	// Writes the path of the library a script handle was loaded from (if any).
 	void (*script_get_library_path)(SwiftGodotScriptHandle p_script, char *r_buffer, int p_buffer_size) = nullptr;
 	void (*script_free)(SwiftGodotScriptHandle p_script) = nullptr;
 	GDExtensionBool (*script_is_valid)(SwiftGodotScriptHandle p_script) = nullptr;
 	void (*script_get_error)(SwiftGodotScriptHandle p_script, char *r_buffer, int p_buffer_size) = nullptr;
-	const char *(*script_get_class_name)(SwiftGodotScriptHandle p_script) = nullptr;
+	uintptr_t (*script_get_class_name)(SwiftGodotScriptHandle p_script) = nullptr;
 	GDExtensionBool (*script_is_tool)(SwiftGodotScriptHandle p_script) = nullptr;
 	int (*script_get_method_count)(SwiftGodotScriptHandle p_script) = nullptr;
-	const char *(*script_get_method_name)(SwiftGodotScriptHandle p_script, int p_index) = nullptr;
+	uintptr_t (*script_get_method_name)(SwiftGodotScriptHandle p_script, int p_index) = nullptr;
 	GDExtensionBool (*script_has_method)(SwiftGodotScriptHandle p_script, const char *p_method) = nullptr;
 	int (*script_get_signal_count)(SwiftGodotScriptHandle p_script) = nullptr;
-	const char *(*script_get_signal_name)(SwiftGodotScriptHandle p_script, int p_index) = nullptr;
+	uintptr_t (*script_get_signal_name)(SwiftGodotScriptHandle p_script, int p_index) = nullptr;
 	GDExtensionBool (*script_has_signal)(SwiftGodotScriptHandle p_script, const char *p_signal) = nullptr;
 	int (*script_get_property_count)(SwiftGodotScriptHandle p_script) = nullptr;
-	const char *(*script_get_property_name)(SwiftGodotScriptHandle p_script, int p_index) = nullptr;
+	uintptr_t (*script_get_property_name)(SwiftGodotScriptHandle p_script, int p_index) = nullptr;
 	int (*script_get_property_type)(SwiftGodotScriptHandle p_script, int p_index) = nullptr;
 	int (*script_get_property_usage)(SwiftGodotScriptHandle p_script, int p_index) = nullptr;
 
 	// Declarative UI (PR #2): build the root node of a Swift scene and
 	// invalidate it (scoped re-render through the attribute graph).
-	GDExtensionObjectPtr (*scene_build)(GDExtensionObjectPtr p_host) = nullptr;
+	uintptr_t (*scene_build)(GDExtensionObjectPtr p_host) = nullptr;
 	void (*scene_invalidate)(GDExtensionObjectPtr p_host) = nullptr;
 
-	SwiftGodotInstanceHandle (*instance_create)(SwiftGodotScriptHandle p_script, GDExtensionObjectPtr p_owner) = nullptr;
+	uintptr_t (*instance_create)(SwiftGodotScriptHandle p_script, GDExtensionObjectPtr p_owner) = nullptr;
 	void (*instance_free)(SwiftGodotInstanceHandle p_instance) = nullptr;
 	GDExtensionBool (*instance_call)(SwiftGodotInstanceHandle p_instance, const char *p_method, GDExtensionConstVariantPtr *p_args, int p_arg_count, GDExtensionVariantPtr r_ret, GDExtensionCallError *r_error) = nullptr;
 	void (*instance_notification)(SwiftGodotInstanceHandle p_instance, int p_notification, GDExtensionBool p_reversed) = nullptr;

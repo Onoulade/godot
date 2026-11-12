@@ -19,7 +19,7 @@ public final class ScriptCompiler {
 
 	public var isAvailable: Bool { swiftcPath != nil }
 
-	public func tryCompile(script: CompiledScript, className: String?, rootView: String?) {
+	func tryCompile(script: CompiledScript, className: String?, rootView: String?) {
 		guard let swiftc = swiftcPath else {
 			script.error = "swiftc not found in PATH; script metadata parsed but not compiled for execution."
 			return

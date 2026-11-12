@@ -70,7 +70,7 @@ public final class Host {
 
 	private var host: UnsafePointer<SwiftGodotHostMirror>?
 
-	public func setHost(_ h: UnsafePointer<SwiftGodotHostMirror>) {
+	public func setHost(_ h: UnsafePointer<SwiftGodotHostMirror>?) {
 		host = h
 	}
 

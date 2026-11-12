@@ -2,7 +2,7 @@ import Foundation
 
 // Variant::Type values mirrored from the engine (core/variant/variant.h).
 public enum VariantTypeMirror: Int32 {
-	case nil = 0
+	case none = 0
 	case bool = 1
 	case int = 2
 	case float = 3
@@ -163,7 +163,7 @@ public final class Runtime {
 
 	public func getScriptClassName(_ handle: UnsafeMutableRawPointer?) -> UnsafeRawPointer? {
 		guard let className = script(for: handle)?.className else { return nil }
-		return className.withCString { strdup($0) }
+		return className.withCString { UnsafeRawPointer(strdup($0)) }
 	}
 
 	public func isScriptTool(_ handle: UnsafeMutableRawPointer?) -> Bool {
@@ -176,7 +176,7 @@ public final class Runtime {
 
 	public func getScriptMethodName(_ handle: UnsafeMutableRawPointer?, index: Int32) -> UnsafeRawPointer? {
 		guard let methods = script(for: handle)?.methods, index >= 0, index < methods.count else { return nil }
-		return methods[Int(index)].withCString { strdup($0) }
+		return methods[Int(index)].withCString { UnsafeRawPointer(strdup($0)) }
 	}
 
 	public func scriptHasMethod(_ handle: UnsafeMutableRawPointer?, method: String) -> Bool {
@@ -189,7 +189,7 @@ public final class Runtime {
 
 	public func getScriptSignalName(_ handle: UnsafeMutableRawPointer?, index: Int32) -> UnsafeRawPointer? {
 		guard let signals = script(for: handle)?.signals, index >= 0, index < signals.count else { return nil }
-		return signals[Int(index)].withCString { strdup($0) }
+		return signals[Int(index)].withCString { UnsafeRawPointer(strdup($0)) }
 	}
 
 	public func scriptHasSignal(_ handle: UnsafeMutableRawPointer?, signal: String) -> Bool {
@@ -202,7 +202,7 @@ public final class Runtime {
 
 	public func getScriptPropertyName(_ handle: UnsafeMutableRawPointer?, index: Int32) -> UnsafeRawPointer? {
 		guard let properties = script(for: handle)?.properties, index >= 0, index < properties.count else { return nil }
-		return properties[Int(index)].name.withCString { strdup($0) }
+		return properties[Int(index)].name.withCString { UnsafeRawPointer(strdup($0)) }
 	}
 
 	public func getScriptPropertyType(_ handle: UnsafeMutableRawPointer?, index: Int32) -> Int32 {
@@ -304,31 +304,35 @@ public final class Runtime {
 		case "Int", "Int32", "Int64", "UInt", "UInt32", "UInt64": return VariantTypeMirror.int.rawValue
 		case "Float", "Double": return VariantTypeMirror.float.rawValue
 		case "String": return VariantTypeMirror.string.rawValue
-		default: return VariantTypeMirror.nil.rawValue
+		default: return VariantTypeMirror.none.rawValue
 		}
+	}
+
+	private func nsrange(of source: String) -> NSRange {
+		NSRange(location: 0, length: source.utf16.count)
 	}
 
 	private func firstMatch(of pattern: String, in source: String) -> String? {
 		guard let regex = try? NSRegularExpression(pattern: pattern) else { return nil }
-		let range = NSRange(source.startIndex..., in: source)
-		guard let match = regex.firstMatch(in: source, range: range), match.numberOfRanges > 1 else { return nil }
-		return String(source[Range(match.range(at: 1), in: source)!])
+		guard let match = regex.firstMatch(in: source, range: nsrange(of: source)), match.numberOfRanges > 1 else { return nil }
+		guard let range = Range(match.range(at: 1), in: source) else { return nil }
+		return String(source[range])
 	}
 
 	private func allMatches(of pattern: String, in source: String) -> [String] {
 		guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }
-		let range = NSRange(source.startIndex..., in: source)
-		return regex.matches(in: source, range: range).compactMap { match in
-			match.numberOfRanges > 1 ? String(source[Range(match.range(at: 1), in: source)!]) : nil
+		return regex.matches(in: source, range: nsrange(of: source)).compactMap { match in
+			guard match.numberOfRanges > 1, let range = Range(match.range(at: 1), in: source) else { return nil }
+			return String(source[range])
 		}
 	}
 
 	private func allMatchesWithGroups(of pattern: String, in source: String) -> [[String]] {
 		guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }
-		let range = NSRange(source.startIndex..., in: source)
-		return regex.matches(in: source, range: range).map { match in
+		return regex.matches(in: source, range: nsrange(of: source)).map { match in
 			(1..<match.numberOfRanges).map { group in
-				String(source[Range(match.range(at: group), in: source)!])
+				guard let range = Range(match.range(at: group), in: source) else { return "" }
+				return String(source[range])
 			}
 		}
 	}

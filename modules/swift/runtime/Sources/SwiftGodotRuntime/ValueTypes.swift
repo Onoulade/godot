@@ -165,9 +165,9 @@ public struct Color: GodotValueType, Equatable, Sendable {
 	}
 
 	@MainActor public func toVariantBox() -> VariantBox {
-		let b = VariantBox()
-		Host.shared.variantSetColor(b.ptr, r, g, b, a)
-		return b
+		let box = VariantBox()
+		Host.shared.variantSetColor(box.ptr, r, g, b, a)
+		return box
 	}
 }
 

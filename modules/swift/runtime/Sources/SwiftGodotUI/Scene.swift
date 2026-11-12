@@ -5,9 +5,9 @@ import SwiftGodotRuntime
 // swiftgodot_scene_build / swiftgodot_scene_invalidate.
 
 @_cdecl("swiftgodot_scene_build")
-public func swiftgodot_scene_build(_ host: UnsafeMutableRawPointer?) -> UnsafeRawPointer? {
+public func swiftgodot_scene_build(_ host: UnsafeMutableRawPointer?) -> UInt {
 	MainActor.assumeIsolated {
-		SceneRegistry.shared.build(host: host)
+		SceneRegistry.shared.build(host: host).map { UInt(bitPattern: $0) } ?? 0
 	}
 }
 
@@ -47,7 +47,7 @@ public final class SceneRegistry {
 		return lastRoot
 	}
 
-	public func build(host: UnsafeMutableRawPointer?) -> UnsafeRawPointer? {
+	public func build(host: UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? {
 		guard let host, let hostNode = Node(raw: host), let view = rootView(for: host) else { return nil }
 		let id = ObjectIdentifier(hostNode.ptr)
 		if let existing = trees[id] {

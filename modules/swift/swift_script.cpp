@@ -50,7 +50,7 @@ StringName SwiftScript::get_global_name() const {
 	if (compiled_handle != nullptr && SwiftBridge::get_singleton()->is_loaded()) {
 		const SwiftGodotABI &abi = SwiftBridge::get_singleton()->get_abi();
 		if (abi.script_get_class_name != nullptr) {
-			const char *class_name = abi.script_get_class_name(compiled_handle);
+			const char *class_name = (const char *)abi.script_get_class_name(compiled_handle);
 			if (class_name != nullptr && class_name[0] != '\0') {
 				return String::utf8(class_name);
 			}
@@ -67,7 +67,7 @@ ScriptInstance *SwiftScript::instance_create(Object *p_this) {
 		return nullptr;
 	}
 	const SwiftGodotABI &abi = SwiftBridge::get_singleton()->get_abi();
-	SwiftGodotInstanceHandle handle = abi.instance_create(compiled_handle, (GDExtensionObjectPtr)p_this);
+	SwiftGodotInstanceHandle handle = (SwiftGodotInstanceHandle)abi.instance_create(compiled_handle, (GDExtensionObjectPtr)p_this);
 	if (handle == nullptr) {
 		return nullptr;
 	}
@@ -97,11 +97,11 @@ Error SwiftScript::reload(bool p_keep_state) {
 		bool loaded_precompiled = false;
 		if (!Engine::get_singleton()->is_editor_hint() && abi.script_load_precompiled != nullptr && FileAccess::exists(bin_path)) {
 			CharString bin = bin_path.utf8();
-			compiled_handle = abi.script_load_precompiled(bin.get_data(), path.get_data(), source.get_data());
+			compiled_handle = (SwiftGodotScriptHandle)abi.script_load_precompiled(bin.get_data(), path.get_data(), source.get_data());
 			loaded_precompiled = compiled_handle != nullptr;
 		}
 		if (!loaded_precompiled) {
-			compiled_handle = abi.script_compile(path.get_data(), source.get_data());
+			compiled_handle = (SwiftGodotScriptHandle)abi.script_compile(path.get_data(), source.get_data());
 		}
 		if (compiled_handle != nullptr) {
 			valid = abi.script_is_valid != nullptr && abi.script_is_valid(compiled_handle) != 0;
@@ -190,7 +190,7 @@ void SwiftScript::get_script_signal_list(List<MethodInfo> *r_signals) const {
 	}
 	int count = abi.script_get_signal_count(compiled_handle);
 	for (int i = 0; i < count; i++) {
-		const char *entry_name = abi.script_get_signal_name(compiled_handle, i);
+		const char *entry_name = (const char *)abi.script_get_signal_name(compiled_handle, i);
 		if (entry_name == nullptr) {
 			continue;
 		}
@@ -210,7 +210,7 @@ void SwiftScript::get_script_method_list(List<MethodInfo> *r_list) const {
 	}
 	int count = abi.script_get_method_count(compiled_handle);
 	for (int i = 0; i < count; i++) {
-		const char *entry_name = abi.script_get_method_name(compiled_handle, i);
+		const char *entry_name = (const char *)abi.script_get_method_name(compiled_handle, i);
 		if (entry_name == nullptr) {
 			continue;
 		}
@@ -230,7 +230,7 @@ void SwiftScript::get_script_property_list(List<PropertyInfo> *r_list) const {
 	}
 	int count = abi.script_get_property_count(compiled_handle);
 	for (int i = 0; i < count; i++) {
-		const char *entry_name = abi.script_get_property_name(compiled_handle, i);
+		const char *entry_name = (const char *)abi.script_get_property_name(compiled_handle, i);
 		if (entry_name == nullptr) {
 			continue;
 		}

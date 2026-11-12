@@ -386,7 +386,12 @@ def emit_method(m, generated):
             else:
                 dv = default_literal(a.get("default_value"))
         else:
-            dv = default_literal(a.get("default_value")) if st in ("Bool", "Int", "Double", "String") else None
+            dv = default_literal(a.get("default_value"))
+            if dv is not None:
+                if st not in ("Bool", "Int", "Double", "String"):
+                    dv = None
+                elif st == "String" and not (dv.startswith('"') and dv.endswith('"')):
+                    dv = None
         params.append(f"{pname}: {st} = {dv}" if dv is not None else f"{pname}: {st}")
         if is_enum(a.get("type"), a.get("class_name")) and st != "Int":
             call_args.append(f"VariantBox({pname}.rawValue)")
@@ -423,7 +428,7 @@ def emit_method(m, generated):
     elif ret_swift == "VariantBox":
         lines.append("\t\treturn __ret")
     else:
-        lines.append(f"\t\treturn __ret.asObject({ret_swift}.self)")
+        lines.append("\t\treturn __ret.asObject()")
     lines.append("\t}")
     return lines
 
@@ -441,7 +446,7 @@ def emit_property(p, method_names, generated):
     elif st == "VariantBox":
         accessor = ""
     elif st == "GodotObject" or st in generated:
-        accessor = f".asObject({st}.self)"
+        accessor = ".asObject()"
     else:
         accessor = f".as{st}()"
     if is_object:
