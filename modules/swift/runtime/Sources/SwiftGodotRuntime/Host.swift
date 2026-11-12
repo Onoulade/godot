@@ -132,7 +132,7 @@ public final class Host {
 		var buffer = [CChar](repeating: 0, count: 4096)
 		requireHost().pointee.variant_as_string!(ptr, &buffer, Int32(buffer.count))
 		let end = buffer.firstIndex(of: 0) ?? buffer.count
-		return String(decoding: buffer[..<end], as: UTF8.self)
+		return String(decoding: buffer[..<end].map { UInt8(bitPattern: $0) }, as: UTF8.self)
 	}
 
 	public func variantGetObject(_ ptr: UnsafeRawPointer?) -> UnsafeMutableRawPointer? {
