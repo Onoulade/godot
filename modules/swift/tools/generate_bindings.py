@@ -11,9 +11,121 @@ Object-typed values are wrapped in generated Swift classes; value types
 """
 
 import argparse
+import ast
 import json
 import re
 import sys
+
+GLOBAL_ENUM_HEADERS = [
+    "core/math/math_defs.h",
+    "core/error/error_list.h",
+    "core/error/error_macros.h",
+    "core/input/input_enums.h",
+    "core/os/keyboard.h",
+    "core/object/property_info.h",
+    "core/object/method_info.h",
+    "core/io/resource_loader_constants.h",
+    "core/io/file_access_pack.h",
+    "core/variant/type_info.h",
+]
+
+
+def safe_eval(expr, consts):
+    node = ast.parse(expr, mode="eval")
+
+    def ev(n):
+        if isinstance(n, ast.Expression):
+            return ev(n.body)
+        if isinstance(n, ast.Constant) and isinstance(n.value, int):
+            return n.value
+        if isinstance(n, ast.Name):
+            return consts[n.id]
+        if isinstance(n, ast.BinOp):
+            lv, rv = ev(n.left), ev(n.right)
+            if isinstance(n.op, ast.LShift):
+                return lv << rv
+            if isinstance(n.op, ast.RShift):
+                return lv >> rv
+            if isinstance(n.op, ast.BitOr):
+                return lv | rv
+            if isinstance(n.op, ast.BitAnd):
+                return lv & rv
+            if isinstance(n.op, ast.BitXor):
+                return lv ^ rv
+            if isinstance(n.op, ast.Add):
+                return lv + rv
+            if isinstance(n.op, ast.Sub):
+                return lv - rv
+            if isinstance(n.op, ast.Mult):
+                return lv * rv
+        if isinstance(n, ast.UnaryOp):
+            if isinstance(n.op, ast.USub):
+                return -ev(n.operand)
+            if isinstance(n.op, ast.Invert):
+                return ~ev(n.operand)
+        if (
+            isinstance(n, ast.Call)
+            and isinstance(n.func, ast.Name)
+            and n.func.id
+            in (
+                "int",
+                "uint8_t",
+                "uint16_t",
+                "uint32_t",
+                "uint64_t",
+                "int8_t",
+                "int16_t",
+                "int32_t",
+                "int64_t",
+                "unsigned",
+                "char",
+                "short",
+                "long",
+                "float",
+                "double",
+            )
+        ):
+            return ev(n.args[0])
+        raise ValueError(f"unsupported expression: {ast.dump(n)}")
+
+    return ev(node)
+
+
+ALL_CONSTS: dict[str, int] = {}
+
+
+def parse_header_enums(path):
+    with open(path) as f:
+        text = f.read()
+    text = re.sub(r"//[^\n]*", "", text)
+    text = re.sub(r"/\*.*?\*/", "", text, flags=re.S)
+    enums = {}
+    for m in re.finditer(r"enum\s+(?:class\s+)?(\w+)\s*(?::\s*\w+\s*)?\{([^}]*)\}", text):
+        name, body = m.group(1), m.group(2)
+        consts = {}
+        cur = -1
+        for item in body.split(","):
+            item = item.strip()
+            if not item:
+                continue
+            if "=" in item:
+                cname, expr = item.split("=", 1)
+                cname = cname.strip()
+                expr = re.sub(r"\w+::(\w+)", r"\1", expr)
+                expr = re.sub(r"\b(?:u?int\d*_t?|unsigned|char|short|long|float|double)\s*\(([^()]*)\)", r"(\1)", expr)
+                val = safe_eval(expr.strip(), {**ALL_CONSTS, **consts})
+            else:
+                cname = item.strip()
+                cur += 1
+                val = cur
+            if re.fullmatch(r"\w+", cname):
+                consts[cname] = val
+                cur = val
+        if consts:
+            enums[name] = consts
+            ALL_CONSTS.update(consts)
+    return enums
+
 
 SWIFT_KEYWORDS = {
     "associatedtype",
@@ -116,10 +228,15 @@ def camel_case(s):
     return parts[0] + "".join(p.capitalize() for p in parts[1:])
 
 
+GLOBAL_ENUMS: dict[str, dict[str, int]] = {}
+
+
 def enum_swift_type(class_name, generated):
     # "Node.ProcessMode" -> "Node.ProcessMode" if Node is generated, else Int.
-    if not class_name or "." not in class_name:
-        return "Int"  # global enum (Error, Key, ...): kept as Int for now
+    if not class_name:
+        return "Int"
+    if "." not in class_name:
+        return class_name if class_name in GLOBAL_ENUMS else "Int"
     cls = class_name.split(".")[0]
     if cls in generated:
         return class_name
@@ -127,7 +244,9 @@ def enum_swift_type(class_name, generated):
 
 
 def is_enum(jtype, class_name):
-    return (jtype or "").lower() == "int" and class_name and "." in class_name
+    if (jtype or "").lower() != "int" or not class_name:
+        return False
+    return "." in class_name or class_name in GLOBAL_ENUMS
 
 
 def swift_type(jtype, class_name, generated):
@@ -238,19 +357,33 @@ def emit_property(p, method_names):
     return lines
 
 
-def emit_enum(en):
-    name = sanitize(en.get("name", "Enum"))
-    prefix = snake_upper(en.get("name", "")) + "_"
-    lines = [f"\tpublic enum {name}: Int, Sendable, CaseIterable {{"]
+def emit_enum_cases(name, values, indent):
+    prefix = snake_upper(name) + "_"
+    lines = []
     used = set()
-    for const, val in sorted(en.get("values", {}).items(), key=lambda kv: kv[1]):
+    for const, val in sorted(values.items(), key=lambda kv: kv[1]):
         base = const[len(prefix) :] if const.startswith(prefix) else const
         case = sanitize(camel_case(base))
         while case in used:
             case += "_"
         used.add(case)
-        lines.append(f"\t\tcase {case} = {val}")
+        lines.append(f"{indent}case {case} = {val}")
+    return lines
+
+
+def emit_enum(en):
+    name = sanitize(en.get("name", "Enum"))
+    lines = [f"\tpublic enum {name}: Int, Sendable, CaseIterable {{"]
+    lines.extend(emit_enum_cases(en.get("name", ""), en.get("values", {}), "\t\t"))
     lines.append("\t}")
+    return lines
+
+
+def emit_top_level_enum(name, values):
+    lines = [f"public enum {sanitize(name)}: Int, Sendable, CaseIterable {{"]
+    lines.extend(emit_enum_cases(name, values, "\t"))
+    lines.append("}")
+    lines.append("")
     return lines
 
 
@@ -280,10 +413,18 @@ def main():
     parser.add_argument("--classes", help="Comma-separated class names to generate")
     parser.add_argument("--all", action="store_true", help="Generate all classes in the API")
     parser.add_argument("--out", required=True, help="Output Swift file")
+    parser.add_argument(
+        "--global-enums-headers",
+        default=",".join(GLOBAL_ENUM_HEADERS),
+        help="Comma-separated core headers to extract global enums from",
+    )
     args = parser.parse_args()
 
     with open(args.api) as f:
         api = json.load(f)
+
+    for header in args.global_enums_headers.split(","):
+        GLOBAL_ENUMS.update(parse_header_enums(header))
 
     all_classes = {c["name"]: c for c in api.get("classes", [])}
     if args.all:
@@ -330,6 +471,8 @@ def main():
     out.append("\t}")
     out.append("}")
     out.append("")
+    for ename in sorted(GLOBAL_ENUMS):
+        out.extend(emit_top_level_enum(ename, GLOBAL_ENUMS[ename]))
     for cname in ordered:
         c = all_classes[cname]
         parent = c.get("inherits") or "GodotObject"
