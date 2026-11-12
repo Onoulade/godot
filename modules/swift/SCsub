@@ -19,17 +19,41 @@ env_swift.add_source_files(env.modules_sources, "*.cpp")
 # the executable's directory first when loading the runtime at startup.
 # Set SWIFTGODOT_SKIP_RUNTIME_BUILD=1 to skip (e.g. no toolchain on a CI
 # builder that only compiles the C++ side).
+def _find_swift():
+    swift = shutil.which("swift")
+    if swift is not None:
+        return swift
+    # Fall back to xcrun (Xcode selected without CLI tools in PATH) and the
+    # usual install locations.
+    xcrun = shutil.which("xcrun")
+    if xcrun is not None:
+        try:
+            out = subprocess.run([xcrun, "--find", "swift"], capture_output=True, text=True, timeout=30)
+            if out.returncode == 0 and out.stdout.strip() and os.path.exists(out.stdout.strip()):
+                return out.stdout.strip()
+        except Exception:
+            pass
+    for candidate in ("/usr/bin/swift", "/usr/local/bin/swift", "/opt/homebrew/bin/swift"):
+        if os.path.exists(candidate):
+            return candidate
+    return None
+
+
 def _build_swift_runtime_libs():
     if os.environ.get("SWIFTGODOT_SKIP_RUNTIME_BUILD"):
         return
     if env.GetOption("clean") or env.GetOption("help"):
         return
-    swift = shutil.which("swift")
+    config = "debug" if env["target"] in ("editor", "template_debug") else "release"
+    swift = _find_swift()
     if swift is None:
+        print("swift module: no Swift toolchain found (swift/xcrun); skipping the runtime build.")
+        print("swift module: to enable Swift scripts, install a Swift 6 toolchain or run manually:")
+        print(f"swift module:   {config} build: swift build -c {config} --package-path modules/swift/runtime")
+        print("swift module:   then copy libswiftgodot_runtime + libSwiftGodotUI next to the binary in bin/.")
         return
     package_path = os.path.join("modules", "swift", "runtime")
-    config = "debug" if env["target"] in ("editor", "template_debug") else "release"
-    print(f"swift module: building the Swift runtime package (swift build -c {config})...")
+    print(f"swift module: building the Swift runtime package ({swift} build -c {config})...")
     result = subprocess.run([swift, "build", "-c", config, "--package-path", package_path])
     if result.returncode != 0:
         print(

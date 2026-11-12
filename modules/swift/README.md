@@ -174,13 +174,15 @@ toolchain (`swift` in `PATH`) is available: the produced
 are copied next to the Godot executable in `bin/`, where the module loads
 them at startup (it also searches `../Frameworks/` inside macOS `.app`
 bundles and `res://bin`). Set `SWIFTGODOT_SKIP_RUNTIME_BUILD=1` to skip this
-step (e.g. on CI builders without Swift). To do it by hand instead:
+step (e.g. on CI builders without Swift). To do it by hand instead (watch the `swift module:` lines in the scons output
+to see whether the toolchain was found):
 
 ```sh
-cd modules/swift/runtime
-swift build -c release   # or -c debug for editor/template_debug builds
-# then place the produced libswiftgodot_runtime.{so,dylib,dll}
-# next to the Godot executable or in res://bin of the project.
+swift build -c debug --package-path modules/swift/runtime   # editor/template_debug; use -c release otherwise
+cp modules/swift/runtime/.build/debug/libswiftgodot_runtime.{so,dylib,dll} \
+   modules/swift/runtime/.build/debug/libSwiftGodotUI.{so,dylib,dll} \
+   bin/
+# for a macOS .app bundle, put them in Godot.app/Contents/Frameworks/ instead
 ```
 
 If the runtime library is missing at startup, the editor prints a warning and
