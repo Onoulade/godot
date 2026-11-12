@@ -6,15 +6,17 @@ import SwiftGodotRuntime
 
 @_cdecl("swiftgodot_scene_build")
 public func swiftgodot_scene_build(_ host: UnsafeMutableRawPointer?) -> UInt {
+	let h = SendableRawPointer(host)
 	MainActor.assumeIsolated {
-		SceneRegistry.shared.build(host: host).map { UInt(bitPattern: $0) } ?? 0
+		SceneRegistry.shared.build(host: h.ptr).map { UInt(bitPattern: $0) } ?? 0
 	}
 }
 
 @_cdecl("swiftgodot_scene_invalidate")
 public func swiftgodot_scene_invalidate(_ host: UnsafeMutableRawPointer?) {
+	let h = SendableRawPointer(host)
 	MainActor.assumeIsolated {
-		SceneRegistry.shared.invalidate(host: host)
+		SceneRegistry.shared.invalidate(host: h.ptr)
 	}
 }
 
