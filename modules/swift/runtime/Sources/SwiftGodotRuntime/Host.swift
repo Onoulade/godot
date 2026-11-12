@@ -295,7 +295,7 @@ public final class Host {
 	}
 
 	public func getNode(_ node: UnsafeMutableRawPointer, _ path: String) -> UnsafeMutableRawPointer? {
-		_ = path.withCString { requireHost().pointee.node_get_node!(node, $0) }
+		return path.withCString { requireHost().pointee.node_get_node!(node, $0) }
 	}
 
 	public func print(_ message: String) {
@@ -304,7 +304,7 @@ public final class Host {
 
 	// Instantiates a registered engine class (e.g. "Label") through ClassDB.
 	public func createObject(_ className: String) -> UnsafeMutableRawPointer? {
-		_ = className.withCString { requireHost().pointee.object_create!($0) }
+		return className.withCString { requireHost().pointee.object_create!($0) }
 	}
 
 	public func variantNewArray() -> UnsafeMutableRawPointer {
