@@ -9,7 +9,7 @@ public enum VariantTypeMirror: Int32 {
 	case string = 4
 }
 
-final class CompiledScript {
+@MainActor final class CompiledScript {
 	let path: String
 	let source: String
 	var className: String?
@@ -31,7 +31,7 @@ final class CompiledScript {
 	}
 }
 
-final class ScriptInstanceBox {
+@MainActor final class ScriptInstanceBox {
 	let script: CompiledScript
 	let owner: UnsafeMutableRawPointer?
 	let object: AnyObject?
@@ -43,8 +43,9 @@ final class ScriptInstanceBox {
 	}
 }
 
+@MainActor
 public final class Runtime {
-	public static let shared = Runtime()
+	@MainActor public static let shared = Runtime()
 
 	public typealias GetProcAddress = @convention(c) (UnsafePointer<CChar>) -> UnsafeMutableRawPointer?
 

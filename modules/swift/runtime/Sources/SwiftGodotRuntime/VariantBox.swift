@@ -2,6 +2,7 @@ import Foundation
 
 // Owns (or borrows) a heap Variant allocated through the host vtable, with
 // typed conversions used by the generated bindings.
+@MainActor
 public class VariantBox {
 	public let ptr: UnsafeMutableRawPointer
 	private let owned: Bool

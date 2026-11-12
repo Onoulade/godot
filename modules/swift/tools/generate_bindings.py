@@ -264,6 +264,9 @@ def main():
     )
     out.append("import Foundation")
     out.append("")
+    out.append("// Godot's API is main-thread-only, so all bindings are @MainActor:")
+    out.append("// Swift 6 strict concurrency then rejects off-main-thread calls at compile time.")
+    out.append("@MainActor")
     out.append("public class GodotObject {")
     out.append("\tpublic let ptr: UnsafeMutableRawPointer")
     out.append("\tpublic init(ptr: UnsafeMutableRawPointer) { self.ptr = ptr }")
@@ -281,6 +284,7 @@ def main():
         parent = c.get("inherits") or "GodotObject"
         if parent not in selected and parent != "":
             parent = "GodotObject"
+        out.append("@MainActor")
         out.append(f"public class {cname}: {parent} {{")
         out.append("\tpublic override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }")
         method_names = set()

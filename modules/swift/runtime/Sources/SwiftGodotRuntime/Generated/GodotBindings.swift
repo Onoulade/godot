@@ -2,6 +2,9 @@
 // Regenerate with: python3 modules/swift/tools/generate_bindings.py --api extension_api.json --classes ... --out <this file>
 import Foundation
 
+// Godot's API is main-thread-only, so all bindings are @MainActor:
+// Swift 6 strict concurrency then rejects off-main-thread calls at compile time.
+@MainActor
 public class GodotObject {
 	public let ptr: UnsafeMutableRawPointer
 	public init(ptr: UnsafeMutableRawPointer) { self.ptr = ptr }
@@ -14,6 +17,7 @@ public class GodotObject {
 	}
 }
 
+@MainActor
 public class Object: GodotObject {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -242,6 +246,7 @@ public class Object: GodotObject {
 	}
 }
 
+@MainActor
 public class AccessibilityServer: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -486,6 +491,7 @@ public class AccessibilityServer: Object {
 	}
 }
 
+@MainActor
 public class AudioServer: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_bus_count(amount: Int) {
@@ -751,6 +757,7 @@ public class AudioServer: Object {
 	}
 }
 
+@MainActor
 public class CameraServer: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_monitoring_feeds(is_monitoring_feeds: Bool) {
@@ -797,6 +804,7 @@ public class CameraServer: Object {
 	}
 }
 
+@MainActor
 public class ClassDB: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -948,6 +956,7 @@ public class ClassDB: Object {
 	}
 }
 
+@MainActor
 public class DisplayServer: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -2093,6 +2102,7 @@ public class DisplayServer: Object {
 	}
 }
 
+@MainActor
 public class Engine: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_physics_ticks_per_second(physics_ticks_per_second: Int) {
@@ -2312,6 +2322,7 @@ public class Engine: Object {
 	}
 }
 
+@MainActor
 public class EngineDebugger: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -2401,6 +2412,7 @@ public class EngineDebugger: Object {
 	}
 }
 
+@MainActor
 public class FramebufferCacheRD: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -2410,6 +2422,7 @@ public class FramebufferCacheRD: Object {
 	}
 }
 
+@MainActor
 public class GDExtensionManager: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -2458,6 +2471,7 @@ public class GDExtensionManager: Object {
 	}
 }
 
+@MainActor
 public class Geometry2D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -2578,6 +2592,7 @@ public class Geometry2D: Object {
 	}
 }
 
+@MainActor
 public class Geometry3D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -2653,6 +2668,7 @@ public class Geometry3D: Object {
 	}
 }
 
+@MainActor
 public class GodotInstance: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -2684,6 +2700,7 @@ public class GodotInstance: Object {
 	}
 }
 
+@MainActor
 public class IP: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -2734,6 +2751,7 @@ public class IP: Object {
 	}
 }
 
+@MainActor
 public class Input: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -3128,6 +3146,7 @@ public class Input: Object {
 	}
 }
 
+@MainActor
 public class InputMap: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -3191,6 +3210,7 @@ public class InputMap: Object {
 	}
 }
 
+@MainActor
 public class JNISingleton: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -3200,6 +3220,7 @@ public class JNISingleton: Object {
 	}
 }
 
+@MainActor
 public class JSONRPC: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_method(name: String, callback: VariantBox) {
@@ -3235,6 +3256,7 @@ public class JSONRPC: Object {
 	}
 }
 
+@MainActor
 public class JavaClassWrapper: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -3259,6 +3281,7 @@ public class JavaClassWrapper: Object {
 	}
 }
 
+@MainActor
 public class JavaScriptBridge: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func eval(code: String, use_global_execution_context: Bool = false) {
@@ -3308,6 +3331,7 @@ public class JavaScriptBridge: Object {
 	}
 }
 
+@MainActor
 public class MainLoop: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _initialize() {
@@ -3331,6 +3355,7 @@ public class MainLoop: Object {
 	}
 }
 
+@MainActor
 public class Marshalls: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -3363,6 +3388,7 @@ public class Marshalls: Object {
 	}
 }
 
+@MainActor
 public class MovieWriter: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func add_writer(writer: MovieWriter) {
@@ -3403,6 +3429,7 @@ public class MovieWriter: Object {
 	}
 }
 
+@MainActor
 public class NativeMenu: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -3706,6 +3733,7 @@ public class NativeMenu: Object {
 	}
 }
 
+@MainActor
 public class NavigationMeshGenerator: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func bake(navigation_mesh: NavigationMesh, root_node: Node) {
@@ -3722,6 +3750,7 @@ public class NavigationMeshGenerator: Object {
 	}
 }
 
+@MainActor
 public class NavigationServer2D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -4302,6 +4331,7 @@ public class NavigationServer2D: Object {
 	}
 }
 
+@MainActor
 public class NavigationServer2DManager: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func register_server(name: String, create_callback: VariantBox) {
@@ -4312,6 +4342,7 @@ public class NavigationServer2DManager: Object {
 	}
 }
 
+@MainActor
 public class NavigationServer3D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -4963,6 +4994,7 @@ public class NavigationServer3D: Object {
 	}
 }
 
+@MainActor
 public class NavigationServer3DManager: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func register_server(name: String, create_callback: VariantBox) {
@@ -4973,6 +5005,7 @@ public class NavigationServer3DManager: Object {
 	}
 }
 
+@MainActor
 public class Node: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func print_orphan_nodes() {
@@ -5629,6 +5662,7 @@ public class Node: Object {
 	}
 }
 
+@MainActor
 public class OS: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -6033,6 +6067,7 @@ public class OS: Object {
 	}
 }
 
+@MainActor
 public class OpenXRExtensionWrapper: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -6244,6 +6279,7 @@ public class OpenXRExtensionWrapper: Object {
 	}
 }
 
+@MainActor
 public class OpenXRInteractionProfileMetadata: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func register_profile_rename(old_name: String, new_name: String) {
@@ -6263,6 +6299,7 @@ public class OpenXRInteractionProfileMetadata: Object {
 	}
 }
 
+@MainActor
 public class Performance: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -6301,6 +6338,7 @@ public class Performance: Object {
 	}
 }
 
+@MainActor
 public class PhysicsDirectBodyState2D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -6565,6 +6603,7 @@ public class PhysicsDirectBodyState2D: Object {
 	}
 }
 
+@MainActor
 public class PhysicsDirectBodyState3D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -6847,6 +6886,7 @@ public class PhysicsDirectBodyState3D: Object {
 	}
 }
 
+@MainActor
 public class PhysicsDirectSpaceState2D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -6911,6 +6951,7 @@ public class PhysicsDirectSpaceState2D: Object {
 	}
 }
 
+@MainActor
 public class PhysicsDirectSpaceState3D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -6975,6 +7016,7 @@ public class PhysicsDirectSpaceState3D: Object {
 	}
 }
 
+@MainActor
 public class PhysicsServer2D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -7437,6 +7479,7 @@ public class PhysicsServer2D: Object {
 	}
 }
 
+@MainActor
 public class PhysicsServer2DManager: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func register_server(name: String, create_callback: VariantBox) {
@@ -7447,6 +7490,7 @@ public class PhysicsServer2DManager: Object {
 	}
 }
 
+@MainActor
 public class PhysicsServer3D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -8129,6 +8173,7 @@ public class PhysicsServer3D: Object {
 	}
 }
 
+@MainActor
 public class PhysicsServer3DManager: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func register_server(name: String, create_callback: VariantBox) {
@@ -8139,6 +8184,7 @@ public class PhysicsServer3DManager: Object {
 	}
 }
 
+@MainActor
 public class PhysicsServer3DRenderingServerHandler: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_vertex(vertex_id: Int, vertex: Vector3) {
@@ -8161,6 +8207,7 @@ public class PhysicsServer3DRenderingServerHandler: Object {
 	}
 }
 
+@MainActor
 public class ProjectSettings: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -8251,6 +8298,7 @@ public class ProjectSettings: Object {
 	}
 }
 
+@MainActor
 public class RefCounted: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -8275,6 +8323,7 @@ public class RefCounted: Object {
 	}
 }
 
+@MainActor
 public class RenderData: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -8299,6 +8348,7 @@ public class RenderData: Object {
 	}
 }
 
+@MainActor
 public class RenderSceneData: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -8333,6 +8383,7 @@ public class RenderSceneData: Object {
 	}
 }
 
+@MainActor
 public class RenderingDevice: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -8947,6 +8998,7 @@ public class RenderingDevice: Object {
 	}
 }
 
+@MainActor
 public class RenderingServer: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -10865,6 +10917,7 @@ public class RenderingServer: Object {
 	}
 }
 
+@MainActor
 public class ResourceLoader: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -10938,6 +10991,7 @@ public class ResourceLoader: Object {
 	}
 }
 
+@MainActor
 public class ResourceSaver: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -10968,6 +11022,7 @@ public class ResourceSaver: Object {
 	}
 }
 
+@MainActor
 public class ResourceUID: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -11026,10 +11081,12 @@ public class ResourceUID: Object {
 	}
 }
 
+@MainActor
 public class ScriptLanguage: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class ShaderIncludeDB: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -11049,6 +11106,7 @@ public class ShaderIncludeDB: Object {
 	}
 }
 
+@MainActor
 public class TextServerManager: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func add_interface(interface: TextServer) {
@@ -11093,6 +11151,7 @@ public class TextServerManager: Object {
 	}
 }
 
+@MainActor
 public class TextureStreaming: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -11144,6 +11203,7 @@ public class TextureStreaming: Object {
 	}
 }
 
+@MainActor
 public class ThemeContext: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func emit_changed() {
@@ -11151,6 +11211,7 @@ public class ThemeContext: Object {
 	}
 }
 
+@MainActor
 public class ThemeDB: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -11244,6 +11305,7 @@ public class ThemeDB: Object {
 	}
 }
 
+@MainActor
 public class TileData: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_flip_h(flip_h: Bool) {
@@ -11517,6 +11579,7 @@ public class TileData: Object {
 	}
 }
 
+@MainActor
 public class Time: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -11626,6 +11689,7 @@ public class Time: Object {
 	}
 }
 
+@MainActor
 public class TranslationServer: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_locale(locale: String) {
@@ -11790,6 +11854,7 @@ public class TranslationServer: Object {
 	}
 }
 
+@MainActor
 public class TreeItem: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_cell_mode(column: Int, mode: Int) {
@@ -12311,6 +12376,7 @@ public class TreeItem: Object {
 	}
 }
 
+@MainActor
 public class UndoRedo: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func create_action(name: String, merge_mode: Int = 0, backward_undo_ops: Bool = false) {
@@ -12413,6 +12479,7 @@ public class UndoRedo: Object {
 	}
 }
 
+@MainActor
 public class UniformSetCacheRD: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -12422,6 +12489,7 @@ public class UniformSetCacheRD: Object {
 	}
 }
 
+@MainActor
 public class WorkerThreadPool: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -12469,6 +12537,7 @@ public class WorkerThreadPool: Object {
 	}
 }
 
+@MainActor
 public class XRServer: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -12610,6 +12679,7 @@ public class XRServer: Object {
 	}
 }
 
+@MainActor
 public class XRVRS: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -12655,6 +12725,7 @@ public class XRVRS: Object {
 	}
 }
 
+@MainActor
 public class AESContext: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -12677,6 +12748,7 @@ public class AESContext: RefCounted {
 	}
 }
 
+@MainActor
 public class AStar2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -12805,6 +12877,7 @@ public class AStar2D: RefCounted {
 	}
 }
 
+@MainActor
 public class AStar3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -12933,6 +13006,7 @@ public class AStar3D: RefCounted {
 	}
 }
 
+@MainActor
 public class AStarGrid2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_region(region: Rect2i) {
@@ -13118,6 +13192,7 @@ public class AStarGrid2D: RefCounted {
 	}
 }
 
+@MainActor
 public class AnimationMixer: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -13374,6 +13449,7 @@ public class AnimationMixer: Node {
 	}
 }
 
+@MainActor
 public class AudioEffectInstance: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _process(src_buffer: Int, r_dst_buffer: Int, frame_count: Int) {
@@ -13386,14 +13462,17 @@ public class AudioEffectInstance: RefCounted {
 	}
 }
 
+@MainActor
 public class AudioSample: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AudioSamplePlayback: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AudioStreamPlayback: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_sample_playback(playback_sample: AudioSamplePlayback) {
@@ -13473,6 +13552,7 @@ public class AudioStreamPlayback: RefCounted {
 	}
 }
 
+@MainActor
 public class AudioStreamPlayer: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_stream(stream: AudioStream) {
@@ -13636,6 +13716,7 @@ public class AudioStreamPlayer: Node {
 	}
 }
 
+@MainActor
 public class CameraFeed: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -13749,6 +13830,7 @@ public class CameraFeed: RefCounted {
 	}
 }
 
+@MainActor
 public class CanvasItem: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _top_level_raise_self() {
@@ -14200,6 +14282,7 @@ public class CanvasItem: Node {
 	}
 }
 
+@MainActor
 public class CanvasLayer: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_layer(layer: Int) {
@@ -14347,6 +14430,7 @@ public class CanvasLayer: Node {
 	}
 }
 
+@MainActor
 public class CharFXTransform: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -14507,6 +14591,7 @@ public class CharFXTransform: RefCounted {
 	}
 }
 
+@MainActor
 public class ConfigFile: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_value(section: String, key: String, value: VariantBox) {
@@ -14586,6 +14671,7 @@ public class ConfigFile: RefCounted {
 	}
 }
 
+@MainActor
 public class Crypto: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -14635,6 +14721,7 @@ public class Crypto: RefCounted {
 	}
 }
 
+@MainActor
 public class DTLSServer: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -14649,6 +14736,7 @@ public class DTLSServer: RefCounted {
 	}
 }
 
+@MainActor
 public class DirAccess: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -14865,6 +14953,7 @@ public class DirAccess: RefCounted {
 	}
 }
 
+@MainActor
 public class ENetConnection: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -14943,6 +15032,7 @@ public class ENetConnection: RefCounted {
 	}
 }
 
+@MainActor
 public class EncodedObjectAsID: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_object_id(id: Int) {
@@ -14959,6 +15049,7 @@ public class EncodedObjectAsID: RefCounted {
 	}
 }
 
+@MainActor
 public class EngineProfiler: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _toggle(enable: Bool, options: VariantBox) {
@@ -14972,6 +15063,7 @@ public class EngineProfiler: RefCounted {
 	}
 }
 
+@MainActor
 public class Expression: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -14994,6 +15086,7 @@ public class Expression: RefCounted {
 	}
 }
 
+@MainActor
 public class FileAccess: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -15330,6 +15423,7 @@ public class FileAccess: RefCounted {
 	}
 }
 
+@MainActor
 public class FuzzySearch: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_start_offset(start_offset: Int) {
@@ -15440,6 +15534,7 @@ public class FuzzySearch: RefCounted {
 	}
 }
 
+@MainActor
 public class FuzzySearchMatch: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_target(target: String) {
@@ -15485,6 +15580,7 @@ public class FuzzySearchMatch: RefCounted {
 	}
 }
 
+@MainActor
 public class GDScriptFunctionState: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _signal_callback() {
@@ -15495,6 +15591,7 @@ public class GDScriptFunctionState: RefCounted {
 	}
 }
 
+@MainActor
 public class GDScriptNativeClass: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func new() {
@@ -15502,6 +15599,7 @@ public class GDScriptNativeClass: RefCounted {
 	}
 }
 
+@MainActor
 public class GLTFObjectModelProperty: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func append_node_path(node_path: String) {
@@ -15602,18 +15700,22 @@ public class GLTFObjectModelProperty: RefCounted {
 	}
 }
 
+@MainActor
 public class GodotNavigationServer2D: NavigationServer2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class GodotPhysicsServer2D: PhysicsServer2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class GodotPhysicsServer3D: PhysicsServer3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class HMACContext: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -15633,6 +15735,7 @@ public class HMACContext: RefCounted {
 	}
 }
 
+@MainActor
 public class HTTPClient: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -15747,6 +15850,7 @@ public class HTTPClient: RefCounted {
 	}
 }
 
+@MainActor
 public class HTTPRequest: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -15899,6 +16003,7 @@ public class HTTPRequest: Node {
 	}
 }
 
+@MainActor
 public class HashingContext: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -15918,10 +16023,12 @@ public class HashingContext: RefCounted {
 	}
 }
 
+@MainActor
 public class ImageFormatLoader: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class InstancePlaceholder: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -15941,6 +16048,7 @@ public class InstancePlaceholder: Node {
 	}
 }
 
+@MainActor
 public class JavaClass: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -15965,6 +16073,7 @@ public class JavaClass: RefCounted {
 	}
 }
 
+@MainActor
 public class JavaObject: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -15979,10 +16088,12 @@ public class JavaObject: RefCounted {
 	}
 }
 
+@MainActor
 public class JavaScriptObject: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class KinematicCollision2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -16052,6 +16163,7 @@ public class KinematicCollision2D: RefCounted {
 	}
 }
 
+@MainActor
 public class KinematicCollision3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -16126,10 +16238,12 @@ public class KinematicCollision3D: RefCounted {
 	}
 }
 
+@MainActor
 public class Lightmapper: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class Logger: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _log_error(function: String, file: String, line: Int, code: String, rationale: String, editor_notify: Bool, error_type: Int, script_backtraces: VariantBox) {
@@ -16140,6 +16254,7 @@ public class Logger: RefCounted {
 	}
 }
 
+@MainActor
 public class MeshConvexDecompositionSettings: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_max_concavity(max_concavity: Double) {
@@ -16300,6 +16415,7 @@ public class MeshConvexDecompositionSettings: RefCounted {
 	}
 }
 
+@MainActor
 public class MeshDataTool: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func clear() {
@@ -16462,6 +16578,7 @@ public class MeshDataTool: RefCounted {
 	}
 }
 
+@MainActor
 public class MissingNode: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_original_class(name: String) {
@@ -16514,14 +16631,17 @@ public class MissingNode: Node {
 	}
 }
 
+@MainActor
 public class MovieWriterMJPEG: MovieWriter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class MovieWriterPNGWAV: MovieWriter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class MultiplayerAPI: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -16611,6 +16731,7 @@ public class MultiplayerAPI: RefCounted {
 	}
 }
 
+@MainActor
 public class MultiplayerSpawner: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func add_spawnable_scene(path: String) {
@@ -16690,6 +16811,7 @@ public class MultiplayerSpawner: Node {
 	}
 }
 
+@MainActor
 public class MultiplayerSynchronizer: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_root_path(path: String) {
@@ -16792,6 +16914,7 @@ public class MultiplayerSynchronizer: Node {
 	}
 }
 
+@MainActor
 public class Mutex: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func lock() {
@@ -16807,6 +16930,7 @@ public class Mutex: RefCounted {
 	}
 }
 
+@MainActor
 public class NavigationAgent2D: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -17294,6 +17418,7 @@ public class NavigationAgent2D: Node {
 	}
 }
 
+@MainActor
 public class NavigationAgent3D: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -17817,6 +17942,7 @@ public class NavigationAgent3D: Node {
 	}
 }
 
+@MainActor
 public class NavigationPathQueryParameters2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_pathfinding_algorithm(pathfinding_algorithm: Int) {
@@ -18001,6 +18127,7 @@ public class NavigationPathQueryParameters2D: RefCounted {
 	}
 }
 
+@MainActor
 public class NavigationPathQueryParameters3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_pathfinding_algorithm(pathfinding_algorithm: Int) {
@@ -18185,6 +18312,7 @@ public class NavigationPathQueryParameters3D: RefCounted {
 	}
 }
 
+@MainActor
 public class NavigationPathQueryResult2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_path(path: VariantBox) {
@@ -18252,6 +18380,7 @@ public class NavigationPathQueryResult2D: RefCounted {
 	}
 }
 
+@MainActor
 public class NavigationPathQueryResult3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_path(path: VariantBox) {
@@ -18319,6 +18448,7 @@ public class NavigationPathQueryResult3D: RefCounted {
 	}
 }
 
+@MainActor
 public class Node3D: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_transform(local: Transform3D) {
@@ -18669,14 +18799,17 @@ public class Node3D: Node {
 	}
 }
 
+@MainActor
 public class Node3DGizmo: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class OggPacketSequencePlayback: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class OpenXRAPIExtension: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -18897,6 +19030,7 @@ public class OpenXRAPIExtension: RefCounted {
 	}
 }
 
+@MainActor
 public class OpenXRAndroidThreadSettingsExtension: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -18906,10 +19040,12 @@ public class OpenXRAndroidThreadSettingsExtension: OpenXRExtensionWrapper {
 	}
 }
 
+@MainActor
 public class OpenXRExtensionWrapperExtension: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class OpenXRFrameSynthesisExtension: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -18946,6 +19082,7 @@ public class OpenXRFrameSynthesisExtension: OpenXRExtensionWrapper {
 	}
 }
 
+@MainActor
 public class OpenXRFutureExtension: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -18963,6 +19100,7 @@ public class OpenXRFutureExtension: OpenXRExtensionWrapper {
 	}
 }
 
+@MainActor
 public class OpenXRFutureResult: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -18989,6 +19127,7 @@ public class OpenXRFutureResult: RefCounted {
 	}
 }
 
+@MainActor
 public class OpenXRRenderModelExtension: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -19065,6 +19204,7 @@ public class OpenXRRenderModelExtension: OpenXRExtensionWrapper {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialAnchorCapability: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -19128,6 +19268,7 @@ public class OpenXRSpatialAnchorCapability: OpenXRExtensionWrapper {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialCapabilityConfigurationBaseHeader: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -19152,6 +19293,7 @@ public class OpenXRSpatialCapabilityConfigurationBaseHeader: RefCounted {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialComponentData: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_capacity(capacity: Int) {
@@ -19177,6 +19319,7 @@ public class OpenXRSpatialComponentData: RefCounted {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialContainerExtension: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -19234,6 +19377,7 @@ public class OpenXRSpatialContainerExtension: OpenXRExtensionWrapper {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialContainerSelfRenderingExtension: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -19243,6 +19387,7 @@ public class OpenXRSpatialContainerSelfRenderingExtension: OpenXRExtensionWrappe
 	}
 }
 
+@MainActor
 public class OpenXRSpatialContainerState: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -19262,6 +19407,7 @@ public class OpenXRSpatialContainerState: RefCounted {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialEntityExtension: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -19393,6 +19539,7 @@ public class OpenXRSpatialEntityExtension: OpenXRExtensionWrapper {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialMarkerTrackingCapability: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -19438,6 +19585,7 @@ public class OpenXRSpatialMarkerTrackingCapability: OpenXRExtensionWrapper {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialPlaneTrackingCapability: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -19465,6 +19613,7 @@ public class OpenXRSpatialPlaneTrackingCapability: OpenXRExtensionWrapper {
 	}
 }
 
+@MainActor
 public class OpenXRStructureBase: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -19496,6 +19645,7 @@ public class OpenXRStructureBase: RefCounted {
 	}
 }
 
+@MainActor
 public class PCKPacker: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -19525,6 +19675,7 @@ public class PCKPacker: RefCounted {
 	}
 }
 
+@MainActor
 public class PackedDataContainerRef: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -19543,6 +19694,7 @@ public class PackedDataContainerRef: RefCounted {
 	}
 }
 
+@MainActor
 public class PacketPeer: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func get_var(allow_objects: Bool = false) {
@@ -19587,6 +19739,7 @@ public class PacketPeer: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsCastMotionResult2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -19609,6 +19762,7 @@ public class PhysicsCastMotionResult2D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsCastMotionResult3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -19631,6 +19785,7 @@ public class PhysicsCastMotionResult3D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsCollideShapeResult2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -19662,6 +19817,7 @@ public class PhysicsCollideShapeResult2D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsCollideShapeResult3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -19693,6 +19849,7 @@ public class PhysicsCollideShapeResult3D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsDirectBodyState2DExtension: PhysicsDirectBodyState2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -19901,6 +20058,7 @@ public class PhysicsDirectBodyState2DExtension: PhysicsDirectBodyState2D {
 	}
 }
 
+@MainActor
 public class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -20119,6 +20277,7 @@ public class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
 	}
 }
 
+@MainActor
 public class PhysicsDirectSpaceState2DExtension: PhysicsDirectSpaceState2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -20158,6 +20317,7 @@ public class PhysicsDirectSpaceState2DExtension: PhysicsDirectSpaceState2D {
 	}
 }
 
+@MainActor
 public class PhysicsDirectSpaceState3DExtension: PhysicsDirectSpaceState3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -20202,6 +20362,7 @@ public class PhysicsDirectSpaceState3DExtension: PhysicsDirectSpaceState3D {
 	}
 }
 
+@MainActor
 public class PhysicsGetRestInfoResult2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -20260,6 +20421,7 @@ public class PhysicsGetRestInfoResult2D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsGetRestInfoResult3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -20318,6 +20480,7 @@ public class PhysicsGetRestInfoResult3D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsIntersectPointResult2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -20359,6 +20522,7 @@ public class PhysicsIntersectPointResult2D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsIntersectPointResult3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -20400,6 +20564,7 @@ public class PhysicsIntersectPointResult3D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsIntersectRayResult2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -20458,6 +20623,7 @@ public class PhysicsIntersectRayResult2D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsIntersectRayResult3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -20525,6 +20691,7 @@ public class PhysicsIntersectRayResult3D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsIntersectShapeResult2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -20566,6 +20733,7 @@ public class PhysicsIntersectShapeResult2D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsIntersectShapeResult3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -20607,6 +20775,7 @@ public class PhysicsIntersectShapeResult3D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsPointQueryParameters2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_position(position: Vector2) {
@@ -20683,6 +20852,7 @@ public class PhysicsPointQueryParameters2D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsPointQueryParameters3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_position(position: Vector3) {
@@ -20747,6 +20917,7 @@ public class PhysicsPointQueryParameters3D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsRayQueryParameters2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -20840,6 +21011,7 @@ public class PhysicsRayQueryParameters2D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsRayQueryParameters3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -20945,6 +21117,7 @@ public class PhysicsRayQueryParameters3D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsServer2DExtension: PhysicsServer2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -21487,6 +21660,7 @@ public class PhysicsServer2DExtension: PhysicsServer2D {
 	}
 }
 
+@MainActor
 public class PhysicsServer3DExtension: PhysicsServer3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -22249,6 +22423,7 @@ public class PhysicsServer3DExtension: PhysicsServer3D {
 	}
 }
 
+@MainActor
 public class PhysicsShapeQueryParameters2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_shape(shape: Resource) {
@@ -22361,6 +22536,7 @@ public class PhysicsShapeQueryParameters2D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsShapeQueryParameters3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_shape(shape: Resource) {
@@ -22473,6 +22649,7 @@ public class PhysicsShapeQueryParameters3D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsTestMotionParameters2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -22561,6 +22738,7 @@ public class PhysicsTestMotionParameters2D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsTestMotionParameters3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -22661,6 +22839,7 @@ public class PhysicsTestMotionParameters3D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsTestMotionResult2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -22730,6 +22909,7 @@ public class PhysicsTestMotionResult2D: RefCounted {
 	}
 }
 
+@MainActor
 public class PhysicsTestMotionResult3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -22804,6 +22984,7 @@ public class PhysicsTestMotionResult3D: RefCounted {
 	}
 }
 
+@MainActor
 public class RDAccelerationStructureGeometry: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_flags(p_member: Int) {
@@ -22916,6 +23097,7 @@ public class RDAccelerationStructureGeometry: RefCounted {
 	}
 }
 
+@MainActor
 public class RDAccelerationStructureInstance: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_transform(p_member: Transform3D) {
@@ -22992,6 +23174,7 @@ public class RDAccelerationStructureInstance: RefCounted {
 	}
 }
 
+@MainActor
 public class RDAttachmentFormat: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_format(p_member: Int) {
@@ -23032,6 +23215,7 @@ public class RDAttachmentFormat: RefCounted {
 	}
 }
 
+@MainActor
 public class RDFramebufferPass: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_color_attachments(p_member: VariantBox) {
@@ -23096,6 +23280,7 @@ public class RDFramebufferPass: RefCounted {
 	}
 }
 
+@MainActor
 public class RDHitGroup: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_closest_hit_shader(p_member: RDPipelineShader) {
@@ -23136,6 +23321,7 @@ public class RDHitGroup: RefCounted {
 	}
 }
 
+@MainActor
 public class RDPipelineColorBlendState: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_enable_logic_op(p_member: Bool) {
@@ -23188,6 +23374,7 @@ public class RDPipelineColorBlendState: RefCounted {
 	}
 }
 
+@MainActor
 public class RDPipelineColorBlendStateAttachment: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_as_mix() {
@@ -23327,6 +23514,7 @@ public class RDPipelineColorBlendStateAttachment: RefCounted {
 	}
 }
 
+@MainActor
 public class RDPipelineDepthStencilState: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_enable_depth_test(p_member: Bool) {
@@ -23583,6 +23771,7 @@ public class RDPipelineDepthStencilState: RefCounted {
 	}
 }
 
+@MainActor
 public class RDPipelineMultisampleState: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_sample_count(p_member: Int) {
@@ -23659,6 +23848,7 @@ public class RDPipelineMultisampleState: RefCounted {
 	}
 }
 
+@MainActor
 public class RDPipelineRasterizationState: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_enable_depth_clamp(p_member: Bool) {
@@ -23795,6 +23985,7 @@ public class RDPipelineRasterizationState: RefCounted {
 	}
 }
 
+@MainActor
 public class RDPipelineShader: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_shader(p_member: VariantBox) {
@@ -23823,6 +24014,7 @@ public class RDPipelineShader: RefCounted {
 	}
 }
 
+@MainActor
 public class RDPipelineSpecializationConstant: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_value(value: VariantBox) {
@@ -23849,6 +24041,7 @@ public class RDPipelineSpecializationConstant: RefCounted {
 	}
 }
 
+@MainActor
 public class RDSamplerState: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_mag_filter(p_member: Int) {
@@ -24033,6 +24226,7 @@ public class RDSamplerState: RefCounted {
 	}
 }
 
+@MainActor
 public class RDShaderSource: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_stage_source(stage: Int, source: String) {
@@ -24105,6 +24299,7 @@ public class RDShaderSource: RefCounted {
 	}
 }
 
+@MainActor
 public class RDTextureFormat: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_format(p_member: Int) {
@@ -24247,6 +24442,7 @@ public class RDTextureFormat: RefCounted {
 	}
 }
 
+@MainActor
 public class RDTextureView: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_format_override(p_member: Int) {
@@ -24311,6 +24507,7 @@ public class RDTextureView: RefCounted {
 	}
 }
 
+@MainActor
 public class RDUniform: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_uniform_type(p_member: Int) {
@@ -24357,6 +24554,7 @@ public class RDUniform: RefCounted {
 	}
 }
 
+@MainActor
 public class RDVertexAttribute: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_binding(p_member: Int) {
@@ -24433,6 +24631,7 @@ public class RDVertexAttribute: RefCounted {
 	}
 }
 
+@MainActor
 public class RandomNumberGenerator: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_seed(seed: Int) {
@@ -24494,6 +24693,7 @@ public class RandomNumberGenerator: RefCounted {
 	}
 }
 
+@MainActor
 public class RegEx: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -24546,6 +24746,7 @@ public class RegEx: RefCounted {
 	}
 }
 
+@MainActor
 public class RegExMatch: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -24597,6 +24798,7 @@ public class RegExMatch: RefCounted {
 	}
 }
 
+@MainActor
 public class RenderDataExtension: RenderData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -24621,10 +24823,12 @@ public class RenderDataExtension: RenderData {
 	}
 }
 
+@MainActor
 public class RenderDataRD: RenderData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class RenderSceneBuffers: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func configure(config: RenderSceneBuffersConfiguration) {
@@ -24632,6 +24836,7 @@ public class RenderSceneBuffers: RefCounted {
 	}
 }
 
+@MainActor
 public class RenderSceneBuffersConfiguration: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -24756,6 +24961,7 @@ public class RenderSceneBuffersConfiguration: RefCounted {
 	}
 }
 
+@MainActor
 public class RenderSceneDataExtension: RenderSceneData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -24790,10 +24996,12 @@ public class RenderSceneDataExtension: RenderSceneData {
 	}
 }
 
+@MainActor
 public class RenderSceneDataRD: RenderSceneData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class Resource: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_path(path: String) {
@@ -24928,6 +25136,7 @@ public class Resource: RefCounted {
 	}
 }
 
+@MainActor
 public class ResourceFormatLoader: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -24985,6 +25194,7 @@ public class ResourceFormatLoader: RefCounted {
 	}
 }
 
+@MainActor
 public class ResourceFormatSaver: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -25014,6 +25224,7 @@ public class ResourceFormatSaver: RefCounted {
 	}
 }
 
+@MainActor
 public class ResourceImporter: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -25023,6 +25234,7 @@ public class ResourceImporter: RefCounted {
 	}
 }
 
+@MainActor
 public class ResourcePreloader: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _set_resources(resources: VariantBox) {
@@ -25063,18 +25275,22 @@ public class ResourcePreloader: Node {
 	}
 }
 
+@MainActor
 public class SceneCacheInterface: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class SceneRPCInterface: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class SceneReplicationInterface: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class SceneState: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -25192,6 +25408,7 @@ public class SceneState: RefCounted {
 	}
 }
 
+@MainActor
 public class SceneTree: MainLoop {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -25462,6 +25679,7 @@ public class SceneTree: MainLoop {
 	}
 }
 
+@MainActor
 public class SceneTreeTimer: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_time_left(time: Double) {
@@ -25481,6 +25699,7 @@ public class SceneTreeTimer: RefCounted {
 	}
 }
 
+@MainActor
 public class ScriptBacktrace: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -25559,6 +25778,7 @@ public class ScriptBacktrace: RefCounted {
 	}
 }
 
+@MainActor
 public class ScriptLanguageExtension: ScriptLanguage {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -25835,6 +26055,7 @@ public class ScriptLanguageExtension: ScriptLanguage {
 	}
 }
 
+@MainActor
 public class Semaphore: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func wait() {
@@ -25850,6 +26071,7 @@ public class Semaphore: RefCounted {
 	}
 }
 
+@MainActor
 public class ShaderGlobalsOverride: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _activate() {
@@ -25857,6 +26079,7 @@ public class ShaderGlobalsOverride: Node {
 	}
 }
 
+@MainActor
 public class SkinReference: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -25871,6 +26094,7 @@ public class SkinReference: RefCounted {
 	}
 }
 
+@MainActor
 public class SocketServer: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -25893,6 +26117,7 @@ public class SocketServer: RefCounted {
 	}
 }
 
+@MainActor
 public class StatusIndicator: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_tooltip(tooltip: String) {
@@ -25953,6 +26178,7 @@ public class StatusIndicator: Node {
 	}
 }
 
+@MainActor
 public class StreamPeer: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -26104,6 +26330,7 @@ public class StreamPeer: RefCounted {
 	}
 }
 
+@MainActor
 public class SurfaceTool: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_skin_weight_count(count: Int) {
@@ -26221,10 +26448,12 @@ public class SurfaceTool: RefCounted {
 	}
 }
 
+@MainActor
 public class SwiftLanguage: ScriptLanguage {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class TLSOptions: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -26274,6 +26503,7 @@ public class TLSOptions: RefCounted {
 	}
 }
 
+@MainActor
 public class TextLine: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func clear() {
@@ -26481,6 +26711,7 @@ public class TextLine: RefCounted {
 	}
 }
 
+@MainActor
 public class TextParagraph: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func clear() {
@@ -26801,6 +27032,7 @@ public class TextParagraph: RefCounted {
 	}
 }
 
+@MainActor
 public class TextServer: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -27870,6 +28102,7 @@ public class TextServer: RefCounted {
 	}
 }
 
+@MainActor
 public class Thread: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -27905,6 +28138,7 @@ public class Thread: RefCounted {
 	}
 }
 
+@MainActor
 public class Timer: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_wait_time(time_sec: Double) {
@@ -28004,6 +28238,7 @@ public class Timer: Node {
 	}
 }
 
+@MainActor
 public class TranslationDomain: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -28185,6 +28420,7 @@ public class TranslationDomain: RefCounted {
 	}
 }
 
+@MainActor
 public class TriangleMesh: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -28209,6 +28445,7 @@ public class TriangleMesh: RefCounted {
 	}
 }
 
+@MainActor
 public class Tween: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -28352,6 +28589,7 @@ public class Tween: RefCounted {
 	}
 }
 
+@MainActor
 public class Tweener: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func emit_finished() {
@@ -28359,6 +28597,7 @@ public class Tweener: RefCounted {
 	}
 }
 
+@MainActor
 public class UDPServer: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -28408,6 +28647,7 @@ public class UDPServer: RefCounted {
 	}
 }
 
+@MainActor
 public class UPNP: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -28495,6 +28735,7 @@ public class UPNP: RefCounted {
 	}
 }
 
+@MainActor
 public class UPNPDevice: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -28591,6 +28832,7 @@ public class UPNPDevice: RefCounted {
 	}
 }
 
+@MainActor
 public class Viewport: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_world_2d(world_2d: World2D) {
@@ -29373,6 +29615,7 @@ public class Viewport: Node {
 	}
 }
 
+@MainActor
 public class WeakRef: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func get_ref() {
@@ -29380,6 +29623,7 @@ public class WeakRef: RefCounted {
 	}
 }
 
+@MainActor
 public class WebRTCPeerConnection: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_default_extension(extension_class: String) {
@@ -29449,6 +29693,7 @@ public class WebRTCPeerConnection: RefCounted {
 	}
 }
 
+@MainActor
 public class WorldEnvironment: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_environment(env: Environment) {
@@ -29489,6 +29734,7 @@ public class WorldEnvironment: Node {
 	}
 }
 
+@MainActor
 public class XMLParser: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -29576,6 +29822,7 @@ public class XMLParser: RefCounted {
 	}
 }
 
+@MainActor
 public class XRInterface: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -29751,6 +29998,7 @@ public class XRInterface: RefCounted {
 	}
 }
 
+@MainActor
 public class XRPose: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_has_tracking_data(has_tracking_data: Bool) {
@@ -29832,6 +30080,7 @@ public class XRPose: RefCounted {
 	}
 }
 
+@MainActor
 public class XRTracker: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -29872,6 +30121,7 @@ public class XRTracker: RefCounted {
 	}
 }
 
+@MainActor
 public class ZIPPacker: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -29918,6 +30168,7 @@ public class ZIPPacker: RefCounted {
 	}
 }
 
+@MainActor
 public class ZIPReader: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -29952,6 +30203,7 @@ public class ZIPReader: RefCounted {
 	}
 }
 
+@MainActor
 public class Animation: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -30325,6 +30577,7 @@ public class Animation: Resource {
 	}
 }
 
+@MainActor
 public class AnimationLibrary: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -30384,6 +30637,7 @@ public class AnimationLibrary: Resource {
 	}
 }
 
+@MainActor
 public class AnimationNode: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -30527,10 +30781,12 @@ public class AnimationNode: Resource {
 	}
 }
 
+@MainActor
 public class AnimationNodeObserver: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AnimationNodeStateMachinePlayback: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func travel(to_node: String, reset_on_teleport: Bool = true) {
@@ -30603,6 +30859,7 @@ public class AnimationNodeStateMachinePlayback: Resource {
 	}
 }
 
+@MainActor
 public class AnimationNodeStateMachineTransition: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_switch_mode(mode: Int) {
@@ -30726,6 +30983,7 @@ public class AnimationNodeStateMachineTransition: Resource {
 	}
 }
 
+@MainActor
 public class AnimationPlayer: AnimationMixer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func animation_set_next(animation_from: String, animation_to: String) {
@@ -31010,6 +31268,7 @@ public class AnimationPlayer: AnimationMixer {
 	}
 }
 
+@MainActor
 public class AnimationTree: AnimationMixer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_tree_root(animation_node: AnimationRootNode) {
@@ -31061,10 +31320,12 @@ public class AnimationTree: AnimationMixer {
 	}
 }
 
+@MainActor
 public class AudioBusLayout: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AudioEffect: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -31074,6 +31335,7 @@ public class AudioEffect: Resource {
 	}
 }
 
+@MainActor
 public class AudioEffectSpectrumAnalyzerInstance: AudioEffectInstance {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -31083,6 +31345,7 @@ public class AudioEffectSpectrumAnalyzerInstance: AudioEffectInstance {
 	}
 }
 
+@MainActor
 public class AudioListener3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func make_current() {
@@ -31115,6 +31378,7 @@ public class AudioListener3D: Node3D {
 	}
 }
 
+@MainActor
 public class AudioStream: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -31202,6 +31466,7 @@ public class AudioStream: Resource {
 	}
 }
 
+@MainActor
 public class AudioStreamPlaybackInteractive: AudioStreamPlayback {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func switch_to_clip_by_name(clip_name: String) {
@@ -31217,10 +31482,12 @@ public class AudioStreamPlaybackInteractive: AudioStreamPlayback {
 	}
 }
 
+@MainActor
 public class AudioStreamPlaybackPlaylist: AudioStreamPlayback {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -31244,6 +31511,7 @@ public class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
 	}
 }
 
+@MainActor
 public class AudioStreamPlaybackResampled: AudioStreamPlayback {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func begin_resample() {
@@ -31261,10 +31529,12 @@ public class AudioStreamPlaybackResampled: AudioStreamPlayback {
 	}
 }
 
+@MainActor
 public class AudioStreamPlaybackSynchronized: AudioStreamPlayback {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AudioStreamPlayer3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_stream(stream: AudioStream) {
@@ -31572,6 +31842,7 @@ public class AudioStreamPlayer3D: Node3D {
 	}
 }
 
+@MainActor
 public class AwaitTweener: Tweener {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -31584,6 +31855,7 @@ public class AwaitTweener: Tweener {
 	}
 }
 
+@MainActor
 public class BitMap: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func create(size: Vector2i) {
@@ -31651,6 +31923,7 @@ public class BitMap: Resource {
 	}
 }
 
+@MainActor
 public class BoneAttachment3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -31723,6 +31996,7 @@ public class BoneAttachment3D: Node3D {
 	}
 }
 
+@MainActor
 public class BoneMap: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -31762,6 +32036,7 @@ public class BoneMap: Resource {
 	}
 }
 
+@MainActor
 public class ButtonGroup: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -31791,6 +32066,7 @@ public class ButtonGroup: Resource {
 	}
 }
 
+@MainActor
 public class CallbackTweener: Tweener {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -31800,6 +32076,7 @@ public class CallbackTweener: Tweener {
 	}
 }
 
+@MainActor
 public class Camera3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -32067,6 +32344,7 @@ public class Camera3D: Node3D {
 	}
 }
 
+@MainActor
 public class CameraAttributes: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_exposure_multiplier(multiplier: Double) {
@@ -32139,6 +32417,7 @@ public class CameraAttributes: Resource {
 	}
 }
 
+@MainActor
 public class CollisionObject3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_collision_layer(layer: Int) {
@@ -32325,6 +32604,7 @@ public class CollisionObject3D: Node3D {
 	}
 }
 
+@MainActor
 public class CollisionPolygon3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_depth(depth: Double) {
@@ -32406,6 +32686,7 @@ public class CollisionPolygon3D: Node3D {
 	}
 }
 
+@MainActor
 public class CollisionShape3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func resource_changed(resource: Resource) {
@@ -32464,6 +32745,7 @@ public class CollisionShape3D: Node3D {
 	}
 }
 
+@MainActor
 public class ColorPalette: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_colors(colors: VariantBox) {
@@ -32480,6 +32762,7 @@ public class ColorPalette: Resource {
 	}
 }
 
+@MainActor
 public class Compositor: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_compositor_effects(compositor_effects: VariantBox) {
@@ -32496,6 +32779,7 @@ public class Compositor: Resource {
 	}
 }
 
+@MainActor
 public class CompositorEffect: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_enabled(enabled: Bool) {
@@ -32587,6 +32871,7 @@ public class CompositorEffect: Resource {
 	}
 }
 
+@MainActor
 public class Control: CanvasItem {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func accept_event() {
@@ -33786,6 +34071,7 @@ public class Control: CanvasItem {
 	}
 }
 
+@MainActor
 public class CryptoKey: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -33815,6 +34101,7 @@ public class CryptoKey: Resource {
 	}
 }
 
+@MainActor
 public class Curve: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -34003,6 +34290,7 @@ public class Curve: Resource {
 	}
 }
 
+@MainActor
 public class Curve2D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -34126,6 +34414,7 @@ public class Curve2D: Resource {
 	}
 }
 
+@MainActor
 public class Curve3D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -34300,6 +34589,7 @@ public class Curve3D: Resource {
 	}
 }
 
+@MainActor
 public class ENetPacketPeer: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func peer_disconnect(data: Int = 0) {
@@ -34368,6 +34658,7 @@ public class ENetPacketPeer: PacketPeer {
 	}
 }
 
+@MainActor
 public class Environment: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_background(mode: Int) {
@@ -35580,6 +35871,7 @@ public class Environment: Resource {
 	}
 }
 
+@MainActor
 public class FoldableGroup: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -35609,6 +35901,7 @@ public class FoldableGroup: Resource {
 	}
 }
 
+@MainActor
 public class Font: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_fallbacks(fallbacks: VariantBox) {
@@ -35790,6 +36083,7 @@ public class Font: Resource {
 	}
 }
 
+@MainActor
 public class GDExtension: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -35804,6 +36098,7 @@ public class GDExtension: Resource {
 	}
 }
 
+@MainActor
 public class GLTFAccessor: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -35998,6 +36293,7 @@ public class GLTFAccessor: Resource {
 	}
 }
 
+@MainActor
 public class GLTFAnimation: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -36032,6 +36328,7 @@ public class GLTFAnimation: Resource {
 	}
 }
 
+@MainActor
 public class GLTFBufferView: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -36123,6 +36420,7 @@ public class GLTFBufferView: Resource {
 	}
 }
 
+@MainActor
 public class GLTFCamera: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -36207,6 +36505,7 @@ public class GLTFCamera: Resource {
 	}
 }
 
+@MainActor
 public class GLTFDocument: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_image_format(image_format: String) {
@@ -36346,6 +36645,7 @@ public class GLTFDocument: Resource {
 	}
 }
 
+@MainActor
 public class GLTFDocumentExtension: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -36468,6 +36768,7 @@ public class GLTFDocumentExtension: Resource {
 	}
 }
 
+@MainActor
 public class GLTFLight: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -36570,6 +36871,7 @@ public class GLTFLight: Resource {
 	}
 }
 
+@MainActor
 public class GLTFMesh: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -36628,6 +36930,7 @@ public class GLTFMesh: Resource {
 	}
 }
 
+@MainActor
 public class GLTFNode: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -36814,6 +37117,7 @@ public class GLTFNode: Resource {
 	}
 }
 
+@MainActor
 public class GLTFPhysicsBody: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -36934,6 +37238,7 @@ public class GLTFPhysicsBody: Resource {
 	}
 }
 
+@MainActor
 public class GLTFPhysicsShape: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -37052,6 +37357,7 @@ public class GLTFPhysicsShape: Resource {
 	}
 }
 
+@MainActor
 public class GLTFSkeleton: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -37119,6 +37425,7 @@ public class GLTFSkeleton: Resource {
 	}
 }
 
+@MainActor
 public class GLTFSkin: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -37243,6 +37550,7 @@ public class GLTFSkin: Resource {
 	}
 }
 
+@MainActor
 public class GLTFSpecGloss: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -37307,6 +37615,7 @@ public class GLTFSpecGloss: Resource {
 	}
 }
 
+@MainActor
 public class GLTFState: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func add_used_extension(extension_name: String, required: Bool) {
@@ -37722,6 +38031,7 @@ public class GLTFState: Resource {
 	}
 }
 
+@MainActor
 public class GLTFTexture: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -37750,6 +38060,7 @@ public class GLTFTexture: Resource {
 	}
 }
 
+@MainActor
 public class GLTFTextureSampler: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -37802,6 +38113,7 @@ public class GLTFTextureSampler: Resource {
 	}
 }
 
+@MainActor
 public class Gradient: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func add_point(offset: Double, color: Color) {
@@ -37897,6 +38209,7 @@ public class Gradient: Resource {
 	}
 }
 
+@MainActor
 public class GridMap: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_collision_layer(layer: Int) {
@@ -38237,6 +38550,7 @@ public class GridMap: Node3D {
 	}
 }
 
+@MainActor
 public class Image: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -38579,6 +38893,7 @@ public class Image: Resource {
 	}
 }
 
+@MainActor
 public class ImageFormatLoaderExtension: ImageFormatLoader {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func add_format_loader() {
@@ -38599,6 +38914,7 @@ public class ImageFormatLoaderExtension: ImageFormatLoader {
 	}
 }
 
+@MainActor
 public class ImporterMesh: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -38724,6 +39040,7 @@ public class ImporterMesh: Resource {
 	}
 }
 
+@MainActor
 public class ImporterMeshInstance3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_mesh(mesh: ImporterMesh) {
@@ -38852,6 +39169,7 @@ public class ImporterMeshInstance3D: Node3D {
 	}
 }
 
+@MainActor
 public class InputEvent: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_device(device: Int) {
@@ -38933,10 +39251,12 @@ public class InputEvent: Resource {
 	}
 }
 
+@MainActor
 public class IntervalTweener: Tweener {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class JSON: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -38985,6 +39305,7 @@ public class JSON: Resource {
 	}
 }
 
+@MainActor
 public class Joint3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_node_a(node: String) {
@@ -39042,10 +39363,12 @@ public class Joint3D: Node3D {
 	}
 }
 
+@MainActor
 public class JointLimitation3D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class LabelSettings: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_line_spacing(spacing: Double) {
@@ -39268,6 +39591,7 @@ public class LabelSettings: Resource {
 	}
 }
 
+@MainActor
 public class LightmapGIData: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _set_user_data(data: VariantBox) {
@@ -39384,10 +39708,12 @@ public class LightmapGIData: Resource {
 	}
 }
 
+@MainActor
 public class LightmapProbe: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class Marker3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_gizmo_extents(extents: Double) {
@@ -39404,6 +39730,7 @@ public class Marker3D: Node3D {
 	}
 }
 
+@MainActor
 public class Material: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_next_pass(next_pass: Material) {
@@ -39460,6 +39787,7 @@ public class Material: Resource {
 	}
 }
 
+@MainActor
 public class Mesh: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_lightmap_size_hint(size: Vector2i) {
@@ -39600,6 +39928,7 @@ public class Mesh: Resource {
 	}
 }
 
+@MainActor
 public class MeshLibrary: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func create_item(id: Int) {
@@ -39713,6 +40042,7 @@ public class MeshLibrary: Resource {
 	}
 }
 
+@MainActor
 public class MethodTweener: Tweener {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -39732,6 +40062,7 @@ public class MethodTweener: Tweener {
 	}
 }
 
+@MainActor
 public class MissingResource: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_original_class(name: String) {
@@ -39760,6 +40091,7 @@ public class MissingResource: Resource {
 	}
 }
 
+@MainActor
 public class MobileVRInterface: XRInterface {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_eye_height(eye_height: Double) {
@@ -39888,6 +40220,7 @@ public class MobileVRInterface: XRInterface {
 	}
 }
 
+@MainActor
 public class MultiMesh: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_mesh(mesh: Mesh) {
@@ -40098,6 +40431,7 @@ public class MultiMesh: Resource {
 	}
 }
 
+@MainActor
 public class MultiplayerAPIExtension: MultiplayerAPI {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -40145,6 +40479,7 @@ public class MultiplayerAPIExtension: MultiplayerAPI {
 	}
 }
 
+@MainActor
 public class MultiplayerPeer: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_transfer_channel(channel: Int) {
@@ -40238,6 +40573,7 @@ public class MultiplayerPeer: PacketPeer {
 	}
 }
 
+@MainActor
 public class NavigationLink3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -40363,6 +40699,7 @@ public class NavigationLink3D: Node3D {
 	}
 }
 
+@MainActor
 public class NavigationMesh: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_sample_partition_type(sample_partition_type: Int) {
@@ -40745,6 +41082,7 @@ public class NavigationMesh: Resource {
 	}
 }
 
+@MainActor
 public class NavigationMeshSourceGeometryData2D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func clear() {
@@ -40819,6 +41157,7 @@ public class NavigationMeshSourceGeometryData2D: Resource {
 	}
 }
 
+@MainActor
 public class NavigationMeshSourceGeometryData3D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_vertices(vertices: VariantBox) {
@@ -40893,6 +41232,7 @@ public class NavigationMeshSourceGeometryData3D: Resource {
 	}
 }
 
+@MainActor
 public class NavigationObstacle3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -41034,6 +41374,7 @@ public class NavigationObstacle3D: Node3D {
 	}
 }
 
+@MainActor
 public class NavigationPolygon: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_vertices(vertices: VariantBox) {
@@ -41274,6 +41615,7 @@ public class NavigationPolygon: Resource {
 	}
 }
 
+@MainActor
 public class NavigationRegion3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -41395,6 +41737,7 @@ public class NavigationRegion3D: Node3D {
 	}
 }
 
+@MainActor
 public class Node2D: CanvasItem {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_position(position: Vector2) {
@@ -41578,6 +41921,7 @@ public class Node2D: CanvasItem {
 	}
 }
 
+@MainActor
 public class Noise: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -41627,6 +41971,7 @@ public class Noise: Resource {
 	}
 }
 
+@MainActor
 public class Occluder3D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -41641,6 +41986,7 @@ public class Occluder3D: Resource {
 	}
 }
 
+@MainActor
 public class OccluderPolygon2D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_closed(closed: Bool) {
@@ -41681,6 +42027,7 @@ public class OccluderPolygon2D: Resource {
 	}
 }
 
+@MainActor
 public class OggPacketSequence: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_packet_data(packet_data: VariantBox) {
@@ -41726,6 +42073,7 @@ public class OggPacketSequence: Resource {
 	}
 }
 
+@MainActor
 public class OpenXRAction: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_localized_name(localized_name: String) {
@@ -41766,6 +42114,7 @@ public class OpenXRAction: Resource {
 	}
 }
 
+@MainActor
 public class OpenXRActionMap: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_action_sets(action_sets: VariantBox) {
@@ -41839,6 +42188,7 @@ public class OpenXRActionMap: Resource {
 	}
 }
 
+@MainActor
 public class OpenXRActionSet: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_localized_name(localized_name: String) {
@@ -41890,6 +42240,7 @@ public class OpenXRActionSet: Resource {
 	}
 }
 
+@MainActor
 public class OpenXRBindingModifier: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -41904,6 +42255,7 @@ public class OpenXRBindingModifier: Resource {
 	}
 }
 
+@MainActor
 public class OpenXRCompositionLayer: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_layer_viewport(viewport: SubViewport) {
@@ -42159,6 +42511,7 @@ public class OpenXRCompositionLayer: Node3D {
 	}
 }
 
+@MainActor
 public class OpenXRHand: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_hand(hand: Int) {
@@ -42223,10 +42576,12 @@ public class OpenXRHand: Node3D {
 	}
 }
 
+@MainActor
 public class OpenXRHapticBase: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class OpenXRIPBinding: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_action(action: OpenXRAction) {
@@ -42305,6 +42660,7 @@ public class OpenXRIPBinding: Resource {
 	}
 }
 
+@MainActor
 public class OpenXRInteractionProfile: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_interaction_profile_path(interaction_profile_path: String) {
@@ -42365,6 +42721,7 @@ public class OpenXRInteractionProfile: Resource {
 	}
 }
 
+@MainActor
 public class OpenXRInterface: XRInterface {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42605,6 +42962,7 @@ public class OpenXRInterface: XRInterface {
 	}
 }
 
+@MainActor
 public class OpenXRRenderModel: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42629,6 +42987,7 @@ public class OpenXRRenderModel: Node3D {
 	}
 }
 
+@MainActor
 public class OpenXRRenderModelManager: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42663,6 +43022,7 @@ public class OpenXRRenderModelManager: Node3D {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialCapabilityConfigurationAnchor: OpenXRSpatialCapabilityConfigurationBaseHeader {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42672,6 +43032,7 @@ public class OpenXRSpatialCapabilityConfigurationAnchor: OpenXRSpatialCapability
 	}
 }
 
+@MainActor
 public class OpenXRSpatialCapabilityConfigurationAprilTag: OpenXRSpatialCapabilityConfigurationBaseHeader {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42693,6 +43054,7 @@ public class OpenXRSpatialCapabilityConfigurationAprilTag: OpenXRSpatialCapabili
 	}
 }
 
+@MainActor
 public class OpenXRSpatialCapabilityConfigurationAruco: OpenXRSpatialCapabilityConfigurationBaseHeader {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42714,6 +43076,7 @@ public class OpenXRSpatialCapabilityConfigurationAruco: OpenXRSpatialCapabilityC
 	}
 }
 
+@MainActor
 public class OpenXRSpatialCapabilityConfigurationMicroQrCode: OpenXRSpatialCapabilityConfigurationBaseHeader {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42723,6 +43086,7 @@ public class OpenXRSpatialCapabilityConfigurationMicroQrCode: OpenXRSpatialCapab
 	}
 }
 
+@MainActor
 public class OpenXRSpatialCapabilityConfigurationPlaneTracking: OpenXRSpatialCapabilityConfigurationBaseHeader {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42747,6 +43111,7 @@ public class OpenXRSpatialCapabilityConfigurationPlaneTracking: OpenXRSpatialCap
 	}
 }
 
+@MainActor
 public class OpenXRSpatialCapabilityConfigurationQrCode: OpenXRSpatialCapabilityConfigurationBaseHeader {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42756,6 +43121,7 @@ public class OpenXRSpatialCapabilityConfigurationQrCode: OpenXRSpatialCapability
 	}
 }
 
+@MainActor
 public class OpenXRSpatialComponentAnchorList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42765,6 +43131,7 @@ public class OpenXRSpatialComponentAnchorList: OpenXRSpatialComponentData {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialComponentBounded2DList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42779,6 +43146,7 @@ public class OpenXRSpatialComponentBounded2DList: OpenXRSpatialComponentData {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialComponentBounded3DList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42793,6 +43161,7 @@ public class OpenXRSpatialComponentBounded3DList: OpenXRSpatialComponentData {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialComponentMarkerList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42810,6 +43179,7 @@ public class OpenXRSpatialComponentMarkerList: OpenXRSpatialComponentData {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialComponentMesh2DList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42829,6 +43199,7 @@ public class OpenXRSpatialComponentMesh2DList: OpenXRSpatialComponentData {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialComponentMesh3DList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42843,6 +43214,7 @@ public class OpenXRSpatialComponentMesh3DList: OpenXRSpatialComponentData {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialComponentParentList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42852,6 +43224,7 @@ public class OpenXRSpatialComponentParentList: OpenXRSpatialComponentData {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialComponentPersistenceList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42866,6 +43239,7 @@ public class OpenXRSpatialComponentPersistenceList: OpenXRSpatialComponentData {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialComponentPlaneAlignmentList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42875,6 +43249,7 @@ public class OpenXRSpatialComponentPlaneAlignmentList: OpenXRSpatialComponentDat
 	}
 }
 
+@MainActor
 public class OpenXRSpatialComponentPlaneSemanticLabelList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42884,6 +43259,7 @@ public class OpenXRSpatialComponentPlaneSemanticLabelList: OpenXRSpatialComponen
 	}
 }
 
+@MainActor
 public class OpenXRSpatialComponentPolygon2DList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42898,6 +43274,7 @@ public class OpenXRSpatialComponentPolygon2DList: OpenXRSpatialComponentData {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialContextPersistenceConfig: OpenXRStructureBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func add_persistence_context(persistence_context: VariantBox) {
@@ -42913,6 +43290,7 @@ public class OpenXRSpatialContextPersistenceConfig: OpenXRStructureBase {
 	}
 }
 
+@MainActor
 public class OpenXRSpatialQueryResultData: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -42932,6 +43310,7 @@ public class OpenXRSpatialQueryResultData: OpenXRSpatialComponentData {
 	}
 }
 
+@MainActor
 public class PackedDataContainer: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _set_data(data: VariantBox) {
@@ -42967,6 +43346,7 @@ public class PackedDataContainer: Resource {
 	}
 }
 
+@MainActor
 public class PackedScene: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -43003,6 +43383,7 @@ public class PackedScene: Resource {
 	}
 }
 
+@MainActor
 public class PacketPeerDTLS: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func poll() {
@@ -43023,6 +43404,7 @@ public class PacketPeerDTLS: PacketPeer {
 	}
 }
 
+@MainActor
 public class PacketPeerExtension: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -43047,6 +43429,7 @@ public class PacketPeerExtension: PacketPeer {
 	}
 }
 
+@MainActor
 public class PacketPeerStream: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_stream_peer(peer: StreamPeer) {
@@ -43087,6 +43470,7 @@ public class PacketPeerStream: PacketPeer {
 	}
 }
 
+@MainActor
 public class PacketPeerUDP: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -43152,6 +43536,7 @@ public class PacketPeerUDP: PacketPeer {
 	}
 }
 
+@MainActor
 public class ParallaxBackground: CanvasLayer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _camera_moved(_unnamed_arg0: Transform2D, _unnamed_arg1: Vector2, _unnamed_arg2: Vector2) {
@@ -43235,6 +43620,7 @@ public class ParallaxBackground: CanvasLayer {
 	}
 }
 
+@MainActor
 public class Path3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_curve(curve: Curve3D) {
@@ -43273,6 +43659,7 @@ public class Path3D: Node3D {
 	}
 }
 
+@MainActor
 public class PathFollow3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_progress(progress: Double) {
@@ -43390,6 +43777,7 @@ public class PathFollow3D: Node3D {
 	}
 }
 
+@MainActor
 public class PhysicsMaterial: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_friction(friction: Double) {
@@ -43442,6 +43830,7 @@ public class PhysicsMaterial: Resource {
 	}
 }
 
+@MainActor
 public class PolygonPathFinder: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func setup(points: VariantBox, connections: VariantBox) {
@@ -43494,6 +43883,7 @@ public class PolygonPathFinder: Resource {
 	}
 }
 
+@MainActor
 public class PropertyTweener: Tweener {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -43533,6 +43923,7 @@ public class PropertyTweener: Tweener {
 	}
 }
 
+@MainActor
 public class RDShaderFile: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_bytecode(bytecode: RDShaderSPIRV, version: String) {
@@ -43574,6 +43965,7 @@ public class RDShaderFile: Resource {
 	}
 }
 
+@MainActor
 public class RDShaderSPIRV: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_stage_bytecode(stage: Int, bytecode: VariantBox) {
@@ -43682,6 +44074,7 @@ public class RDShaderSPIRV: Resource {
 	}
 }
 
+@MainActor
 public class RayCast3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_enabled(enabled: Bool) {
@@ -43875,6 +44268,7 @@ public class RayCast3D: Node3D {
 	}
 }
 
+@MainActor
 public class RemoteTransform3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_remote_node(path: String) {
@@ -43946,6 +44340,7 @@ public class RemoteTransform3D: Node3D {
 	}
 }
 
+@MainActor
 public class RenderSceneBuffersExtension: RenderSceneBuffers {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _configure(config: RenderSceneBuffersConfiguration) {
@@ -43965,6 +44360,7 @@ public class RenderSceneBuffersExtension: RenderSceneBuffers {
 	}
 }
 
+@MainActor
 public class RenderSceneBuffersRD: RenderSceneBuffers {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -44102,10 +44498,12 @@ public class RenderSceneBuffersRD: RenderSceneBuffers {
 	}
 }
 
+@MainActor
 public class ResourceFormatImporterSaver: ResourceFormatSaver {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class RichTextEffect: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -44115,6 +44513,7 @@ public class RichTextEffect: Resource {
 	}
 }
 
+@MainActor
 public class SceneMultiplayer: MultiplayerAPI {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_root_path(path: String) {
@@ -44250,6 +44649,7 @@ public class SceneMultiplayer: MultiplayerAPI {
 	}
 }
 
+@MainActor
 public class SceneReplicationConfig: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -44307,6 +44707,7 @@ public class SceneReplicationConfig: Resource {
 	}
 }
 
+@MainActor
 public class Script: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -44404,6 +44805,7 @@ public class Script: Resource {
 	}
 }
 
+@MainActor
 public class Shader: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -44444,6 +44846,7 @@ public class Shader: Resource {
 	}
 }
 
+@MainActor
 public class ShaderGraph: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func add_node(node: VisualShaderNode, position: Vector2, id: Int) {
@@ -44480,6 +44883,7 @@ public class ShaderGraph: Resource {
 	}
 }
 
+@MainActor
 public class ShaderInclude: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_code(code: String) {
@@ -44496,6 +44900,7 @@ public class ShaderInclude: Resource {
 	}
 }
 
+@MainActor
 public class Shape2D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_custom_solver_bias(bias: Double) {
@@ -44540,6 +44945,7 @@ public class Shape2D: Resource {
 	}
 }
 
+@MainActor
 public class Shape3D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_custom_solver_bias(bias: Double) {
@@ -44573,6 +44979,7 @@ public class Shape3D: Resource {
 	}
 }
 
+@MainActor
 public class ShapeCast3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func resource_changed(resource: Resource) {
@@ -44788,6 +45195,7 @@ public class ShapeCast3D: Node3D {
 	}
 }
 
+@MainActor
 public class Shortcut: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_events(events: VariantBox) {
@@ -44819,6 +45227,7 @@ public class Shortcut: Resource {
 	}
 }
 
+@MainActor
 public class Skeleton3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -45095,6 +45504,7 @@ public class Skeleton3D: Node3D {
 	}
 }
 
+@MainActor
 public class SkeletonModification2D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_enabled(enabled: Bool) {
@@ -45158,6 +45568,7 @@ public class SkeletonModification2D: Resource {
 	}
 }
 
+@MainActor
 public class SkeletonModificationStack2D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func setup() {
@@ -45231,6 +45642,7 @@ public class SkeletonModificationStack2D: Resource {
 	}
 }
 
+@MainActor
 public class SkeletonModifier3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -45279,6 +45691,7 @@ public class SkeletonModifier3D: Node3D {
 	}
 }
 
+@MainActor
 public class SkeletonProfile: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_root_bone(bone_name: String) {
@@ -45419,6 +45832,7 @@ public class SkeletonProfile: Resource {
 	}
 }
 
+@MainActor
 public class Skin: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_bind_count(bind_count: Int) {
@@ -45464,6 +45878,7 @@ public class Skin: Resource {
 	}
 }
 
+@MainActor
 public class Sky: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radiance_size(size: Int) {
@@ -45504,6 +45919,7 @@ public class Sky: Resource {
 	}
 }
 
+@MainActor
 public class SpringArm3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -45572,6 +45988,7 @@ public class SpringArm3D: Node3D {
 	}
 }
 
+@MainActor
 public class SpringBoneCollision3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -45633,6 +46050,7 @@ public class SpringBoneCollision3D: Node3D {
 	}
 }
 
+@MainActor
 public class SpriteFrames: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func add_animation(anim: String) {
@@ -45725,6 +46143,7 @@ public class SpriteFrames: Resource {
 	}
 }
 
+@MainActor
 public class StreamPeerBuffer: StreamPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func seek(position: Int) {
@@ -45765,6 +46184,7 @@ public class StreamPeerBuffer: StreamPeer {
 	}
 }
 
+@MainActor
 public class StreamPeerExtension: StreamPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -45794,6 +46214,7 @@ public class StreamPeerExtension: StreamPeer {
 	}
 }
 
+@MainActor
 public class StreamPeerGZIP: StreamPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -45816,6 +46237,7 @@ public class StreamPeerGZIP: StreamPeer {
 	}
 }
 
+@MainActor
 public class StreamPeerSocket: StreamPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -45833,6 +46255,7 @@ public class StreamPeerSocket: StreamPeer {
 	}
 }
 
+@MainActor
 public class StreamPeerTLS: StreamPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func poll() {
@@ -45863,6 +46286,7 @@ public class StreamPeerTLS: StreamPeer {
 	}
 }
 
+@MainActor
 public class StyleBox: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -45944,6 +46368,7 @@ public class StyleBox: Resource {
 	}
 }
 
+@MainActor
 public class SubViewport: Viewport {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector2i) {
@@ -46024,6 +46449,7 @@ public class SubViewport: Viewport {
 	}
 }
 
+@MainActor
 public class SubtweenTweener: Tweener {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -46033,6 +46459,7 @@ public class SubtweenTweener: Tweener {
 	}
 }
 
+@MainActor
 public class SyntaxHighlighter: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -46064,6 +46491,7 @@ public class SyntaxHighlighter: Resource {
 	}
 }
 
+@MainActor
 public class TCPServer: SocketServer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -46083,6 +46511,7 @@ public class TCPServer: SocketServer {
 	}
 }
 
+@MainActor
 public class TextServerExtension: TextServer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -47172,10 +47601,12 @@ public class TextServerExtension: TextServer {
 	}
 }
 
+@MainActor
 public class Texture: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class Theme: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_icon(name: String, theme_type: String, texture: Texture2D) {
@@ -47502,6 +47933,7 @@ public class Theme: Resource {
 	}
 }
 
+@MainActor
 public class TileMapPattern: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_cell(coords: Vector2i, source_id: Int = -1, atlas_coords: Vector2i, alternative_tile: Int = -1) {
@@ -47550,6 +47982,7 @@ public class TileMapPattern: Resource {
 	}
 }
 
+@MainActor
 public class TileSet: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -47956,6 +48389,7 @@ public class TileSet: Resource {
 	}
 }
 
+@MainActor
 public class TileSetSource: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -47990,6 +48424,7 @@ public class TileSetSource: Resource {
 	}
 }
 
+@MainActor
 public class Translation: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_locale(locale: String) {
@@ -48074,6 +48509,7 @@ public class Translation: Resource {
 	}
 }
 
+@MainActor
 public class UDSServer: SocketServer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -48088,6 +48524,7 @@ public class UDSServer: SocketServer {
 	}
 }
 
+@MainActor
 public class VehicleWheel3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(length: Double) {
@@ -48310,6 +48747,7 @@ public class VehicleWheel3D: Node3D {
 	}
 }
 
+@MainActor
 public class VideoStream: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_file(file: String) {
@@ -48331,6 +48769,7 @@ public class VideoStream: Resource {
 	}
 }
 
+@MainActor
 public class VideoStreamPlayback: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -48393,6 +48832,7 @@ public class VideoStreamPlayback: Resource {
 	}
 }
 
+@MainActor
 public class VisualInstance3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_base(base: VariantBox) {
@@ -48468,6 +48908,7 @@ public class VisualInstance3D: Node3D {
 	}
 }
 
+@MainActor
 public class VisualShaderGroup: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_group_name(name: String) {
@@ -48626,6 +49067,7 @@ public class VisualShaderGroup: Resource {
 	}
 }
 
+@MainActor
 public class VisualShaderNode: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -48703,6 +49145,7 @@ public class VisualShaderNode: Resource {
 	}
 }
 
+@MainActor
 public class VoxelGIData: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func allocate(to_cell_xform: Transform3D, aabb: AABB, octree_size: Vector3, octree_cells: VariantBox, data_cells: VariantBox, distance_field: VariantBox, level_counts: VariantBox) {
@@ -48836,6 +49279,7 @@ public class VoxelGIData: Resource {
 	}
 }
 
+@MainActor
 public class WebRTCDataChannel: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -48910,6 +49354,7 @@ public class WebRTCDataChannel: PacketPeer {
 	}
 }
 
+@MainActor
 public class WebRTCPeerConnectionExtension: WebRTCPeerConnection {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -48967,6 +49412,7 @@ public class WebRTCPeerConnectionExtension: WebRTCPeerConnection {
 	}
 }
 
+@MainActor
 public class WebSocketPeer: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -49117,6 +49563,7 @@ public class WebSocketPeer: PacketPeer {
 	}
 }
 
+@MainActor
 public class WebXRInterface: XRInterface {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func is_session_supported(session_mode: String) {
@@ -49278,6 +49725,7 @@ public class WebXRInterface: XRInterface {
 	}
 }
 
+@MainActor
 public class Window: Viewport {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_title(title: String) {
@@ -50084,6 +50532,7 @@ public class Window: Viewport {
 	}
 }
 
+@MainActor
 public class World2D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -50124,6 +50573,7 @@ public class World2D: Resource {
 	}
 }
 
+@MainActor
 public class World3D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -50200,6 +50650,7 @@ public class World3D: Resource {
 	}
 }
 
+@MainActor
 public class X509Certificate: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -50224,6 +50675,7 @@ public class X509Certificate: Resource {
 	}
 }
 
+@MainActor
 public class XRFaceModifier3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_face_tracker(tracker_name: String) {
@@ -50252,6 +50704,7 @@ public class XRFaceModifier3D: Node3D {
 	}
 }
 
+@MainActor
 public class XRFaceTracker: XRTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -50276,6 +50729,7 @@ public class XRFaceTracker: XRTracker {
 	}
 }
 
+@MainActor
 public class XRInterfaceExtension: XRInterface {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -50459,6 +50913,7 @@ public class XRInterfaceExtension: XRInterface {
 	}
 }
 
+@MainActor
 public class XRNode3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_tracker(tracker_name: String) {
@@ -50520,6 +50975,7 @@ public class XRNode3D: Node3D {
 	}
 }
 
+@MainActor
 public class XROrigin3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_world_scale(world_scale: Double) {
@@ -50548,6 +51004,7 @@ public class XROrigin3D: Node3D {
 	}
 }
 
+@MainActor
 public class XRPositionalTracker: XRTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -50619,6 +51076,7 @@ public class XRPositionalTracker: XRTracker {
 	}
 }
 
+@MainActor
 public class AcceptDialog: Window {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -50722,6 +51180,7 @@ public class AcceptDialog: Window {
 	}
 }
 
+@MainActor
 public class AnimatedSprite2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_sprite_frames(sprite_frames: SpriteFrames) {
@@ -50890,6 +51349,7 @@ public class AnimatedSprite2D: Node2D {
 	}
 }
 
+@MainActor
 public class AnimationNodeExtension: AnimationNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -50909,6 +51369,7 @@ public class AnimationNodeExtension: AnimationNode {
 	}
 }
 
+@MainActor
 public class AnimationNodeObserverBlendSpace: AnimationNodeObserver {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func emit_closest_point_changed(closest_point_name: String) {
@@ -50916,6 +51377,7 @@ public class AnimationNodeObserverBlendSpace: AnimationNodeObserver {
 	}
 }
 
+@MainActor
 public class AnimationNodeObserverOneShot: AnimationNodeObserver {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func emit_started() {
@@ -50932,6 +51394,7 @@ public class AnimationNodeObserverOneShot: AnimationNodeObserver {
 	}
 }
 
+@MainActor
 public class AnimationNodeObserverTransition: AnimationNodeObserver {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func emit_state_started(state: String) {
@@ -50942,10 +51405,12 @@ public class AnimationNodeObserverTransition: AnimationNodeObserver {
 	}
 }
 
+@MainActor
 public class AnimationNodeOutput: AnimationNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AnimationNodeSync: AnimationNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_use_sync(enable: Bool) {
@@ -50962,10 +51427,12 @@ public class AnimationNodeSync: AnimationNode {
 	}
 }
 
+@MainActor
 public class AnimationNodeTimeScale: AnimationNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AnimationNodeTimeSeek: AnimationNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_explicit_elapse(enable: Bool) {
@@ -50982,10 +51449,12 @@ public class AnimationNodeTimeSeek: AnimationNode {
 	}
 }
 
+@MainActor
 public class AnimationRootNode: AnimationNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class Area3D: CollisionObject3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_gravity_space_override_mode(space_override_mode: Int) {
@@ -51332,6 +51801,7 @@ public class Area3D: CollisionObject3D {
 	}
 }
 
+@MainActor
 public class ArrayMesh: Mesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func add_blend_shape(name: String) {
@@ -51474,6 +51944,7 @@ public class ArrayMesh: Mesh {
 	}
 }
 
+@MainActor
 public class ArrayOccluder3D: Occluder3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_arrays(vertices: VariantBox, indices: VariantBox) {
@@ -51495,6 +51966,7 @@ public class ArrayOccluder3D: Occluder3D {
 	}
 }
 
+@MainActor
 public class AudioEffectAmplify: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_volume_db(volume: Double) {
@@ -51523,6 +51995,7 @@ public class AudioEffectAmplify: AudioEffect {
 	}
 }
 
+@MainActor
 public class AudioEffectCapture: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -51572,6 +52045,7 @@ public class AudioEffectCapture: AudioEffect {
 	}
 }
 
+@MainActor
 public class AudioEffectChorus: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_voice_count(voices: Int) {
@@ -51756,6 +52230,7 @@ public class AudioEffectChorus: AudioEffect {
 	}
 }
 
+@MainActor
 public class AudioEffectCompressor: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_threshold(threshold: Double) {
@@ -51844,6 +52319,7 @@ public class AudioEffectCompressor: AudioEffect {
 	}
 }
 
+@MainActor
 public class AudioEffectDelay: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_dry(amount: Double) {
@@ -52016,6 +52492,7 @@ public class AudioEffectDelay: AudioEffect {
 	}
 }
 
+@MainActor
 public class AudioEffectDistortion: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_mode(mode: Int) {
@@ -52080,6 +52557,7 @@ public class AudioEffectDistortion: AudioEffect {
 	}
 }
 
+@MainActor
 public class AudioEffectEQ: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_band_gain_db(band_idx: Int, volume_db: Double) {
@@ -52097,6 +52575,7 @@ public class AudioEffectEQ: AudioEffect {
 	}
 }
 
+@MainActor
 public class AudioEffectFilter: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_cutoff(freq: Double) {
@@ -52149,6 +52628,7 @@ public class AudioEffectFilter: AudioEffect {
 	}
 }
 
+@MainActor
 public class AudioEffectHardLimiter: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_ceiling_db(ceiling: Double) {
@@ -52189,6 +52669,7 @@ public class AudioEffectHardLimiter: AudioEffect {
 	}
 }
 
+@MainActor
 public class AudioEffectLimiter: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_ceiling_db(ceiling: Double) {
@@ -52241,6 +52722,7 @@ public class AudioEffectLimiter: AudioEffect {
 	}
 }
 
+@MainActor
 public class AudioEffectPanner: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_pan(cpanume: Double) {
@@ -52257,6 +52739,7 @@ public class AudioEffectPanner: AudioEffect {
 	}
 }
 
+@MainActor
 public class AudioEffectPhaser: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_range_min_hz(hz: Double) {
@@ -52321,6 +52804,7 @@ public class AudioEffectPhaser: AudioEffect {
 	}
 }
 
+@MainActor
 public class AudioEffectPitchShift: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_pitch_scale(rate: Double) {
@@ -52361,6 +52845,7 @@ public class AudioEffectPitchShift: AudioEffect {
 	}
 }
 
+@MainActor
 public class AudioEffectRecord: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_recording_active(record: Bool) {
@@ -52390,6 +52875,7 @@ public class AudioEffectRecord: AudioEffect {
 	}
 }
 
+@MainActor
 public class AudioEffectReverb: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_predelay_msec(msec: Double) {
@@ -52498,6 +52984,7 @@ public class AudioEffectReverb: AudioEffect {
 	}
 }
 
+@MainActor
 public class AudioEffectSpectrumAnalyzer: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_buffer_length(seconds: Double) {
@@ -52526,6 +53013,7 @@ public class AudioEffectSpectrumAnalyzer: AudioEffect {
 	}
 }
 
+@MainActor
 public class AudioEffectStereoEnhance: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_pan_pullout(amount: Double) {
@@ -52566,6 +53054,7 @@ public class AudioEffectStereoEnhance: AudioEffect {
 	}
 }
 
+@MainActor
 public class AudioListener2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func make_current() {
@@ -52581,6 +53070,7 @@ public class AudioListener2D: Node2D {
 	}
 }
 
+@MainActor
 public class AudioStreamGenerator: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_mix_rate(hz: Double) {
@@ -52621,6 +53111,7 @@ public class AudioStreamGenerator: AudioStream {
 	}
 }
 
+@MainActor
 public class AudioStreamGeneratorPlayback: AudioStreamPlaybackResampled {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -52653,6 +53144,7 @@ public class AudioStreamGeneratorPlayback: AudioStreamPlaybackResampled {
 	}
 }
 
+@MainActor
 public class AudioStreamInteractive: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_clip_count(clip_count: Int) {
@@ -53784,6 +54276,7 @@ public class AudioStreamInteractive: AudioStream {
 	}
 }
 
+@MainActor
 public class AudioStreamMP3: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -53870,10 +54363,12 @@ public class AudioStreamMP3: AudioStream {
 	}
 }
 
+@MainActor
 public class AudioStreamMicrophone: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AudioStreamOggVorbis: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -53972,10 +54467,12 @@ public class AudioStreamOggVorbis: AudioStream {
 	}
 }
 
+@MainActor
 public class AudioStreamPlaybackOggVorbis: AudioStreamPlaybackResampled {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AudioStreamPlayer2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_stream(stream: AudioStream) {
@@ -54175,6 +54672,7 @@ public class AudioStreamPlayer2D: Node2D {
 	}
 }
 
+@MainActor
 public class AudioStreamPlaylist: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_stream_count(stream_count: Int) {
@@ -54496,6 +54994,7 @@ public class AudioStreamPlaylist: AudioStream {
 	}
 }
 
+@MainActor
 public class AudioStreamPolyphonic: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_polyphony(voices: Int) {
@@ -54512,6 +55011,7 @@ public class AudioStreamPolyphonic: AudioStream {
 	}
 }
 
+@MainActor
 public class AudioStreamRandomizer: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func add_stream(index: Int, stream: AudioStream, weight: Double = 1.0) {
@@ -54605,6 +55105,7 @@ public class AudioStreamRandomizer: AudioStream {
 	}
 }
 
+@MainActor
 public class AudioStreamSynchronized: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_stream_count(stream_count: Int) {
@@ -54893,6 +55394,7 @@ public class AudioStreamSynchronized: AudioStream {
 	}
 }
 
+@MainActor
 public class AudioStreamWAV: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -55008,6 +55510,7 @@ public class AudioStreamWAV: AudioStream {
 	}
 }
 
+@MainActor
 public class BackBufferCopy: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_rect(rect: Rect2) {
@@ -55036,6 +55539,7 @@ public class BackBufferCopy: Node2D {
 	}
 }
 
+@MainActor
 public class BaseButton: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func press() {
@@ -55198,6 +55702,7 @@ public class BaseButton: Control {
 	}
 }
 
+@MainActor
 public class BaseMaterial3D: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_albedo(albedo: Color) {
@@ -56474,6 +56979,7 @@ public class BaseMaterial3D: Material {
 	}
 }
 
+@MainActor
 public class BlitMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_blend_mode(blend_mode: Int) {
@@ -56490,6 +56996,7 @@ public class BlitMaterial: Material {
 	}
 }
 
+@MainActor
 public class Bone2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_rest(rest: Transform2D) {
@@ -56543,6 +57050,7 @@ public class Bone2D: Node2D {
 	}
 }
 
+@MainActor
 public class BoneConstraint3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_amount(index: Int, amount: Double) {
@@ -56614,6 +57122,7 @@ public class BoneConstraint3D: SkeletonModifier3D {
 	}
 }
 
+@MainActor
 public class BoneSpaceAdjuster3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_use_bone_skin_scale_for_all_bones(enabled: Bool) {
@@ -56677,6 +57186,7 @@ public class BoneSpaceAdjuster3D: SkeletonModifier3D {
 	}
 }
 
+@MainActor
 public class BoneTwistDisperser3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_setting_count(count: Int) {
@@ -56829,6 +57339,7 @@ public class BoneTwistDisperser3D: SkeletonModifier3D {
 	}
 }
 
+@MainActor
 public class BoxOccluder3D: Occluder3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector3) {
@@ -56845,6 +57356,7 @@ public class BoxOccluder3D: Occluder3D {
 	}
 }
 
+@MainActor
 public class BoxShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector3) {
@@ -56861,6 +57373,7 @@ public class BoxShape3D: Shape3D {
 	}
 }
 
+@MainActor
 public class CPUParticles2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_emitting(emitting: Bool) {
@@ -57521,6 +58034,7 @@ public class CPUParticles2D: Node2D {
 	}
 }
 
+@MainActor
 public class Camera2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_offset(offset: Vector2) {
@@ -57874,6 +58388,7 @@ public class Camera2D: Node2D {
 	}
 }
 
+@MainActor
 public class CameraAttributesPhysical: CameraAttributes {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_aperture(aperture: Double) {
@@ -57991,6 +58506,7 @@ public class CameraAttributesPhysical: CameraAttributes {
 	}
 }
 
+@MainActor
 public class CameraAttributesPractical: CameraAttributes {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_dof_blur_far_enabled(enabled: Bool) {
@@ -58111,6 +58627,7 @@ public class CameraAttributesPractical: CameraAttributes {
 	}
 }
 
+@MainActor
 public class CanvasGroup: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_fit_margin(fit_margin: Double) {
@@ -58155,6 +58672,7 @@ public class CanvasGroup: Node2D {
 	}
 }
 
+@MainActor
 public class CanvasItemMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_blend_mode(blend_mode: Int) {
@@ -58231,6 +58749,7 @@ public class CanvasItemMaterial: Material {
 	}
 }
 
+@MainActor
 public class CanvasModulate: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_color(color: Color) {
@@ -58247,6 +58766,7 @@ public class CanvasModulate: Node2D {
 	}
 }
 
+@MainActor
 public class CapsuleShape2D: Shape2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(radius: Double) {
@@ -58287,6 +58807,7 @@ public class CapsuleShape2D: Shape2D {
 	}
 }
 
+@MainActor
 public class CapsuleShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(radius: Double) {
@@ -58327,6 +58848,7 @@ public class CapsuleShape3D: Shape3D {
 	}
 }
 
+@MainActor
 public class CircleShape2D: Shape2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(radius: Double) {
@@ -58343,6 +58865,7 @@ public class CircleShape2D: Shape2D {
 	}
 }
 
+@MainActor
 public class CodeHighlighter: SyntaxHighlighter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func add_keyword_color(keyword: String, color: Color) {
@@ -58483,6 +59006,7 @@ public class CodeHighlighter: SyntaxHighlighter {
 	}
 }
 
+@MainActor
 public class CollisionObject2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -58693,6 +59217,7 @@ public class CollisionObject2D: Node2D {
 	}
 }
 
+@MainActor
 public class CollisionPolygon2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_polygon(polygon: VariantBox) {
@@ -58773,6 +59298,7 @@ public class CollisionPolygon2D: Node2D {
 	}
 }
 
+@MainActor
 public class CollisionShape2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_shape(shape: Shape2D) {
@@ -58853,6 +59379,7 @@ public class CollisionShape2D: Node2D {
 	}
 }
 
+@MainActor
 public class ColorRect: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_color(color: Color) {
@@ -58869,6 +59396,7 @@ public class ColorRect: Control {
 	}
 }
 
+@MainActor
 public class ConcavePolygonShape2D: Shape2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_segments(segments: VariantBox) {
@@ -58885,6 +59413,7 @@ public class ConcavePolygonShape2D: Shape2D {
 	}
 }
 
+@MainActor
 public class ConcavePolygonShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_faces(faces: VariantBox) {
@@ -58913,6 +59442,7 @@ public class ConcavePolygonShape3D: Shape3D {
 	}
 }
 
+@MainActor
 public class ConeTwistJoint3D: Joint3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_param(param: Int, value: Double) {
@@ -58945,6 +59475,7 @@ public class ConeTwistJoint3D: Joint3D {
 	}
 }
 
+@MainActor
 public class Container: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func queue_sort() {
@@ -58983,6 +59514,7 @@ public class Container: Control {
 	}
 }
 
+@MainActor
 public class ConvexPolygonShape2D: Shape2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_point_cloud(point_cloud: VariantBox) {
@@ -59002,6 +59534,7 @@ public class ConvexPolygonShape2D: Shape2D {
 	}
 }
 
+@MainActor
 public class ConvexPolygonShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_points(points: VariantBox) {
@@ -59018,6 +59551,7 @@ public class ConvexPolygonShape3D: Shape3D {
 	}
 }
 
+@MainActor
 public class CylinderShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(radius: Double) {
@@ -59046,6 +59580,7 @@ public class CylinderShape3D: Shape3D {
 	}
 }
 
+@MainActor
 public class Decal: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector3) {
@@ -59226,6 +59761,7 @@ public class Decal: VisualInstance3D {
 	}
 }
 
+@MainActor
 public class ENetMultiplayerPeer: MultiplayerPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -59267,10 +59803,12 @@ public class ENetMultiplayerPeer: MultiplayerPeer {
 	}
 }
 
+@MainActor
 public class FBXDocument: GLTFDocument {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class FBXState: GLTFState {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -59287,6 +59825,7 @@ public class FBXState: GLTFState {
 	}
 }
 
+@MainActor
 public class FastNoiseLite: Noise {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_noise_type(type: Int) {
@@ -59558,6 +60097,7 @@ public class FastNoiseLite: Noise {
 	}
 }
 
+@MainActor
 public class FogMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_density(density: Double) {
@@ -59634,6 +60174,7 @@ public class FogMaterial: Material {
 	}
 }
 
+@MainActor
 public class FogVolume: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector3) {
@@ -59674,6 +60215,7 @@ public class FogVolume: VisualInstance3D {
 	}
 }
 
+@MainActor
 public class FontFile: Font {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -60182,6 +60724,7 @@ public class FontFile: Font {
 	}
 }
 
+@MainActor
 public class FontVariation: Font {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_base_font(font: Font) {
@@ -60328,6 +60871,7 @@ public class FontVariation: Font {
 	}
 }
 
+@MainActor
 public class GDScript: Script {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func new() {
@@ -60335,22 +60879,27 @@ public class GDScript: Script {
 	}
 }
 
+@MainActor
 public class GLTFDocumentExtensionConvertImporterMesh: GLTFDocumentExtension {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class GLTFDocumentExtensionPhysics: GLTFDocumentExtension {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class GLTFDocumentExtensionTextureKTX: GLTFDocumentExtension {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class GLTFDocumentExtensionTextureWebP: GLTFDocumentExtension {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class GPUParticles2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_emitting(emitting: Bool) {
@@ -60707,6 +61256,7 @@ public class GPUParticles2D: Node2D {
 	}
 }
 
+@MainActor
 public class GPUParticlesAttractor3D: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_cull_mask(mask: Int) {
@@ -60759,6 +61309,7 @@ public class GPUParticlesAttractor3D: VisualInstance3D {
 	}
 }
 
+@MainActor
 public class GPUParticlesCollision3D: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_cull_mask(mask: Int) {
@@ -60775,6 +61326,7 @@ public class GPUParticlesCollision3D: VisualInstance3D {
 	}
 }
 
+@MainActor
 public class Generic6DOFJoint3D: Joint3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_param_x(param: Int, value: Double) {
@@ -61235,6 +61787,7 @@ public class Generic6DOFJoint3D: Joint3D {
 	}
 }
 
+@MainActor
 public class GeometryInstance3D: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_material_override(material: Material) {
@@ -61449,6 +62002,7 @@ public class GeometryInstance3D: VisualInstance3D {
 	}
 }
 
+@MainActor
 public class GraphEdit: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -61943,6 +62497,7 @@ public class GraphEdit: Control {
 	}
 }
 
+@MainActor
 public class HeightMapShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_map_width(width: Int) {
@@ -61996,6 +62551,7 @@ public class HeightMapShape3D: Shape3D {
 	}
 }
 
+@MainActor
 public class HingeJoint3D: Joint3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_param(param: Int, value: Double) {
@@ -62056,6 +62612,7 @@ public class HingeJoint3D: Joint3D {
 	}
 }
 
+@MainActor
 public class IKModifier3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_setting_count(count: Int) {
@@ -62086,6 +62643,7 @@ public class IKModifier3D: SkeletonModifier3D {
 	}
 }
 
+@MainActor
 public class ImmediateMesh: Mesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func surface_begin(primitive: Int, material: Material) {
@@ -62120,6 +62678,7 @@ public class ImmediateMesh: Mesh {
 	}
 }
 
+@MainActor
 public class InputEventAction: InputEvent {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_action(action: String) {
@@ -62167,6 +62726,7 @@ public class InputEventAction: InputEvent {
 	}
 }
 
+@MainActor
 public class InputEventFromWindow: InputEvent {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_window_id(id: Int) {
@@ -62183,6 +62743,7 @@ public class InputEventFromWindow: InputEvent {
 	}
 }
 
+@MainActor
 public class InputEventJoypadButton: InputEvent {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_button_index(button_index: Int) {
@@ -62218,6 +62779,7 @@ public class InputEventJoypadButton: InputEvent {
 	}
 }
 
+@MainActor
 public class InputEventJoypadMotion: InputEvent {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_axis(axis: Int) {
@@ -62246,6 +62808,7 @@ public class InputEventJoypadMotion: InputEvent {
 	}
 }
 
+@MainActor
 public class InputEventMIDI: InputEvent {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_channel(channel: Int) {
@@ -62346,6 +62909,7 @@ public class InputEventMIDI: InputEvent {
 	}
 }
 
+@MainActor
 public class InputEventShortcut: InputEvent {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_shortcut(shortcut: Shortcut) {
@@ -62362,6 +62926,7 @@ public class InputEventShortcut: InputEvent {
 	}
 }
 
+@MainActor
 public class ItemList: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -62798,6 +63363,7 @@ public class ItemList: Control {
 	}
 }
 
+@MainActor
 public class Joint2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_node_a(node: String) {
@@ -62855,6 +63421,7 @@ public class Joint2D: Node2D {
 	}
 }
 
+@MainActor
 public class JointLimitationCone3D: JointLimitation3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_angle(angle: Double) {
@@ -62871,6 +63438,7 @@ public class JointLimitationCone3D: JointLimitation3D {
 	}
 }
 
+@MainActor
 public class Label: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_horizontal_alignment(alignment: Int) {
@@ -63217,6 +63785,7 @@ public class Label: Control {
 	}
 }
 
+@MainActor
 public class Light2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_enabled(enabled: Bool) {
@@ -63417,6 +63986,7 @@ public class Light2D: Node2D {
 	}
 }
 
+@MainActor
 public class Light3D: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_editor_only(editor_only: Bool) {
@@ -63698,6 +64268,7 @@ public class Light3D: VisualInstance3D {
 	}
 }
 
+@MainActor
 public class LightOccluder2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_occluder_polygon(polygon: OccluderPolygon2D) {
@@ -63738,6 +64309,7 @@ public class LightOccluder2D: Node2D {
 	}
 }
 
+@MainActor
 public class LightmapGI: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_light_data(data: LightmapGIData) {
@@ -64034,6 +64606,7 @@ public class LightmapGI: VisualInstance3D {
 	}
 }
 
+@MainActor
 public class LimitAngularVelocityModifier3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_root_bone_name(index: Int, bone_name: String) {
@@ -64121,6 +64694,7 @@ public class LimitAngularVelocityModifier3D: SkeletonModifier3D {
 	}
 }
 
+@MainActor
 public class Line2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_points(points: VariantBox) {
@@ -64327,6 +64901,7 @@ public class Line2D: Node2D {
 	}
 }
 
+@MainActor
 public class LineEdit: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _set_text(text: String, emit_signal: Bool = false) {
@@ -64899,6 +65474,7 @@ public class LineEdit: Control {
 	}
 }
 
+@MainActor
 public class LookAtModifier3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_target_node(target_node: String) {
@@ -65302,6 +65878,7 @@ public class LookAtModifier3D: SkeletonModifier3D {
 	}
 }
 
+@MainActor
 public class Marker2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_gizmo_extents(extents: Double) {
@@ -65318,6 +65895,7 @@ public class Marker2D: Node2D {
 	}
 }
 
+@MainActor
 public class MenuBar: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_switch_on_hover(enable: Bool) {
@@ -65448,6 +66026,7 @@ public class MenuBar: Control {
 	}
 }
 
+@MainActor
 public class MeshInstance2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_mesh(mesh: Mesh) {
@@ -65479,6 +66058,7 @@ public class MeshInstance2D: Node2D {
 	}
 }
 
+@MainActor
 public class ModifierBoneTarget3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_bone_name(bone_name: String) {
@@ -65507,6 +66087,7 @@ public class ModifierBoneTarget3D: SkeletonModifier3D {
 	}
 }
 
+@MainActor
 public class MultiMeshInstance2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_multimesh(multimesh: MultiMesh) {
@@ -65538,6 +66119,7 @@ public class MultiMeshInstance2D: Node2D {
 	}
 }
 
+@MainActor
 public class MultiplayerPeerExtension: MultiplayerPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -65643,6 +66225,7 @@ public class MultiplayerPeerExtension: MultiplayerPeer {
 	}
 }
 
+@MainActor
 public class NavigationLink2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -65768,6 +66351,7 @@ public class NavigationLink2D: Node2D {
 	}
 }
 
+@MainActor
 public class NavigationObstacle2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -65885,6 +66469,7 @@ public class NavigationObstacle2D: Node2D {
 	}
 }
 
+@MainActor
 public class NavigationRegion2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -66009,6 +66594,7 @@ public class NavigationRegion2D: Node2D {
 	}
 }
 
+@MainActor
 public class NinePatchRect: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_texture(texture: Texture2D) {
@@ -66108,6 +66694,7 @@ public class NinePatchRect: Control {
 	}
 }
 
+@MainActor
 public class OccluderInstance3D: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_bake_mask(mask: Int) {
@@ -66170,14 +66757,17 @@ public class OccluderInstance3D: VisualInstance3D {
 	}
 }
 
+@MainActor
 public class OfflineMultiplayerPeer: MultiplayerPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class OpenXRActionBindingModifier: OpenXRBindingModifier {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class OpenXRCompositionLayerCylinder: OpenXRCompositionLayer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(radius: Double) {
@@ -66230,6 +66820,7 @@ public class OpenXRCompositionLayerCylinder: OpenXRCompositionLayer {
 	}
 }
 
+@MainActor
 public class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(radius: Double) {
@@ -66294,6 +66885,7 @@ public class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
 	}
 }
 
+@MainActor
 public class OpenXRCompositionLayerQuad: OpenXRCompositionLayer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_quad_size(size: Vector2) {
@@ -66310,6 +66902,7 @@ public class OpenXRCompositionLayerQuad: OpenXRCompositionLayer {
 	}
 }
 
+@MainActor
 public class OpenXRFoveatedInsetViewport: SubViewport {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -66324,6 +66917,7 @@ public class OpenXRFoveatedInsetViewport: SubViewport {
 	}
 }
 
+@MainActor
 public class OpenXRHapticVibration: OpenXRHapticBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_duration(duration: Int) {
@@ -66364,10 +66958,12 @@ public class OpenXRHapticVibration: OpenXRHapticBase {
 	}
 }
 
+@MainActor
 public class OpenXRIPBindingModifier: OpenXRBindingModifier {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class OpenXRSpatialEntityTracker: XRPositionalTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_spatial_context(spatial_context: VariantBox) {
@@ -66421,10 +67017,12 @@ public class OpenXRSpatialEntityTracker: XRPositionalTracker {
 	}
 }
 
+@MainActor
 public class OpenXRVisibilityMask: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class OptimizedTranslation: Translation {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -66434,10 +67032,12 @@ public class OptimizedTranslation: Translation {
 	}
 }
 
+@MainActor
 public class Panel: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class PanoramaSkyMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_panorama(texture: Texture2D) {
@@ -66478,6 +67078,7 @@ public class PanoramaSkyMaterial: Material {
 	}
 }
 
+@MainActor
 public class Parallax2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _camera_moved(transform: Transform2D, screen_offset: Vector2, adj_screen_offset: Vector2) {
@@ -66617,6 +67218,7 @@ public class Parallax2D: Node2D {
 	}
 }
 
+@MainActor
 public class ParallaxLayer: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_motion_scale(scale: Vector2) {
@@ -66661,6 +67263,7 @@ public class ParallaxLayer: Node2D {
 	}
 }
 
+@MainActor
 public class ParticleProcessMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_direction(degrees: Vector3) {
@@ -67752,6 +68355,7 @@ public class ParticleProcessMaterial: Material {
 	}
 }
 
+@MainActor
 public class Path2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_curve(curve: Curve2D) {
@@ -67768,6 +68372,7 @@ public class Path2D: Node2D {
 	}
 }
 
+@MainActor
 public class PathFollow2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_progress(progress: Double) {
@@ -67856,6 +68461,7 @@ public class PathFollow2D: Node2D {
 	}
 }
 
+@MainActor
 public class PhysicalBoneSimulator3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -67877,6 +68483,7 @@ public class PhysicalBoneSimulator3D: SkeletonModifier3D {
 	}
 }
 
+@MainActor
 public class PhysicalSkyMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_rayleigh_coefficient(rayleigh: Double) {
@@ -68021,6 +68628,7 @@ public class PhysicalSkyMaterial: Material {
 	}
 }
 
+@MainActor
 public class PhysicsBody3D: CollisionObject3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -68087,6 +68695,7 @@ public class PhysicsBody3D: CollisionObject3D {
 	}
 }
 
+@MainActor
 public class PinJoint3D: Joint3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_param(param: Int, value: Double) {
@@ -68111,10 +68720,12 @@ public class PinJoint3D: Joint3D {
 	}
 }
 
+@MainActor
 public class PlaceholderMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class PlaceholderMesh: Mesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_aabb(aabb: AABB) {
@@ -68126,6 +68737,7 @@ public class PlaceholderMesh: Mesh {
 	}
 }
 
+@MainActor
 public class Polygon2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_polygon(polygon: VariantBox) {
@@ -68368,6 +68980,7 @@ public class Polygon2D: Node2D {
 	}
 }
 
+@MainActor
 public class PolygonOccluder3D: Occluder3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_polygon(polygon: VariantBox) {
@@ -68389,6 +69002,7 @@ public class PolygonOccluder3D: Occluder3D {
 	}
 }
 
+@MainActor
 public class Popup: Window {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func emit_popup_hide() {
@@ -68396,6 +69010,7 @@ public class Popup: Window {
 	}
 }
 
+@MainActor
 public class PrimitiveMesh: Mesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_material(material: Material) {
@@ -68473,6 +69088,7 @@ public class PrimitiveMesh: Mesh {
 	}
 }
 
+@MainActor
 public class ProceduralSkyMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_sky_top_color(color: Color) {
@@ -68661,6 +69277,7 @@ public class ProceduralSkyMaterial: Material {
 	}
 }
 
+@MainActor
 public class QuadOccluder3D: Occluder3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector2) {
@@ -68677,6 +69294,7 @@ public class QuadOccluder3D: Occluder3D {
 	}
 }
 
+@MainActor
 public class Range: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -68819,6 +69437,7 @@ public class Range: Control {
 	}
 }
 
+@MainActor
 public class RayCast2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_enabled(enabled: Bool) {
@@ -68967,6 +69586,7 @@ public class RayCast2D: Node2D {
 	}
 }
 
+@MainActor
 public class RectangleShape2D: Shape2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector2) {
@@ -68983,6 +69603,7 @@ public class RectangleShape2D: Shape2D {
 	}
 }
 
+@MainActor
 public class ReferenceRect: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -69023,6 +69644,7 @@ public class ReferenceRect: Control {
 	}
 }
 
+@MainActor
 public class ReflectionProbe: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_intensity(intensity: Double) {
@@ -69211,6 +69833,7 @@ public class ReflectionProbe: VisualInstance3D {
 	}
 }
 
+@MainActor
 public class RemoteTransform2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_remote_node(path: String) {
@@ -69282,6 +69905,7 @@ public class RemoteTransform2D: Node2D {
 	}
 }
 
+@MainActor
 public class RetargetModifier3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_profile(profile: SkeletonProfile) {
@@ -69358,6 +69982,7 @@ public class RetargetModifier3D: SkeletonModifier3D {
 	}
 }
 
+@MainActor
 public class RichTextLabel: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -70101,6 +70726,7 @@ public class RichTextLabel: Control {
 	}
 }
 
+@MainActor
 public class RootMotionView: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_animation_path(path: String) {
@@ -70165,6 +70791,7 @@ public class RootMotionView: VisualInstance3D {
 	}
 }
 
+@MainActor
 public class ScriptExtension: Script {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -70342,6 +70969,7 @@ public class ScriptExtension: Script {
 	}
 }
 
+@MainActor
 public class SegmentShape2D: Shape2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_a(a: Vector2) {
@@ -70370,6 +70998,7 @@ public class SegmentShape2D: Shape2D {
 	}
 }
 
+@MainActor
 public class SeparationRayShape2D: Shape2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_length(length: Double) {
@@ -70398,6 +71027,7 @@ public class SeparationRayShape2D: Shape2D {
 	}
 }
 
+@MainActor
 public class SeparationRayShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_length(length: Double) {
@@ -70426,10 +71056,12 @@ public class SeparationRayShape3D: Shape3D {
 	}
 }
 
+@MainActor
 public class Separator: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class ShaderMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_shader(shader: Shader) {
@@ -70452,6 +71084,7 @@ public class ShaderMaterial: Material {
 	}
 }
 
+@MainActor
 public class ShapeCast2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_enabled(enabled: Bool) {
@@ -70648,6 +71281,7 @@ public class ShapeCast2D: Node2D {
 	}
 }
 
+@MainActor
 public class Skeleton2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -70689,6 +71323,7 @@ public class Skeleton2D: Node2D {
 	}
 }
 
+@MainActor
 public class SkeletonIK3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_root_bone(root_bone: String) {
@@ -70829,6 +71464,7 @@ public class SkeletonIK3D: SkeletonModifier3D {
 	}
 }
 
+@MainActor
 public class SkeletonModification2DCCDIK: SkeletonModification2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_target_node(target_nodepath: String) {
@@ -70925,6 +71561,7 @@ public class SkeletonModification2DCCDIK: SkeletonModification2D {
 	}
 }
 
+@MainActor
 public class SkeletonModification2DFABRIK: SkeletonModification2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_target_node(target_nodepath: String) {
@@ -70985,6 +71622,7 @@ public class SkeletonModification2DFABRIK: SkeletonModification2D {
 	}
 }
 
+@MainActor
 public class SkeletonModification2DJiggle: SkeletonModification2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_target_node(target_nodepath: String) {
@@ -71164,6 +71802,7 @@ public class SkeletonModification2DJiggle: SkeletonModification2D {
 	}
 }
 
+@MainActor
 public class SkeletonModification2DLookAt: SkeletonModification2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_bone2d_node(bone2d_nodepath: String) {
@@ -71244,6 +71883,7 @@ public class SkeletonModification2DLookAt: SkeletonModification2D {
 	}
 }
 
+@MainActor
 public class SkeletonModification2DPhysicalBones: SkeletonModification2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_physical_bone_chain_length(length: Int) {
@@ -71277,6 +71917,7 @@ public class SkeletonModification2DPhysicalBones: SkeletonModification2D {
 	}
 }
 
+@MainActor
 public class SkeletonModification2DStackHolder: SkeletonModification2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_held_modification_stack(held_modification_stack: SkeletonModificationStack2D) {
@@ -71289,6 +71930,7 @@ public class SkeletonModification2DStackHolder: SkeletonModification2D {
 	}
 }
 
+@MainActor
 public class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_target_node(target_nodepath: String) {
@@ -71377,10 +72019,12 @@ public class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
 	}
 }
 
+@MainActor
 public class SkeletonProfileHumanoid: SkeletonProfile {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class SliderJoint3D: Joint3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_param(param: Int, value: Double) {
@@ -71481,6 +72125,7 @@ public class SliderJoint3D: Joint3D {
 	}
 }
 
+@MainActor
 public class SphereOccluder3D: Occluder3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(radius: Double) {
@@ -71497,6 +72142,7 @@ public class SphereOccluder3D: Occluder3D {
 	}
 }
 
+@MainActor
 public class SphereShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(radius: Double) {
@@ -71513,6 +72159,7 @@ public class SphereShape3D: Shape3D {
 	}
 }
 
+@MainActor
 public class SpringBoneCollisionCapsule3D: SpringBoneCollision3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(radius: Double) {
@@ -71565,10 +72212,12 @@ public class SpringBoneCollisionCapsule3D: SpringBoneCollision3D {
 	}
 }
 
+@MainActor
 public class SpringBoneCollisionPlane3D: SpringBoneCollision3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class SpringBoneCollisionSphere3D: SpringBoneCollision3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(radius: Double) {
@@ -71597,6 +72246,7 @@ public class SpringBoneCollisionSphere3D: SpringBoneCollision3D {
 	}
 }
 
+@MainActor
 public class SpringBoneSimulator3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_root_bone_name(index: Int, bone_name: String) {
@@ -71944,6 +72594,7 @@ public class SpringBoneSimulator3D: SkeletonModifier3D {
 	}
 }
 
+@MainActor
 public class Sprite2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_texture(texture: Texture2D) {
@@ -72120,6 +72771,7 @@ public class Sprite2D: Node2D {
 	}
 }
 
+@MainActor
 public class StreamPeerTCP: StreamPeerSocket {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -72152,6 +72804,7 @@ public class StreamPeerTCP: StreamPeerSocket {
 	}
 }
 
+@MainActor
 public class StreamPeerUDS: StreamPeerSocket {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -72171,10 +72824,12 @@ public class StreamPeerUDS: StreamPeerSocket {
 	}
 }
 
+@MainActor
 public class StyleBoxEmpty: StyleBox {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class StyleBoxFlat: StyleBox {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_bg_color(color: Color) {
@@ -72421,6 +73076,7 @@ public class StyleBoxFlat: StyleBox {
 	}
 }
 
+@MainActor
 public class StyleBoxLine: StyleBox {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_color(color: Color) {
@@ -72485,6 +73141,7 @@ public class StyleBoxLine: StyleBox {
 	}
 }
 
+@MainActor
 public class StyleBoxTexture: StyleBox {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_texture(texture: Texture2D) {
@@ -72635,10 +73292,12 @@ public class StyleBoxTexture: StyleBox {
 	}
 }
 
+@MainActor
 public class SwiftScript: Script {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class SystemFont: Font {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_antialiasing(antialiasing: Int) {
@@ -72837,6 +73496,7 @@ public class SystemFont: Font {
 	}
 }
 
+@MainActor
 public class TabBar: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_tab_count(count: Int) {
@@ -73173,6 +73833,7 @@ public class TabBar: Control {
 	}
 }
 
+@MainActor
 public class TextEdit: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _set_text(text: String, emit_signal: Bool = false) {
@@ -74460,14 +75121,17 @@ public class TextEdit: Control {
 	}
 }
 
+@MainActor
 public class TextServerAdvanced: TextServerExtension {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class TextServerDummy: TextServerExtension {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class Texture2D: Texture {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -74579,6 +75243,7 @@ public class Texture2D: Texture {
 	}
 }
 
+@MainActor
 public class Texture3D: Texture {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -74648,6 +75313,7 @@ public class Texture3D: Texture {
 	}
 }
 
+@MainActor
 public class TextureLayered: Texture {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -74722,6 +75388,7 @@ public class TextureLayered: Texture {
 	}
 }
 
+@MainActor
 public class TextureRect: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_texture(texture: Texture2D) {
@@ -74786,6 +75453,7 @@ public class TextureRect: Control {
 	}
 }
 
+@MainActor
 public class TileMap: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_navigation_map(layer: Int, map: VariantBox) {
@@ -75074,6 +75742,7 @@ public class TileMap: Node2D {
 	}
 }
 
+@MainActor
 public class TileMapLayer: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_cell(coords: Vector2i, source_id: Int = -1, atlas_coords: Vector2i, alternative_tile: Int = 0) {
@@ -75385,6 +76054,7 @@ public class TileMapLayer: Node2D {
 	}
 }
 
+@MainActor
 public class TileSetAtlasSource: TileSetSource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_texture(texture: Texture2D) {
@@ -75580,6 +76250,7 @@ public class TileSetAtlasSource: TileSetSource {
 	}
 }
 
+@MainActor
 public class TileSetScenesCollectionSource: TileSetSource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -75631,6 +76302,7 @@ public class TileSetScenesCollectionSource: TileSetSource {
 	}
 }
 
+@MainActor
 public class TouchScreenButton: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_texture_normal(texture: Texture2D) {
@@ -75754,6 +76426,7 @@ public class TouchScreenButton: Node2D {
 	}
 }
 
+@MainActor
 public class Tree: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func clear() {
@@ -76171,6 +76844,7 @@ public class Tree: Control {
 	}
 }
 
+@MainActor
 public class VideoStreamPlayer: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_stream(stream: VideoStream) {
@@ -76348,10 +77022,12 @@ public class VideoStreamPlayer: Control {
 	}
 }
 
+@MainActor
 public class VideoStreamTheora: VideoStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VirtualJoystick: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_joystick_mode(mode: Int) {
@@ -76503,6 +77179,7 @@ public class VirtualJoystick: Control {
 	}
 }
 
+@MainActor
 public class VisibleOnScreenNotifier2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_rect(rect: Rect2) {
@@ -76542,6 +77219,7 @@ public class VisibleOnScreenNotifier2D: Node2D {
 	}
 }
 
+@MainActor
 public class VisibleOnScreenNotifier3D: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_aabb(rect: AABB) {
@@ -76564,6 +77242,7 @@ public class VisibleOnScreenNotifier3D: VisualInstance3D {
 	}
 }
 
+@MainActor
 public class VisualShader: Shader {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_mode(mode: Int) {
@@ -76672,6 +77351,7 @@ public class VisualShader: Shader {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeBillboard: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_billboard_type(billboard_type: Int) {
@@ -76700,6 +77380,7 @@ public class VisualShaderNodeBillboard: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeClamp: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_op_type(op_type: Int) {
@@ -76716,6 +77397,7 @@ public class VisualShaderNodeClamp: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeColorFunc: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_function(func_: Int) {
@@ -76732,6 +77414,7 @@ public class VisualShaderNodeColorFunc: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeColorOp: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_operator(op: Int) {
@@ -76748,6 +77431,7 @@ public class VisualShaderNodeColorOp: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeCompare: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_comparison_type(type: Int) {
@@ -76788,10 +77472,12 @@ public class VisualShaderNodeCompare: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeConstant: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeCubemap: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_source(value: Int) {
@@ -76832,6 +77518,7 @@ public class VisualShaderNodeCubemap: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeCustom: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _set_initialized(enabled: Bool) {
@@ -76974,6 +77661,7 @@ public class VisualShaderNodeCustom: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeDerivativeFunc: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_op_type(type: Int) {
@@ -77014,18 +77702,22 @@ public class VisualShaderNodeDerivativeFunc: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeDeterminant: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeDistanceFade: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeDotProduct: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeFloatFunc: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_function(func_: Int) {
@@ -77042,6 +77734,7 @@ public class VisualShaderNodeFloatFunc: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeFloatOp: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_operator(op: Int) {
@@ -77058,10 +77751,12 @@ public class VisualShaderNodeFloatOp: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeFresnel: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeGroup: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_group(group: VisualShaderGroup) {
@@ -77078,18 +77773,22 @@ public class VisualShaderNodeGroup: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeGroupInput: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeGroupOutput: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeIf: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeInput: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_input_name(name: String) {
@@ -77114,6 +77813,7 @@ public class VisualShaderNodeInput: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeIntFunc: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_function(func_: Int) {
@@ -77130,6 +77830,7 @@ public class VisualShaderNodeIntFunc: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeIntOp: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_operator(op: Int) {
@@ -77146,6 +77847,7 @@ public class VisualShaderNodeIntOp: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeIs: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_function(func_: Int) {
@@ -77162,10 +77864,12 @@ public class VisualShaderNodeIs: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeLinearSceneDepth: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeMix: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_op_type(op_type: Int) {
@@ -77182,6 +77886,7 @@ public class VisualShaderNodeMix: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeMultiplyAdd: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_op_type(type: Int) {
@@ -77198,14 +77903,17 @@ public class VisualShaderNodeMultiplyAdd: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeOuterProduct: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeOutput: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeParameter: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_parameter_name(name: String) {
@@ -77246,6 +77954,7 @@ public class VisualShaderNodeParameter: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeParameterRef: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_parameter_name(name: String) {
@@ -77274,6 +77983,7 @@ public class VisualShaderNodeParameterRef: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeParticleAccelerator: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_mode(mode: Int) {
@@ -77290,10 +78000,12 @@ public class VisualShaderNodeParticleAccelerator: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeParticleConeVelocity: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeParticleEmit: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_flags(flags: Int) {
@@ -77310,6 +78022,7 @@ public class VisualShaderNodeParticleEmit: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeParticleEmitter: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_mode_2d(enabled: Bool) {
@@ -77326,6 +78039,7 @@ public class VisualShaderNodeParticleEmitter: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeParticleMultiplyByAxisAngle: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_degrees_mode(enabled: Bool) {
@@ -77342,6 +78056,7 @@ public class VisualShaderNodeParticleMultiplyByAxisAngle: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeParticleRandomness: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_op_type(type: Int) {
@@ -77358,14 +78073,17 @@ public class VisualShaderNodeParticleRandomness: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeProximityFade: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeRandomRange: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeRemap: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_op_type(op_type: Int) {
@@ -77382,6 +78100,7 @@ public class VisualShaderNodeRemap: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeReroute: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _set_port_type(port_type: Int) {
@@ -77398,6 +78117,7 @@ public class VisualShaderNodeReroute: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeResizableBase: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector2) {
@@ -77414,18 +78134,22 @@ public class VisualShaderNodeResizableBase: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeRotationByAxis: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeSDFRaymarch: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeSDFToScreenUV: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeSample3D: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_source(value: Int) {
@@ -77442,14 +78166,17 @@ public class VisualShaderNodeSample3D: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeScreenNormalWorldSpace: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeScreenUVToSDF: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeSmoothStep: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_op_type(op_type: Int) {
@@ -77466,6 +78193,7 @@ public class VisualShaderNodeSmoothStep: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeStep: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_op_type(op_type: Int) {
@@ -77482,6 +78210,7 @@ public class VisualShaderNodeStep: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeSwitch: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_op_type(type: Int) {
@@ -77498,6 +78227,7 @@ public class VisualShaderNodeSwitch: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeTexture: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_source(value: Int) {
@@ -77538,22 +78268,27 @@ public class VisualShaderNodeTexture: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeTextureSDF: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeTextureSDFNormal: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeTransformCompose: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeTransformDecompose: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeTransformFunc: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_function(func_: Int) {
@@ -77570,6 +78305,7 @@ public class VisualShaderNodeTransformFunc: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeTransformOp: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_operator(op: Int) {
@@ -77586,6 +78322,7 @@ public class VisualShaderNodeTransformOp: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeTransformVecMult: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_operator(op: Int) {
@@ -77602,6 +78339,7 @@ public class VisualShaderNodeTransformVecMult: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeUIntFunc: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_function(func_: Int) {
@@ -77618,6 +78356,7 @@ public class VisualShaderNodeUIntFunc: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeUIntOp: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_operator(op: Int) {
@@ -77634,6 +78373,7 @@ public class VisualShaderNodeUIntOp: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeUVFunc: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_function(func_: Int) {
@@ -77650,10 +78390,12 @@ public class VisualShaderNodeUVFunc: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeUVPolarCoord: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeVarying: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_varying_name(name: String) {
@@ -77682,6 +78424,7 @@ public class VisualShaderNodeVarying: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeVectorBase: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_op_type(type: Int) {
@@ -77698,10 +78441,12 @@ public class VisualShaderNodeVectorBase: VisualShaderNode {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeWorldPositionFromDepth: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VoxelGI: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_probe_data(data: VoxelGIData) {
@@ -77760,6 +78505,7 @@ public class VoxelGI: VisualInstance3D {
 	}
 }
 
+@MainActor
 public class WebRTCDataChannelExtension: WebRTCDataChannel {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -77850,6 +78596,7 @@ public class WebRTCDataChannelExtension: WebRTCDataChannel {
 	}
 }
 
+@MainActor
 public class WebRTCMultiplayerPeer: MultiplayerPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -77892,6 +78639,7 @@ public class WebRTCMultiplayerPeer: MultiplayerPeer {
 	}
 }
 
+@MainActor
 public class WebSocketMultiplayerPeer: MultiplayerPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -77993,6 +78741,7 @@ public class WebSocketMultiplayerPeer: MultiplayerPeer {
 	}
 }
 
+@MainActor
 public class WorldBoundaryShape2D: Shape2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_normal(normal: Vector2) {
@@ -78021,6 +78770,7 @@ public class WorldBoundaryShape2D: Shape2D {
 	}
 }
 
+@MainActor
 public class WorldBoundaryShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_plane(plane: Plane) {
@@ -78037,6 +78787,7 @@ public class WorldBoundaryShape3D: Shape3D {
 	}
 }
 
+@MainActor
 public class XRAnchor3D: XRNode3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -78051,6 +78802,7 @@ public class XRAnchor3D: XRNode3D {
 	}
 }
 
+@MainActor
 public class XRBodyModifier3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_body_tracker(tracker_name: String) {
@@ -78091,6 +78843,7 @@ public class XRBodyModifier3D: SkeletonModifier3D {
 	}
 }
 
+@MainActor
 public class XRBodyTracker: XRPositionalTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_has_tracking_data(has_data: Bool) {
@@ -78135,6 +78888,7 @@ public class XRBodyTracker: XRPositionalTracker {
 	}
 }
 
+@MainActor
 public class XRCamera3D: Camera3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_tracker(tracker_name: String) {
@@ -78151,6 +78905,7 @@ public class XRCamera3D: Camera3D {
 	}
 }
 
+@MainActor
 public class XRController3D: XRNode3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -78193,10 +78948,12 @@ public class XRController3D: XRNode3D {
 	}
 }
 
+@MainActor
 public class XRControllerTracker: XRPositionalTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class XRHandModifier3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_hand_tracker(tracker_name: String) {
@@ -78225,6 +78982,7 @@ public class XRHandModifier3D: SkeletonModifier3D {
 	}
 }
 
+@MainActor
 public class XRHandTracker: XRPositionalTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_has_tracking_data(has_data: Bool) {
@@ -78293,6 +79051,7 @@ public class XRHandTracker: XRPositionalTracker {
 	}
 }
 
+@MainActor
 public class AimModifier3D: BoneConstraint3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_forward_axis(index: Int, axis: Int) {
@@ -78341,6 +79100,7 @@ public class AimModifier3D: BoneConstraint3D {
 	}
 }
 
+@MainActor
 public class AnimatedTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_frames(frames: Int) {
@@ -80469,14 +81229,17 @@ public class AnimatedTexture: Texture2D {
 	}
 }
 
+@MainActor
 public class AnimationNodeAdd2: AnimationNodeSync {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AnimationNodeAdd3: AnimationNodeSync {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AnimationNodeAnimation: AnimationRootNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_animation(name: String) {
@@ -80577,14 +81340,17 @@ public class AnimationNodeAnimation: AnimationRootNode {
 	}
 }
 
+@MainActor
 public class AnimationNodeBlend2: AnimationNodeSync {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AnimationNodeBlend3: AnimationNodeSync {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AnimationNodeBlendSpace1D: AnimationRootNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func add_blend_point(node: AnimationRootNode, pos: Double, at_index: Int = -1, name: String) {
@@ -80728,6 +81494,7 @@ public class AnimationNodeBlendSpace1D: AnimationRootNode {
 	}
 }
 
+@MainActor
 public class AnimationNodeBlendSpace2D: AnimationRootNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func add_blend_point(node: AnimationRootNode, pos: Vector2, at_index: Int = -1, name: String) {
@@ -80922,6 +81689,7 @@ public class AnimationNodeBlendSpace2D: AnimationRootNode {
 	}
 }
 
+@MainActor
 public class AnimationNodeBlendTree: AnimationRootNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func add_node(name: String, node: AnimationNode, position: Vector2) {
@@ -80979,6 +81747,7 @@ public class AnimationNodeBlendTree: AnimationRootNode {
 	}
 }
 
+@MainActor
 public class AnimationNodeOneShot: AnimationNodeSync {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_fadein_time(time: Double) {
@@ -81107,6 +81876,7 @@ public class AnimationNodeOneShot: AnimationNodeSync {
 	}
 }
 
+@MainActor
 public class AnimationNodeStateMachine: AnimationRootNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func add_node(name: String, node: AnimationNode, position: Vector2) {
@@ -81229,10 +81999,12 @@ public class AnimationNodeStateMachine: AnimationRootNode {
 	}
 }
 
+@MainActor
 public class AnimationNodeSub2: AnimationNodeSync {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AnimationNodeTransition: AnimationNodeSync {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_input_count(input_count: Int) {
@@ -81304,6 +82076,7 @@ public class AnimationNodeTransition: AnimationNodeSync {
 	}
 }
 
+@MainActor
 public class Area2D: CollisionObject2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_gravity_space_override_mode(space_override_mode: Int) {
@@ -81558,6 +82331,7 @@ public class Area2D: CollisionObject2D {
 	}
 }
 
+@MainActor
 public class AreaLight3D: Light3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_area_texture(texture: Texture2D) {
@@ -81610,6 +82384,7 @@ public class AreaLight3D: Light3D {
 	}
 }
 
+@MainActor
 public class AspectRatioContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_ratio(ratio: Double) {
@@ -81666,6 +82441,7 @@ public class AspectRatioContainer: Container {
 	}
 }
 
+@MainActor
 public class AtlasTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_atlas(atlas: Texture2D) {
@@ -81718,46 +82494,57 @@ public class AtlasTexture: Texture2D {
 	}
 }
 
+@MainActor
 public class AudioEffectBandLimitFilter: AudioEffectFilter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AudioEffectBandPassFilter: AudioEffectFilter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AudioEffectEQ10: AudioEffectEQ {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AudioEffectEQ21: AudioEffectEQ {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AudioEffectEQ6: AudioEffectEQ {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AudioEffectHighPassFilter: AudioEffectFilter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AudioEffectHighShelfFilter: AudioEffectFilter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AudioEffectLowPassFilter: AudioEffectFilter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AudioEffectLowShelfFilter: AudioEffectFilter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AudioEffectNotchFilter: AudioEffectFilter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class BoxContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -81803,6 +82590,7 @@ public class BoxContainer: Container {
 	}
 }
 
+@MainActor
 public class BoxMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector3) {
@@ -81855,6 +82643,7 @@ public class BoxMesh: PrimitiveMesh {
 	}
 }
 
+@MainActor
 public class Button: BaseButton {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_text(text: String) {
@@ -82027,6 +82816,7 @@ public class Button: BaseButton {
 	}
 }
 
+@MainActor
 public class CPUParticles3D: GeometryInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_emitting(emitting: Bool) {
@@ -82772,6 +83562,7 @@ public class CPUParticles3D: GeometryInstance3D {
 	}
 }
 
+@MainActor
 public class CSGShape3D: GeometryInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -82932,6 +83723,7 @@ public class CSGShape3D: GeometryInstance3D {
 	}
 }
 
+@MainActor
 public class CameraTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_camera_feed_id(feed_id: Int) {
@@ -82972,6 +83764,7 @@ public class CameraTexture: Texture2D {
 	}
 }
 
+@MainActor
 public class CanvasTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_diffuse_texture(texture: Texture2D) {
@@ -83076,6 +83869,7 @@ public class CanvasTexture: Texture2D {
 	}
 }
 
+@MainActor
 public class CapsuleMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(radius: Double) {
@@ -83128,6 +83922,7 @@ public class CapsuleMesh: PrimitiveMesh {
 	}
 }
 
+@MainActor
 public class CenterContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_use_top_left(enable: Bool) {
@@ -83144,6 +83939,7 @@ public class CenterContainer: Container {
 	}
 }
 
+@MainActor
 public class ChainIK3D: IKModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_root_bone_name(index: Int, bone_name: String) {
@@ -83219,6 +84015,7 @@ public class ChainIK3D: IKModifier3D {
 	}
 }
 
+@MainActor
 public class CharacterBody3D: PhysicsBody3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -83508,6 +84305,7 @@ public class CharacterBody3D: PhysicsBody3D {
 	}
 }
 
+@MainActor
 public class CodeEdit: TextEdit {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_indent_size(size: Int) {
@@ -84092,6 +84890,7 @@ public class CodeEdit: TextEdit {
 	}
 }
 
+@MainActor
 public class CompressedTexture2D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -84110,6 +84909,7 @@ public class CompressedTexture2D: Texture2D {
 	}
 }
 
+@MainActor
 public class CompressedTexture3D: Texture3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -84128,6 +84928,7 @@ public class CompressedTexture3D: Texture3D {
 	}
 }
 
+@MainActor
 public class CompressedTextureLayered: TextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -84146,6 +84947,7 @@ public class CompressedTextureLayered: TextureLayered {
 	}
 }
 
+@MainActor
 public class ConfirmationDialog: AcceptDialog {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -84167,6 +84969,7 @@ public class ConfirmationDialog: AcceptDialog {
 	}
 }
 
+@MainActor
 public class ConvertTransformModifier3D: BoneConstraint3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_apply_transform_mode(index: Int, transform_mode: Int) {
@@ -84263,6 +85066,7 @@ public class ConvertTransformModifier3D: BoneConstraint3D {
 	}
 }
 
+@MainActor
 public class CopyTransformModifier3D: BoneConstraint3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_copy_flags(index: Int, copy_flags: Int) {
@@ -84391,6 +85195,7 @@ public class CopyTransformModifier3D: BoneConstraint3D {
 	}
 }
 
+@MainActor
 public class CurveTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_width(width: Int) {
@@ -84426,6 +85231,7 @@ public class CurveTexture: Texture2D {
 	}
 }
 
+@MainActor
 public class CurveXYZTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_width(width: Int) {
@@ -84473,6 +85279,7 @@ public class CurveXYZTexture: Texture2D {
 	}
 }
 
+@MainActor
 public class CylinderMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_top_radius(radius: Double) {
@@ -84561,6 +85368,7 @@ public class CylinderMesh: PrimitiveMesh {
 	}
 }
 
+@MainActor
 public class DPITexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -84650,6 +85458,7 @@ public class DPITexture: Texture2D {
 	}
 }
 
+@MainActor
 public class DampedSpringJoint2D: Joint2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_length(length: Double) {
@@ -84702,6 +85511,7 @@ public class DampedSpringJoint2D: Joint2D {
 	}
 }
 
+@MainActor
 public class DirectionalLight2D: Light2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_max_distance(pixels: Double) {
@@ -84722,6 +85532,7 @@ public class DirectionalLight2D: Light2D {
 	}
 }
 
+@MainActor
 public class DirectionalLight3D: Light3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_shadow_mode(mode: Int) {
@@ -84790,6 +85601,7 @@ public class DirectionalLight3D: Light3D {
 	}
 }
 
+@MainActor
 public class DrawableTexture2D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_format(format: Int) {
@@ -84817,6 +85629,7 @@ public class DrawableTexture2D: Texture2D {
 	}
 }
 
+@MainActor
 public class ExternalTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector2) {
@@ -84836,6 +85649,7 @@ public class ExternalTexture: Texture2D {
 	}
 }
 
+@MainActor
 public class FlowContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -84893,6 +85707,7 @@ public class FlowContainer: Container {
 	}
 }
 
+@MainActor
 public class FoldableContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func fold() {
@@ -85022,6 +85837,7 @@ public class FoldableContainer: Container {
 	}
 }
 
+@MainActor
 public class GPUParticles3D: GeometryInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_emitting(emitting: Bool) {
@@ -85434,6 +86250,7 @@ public class GPUParticles3D: GeometryInstance3D {
 	}
 }
 
+@MainActor
 public class GPUParticlesAttractorBox3D: GPUParticlesAttractor3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector3) {
@@ -85450,6 +86267,7 @@ public class GPUParticlesAttractorBox3D: GPUParticlesAttractor3D {
 	}
 }
 
+@MainActor
 public class GPUParticlesAttractorSphere3D: GPUParticlesAttractor3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(radius: Double) {
@@ -85466,6 +86284,7 @@ public class GPUParticlesAttractorSphere3D: GPUParticlesAttractor3D {
 	}
 }
 
+@MainActor
 public class GPUParticlesAttractorVectorField3D: GPUParticlesAttractor3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector3) {
@@ -85494,6 +86313,7 @@ public class GPUParticlesAttractorVectorField3D: GPUParticlesAttractor3D {
 	}
 }
 
+@MainActor
 public class GPUParticlesCollisionBox3D: GPUParticlesCollision3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector3) {
@@ -85510,6 +86330,7 @@ public class GPUParticlesCollisionBox3D: GPUParticlesCollision3D {
 	}
 }
 
+@MainActor
 public class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector3) {
@@ -85582,6 +86403,7 @@ public class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
 	}
 }
 
+@MainActor
 public class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector3) {
@@ -85654,6 +86476,7 @@ public class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
 	}
 }
 
+@MainActor
 public class GPUParticlesCollisionSphere3D: GPUParticlesCollision3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(radius: Double) {
@@ -85670,6 +86493,7 @@ public class GPUParticlesCollisionSphere3D: GPUParticlesCollision3D {
 	}
 }
 
+@MainActor
 public class GradientTexture1D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_gradient(gradient: Gradient) {
@@ -85705,6 +86529,7 @@ public class GradientTexture1D: Texture2D {
 	}
 }
 
+@MainActor
 public class GradientTexture2D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_gradient(gradient: Gradient) {
@@ -85803,6 +86628,7 @@ public class GradientTexture2D: Texture2D {
 	}
 }
 
+@MainActor
 public class GraphElement: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_resizable(resizable: Bool) {
@@ -85903,6 +86729,7 @@ public class GraphElement: Container {
 	}
 }
 
+@MainActor
 public class GridContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_columns(columns: Int) {
@@ -85919,6 +86746,7 @@ public class GridContainer: Container {
 	}
 }
 
+@MainActor
 public class GrooveJoint2D: Joint2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_length(length: Double) {
@@ -85947,10 +86775,12 @@ public class GrooveJoint2D: Joint2D {
 	}
 }
 
+@MainActor
 public class HSeparator: Separator {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class ImageTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -85976,6 +86806,7 @@ public class ImageTexture: Texture2D {
 	}
 }
 
+@MainActor
 public class ImageTexture3D: Texture3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -86000,6 +86831,7 @@ public class ImageTexture3D: Texture3D {
 	}
 }
 
+@MainActor
 public class ImageTextureLayered: TextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -86024,6 +86856,7 @@ public class ImageTextureLayered: TextureLayered {
 	}
 }
 
+@MainActor
 public class InputEventScreenDrag: InputEventFromWindow {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_index(index: Int) {
@@ -86136,6 +86969,7 @@ public class InputEventScreenDrag: InputEventFromWindow {
 	}
 }
 
+@MainActor
 public class InputEventScreenTouch: InputEventFromWindow {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_index(index: Int) {
@@ -86202,6 +87036,7 @@ public class InputEventScreenTouch: InputEventFromWindow {
 	}
 }
 
+@MainActor
 public class InputEventWithModifiers: InputEventFromWindow {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_command_or_control_autoremap(enable: Bool) {
@@ -86276,6 +87111,7 @@ public class InputEventWithModifiers: InputEventFromWindow {
 	}
 }
 
+@MainActor
 public class Label3D: GeometryInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_horizontal_alignment(alignment: Int) {
@@ -86669,10 +87505,12 @@ public class Label3D: GeometryInstance3D {
 	}
 }
 
+@MainActor
 public class LineBase3D: GeometryInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class LinkButton: BaseButton {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_text(text: String) {
@@ -86793,10 +87631,12 @@ public class LinkButton: BaseButton {
 	}
 }
 
+@MainActor
 public class MarginContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class MeshInstance3D: GeometryInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_mesh(mesh: Mesh) {
@@ -86908,6 +87748,7 @@ public class MeshInstance3D: GeometryInstance3D {
 	}
 }
 
+@MainActor
 public class MeshTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_mesh(mesh: Mesh) {
@@ -86948,6 +87789,7 @@ public class MeshTexture: Texture2D {
 	}
 }
 
+@MainActor
 public class MultiMeshInstance3D: GeometryInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_multimesh(multimesh: MultiMesh) {
@@ -86964,6 +87806,7 @@ public class MultiMeshInstance3D: GeometryInstance3D {
 	}
 }
 
+@MainActor
 public class NoiseTexture2D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_width(width: Int) {
@@ -87102,6 +87945,7 @@ public class NoiseTexture2D: Texture2D {
 	}
 }
 
+@MainActor
 public class NoiseTexture3D: Texture3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_width(width: Int) {
@@ -87199,10 +88043,12 @@ public class NoiseTexture3D: Texture3D {
 	}
 }
 
+@MainActor
 public class ORMMaterial3D: BaseMaterial3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class OmniLight3D: Light3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_shadow_mode(mode: Int) {
@@ -87231,6 +88077,7 @@ public class OmniLight3D: Light3D {
 	}
 }
 
+@MainActor
 public class OpenXRAnalogThresholdModifier: OpenXRActionBindingModifier {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_on_threshold(on_threshold: Double) {
@@ -87283,6 +88130,7 @@ public class OpenXRAnalogThresholdModifier: OpenXRActionBindingModifier {
 	}
 }
 
+@MainActor
 public class OpenXRAnchorTracker: OpenXRSpatialEntityTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -87307,6 +88155,7 @@ public class OpenXRAnchorTracker: OpenXRSpatialEntityTracker {
 	}
 }
 
+@MainActor
 public class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_action_set(action_set: OpenXRActionSet) {
@@ -87419,6 +88268,7 @@ public class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
 	}
 }
 
+@MainActor
 public class OpenXRMarkerTracker: OpenXRSpatialEntityTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_bounds_size(bounds_size: Vector2) {
@@ -87465,6 +88315,7 @@ public class OpenXRMarkerTracker: OpenXRSpatialEntityTracker {
 	}
 }
 
+@MainActor
 public class OpenXRPlaneTracker: OpenXRSpatialEntityTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_bounds_size(bounds_size: Vector2) {
@@ -87539,10 +88390,12 @@ public class OpenXRPlaneTracker: OpenXRSpatialEntityTracker {
 	}
 }
 
+@MainActor
 public class PanelContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class PhysicalBone3D: PhysicsBody3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func apply_central_impulse(impulse: Vector3) {
@@ -87772,6 +88625,7 @@ public class PhysicalBone3D: PhysicsBody3D {
 	}
 }
 
+@MainActor
 public class PhysicsBody2D: CollisionObject2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -87802,6 +88656,7 @@ public class PhysicsBody2D: CollisionObject2D {
 	}
 }
 
+@MainActor
 public class PinJoint2D: Joint2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_softness(softness: Double) {
@@ -87886,6 +88741,7 @@ public class PinJoint2D: Joint2D {
 	}
 }
 
+@MainActor
 public class PlaceholderTexture2D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector2) {
@@ -87897,6 +88753,7 @@ public class PlaceholderTexture2D: Texture2D {
 	}
 }
 
+@MainActor
 public class PlaceholderTexture3D: Texture3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector3i) {
@@ -87913,6 +88770,7 @@ public class PlaceholderTexture3D: Texture3D {
 	}
 }
 
+@MainActor
 public class PlaceholderTextureLayered: TextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector2i) {
@@ -87936,6 +88794,7 @@ public class PlaceholderTextureLayered: TextureLayered {
 	}
 }
 
+@MainActor
 public class PlaneMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector2) {
@@ -88000,6 +88859,7 @@ public class PlaneMesh: PrimitiveMesh {
 	}
 }
 
+@MainActor
 public class PointLight2D: Light2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_texture(texture: Texture2D) {
@@ -88044,10 +88904,12 @@ public class PointLight2D: Light2D {
 	}
 }
 
+@MainActor
 public class PointMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class PopupMenu: Popup {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -88520,10 +89382,12 @@ public class PopupMenu: Popup {
 	}
 }
 
+@MainActor
 public class PopupPanel: Popup {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class PortableCompressedTexture2D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func create_from_image(image: Image, compression_mode: Int, normal_map: Bool = false, lossy_quality: Double = 0.8) {
@@ -88583,6 +89447,7 @@ public class PortableCompressedTexture2D: Texture2D {
 	}
 }
 
+@MainActor
 public class PrismMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_left_to_right(left_to_right: Double) {
@@ -88647,6 +89512,7 @@ public class PrismMesh: PrimitiveMesh {
 	}
 }
 
+@MainActor
 public class ProgressBar: Range {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_fill_mode(mode: Int) {
@@ -88703,6 +89569,7 @@ public class ProgressBar: Range {
 	}
 }
 
+@MainActor
 public class RibbonTrailMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Double) {
@@ -88779,6 +89646,7 @@ public class RibbonTrailMesh: PrimitiveMesh {
 	}
 }
 
+@MainActor
 public class RigidBody3D: PhysicsBody3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_mass(mass: Double) {
@@ -89156,6 +90024,7 @@ public class RigidBody3D: PhysicsBody3D {
 	}
 }
 
+@MainActor
 public class ScrollBar: Range {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_custom_step(step: Double) {
@@ -89175,6 +90044,7 @@ public class ScrollBar: Range {
 	}
 }
 
+@MainActor
 public class ScrollContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_h_scroll(value: Int) {
@@ -89350,6 +90220,7 @@ public class ScrollContainer: Container {
 	}
 }
 
+@MainActor
 public class Slider: Range {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_ticks(count: Int) {
@@ -89420,6 +90291,7 @@ public class Slider: Range {
 	}
 }
 
+@MainActor
 public class SphereMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(radius: Double) {
@@ -89484,6 +90356,7 @@ public class SphereMesh: PrimitiveMesh {
 	}
 }
 
+@MainActor
 public class SpinBox: Range {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_horizontal_alignment(alignment: Int) {
@@ -89632,6 +90505,7 @@ public class SpinBox: Range {
 	}
 }
 
+@MainActor
 public class SplitContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_split_offsets(offsets: VariantBox) {
@@ -89806,6 +90680,7 @@ public class SplitContainer: Container {
 	}
 }
 
+@MainActor
 public class SpotLight3D: Light3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public var Spot: VariantBox {
@@ -89830,6 +90705,7 @@ public class SpotLight3D: Light3D {
 	}
 }
 
+@MainActor
 public class SpriteBase3D: GeometryInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_centered(centered: Bool) {
@@ -90056,10 +90932,12 @@ public class SpriteBase3D: GeometryInstance3D {
 	}
 }
 
+@MainActor
 public class StandardMaterial3D: BaseMaterial3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class StaticBody3D: PhysicsBody3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_constant_linear_velocity(vel: Vector3) {
@@ -90100,6 +90978,7 @@ public class StaticBody3D: PhysicsBody3D {
 	}
 }
 
+@MainActor
 public class StreamedTexture2D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -90142,6 +91021,7 @@ public class StreamedTexture2D: Texture2D {
 	}
 }
 
+@MainActor
 public class SubViewportContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_stretch(enable: Bool) {
@@ -90187,6 +91067,7 @@ public class SubViewportContainer: Container {
 	}
 }
 
+@MainActor
 public class TabContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -90483,6 +91364,7 @@ public class TabContainer: Container {
 	}
 }
 
+@MainActor
 public class TextMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_horizontal_alignment(alignment: Int) {
@@ -90715,6 +91597,7 @@ public class TextMesh: PrimitiveMesh {
 	}
 }
 
+@MainActor
 public class Texture2DRD: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_texture_rd_rid(texture_rd_rid: VariantBox) {
@@ -90731,6 +91614,7 @@ public class Texture2DRD: Texture2D {
 	}
 }
 
+@MainActor
 public class Texture3DRD: Texture3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_texture_rd_rid(texture_rd_rid: VariantBox) {
@@ -90747,6 +91631,7 @@ public class Texture3DRD: Texture3D {
 	}
 }
 
+@MainActor
 public class TextureButton: BaseButton {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_texture_normal(texture: Texture2D) {
@@ -90875,6 +91760,7 @@ public class TextureButton: BaseButton {
 	}
 }
 
+@MainActor
 public class TextureLayeredRD: TextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_texture_rd_rid(texture_rd_rid: VariantBox) {
@@ -90891,6 +91777,7 @@ public class TextureLayeredRD: TextureLayered {
 	}
 }
 
+@MainActor
 public class TextureProgressBar: Range {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_under_texture(tex: Texture2D) {
@@ -91083,6 +91970,7 @@ public class TextureProgressBar: Range {
 	}
 }
 
+@MainActor
 public class TorusMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_inner_radius(radius: Double) {
@@ -91135,6 +92023,7 @@ public class TorusMesh: PrimitiveMesh {
 	}
 }
 
+@MainActor
 public class TubeTrailMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(radius: Double) {
@@ -91235,6 +92124,7 @@ public class TubeTrailMesh: PrimitiveMesh {
 	}
 }
 
+@MainActor
 public class TwoBoneIK3D: IKModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_target_node(index: Int, target_node: String) {
@@ -91355,10 +92245,12 @@ public class TwoBoneIK3D: IKModifier3D {
 	}
 }
 
+@MainActor
 public class VSeparator: Separator {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class ViewportTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_viewport_path_in_scene(path: String) {
@@ -91375,6 +92267,7 @@ public class ViewportTexture: Texture2D {
 	}
 }
 
+@MainActor
 public class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_enable_mode(mode: Int) {
@@ -91407,6 +92300,7 @@ public class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
 	}
 }
 
+@MainActor
 public class VisibleOnScreenEnabler3D: VisibleOnScreenNotifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_enable_mode(mode: Int) {
@@ -91439,6 +92333,7 @@ public class VisibleOnScreenEnabler3D: VisibleOnScreenNotifier3D {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeBooleanConstant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_constant(constant: Bool) {
@@ -91455,6 +92350,7 @@ public class VisualShaderNodeBooleanConstant: VisualShaderNodeConstant {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeBooleanParameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_default_value_enabled(enabled: Bool) {
@@ -91483,6 +92379,7 @@ public class VisualShaderNodeBooleanParameter: VisualShaderNodeParameter {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeColorConstant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_constant(constant: Color) {
@@ -91499,6 +92396,7 @@ public class VisualShaderNodeColorConstant: VisualShaderNodeConstant {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeColorParameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_default_value_enabled(enabled: Bool) {
@@ -91527,6 +92425,7 @@ public class VisualShaderNodeColorParameter: VisualShaderNodeParameter {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeCurveTexture: VisualShaderNodeResizableBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_texture(texture: CurveTexture) {
@@ -91543,6 +92442,7 @@ public class VisualShaderNodeCurveTexture: VisualShaderNodeResizableBase {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeCurveXYZTexture: VisualShaderNodeResizableBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_texture(texture: CurveXYZTexture) {
@@ -91559,10 +92459,12 @@ public class VisualShaderNodeCurveXYZTexture: VisualShaderNodeResizableBase {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeFaceForward: VisualShaderNodeVectorBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeFloatConstant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_constant(constant: Double) {
@@ -91579,6 +92481,7 @@ public class VisualShaderNodeFloatConstant: VisualShaderNodeConstant {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_hint(hint: Int) {
@@ -91655,6 +92558,7 @@ public class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_title(title: String) {
@@ -91725,6 +92629,7 @@ public class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_inputs(inputs: String) {
@@ -91810,6 +92715,7 @@ public class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeIntConstant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_constant(constant: Int) {
@@ -91826,6 +92732,7 @@ public class VisualShaderNodeIntConstant: VisualShaderNodeConstant {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeIntParameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_hint(hint: Int) {
@@ -91914,10 +92821,12 @@ public class VisualShaderNodeIntParameter: VisualShaderNodeParameter {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeParticleBoxEmitter: VisualShaderNodeParticleEmitter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeParticleMeshEmitter: VisualShaderNodeParticleEmitter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_mesh(mesh: Mesh) {
@@ -91958,18 +92867,22 @@ public class VisualShaderNodeParticleMeshEmitter: VisualShaderNodeParticleEmitte
 	}
 }
 
+@MainActor
 public class VisualShaderNodeParticleOutput: VisualShaderNodeOutput {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeParticleRingEmitter: VisualShaderNodeParticleEmitter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeParticleSphereEmitter: VisualShaderNodeParticleEmitter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeTexture2DArray: VisualShaderNodeSample3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_texture_array(value: TextureLayered) {
@@ -91986,6 +92899,7 @@ public class VisualShaderNodeTexture2DArray: VisualShaderNodeSample3D {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeTexture3D: VisualShaderNodeSample3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_texture(value: Texture3D) {
@@ -92002,6 +92916,7 @@ public class VisualShaderNodeTexture3D: VisualShaderNodeSample3D {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_texture_type(type: Int) {
@@ -92066,6 +92981,7 @@ public class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeTransformConstant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_constant(constant: Transform3D) {
@@ -92082,6 +92998,7 @@ public class VisualShaderNodeTransformConstant: VisualShaderNodeConstant {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeTransformParameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_default_value_enabled(enabled: Bool) {
@@ -92110,6 +93027,7 @@ public class VisualShaderNodeTransformParameter: VisualShaderNodeParameter {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeUIntConstant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_constant(constant: Int) {
@@ -92126,6 +93044,7 @@ public class VisualShaderNodeUIntConstant: VisualShaderNodeConstant {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeUIntParameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_default_value_enabled(enabled: Bool) {
@@ -92154,14 +93073,17 @@ public class VisualShaderNodeUIntParameter: VisualShaderNodeParameter {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeVaryingGetter: VisualShaderNodeVarying {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeVaryingSetter: VisualShaderNodeVarying {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeVec2Constant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_constant(constant: Vector2) {
@@ -92178,6 +93100,7 @@ public class VisualShaderNodeVec2Constant: VisualShaderNodeConstant {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeVec2Parameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_default_value_enabled(enabled: Bool) {
@@ -92206,6 +93129,7 @@ public class VisualShaderNodeVec2Parameter: VisualShaderNodeParameter {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeVec3Constant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_constant(constant: Vector3) {
@@ -92222,6 +93146,7 @@ public class VisualShaderNodeVec3Constant: VisualShaderNodeConstant {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeVec3Parameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_default_value_enabled(enabled: Bool) {
@@ -92250,6 +93175,7 @@ public class VisualShaderNodeVec3Parameter: VisualShaderNodeParameter {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeVec4Constant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_constant(constant: Quaternion) {
@@ -92278,6 +93204,7 @@ public class VisualShaderNodeVec4Constant: VisualShaderNodeConstant {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeVec4Parameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_default_value_enabled(enabled: Bool) {
@@ -92306,18 +93233,22 @@ public class VisualShaderNodeVec4Parameter: VisualShaderNodeParameter {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeVectorCompose: VisualShaderNodeVectorBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeVectorDecompose: VisualShaderNodeVectorBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeVectorDistance: VisualShaderNodeVectorBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeVectorFunc: VisualShaderNodeVectorBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_function(func_: Int) {
@@ -92334,10 +93265,12 @@ public class VisualShaderNodeVectorFunc: VisualShaderNodeVectorBase {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeVectorLen: VisualShaderNodeVectorBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeVectorOp: VisualShaderNodeVectorBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_operator(op: Int) {
@@ -92354,10 +93287,12 @@ public class VisualShaderNodeVectorOp: VisualShaderNodeVectorBase {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeVectorRefract: VisualShaderNodeVectorBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AnimatableBody3D: StaticBody3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_sync_to_physics(enable: Bool) {
@@ -92374,6 +93309,7 @@ public class AnimatableBody3D: StaticBody3D {
 	}
 }
 
+@MainActor
 public class AnimatedSprite3D: SpriteBase3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_sprite_frames(sprite_frames: SpriteFrames) {
@@ -92493,10 +93429,12 @@ public class AnimatedSprite3D: SpriteBase3D {
 	}
 }
 
+@MainActor
 public class CSGCombiner3D: CSGShape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class CSGPrimitive3D: CSGShape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_flip_faces(flip_faces: Bool) {
@@ -92513,6 +93451,7 @@ public class CSGPrimitive3D: CSGShape3D {
 	}
 }
 
+@MainActor
 public class CharacterBody2D: PhysicsBody2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -92797,14 +93736,17 @@ public class CharacterBody2D: PhysicsBody2D {
 	}
 }
 
+@MainActor
 public class CheckBox: Button {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class CheckButton: Button {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class ColorPickerButton: Button {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_pick_color(color: Color) {
@@ -92867,18 +93809,22 @@ public class ColorPickerButton: Button {
 	}
 }
 
+@MainActor
 public class CompressedCubemap: CompressedTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class CompressedCubemapArray: CompressedTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class CompressedTexture2DArray: CompressedTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class Cubemap: ImageTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -92888,6 +93834,7 @@ public class Cubemap: ImageTextureLayered {
 	}
 }
 
+@MainActor
 public class CubemapArray: ImageTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -92897,6 +93844,7 @@ public class CubemapArray: ImageTextureLayered {
 	}
 }
 
+@MainActor
 public class FileDialog: ConfirmationDialog {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func _cancel_pressed() {
@@ -93214,6 +94162,7 @@ public class FileDialog: ConfirmationDialog {
 	}
 }
 
+@MainActor
 public class GraphFrame: GraphElement {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_title(title: String) {
@@ -93298,6 +94247,7 @@ public class GraphFrame: GraphElement {
 	}
 }
 
+@MainActor
 public class GraphNode: GraphElement {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_title(title: String) {
@@ -93495,26 +94445,32 @@ public class GraphNode: GraphElement {
 	}
 }
 
+@MainActor
 public class HBoxContainer: BoxContainer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class HFlowContainer: FlowContainer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class HScrollBar: ScrollBar {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class HSlider: Slider {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class HSplitContainer: SplitContainer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class InputEventGesture: InputEventWithModifiers {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_position(position: Vector2) {
@@ -93531,6 +94487,7 @@ public class InputEventGesture: InputEventWithModifiers {
 	}
 }
 
+@MainActor
 public class InputEventKey: InputEventWithModifiers {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_pressed(pressed: Bool) {
@@ -93644,6 +94601,7 @@ public class InputEventKey: InputEventWithModifiers {
 	}
 }
 
+@MainActor
 public class InputEventMouse: InputEventWithModifiers {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_button_mask(button_mask: Int) {
@@ -93684,6 +94642,7 @@ public class InputEventMouse: InputEventWithModifiers {
 	}
 }
 
+@MainActor
 public class IterateIK3D: ChainIK3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_max_iterations(max_iterations: Int) {
@@ -93804,6 +94763,7 @@ public class IterateIK3D: ChainIK3D {
 	}
 }
 
+@MainActor
 public class MenuButton: Button {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -93846,6 +94806,7 @@ public class MenuButton: Button {
 	}
 }
 
+@MainActor
 public class OptionButton: Button {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func add_item(label: String, id: Int = -1) {
@@ -94067,22 +95028,27 @@ public class OptionButton: Button {
 	}
 }
 
+@MainActor
 public class PlaceholderCubemap: PlaceholderTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class PlaceholderCubemapArray: PlaceholderTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class PlaceholderTexture2DArray: PlaceholderTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class QuadMesh: PlaneMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class RigidBody2D: PhysicsBody2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_mass(mass: Double) {
@@ -94455,6 +95421,7 @@ public class RigidBody2D: PhysicsBody2D {
 	}
 }
 
+@MainActor
 public class SoftBody3D: MeshInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -94673,6 +95640,7 @@ public class SoftBody3D: MeshInstance3D {
 	}
 }
 
+@MainActor
 public class SplineIK3D: ChainIK3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_path_3d(index: Int, path_3d: String) {
@@ -94713,6 +95681,7 @@ public class SplineIK3D: ChainIK3D {
 	}
 }
 
+@MainActor
 public class Sprite3D: SpriteBase3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_texture(texture: Texture2D) {
@@ -94815,6 +95784,7 @@ public class Sprite3D: SpriteBase3D {
 	}
 }
 
+@MainActor
 public class StaticBody2D: PhysicsBody2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_constant_linear_velocity(vel: Vector2) {
@@ -94855,6 +95825,7 @@ public class StaticBody2D: PhysicsBody2D {
 	}
 }
 
+@MainActor
 public class Texture2DArray: ImageTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -94864,18 +95835,22 @@ public class Texture2DArray: ImageTextureLayered {
 	}
 }
 
+@MainActor
 public class Texture2DArrayRD: TextureLayeredRD {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class TextureCubemapArrayRD: TextureLayeredRD {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class TextureCubemapRD: TextureLayeredRD {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class Trail3D: LineBase3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_width(width: Double) {
@@ -95068,26 +96043,32 @@ public class Trail3D: LineBase3D {
 	}
 }
 
+@MainActor
 public class VBoxContainer: BoxContainer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VFlowContainer: FlowContainer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VScrollBar: ScrollBar {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VSlider: Slider {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VSplitContainer: SplitContainer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VehicleBody3D: RigidBody3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_engine_force(engine_force: Double) {
@@ -95132,6 +96113,7 @@ public class VehicleBody3D: RigidBody3D {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeComment: VisualShaderNodeFrame {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_description(description: String) {
@@ -95148,10 +96130,12 @@ public class VisualShaderNodeComment: VisualShaderNodeFrame {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeCubemapParameter: VisualShaderNodeTextureParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeExpression: VisualShaderNodeGroupBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_expression(expression: String) {
@@ -95168,22 +96152,27 @@ public class VisualShaderNodeExpression: VisualShaderNodeGroupBase {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeTexture2DArrayParameter: VisualShaderNodeTextureParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeTexture2DParameter: VisualShaderNodeTextureParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeTexture3DParameter: VisualShaderNodeTextureParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class VisualShaderNodeTextureParameterTriplanar: VisualShaderNodeTextureParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class AnimatableBody2D: StaticBody2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_sync_to_physics(enable: Bool) {
@@ -95200,10 +96189,12 @@ public class AnimatableBody2D: StaticBody2D {
 	}
 }
 
+@MainActor
 public class CCDIK3D: IterateIK3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class CSGBox3D: CSGPrimitive3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_size(size: Vector3) {
@@ -95232,6 +96223,7 @@ public class CSGBox3D: CSGPrimitive3D {
 	}
 }
 
+@MainActor
 public class CSGCylinder3D: CSGPrimitive3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(radius: Double) {
@@ -95308,6 +96300,7 @@ public class CSGCylinder3D: CSGPrimitive3D {
 	}
 }
 
+@MainActor
 public class CSGMesh3D: CSGPrimitive3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_mesh(mesh: Mesh) {
@@ -95336,6 +96329,7 @@ public class CSGMesh3D: CSGPrimitive3D {
 	}
 }
 
+@MainActor
 public class CSGPolygon3D: CSGPrimitive3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_polygon(polygon: VariantBox) {
@@ -95554,6 +96548,7 @@ public class CSGPolygon3D: CSGPrimitive3D {
 	}
 }
 
+@MainActor
 public class CSGSphere3D: CSGPrimitive3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_radius(radius: Double) {
@@ -95618,6 +96613,7 @@ public class CSGSphere3D: CSGPrimitive3D {
 	}
 }
 
+@MainActor
 public class CSGTorus3D: CSGPrimitive3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_inner_radius(radius: Double) {
@@ -95694,6 +96690,7 @@ public class CSGTorus3D: CSGPrimitive3D {
 	}
 }
 
+@MainActor
 public class ColorPicker: VBoxContainer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_pick_color(color: Color) {
@@ -95877,10 +96874,12 @@ public class ColorPicker: VBoxContainer {
 	}
 }
 
+@MainActor
 public class FABRIK3D: IterateIK3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class InputEventMagnifyGesture: InputEventGesture {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_factor(factor: Double) {
@@ -95897,6 +96896,7 @@ public class InputEventMagnifyGesture: InputEventGesture {
 	}
 }
 
+@MainActor
 public class InputEventMouseButton: InputEventMouse {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_factor(factor: Double) {
@@ -95951,6 +96951,7 @@ public class InputEventMouseButton: InputEventMouse {
 	}
 }
 
+@MainActor
 public class InputEventMouseMotion: InputEventMouse {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_tilt(tilt: Vector2) {
@@ -96039,6 +97040,7 @@ public class InputEventMouseMotion: InputEventMouse {
 	}
 }
 
+@MainActor
 public class InputEventPanGesture: InputEventGesture {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public func set_delta(delta: Vector2) {
@@ -96055,10 +97057,12 @@ public class InputEventPanGesture: InputEventGesture {
 	}
 }
 
+@MainActor
 public class JacobianIK3D: IterateIK3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }
 
+@MainActor
 public class PhysicalBone2D: RigidBody2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	@discardableResult
@@ -96133,6 +97137,7 @@ public class PhysicalBone2D: RigidBody2D {
 	}
 }
 
+@MainActor
 public class VisualShaderNodeGlobalExpression: VisualShaderNodeExpression {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 }

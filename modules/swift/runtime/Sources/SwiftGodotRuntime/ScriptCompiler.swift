@@ -5,8 +5,9 @@ import Foundation
 // When no Swift toolchain is available, the script keeps its parsed
 // metadata (valid for the editor) but instances cannot execute methods.
 
+@MainActor
 public final class ScriptCompiler {
-	public static let shared = ScriptCompiler()
+	@MainActor public static let shared = ScriptCompiler()
 
 	private let swiftcPath: String?
 
@@ -80,20 +81,22 @@ public final class ScriptCompiler {
 		lines.append("private var methodFns: [SwiftGodotMethodFn?] = [")
 		for method in methods {
 			lines.append("\t{ instance, args, argCount, ret, error in")
-			lines.append("\t\tguard let instance = instance else { return 0 }")
-			lines.append("\t\tlet object = instance.assumingMemoryBound(to: \(className).self).pointee")
+			lines.append("\t\treturn MainActor.assumeIsolated { () -> UInt8 in")
+			lines.append("\t\t\tguard let instance = instance else { return 0 }")
+			lines.append("\t\t\tlet object = instance.assumingMemoryBound(to: \(className).self).pointee")
 			if method == "_process" || method == "_physics_process" {
-				lines.append("\t\tlet delta = argCount > 0 && args != nil ? Host.shared.variantAsDouble(args![0]) : 0.0")
-				lines.append("\t\tobject.\(method)(delta: delta)")
+				lines.append("\t\t\tlet delta = argCount > 0 && args != nil ? Host.shared.variantAsDouble(args![0]) : 0.0")
+				lines.append("\t\t\tobject.\(method)(delta: delta)")
 			} else {
-				lines.append("\t\tobject.\(method)()")
+				lines.append("\t\t\tobject.\(method)()")
 			}
-			lines.append("\t\treturn 1")
+			lines.append("\t\t\treturn 1")
+			lines.append("\t\t}")
 			lines.append("\t},")
 		}
 		lines.append("]")
 		lines.append("private let newInstance: @convention(c) () -> UnsafeMutableRawPointer? = {")
-		lines.append("\tUnmanaged.passRetained(\(className)()).toOpaque()")
+		lines.append("\tMainActor.assumeIsolated { Unmanaged.passRetained(\(className)()).toOpaque() }")
 		lines.append("}")
 		lines.append("private var descriptor = SwiftGodotScriptDescriptor()")
 		lines.append("")

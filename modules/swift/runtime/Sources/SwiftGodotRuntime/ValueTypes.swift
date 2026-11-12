@@ -3,12 +3,12 @@ import Foundation
 // Typed Swift wrappers for Godot builtin value types, marshaled through the
 // host vtable (see swift_host.h). The generated bindings use these types.
 
-public protocol GodotValueType {
+@MainActor public protocol GodotValueType {
 	init?(box: VariantBox)
 	func toVariantBox() -> VariantBox
 }
 
-public struct Vector2: GodotValueType, Equatable {
+public struct Vector2: GodotValueType, Equatable, Sendable {
 	public var x: Double
 	public var y: Double
 
@@ -17,19 +17,19 @@ public struct Vector2: GodotValueType, Equatable {
 		self.y = y
 	}
 
-	public init?(box: VariantBox) {
+	@MainActor public init?(box: VariantBox) {
 		let v = Host.shared.variantAsVector2(box.ptr)
 		self.init(v.0, v.1)
 	}
 
-	public func toVariantBox() -> VariantBox {
+	@MainActor public func toVariantBox() -> VariantBox {
 		let b = VariantBox()
 		Host.shared.variantSetVector2(b.ptr, x, y)
 		return b
 	}
 }
 
-public struct Vector3: GodotValueType, Equatable {
+public struct Vector3: GodotValueType, Equatable, Sendable {
 	public var x: Double
 	public var y: Double
 	public var z: Double
@@ -40,19 +40,19 @@ public struct Vector3: GodotValueType, Equatable {
 		self.z = z
 	}
 
-	public init?(box: VariantBox) {
+	@MainActor public init?(box: VariantBox) {
 		let v = Host.shared.variantAsVector3(box.ptr)
 		self.init(v.0, v.1, v.2)
 	}
 
-	public func toVariantBox() -> VariantBox {
+	@MainActor public func toVariantBox() -> VariantBox {
 		let b = VariantBox()
 		Host.shared.variantSetVector3(b.ptr, x, y, z)
 		return b
 	}
 }
 
-public struct Vector2i: GodotValueType, Equatable {
+public struct Vector2i: GodotValueType, Equatable, Sendable {
 	public var x: Int
 	public var y: Int
 
@@ -61,19 +61,19 @@ public struct Vector2i: GodotValueType, Equatable {
 		self.y = y
 	}
 
-	public init?(box: VariantBox) {
+	@MainActor public init?(box: VariantBox) {
 		let v = Host.shared.variantAsVector2i(box.ptr)
 		self.init(v.0, v.1)
 	}
 
-	public func toVariantBox() -> VariantBox {
+	@MainActor public func toVariantBox() -> VariantBox {
 		let b = VariantBox()
 		Host.shared.variantSetVector2i(b.ptr, x, y)
 		return b
 	}
 }
 
-public struct Vector3i: GodotValueType, Equatable {
+public struct Vector3i: GodotValueType, Equatable, Sendable {
 	public var x: Int
 	public var y: Int
 	public var z: Int
@@ -84,19 +84,19 @@ public struct Vector3i: GodotValueType, Equatable {
 		self.z = z
 	}
 
-	public init?(box: VariantBox) {
+	@MainActor public init?(box: VariantBox) {
 		let v = Host.shared.variantAsVector3i(box.ptr)
 		self.init(v.0, v.1, v.2)
 	}
 
-	public func toVariantBox() -> VariantBox {
+	@MainActor public func toVariantBox() -> VariantBox {
 		let b = VariantBox()
 		Host.shared.variantSetVector3i(b.ptr, x, y, z)
 		return b
 	}
 }
 
-public struct Vector4: GodotValueType {
+public struct Vector4: GodotValueType, Sendable {
 	public var x: Double
 	public var y: Double
 	public var z: Double
@@ -109,19 +109,19 @@ public struct Vector4: GodotValueType {
 		self.w = w
 	}
 
-	public init?(box: VariantBox) {
+	@MainActor public init?(box: VariantBox) {
 		let s = Host.shared.variantAsString(box.ptr)
 		let parts = s.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").split(separator: ",").compactMap { Double($0) }
 		guard parts.count == 4 else { return nil }
 		self.init(parts[0], parts[1], parts[2], parts[3])
 	}
 
-	public func toVariantBox() -> VariantBox {
+	@MainActor public func toVariantBox() -> VariantBox {
 		VariantBox("(\(x), \(y), \(z), \(w))")
 	}
 }
 
-public struct Vector4i: GodotValueType {
+public struct Vector4i: GodotValueType, Sendable {
 	public var x: Int
 	public var y: Int
 	public var z: Int
@@ -134,19 +134,19 @@ public struct Vector4i: GodotValueType {
 		self.w = w
 	}
 
-	public init?(box: VariantBox) {
+	@MainActor public init?(box: VariantBox) {
 		let s = Host.shared.variantAsString(box.ptr)
 		let parts = s.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").split(separator: ",").compactMap { Int($0) }
 		guard parts.count == 4 else { return nil }
 		self.init(parts[0], parts[1], parts[2], parts[3])
 	}
 
-	public func toVariantBox() -> VariantBox {
+	@MainActor public func toVariantBox() -> VariantBox {
 		VariantBox("(\(x), \(y), \(z), \(w))")
 	}
 }
 
-public struct Color: GodotValueType, Equatable {
+public struct Color: GodotValueType, Equatable, Sendable {
 	public var r: Float
 	public var g: Float
 	public var b: Float
@@ -159,19 +159,19 @@ public struct Color: GodotValueType, Equatable {
 		self.a = a
 	}
 
-	public init?(box: VariantBox) {
+	@MainActor public init?(box: VariantBox) {
 		let v = Host.shared.variantAsColor(box.ptr)
 		self.init(v.0, v.1, v.2, v.3)
 	}
 
-	public func toVariantBox() -> VariantBox {
+	@MainActor public func toVariantBox() -> VariantBox {
 		let b = VariantBox()
 		Host.shared.variantSetColor(b.ptr, r, g, b, a)
 		return b
 	}
 }
 
-public struct Quaternion: GodotValueType, Equatable {
+public struct Quaternion: GodotValueType, Equatable, Sendable {
 	public var x: Float
 	public var y: Float
 	public var z: Float
@@ -184,19 +184,19 @@ public struct Quaternion: GodotValueType, Equatable {
 		self.w = w
 	}
 
-	public init?(box: VariantBox) {
+	@MainActor public init?(box: VariantBox) {
 		let v = Host.shared.variantAsQuaternion(box.ptr)
 		self.init(v.0, v.1, v.2, v.3)
 	}
 
-	public func toVariantBox() -> VariantBox {
+	@MainActor public func toVariantBox() -> VariantBox {
 		let b = VariantBox()
 		Host.shared.variantSetQuaternion(b.ptr, x, y, z, w)
 		return b
 	}
 }
 
-public struct Rect2: GodotValueType {
+public struct Rect2: GodotValueType, Sendable {
 	public var position: Vector2
 	public var size: Vector2
 
@@ -205,19 +205,19 @@ public struct Rect2: GodotValueType {
 		self.size = size
 	}
 
-	public init?(box: VariantBox) {
+	@MainActor public init?(box: VariantBox) {
 		let v = Host.shared.variantAsRect2(box.ptr)
 		self.init(Vector2(Double(v.0), Double(v.1)), Vector2(Double(v.2), Double(v.3)))
 	}
 
-	public func toVariantBox() -> VariantBox {
+	@MainActor public func toVariantBox() -> VariantBox {
 		let b = VariantBox()
 		Host.shared.variantSetRect2(b.ptr, Float(position.x), Float(position.y), Float(size.x), Float(size.y))
 		return b
 	}
 }
 
-public struct Rect2i: GodotValueType {
+public struct Rect2i: GodotValueType, Sendable {
 	public var position: Vector2i
 	public var size: Vector2i
 
@@ -226,19 +226,19 @@ public struct Rect2i: GodotValueType {
 		self.size = size
 	}
 
-	public init?(box: VariantBox) {
+	@MainActor public init?(box: VariantBox) {
 		let s = Host.shared.variantAsString(box.ptr)
 		let nums = s.replacingOccurrences(of: "(", with: "").replacingOccurrences(of: ")", with: "").split(separator: ",").compactMap { Int($0) }
 		guard nums.count == 4 else { return nil }
 		self.init(Vector2i(nums[0], nums[1]), Vector2i(nums[2], nums[3]))
 	}
 
-	public func toVariantBox() -> VariantBox {
+	@MainActor public func toVariantBox() -> VariantBox {
 		VariantBox("(\(position.x), \(position.y), \(size.x), \(size.y))")
 	}
 }
 
-public struct AABB: GodotValueType {
+public struct AABB: GodotValueType, Sendable {
 	public var position: Vector3
 	public var size: Vector3
 
@@ -247,20 +247,20 @@ public struct AABB: GodotValueType {
 		self.size = size
 	}
 
-	public init?(box: VariantBox) {
+	@MainActor public init?(box: VariantBox) {
 		let v = Host.shared.variantAsAABB(box.ptr)
 		guard v.count == 6 else { return nil }
 		self.init(Vector3(Double(v[0]), Double(v[1]), Double(v[2])), Vector3(Double(v[3]), Double(v[4]), Double(v[5])))
 	}
 
-	public func toVariantBox() -> VariantBox {
+	@MainActor public func toVariantBox() -> VariantBox {
 		let b = VariantBox()
 		Host.shared.variantSetAABB(b.ptr, [Float(position.x), Float(position.y), Float(position.z), Float(size.x), Float(size.y), Float(size.z)])
 		return b
 	}
 }
 
-public struct Plane: GodotValueType {
+public struct Plane: GodotValueType, Sendable {
 	public var normal: Vector3
 	public var d: Float
 
@@ -269,19 +269,19 @@ public struct Plane: GodotValueType {
 		self.d = d
 	}
 
-	public init?(box: VariantBox) {
+	@MainActor public init?(box: VariantBox) {
 		let v = Host.shared.variantAsPlane(box.ptr)
 		self.init(Vector3(Double(v.0), Double(v.1), Double(v.2)), v.3)
 	}
 
-	public func toVariantBox() -> VariantBox {
+	@MainActor public func toVariantBox() -> VariantBox {
 		let b = VariantBox()
 		Host.shared.variantSetPlane(b.ptr, Float(normal.x), Float(normal.y), Float(normal.z), d)
 		return b
 	}
 }
 
-public struct Transform2D: GodotValueType {
+public struct Transform2D: GodotValueType, Sendable {
 	public var x: Vector2
 	public var y: Vector2
 	public var origin: Vector2
@@ -292,20 +292,20 @@ public struct Transform2D: GodotValueType {
 		self.origin = origin
 	}
 
-	public init?(box: VariantBox) {
+	@MainActor public init?(box: VariantBox) {
 		let v = Host.shared.variantAsTransform2D(box.ptr)
 		guard v.count == 6 else { return nil }
 		self.init(Vector2(Double(v[0]), Double(v[1])), Vector2(Double(v[2]), Double(v[3])), Vector2(Double(v[4]), Double(v[5])))
 	}
 
-	public func toVariantBox() -> VariantBox {
+	@MainActor public func toVariantBox() -> VariantBox {
 		let b = VariantBox()
 		Host.shared.variantSetTransform2D(b.ptr, [Float(x.x), Float(x.y), Float(y.x), Float(y.y), Float(origin.x), Float(origin.y)])
 		return b
 	}
 }
 
-public struct Transform3D: GodotValueType {
+public struct Transform3D: GodotValueType, Sendable {
 	public var basis: Basis
 	public var origin: Vector3
 
@@ -314,7 +314,7 @@ public struct Transform3D: GodotValueType {
 		self.origin = origin
 	}
 
-	public init?(box: VariantBox) {
+	@MainActor public init?(box: VariantBox) {
 		let v = Host.shared.variantAsTransform3D(box.ptr)
 		guard v.count == 12 else { return nil }
 		var rows: [Vector3] = []
@@ -324,7 +324,7 @@ public struct Transform3D: GodotValueType {
 		self.init(Basis(rows), Vector3(Double(v[9]), Double(v[10]), Double(v[11])))
 	}
 
-	public func toVariantBox() -> VariantBox {
+	@MainActor public func toVariantBox() -> VariantBox {
 		let b = VariantBox()
 		var v: [Float] = []
 		for r in basis.rows {
@@ -336,14 +336,14 @@ public struct Transform3D: GodotValueType {
 	}
 }
 
-public struct Basis: GodotValueType {
+public struct Basis: GodotValueType, Sendable {
 	public var rows: [Vector3]
 
 	public init(_ rows: [Vector3]) {
 		self.rows = rows
 	}
 
-	public init?(box: VariantBox) {
+	@MainActor public init?(box: VariantBox) {
 		let v = Host.shared.variantAsBasis(box.ptr)
 		guard v.count == 9 else { return nil }
 		var rows: [Vector3] = []
@@ -353,7 +353,7 @@ public struct Basis: GodotValueType {
 		self.init(rows)
 	}
 
-	public func toVariantBox() -> VariantBox {
+	@MainActor public func toVariantBox() -> VariantBox {
 		let b = VariantBox()
 		var v: [Float] = []
 		for r in rows {
@@ -364,14 +364,14 @@ public struct Basis: GodotValueType {
 	}
 }
 
-public struct Projection: GodotValueType {
+public struct Projection: GodotValueType, Sendable {
 	public var columns: [Vector4]
 
 	public init(_ columns: [Vector4]) {
 		self.columns = columns
 	}
 
-	public init?(box: VariantBox) {
+	@MainActor public init?(box: VariantBox) {
 		let v = Host.shared.variantAsProjection(box.ptr)
 		guard v.count == 16 else { return nil }
 		var cols: [Vector4] = []
@@ -381,7 +381,7 @@ public struct Projection: GodotValueType {
 		self.init(cols)
 	}
 
-	public func toVariantBox() -> VariantBox {
+	@MainActor public func toVariantBox() -> VariantBox {
 		let b = VariantBox()
 		var v: [Float] = []
 		for c in columns {
@@ -393,7 +393,7 @@ public struct Projection: GodotValueType {
 }
 
 extension VariantBox {
-	public convenience init<T: GodotValueType>(_ value: T) {
+	@MainActor public convenience init<T: GodotValueType>(_ value: T) {
 		self.init()
 		Host.shared.variantCopy(ptr, value.toVariantBox().ptr)
 	}
