@@ -314,11 +314,10 @@ public final class Runtime {
 
 	// NSRange -> String without Range(_:in:) (unreliable overload resolution).
 	private func substring(of source: String, _ r: NSRange) -> String? {
-		let utf16 = source.utf16
-		let lower = r.location
-		let upper = r.location + r.length
-		guard lower >= 0, upper <= utf16.count else { return nil }
-		return String(utf16[lower..<upper])
+		guard let start = String.Index(utf16Offset: r.location, in: source),
+			let end = String.Index(utf16Offset: r.location + r.length, in: source)
+		else { return nil }
+		return String(source[start..<end])
 	}
 
 	private func firstMatch(of pattern: String, in source: String) -> String? {

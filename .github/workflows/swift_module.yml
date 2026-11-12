@@ -51,25 +51,9 @@ jobs:
           test -n "$UILIB"
           nm -gU "$UILIB" | grep -q swiftgodot_scene_build
 
-  build-swift-runtime-windows:
-    name: Build Swift runtime (Windows)
-    runs-on: windows-2022
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v4
-      - uses: swift-actions/setup-swift@v2
-        with:
-          # setup-swift needs an exact version on Windows.
-          swift-version: "6.0.3"
-      - name: Build the runtime package
-        run: swift build -c release --package-path modules/swift/runtime
-      - name: Check the runtime libraries
-        shell: pwsh
-        run: |
-          $lib = Get-ChildItem -Recurse modules/swift/runtime/.build/release -Filter "swiftgodot_runtime.dll" | Select-Object -First 1
-          if (-not $lib) { throw "swiftgodot_runtime.dll not found" }
-          $ui = Get-ChildItem -Recurse modules/swift/runtime/.build/release -Filter "SwiftGodotUI.dll" | Select-Object -First 1
-          if (-not $ui) { throw "SwiftGodotUI.dll not found" }
+  # Windows runtime build is a follow-up: swift-actions/setup-swift@v2 only
+  # ships Windows toolchains up to 5.6.3, so Swift 6 on a Windows runner
+  # needs a manual installer (swift.org) or swiftly.
 
   build-engine-with-swift-module:
     name: Build engine with module_swift_enabled=yes
