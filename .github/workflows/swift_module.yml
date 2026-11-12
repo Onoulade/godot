@@ -21,12 +21,12 @@ jobs:
         run: swift build -c release --package-path modules/swift/runtime
       - name: Smoke-test the runtime library exports
         run: |
-          LIB=$(find modules/swift/runtime/.build/release -name "libswiftgodot_runtime.so" | head -1)
+          LIB=$(find -L modules/swift/runtime/.build/release -name "libswiftgodot_runtime.so" | head -1)
           test -n "$LIB"
           nm -D "$LIB" | grep -q swiftgodot_runtime_version
           nm -D "$LIB" | grep -q swiftgodot_script_compile
           nm -D "$LIB" | grep -q swiftgodot_instance_create
-          UILIB=$(find modules/swift/runtime/.build/release -name "libSwiftGodotUI.so" | head -1)
+          UILIB=$(find -L modules/swift/runtime/.build/release -name "libSwiftGodotUI.so" | head -1)
           test -n "$UILIB"
           nm -D "$UILIB" | grep -q swiftgodot_scene_build
           nm -D "$UILIB" | grep -q swiftgodot_scene_invalidate
@@ -44,10 +44,10 @@ jobs:
         run: swift build -c release --package-path modules/swift/runtime
       - name: Check the runtime libraries
         run: |
-          LIB=$(find modules/swift/runtime/.build/release -name "libswiftgodot_runtime.dylib" | head -1)
+          LIB=$(find -L modules/swift/runtime/.build/release -name "libswiftgodot_runtime.dylib" | head -1)
           test -n "$LIB"
           nm -gU "$LIB" | grep -q swiftgodot_init
-          UILIB=$(find modules/swift/runtime/.build/release -name "libSwiftGodotUI.dylib" | head -1)
+          UILIB=$(find -L modules/swift/runtime/.build/release -name "libSwiftGodotUI.dylib" | head -1)
           test -n "$UILIB"
           nm -gU "$UILIB" | grep -q swiftgodot_scene_build
 
