@@ -30,6 +30,8 @@
 
 #include "swift_bridge.h"
 
+#include "swift_host.h"
+
 #include "core/os/memory.h"
 
 // Engine-side GDExtension function resolver, handed to the Swift runtime so
@@ -85,6 +87,7 @@ Error SwiftBridge::_try_load_from(const String &p_dir) {
 	abi.runtime_version = reinterpret_cast<uint32_t (*)()>(version_sym);
 
 	abi.runtime_init = reinterpret_cast<void (*)(GDExtensionInterfaceGetProcAddress)>(_resolve("swiftgodot_init", true));
+	abi.host_init = reinterpret_cast<void (*)(const SwiftGodotHost *)>(_resolve("swiftgodot_host_init", true));
 	abi.runtime_shutdown = reinterpret_cast<void (*)()>(_resolve("swiftgodot_shutdown", true));
 
 	abi.script_compile = reinterpret_cast<SwiftGodotScriptHandle (*)(const char *, const char *)>(_resolve("swiftgodot_script_compile", true));
@@ -102,6 +105,7 @@ Error SwiftBridge::_try_load_from(const String &p_dir) {
 	abi.script_get_property_count = reinterpret_cast<int (*)(SwiftGodotScriptHandle)>(_resolve("swiftgodot_script_get_property_count", true));
 	abi.script_get_property_name = reinterpret_cast<const char *(*)(SwiftGodotScriptHandle, int)>(_resolve("swiftgodot_script_get_property_name", true));
 	abi.script_get_property_type = reinterpret_cast<int (*)(SwiftGodotScriptHandle, int)>(_resolve("swiftgodot_script_get_property_type", true));
+	abi.script_get_property_usage = reinterpret_cast<int (*)(SwiftGodotScriptHandle, int)>(_resolve("swiftgodot_script_get_property_usage", true));
 
 	abi.instance_create = reinterpret_cast<SwiftGodotInstanceHandle (*)(SwiftGodotScriptHandle, GDExtensionObjectPtr)>(_resolve("swiftgodot_instance_create", true));
 	abi.instance_free = reinterpret_cast<void (*)(SwiftGodotInstanceHandle)>(_resolve("swiftgodot_instance_free", true));
@@ -112,6 +116,9 @@ Error SwiftBridge::_try_load_from(const String &p_dir) {
 
 	if (abi.runtime_init != nullptr) {
 		abi.runtime_init(&gdextension_get_proc_address);
+	}
+	if (abi.host_init != nullptr) {
+		abi.host_init(SwiftHost::get_host());
 	}
 	return OK;
 }

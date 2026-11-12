@@ -34,6 +34,8 @@
 #include "core/os/os.h"
 #include "core/string/ustring.h"
 
+struct SwiftGodotHost;
+
 // Bridge between the C++ module and the Swift runtime library
 // (modules/swift/runtime, built with `swiftc`).
 //
@@ -53,6 +55,7 @@ typedef void *SwiftGodotInstanceHandle;
 struct SwiftGodotABI {
 	uint32_t (*runtime_version)() = nullptr;
 	void (*runtime_init)(GDExtensionInterfaceGetProcAddress p_get_proc_address) = nullptr;
+	void (*host_init)(const SwiftGodotHost *p_host) = nullptr;
 	void (*runtime_shutdown)() = nullptr;
 
 	SwiftGodotScriptHandle (*script_compile)(const char *p_path, const char *p_source) = nullptr;
@@ -70,6 +73,7 @@ struct SwiftGodotABI {
 	int (*script_get_property_count)(SwiftGodotScriptHandle p_script) = nullptr;
 	const char *(*script_get_property_name)(SwiftGodotScriptHandle p_script, int p_index) = nullptr;
 	int (*script_get_property_type)(SwiftGodotScriptHandle p_script, int p_index) = nullptr;
+	int (*script_get_property_usage)(SwiftGodotScriptHandle p_script, int p_index) = nullptr;
 
 	SwiftGodotInstanceHandle (*instance_create)(SwiftGodotScriptHandle p_script, GDExtensionObjectPtr p_owner) = nullptr;
 	void (*instance_free)(SwiftGodotInstanceHandle p_instance) = nullptr;

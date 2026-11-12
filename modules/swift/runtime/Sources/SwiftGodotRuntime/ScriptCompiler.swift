@@ -82,16 +82,25 @@ public final class ScriptCompiler {
 			lines.append("\t{ instance, args, argCount, ret, error in")
 			lines.append("\t\tguard let instance = instance else { return 0 }")
 			lines.append("\t\tlet object = instance.assumingMemoryBound(to: \(className).self).pointee")
-			lines.append("\t\tobject.\(method)()")
+			if method == "_process" || method == "_physics_process" {
+				lines.append("\t\tlet delta = argCount > 0 && args != nil ? Host.shared.variantAsDouble(args![0]) : 0.0")
+				lines.append("\t\tobject.\(method)(delta: delta)")
+			} else {
+				lines.append("\t\tobject.\(method)()")
+			}
 			lines.append("\t\treturn 1")
 			lines.append("\t},")
 		}
 		lines.append("]")
+		lines.append("private let newInstance: @convention(c) () -> UnsafeMutableRawPointer? = {")
+		lines.append("\tUnmanaged.passRetained(\(className)()).toOpaque()")
+		lines.append("}")
 		lines.append("private var descriptor = SwiftGodotScriptDescriptor()")
 		lines.append("")
 		lines.append("@_cdecl(\"swiftgodot_script_descriptor\")")
 		lines.append("public func swiftgodot_script_descriptor() -> UnsafePointer<SwiftGodotScriptDescriptor> {")
 		lines.append("\tdescriptor.class_name = \"\(className)\".withCString { strdup($0) }")
+		lines.append("\tdescriptor.new_instance = newInstance")
 		lines.append("\tdescriptor.method_count = Int32(methodNames.count)")
 		lines.append("\tdescriptor.method_names = methodNames.withUnsafeBufferPointer { UnsafeMutablePointer(mutating: $0.baseAddress) }")
 		lines.append("\tdescriptor.method_fns = methodFns.withUnsafeBufferPointer { UnsafeMutablePointer(mutating: $0.baseAddress) }")

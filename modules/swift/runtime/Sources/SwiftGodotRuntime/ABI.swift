@@ -29,6 +29,7 @@ public typealias SwiftGodotMethodFn = @convention(c) (
 public struct SwiftGodotScriptDescriptor {
 	public var class_name: UnsafePointer<CChar>?
 	public var is_tool: UInt8
+	public var new_instance: (@convention(c) () -> UnsafeMutableRawPointer?)?
 	public var method_count: Int32
 	public var method_names: UnsafeMutablePointer<UnsafePointer<CChar>?>?
 	public var method_fns: UnsafeMutablePointer<SwiftGodotMethodFn?>?
@@ -36,6 +37,7 @@ public struct SwiftGodotScriptDescriptor {
 	public init() {
 		class_name = nil
 		is_tool = 0
+		new_instance = nil
 		method_count = 0
 		method_names = nil
 		method_fns = nil
