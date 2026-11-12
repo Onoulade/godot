@@ -398,6 +398,10 @@ extension VariantBox {
 		Host.shared.variantCopy(ptr, value.toVariantBox().ptr)
 	}
 
+	public func asEnum<T: RawRepresentable>(_ type: T.Type) -> T where T.RawValue == Int {
+		T(rawValue: asInt())!
+	}
+
 	public func asVector2() -> Vector2 { Vector2(box: self)! }
 	public func asVector3() -> Vector3 { Vector3(box: self)! }
 	public func asVector2i() -> Vector2i { Vector2i(box: self)! }

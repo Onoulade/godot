@@ -105,11 +105,38 @@ VALUE_TYPES = {
 VALUE_TYPE_ACCESSORS = {v: "as" + v for v in VALUE_TYPES.values()}
 
 
+def snake_upper(s):
+    return re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", s).upper()
+
+
+def camel_case(s):
+    parts = [p for p in s.lower().split("_") if p]
+    if not parts:
+        return "value"
+    return parts[0] + "".join(p.capitalize() for p in parts[1:])
+
+
+def enum_swift_type(class_name, generated):
+    # "Node.ProcessMode" -> "Node.ProcessMode" if Node is generated, else Int.
+    if not class_name or "." not in class_name:
+        return "Int"  # global enum (Error, Key, ...): kept as Int for now
+    cls = class_name.split(".")[0]
+    if cls in generated:
+        return class_name
+    return "Int"
+
+
+def is_enum(jtype, class_name):
+    return (jtype or "").lower() == "int" and class_name and "." in class_name
+
+
 def swift_type(jtype, class_name, generated):
     t = (jtype or "").lower()
     if t == "bool":
         return "Bool"
     if t == "int":
+        if is_enum(jtype, class_name):
+            return enum_swift_type(class_name, generated)
         return "Int"
     if t == "float":
         return "Double"
@@ -150,9 +177,12 @@ def emit_method(m, generated):
     for a in args:
         st = swift_type(a.get("type"), a.get("class_name"), generated)
         pname = sanitize(a.get("name", "arg"))
-        dv = default_literal(a.get("default_value"))
+        dv = None if is_enum(a.get("type"), a.get("class_name")) else default_literal(a.get("default_value"))
         params.append(f"{pname}: {st} = {dv}" if dv is not None else f"{pname}: {st}")
-        call_args.append(f"VariantBox({pname})")
+        if is_enum(a.get("type"), a.get("class_name")) and st != "Int":
+            call_args.append(f"VariantBox({pname}.rawValue)")
+        else:
+            call_args.append(f"VariantBox({pname})")
     signature = f"public func {name}({', '.join(params)})"
     lines = []
     if not ret_void:
@@ -179,6 +209,8 @@ def emit_method(m, generated):
         lines.append("\t\treturn __ret.asString()")
     elif ret_swift in VALUE_TYPE_ACCESSORS:
         lines.append(f"\t\treturn __ret.{VALUE_TYPE_ACCESSORS[ret_swift]}()")
+    elif is_enum(ret.get("type"), ret.get("class_name")) and ret_swift != "Int":
+        lines.append(f"\t\treturn __ret.asEnum({ret_swift}.self)")
     elif ret_swift == "VariantBox":
         lines.append("\t\treturn __ret")
     else:
@@ -193,13 +225,32 @@ def emit_property(p, method_names):
         return []
     st = swift_type(p.get("type"), p.get("class_name"), set())
     raw = p.get("name")
-    accessor = f".as{st}()" if st in ("Bool", "Int", "Double", "String") or st in VALUE_TYPE_ACCESSORS else ""
+    if is_enum(p.get("type"), p.get("class_name")) and st != "Int":
+        accessor = f".asEnum({st}.self)"
+    else:
+        accessor = f".as{st}()" if st in ("Bool", "Int", "Double", "String") or st in VALUE_TYPE_ACCESSORS else ""
     lines = [
         f"\tpublic var {name}: {st} {{",
         f'\t\tget {{ Host.shared.getProperty(object: ptr, name: "{raw}")' + accessor + " }",
         f'\t\tset {{ Host.shared.setProperty(object: ptr, name: "{raw}", value: VariantBox(newValue)) }}',
         "\t}",
     ]
+    return lines
+
+
+def emit_enum(en):
+    name = sanitize(en.get("name", "Enum"))
+    prefix = snake_upper(en.get("name", "")) + "_"
+    lines = [f"\tpublic enum {name}: Int, Sendable, CaseIterable {{"]
+    used = set()
+    for const, val in sorted(en.get("values", {}).items(), key=lambda kv: kv[1]):
+        base = const[len(prefix) :] if const.startswith(prefix) else const
+        case = sanitize(camel_case(base))
+        while case in used:
+            case += "_"
+        used.add(case)
+        lines.append(f"\t\tcase {case} = {val}")
+    lines.append("\t}")
     return lines
 
 
@@ -287,6 +338,8 @@ def main():
         out.append("@MainActor")
         out.append(f"public class {cname}: {parent} {{")
         out.append("\tpublic override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }")
+        for en in c.get("enums", []):
+            out.extend(emit_enum(en))
         method_names = set()
         for m in c.get("methods", []):
             if m.get("is_virtual"):
