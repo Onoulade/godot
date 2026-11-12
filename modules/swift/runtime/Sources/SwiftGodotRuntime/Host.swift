@@ -53,8 +53,9 @@ public struct SwiftGodotHostMirror {
 	public var push_error: (@convention(c) (UnsafePointer<CChar>?) -> Void)?
 }
 
+@MainActor
 public final class Host {
-	public static let shared = Host()
+	@MainActor public static let shared = Host()
 
 	private var host: UnsafePointer<SwiftGodotHostMirror>?
 

@@ -68,7 +68,17 @@ returns `false` and a warning is printed.
    that bundles `.swift` sources and the runtime library into exports, and
    `.github/workflows/swift_module.yml` (runtime build + symbol checks,
    engine build with the module, bindings freshness check).
-   **Remaining:** per-platform runtime builds in CI, user docs, LSP-based
+7. **Swift 6 / @MainActor thread safety** — the runtime package is
+   swift-tools 6.0; every generated binding class (`GodotObject` and all
+   1002 engine classes) is `@MainActor`, so Swift 6 strict concurrency
+   rejects off-main-thread engine calls at compile time. The runtime
+   singletons (`Host`, `Runtime`, `ScriptCompiler`) are `@MainActor` and the
+   C entry points enter them via `MainActor.assumeIsolated` (the engine only
+   calls scripts on the main thread). Value types are `Sendable`; their
+   marshaling entry points are `@MainActor`. User scripts can therefore use
+   `@MainActor`, `async`/`await` and actors freely.
+   **Remaining:** per-platform runtime builds in CI, precompiling scripts at
+   export time (an exported game has no `swiftc`), user docs, LSP-based
    completion.
 
 ## Building
