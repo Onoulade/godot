@@ -30,11 +30,6 @@ extension String: VariantBoxConvertible {
 	public static func fromVariantBox(_ box: VariantBox) -> String { box.asString() }
 }
 
-extension VariantBox: VariantBoxConvertible {
-	public func toVariantBox() -> VariantBox { self }
-	public static func fromVariantBox(_ box: VariantBox) -> VariantBox { box }
-}
-
 extension GodotObject: VariantBoxConvertible {
 	public func toVariantBox() -> VariantBox { VariantBox(self) }
 	public static func fromVariantBox(_ box: VariantBox) -> Self {
@@ -45,8 +40,9 @@ extension GodotObject: VariantBoxConvertible {
 	}
 }
 
-// Value types already declare toVariantBox()/init?(box:) in GodotValueType.
-extension GodotValueType: VariantBoxConvertible {
+// Value types already declare toVariantBox()/init?(box:) in GodotValueType
+// (which inherits VariantBoxConvertible); provide the static conversion here.
+extension GodotValueType {
 	public static func fromVariantBox(_ box: VariantBox) -> Self {
 		guard let value = Self(box: box) else {
 			fatalError("VariantBox does not hold the expected Godot value type")
@@ -73,8 +69,10 @@ public final class GodotArray: VariantBoxConvertible {
 	}
 
 	deinit {
-		if owned {
-			Host.shared.variantFree(ptr)
+		MainActor.assumeIsolated {
+			if owned {
+				Host.shared.variantFree(ptr)
+			}
 		}
 	}
 
@@ -93,7 +91,7 @@ public final class GodotArray: VariantBoxConvertible {
 	public subscript(index: Int) -> VariantBox {
 		get {
 			if let raw = Host.shared.variantArrayGet(ptr, index) {
-				return VariantBox(borrowed: raw)
+				return VariantBox(borrowed: UnsafeMutableRawPointer(mutating: raw))
 			}
 			return VariantBox()
 		}
@@ -132,8 +130,10 @@ public final class GodotDictionary: VariantBoxConvertible {
 	}
 
 	deinit {
-		if owned {
-			Host.shared.variantFree(ptr)
+		MainActor.assumeIsolated {
+			if owned {
+				Host.shared.variantFree(ptr)
+			}
 		}
 	}
 
@@ -151,7 +151,7 @@ public final class GodotDictionary: VariantBoxConvertible {
 
 	public func get<V: VariantBoxConvertible, K: VariantBoxConvertible>(_ key: K) -> V? {
 		guard let raw = Host.shared.variantDictionaryGet(ptr, key.toVariantBox().borrowedPtr) else { return nil }
-		return V.fromVariantBox(VariantBox(borrowed: raw))
+		return V.fromVariantBox(VariantBox(borrowed: UnsafeMutableRawPointer(mutating: raw)))
 	}
 
 	public func toVariantBox() -> VariantBox {

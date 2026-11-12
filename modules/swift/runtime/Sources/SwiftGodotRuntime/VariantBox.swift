@@ -53,6 +53,18 @@ public class VariantBox {
 		Host.shared.variantSetObject(ptr, object.ptr)
 	}
 
+	// Int-raw-value enums (Key, Error, class enums, ...).
+	public init<T: RawRepresentable>(_ value: T) where T.RawValue == Int {
+		self.init()
+		Host.shared.variantSetInt(ptr, Int64(value.rawValue))
+	}
+
+	// Godot value types (Vector2, Color, ...): marshaled through GodotValueType.
+	public init<T: GodotValueType>(_ value: T) {
+		self.init()
+		Host.shared.variantCopy(ptr, value.toVariantBox().borrowedPtr)
+	}
+
 	public var borrowedPtr: UnsafeRawPointer { ptr }
 
 	public func asInt() -> Int {

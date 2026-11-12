@@ -71,7 +71,8 @@ public final class ScriptCompiler {
 			}
 
 			guard let handle = dlopen(libURL.path, RTLD_NOW | RTLD_LOCAL) else {
-				script.error = "dlopen failed: \(String(cString: dlerror() ?? "unknown"))"
+				let message = dlerror().map { String(cString: $0) } ?? "unknown"
+				script.error = "dlopen failed: \(message)"
 				return
 			}
 			script.libraryPath = libURL.path
@@ -101,7 +102,7 @@ public final class ScriptCompiler {
 			lines.append("\t\t\tguard let instance = instance else { return 0 }")
 			lines.append("\t\t\tlet object = instance.assumingMemoryBound(to: \(className).self).pointee")
 			if method == "_process" || method == "_physics_process" {
-				lines.append("\t\t\tlet delta = argCount > 0 && args != nil ? Host.shared.variantAsDouble(args![0]) : 0.0")
+				lines.append("\t\t\tlet delta = argCount > 0 && args != nil ? Host.shared.variantAsDouble(args!.assumingMemoryBound(to: UnsafeRawPointer?.self)[0]) : 0.0")
 				lines.append("\t\t\tobject.\(method)(delta: delta)")
 			} else {
 				lines.append("\t\t\tobject.\(method)()")
@@ -111,7 +112,7 @@ public final class ScriptCompiler {
 			lines.append("\t},")
 		}
 		lines.append("]")
-		lines.append("private let newInstance: @convention(c) () -> UnsafeMutableRawPointer? = {")
+		lines.append("private let newInstance: @convention(c) () -> UnsafeRawPointer? = {")
 		if let className {
 			lines.append("\tMainActor.assumeIsolated { Unmanaged.passRetained(\(className)()).toOpaque() }")
 		} else {

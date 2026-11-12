@@ -44,7 +44,7 @@ public struct SwiftGodotHostMirror {
 	public var variant_set_basis: (@convention(c) (UnsafeMutableRawPointer?, UnsafePointer<Float>?) -> Void)?
 	public var variant_as_projection: (@convention(c) (UnsafeRawPointer?, UnsafeMutablePointer<Float>?) -> Void)?
 	public var variant_set_projection: (@convention(c) (UnsafeMutableRawPointer?, UnsafePointer<Float>?) -> Void)?
-	public var object_call: (@convention(c) (UnsafeMutableRawPointer?, UnsafePointer<CChar>?, UnsafePointer<UnsafeRawPointer?>?, Int32, UnsafeMutableRawPointer?, UnsafeMutablePointer<GDExtensionCallErrorMirror>?) -> UInt8)?
+	public var object_call: (@convention(c) (UnsafeMutableRawPointer?, UnsafePointer<CChar>?, UnsafeMutableRawPointer?, Int32, UnsafeMutableRawPointer?, UnsafeMutableRawPointer?) -> UInt8)?
 	public var object_get: (@convention(c) (UnsafeMutableRawPointer?, UnsafePointer<CChar>?, UnsafeMutableRawPointer?) -> UInt8)?
 	public var object_set: (@convention(c) (UnsafeMutableRawPointer?, UnsafePointer<CChar>?, UnsafeRawPointer?) -> UInt8)?
 	public var node_get_node: (@convention(c) (UnsafeMutableRawPointer?, UnsafePointer<CChar>?) -> UnsafeMutableRawPointer?)?
@@ -82,7 +82,10 @@ public final class Host {
 	}
 
 	public func variantNew() -> UnsafeMutableRawPointer {
-		requireHost().pointee.variant_new!()
+		guard let fn = requireHost().pointee.variant_new, let ptr = fn() else {
+			fatalError("SwiftGodotHost.variant_new is not available")
+		}
+		return ptr
 	}
 
 	public func variantFree(_ ptr: UnsafeMutableRawPointer?) {
@@ -271,7 +274,8 @@ public final class Host {
 		var err = GDExtensionCallErrorMirror()
 		method.withCString { m in
 			args.map { $0.borrowedPtr }.withUnsafeBufferPointer { buf in
-				_ = requireHost().pointee.object_call!(object, m, buf.baseAddress, Int32(args.count), ret.ptr, &err)
+				let rawArgs = buf.baseAddress.map { UnsafeMutableRawPointer(mutating: UnsafeRawPointer($0)) }
+				_ = requireHost().pointee.object_call!(object, m, rawArgs, Int32(args.count), ret.ptr, UnsafeMutableRawPointer(&err))
 			}
 		}
 		return ret
@@ -301,7 +305,10 @@ public final class Host {
 	}
 
 	public func variantNewArray() -> UnsafeMutableRawPointer {
-		requireHost().pointee.variant_new_array!()
+		guard let fn = requireHost().pointee.variant_new_array, let ptr = fn() else {
+			fatalError("SwiftGodotHost.variant_new_array is not available")
+		}
+		return ptr
 	}
 
 	public func variantArraySize(_ ptr: UnsafeRawPointer?) -> Int {
@@ -321,7 +328,10 @@ public final class Host {
 	}
 
 	public func variantNewDictionary() -> UnsafeMutableRawPointer {
-		requireHost().pointee.variant_new_dictionary!()
+		guard let fn = requireHost().pointee.variant_new_dictionary, let ptr = fn() else {
+			fatalError("SwiftGodotHost.variant_new_dictionary is not available")
+		}
+		return ptr
 	}
 
 	public func variantDictionarySize(_ ptr: UnsafeRawPointer?) -> Int {

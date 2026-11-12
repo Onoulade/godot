@@ -3,6 +3,9 @@ import Foundation
 // C entry points loaded by SwiftBridge (modules/swift/swift_bridge.cpp).
 // The engine calls these on the main thread, so the @MainActor runtime
 // singletons are entered through MainActor.assumeIsolated.
+// Note: @_cdecl requires C-representable, Sendable types, so pointer
+// parameters use UnsafeMutableRawPointer?/UnsafeRawPointer? and returns use
+// UnsafeRawPointer? (Sendable); they are cast back to typed pointers inside.
 
 @_cdecl("swiftgodot_runtime_version")
 public func swiftgodot_runtime_version() -> UInt32 {
@@ -10,16 +13,17 @@ public func swiftgodot_runtime_version() -> UInt32 {
 }
 
 @_cdecl("swiftgodot_init")
-public func swiftgodot_init(_ getProcAddress: @convention(c) (UnsafePointer<CChar>) -> UnsafeMutableRawPointer?) {
+public func swiftgodot_init(_ getProcAddress: UnsafeMutableRawPointer?) {
 	MainActor.assumeIsolated {
-		Runtime.shared.initialize(getProcAddress: getProcAddress)
+		let fn = unsafeBitCast(getProcAddress, to: Runtime.GetProcAddress.self)
+		Runtime.shared.initialize(getProcAddress: fn)
 	}
 }
 
 @_cdecl("swiftgodot_host_init")
-public func swiftgodot_host_init(_ host: UnsafePointer<SwiftGodotHostMirror>) {
+public func swiftgodot_host_init(_ host: UnsafeRawPointer?) {
 	MainActor.assumeIsolated {
-		Host.shared.setHost(host)
+		Host.shared.setHost(host?.assumingMemoryBound(to: SwiftGodotHostMirror.self))
 	}
 }
 
@@ -31,23 +35,23 @@ public func swiftgodot_shutdown() {
 }
 
 @_cdecl("swiftgodot_script_compile")
-public func swiftgodot_script_compile(_ path: UnsafePointer<CChar>, _ source: UnsafePointer<CChar>) -> UnsafeMutableRawPointer? {
+public func swiftgodot_script_compile(_ path: UnsafePointer<CChar>, _ source: UnsafePointer<CChar>) -> UnsafeRawPointer? {
 	MainActor.assumeIsolated {
 		Runtime.shared.compileScript(path: String(cString: path), source: String(cString: source))
 	}
 }
 
 @_cdecl("swiftgodot_script_load_precompiled")
-public func swiftgodot_script_load_precompiled(_ libraryPath: UnsafePointer<CChar>, _ path: UnsafePointer<CChar>, _ source: UnsafePointer<CChar>) -> UnsafeMutableRawPointer? {
+public func swiftgodot_script_load_precompiled(_ libraryPath: UnsafePointer<CChar>, _ path: UnsafePointer<CChar>, _ source: UnsafePointer<CChar>) -> UnsafeRawPointer? {
 	MainActor.assumeIsolated {
 		Runtime.shared.loadPrecompiled(libraryPath: String(cString: libraryPath), path: String(cString: path), source: String(cString: source))
 	}
 }
 
 @_cdecl("swiftgodot_script_get_library_path")
-public func swiftgodot_script_get_library_path(_ script: UnsafeMutableRawPointer?, _ buffer: UnsafeMutablePointer<CChar>?, _ bufferSize: Int32) {
+public func swiftgodot_script_get_library_path(_ script: UnsafeMutableRawPointer?, _ buffer: UnsafeMutableRawPointer?, _ bufferSize: Int32) {
 	MainActor.assumeIsolated {
-		Runtime.shared.getScriptLibraryPath(script, buffer: buffer, bufferSize: bufferSize)
+		Runtime.shared.getScriptLibraryPath(script, buffer: buffer?.assumingMemoryBound(to: CChar.self), bufferSize: bufferSize)
 	}
 }
 
@@ -66,14 +70,14 @@ public func swiftgodot_script_is_valid(_ script: UnsafeMutableRawPointer?) -> UI
 }
 
 @_cdecl("swiftgodot_script_get_error")
-public func swiftgodot_script_get_error(_ script: UnsafeMutableRawPointer?, _ buffer: UnsafeMutablePointer<CChar>?, _ bufferSize: Int32) {
+public func swiftgodot_script_get_error(_ script: UnsafeMutableRawPointer?, _ buffer: UnsafeMutableRawPointer?, _ bufferSize: Int32) {
 	MainActor.assumeIsolated {
-		Runtime.shared.getScriptError(script, buffer: buffer, bufferSize: bufferSize)
+		Runtime.shared.getScriptError(script, buffer: buffer?.assumingMemoryBound(to: CChar.self), bufferSize: bufferSize)
 	}
 }
 
 @_cdecl("swiftgodot_script_get_class_name")
-public func swiftgodot_script_get_class_name(_ script: UnsafeMutableRawPointer?) -> UnsafePointer<CChar>? {
+public func swiftgodot_script_get_class_name(_ script: UnsafeMutableRawPointer?) -> UnsafeRawPointer? {
 	MainActor.assumeIsolated {
 		Runtime.shared.getScriptClassName(script)
 	}
@@ -94,7 +98,7 @@ public func swiftgodot_script_get_method_count(_ script: UnsafeMutableRawPointer
 }
 
 @_cdecl("swiftgodot_script_get_method_name")
-public func swiftgodot_script_get_method_name(_ script: UnsafeMutableRawPointer?, _ index: Int32) -> UnsafePointer<CChar>? {
+public func swiftgodot_script_get_method_name(_ script: UnsafeMutableRawPointer?, _ index: Int32) -> UnsafeRawPointer? {
 	MainActor.assumeIsolated {
 		Runtime.shared.getScriptMethodName(script, index: index)
 	}
@@ -115,7 +119,7 @@ public func swiftgodot_script_get_signal_count(_ script: UnsafeMutableRawPointer
 }
 
 @_cdecl("swiftgodot_script_get_signal_name")
-public func swiftgodot_script_get_signal_name(_ script: UnsafeMutableRawPointer?, _ index: Int32) -> UnsafePointer<CChar>? {
+public func swiftgodot_script_get_signal_name(_ script: UnsafeMutableRawPointer?, _ index: Int32) -> UnsafeRawPointer? {
 	MainActor.assumeIsolated {
 		Runtime.shared.getScriptSignalName(script, index: index)
 	}
@@ -136,7 +140,7 @@ public func swiftgodot_script_get_property_count(_ script: UnsafeMutableRawPoint
 }
 
 @_cdecl("swiftgodot_script_get_property_name")
-public func swiftgodot_script_get_property_name(_ script: UnsafeMutableRawPointer?, _ index: Int32) -> UnsafePointer<CChar>? {
+public func swiftgodot_script_get_property_name(_ script: UnsafeMutableRawPointer?, _ index: Int32) -> UnsafeRawPointer? {
 	MainActor.assumeIsolated {
 		Runtime.shared.getScriptPropertyName(script, index: index)
 	}
@@ -157,7 +161,7 @@ public func swiftgodot_script_get_property_usage(_ script: UnsafeMutableRawPoint
 }
 
 @_cdecl("swiftgodot_instance_create")
-public func swiftgodot_instance_create(_ script: UnsafeMutableRawPointer?, _ owner: UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? {
+public func swiftgodot_instance_create(_ script: UnsafeMutableRawPointer?, _ owner: UnsafeMutableRawPointer?) -> UnsafeRawPointer? {
 	MainActor.assumeIsolated {
 		Runtime.shared.createInstance(script: script, owner: owner)
 	}
@@ -174,10 +178,10 @@ public func swiftgodot_instance_free(_ instance: UnsafeMutableRawPointer?) {
 public func swiftgodot_instance_call(
 	_ instance: UnsafeMutableRawPointer?,
 	_ method: UnsafePointer<CChar>,
-	_ args: UnsafePointer<UnsafeRawPointer?>?,
+	_ args: UnsafeMutableRawPointer?,
 	_ argCount: Int32,
 	_ ret: UnsafeMutableRawPointer?,
-	_ error: UnsafeMutablePointer<GDExtensionCallErrorMirror>?
+	_ error: UnsafeMutableRawPointer?
 ) -> UInt8 {
 	MainActor.assumeIsolated {
 		Runtime.shared.instanceCall(instance, method: String(cString: method), args: args, argCount: argCount, ret: ret, error: error)

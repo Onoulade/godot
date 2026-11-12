@@ -98,7 +98,8 @@ public final class Runtime {
 		if let handle = dlopen(libraryPath, RTLD_NOW | RTLD_LOCAL) {
 			attachLibrary(handle: handle, script: script)
 		} else {
-			script.error = "dlopen failed on precompiled library: \(String(cString: dlerror() ?? "unknown"))"
+			let message = dlerror().map { String(cString: $0) } ?? "unknown"
+			script.error = "dlopen failed on precompiled library: \(message)"
 		}
 		return store(script)
 	}
@@ -120,10 +121,10 @@ public final class Runtime {
 			dlclose(handle)
 			return
 		}
-		typealias DescriptorFn = @convention(c) () -> UnsafePointer<SwiftGodotScriptDescriptor>
+		typealias DescriptorFn = @convention(c) () -> UnsafeRawPointer?
 		let descriptorFn = unsafeBitCast(descriptorPtr, to: DescriptorFn.self)
 		script.libraryHandle = handle
-		script.descriptor = descriptorFn()
+		script.descriptor = unsafeBitCast(descriptorFn(), to: UnsafePointer<SwiftGodotScriptDescriptor>.self)
 		if script.rootViewClass != nil, let registerPtr = dlsym(handle, "swiftgodot_scene_register") {
 			typealias RegisterFn = @convention(c) () -> Void
 			unsafeBitCast(registerPtr, to: RegisterFn.self)()
@@ -160,7 +161,7 @@ public final class Runtime {
 		}
 	}
 
-	public func getScriptClassName(_ handle: UnsafeMutableRawPointer?) -> UnsafePointer<CChar>? {
+	public func getScriptClassName(_ handle: UnsafeMutableRawPointer?) -> UnsafeRawPointer? {
 		guard let className = script(for: handle)?.className else { return nil }
 		return className.withCString { strdup($0) }
 	}
@@ -173,7 +174,7 @@ public final class Runtime {
 		return Int32(script(for: handle)?.methods.count ?? 0)
 	}
 
-	public func getScriptMethodName(_ handle: UnsafeMutableRawPointer?, index: Int32) -> UnsafePointer<CChar>? {
+	public func getScriptMethodName(_ handle: UnsafeMutableRawPointer?, index: Int32) -> UnsafeRawPointer? {
 		guard let methods = script(for: handle)?.methods, index >= 0, index < methods.count else { return nil }
 		return methods[Int(index)].withCString { strdup($0) }
 	}
@@ -186,7 +187,7 @@ public final class Runtime {
 		return Int32(script(for: handle)?.signals.count ?? 0)
 	}
 
-	public func getScriptSignalName(_ handle: UnsafeMutableRawPointer?, index: Int32) -> UnsafePointer<CChar>? {
+	public func getScriptSignalName(_ handle: UnsafeMutableRawPointer?, index: Int32) -> UnsafeRawPointer? {
 		guard let signals = script(for: handle)?.signals, index >= 0, index < signals.count else { return nil }
 		return signals[Int(index)].withCString { strdup($0) }
 	}
@@ -199,7 +200,7 @@ public final class Runtime {
 		return Int32(script(for: handle)?.properties.count ?? 0)
 	}
 
-	public func getScriptPropertyName(_ handle: UnsafeMutableRawPointer?, index: Int32) -> UnsafePointer<CChar>? {
+	public func getScriptPropertyName(_ handle: UnsafeMutableRawPointer?, index: Int32) -> UnsafeRawPointer? {
 		guard let properties = script(for: handle)?.properties, index >= 0, index < properties.count else { return nil }
 		return properties[Int(index)].name.withCString { strdup($0) }
 	}
@@ -220,7 +221,7 @@ public final class Runtime {
 		guard let script = script(for: handle) else { return nil }
 		var object: AnyObject?
 		if let descriptor = script.descriptor, let newInstance = descriptor.pointee.new_instance, let raw = newInstance() {
-			object = Unmanaged<AnyObject>.fromOpaque(raw).takeUnretainedValue()
+			object = Unmanaged<AnyObject>.fromOpaque(UnsafeMutableRawPointer(mutating: raw)).takeUnretainedValue()
 		}
 		let box = ScriptInstanceBox(script: script, owner: owner, object: object)
 		lock.lock()
@@ -237,17 +238,18 @@ public final class Runtime {
 		lock.unlock()
 	}
 
-	public func instanceCall(_ handle: UnsafeMutableRawPointer?, method: String, args: UnsafePointer<UnsafeRawPointer?>?, argCount: Int32, ret: UnsafeMutableRawPointer?, error: UnsafeMutablePointer<GDExtensionCallErrorMirror>?) -> UInt8 {
+	public func instanceCall(_ handle: UnsafeMutableRawPointer?, method: String, args: UnsafeMutableRawPointer?, argCount: Int32, ret: UnsafeMutableRawPointer?, error: UnsafeMutableRawPointer?) -> UInt8 {
+		let errorMirror = error?.assumingMemoryBound(to: GDExtensionCallErrorMirror.self)
 		guard let box = instance(for: handle), let descriptor = box.script.descriptor else {
-			if let error = error {
-				error.pointee.error = 1 // CALL_ERROR_INVALID_METHOD
+			if let errorMirror = errorMirror {
+				errorMirror.pointee.error = 1 // CALL_ERROR_INVALID_METHOD
 			}
 			return 0
 		}
 		let methodIndex = box.script.methods.firstIndex(of: method) ?? -1
 		guard methodIndex >= 0, let fns = descriptor.pointee.method_fns, let fn = fns[methodIndex] else {
-			if let error = error {
-				error.pointee.error = 1
+			if let errorMirror = errorMirror {
+				errorMirror.pointee.error = 1
 			}
 			return 0
 		}

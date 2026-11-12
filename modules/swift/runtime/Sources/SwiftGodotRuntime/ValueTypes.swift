@@ -3,7 +3,7 @@ import Foundation
 // Typed Swift wrappers for Godot builtin value types, marshaled through the
 // host vtable (see swift_host.h). The generated bindings use these types.
 
-@MainActor public protocol GodotValueType {
+@MainActor public protocol GodotValueType: VariantBoxConvertible {
 	init?(box: VariantBox)
 	func toVariantBox() -> VariantBox
 }
