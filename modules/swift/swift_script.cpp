@@ -161,12 +161,12 @@ void SwiftScript::get_script_signal_list(List<MethodInfo> *r_signals) const {
 	}
 	int count = abi.script_get_signal_count(compiled_handle);
 	for (int i = 0; i < count; i++) {
-		const char *name = abi.script_get_signal_name(compiled_handle, i);
-		if (name == nullptr) {
+		const char *entry_name = abi.script_get_signal_name(compiled_handle, i);
+		if (entry_name == nullptr) {
 			continue;
 		}
 		MethodInfo mi;
-		mi.name = String::utf8(name);
+		mi.name = String::utf8(entry_name);
 		r_signals->push_back(mi);
 	}
 }
@@ -181,12 +181,12 @@ void SwiftScript::get_script_method_list(List<MethodInfo> *r_list) const {
 	}
 	int count = abi.script_get_method_count(compiled_handle);
 	for (int i = 0; i < count; i++) {
-		const char *name = abi.script_get_method_name(compiled_handle, i);
-		if (name == nullptr) {
+		const char *entry_name = abi.script_get_method_name(compiled_handle, i);
+		if (entry_name == nullptr) {
 			continue;
 		}
 		MethodInfo mi;
-		mi.name = String::utf8(name);
+		mi.name = String::utf8(entry_name);
 		r_list->push_back(mi);
 	}
 }
@@ -201,15 +201,15 @@ void SwiftScript::get_script_property_list(List<PropertyInfo> *r_list) const {
 	}
 	int count = abi.script_get_property_count(compiled_handle);
 	for (int i = 0; i < count; i++) {
-		const char *name = abi.script_get_property_name(compiled_handle, i);
-		if (name == nullptr) {
+		const char *entry_name = abi.script_get_property_name(compiled_handle, i);
+		if (entry_name == nullptr) {
 			continue;
 		}
 		Variant::Type type = Variant::NIL;
 		if (abi.script_get_property_type != nullptr) {
 			type = (Variant::Type)abi.script_get_property_type(compiled_handle, i);
 		}
-		r_list->push_back(PropertyInfo(type, String::utf8(name)));
+		r_list->push_back(PropertyInfo(type, String::utf8(entry_name)));
 	}
 }
 
