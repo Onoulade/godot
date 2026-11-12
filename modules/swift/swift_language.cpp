@@ -33,7 +33,13 @@
 #include "swift_bridge.h"
 #include "swift_script.h"
 
+#ifdef TOOLS_ENABLED
+#include "swift_editor_language.h"
+#endif // TOOLS_ENABLED
+
+#include "core/io/file_access.h"
 #include "core/os/memory.h"
+#include "core/string/regex.h"
 
 void SwiftLanguage::_bind_methods() {
 }
@@ -57,6 +63,9 @@ void SwiftLanguage::finish() {
 
 #ifdef TOOLS_ENABLED
 EditorLanguage *SwiftLanguage::get_editor_language() {
+	if (SwiftEditorLanguage::get_singleton() != nullptr) {
+		return SwiftEditorLanguage::get_singleton();
+	}
 	if (editor_language == nullptr) {
 		editor_language = memnew(EditorLanguage);
 	}
@@ -225,4 +234,33 @@ void SwiftLanguage::get_public_constants(List<Pair<String, Variant>> *r_constant
 	for (const KeyValue<StringName, Variant> &E : global_constants) {
 		r_constants->push_back(Pair<String, Variant>(E.key, E.value));
 	}
+}
+
+String SwiftLanguage::get_global_class_name(const String &p_path, String *r_base_type, String *r_icon_path, bool *r_is_abstract, bool *r_is_tool) const {
+	Ref<FileAccess> file = FileAccess::open(p_path, FileAccess::READ);
+	if (file.is_null()) {
+		return String();
+	}
+	String source = file->get_as_utf8_string();
+
+	Ref<RegEx> class_regex;
+	class_regex.instantiate();
+	class_regex->compile("\\bclass\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*(?::\\s*([A-Za-z_][A-Za-z0-9_.]*))?");
+	Ref<RegExMatch> match = class_regex->search(source);
+	if (match.is_null()) {
+		return String();
+	}
+	if (r_base_type != nullptr) {
+		*r_base_type = match->get_string(2);
+	}
+	if (r_icon_path != nullptr) {
+		*r_icon_path = String();
+	}
+	if (r_is_abstract != nullptr) {
+		*r_is_abstract = false;
+	}
+	if (r_is_tool != nullptr) {
+		*r_is_tool = source.contains("@tool");
+	}
+	return match->get_string(1);
 }

@@ -38,6 +38,24 @@
 #include "core/io/resource_saver.h"
 #include "core/object/class_db.h"
 
+#ifdef TOOLS_ENABLED
+#include "swift_editor_language.h"
+
+#include "editor/editor_node.h"
+#include "editor/script/script_editor_plugin.h"
+#include "editor/script/syntax_highlighters.h"
+
+static Ref<EditorSyntaxHighlighter> swift_syntax_highlighter;
+
+static void _editor_init() {
+	Ref<EditorStandardSyntaxHighlighter> highlighter;
+	highlighter.instantiate();
+	highlighter->_set_script_language(script_language_swift);
+	ScriptEditor::get_singleton()->register_syntax_highlighter(highlighter);
+	swift_syntax_highlighter = highlighter;
+}
+#endif // TOOLS_ENABLED
+
 SwiftLanguage *script_language_swift = nullptr;
 static Ref<ResourceFormatLoaderSwift> resource_loader_swift;
 static Ref<ResourceFormatSaverSwift> resource_saver_swift;
@@ -56,6 +74,13 @@ void initialize_swift_module(ModuleInitializationLevel p_level) {
 		resource_saver_swift.instantiate();
 		ResourceSaver::add_resource_format_saver(resource_saver_swift);
 	}
+
+#ifdef TOOLS_ENABLED
+	if (p_level == MODULE_INITIALIZATION_LEVEL_EDITOR) {
+		memnew(SwiftEditorLanguage);
+		EditorNode::add_init_callback(_editor_init);
+	}
+#endif // TOOLS_ENABLED
 }
 
 void uninitialize_swift_module(ModuleInitializationLevel p_level) {
@@ -71,4 +96,16 @@ void uninitialize_swift_module(ModuleInitializationLevel p_level) {
 		memdelete(script_language_swift);
 		script_language_swift = nullptr;
 	}
+
+#ifdef TOOLS_ENABLED
+	if (p_level == MODULE_INITIALIZATION_LEVEL_EDITOR) {
+		if (swift_syntax_highlighter.is_valid()) {
+			ScriptEditor::get_singleton()->unregister_syntax_highlighter(swift_syntax_highlighter);
+			swift_syntax_highlighter.unref();
+		}
+		if (SwiftEditorLanguage::get_singleton() != nullptr) {
+			memdelete(SwiftEditorLanguage::get_singleton());
+		}
+	}
+#endif // TOOLS_ENABLED
 }
