@@ -26,6 +26,10 @@ jobs:
           nm -D "$LIB" | grep -q swiftgodot_runtime_version
           nm -D "$LIB" | grep -q swiftgodot_script_compile
           nm -D "$LIB" | grep -q swiftgodot_instance_create
+          UILIB=$(find modules/swift/runtime/.build/release -name "libSwiftGodotUI.so" | head -1)
+          test -n "$UILIB"
+          nm -D "$UILIB" | grep -q swiftgodot_scene_build
+          nm -D "$UILIB" | grep -q swiftgodot_scene_invalidate
 
   build-engine-with-swift-module:
     name: Build engine with module_swift_enabled=yes
@@ -69,5 +73,5 @@ jobs:
           printf 'config_version=5\n\n[application]\n\nconfig/name="apidump"\n' > project.godot
           "$GITHUB_WORKSPACE"/bin/godot.linuxbsd.editor.dev.x86_64* --headless --dump-extension-api
           python3 "$GITHUB_WORKSPACE"/modules/swift/tools/generate_bindings.py --api extension_api.json --all \
-            --out /tmp/apidump/GodotBindings.swift
+            --exclude SwiftViewHost --out /tmp/apidump/GodotBindings.swift
           diff -q /tmp/apidump/GodotBindings.swift "$GITHUB_WORKSPACE"/modules/swift/runtime/Sources/SwiftGodotRuntime/Generated/GodotBindings.swift

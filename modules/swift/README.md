@@ -86,6 +86,50 @@ returns `false` and a warning is printed.
    top-level `enum: Int, Sendable, CaseIterable`, with signatures mapped
    to them (e.g. `is_key_pressed(key: Key)`, `-> Error`).
 
+## Declarative UI (SwiftUI-style scenes)
+
+On top of the script layer, `SwiftGodotUI` (in `runtime/`, depending on
+`SwiftGodotRuntime` and on Apple's
+[swift-observation](https://github.com/apple/swift-observation) package)
+adds a SwiftUI-style declarative layer. Design decisions:
+
+- **Leaf primitives are native Godot nodes.** Scenes are built from the
+  generated bindings (`Label()`, `Button()`, `VBoxContainer()`, ...) wrapped
+  in `NodeView<Root: Node>`. SwiftUI-like container wrappers
+  (VStack/HStack/...) will be layered on top later. To make this possible,
+  the host vtable gained `object_create` (ClassDB::instantiate) and every
+  generated class gets a `public convenience init()` (e.g. `Label()`);
+  enum-typed arguments now also get their default value mapped to a Swift
+  case (`add_child(node:)` just works).
+- **Diff engine = component stack + attribute graph** with scoped,
+  propagated invalidation: `ComponentStack`/`ComponentFrame` give each
+  component a stable identity (type + position) while `body` evaluates,
+  and `Differ` reconciles the rendered Godot node tree in place instead of
+  rebuilding it.
+- **Observation = Apple's real dependency** (`@Observable`,
+  `withObservationTracking` from swift-observation), not a hand-rolled
+  didSet. `@State` is a property wrapper over an `@Observable` box.
+
+Files: `View.swift` (`@MainActor protocol View`, `@ViewBuilder`,
+`EmptyView`, `NodeView`, `TupleView`, `OptionalView`, `EitherView`),
+`AttributeGraph.swift` (tracked evaluation + coalesced main-actor flush),
+`State.swift`, `Differ.swift`, `Scene.swift` (the `swiftgodot_scene_build` /
+`swiftgodot_scene_invalidate` C entry points and `SceneRegistry`).
+
+Engine side: `SwiftViewHost` (a `Node`) calls `scene_build` on
+`NOTIFICATION_READY` and exposes `invalidate()`; the ABI gained
+`scene_build`/`scene_invalidate`. A script declaring `struct MyScene: View`
+gets a generated `swiftgodot_scene_register` entry point that registers the
+root view in `SceneRegistry`; the host renders it once and re-renders
+through the attribute graph + differ on invalidation. Compiling scene
+scripts requires the runtime package to be pre-built (`swift build` in
+`modules/swift/runtime`); `ScriptCompiler` links each per-script library
+against its `.build/debug`.
+
+**Status:** skeleton. Remaining: per-host root-view association, container
+wrappers, fine-grained in-place child reconciliation in the differ, and
+precompilation of scene scripts at export time.
+
 ## Building
 
 ```sh
@@ -106,5 +150,9 @@ Regenerating the bindings (needs an editor build to dump the API):
 ```sh
 godot --headless --dump-extension-api   # produces extension_api.json
 python3 modules/swift/tools/generate_bindings.py --api extension_api.json --all \
+    --exclude SwiftViewHost \
     --out modules/swift/runtime/Sources/SwiftGodotRuntime/Generated/GodotBindings.swift
 ```
+
+(`--exclude` skips module-provided classes such as `SwiftViewHost` that the
+editor dump also contains.)

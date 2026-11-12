@@ -611,6 +611,12 @@ public enum VerticalAlignment: Int, Sendable, CaseIterable {
 @MainActor
 public class Object: GodotObject {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public convenience init() {
+		guard let raw = Host.shared.createObject("Object") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Object")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_class() -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_class", args: [])
@@ -840,6 +846,12 @@ public class Object: GodotObject {
 @MainActor
 public class AccessibilityServer: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AccessibilityServer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AccessibilityServer")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func is_supported() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_supported", args: [])
@@ -1085,6 +1097,12 @@ public class AccessibilityServer: Object {
 @MainActor
 public class AudioServer: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioServer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioServer")
+		}
+		self.init(ptr: raw)
+	}
 	public enum SpeakerMode: Int, Sendable, CaseIterable {
 		case stereo = 0
 	}
@@ -1360,6 +1378,12 @@ public class AudioServer: Object {
 @MainActor
 public class CameraServer: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CameraServer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CameraServer")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_monitoring_feeds(is_monitoring_feeds: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_monitoring_feeds", args: [VariantBox(is_monitoring_feeds)])
 	}
@@ -1407,6 +1431,12 @@ public class CameraServer: Object {
 @MainActor
 public class ClassDB: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ClassDB") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ClassDB")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_class_list() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_class_list", args: [])
@@ -1559,6 +1589,12 @@ public class ClassDB: Object {
 @MainActor
 public class DisplayServer: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("DisplayServer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class DisplayServer")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Feature: Int, Sendable, CaseIterable {
 		case globalMenu = 0
 		case subwindows = 1
@@ -1666,37 +1702,37 @@ public class DisplayServer: Object {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func global_menu_add_item(menu_root: String, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+	public func global_menu_add_item(menu_root: String, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key = .none, index: Int = -1) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_item", args: [VariantBox(menu_root), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func global_menu_add_check_item(menu_root: String, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+	public func global_menu_add_check_item(menu_root: String, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key = .none, index: Int = -1) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_check_item", args: [VariantBox(menu_root), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func global_menu_add_icon_item(menu_root: String, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+	public func global_menu_add_icon_item(menu_root: String, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key = .none, index: Int = -1) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_icon_item", args: [VariantBox(menu_root), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func global_menu_add_icon_check_item(menu_root: String, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+	public func global_menu_add_icon_check_item(menu_root: String, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key = .none, index: Int = -1) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_icon_check_item", args: [VariantBox(menu_root), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func global_menu_add_radio_check_item(menu_root: String, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+	public func global_menu_add_radio_check_item(menu_root: String, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key = .none, index: Int = -1) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_radio_check_item", args: [VariantBox(menu_root), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func global_menu_add_icon_radio_check_item(menu_root: String, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+	public func global_menu_add_icon_radio_check_item(menu_root: String, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key = .none, index: Int = -1) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_icon_radio_check_item", args: [VariantBox(menu_root), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func global_menu_add_multistate_item(menu_root: String, label: String, max_states: Int, default_state: Int, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+	public func global_menu_add_multistate_item(menu_root: String, label: String, max_states: Int, default_state: Int, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key = .none, index: Int = -1) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "global_menu_add_multistate_item", args: [VariantBox(menu_root), VariantBox(label), VariantBox(max_states), VariantBox(default_state), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
@@ -2790,6 +2826,12 @@ public class DisplayServer: Object {
 @MainActor
 public class Engine: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Engine") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Engine")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_physics_ticks_per_second(physics_ticks_per_second: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_physics_ticks_per_second", args: [VariantBox(physics_ticks_per_second)])
 	}
@@ -3010,6 +3052,12 @@ public class Engine: Object {
 @MainActor
 public class EngineDebugger: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("EngineDebugger") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class EngineDebugger")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func is_active() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_active", args: [])
@@ -3100,6 +3148,12 @@ public class EngineDebugger: Object {
 @MainActor
 public class FramebufferCacheRD: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("FramebufferCacheRD") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class FramebufferCacheRD")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_cache_multipass(textures: VariantBox, passes: VariantBox, views: Int) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_cache_multipass", args: [VariantBox(textures), VariantBox(passes), VariantBox(views)])
@@ -3110,6 +3164,12 @@ public class FramebufferCacheRD: Object {
 @MainActor
 public class GDExtensionManager: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GDExtensionManager") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GDExtensionManager")
+		}
+		self.init(ptr: raw)
+	}
 	public enum LoadStatus: Int, Sendable, CaseIterable {
 		case ok = 0
 		case failed = 1
@@ -3166,6 +3226,12 @@ public class GDExtensionManager: Object {
 @MainActor
 public class Geometry2D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Geometry2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Geometry2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func is_point_in_circle(point: Vector2, circle_position: Vector2, circle_radius: Double) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_point_in_circle", args: [VariantBox(point), VariantBox(circle_position), VariantBox(circle_radius)])
@@ -3287,6 +3353,12 @@ public class Geometry2D: Object {
 @MainActor
 public class Geometry3D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Geometry3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Geometry3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func compute_convex_mesh_points(planes: VariantBox) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "compute_convex_mesh_points", args: [VariantBox(planes)])
@@ -3363,6 +3435,12 @@ public class Geometry3D: Object {
 @MainActor
 public class GodotInstance: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GodotInstance") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GodotInstance")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func start() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "start", args: [])
@@ -3395,6 +3473,12 @@ public class GodotInstance: Object {
 @MainActor
 public class IP: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("IP") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class IP")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ResolverStatus: Int, Sendable, CaseIterable {
 		case none = 0
 		case waiting = 1
@@ -3408,17 +3492,17 @@ public class IP: Object {
 		case any_ = 3
 	}
 	@discardableResult
-	public func resolve_hostname(host: String, ip_type: IP.Type) -> String {
+	public func resolve_hostname(host: String, ip_type: IP.Type = .any_) -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "resolve_hostname", args: [VariantBox(host), VariantBox(ip_type.rawValue)])
 		return __ret.asString()
 	}
 	@discardableResult
-	public func resolve_hostname_addresses(host: String, ip_type: IP.Type) -> VariantBox {
+	public func resolve_hostname_addresses(host: String, ip_type: IP.Type = .any_) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "resolve_hostname_addresses", args: [VariantBox(host), VariantBox(ip_type.rawValue)])
 		return __ret
 	}
 	@discardableResult
-	public func resolve_hostname_queue_item(host: String, ip_type: IP.Type) -> Int {
+	public func resolve_hostname_queue_item(host: String, ip_type: IP.Type = .any_) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "resolve_hostname_queue_item", args: [VariantBox(host), VariantBox(ip_type.rawValue)])
 		return __ret.asInt()
 	}
@@ -3458,6 +3542,12 @@ public class IP: Object {
 @MainActor
 public class Input: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Input") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Input")
+		}
+		self.init(ptr: raw)
+	}
 	public enum MouseMode: Int, Sendable, CaseIterable {
 		case visible = 0
 		case hidden = 1
@@ -3861,6 +3951,12 @@ public class Input: Object {
 @MainActor
 public class InputMap: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputMap") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputMap")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func has_action(action: String) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "has_action", args: [VariantBox(action)])
@@ -3925,6 +4021,12 @@ public class InputMap: Object {
 @MainActor
 public class JNISingleton: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("JNISingleton") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class JNISingleton")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func has_java_method(method: String) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "has_java_method", args: [VariantBox(method)])
@@ -3935,6 +4037,12 @@ public class JNISingleton: Object {
 @MainActor
 public class JSONRPC: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("JSONRPC") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class JSONRPC")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_method(name: String, callback: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_method", args: [VariantBox(name), VariantBox(callback)])
 	}
@@ -3971,6 +4079,12 @@ public class JSONRPC: Object {
 @MainActor
 public class JavaClassWrapper: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("JavaClassWrapper") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class JavaClassWrapper")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func wrap(name: String) -> JavaClass? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "wrap", args: [VariantBox(name)])
@@ -3996,6 +4110,12 @@ public class JavaClassWrapper: Object {
 @MainActor
 public class JavaScriptBridge: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("JavaScriptBridge") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class JavaScriptBridge")
+		}
+		self.init(ptr: raw)
+	}
 	public func eval(code: String, use_global_execution_context: Bool = false) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "eval", args: [VariantBox(code), VariantBox(use_global_execution_context)])
 	}
@@ -4046,6 +4166,12 @@ public class JavaScriptBridge: Object {
 @MainActor
 public class MainLoop: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MainLoop") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MainLoop")
+		}
+		self.init(ptr: raw)
+	}
 	public func _initialize() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_initialize", args: [])
 	}
@@ -4070,6 +4196,12 @@ public class MainLoop: Object {
 @MainActor
 public class Marshalls: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Marshalls") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Marshalls")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func variant_to_base64(variant: VariantBox, full_objects: Bool = false) -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "variant_to_base64", args: [VariantBox(variant), VariantBox(full_objects)])
@@ -4103,6 +4235,12 @@ public class Marshalls: Object {
 @MainActor
 public class MovieWriter: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MovieWriter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MovieWriter")
+		}
+		self.init(ptr: raw)
+	}
 	public func add_writer(writer: MovieWriter) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_writer", args: [VariantBox(writer)])
 	}
@@ -4144,6 +4282,12 @@ public class MovieWriter: Object {
 @MainActor
 public class NativeMenu: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NativeMenu") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NativeMenu")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Feature: Int, Sendable, CaseIterable {
 		case globalMenu = 0
 		case popupMenu = 1
@@ -4238,37 +4382,37 @@ public class NativeMenu: Object {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func add_item(rid: VariantBox, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+	public func add_item(rid: VariantBox, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key = .none, index: Int = -1) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_item", args: [VariantBox(rid), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func add_check_item(rid: VariantBox, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+	public func add_check_item(rid: VariantBox, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key = .none, index: Int = -1) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_check_item", args: [VariantBox(rid), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func add_icon_item(rid: VariantBox, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+	public func add_icon_item(rid: VariantBox, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key = .none, index: Int = -1) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_item", args: [VariantBox(rid), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func add_icon_check_item(rid: VariantBox, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+	public func add_icon_check_item(rid: VariantBox, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key = .none, index: Int = -1) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_check_item", args: [VariantBox(rid), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func add_radio_check_item(rid: VariantBox, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+	public func add_radio_check_item(rid: VariantBox, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key = .none, index: Int = -1) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_radio_check_item", args: [VariantBox(rid), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func add_icon_radio_check_item(rid: VariantBox, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+	public func add_icon_radio_check_item(rid: VariantBox, icon: Texture2D, label: String, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key = .none, index: Int = -1) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_radio_check_item", args: [VariantBox(rid), VariantBox(icon), VariantBox(label), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func add_multistate_item(rid: VariantBox, label: String, max_states: Int, default_state: Int, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key, index: Int = -1) -> Int {
+	public func add_multistate_item(rid: VariantBox, label: String, max_states: Int, default_state: Int, callback: VariantBox, key_callback: VariantBox, tag: VariantBox, accelerator: Key = .none, index: Int = -1) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_multistate_item", args: [VariantBox(rid), VariantBox(label), VariantBox(max_states), VariantBox(default_state), VariantBox(callback), VariantBox(key_callback), VariantBox(tag), VariantBox(accelerator.rawValue), VariantBox(index)])
 		return __ret.asInt()
 	}
@@ -4455,6 +4599,12 @@ public class NativeMenu: Object {
 @MainActor
 public class NavigationMeshGenerator: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationMeshGenerator") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationMeshGenerator")
+		}
+		self.init(ptr: raw)
+	}
 	public func bake(navigation_mesh: NavigationMesh, root_node: Node) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "bake", args: [VariantBox(navigation_mesh), VariantBox(root_node)])
 	}
@@ -4472,6 +4622,12 @@ public class NavigationMeshGenerator: Object {
 @MainActor
 public class NavigationServer2D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationServer2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationServer2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_maps() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_maps", args: [])
@@ -5053,6 +5209,12 @@ public class NavigationServer2D: Object {
 @MainActor
 public class NavigationServer2DManager: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationServer2DManager") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationServer2DManager")
+		}
+		self.init(ptr: raw)
+	}
 	public func register_server(name: String, create_callback: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "register_server", args: [VariantBox(name), VariantBox(create_callback)])
 	}
@@ -5064,6 +5226,12 @@ public class NavigationServer2DManager: Object {
 @MainActor
 public class NavigationServer3D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationServer3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationServer3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_maps() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_maps", args: [])
@@ -5716,6 +5884,12 @@ public class NavigationServer3D: Object {
 @MainActor
 public class NavigationServer3DManager: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationServer3DManager") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationServer3DManager")
+		}
+		self.init(ptr: raw)
+	}
 	public func register_server(name: String, create_callback: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "register_server", args: [VariantBox(name), VariantBox(create_callback)])
 	}
@@ -5727,6 +5901,12 @@ public class NavigationServer3DManager: Object {
 @MainActor
 public class Node: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Node") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Node")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ProcessMode: Int, Sendable, CaseIterable {
 		case inherit = 0
 		case pausable = 1
@@ -5773,7 +5953,7 @@ public class Node: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_name", args: [])
 		return __ret.asString()
 	}
-	public func add_child(node: Node, force_readable_name: Bool = false, internal_: Node.InternalMode) {
+	public func add_child(node: Node, force_readable_name: Bool = false, internal_: Node.InternalMode = .disabled) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_child", args: [VariantBox(node), VariantBox(force_readable_name), VariantBox(internal_.rawValue)])
 	}
 	public func remove_child(node: Node) {
@@ -6411,6 +6591,12 @@ public class Node: Object {
 @MainActor
 public class OS: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OS") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OS")
+		}
+		self.init(ptr: raw)
+	}
 	public enum RenderingDriver: Int, Sendable, CaseIterable {
 		case vulkan = 0
 		case opengl3 = 1
@@ -6832,6 +7018,12 @@ public class OS: Object {
 @MainActor
 public class OpenXRExtensionWrapper: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRExtensionWrapper") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRExtensionWrapper")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_openxr_api() -> OpenXRAPIExtension? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_openxr_api", args: [])
@@ -7044,6 +7236,12 @@ public class OpenXRExtensionWrapper: Object {
 @MainActor
 public class OpenXRInteractionProfileMetadata: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRInteractionProfileMetadata") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRInteractionProfileMetadata")
+		}
+		self.init(ptr: raw)
+	}
 	public func register_profile_rename(old_name: String, new_name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "register_profile_rename", args: [VariantBox(old_name), VariantBox(new_name)])
 	}
@@ -7064,6 +7262,12 @@ public class OpenXRInteractionProfileMetadata: Object {
 @MainActor
 public class Performance: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Performance") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Performance")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Monitor: Int, Sendable, CaseIterable {
 		case typeQuantity = 0
 		case typeMemory = 1
@@ -7082,7 +7286,7 @@ public class Performance: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_monitor", args: [VariantBox(monitor.rawValue)])
 		return __ret.asDouble()
 	}
-	public func add_custom_monitor(id: String, callable: VariantBox, arguments: VariantBox, type: Performance.MonitorType) {
+	public func add_custom_monitor(id: String, callable: VariantBox, arguments: VariantBox, type: Performance.MonitorType = .quantity) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_custom_monitor", args: [VariantBox(id), VariantBox(callable), VariantBox(arguments), VariantBox(type.rawValue)])
 	}
 	public func remove_custom_monitor(id: String) {
@@ -7116,6 +7320,12 @@ public class Performance: Object {
 @MainActor
 public class PhysicsDirectBodyState2D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsDirectBodyState2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsDirectBodyState2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_total_gravity() -> Vector2 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_total_gravity", args: [])
@@ -7381,6 +7591,12 @@ public class PhysicsDirectBodyState2D: Object {
 @MainActor
 public class PhysicsDirectBodyState3D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsDirectBodyState3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsDirectBodyState3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_total_gravity() -> Vector3 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_total_gravity", args: [])
@@ -7664,6 +7880,12 @@ public class PhysicsDirectBodyState3D: Object {
 @MainActor
 public class PhysicsDirectSpaceState2D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsDirectSpaceState2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsDirectSpaceState2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func intersect_ray(parameters: PhysicsRayQueryParameters2D) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "intersect_ray", args: [VariantBox(parameters)])
@@ -7729,6 +7951,12 @@ public class PhysicsDirectSpaceState2D: Object {
 @MainActor
 public class PhysicsDirectSpaceState3D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsDirectSpaceState3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsDirectSpaceState3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func intersect_ray(parameters: PhysicsRayQueryParameters3D) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "intersect_ray", args: [VariantBox(parameters)])
@@ -7794,6 +8022,12 @@ public class PhysicsDirectSpaceState3D: Object {
 @MainActor
 public class PhysicsServer2D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsServer2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsServer2D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum BodyMode: Int, Sendable, CaseIterable {
 		case static_ = 0
 		case kinematic = 1
@@ -8289,6 +8523,12 @@ public class PhysicsServer2D: Object {
 @MainActor
 public class PhysicsServer2DManager: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsServer2DManager") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsServer2DManager")
+		}
+		self.init(ptr: raw)
+	}
 	public func register_server(name: String, create_callback: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "register_server", args: [VariantBox(name), VariantBox(create_callback)])
 	}
@@ -8300,6 +8540,12 @@ public class PhysicsServer2DManager: Object {
 @MainActor
 public class PhysicsServer3D: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsServer3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsServer3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum JointType: Int, Sendable, CaseIterable {
 		case pin = 0
 		case hinge = 1
@@ -9020,6 +9266,12 @@ public class PhysicsServer3D: Object {
 @MainActor
 public class PhysicsServer3DManager: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsServer3DManager") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsServer3DManager")
+		}
+		self.init(ptr: raw)
+	}
 	public func register_server(name: String, create_callback: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "register_server", args: [VariantBox(name), VariantBox(create_callback)])
 	}
@@ -9031,6 +9283,12 @@ public class PhysicsServer3DManager: Object {
 @MainActor
 public class PhysicsServer3DRenderingServerHandler: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsServer3DRenderingServerHandler") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsServer3DRenderingServerHandler")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_vertex(vertex_id: Int, vertex: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_vertex", args: [VariantBox(vertex_id), VariantBox(vertex)])
 	}
@@ -9054,6 +9312,12 @@ public class PhysicsServer3DRenderingServerHandler: Object {
 @MainActor
 public class ProjectSettings: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ProjectSettings") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ProjectSettings")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func has_setting(name: String) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "has_setting", args: [VariantBox(name)])
@@ -9145,6 +9409,12 @@ public class ProjectSettings: Object {
 @MainActor
 public class RefCounted: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RefCounted") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RefCounted")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func init_ref() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "init_ref", args: [])
@@ -9170,6 +9440,12 @@ public class RefCounted: Object {
 @MainActor
 public class RenderData: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RenderData") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RenderData")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_render_scene_buffers() -> RenderSceneBuffers? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_render_scene_buffers", args: [])
@@ -9195,6 +9471,12 @@ public class RenderData: Object {
 @MainActor
 public class RenderSceneData: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RenderSceneData") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RenderSceneData")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_cam_transform() -> Transform3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_cam_transform", args: [])
@@ -9230,6 +9512,12 @@ public class RenderSceneData: Object {
 @MainActor
 public class RenderingDevice: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RenderingDevice") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RenderingDevice")
+		}
+		self.init(ptr: raw)
+	}
 	public enum DeviceType: Int, Sendable, CaseIterable {
 		case other = 0
 		case integratedGpu = 1
@@ -9818,7 +10106,7 @@ public class RenderingDevice: Object {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func framebuffer_format_create_empty(samples: RenderingDevice.TextureSamples) -> Int {
+	public func framebuffer_format_create_empty(samples: RenderingDevice.TextureSamples = .1_) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "framebuffer_format_create_empty", args: [VariantBox(samples.rawValue)])
 		return __ret.asInt()
 	}
@@ -9838,7 +10126,7 @@ public class RenderingDevice: Object {
 		return __ret
 	}
 	@discardableResult
-	public func framebuffer_create_empty(size: Vector2i, samples: RenderingDevice.TextureSamples, validate_with_format: Int = -1) -> VariantBox {
+	public func framebuffer_create_empty(size: Vector2i, samples: RenderingDevice.TextureSamples = .1_, validate_with_format: Int = -1) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "framebuffer_create_empty", args: [VariantBox(size), VariantBox(samples.rawValue), VariantBox(validate_with_format)])
 		return __ret
 	}
@@ -10221,7 +10509,7 @@ public class RenderingDevice: Object {
 	public func sync() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "sync", args: [])
 	}
-	public func barrier(from: RenderingDevice.BarrierMask, to: RenderingDevice.BarrierMask) {
+	public func barrier(from: RenderingDevice.BarrierMask = .allBarriers, to: RenderingDevice.BarrierMask = .allBarriers) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "barrier", args: [VariantBox(from.rawValue), VariantBox(to.rawValue)])
 	}
 	public func full_barrier() {
@@ -10334,6 +10622,12 @@ public class RenderingDevice: Object {
 @MainActor
 public class RenderingServer: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RenderingServer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RenderingServer")
+		}
+		self.init(ptr: raw)
+	}
 	public enum TextureType: Int, Sendable, CaseIterable {
 		case 2d_ = 0
 		case layered = 1
@@ -12533,6 +12827,12 @@ public class RenderingServer: Object {
 @MainActor
 public class ResourceLoader: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ResourceLoader") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ResourceLoader")
+		}
+		self.init(ptr: raw)
+	}
 	public enum CacheMode: Int, Sendable, CaseIterable {
 		case ignore = 0
 		case reuse = 1
@@ -12541,7 +12841,7 @@ public class ResourceLoader: Object {
 		case replaceDeep = 4
 	}
 	@discardableResult
-	public func load_threaded_request(path: String, type_hint: String, use_sub_threads: Bool = false, cache_mode: ResourceLoader.CacheMode) -> Error {
+	public func load_threaded_request(path: String, type_hint: String, use_sub_threads: Bool = false, cache_mode: ResourceLoader.CacheMode = .reuse) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_threaded_request", args: [VariantBox(path), VariantBox(type_hint), VariantBox(use_sub_threads), VariantBox(cache_mode.rawValue)])
 		return __ret.asEnum(Error.self)
 	}
@@ -12556,7 +12856,7 @@ public class ResourceLoader: Object {
 		return __ret.asObject(Resource.self)
 	}
 	@discardableResult
-	public func load(path: String, type_hint: String, cache_mode: ResourceLoader.CacheMode) -> Resource? {
+	public func load(path: String, type_hint: String, cache_mode: ResourceLoader.CacheMode = .reuse) -> Resource? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load", args: [VariantBox(path), VariantBox(type_hint), VariantBox(cache_mode.rawValue)])
 		return __ret.asObject(Resource.self)
 	}
@@ -12614,6 +12914,12 @@ public class ResourceLoader: Object {
 @MainActor
 public class ResourceSaver: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ResourceSaver") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ResourceSaver")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func save(resource: Resource, path: String, flags: ResourceSaver.SaverFlags) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "save", args: [VariantBox(resource), VariantBox(path), VariantBox(flags.rawValue)])
@@ -12645,6 +12951,12 @@ public class ResourceSaver: Object {
 @MainActor
 public class ResourceUID: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ResourceUID") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ResourceUID")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func id_to_text(id: Int) -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "id_to_text", args: [VariantBox(id)])
@@ -12704,6 +13016,12 @@ public class ResourceUID: Object {
 @MainActor
 public class ScriptLanguage: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ScriptLanguage") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ScriptLanguage")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ScriptNameCasing: Int, Sendable, CaseIterable {
 		case auto = 0
 		case pascalCase = 1
@@ -12716,6 +13034,12 @@ public class ScriptLanguage: Object {
 @MainActor
 public class ShaderIncludeDB: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ShaderIncludeDB") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ShaderIncludeDB")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func list_built_in_include_files() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "list_built_in_include_files", args: [])
@@ -12736,6 +13060,12 @@ public class ShaderIncludeDB: Object {
 @MainActor
 public class TextServerManager: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TextServerManager") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TextServerManager")
+		}
+		self.init(ptr: raw)
+	}
 	public func add_interface(interface: TextServer) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_interface", args: [VariantBox(interface)])
 	}
@@ -12781,6 +13111,12 @@ public class TextServerManager: Object {
 @MainActor
 public class TextureStreaming: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TextureStreaming") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TextureStreaming")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_min_lod_override() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_min_lod_override", args: [])
@@ -12833,6 +13169,12 @@ public class TextureStreaming: Object {
 @MainActor
 public class ThemeContext: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ThemeContext") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ThemeContext")
+		}
+		self.init(ptr: raw)
+	}
 	public func emit_changed() {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("changed")])
 	}
@@ -12841,6 +13183,12 @@ public class ThemeContext: Object {
 @MainActor
 public class ThemeDB: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ThemeDB") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ThemeDB")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_default_theme() -> Theme? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_default_theme", args: [])
@@ -12935,6 +13283,12 @@ public class ThemeDB: Object {
 @MainActor
 public class TileData: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TileData") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TileData")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_flip_h(flip_h: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_flip_h", args: [VariantBox(flip_h)])
 	}
@@ -13209,6 +13563,12 @@ public class TileData: Object {
 @MainActor
 public class Time: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Time") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Time")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Month: Int, Sendable, CaseIterable {
 		case january = 1
 		case february = 2
@@ -13342,6 +13702,12 @@ public class Time: Object {
 @MainActor
 public class TranslationServer: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TranslationServer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TranslationServer")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_locale(locale: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_locale", args: [VariantBox(locale)])
 	}
@@ -13507,6 +13873,12 @@ public class TranslationServer: Object {
 @MainActor
 public class TreeItem: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TreeItem") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TreeItem")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_cell_mode(column: Int, mode: TreeItem.TreeCellMode) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_cell_mode", args: [VariantBox(column), VariantBox(mode.rawValue)])
 	}
@@ -14029,6 +14401,12 @@ public class TreeItem: Object {
 @MainActor
 public class UndoRedo: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("UndoRedo") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class UndoRedo")
+		}
+		self.init(ptr: raw)
+	}
 	public func create_action(name: String, merge_mode: UndoRedo.MergeMode, backward_undo_ops: Bool = false) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_action", args: [VariantBox(name), VariantBox(merge_mode.rawValue), VariantBox(backward_undo_ops)])
 	}
@@ -14132,6 +14510,12 @@ public class UndoRedo: Object {
 @MainActor
 public class UniformSetCacheRD: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("UniformSetCacheRD") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class UniformSetCacheRD")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_cache(shader: VariantBox, set: Int, uniforms: VariantBox) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_cache", args: [VariantBox(shader), VariantBox(set), VariantBox(uniforms)])
@@ -14142,6 +14526,12 @@ public class UniformSetCacheRD: Object {
 @MainActor
 public class WorkerThreadPool: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("WorkerThreadPool") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class WorkerThreadPool")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func add_task(action: VariantBox, high_priority: Bool = false, description: String) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_task", args: [VariantBox(action), VariantBox(high_priority), VariantBox(description)])
@@ -14190,6 +14580,12 @@ public class WorkerThreadPool: Object {
 @MainActor
 public class XRServer: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRServer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRServer")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_world_scale() -> Double {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_world_scale", args: [])
@@ -14332,6 +14728,12 @@ public class XRServer: Object {
 @MainActor
 public class XRVRS: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRVRS") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRVRS")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_vrs_min_radius() -> Double {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_vrs_min_radius", args: [])
@@ -14378,6 +14780,12 @@ public class XRVRS: Object {
 @MainActor
 public class AESContext: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AESContext") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AESContext")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Mode: Int, Sendable, CaseIterable {
 		case ecbEncrypt = 0
 		case ecbDecrypt = 1
@@ -14408,6 +14816,12 @@ public class AESContext: RefCounted {
 @MainActor
 public class AStar2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AStar2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AStar2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_available_point_id() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_available_point_id", args: [])
@@ -14537,6 +14951,12 @@ public class AStar2D: RefCounted {
 @MainActor
 public class AStar3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AStar3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AStar3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_available_point_id() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_available_point_id", args: [])
@@ -14666,6 +15086,12 @@ public class AStar3D: RefCounted {
 @MainActor
 public class AStarGrid2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AStarGrid2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AStarGrid2D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Heuristic: Int, Sendable, CaseIterable {
 		case euclidean = 0
 		case manhattan = 1
@@ -14872,6 +15298,12 @@ public class AStarGrid2D: RefCounted {
 @MainActor
 public class AnimationMixer: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationMixer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationMixer")
+		}
+		self.init(ptr: raw)
+	}
 	public enum AnimationCallbackModeProcess: Int, Sendable, CaseIterable {
 		case physics = 0
 		case idle = 1
@@ -15143,6 +15575,12 @@ public class AnimationMixer: Node {
 @MainActor
 public class AudioEffectInstance: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectInstance") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectInstance")
+		}
+		self.init(ptr: raw)
+	}
 	public func _process(src_buffer: Int, r_dst_buffer: Int, frame_count: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_process", args: [VariantBox(src_buffer), VariantBox(r_dst_buffer), VariantBox(frame_count)])
 	}
@@ -15156,16 +15594,34 @@ public class AudioEffectInstance: RefCounted {
 @MainActor
 public class AudioSample: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioSample") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioSample")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AudioSamplePlayback: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioSamplePlayback") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioSamplePlayback")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AudioStreamPlayback: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamPlayback") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamPlayback")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_sample_playback(playback_sample: AudioSamplePlayback) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_sample_playback", args: [VariantBox(playback_sample)])
 	}
@@ -15246,6 +15702,12 @@ public class AudioStreamPlayback: RefCounted {
 @MainActor
 public class AudioStreamPlayer: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamPlayer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamPlayer")
+		}
+		self.init(ptr: raw)
+	}
 	public enum MixTarget: Int, Sendable, CaseIterable {
 		case stereo = 0
 		case surround = 1
@@ -15415,6 +15877,12 @@ public class AudioStreamPlayer: Node {
 @MainActor
 public class CameraFeed: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CameraFeed") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CameraFeed")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_id() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_id", args: [])
@@ -15529,6 +15997,12 @@ public class CameraFeed: RefCounted {
 @MainActor
 public class CanvasItem: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CanvasItem") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CanvasItem")
+		}
+		self.init(ptr: raw)
+	}
 	public enum TextureFilter: Int, Sendable, CaseIterable {
 		case parentNode = 0
 		case nearest = 1
@@ -15709,16 +16183,16 @@ public class CanvasItem: Node {
 	public func draw_colored_polygon(points: VariantBox, color: Color, uvs: VariantBox, texture: Texture2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "draw_colored_polygon", args: [VariantBox(points), VariantBox(color), VariantBox(uvs), VariantBox(texture)])
 	}
-	public func draw_string(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
+	public func draw_string(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(modulate), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_multiline_string(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
+	public func draw_multiline_string(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(modulate), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_string_outline(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, size: Int = 1, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
+	public func draw_string_outline(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, size: Int = 1, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string_outline", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(size), VariantBox(modulate), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_multiline_string_outline(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, size: Int = 1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
+	public func draw_multiline_string_outline(font: Font, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, size: Int = 1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string_outline", args: [VariantBox(font), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(size), VariantBox(modulate), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
 	public func draw_char(font: Font, pos: Vector2, char: String, font_size: Int = 16, modulate: Color, oversampling: Double = 0.0) {
@@ -16004,6 +16478,12 @@ public class CanvasItem: Node {
 @MainActor
 public class CanvasLayer: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CanvasLayer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CanvasLayer")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_layer(layer: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_layer", args: [VariantBox(layer)])
 	}
@@ -16152,6 +16632,12 @@ public class CanvasLayer: Node {
 @MainActor
 public class CharFXTransform: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CharFXTransform") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CharFXTransform")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_transform() -> Transform2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_transform", args: [])
@@ -16313,6 +16799,12 @@ public class CharFXTransform: RefCounted {
 @MainActor
 public class ConfigFile: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ConfigFile") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ConfigFile")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_value(section: String, key: String, value: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_value", args: [VariantBox(section), VariantBox(key), VariantBox(value)])
 	}
@@ -16393,6 +16885,12 @@ public class ConfigFile: RefCounted {
 @MainActor
 public class Crypto: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Crypto") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Crypto")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func generate_random_bytes(size: Int) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "generate_random_bytes", args: [VariantBox(size)])
@@ -16443,6 +16941,12 @@ public class Crypto: RefCounted {
 @MainActor
 public class DTLSServer: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("DTLSServer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class DTLSServer")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func setup(server_options: TLSOptions) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "setup", args: [VariantBox(server_options)])
@@ -16458,6 +16962,12 @@ public class DTLSServer: RefCounted {
 @MainActor
 public class DirAccess: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("DirAccess") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class DirAccess")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func open_(path: String) -> DirAccess? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "open", args: [VariantBox(path)])
@@ -16675,6 +17185,12 @@ public class DirAccess: RefCounted {
 @MainActor
 public class ENetConnection: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ENetConnection") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ENetConnection")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func create_host_bound(bind_address: String, bind_port: Int, max_peers: Int = 32, max_channels: Int = 0, in_bandwidth: Int = 0, out_bandwidth: Int = 0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_host_bound", args: [VariantBox(bind_address), VariantBox(bind_port), VariantBox(max_peers), VariantBox(max_channels), VariantBox(in_bandwidth), VariantBox(out_bandwidth)])
@@ -16754,6 +17270,12 @@ public class ENetConnection: RefCounted {
 @MainActor
 public class EncodedObjectAsID: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("EncodedObjectAsID") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class EncodedObjectAsID")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_object_id(id: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_object_id", args: [VariantBox(id)])
 	}
@@ -16771,6 +17293,12 @@ public class EncodedObjectAsID: RefCounted {
 @MainActor
 public class EngineProfiler: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("EngineProfiler") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class EngineProfiler")
+		}
+		self.init(ptr: raw)
+	}
 	public func _toggle(enable: Bool, options: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_toggle", args: [VariantBox(enable), VariantBox(options)])
 	}
@@ -16785,6 +17313,12 @@ public class EngineProfiler: RefCounted {
 @MainActor
 public class Expression: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Expression") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Expression")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func parse(expression: String, input_names: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "parse", args: [VariantBox(expression), VariantBox(input_names)])
@@ -16808,6 +17342,12 @@ public class Expression: RefCounted {
 @MainActor
 public class FileAccess: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("FileAccess") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class FileAccess")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func open_(path: String, flags: FileAccess.ModeFlags) -> FileAccess? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "open", args: [VariantBox(path), VariantBox(flags.rawValue)])
@@ -17145,6 +17685,12 @@ public class FileAccess: RefCounted {
 @MainActor
 public class FuzzySearch: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("FuzzySearch") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class FuzzySearch")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_start_offset(start_offset: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_start_offset", args: [VariantBox(start_offset)])
 	}
@@ -17256,6 +17802,12 @@ public class FuzzySearch: RefCounted {
 @MainActor
 public class FuzzySearchMatch: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("FuzzySearchMatch") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class FuzzySearchMatch")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_target(target: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_target", args: [VariantBox(target)])
 	}
@@ -17302,6 +17854,12 @@ public class FuzzySearchMatch: RefCounted {
 @MainActor
 public class GDScriptFunctionState: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GDScriptFunctionState") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GDScriptFunctionState")
+		}
+		self.init(ptr: raw)
+	}
 	public func _signal_callback() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_signal_callback", args: [])
 	}
@@ -17313,6 +17871,12 @@ public class GDScriptFunctionState: RefCounted {
 @MainActor
 public class GDScriptNativeClass: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GDScriptNativeClass") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GDScriptNativeClass")
+		}
+		self.init(ptr: raw)
+	}
 	public func new() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "new", args: [])
 	}
@@ -17321,6 +17885,12 @@ public class GDScriptNativeClass: RefCounted {
 @MainActor
 public class GLTFObjectModelProperty: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFObjectModelProperty") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFObjectModelProperty")
+		}
+		self.init(ptr: raw)
+	}
 	public func append_node_path(node_path: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "append_node_path", args: [VariantBox(node_path)])
 	}
@@ -17422,21 +17992,45 @@ public class GLTFObjectModelProperty: RefCounted {
 @MainActor
 public class GodotNavigationServer2D: NavigationServer2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GodotNavigationServer2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GodotNavigationServer2D")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class GodotPhysicsServer2D: PhysicsServer2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GodotPhysicsServer2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GodotPhysicsServer2D")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class GodotPhysicsServer3D: PhysicsServer3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GodotPhysicsServer3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GodotPhysicsServer3D")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class HMACContext: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("HMACContext") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class HMACContext")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func start(hash_type: HashingContext.HashType, key: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "start", args: [VariantBox(hash_type.rawValue), VariantBox(key)])
@@ -17457,6 +18051,12 @@ public class HMACContext: RefCounted {
 @MainActor
 public class HTTPClient: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("HTTPClient") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class HTTPClient")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Method: Int, Sendable, CaseIterable {
 		case get = 0
 		case head = 1
@@ -17596,6 +18196,12 @@ public class HTTPClient: RefCounted {
 @MainActor
 public class HTTPRequest: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("HTTPRequest") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class HTTPRequest")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Result: Int, Sendable, CaseIterable {
 		case success = 0
 		case chunkedBodySizeMismatch = 1
@@ -17613,12 +18219,12 @@ public class HTTPRequest: Node {
 		case timeout = 13
 	}
 	@discardableResult
-	public func request(url: String, custom_headers: VariantBox, method: HTTPClient.Method, request_data: String) -> Error {
+	public func request(url: String, custom_headers: VariantBox, method: HTTPClient.Method = .get, request_data: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "request", args: [VariantBox(url), VariantBox(custom_headers), VariantBox(method.rawValue), VariantBox(request_data)])
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func request_raw(url: String, custom_headers: VariantBox, method: HTTPClient.Method, request_data_raw: VariantBox) -> Error {
+	public func request_raw(url: String, custom_headers: VariantBox, method: HTTPClient.Method = .get, request_data_raw: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "request_raw", args: [VariantBox(url), VariantBox(custom_headers), VariantBox(method.rawValue), VariantBox(request_data_raw)])
 		return __ret.asEnum(Error.self)
 	}
@@ -17765,6 +18371,12 @@ public class HTTPRequest: Node {
 @MainActor
 public class HashingContext: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("HashingContext") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class HashingContext")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func start(type: HashingContext.HashType) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "start", args: [VariantBox(type.rawValue)])
@@ -17785,11 +18397,23 @@ public class HashingContext: RefCounted {
 @MainActor
 public class ImageFormatLoader: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ImageFormatLoader") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ImageFormatLoader")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class InstancePlaceholder: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InstancePlaceholder") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InstancePlaceholder")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_stored_values(with_order: Bool = false) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_stored_values", args: [VariantBox(with_order)])
@@ -17810,6 +18434,12 @@ public class InstancePlaceholder: Node {
 @MainActor
 public class JavaClass: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("JavaClass") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class JavaClass")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_java_class_name() -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_java_class_name", args: [])
@@ -17835,6 +18465,12 @@ public class JavaClass: RefCounted {
 @MainActor
 public class JavaObject: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("JavaObject") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class JavaObject")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_java_class() -> JavaClass? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_java_class", args: [])
@@ -17850,11 +18486,23 @@ public class JavaObject: RefCounted {
 @MainActor
 public class JavaScriptObject: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("JavaScriptObject") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class JavaScriptObject")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class KinematicCollision2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("KinematicCollision2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class KinematicCollision2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_position() -> Vector2 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_position", args: [])
@@ -17925,6 +18573,12 @@ public class KinematicCollision2D: RefCounted {
 @MainActor
 public class KinematicCollision3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("KinematicCollision3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class KinematicCollision3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_travel() -> Vector3 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_travel", args: [])
@@ -18000,11 +18654,23 @@ public class KinematicCollision3D: RefCounted {
 @MainActor
 public class Lightmapper: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Lightmapper") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Lightmapper")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class Logger: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Logger") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Logger")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ErrorType: Int, Sendable, CaseIterable {
 		case error = 0
 		case warning = 1
@@ -18022,6 +18688,12 @@ public class Logger: RefCounted {
 @MainActor
 public class MeshConvexDecompositionSettings: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MeshConvexDecompositionSettings") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MeshConvexDecompositionSettings")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_max_concavity(max_concavity: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_max_concavity", args: [VariantBox(max_concavity)])
 	}
@@ -18183,6 +18855,12 @@ public class MeshConvexDecompositionSettings: RefCounted {
 @MainActor
 public class MeshDataTool: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MeshDataTool") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MeshDataTool")
+		}
+		self.init(ptr: raw)
+	}
 	public func clear() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "clear", args: [])
 	}
@@ -18346,6 +19024,12 @@ public class MeshDataTool: RefCounted {
 @MainActor
 public class MissingNode: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MissingNode") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MissingNode")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_original_class(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_original_class", args: [VariantBox(name)])
 	}
@@ -18399,16 +19083,34 @@ public class MissingNode: Node {
 @MainActor
 public class MovieWriterMJPEG: MovieWriter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MovieWriterMJPEG") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MovieWriterMJPEG")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class MovieWriterPNGWAV: MovieWriter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MovieWriterPNGWAV") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MovieWriterPNGWAV")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class MultiplayerAPI: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MultiplayerAPI") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MultiplayerAPI")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func has_multiplayer_peer() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "has_multiplayer_peer", args: [])
@@ -18499,6 +19201,12 @@ public class MultiplayerAPI: RefCounted {
 @MainActor
 public class MultiplayerSpawner: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MultiplayerSpawner") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MultiplayerSpawner")
+		}
+		self.init(ptr: raw)
+	}
 	public func add_spawnable_scene(path: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_spawnable_scene", args: [VariantBox(path)])
 	}
@@ -18579,6 +19287,12 @@ public class MultiplayerSpawner: Node {
 @MainActor
 public class MultiplayerSynchronizer: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MultiplayerSynchronizer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MultiplayerSynchronizer")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_root_path(path: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_root_path", args: [VariantBox(path)])
 	}
@@ -18682,6 +19396,12 @@ public class MultiplayerSynchronizer: Node {
 @MainActor
 public class Mutex: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Mutex") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Mutex")
+		}
+		self.init(ptr: raw)
+	}
 	public func lock() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "lock", args: [])
 	}
@@ -18698,6 +19418,12 @@ public class Mutex: RefCounted {
 @MainActor
 public class NavigationAgent2D: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationAgent2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationAgent2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_rid() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_rid", args: [])
@@ -19186,6 +19912,12 @@ public class NavigationAgent2D: Node {
 @MainActor
 public class NavigationAgent3D: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationAgent3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationAgent3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_rid() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_rid", args: [])
@@ -19710,6 +20442,12 @@ public class NavigationAgent3D: Node {
 @MainActor
 public class NavigationPathQueryParameters2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationPathQueryParameters2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationPathQueryParameters2D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum PathfindingAlgorithm: Int, Sendable, CaseIterable {
 		case astar = 0
 	}
@@ -19898,6 +20636,12 @@ public class NavigationPathQueryParameters2D: RefCounted {
 @MainActor
 public class NavigationPathQueryParameters3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationPathQueryParameters3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationPathQueryParameters3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum PathfindingAlgorithm: Int, Sendable, CaseIterable {
 		case astar = 0
 	}
@@ -20086,6 +20830,12 @@ public class NavigationPathQueryParameters3D: RefCounted {
 @MainActor
 public class NavigationPathQueryResult2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationPathQueryResult2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationPathQueryResult2D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum PathSegmentType: Int, Sendable, CaseIterable {
 		case region = 0
 		case link = 1
@@ -20158,6 +20908,12 @@ public class NavigationPathQueryResult2D: RefCounted {
 @MainActor
 public class NavigationPathQueryResult3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationPathQueryResult3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationPathQueryResult3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum PathSegmentType: Int, Sendable, CaseIterable {
 		case region = 0
 		case link = 1
@@ -20230,6 +20986,12 @@ public class NavigationPathQueryResult3D: RefCounted {
 @MainActor
 public class Node3D: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Node3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Node3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum RotationEditMode: Int, Sendable, CaseIterable {
 		case euler = 0
 		case quaternion = 1
@@ -20586,16 +21348,34 @@ public class Node3D: Node {
 @MainActor
 public class Node3DGizmo: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Node3DGizmo") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Node3DGizmo")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class OggPacketSequencePlayback: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OggPacketSequencePlayback") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OggPacketSequencePlayback")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class OpenXRAPIExtension: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRAPIExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRAPIExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_openxr_version() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_openxr_version", args: [])
@@ -20817,6 +21597,12 @@ public class OpenXRAPIExtension: RefCounted {
 @MainActor
 public class OpenXRAndroidThreadSettingsExtension: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRAndroidThreadSettingsExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRAndroidThreadSettingsExtension")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ThreadType: Int, Sendable, CaseIterable {
 		case applicationMain = 0
 		case applicationWorker = 1
@@ -20833,11 +21619,23 @@ public class OpenXRAndroidThreadSettingsExtension: OpenXRExtensionWrapper {
 @MainActor
 public class OpenXRExtensionWrapperExtension: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRExtensionWrapperExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRExtensionWrapperExtension")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class OpenXRFrameSynthesisExtension: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRFrameSynthesisExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRFrameSynthesisExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func is_available() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_available", args: [])
@@ -20875,6 +21673,12 @@ public class OpenXRFrameSynthesisExtension: OpenXRExtensionWrapper {
 @MainActor
 public class OpenXRFutureExtension: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRFutureExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRFutureExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func is_active() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_active", args: [])
@@ -20893,6 +21697,12 @@ public class OpenXRFutureExtension: OpenXRExtensionWrapper {
 @MainActor
 public class OpenXRFutureResult: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRFutureResult") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRFutureResult")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_status() -> OpenXRFutureResult.ResultStatus {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_status", args: [])
@@ -20920,6 +21730,12 @@ public class OpenXRFutureResult: RefCounted {
 @MainActor
 public class OpenXRRenderModelExtension: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRRenderModelExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRRenderModelExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func is_active() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_active", args: [])
@@ -20997,6 +21813,12 @@ public class OpenXRRenderModelExtension: OpenXRExtensionWrapper {
 @MainActor
 public class OpenXRSpatialAnchorCapability: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialAnchorCapability") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialAnchorCapability")
+		}
+		self.init(ptr: raw)
+	}
 	public enum PersistenceScope: Int, Sendable, CaseIterable {
 		case systemManaged = 1
 		case localAnchors = 1000781000
@@ -21065,6 +21887,12 @@ public class OpenXRSpatialAnchorCapability: OpenXRExtensionWrapper {
 @MainActor
 public class OpenXRSpatialCapabilityConfigurationBaseHeader: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialCapabilityConfigurationBaseHeader") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialCapabilityConfigurationBaseHeader")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func has_valid_configuration() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "has_valid_configuration", args: [])
@@ -21090,6 +21918,12 @@ public class OpenXRSpatialCapabilityConfigurationBaseHeader: RefCounted {
 @MainActor
 public class OpenXRSpatialComponentData: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialComponentData") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialComponentData")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_capacity(capacity: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_capacity", args: [VariantBox(capacity)])
 	}
@@ -21116,6 +21950,12 @@ public class OpenXRSpatialComponentData: RefCounted {
 @MainActor
 public class OpenXRSpatialContainerExtension: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialContainerExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialContainerExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func is_enabled() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_enabled", args: [])
@@ -21174,6 +22014,12 @@ public class OpenXRSpatialContainerExtension: OpenXRExtensionWrapper {
 @MainActor
 public class OpenXRSpatialContainerSelfRenderingExtension: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialContainerSelfRenderingExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialContainerSelfRenderingExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func is_enabled() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_enabled", args: [])
@@ -21184,6 +22030,12 @@ public class OpenXRSpatialContainerSelfRenderingExtension: OpenXRExtensionWrappe
 @MainActor
 public class OpenXRSpatialContainerState: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialContainerState") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialContainerState")
+		}
+		self.init(ptr: raw)
+	}
 	public enum BoundsMode: Int, Sendable, CaseIterable {
 		case bounded = 0
 		case immersive = 1
@@ -21208,6 +22060,12 @@ public class OpenXRSpatialContainerState: RefCounted {
 @MainActor
 public class OpenXRSpatialEntityExtension: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialEntityExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialEntityExtension")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Capability: Int, Sendable, CaseIterable {
 		case planeTracking = 1000741000
 		case markerTrackingQrCode = 1000743000
@@ -21361,6 +22219,12 @@ public class OpenXRSpatialEntityExtension: OpenXRExtensionWrapper {
 @MainActor
 public class OpenXRSpatialMarkerTrackingCapability: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialMarkerTrackingCapability") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialMarkerTrackingCapability")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func is_qrcode_supported() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_qrcode_supported", args: [])
@@ -21407,6 +22271,12 @@ public class OpenXRSpatialMarkerTrackingCapability: OpenXRExtensionWrapper {
 @MainActor
 public class OpenXRSpatialPlaneTrackingCapability: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialPlaneTrackingCapability") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialPlaneTrackingCapability")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func is_supported() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_supported", args: [])
@@ -21435,6 +22305,12 @@ public class OpenXRSpatialPlaneTrackingCapability: OpenXRExtensionWrapper {
 @MainActor
 public class OpenXRStructureBase: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRStructureBase") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRStructureBase")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_header(next: Int) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_header", args: [VariantBox(next)])
@@ -21467,6 +22343,12 @@ public class OpenXRStructureBase: RefCounted {
 @MainActor
 public class PCKPacker: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PCKPacker") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PCKPacker")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func pck_start(pck_path: String, alignment: Int = 32, key: String = 0000000000000000000000000000000000000000000000000000000000000000, encrypt_directory: Bool = false) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "pck_start", args: [VariantBox(pck_path), VariantBox(alignment), VariantBox(key), VariantBox(encrypt_directory)])
@@ -21497,6 +22379,12 @@ public class PCKPacker: RefCounted {
 @MainActor
 public class PackedDataContainerRef: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PackedDataContainerRef") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PackedDataContainerRef")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func size() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "size", args: [])
@@ -21516,6 +22404,12 @@ public class PackedDataContainerRef: RefCounted {
 @MainActor
 public class PacketPeer: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PacketPeer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PacketPeer")
+		}
+		self.init(ptr: raw)
+	}
 	public func get_var(allow_objects: Bool = false) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_var", args: [VariantBox(allow_objects)])
 	}
@@ -21561,6 +22455,12 @@ public class PacketPeer: RefCounted {
 @MainActor
 public class PhysicsCastMotionResult2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsCastMotionResult2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsCastMotionResult2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_safe_fraction() -> Double {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_safe_fraction", args: [])
@@ -21584,6 +22484,12 @@ public class PhysicsCastMotionResult2D: RefCounted {
 @MainActor
 public class PhysicsCastMotionResult3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsCastMotionResult3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsCastMotionResult3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_safe_fraction() -> Double {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_safe_fraction", args: [])
@@ -21607,6 +22513,12 @@ public class PhysicsCastMotionResult3D: RefCounted {
 @MainActor
 public class PhysicsCollideShapeResult2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsCollideShapeResult2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsCollideShapeResult2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_max_collisions() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_collisions", args: [])
@@ -21639,6 +22551,12 @@ public class PhysicsCollideShapeResult2D: RefCounted {
 @MainActor
 public class PhysicsCollideShapeResult3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsCollideShapeResult3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsCollideShapeResult3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_max_collisions() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_collisions", args: [])
@@ -21671,6 +22589,12 @@ public class PhysicsCollideShapeResult3D: RefCounted {
 @MainActor
 public class PhysicsDirectBodyState2DExtension: PhysicsDirectBodyState2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsDirectBodyState2DExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsDirectBodyState2DExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func _get_total_gravity() -> Vector2 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_total_gravity", args: [])
@@ -21880,6 +22804,12 @@ public class PhysicsDirectBodyState2DExtension: PhysicsDirectBodyState2D {
 @MainActor
 public class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsDirectBodyState3DExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsDirectBodyState3DExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func _get_total_gravity() -> Vector3 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_total_gravity", args: [])
@@ -22099,6 +23029,12 @@ public class PhysicsDirectBodyState3DExtension: PhysicsDirectBodyState3D {
 @MainActor
 public class PhysicsDirectSpaceState2DExtension: PhysicsDirectSpaceState2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsDirectSpaceState2DExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsDirectSpaceState2DExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func is_body_excluded_from_query(body: VariantBox) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_body_excluded_from_query", args: [VariantBox(body)])
@@ -22139,6 +23075,12 @@ public class PhysicsDirectSpaceState2DExtension: PhysicsDirectSpaceState2D {
 @MainActor
 public class PhysicsDirectSpaceState3DExtension: PhysicsDirectSpaceState3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsDirectSpaceState3DExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsDirectSpaceState3DExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func is_body_excluded_from_query(body: VariantBox) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_body_excluded_from_query", args: [VariantBox(body)])
@@ -22184,6 +23126,12 @@ public class PhysicsDirectSpaceState3DExtension: PhysicsDirectSpaceState3D {
 @MainActor
 public class PhysicsGetRestInfoResult2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsGetRestInfoResult2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsGetRestInfoResult2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_point() -> Vector2 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_point", args: [])
@@ -22243,6 +23191,12 @@ public class PhysicsGetRestInfoResult2D: RefCounted {
 @MainActor
 public class PhysicsGetRestInfoResult3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsGetRestInfoResult3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsGetRestInfoResult3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_point() -> Vector3 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_point", args: [])
@@ -22302,6 +23256,12 @@ public class PhysicsGetRestInfoResult3D: RefCounted {
 @MainActor
 public class PhysicsIntersectPointResult2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsIntersectPointResult2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsIntersectPointResult2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_max_intersections() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_intersections", args: [])
@@ -22344,6 +23304,12 @@ public class PhysicsIntersectPointResult2D: RefCounted {
 @MainActor
 public class PhysicsIntersectPointResult3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsIntersectPointResult3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsIntersectPointResult3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_max_intersections() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_intersections", args: [])
@@ -22386,6 +23352,12 @@ public class PhysicsIntersectPointResult3D: RefCounted {
 @MainActor
 public class PhysicsIntersectRayResult2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsIntersectRayResult2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsIntersectRayResult2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_position() -> Vector2 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_position", args: [])
@@ -22445,6 +23417,12 @@ public class PhysicsIntersectRayResult2D: RefCounted {
 @MainActor
 public class PhysicsIntersectRayResult3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsIntersectRayResult3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsIntersectRayResult3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_position() -> Vector3 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_position", args: [])
@@ -22513,6 +23491,12 @@ public class PhysicsIntersectRayResult3D: RefCounted {
 @MainActor
 public class PhysicsIntersectShapeResult2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsIntersectShapeResult2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsIntersectShapeResult2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_max_intersections() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_intersections", args: [])
@@ -22555,6 +23539,12 @@ public class PhysicsIntersectShapeResult2D: RefCounted {
 @MainActor
 public class PhysicsIntersectShapeResult3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsIntersectShapeResult3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsIntersectShapeResult3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_max_intersections() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_intersections", args: [])
@@ -22597,6 +23587,12 @@ public class PhysicsIntersectShapeResult3D: RefCounted {
 @MainActor
 public class PhysicsPointQueryParameters2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsPointQueryParameters2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsPointQueryParameters2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_position(position: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_position", args: [VariantBox(position)])
 	}
@@ -22674,6 +23670,12 @@ public class PhysicsPointQueryParameters2D: RefCounted {
 @MainActor
 public class PhysicsPointQueryParameters3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsPointQueryParameters3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsPointQueryParameters3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_position(position: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_position", args: [VariantBox(position)])
 	}
@@ -22739,6 +23741,12 @@ public class PhysicsPointQueryParameters3D: RefCounted {
 @MainActor
 public class PhysicsRayQueryParameters2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsRayQueryParameters2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsRayQueryParameters2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func create(from: Vector2, to: Vector2, collision_mask: Int = 4294967295, exclude: VariantBox) -> PhysicsRayQueryParameters2D? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create", args: [VariantBox(from), VariantBox(to), VariantBox(collision_mask), VariantBox(exclude)])
@@ -22833,6 +23841,12 @@ public class PhysicsRayQueryParameters2D: RefCounted {
 @MainActor
 public class PhysicsRayQueryParameters3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsRayQueryParameters3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsRayQueryParameters3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func create(from: Vector3, to: Vector3, collision_mask: Int = 4294967295, exclude: VariantBox) -> PhysicsRayQueryParameters3D? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create", args: [VariantBox(from), VariantBox(to), VariantBox(collision_mask), VariantBox(exclude)])
@@ -22939,6 +23953,12 @@ public class PhysicsRayQueryParameters3D: RefCounted {
 @MainActor
 public class PhysicsServer2DExtension: PhysicsServer2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsServer2DExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsServer2DExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func body_test_motion_is_excluding_body(body: VariantBox) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "body_test_motion_is_excluding_body", args: [VariantBox(body)])
@@ -23482,6 +24502,12 @@ public class PhysicsServer2DExtension: PhysicsServer2D {
 @MainActor
 public class PhysicsServer3DExtension: PhysicsServer3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsServer3DExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsServer3DExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func body_test_motion_is_excluding_body(body: VariantBox) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "body_test_motion_is_excluding_body", args: [VariantBox(body)])
@@ -24245,6 +25271,12 @@ public class PhysicsServer3DExtension: PhysicsServer3D {
 @MainActor
 public class PhysicsShapeQueryParameters2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsShapeQueryParameters2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsShapeQueryParameters2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_shape(shape: Resource) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_shape", args: [VariantBox(shape)])
 	}
@@ -24358,6 +25390,12 @@ public class PhysicsShapeQueryParameters2D: RefCounted {
 @MainActor
 public class PhysicsShapeQueryParameters3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsShapeQueryParameters3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsShapeQueryParameters3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_shape(shape: Resource) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_shape", args: [VariantBox(shape)])
 	}
@@ -24471,6 +25509,12 @@ public class PhysicsShapeQueryParameters3D: RefCounted {
 @MainActor
 public class PhysicsTestMotionParameters2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsTestMotionParameters2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsTestMotionParameters2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_from() -> Transform2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_from", args: [])
@@ -24560,6 +25604,12 @@ public class PhysicsTestMotionParameters2D: RefCounted {
 @MainActor
 public class PhysicsTestMotionParameters3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsTestMotionParameters3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsTestMotionParameters3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_from() -> Transform3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_from", args: [])
@@ -24661,6 +25711,12 @@ public class PhysicsTestMotionParameters3D: RefCounted {
 @MainActor
 public class PhysicsTestMotionResult2D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsTestMotionResult2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsTestMotionResult2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_travel() -> Vector2 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_travel", args: [])
@@ -24731,6 +25787,12 @@ public class PhysicsTestMotionResult2D: RefCounted {
 @MainActor
 public class PhysicsTestMotionResult3D: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsTestMotionResult3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsTestMotionResult3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_travel() -> Vector3 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_travel", args: [])
@@ -24806,6 +25868,12 @@ public class PhysicsTestMotionResult3D: RefCounted {
 @MainActor
 public class RDAccelerationStructureGeometry: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDAccelerationStructureGeometry") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDAccelerationStructureGeometry")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_flags(p_member: RenderingDevice.AccelerationStructureGeometryFlagBits) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_flags", args: [VariantBox(p_member.rawValue)])
 	}
@@ -24919,6 +25987,12 @@ public class RDAccelerationStructureGeometry: RefCounted {
 @MainActor
 public class RDAccelerationStructureInstance: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDAccelerationStructureInstance") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDAccelerationStructureInstance")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_transform(p_member: Transform3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_transform", args: [VariantBox(p_member)])
 	}
@@ -24996,6 +26070,12 @@ public class RDAccelerationStructureInstance: RefCounted {
 @MainActor
 public class RDAttachmentFormat: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDAttachmentFormat") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDAttachmentFormat")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_format(p_member: RenderingDevice.DataFormat) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_format", args: [VariantBox(p_member.rawValue)])
 	}
@@ -25037,6 +26117,12 @@ public class RDAttachmentFormat: RefCounted {
 @MainActor
 public class RDFramebufferPass: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDFramebufferPass") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDFramebufferPass")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_color_attachments(p_member: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_color_attachments", args: [VariantBox(p_member)])
 	}
@@ -25102,6 +26188,12 @@ public class RDFramebufferPass: RefCounted {
 @MainActor
 public class RDHitGroup: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDHitGroup") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDHitGroup")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_closest_hit_shader(p_member: RDPipelineShader) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_closest_hit_shader", args: [VariantBox(p_member)])
 	}
@@ -25143,6 +26235,12 @@ public class RDHitGroup: RefCounted {
 @MainActor
 public class RDPipelineColorBlendState: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDPipelineColorBlendState") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDPipelineColorBlendState")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_enable_logic_op(p_member: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_enable_logic_op", args: [VariantBox(p_member)])
 	}
@@ -25196,6 +26294,12 @@ public class RDPipelineColorBlendState: RefCounted {
 @MainActor
 public class RDPipelineColorBlendStateAttachment: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDPipelineColorBlendStateAttachment") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDPipelineColorBlendStateAttachment")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_as_mix() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_as_mix", args: [])
 	}
@@ -25336,6 +26440,12 @@ public class RDPipelineColorBlendStateAttachment: RefCounted {
 @MainActor
 public class RDPipelineDepthStencilState: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDPipelineDepthStencilState") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDPipelineDepthStencilState")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_enable_depth_test(p_member: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_enable_depth_test", args: [VariantBox(p_member)])
 	}
@@ -25593,6 +26703,12 @@ public class RDPipelineDepthStencilState: RefCounted {
 @MainActor
 public class RDPipelineMultisampleState: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDPipelineMultisampleState") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDPipelineMultisampleState")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_sample_count(p_member: RenderingDevice.TextureSamples) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_sample_count", args: [VariantBox(p_member.rawValue)])
 	}
@@ -25670,6 +26786,12 @@ public class RDPipelineMultisampleState: RefCounted {
 @MainActor
 public class RDPipelineRasterizationState: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDPipelineRasterizationState") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDPipelineRasterizationState")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_enable_depth_clamp(p_member: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_enable_depth_clamp", args: [VariantBox(p_member)])
 	}
@@ -25807,6 +26929,12 @@ public class RDPipelineRasterizationState: RefCounted {
 @MainActor
 public class RDPipelineShader: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDPipelineShader") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDPipelineShader")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_shader(p_member: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_shader", args: [VariantBox(p_member)])
 	}
@@ -25836,6 +26964,12 @@ public class RDPipelineShader: RefCounted {
 @MainActor
 public class RDPipelineSpecializationConstant: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDPipelineSpecializationConstant") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDPipelineSpecializationConstant")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_value(value: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_value", args: [VariantBox(value)])
 	}
@@ -25863,6 +26997,12 @@ public class RDPipelineSpecializationConstant: RefCounted {
 @MainActor
 public class RDSamplerState: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDSamplerState") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDSamplerState")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_mag_filter(p_member: RenderingDevice.SamplerFilter) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_mag_filter", args: [VariantBox(p_member.rawValue)])
 	}
@@ -26048,6 +27188,12 @@ public class RDSamplerState: RefCounted {
 @MainActor
 public class RDShaderSource: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDShaderSource") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDShaderSource")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_stage_source(stage: RenderingDevice.ShaderStage, source: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_stage_source", args: [VariantBox(stage.rawValue), VariantBox(source)])
 	}
@@ -26121,6 +27267,12 @@ public class RDShaderSource: RefCounted {
 @MainActor
 public class RDTextureFormat: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDTextureFormat") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDTextureFormat")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_format(p_member: RenderingDevice.DataFormat) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_format", args: [VariantBox(p_member.rawValue)])
 	}
@@ -26264,6 +27416,12 @@ public class RDTextureFormat: RefCounted {
 @MainActor
 public class RDTextureView: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDTextureView") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDTextureView")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_format_override(p_member: RenderingDevice.DataFormat) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_format_override", args: [VariantBox(p_member.rawValue)])
 	}
@@ -26329,6 +27487,12 @@ public class RDTextureView: RefCounted {
 @MainActor
 public class RDUniform: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDUniform") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDUniform")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_uniform_type(p_member: RenderingDevice.UniformType) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_uniform_type", args: [VariantBox(p_member.rawValue)])
 	}
@@ -26376,6 +27540,12 @@ public class RDUniform: RefCounted {
 @MainActor
 public class RDVertexAttribute: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDVertexAttribute") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDVertexAttribute")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_binding(p_member: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_binding", args: [VariantBox(p_member)])
 	}
@@ -26453,6 +27623,12 @@ public class RDVertexAttribute: RefCounted {
 @MainActor
 public class RandomNumberGenerator: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RandomNumberGenerator") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RandomNumberGenerator")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_seed(seed: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_seed", args: [VariantBox(seed)])
 	}
@@ -26515,6 +27691,12 @@ public class RandomNumberGenerator: RefCounted {
 @MainActor
 public class RegEx: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RegEx") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RegEx")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func create_from_string(pattern: String, show_error: Bool = true) -> RegEx? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_from_string", args: [VariantBox(pattern), VariantBox(show_error)])
@@ -26568,6 +27750,12 @@ public class RegEx: RefCounted {
 @MainActor
 public class RegExMatch: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RegExMatch") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RegExMatch")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_subject() -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_subject", args: [])
@@ -26620,6 +27808,12 @@ public class RegExMatch: RefCounted {
 @MainActor
 public class RenderDataExtension: RenderData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RenderDataExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RenderDataExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func _get_render_scene_buffers() -> RenderSceneBuffers? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_render_scene_buffers", args: [])
@@ -26645,11 +27839,23 @@ public class RenderDataExtension: RenderData {
 @MainActor
 public class RenderDataRD: RenderData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RenderDataRD") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RenderDataRD")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class RenderSceneBuffers: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RenderSceneBuffers") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RenderSceneBuffers")
+		}
+		self.init(ptr: raw)
+	}
 	public func configure(config: RenderSceneBuffersConfiguration) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "configure", args: [VariantBox(config)])
 	}
@@ -26658,6 +27864,12 @@ public class RenderSceneBuffers: RefCounted {
 @MainActor
 public class RenderSceneBuffersConfiguration: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RenderSceneBuffersConfiguration") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RenderSceneBuffersConfiguration")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_render_target() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_render_target", args: [])
@@ -26783,6 +27995,12 @@ public class RenderSceneBuffersConfiguration: RefCounted {
 @MainActor
 public class RenderSceneDataExtension: RenderSceneData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RenderSceneDataExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RenderSceneDataExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func _get_cam_transform() -> Transform3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_cam_transform", args: [])
@@ -26818,11 +28036,23 @@ public class RenderSceneDataExtension: RenderSceneData {
 @MainActor
 public class RenderSceneDataRD: RenderSceneData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RenderSceneDataRD") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RenderSceneDataRD")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class Resource: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Resource") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Resource")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_path(path: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_path", args: [VariantBox(path)])
 	}
@@ -26958,6 +28188,12 @@ public class Resource: RefCounted {
 @MainActor
 public class ResourceFormatLoader: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ResourceFormatLoader") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ResourceFormatLoader")
+		}
+		self.init(ptr: raw)
+	}
 	public enum CacheMode: Int, Sendable, CaseIterable {
 		case ignore = 0
 		case reuse = 1
@@ -27023,6 +28259,12 @@ public class ResourceFormatLoader: RefCounted {
 @MainActor
 public class ResourceFormatSaver: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ResourceFormatSaver") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ResourceFormatSaver")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func _save(resource: Resource, path: String, flags: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_save", args: [VariantBox(resource), VariantBox(path), VariantBox(flags)])
@@ -27053,6 +28295,12 @@ public class ResourceFormatSaver: RefCounted {
 @MainActor
 public class ResourceImporter: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ResourceImporter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ResourceImporter")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ImportOrder: Int, Sendable, CaseIterable {
 		case default_ = 0
 		case scene = 100
@@ -27067,6 +28315,12 @@ public class ResourceImporter: RefCounted {
 @MainActor
 public class ResourcePreloader: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ResourcePreloader") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ResourcePreloader")
+		}
+		self.init(ptr: raw)
+	}
 	public func _set_resources(resources: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_set_resources", args: [VariantBox(resources)])
 	}
@@ -27108,21 +28362,45 @@ public class ResourcePreloader: Node {
 @MainActor
 public class SceneCacheInterface: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SceneCacheInterface") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SceneCacheInterface")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class SceneRPCInterface: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SceneRPCInterface") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SceneRPCInterface")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class SceneReplicationInterface: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SceneReplicationInterface") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SceneReplicationInterface")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class SceneState: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SceneState") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SceneState")
+		}
+		self.init(ptr: raw)
+	}
 	public enum GenEditState: Int, Sendable, CaseIterable {
 		case disabled = 0
 		case instance = 1
@@ -27247,6 +28525,12 @@ public class SceneState: RefCounted {
 @MainActor
 public class SceneTree: MainLoop {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SceneTree") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SceneTree")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_root() -> Window? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_root", args: [])
@@ -27518,6 +28802,12 @@ public class SceneTree: MainLoop {
 @MainActor
 public class SceneTreeTimer: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SceneTreeTimer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SceneTreeTimer")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_time_left(time: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_time_left", args: [VariantBox(time)])
 	}
@@ -27538,6 +28828,12 @@ public class SceneTreeTimer: RefCounted {
 @MainActor
 public class ScriptBacktrace: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ScriptBacktrace") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ScriptBacktrace")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_language_name() -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_language_name", args: [])
@@ -27617,6 +28913,12 @@ public class ScriptBacktrace: RefCounted {
 @MainActor
 public class ScriptLanguageExtension: ScriptLanguage {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ScriptLanguageExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ScriptLanguageExtension")
+		}
+		self.init(ptr: raw)
+	}
 	public enum CodeCompletionKind: Int, Sendable, CaseIterable {
 		case class_ = 0
 		case function = 1
@@ -27908,6 +29210,12 @@ public class ScriptLanguageExtension: ScriptLanguage {
 @MainActor
 public class Semaphore: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Semaphore") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Semaphore")
+		}
+		self.init(ptr: raw)
+	}
 	public func wait() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "wait", args: [])
 	}
@@ -27924,6 +29232,12 @@ public class Semaphore: RefCounted {
 @MainActor
 public class ShaderGlobalsOverride: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ShaderGlobalsOverride") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ShaderGlobalsOverride")
+		}
+		self.init(ptr: raw)
+	}
 	public func _activate() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_activate", args: [])
 	}
@@ -27932,6 +29246,12 @@ public class ShaderGlobalsOverride: Node {
 @MainActor
 public class SkinReference: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SkinReference") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SkinReference")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_skeleton() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_skeleton", args: [])
@@ -27947,6 +29267,12 @@ public class SkinReference: RefCounted {
 @MainActor
 public class SocketServer: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SocketServer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SocketServer")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func is_connection_available() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_connection_available", args: [])
@@ -27970,6 +29296,12 @@ public class SocketServer: RefCounted {
 @MainActor
 public class StatusIndicator: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StatusIndicator") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StatusIndicator")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_tooltip(tooltip: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_tooltip", args: [VariantBox(tooltip)])
 	}
@@ -28031,6 +29363,12 @@ public class StatusIndicator: Node {
 @MainActor
 public class StreamPeer: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StreamPeer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StreamPeer")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func put_data(data: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "put_data", args: [VariantBox(data)])
@@ -28183,6 +29521,12 @@ public class StreamPeer: RefCounted {
 @MainActor
 public class SurfaceTool: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SurfaceTool") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SurfaceTool")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_skin_weight_count(count: SurfaceTool.SkinWeightCount) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_skin_weight_count", args: [VariantBox(count.rawValue)])
 	}
@@ -28301,11 +29645,23 @@ public class SurfaceTool: RefCounted {
 @MainActor
 public class SwiftLanguage: ScriptLanguage {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SwiftLanguage") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SwiftLanguage")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class TLSOptions: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TLSOptions") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TLSOptions")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func client(trusted_chain: X509Certificate, common_name_override: String) -> TLSOptions? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "client", args: [VariantBox(trusted_chain), VariantBox(common_name_override)])
@@ -28356,6 +29712,12 @@ public class TLSOptions: RefCounted {
 @MainActor
 public class TextLine: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TextLine") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TextLine")
+		}
+		self.init(ptr: raw)
+	}
 	public func clear() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "clear", args: [])
 	}
@@ -28410,12 +29772,12 @@ public class TextLine: RefCounted {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func add_object(key: VariantBox, size: Vector2, inline_align: InlineAlignment, length: Int = 1, baseline: Double = 0.0) -> Bool {
+	public func add_object(key: VariantBox, size: Vector2, inline_align: InlineAlignment = .center, length: Int = 1, baseline: Double = 0.0) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_object", args: [VariantBox(key), VariantBox(size), VariantBox(inline_align.rawValue), VariantBox(length), VariantBox(baseline)])
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func resize_object(key: VariantBox, size: Vector2, inline_align: InlineAlignment, baseline: Double = 0.0) -> Bool {
+	public func resize_object(key: VariantBox, size: Vector2, inline_align: InlineAlignment = .center, baseline: Double = 0.0) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "resize_object", args: [VariantBox(key), VariantBox(size), VariantBox(inline_align.rawValue), VariantBox(baseline)])
 		return __ret.asBool()
 	}
@@ -28564,6 +29926,12 @@ public class TextLine: RefCounted {
 @MainActor
 public class TextParagraph: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TextParagraph") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TextParagraph")
+		}
+		self.init(ptr: raw)
+	}
 	public func clear() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "clear", args: [])
 	}
@@ -28634,12 +30002,12 @@ public class TextParagraph: RefCounted {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func add_object(key: VariantBox, size: Vector2, inline_align: InlineAlignment, length: Int = 1, baseline: Double = 0.0) -> Bool {
+	public func add_object(key: VariantBox, size: Vector2, inline_align: InlineAlignment = .center, length: Int = 1, baseline: Double = 0.0) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_object", args: [VariantBox(key), VariantBox(size), VariantBox(inline_align.rawValue), VariantBox(length), VariantBox(baseline)])
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func resize_object(key: VariantBox, size: Vector2, inline_align: InlineAlignment, baseline: Double = 0.0) -> Bool {
+	public func resize_object(key: VariantBox, size: Vector2, inline_align: InlineAlignment = .center, baseline: Double = 0.0) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "resize_object", args: [VariantBox(key), VariantBox(size), VariantBox(inline_align.rawValue), VariantBox(baseline)])
 		return __ret.asBool()
 	}
@@ -28885,6 +30253,12 @@ public class TextParagraph: RefCounted {
 @MainActor
 public class TextServer: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TextServer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TextServer")
+		}
+		self.init(ptr: raw)
+	}
 	public enum FontAntialiasing: Int, Sendable, CaseIterable {
 		case none = 0
 		case gray = 1
@@ -29550,7 +30924,7 @@ public class TextServer: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "draw_hex_code_box", args: [VariantBox(canvas), VariantBox(size), VariantBox(pos), VariantBox(index), VariantBox(color)])
 	}
 	@discardableResult
-	public func create_shaped_text(direction: TextServer.Direction, orientation: TextServer.Orientation) -> VariantBox {
+	public func create_shaped_text(direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_shaped_text", args: [VariantBox(direction.rawValue), VariantBox(orientation.rawValue)])
 		return __ret
 	}
@@ -29562,7 +30936,7 @@ public class TextServer: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_duplicate", args: [VariantBox(rid)])
 		return __ret
 	}
-	public func shaped_text_set_direction(shaped: VariantBox, direction: TextServer.Direction) {
+	public func shaped_text_set_direction(shaped: VariantBox, direction: TextServer.Direction = .auto) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_set_direction", args: [VariantBox(shaped), VariantBox(direction.rawValue)])
 	}
 	@discardableResult
@@ -29594,7 +30968,7 @@ public class TextServer: RefCounted {
 		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_get_custom_ellipsis", args: [VariantBox(shaped)])
 		return __ret.asInt()
 	}
-	public func shaped_text_set_orientation(shaped: VariantBox, orientation: TextServer.Orientation) {
+	public func shaped_text_set_orientation(shaped: VariantBox, orientation: TextServer.Orientation = .horizontal) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_set_orientation", args: [VariantBox(shaped), VariantBox(orientation.rawValue)])
 	}
 	@discardableResult
@@ -29632,12 +31006,12 @@ public class TextServer: RefCounted {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func shaped_text_add_object(shaped: VariantBox, key: VariantBox, size: Vector2, inline_align: InlineAlignment, length: Int = 1, baseline: Double = 0.0) -> Bool {
+	public func shaped_text_add_object(shaped: VariantBox, key: VariantBox, size: Vector2, inline_align: InlineAlignment = .center, length: Int = 1, baseline: Double = 0.0) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_add_object", args: [VariantBox(shaped), VariantBox(key), VariantBox(size), VariantBox(inline_align.rawValue), VariantBox(length), VariantBox(baseline)])
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func shaped_text_resize_object(shaped: VariantBox, key: VariantBox, size: Vector2, inline_align: InlineAlignment, baseline: Double = 0.0) -> Bool {
+	public func shaped_text_resize_object(shaped: VariantBox, key: VariantBox, size: Vector2, inline_align: InlineAlignment = .center, baseline: Double = 0.0) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "shaped_text_resize_object", args: [VariantBox(shaped), VariantBox(key), VariantBox(size), VariantBox(inline_align.rawValue), VariantBox(baseline)])
 		return __ret.asBool()
 	}
@@ -30000,13 +31374,19 @@ public class TextServer: RefCounted {
 @MainActor
 public class Thread: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Thread") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Thread")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Priority: Int, Sendable, CaseIterable {
 		case low = 0
 		case normal = 1
 		case high = 2
 	}
 	@discardableResult
-	public func start(callable: VariantBox, priority: Thread.Priority) -> Error {
+	public func start(callable: VariantBox, priority: Thread.Priority = .normal) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "start", args: [VariantBox(callable), VariantBox(priority.rawValue)])
 		return __ret.asEnum(Error.self)
 	}
@@ -30041,6 +31421,12 @@ public class Thread: RefCounted {
 @MainActor
 public class Timer: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Timer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Timer")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_wait_time(time_sec: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_wait_time", args: [VariantBox(time_sec)])
 	}
@@ -30141,6 +31527,12 @@ public class Timer: Node {
 @MainActor
 public class TranslationDomain: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TranslationDomain") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TranslationDomain")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_translation_object(locale: String) -> Translation? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_translation_object", args: [VariantBox(locale)])
@@ -30323,6 +31715,12 @@ public class TranslationDomain: RefCounted {
 @MainActor
 public class TriangleMesh: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TriangleMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TriangleMesh")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func create_from_faces(faces: VariantBox) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_from_faces", args: [VariantBox(faces)])
@@ -30348,6 +31746,12 @@ public class TriangleMesh: RefCounted {
 @MainActor
 public class Tween: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Tween") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Tween")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func tween_property(object: Object, property: String, final_val: VariantBox, duration: Double) -> PropertyTweener? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "tween_property", args: [VariantBox(object), VariantBox(property), VariantBox(final_val), VariantBox(duration)])
@@ -30492,6 +31896,12 @@ public class Tween: RefCounted {
 @MainActor
 public class Tweener: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Tweener") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Tweener")
+		}
+		self.init(ptr: raw)
+	}
 	public func emit_finished() {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("finished")])
 	}
@@ -30500,6 +31910,12 @@ public class Tweener: RefCounted {
 @MainActor
 public class UDPServer: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("UDPServer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class UDPServer")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func listen(port: Int, bind_address: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "listen", args: [VariantBox(port), VariantBox(bind_address)])
@@ -30550,6 +31966,12 @@ public class UDPServer: RefCounted {
 @MainActor
 public class UPNP: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("UPNP") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class UPNP")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_device_count() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_device_count", args: [])
@@ -30638,6 +32060,12 @@ public class UPNP: RefCounted {
 @MainActor
 public class UPNPDevice: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("UPNPDevice") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class UPNPDevice")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func is_valid_gateway() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_valid_gateway", args: [])
@@ -30735,6 +32163,12 @@ public class UPNPDevice: RefCounted {
 @MainActor
 public class Viewport: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Viewport") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Viewport")
+		}
+		self.init(ptr: raw)
+	}
 	public enum RenderInfo: Int, Sendable, CaseIterable {
 		case objectsInFrame = 0
 		case typeVisible = 0
@@ -31580,6 +33014,12 @@ public class Viewport: Node {
 @MainActor
 public class WeakRef: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("WeakRef") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class WeakRef")
+		}
+		self.init(ptr: raw)
+	}
 	public func get_ref() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_ref", args: [])
 	}
@@ -31588,6 +33028,12 @@ public class WeakRef: RefCounted {
 @MainActor
 public class WebRTCPeerConnection: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("WebRTCPeerConnection") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class WebRTCPeerConnection")
+		}
+		self.init(ptr: raw)
+	}
 	public enum GatheringState: Int, Sendable, CaseIterable {
 		case new = 0
 		case gathering = 1
@@ -31671,6 +33117,12 @@ public class WebRTCPeerConnection: RefCounted {
 @MainActor
 public class WorldEnvironment: Node {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("WorldEnvironment") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class WorldEnvironment")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_environment(env: Environment) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_environment", args: [VariantBox(env)])
 	}
@@ -31712,6 +33164,12 @@ public class WorldEnvironment: Node {
 @MainActor
 public class XMLParser: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XMLParser") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XMLParser")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func read() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "read", args: [])
@@ -31800,6 +33258,12 @@ public class XMLParser: RefCounted {
 @MainActor
 public class XRInterface: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRInterface") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRInterface")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_name() -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_name", args: [])
@@ -31976,6 +33440,12 @@ public class XRInterface: RefCounted {
 @MainActor
 public class XRPose: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRPose") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRPose")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_has_tracking_data(has_tracking_data: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_has_tracking_data", args: [VariantBox(has_tracking_data)])
 	}
@@ -32058,6 +33528,12 @@ public class XRPose: RefCounted {
 @MainActor
 public class XRTracker: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRTracker") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRTracker")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_tracker_type() -> XRServer.TrackerType {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tracker_type", args: [])
@@ -32099,6 +33575,12 @@ public class XRTracker: RefCounted {
 @MainActor
 public class ZIPPacker: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ZIPPacker") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ZIPPacker")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func open_(path: String, append: ZIPPacker.ZipAppend) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "open", args: [VariantBox(path), VariantBox(append.rawValue)])
@@ -32146,6 +33628,12 @@ public class ZIPPacker: RefCounted {
 @MainActor
 public class ZIPReader: RefCounted {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ZIPReader") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ZIPReader")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func open_(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "open", args: [VariantBox(path)])
@@ -32181,6 +33669,12 @@ public class ZIPReader: RefCounted {
 @MainActor
 public class Animation: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Animation") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Animation")
+		}
+		self.init(ptr: raw)
+	}
 	public enum LoopedFlag: Int, Sendable, CaseIterable {
 		case none = 0
 		case end = 1
@@ -32329,7 +33823,7 @@ public class Animation: Resource {
 		return __ret.asDouble()
 	}
 	@discardableResult
-	public func track_find_key(track_idx: Int, time: Double, find_mode: Animation.FindMode, limit: Bool = false, backward: Bool = false) -> Int {
+	public func track_find_key(track_idx: Int, time: Double, find_mode: Animation.FindMode = .nearest, limit: Bool = false, backward: Bool = false) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "track_find_key", args: [VariantBox(track_idx), VariantBox(time), VariantBox(find_mode.rawValue), VariantBox(limit), VariantBox(backward)])
 		return __ret.asInt()
 	}
@@ -32565,6 +34059,12 @@ public class Animation: Resource {
 @MainActor
 public class AnimationLibrary: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationLibrary") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationLibrary")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func add_animation(name: String, animation: Animation) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_animation", args: [VariantBox(name), VariantBox(animation)])
@@ -32625,6 +34125,12 @@ public class AnimationLibrary: Resource {
 @MainActor
 public class AnimationNode: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNode") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNode")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func add_input(name: String) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_input", args: [VariantBox(name)])
@@ -32687,7 +34193,7 @@ public class AnimationNode: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_filters", args: [])
 		return __ret
 	}
-	public func blend_animation(animation: String, time: Double, delta: Double, seeked: Bool, is_external_seeking: Bool, blend: Double, looped_flag: Animation.LoopedFlag) {
+	public func blend_animation(animation: String, time: Double, delta: Double, seeked: Bool, is_external_seeking: Bool, blend: Double, looped_flag: Animation.LoopedFlag = .none) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "blend_animation", args: [VariantBox(animation), VariantBox(time), VariantBox(delta), VariantBox(seeked), VariantBox(is_external_seeking), VariantBox(blend), VariantBox(looped_flag.rawValue)])
 	}
 	@discardableResult
@@ -32769,11 +34275,23 @@ public class AnimationNode: Resource {
 @MainActor
 public class AnimationNodeObserver: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeObserver") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeObserver")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AnimationNodeStateMachinePlayback: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeStateMachinePlayback") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeStateMachinePlayback")
+		}
+		self.init(ptr: raw)
+	}
 	public func travel(to_node: String, reset_on_teleport: Bool = true) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "travel", args: [VariantBox(to_node), VariantBox(reset_on_teleport)])
 	}
@@ -32847,6 +34365,12 @@ public class AnimationNodeStateMachinePlayback: Resource {
 @MainActor
 public class AnimationNodeStateMachineTransition: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeStateMachineTransition") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeStateMachineTransition")
+		}
+		self.init(ptr: raw)
+	}
 	public enum SwitchMode: Int, Sendable, CaseIterable {
 		case immediate = 0
 		case sync = 1
@@ -32981,6 +34505,12 @@ public class AnimationNodeStateMachineTransition: Resource {
 @MainActor
 public class AnimationPlayer: AnimationMixer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationPlayer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationPlayer")
+		}
+		self.init(ptr: raw)
+	}
 	public func animation_set_next(animation_from: String, animation_to: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "animation_set_next", args: [VariantBox(animation_from), VariantBox(animation_to)])
 	}
@@ -33266,6 +34796,12 @@ public class AnimationPlayer: AnimationMixer {
 @MainActor
 public class AnimationTree: AnimationMixer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationTree") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationTree")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_tree_root(animation_node: AnimationRootNode) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_tree_root", args: [VariantBox(animation_node)])
 	}
@@ -33318,11 +34854,23 @@ public class AnimationTree: AnimationMixer {
 @MainActor
 public class AudioBusLayout: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioBusLayout") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioBusLayout")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AudioEffect: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffect") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffect")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func _instantiate() -> AudioEffectInstance? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_instantiate", args: [])
@@ -33333,6 +34881,12 @@ public class AudioEffect: Resource {
 @MainActor
 public class AudioEffectSpectrumAnalyzerInstance: AudioEffectInstance {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectSpectrumAnalyzerInstance") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectSpectrumAnalyzerInstance")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_magnitude_for_frequency_range(from_hz: Double, to_hz: Double, mode: AudioEffectSpectrumAnalyzerInstance.MagnitudeMode) -> Vector2 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_magnitude_for_frequency_range", args: [VariantBox(from_hz), VariantBox(to_hz), VariantBox(mode.rawValue)])
@@ -33343,6 +34897,12 @@ public class AudioEffectSpectrumAnalyzerInstance: AudioEffectInstance {
 @MainActor
 public class AudioListener3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioListener3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioListener3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum DopplerTracking: Int, Sendable, CaseIterable {
 		case disabled = 0
 		case idleStep = 1
@@ -33381,6 +34941,12 @@ public class AudioListener3D: Node3D {
 @MainActor
 public class AudioStream: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStream") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStream")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_length() -> Double {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_length", args: [])
@@ -33469,6 +35035,12 @@ public class AudioStream: Resource {
 @MainActor
 public class AudioStreamPlaybackInteractive: AudioStreamPlayback {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamPlaybackInteractive") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamPlaybackInteractive")
+		}
+		self.init(ptr: raw)
+	}
 	public func switch_to_clip_by_name(clip_name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "switch_to_clip_by_name", args: [VariantBox(clip_name)])
 	}
@@ -33485,13 +35057,25 @@ public class AudioStreamPlaybackInteractive: AudioStreamPlayback {
 @MainActor
 public class AudioStreamPlaybackPlaylist: AudioStreamPlayback {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamPlaybackPlaylist") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamPlaybackPlaylist")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamPlaybackPolyphonic") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamPlaybackPolyphonic")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
-	public func play_stream(stream: AudioStream, from_offset: Double = 0, volume_db: Double = 0, pitch_scale: Double = 1.0, playback_type: AudioServer.PlaybackType, bus: String) -> Int {
+	public func play_stream(stream: AudioStream, from_offset: Double = 0, volume_db: Double = 0, pitch_scale: Double = 1.0, playback_type: AudioServer.PlaybackType = .default_, bus: String) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "play_stream", args: [VariantBox(stream), VariantBox(from_offset), VariantBox(volume_db), VariantBox(pitch_scale), VariantBox(playback_type.rawValue), VariantBox(bus)])
 		return __ret.asInt()
 	}
@@ -33514,6 +35098,12 @@ public class AudioStreamPlaybackPolyphonic: AudioStreamPlayback {
 @MainActor
 public class AudioStreamPlaybackResampled: AudioStreamPlayback {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamPlaybackResampled") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamPlaybackResampled")
+		}
+		self.init(ptr: raw)
+	}
 	public func begin_resample() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "begin_resample", args: [])
 	}
@@ -33532,11 +35122,23 @@ public class AudioStreamPlaybackResampled: AudioStreamPlayback {
 @MainActor
 public class AudioStreamPlaybackSynchronized: AudioStreamPlayback {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamPlaybackSynchronized") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamPlaybackSynchronized")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AudioStreamPlayer3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamPlayer3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamPlayer3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum DopplerTracking: Int, Sendable, CaseIterable {
 		case disabled = 0
 		case idleStep = 1
@@ -33850,6 +35452,12 @@ public class AudioStreamPlayer3D: Node3D {
 @MainActor
 public class AwaitTweener: Tweener {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AwaitTweener") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AwaitTweener")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func set_timeout(timeout: Double) -> AwaitTweener? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_timeout", args: [VariantBox(timeout)])
@@ -33863,6 +35471,12 @@ public class AwaitTweener: Tweener {
 @MainActor
 public class BitMap: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("BitMap") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class BitMap")
+		}
+		self.init(ptr: raw)
+	}
 	public func create(size: Vector2i) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create", args: [VariantBox(size)])
 	}
@@ -33931,6 +35545,12 @@ public class BitMap: Resource {
 @MainActor
 public class BoneAttachment3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("BoneAttachment3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class BoneAttachment3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_skeleton() -> Skeleton3D? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_skeleton", args: [])
@@ -34004,6 +35624,12 @@ public class BoneAttachment3D: Node3D {
 @MainActor
 public class BoneMap: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("BoneMap") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class BoneMap")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_profile() -> SkeletonProfile? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_profile", args: [])
@@ -34044,6 +35670,12 @@ public class BoneMap: Resource {
 @MainActor
 public class ButtonGroup: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ButtonGroup") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ButtonGroup")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_pressed_button() -> BaseButton? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_pressed_button", args: [])
@@ -34074,6 +35706,12 @@ public class ButtonGroup: Resource {
 @MainActor
 public class CallbackTweener: Tweener {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CallbackTweener") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CallbackTweener")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func set_delay(delay: Double) -> CallbackTweener? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_delay", args: [VariantBox(delay)])
@@ -34084,6 +35722,12 @@ public class CallbackTweener: Tweener {
 @MainActor
 public class Camera3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Camera3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Camera3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum DopplerTracking: Int, Sendable, CaseIterable {
 		case disabled = 0
 		case idleStep = 1
@@ -34357,6 +36001,12 @@ public class Camera3D: Node3D {
 @MainActor
 public class CameraAttributes: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CameraAttributes") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CameraAttributes")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_exposure_multiplier(multiplier: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_exposure_multiplier", args: [VariantBox(multiplier)])
 	}
@@ -34430,6 +36080,12 @@ public class CameraAttributes: Resource {
 @MainActor
 public class CollisionObject3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CollisionObject3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CollisionObject3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum DisableMode: Int, Sendable, CaseIterable {
 		case remove = 0
 		case makeStatic = 1
@@ -34622,6 +36278,12 @@ public class CollisionObject3D: Node3D {
 @MainActor
 public class CollisionPolygon3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CollisionPolygon3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CollisionPolygon3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_depth(depth: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_depth", args: [VariantBox(depth)])
 	}
@@ -34704,6 +36366,12 @@ public class CollisionPolygon3D: Node3D {
 @MainActor
 public class CollisionShape3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CollisionShape3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CollisionShape3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func resource_changed(resource: Resource) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "resource_changed", args: [VariantBox(resource)])
 	}
@@ -34763,6 +36431,12 @@ public class CollisionShape3D: Node3D {
 @MainActor
 public class ColorPalette: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ColorPalette") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ColorPalette")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_colors(colors: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_colors", args: [VariantBox(colors)])
 	}
@@ -34780,6 +36454,12 @@ public class ColorPalette: Resource {
 @MainActor
 public class Compositor: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Compositor") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Compositor")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_compositor_effects(compositor_effects: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_compositor_effects", args: [VariantBox(compositor_effects)])
 	}
@@ -34797,6 +36477,12 @@ public class Compositor: Resource {
 @MainActor
 public class CompositorEffect: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CompositorEffect") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CompositorEffect")
+		}
+		self.init(ptr: raw)
+	}
 	public enum EffectCallbackType: Int, Sendable, CaseIterable {
 		case preOpaque = 0
 		case postOpaque = 1
@@ -34897,6 +36583,12 @@ public class CompositorEffect: Resource {
 @MainActor
 public class Control: CanvasItem {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Control") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Control")
+		}
+		self.init(ptr: raw)
+	}
 	public enum MouseFilter: Int, Sendable, CaseIterable {
 		case stop = 0
 		case pass = 1
@@ -36126,6 +37818,12 @@ public class Control: CanvasItem {
 @MainActor
 public class CryptoKey: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CryptoKey") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CryptoKey")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func save(path: String, public_only: Bool = false) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "save", args: [VariantBox(path), VariantBox(public_only)])
@@ -36156,6 +37854,12 @@ public class CryptoKey: Resource {
 @MainActor
 public class Curve: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Curve") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Curve")
+		}
+		self.init(ptr: raw)
+	}
 	public enum TangentMode: Int, Sendable, CaseIterable {
 		case count = 2
 	}
@@ -36348,6 +38052,12 @@ public class Curve: Resource {
 @MainActor
 public class Curve2D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Curve2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Curve2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_point_count() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_point_count", args: [])
@@ -36472,6 +38182,12 @@ public class Curve2D: Resource {
 @MainActor
 public class Curve3D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Curve3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Curve3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_point_count() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_point_count", args: [])
@@ -36647,6 +38363,12 @@ public class Curve3D: Resource {
 @MainActor
 public class ENetPacketPeer: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ENetPacketPeer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ENetPacketPeer")
+		}
+		self.init(ptr: raw)
+	}
 	public func peer_disconnect(data: Int = 0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "peer_disconnect", args: [VariantBox(data)])
 	}
@@ -36716,6 +38438,12 @@ public class ENetPacketPeer: PacketPeer {
 @MainActor
 public class Environment: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Environment") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Environment")
+		}
+		self.init(ptr: raw)
+	}
 	public enum AmbientSource: Int, Sendable, CaseIterable {
 		case bg = 0
 		case disabled = 1
@@ -37958,6 +39686,12 @@ public class Environment: Resource {
 @MainActor
 public class FoldableGroup: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("FoldableGroup") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class FoldableGroup")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_expanded_container() -> FoldableContainer? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_expanded_container", args: [])
@@ -37988,6 +39722,12 @@ public class FoldableGroup: Resource {
 @MainActor
 public class Font: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Font") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Font")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_fallbacks(fallbacks: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_fallbacks", args: [VariantBox(fallbacks)])
 	}
@@ -38090,25 +39830,25 @@ public class Font: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_cache_capacity", args: [VariantBox(single_line), VariantBox(multi_line)])
 	}
 	@discardableResult
-	public func get_string_size(text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation) -> Vector2 {
+	public func get_string_size(text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal) -> Vector2 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_string_size", args: [VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue)])
 		return __ret.asVector2()
 	}
 	@discardableResult
-	public func get_multiline_string_size(text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation) -> Vector2 {
+	public func get_multiline_string_size(text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal) -> Vector2 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_multiline_string_size", args: [VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue)])
 		return __ret.asVector2()
 	}
-	public func draw_string(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
+	public func draw_string(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(modulate), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_multiline_string(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
+	public func draw_multiline_string(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(modulate), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_string_outline(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, size: Int = 1, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
+	public func draw_string_outline(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, size: Int = 1, modulate: Color, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "draw_string_outline", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(size), VariantBox(modulate), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
-	public func draw_multiline_string_outline(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, size: Int = 1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction, orientation: TextServer.Orientation, oversampling: Double = 0.0) {
+	public func draw_multiline_string_outline(canvas_item: VariantBox, pos: Vector2, text: String, alignment: HorizontalAlignment = .left, width: Double = -1, font_size: Int = 16, max_lines: Int = -1, size: Int = 1, modulate: Color, brk_flags: TextServer.LineBreakFlag, justification_flags: TextServer.JustificationFlag, direction: TextServer.Direction = .auto, orientation: TextServer.Orientation = .horizontal, oversampling: Double = 0.0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "draw_multiline_string_outline", args: [VariantBox(canvas_item), VariantBox(pos), VariantBox(text), VariantBox(alignment.rawValue), VariantBox(width), VariantBox(font_size), VariantBox(max_lines), VariantBox(size), VariantBox(modulate), VariantBox(brk_flags.rawValue), VariantBox(justification_flags.rawValue), VariantBox(direction.rawValue), VariantBox(orientation.rawValue), VariantBox(oversampling)])
 	}
 	@discardableResult
@@ -38170,6 +39910,12 @@ public class Font: Resource {
 @MainActor
 public class GDExtension: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GDExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GDExtension")
+		}
+		self.init(ptr: raw)
+	}
 	public enum InitializationLevel: Int, Sendable, CaseIterable {
 		case core = 0
 		case servers = 1
@@ -38191,6 +39937,12 @@ public class GDExtension: Resource {
 @MainActor
 public class GLTFAccessor: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFAccessor") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFAccessor")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func from_dictionary(dictionary: VariantBox) -> GLTFAccessor? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "from_dictionary", args: [VariantBox(dictionary)])
@@ -38386,6 +40138,12 @@ public class GLTFAccessor: Resource {
 @MainActor
 public class GLTFAnimation: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFAnimation") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFAnimation")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_original_name() -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_original_name", args: [])
@@ -38421,6 +40179,12 @@ public class GLTFAnimation: Resource {
 @MainActor
 public class GLTFBufferView: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFBufferView") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFBufferView")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func load_buffer_view_data(state: GLTFState) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_buffer_view_data", args: [VariantBox(state)])
@@ -38513,6 +40277,12 @@ public class GLTFBufferView: Resource {
 @MainActor
 public class GLTFCamera: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFCamera") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFCamera")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func from_node(camera_node: Camera3D) -> GLTFCamera? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "from_node", args: [VariantBox(camera_node)])
@@ -38598,6 +40368,12 @@ public class GLTFCamera: Resource {
 @MainActor
 public class GLTFDocument: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFDocument") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFDocument")
+		}
+		self.init(ptr: raw)
+	}
 	public enum RootNodeMode: Int, Sendable, CaseIterable {
 		case singleRoot = 0
 		case keepRoot = 1
@@ -38752,6 +40528,12 @@ public class GLTFDocument: Resource {
 @MainActor
 public class GLTFDocumentExtension: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFDocumentExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFDocumentExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func _import_preflight(state: GLTFState, extensions: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_import_preflight", args: [VariantBox(state), VariantBox(extensions)])
@@ -38875,6 +40657,12 @@ public class GLTFDocumentExtension: Resource {
 @MainActor
 public class GLTFLight: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFLight") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFLight")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func from_node(light_node: Light3D) -> GLTFLight? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "from_node", args: [VariantBox(light_node)])
@@ -38978,6 +40766,12 @@ public class GLTFLight: Resource {
 @MainActor
 public class GLTFMesh: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFMesh")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_original_name() -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_original_name", args: [])
@@ -39037,6 +40831,12 @@ public class GLTFMesh: Resource {
 @MainActor
 public class GLTFNode: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFNode") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFNode")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_original_name() -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_original_name", args: [])
@@ -39224,6 +41024,12 @@ public class GLTFNode: Resource {
 @MainActor
 public class GLTFPhysicsBody: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFPhysicsBody") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFPhysicsBody")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func from_node(body_node: CollisionObject3D) -> GLTFPhysicsBody? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "from_node", args: [VariantBox(body_node)])
@@ -39345,6 +41151,12 @@ public class GLTFPhysicsBody: Resource {
 @MainActor
 public class GLTFPhysicsShape: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFPhysicsShape") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFPhysicsShape")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func from_node(shape_node: CollisionShape3D) -> GLTFPhysicsShape? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "from_node", args: [VariantBox(shape_node)])
@@ -39464,6 +41276,12 @@ public class GLTFPhysicsShape: Resource {
 @MainActor
 public class GLTFSkeleton: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFSkeleton") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFSkeleton")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_joints() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_joints", args: [])
@@ -39532,6 +41350,12 @@ public class GLTFSkeleton: Resource {
 @MainActor
 public class GLTFSkin: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFSkin") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFSkin")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_skin_root() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_skin_root", args: [])
@@ -39657,6 +41481,12 @@ public class GLTFSkin: Resource {
 @MainActor
 public class GLTFSpecGloss: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFSpecGloss") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFSpecGloss")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_diffuse_img() -> Image? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_diffuse_img", args: [])
@@ -39722,6 +41552,12 @@ public class GLTFSpecGloss: Resource {
 @MainActor
 public class GLTFState: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFState") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFState")
+		}
+		self.init(ptr: raw)
+	}
 	public enum HandleBinaryImageMode: Int, Sendable, CaseIterable {
 		case discardTextures = 0
 		case extractTextures = 1
@@ -40144,6 +41980,12 @@ public class GLTFState: Resource {
 @MainActor
 public class GLTFTexture: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFTexture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFTexture")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_src_image() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_src_image", args: [])
@@ -40173,6 +42015,12 @@ public class GLTFTexture: Resource {
 @MainActor
 public class GLTFTextureSampler: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFTextureSampler") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFTextureSampler")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_mag_filter() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_mag_filter", args: [])
@@ -40226,6 +42074,12 @@ public class GLTFTextureSampler: Resource {
 @MainActor
 public class Gradient: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Gradient") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Gradient")
+		}
+		self.init(ptr: raw)
+	}
 	public func add_point(offset: Double, color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_point", args: [VariantBox(offset), VariantBox(color)])
 	}
@@ -40322,6 +42176,12 @@ public class Gradient: Resource {
 @MainActor
 public class GridMap: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GridMap") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GridMap")
+		}
+		self.init(ptr: raw)
+	}
 	public enum DebugVisibilityMode: Int, Sendable, CaseIterable {
 		case default_ = 0
 		case forceShow = 1
@@ -40668,6 +42528,12 @@ public class GridMap: Node3D {
 @MainActor
 public class Image: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Image") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Image")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Format: Int, Sendable, CaseIterable {
 		case l8 = 0
 		case la8 = 1
@@ -40908,17 +42774,17 @@ public class Image: Resource {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func detect_used_channels(source: Image.CompressSource) -> Image.UsedChannels {
+	public func detect_used_channels(source: Image.CompressSource = .generic) -> Image.UsedChannels {
 		let __ret = Host.shared.callMethod(object: ptr, method: "detect_used_channels", args: [VariantBox(source.rawValue)])
 		return __ret.asEnum(Image.UsedChannels.self)
 	}
 	@discardableResult
-	public func compress(mode: Image.CompressMode, source: Image.CompressSource, profile: Image.CompressProfile) -> Error {
+	public func compress(mode: Image.CompressMode, source: Image.CompressSource = .generic, profile: Image.CompressProfile = .automatic) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "compress", args: [VariantBox(mode.rawValue), VariantBox(source.rawValue), VariantBox(profile.rawValue)])
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func compress_from_channels(mode: Image.CompressMode, channels: Image.UsedChannels, profile: Image.CompressProfile) -> Error {
+	public func compress_from_channels(mode: Image.CompressMode, channels: Image.UsedChannels, profile: Image.CompressProfile = .automatic) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "compress_from_channels", args: [VariantBox(mode.rawValue), VariantBox(channels.rawValue), VariantBox(profile.rawValue)])
 		return __ret.asEnum(Error.self)
 	}
@@ -41083,6 +42949,12 @@ public class Image: Resource {
 @MainActor
 public class ImageFormatLoaderExtension: ImageFormatLoader {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ImageFormatLoaderExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ImageFormatLoaderExtension")
+		}
+		self.init(ptr: raw)
+	}
 	public func add_format_loader() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_format_loader", args: [])
 	}
@@ -41104,6 +42976,12 @@ public class ImageFormatLoaderExtension: ImageFormatLoader {
 @MainActor
 public class ImporterMesh: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ImporterMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ImporterMesh")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func merge_importer_meshes(importer_meshes: VariantBox, relative_transforms: VariantBox, deduplicate_surfaces: Bool = true) -> ImporterMesh? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "merge_importer_meshes", args: [VariantBox(importer_meshes), VariantBox(relative_transforms), VariantBox(deduplicate_surfaces)])
@@ -41230,6 +43108,12 @@ public class ImporterMesh: Resource {
 @MainActor
 public class ImporterMeshInstance3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ImporterMeshInstance3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ImporterMeshInstance3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_mesh(mesh: ImporterMesh) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_mesh", args: [VariantBox(mesh)])
 	}
@@ -41359,6 +43243,12 @@ public class ImporterMeshInstance3D: Node3D {
 @MainActor
 public class InputEvent: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputEvent") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputEvent")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_device(device: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_device", args: [VariantBox(device)])
 	}
@@ -41441,11 +43331,23 @@ public class InputEvent: Resource {
 @MainActor
 public class IntervalTweener: Tweener {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("IntervalTweener") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class IntervalTweener")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class JSON: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("JSON") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class JSON")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func stringify(data: VariantBox, indent: String, sort_keys: Bool = true, full_precision: Bool = false) -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "stringify", args: [VariantBox(data), VariantBox(indent), VariantBox(sort_keys), VariantBox(full_precision)])
@@ -41495,6 +43397,12 @@ public class JSON: Resource {
 @MainActor
 public class Joint3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Joint3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Joint3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_node_a(node: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_node_a", args: [VariantBox(node)])
 	}
@@ -41553,11 +43461,23 @@ public class Joint3D: Node3D {
 @MainActor
 public class JointLimitation3D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("JointLimitation3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class JointLimitation3D")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class LabelSettings: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("LabelSettings") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class LabelSettings")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_line_spacing(spacing: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_line_spacing", args: [VariantBox(spacing)])
 	}
@@ -41781,6 +43701,12 @@ public class LabelSettings: Resource {
 @MainActor
 public class LightmapGIData: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("LightmapGIData") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class LightmapGIData")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ShadowmaskMode: Int, Sendable, CaseIterable {
 		case none = 0
 		case replace = 1
@@ -41903,11 +43829,23 @@ public class LightmapGIData: Resource {
 @MainActor
 public class LightmapProbe: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("LightmapProbe") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class LightmapProbe")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class Marker3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Marker3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Marker3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_gizmo_extents(extents: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_gizmo_extents", args: [VariantBox(extents)])
 	}
@@ -41925,6 +43863,12 @@ public class Marker3D: Node3D {
 @MainActor
 public class Material: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Material") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Material")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_next_pass(next_pass: Material) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_next_pass", args: [VariantBox(next_pass)])
 	}
@@ -41982,6 +43926,12 @@ public class Material: Resource {
 @MainActor
 public class Mesh: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Mesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Mesh")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ArrayFormat: Int, Sendable, CaseIterable {
 		case vertex = 1
 		case normal = 2
@@ -42150,6 +44100,12 @@ public class Mesh: Resource {
 @MainActor
 public class MeshLibrary: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MeshLibrary") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MeshLibrary")
+		}
+		self.init(ptr: raw)
+	}
 	public func create_item(id: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_item", args: [VariantBox(id)])
 	}
@@ -42264,6 +44220,12 @@ public class MeshLibrary: Resource {
 @MainActor
 public class MethodTweener: Tweener {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MethodTweener") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MethodTweener")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func set_delay(delay: Double) -> MethodTweener? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_delay", args: [VariantBox(delay)])
@@ -42284,6 +44246,12 @@ public class MethodTweener: Tweener {
 @MainActor
 public class MissingResource: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MissingResource") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MissingResource")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_original_class(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_original_class", args: [VariantBox(name)])
 	}
@@ -42313,6 +44281,12 @@ public class MissingResource: Resource {
 @MainActor
 public class MobileVRInterface: XRInterface {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MobileVRInterface") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MobileVRInterface")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_eye_height(eye_height: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_eye_height", args: [VariantBox(eye_height)])
 	}
@@ -42442,6 +44416,12 @@ public class MobileVRInterface: XRInterface {
 @MainActor
 public class MultiMesh: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MultiMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MultiMesh")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_mesh(mesh: Mesh) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_mesh", args: [VariantBox(mesh)])
 	}
@@ -42653,6 +44633,12 @@ public class MultiMesh: Resource {
 @MainActor
 public class MultiplayerAPIExtension: MultiplayerAPI {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MultiplayerAPIExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MultiplayerAPIExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func _poll() -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_poll", args: [])
@@ -42701,6 +44687,12 @@ public class MultiplayerAPIExtension: MultiplayerAPI {
 @MainActor
 public class MultiplayerPeer: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MultiplayerPeer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MultiplayerPeer")
+		}
+		self.init(ptr: raw)
+	}
 	public enum TransferMode: Int, Sendable, CaseIterable {
 		case unreliable = 0
 		case unreliableOrdered = 1
@@ -42800,6 +44792,12 @@ public class MultiplayerPeer: PacketPeer {
 @MainActor
 public class NavigationLink3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationLink3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationLink3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_rid() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_rid", args: [])
@@ -42926,6 +44924,12 @@ public class NavigationLink3D: Node3D {
 @MainActor
 public class NavigationMesh: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationMesh")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_sample_partition_type(sample_partition_type: NavigationMesh.SamplePartitionType) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_sample_partition_type", args: [VariantBox(sample_partition_type.rawValue)])
 	}
@@ -43309,6 +45313,12 @@ public class NavigationMesh: Resource {
 @MainActor
 public class NavigationMeshSourceGeometryData2D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationMeshSourceGeometryData2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationMeshSourceGeometryData2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func clear() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "clear", args: [])
 	}
@@ -43384,6 +45394,12 @@ public class NavigationMeshSourceGeometryData2D: Resource {
 @MainActor
 public class NavigationMeshSourceGeometryData3D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationMeshSourceGeometryData3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationMeshSourceGeometryData3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_vertices(vertices: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_vertices", args: [VariantBox(vertices)])
 	}
@@ -43459,6 +45475,12 @@ public class NavigationMeshSourceGeometryData3D: Resource {
 @MainActor
 public class NavigationObstacle3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationObstacle3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationObstacle3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_rid() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_rid", args: [])
@@ -43601,6 +45623,12 @@ public class NavigationObstacle3D: Node3D {
 @MainActor
 public class NavigationPolygon: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationPolygon") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationPolygon")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_vertices(vertices: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_vertices", args: [VariantBox(vertices)])
 	}
@@ -43842,6 +45870,12 @@ public class NavigationPolygon: Resource {
 @MainActor
 public class NavigationRegion3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationRegion3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationRegion3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_rid() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_rid", args: [])
@@ -43964,6 +45998,12 @@ public class NavigationRegion3D: Node3D {
 @MainActor
 public class Node2D: CanvasItem {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Node2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Node2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_position(position: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_position", args: [VariantBox(position)])
 	}
@@ -44148,6 +46188,12 @@ public class Node2D: CanvasItem {
 @MainActor
 public class Noise: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Noise") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Noise")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_noise_1d(x: Double) -> Double {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_noise_1d", args: [VariantBox(x)])
@@ -44198,6 +46244,12 @@ public class Noise: Resource {
 @MainActor
 public class Occluder3D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Occluder3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Occluder3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_vertices() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_vertices", args: [])
@@ -44213,6 +46265,12 @@ public class Occluder3D: Resource {
 @MainActor
 public class OccluderPolygon2D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OccluderPolygon2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OccluderPolygon2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_closed(closed: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_closed", args: [VariantBox(closed)])
 	}
@@ -44254,6 +46312,12 @@ public class OccluderPolygon2D: Resource {
 @MainActor
 public class OggPacketSequence: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OggPacketSequence") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OggPacketSequence")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_packet_data(packet_data: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_packet_data", args: [VariantBox(packet_data)])
 	}
@@ -44300,6 +46364,12 @@ public class OggPacketSequence: Resource {
 @MainActor
 public class OpenXRAction: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRAction") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRAction")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_localized_name(localized_name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_localized_name", args: [VariantBox(localized_name)])
 	}
@@ -44341,6 +46411,12 @@ public class OpenXRAction: Resource {
 @MainActor
 public class OpenXRActionMap: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRActionMap") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRActionMap")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_action_sets(action_sets: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_action_sets", args: [VariantBox(action_sets)])
 	}
@@ -44415,6 +46491,12 @@ public class OpenXRActionMap: Resource {
 @MainActor
 public class OpenXRActionSet: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRActionSet") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRActionSet")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_localized_name(localized_name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_localized_name", args: [VariantBox(localized_name)])
 	}
@@ -44467,6 +46549,12 @@ public class OpenXRActionSet: Resource {
 @MainActor
 public class OpenXRBindingModifier: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRBindingModifier") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRBindingModifier")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func _get_description() -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_description", args: [])
@@ -44482,6 +46570,12 @@ public class OpenXRBindingModifier: Resource {
 @MainActor
 public class OpenXRCompositionLayer: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRCompositionLayer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRCompositionLayer")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Filter: Int, Sendable, CaseIterable {
 		case nearest = 0
 		case linear = 1
@@ -44768,6 +46862,12 @@ public class OpenXRCompositionLayer: Node3D {
 @MainActor
 public class OpenXRHand: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRHand") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRHand")
+		}
+		self.init(ptr: raw)
+	}
 	public enum MotionRange: Int, Sendable, CaseIterable {
 		case unobstructed = 0
 		case conformToController = 1
@@ -44848,11 +46948,23 @@ public class OpenXRHand: Node3D {
 @MainActor
 public class OpenXRHapticBase: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRHapticBase") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRHapticBase")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class OpenXRIPBinding: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRIPBinding") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRIPBinding")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_action(action: OpenXRAction) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_action", args: [VariantBox(action)])
 	}
@@ -44932,6 +47044,12 @@ public class OpenXRIPBinding: Resource {
 @MainActor
 public class OpenXRInteractionProfile: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRInteractionProfile") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRInteractionProfile")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_interaction_profile_path(interaction_profile_path: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_interaction_profile_path", args: [VariantBox(interaction_profile_path)])
 	}
@@ -44993,6 +47111,12 @@ public class OpenXRInteractionProfile: Resource {
 @MainActor
 public class OpenXRInterface: XRInterface {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRInterface") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRInterface")
+		}
+		self.init(ptr: raw)
+	}
 	public enum SessionState: Int, Sendable, CaseIterable {
 		case unknown = 0
 		case idle = 1
@@ -45320,6 +47444,12 @@ public class OpenXRInterface: XRInterface {
 @MainActor
 public class OpenXRRenderModel: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRRenderModel") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRRenderModel")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_top_level_path() -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_top_level_path", args: [])
@@ -45345,6 +47475,12 @@ public class OpenXRRenderModel: Node3D {
 @MainActor
 public class OpenXRRenderModelManager: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRRenderModelManager") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRRenderModelManager")
+		}
+		self.init(ptr: raw)
+	}
 	public enum RenderModelTracker: Int, Sendable, CaseIterable {
 		case any_ = 0
 		case noneSet = 1
@@ -45386,6 +47522,12 @@ public class OpenXRRenderModelManager: Node3D {
 @MainActor
 public class OpenXRSpatialCapabilityConfigurationAnchor: OpenXRSpatialCapabilityConfigurationBaseHeader {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialCapabilityConfigurationAnchor") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialCapabilityConfigurationAnchor")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_enabled_components() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_enabled_components", args: [])
@@ -45396,6 +47538,12 @@ public class OpenXRSpatialCapabilityConfigurationAnchor: OpenXRSpatialCapability
 @MainActor
 public class OpenXRSpatialCapabilityConfigurationAprilTag: OpenXRSpatialCapabilityConfigurationBaseHeader {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialCapabilityConfigurationAprilTag") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialCapabilityConfigurationAprilTag")
+		}
+		self.init(ptr: raw)
+	}
 	public enum AprilTagDict: Int, Sendable, CaseIterable {
 		case 16h5_ = 1
 		case 25h9_ = 2
@@ -45424,6 +47572,12 @@ public class OpenXRSpatialCapabilityConfigurationAprilTag: OpenXRSpatialCapabili
 @MainActor
 public class OpenXRSpatialCapabilityConfigurationAruco: OpenXRSpatialCapabilityConfigurationBaseHeader {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialCapabilityConfigurationAruco") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialCapabilityConfigurationAruco")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ArucoDict: Int, Sendable, CaseIterable {
 		case 4x450_ = 1
 		case 4x4100_ = 2
@@ -45464,6 +47618,12 @@ public class OpenXRSpatialCapabilityConfigurationAruco: OpenXRSpatialCapabilityC
 @MainActor
 public class OpenXRSpatialCapabilityConfigurationMicroQrCode: OpenXRSpatialCapabilityConfigurationBaseHeader {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialCapabilityConfigurationMicroQrCode") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialCapabilityConfigurationMicroQrCode")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_enabled_components() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_enabled_components", args: [])
@@ -45474,6 +47634,12 @@ public class OpenXRSpatialCapabilityConfigurationMicroQrCode: OpenXRSpatialCapab
 @MainActor
 public class OpenXRSpatialCapabilityConfigurationPlaneTracking: OpenXRSpatialCapabilityConfigurationBaseHeader {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialCapabilityConfigurationPlaneTracking") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialCapabilityConfigurationPlaneTracking")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func supports_mesh_2d() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "supports_mesh_2d", args: [])
@@ -45499,6 +47665,12 @@ public class OpenXRSpatialCapabilityConfigurationPlaneTracking: OpenXRSpatialCap
 @MainActor
 public class OpenXRSpatialCapabilityConfigurationQrCode: OpenXRSpatialCapabilityConfigurationBaseHeader {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialCapabilityConfigurationQrCode") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialCapabilityConfigurationQrCode")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_enabled_components() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_enabled_components", args: [])
@@ -45509,6 +47681,12 @@ public class OpenXRSpatialCapabilityConfigurationQrCode: OpenXRSpatialCapability
 @MainActor
 public class OpenXRSpatialComponentAnchorList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialComponentAnchorList") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialComponentAnchorList")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_entity_pose(index: Int) -> Transform3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_entity_pose", args: [VariantBox(index)])
@@ -45519,6 +47697,12 @@ public class OpenXRSpatialComponentAnchorList: OpenXRSpatialComponentData {
 @MainActor
 public class OpenXRSpatialComponentBounded2DList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialComponentBounded2DList") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialComponentBounded2DList")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_center_pose(index: Int) -> Transform3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_center_pose", args: [VariantBox(index)])
@@ -45534,6 +47718,12 @@ public class OpenXRSpatialComponentBounded2DList: OpenXRSpatialComponentData {
 @MainActor
 public class OpenXRSpatialComponentBounded3DList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialComponentBounded3DList") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialComponentBounded3DList")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_center_pose(index: Int) -> Transform3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_center_pose", args: [VariantBox(index)])
@@ -45549,6 +47739,12 @@ public class OpenXRSpatialComponentBounded3DList: OpenXRSpatialComponentData {
 @MainActor
 public class OpenXRSpatialComponentMarkerList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialComponentMarkerList") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialComponentMarkerList")
+		}
+		self.init(ptr: raw)
+	}
 	public enum MarkerType: Int, Sendable, CaseIterable {
 		case unknown = 0
 		case qrcode = 1
@@ -45575,6 +47771,12 @@ public class OpenXRSpatialComponentMarkerList: OpenXRSpatialComponentData {
 @MainActor
 public class OpenXRSpatialComponentMesh2DList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialComponentMesh2DList") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialComponentMesh2DList")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_transform(index: Int) -> Transform3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_transform", args: [VariantBox(index)])
@@ -45595,6 +47797,12 @@ public class OpenXRSpatialComponentMesh2DList: OpenXRSpatialComponentData {
 @MainActor
 public class OpenXRSpatialComponentMesh3DList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialComponentMesh3DList") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialComponentMesh3DList")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_transform(index: Int) -> Transform3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_transform", args: [VariantBox(index)])
@@ -45610,6 +47818,12 @@ public class OpenXRSpatialComponentMesh3DList: OpenXRSpatialComponentData {
 @MainActor
 public class OpenXRSpatialComponentParentList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialComponentParentList") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialComponentParentList")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_parent(index: Int) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_parent", args: [VariantBox(index)])
@@ -45620,6 +47834,12 @@ public class OpenXRSpatialComponentParentList: OpenXRSpatialComponentData {
 @MainActor
 public class OpenXRSpatialComponentPersistenceList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialComponentPersistenceList") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialComponentPersistenceList")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_persistent_uuid(index: Int) -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_persistent_uuid", args: [VariantBox(index)])
@@ -45635,6 +47855,12 @@ public class OpenXRSpatialComponentPersistenceList: OpenXRSpatialComponentData {
 @MainActor
 public class OpenXRSpatialComponentPlaneAlignmentList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialComponentPlaneAlignmentList") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialComponentPlaneAlignmentList")
+		}
+		self.init(ptr: raw)
+	}
 	public enum PlaneAlignment: Int, Sendable, CaseIterable {
 		case horizontalUpward = 0
 		case horizontalDownward = 1
@@ -45651,6 +47877,12 @@ public class OpenXRSpatialComponentPlaneAlignmentList: OpenXRSpatialComponentDat
 @MainActor
 public class OpenXRSpatialComponentPlaneSemanticLabelList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialComponentPlaneSemanticLabelList") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialComponentPlaneSemanticLabelList")
+		}
+		self.init(ptr: raw)
+	}
 	public enum PlaneSemanticLabel: Int, Sendable, CaseIterable {
 		case uncategorized = 1
 		case floor = 2
@@ -45668,6 +47900,12 @@ public class OpenXRSpatialComponentPlaneSemanticLabelList: OpenXRSpatialComponen
 @MainActor
 public class OpenXRSpatialComponentPolygon2DList: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialComponentPolygon2DList") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialComponentPolygon2DList")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_transform(index: Int) -> Transform3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_transform", args: [VariantBox(index)])
@@ -45683,6 +47921,12 @@ public class OpenXRSpatialComponentPolygon2DList: OpenXRSpatialComponentData {
 @MainActor
 public class OpenXRSpatialContextPersistenceConfig: OpenXRStructureBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialContextPersistenceConfig") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialContextPersistenceConfig")
+		}
+		self.init(ptr: raw)
+	}
 	public func add_persistence_context(persistence_context: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_persistence_context", args: [VariantBox(persistence_context)])
 	}
@@ -45699,6 +47943,12 @@ public class OpenXRSpatialContextPersistenceConfig: OpenXRStructureBase {
 @MainActor
 public class OpenXRSpatialQueryResultData: OpenXRSpatialComponentData {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialQueryResultData") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialQueryResultData")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_capacity() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_capacity", args: [])
@@ -45719,6 +47969,12 @@ public class OpenXRSpatialQueryResultData: OpenXRSpatialComponentData {
 @MainActor
 public class PackedDataContainer: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PackedDataContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PackedDataContainer")
+		}
+		self.init(ptr: raw)
+	}
 	public func _set_data(data: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_set_data", args: [VariantBox(data)])
 	}
@@ -45755,6 +48011,12 @@ public class PackedDataContainer: Resource {
 @MainActor
 public class PackedScene: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PackedScene") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PackedScene")
+		}
+		self.init(ptr: raw)
+	}
 	public enum GenEditState: Int, Sendable, CaseIterable {
 		case disabled = 0
 		case instance = 1
@@ -45767,7 +48029,7 @@ public class PackedScene: Resource {
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func instantiate(edit_state: PackedScene.GenEditState) -> Node? {
+	public func instantiate(edit_state: PackedScene.GenEditState = .disabled) -> Node? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "instantiate", args: [VariantBox(edit_state.rawValue)])
 		return __ret.asObject(Node.self)
 	}
@@ -45798,6 +48060,12 @@ public class PackedScene: Resource {
 @MainActor
 public class PacketPeerDTLS: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PacketPeerDTLS") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PacketPeerDTLS")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Status: Int, Sendable, CaseIterable {
 		case disconnected = 0
 		case handshaking = 1
@@ -45826,6 +48094,12 @@ public class PacketPeerDTLS: PacketPeer {
 @MainActor
 public class PacketPeerExtension: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PacketPeerExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PacketPeerExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func _get_packet(r_buffer: Int, r_buffer_size: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_packet", args: [VariantBox(r_buffer), VariantBox(r_buffer_size)])
@@ -45851,6 +48125,12 @@ public class PacketPeerExtension: PacketPeer {
 @MainActor
 public class PacketPeerStream: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PacketPeerStream") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PacketPeerStream")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_stream_peer(peer: StreamPeer) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_stream_peer", args: [VariantBox(peer)])
 	}
@@ -45892,6 +48172,12 @@ public class PacketPeerStream: PacketPeer {
 @MainActor
 public class PacketPeerUDP: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PacketPeerUDP") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PacketPeerUDP")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func bind(port: Int, bind_address: String, recv_buf_size: Int = 65536) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "bind", args: [VariantBox(port), VariantBox(bind_address), VariantBox(recv_buf_size)])
@@ -45958,6 +48244,12 @@ public class PacketPeerUDP: PacketPeer {
 @MainActor
 public class ParallaxBackground: CanvasLayer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ParallaxBackground") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ParallaxBackground")
+		}
+		self.init(ptr: raw)
+	}
 	public func _camera_moved(_unnamed_arg0: Transform2D, _unnamed_arg1: Vector2, _unnamed_arg2: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_camera_moved", args: [VariantBox(_unnamed_arg0), VariantBox(_unnamed_arg1), VariantBox(_unnamed_arg2)])
 	}
@@ -46042,6 +48334,12 @@ public class ParallaxBackground: CanvasLayer {
 @MainActor
 public class Path3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Path3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Path3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_curve(curve: Curve3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_curve", args: [VariantBox(curve)])
 	}
@@ -46081,6 +48379,12 @@ public class Path3D: Node3D {
 @MainActor
 public class PathFollow3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PathFollow3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PathFollow3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_progress(progress: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_progress", args: [VariantBox(progress)])
 	}
@@ -46199,6 +48503,12 @@ public class PathFollow3D: Node3D {
 @MainActor
 public class PhysicsMaterial: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsMaterial") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsMaterial")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_friction(friction: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_friction", args: [VariantBox(friction)])
 	}
@@ -46252,6 +48562,12 @@ public class PhysicsMaterial: Resource {
 @MainActor
 public class PolygonPathFinder: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PolygonPathFinder") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PolygonPathFinder")
+		}
+		self.init(ptr: raw)
+	}
 	public func setup(points: VariantBox, connections: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "setup", args: [VariantBox(points), VariantBox(connections)])
 	}
@@ -46305,6 +48621,12 @@ public class PolygonPathFinder: Resource {
 @MainActor
 public class PropertyTweener: Tweener {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PropertyTweener") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PropertyTweener")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func from(value: VariantBox) -> PropertyTweener? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "from", args: [VariantBox(value)])
@@ -46345,6 +48667,12 @@ public class PropertyTweener: Tweener {
 @MainActor
 public class RDShaderFile: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDShaderFile") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDShaderFile")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_bytecode(bytecode: RDShaderSPIRV, version: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_bytecode", args: [VariantBox(bytecode), VariantBox(version)])
 	}
@@ -46387,6 +48715,12 @@ public class RDShaderFile: Resource {
 @MainActor
 public class RDShaderSPIRV: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RDShaderSPIRV") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RDShaderSPIRV")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_stage_bytecode(stage: RenderingDevice.ShaderStage, bytecode: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_stage_bytecode", args: [VariantBox(stage.rawValue), VariantBox(bytecode)])
 	}
@@ -46496,6 +48830,12 @@ public class RDShaderSPIRV: Resource {
 @MainActor
 public class RayCast3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RayCast3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RayCast3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_enabled", args: [VariantBox(enabled)])
 	}
@@ -46690,6 +49030,12 @@ public class RayCast3D: Node3D {
 @MainActor
 public class RemoteTransform3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RemoteTransform3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RemoteTransform3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_remote_node(path: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_remote_node", args: [VariantBox(path)])
 	}
@@ -46762,6 +49108,12 @@ public class RemoteTransform3D: Node3D {
 @MainActor
 public class RenderSceneBuffersExtension: RenderSceneBuffers {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RenderSceneBuffersExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RenderSceneBuffersExtension")
+		}
+		self.init(ptr: raw)
+	}
 	public func _configure(config: RenderSceneBuffersConfiguration) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_configure", args: [VariantBox(config)])
 	}
@@ -46782,6 +49134,12 @@ public class RenderSceneBuffersExtension: RenderSceneBuffers {
 @MainActor
 public class RenderSceneBuffersRD: RenderSceneBuffers {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RenderSceneBuffersRD") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RenderSceneBuffersRD")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func has_texture(context: String, name: String) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "has_texture", args: [VariantBox(context), VariantBox(name)])
@@ -46920,11 +49278,23 @@ public class RenderSceneBuffersRD: RenderSceneBuffers {
 @MainActor
 public class ResourceFormatImporterSaver: ResourceFormatSaver {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ResourceFormatImporterSaver") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ResourceFormatImporterSaver")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class RichTextEffect: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RichTextEffect") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RichTextEffect")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func _process_custom_fx(char_fx: CharFXTransform) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_process_custom_fx", args: [VariantBox(char_fx)])
@@ -46935,6 +49305,12 @@ public class RichTextEffect: Resource {
 @MainActor
 public class SceneMultiplayer: MultiplayerAPI {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SceneMultiplayer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SceneMultiplayer")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_root_path(path: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_root_path", args: [VariantBox(path)])
 	}
@@ -47005,7 +49381,7 @@ public class SceneMultiplayer: MultiplayerAPI {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func send_bytes(bytes: VariantBox, id: Int = 0, mode: MultiplayerPeer.TransferMode, channel: Int = 0) -> Error {
+	public func send_bytes(bytes: VariantBox, id: Int = 0, mode: MultiplayerPeer.TransferMode = .reliable, channel: Int = 0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "send_bytes", args: [VariantBox(bytes), VariantBox(id), VariantBox(mode.rawValue), VariantBox(channel)])
 		return __ret.asEnum(Error.self)
 	}
@@ -47071,6 +49447,12 @@ public class SceneMultiplayer: MultiplayerAPI {
 @MainActor
 public class SceneReplicationConfig: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SceneReplicationConfig") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SceneReplicationConfig")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ReplicationMode: Int, Sendable, CaseIterable {
 		case never = 0
 		case always = 1
@@ -47134,6 +49516,12 @@ public class SceneReplicationConfig: Resource {
 @MainActor
 public class Script: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Script") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Script")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func can_instantiate() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "can_instantiate", args: [])
@@ -47232,6 +49620,12 @@ public class Script: Resource {
 @MainActor
 public class Shader: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Shader") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Shader")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Mode: Int, Sendable, CaseIterable {
 		case spatial = 0
 		case canvasItem = 1
@@ -47281,6 +49675,12 @@ public class Shader: Resource {
 @MainActor
 public class ShaderGraph: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ShaderGraph") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ShaderGraph")
+		}
+		self.init(ptr: raw)
+	}
 	public func add_node(node: VisualShaderNode, position: Vector2, id: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_node", args: [VariantBox(node), VariantBox(position), VariantBox(id)])
 	}
@@ -47318,6 +49718,12 @@ public class ShaderGraph: Resource {
 @MainActor
 public class ShaderInclude: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ShaderInclude") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ShaderInclude")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_code(code: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_code", args: [VariantBox(code)])
 	}
@@ -47335,6 +49741,12 @@ public class ShaderInclude: Resource {
 @MainActor
 public class Shape2D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Shape2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Shape2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_custom_solver_bias(bias: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_custom_solver_bias", args: [VariantBox(bias)])
 	}
@@ -47380,6 +49792,12 @@ public class Shape2D: Resource {
 @MainActor
 public class Shape3D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Shape3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Shape3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_custom_solver_bias(bias: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_custom_solver_bias", args: [VariantBox(bias)])
 	}
@@ -47414,6 +49832,12 @@ public class Shape3D: Resource {
 @MainActor
 public class ShapeCast3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ShapeCast3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ShapeCast3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func resource_changed(resource: Resource) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "resource_changed", args: [VariantBox(resource)])
 	}
@@ -47630,6 +50054,12 @@ public class ShapeCast3D: Node3D {
 @MainActor
 public class Shortcut: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Shortcut") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Shortcut")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_events(events: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_events", args: [VariantBox(events)])
 	}
@@ -47662,6 +50092,12 @@ public class Shortcut: Resource {
 @MainActor
 public class Skeleton3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Skeleton3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Skeleton3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ModifierCallbackModeProcess: Int, Sendable, CaseIterable {
 		case physics = 0
 		case idle = 1
@@ -47944,6 +50380,12 @@ public class Skeleton3D: Node3D {
 @MainActor
 public class SkeletonModification2D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SkeletonModification2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SkeletonModification2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_enabled", args: [VariantBox(enabled)])
 	}
@@ -48008,6 +50450,12 @@ public class SkeletonModification2D: Resource {
 @MainActor
 public class SkeletonModificationStack2D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SkeletonModificationStack2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SkeletonModificationStack2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func setup() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "setup", args: [])
 	}
@@ -48082,6 +50530,12 @@ public class SkeletonModificationStack2D: Resource {
 @MainActor
 public class SkeletonModifier3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SkeletonModifier3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SkeletonModifier3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum BoneAxis: Int, Sendable, CaseIterable {
 		case plusX = 0
 		case minusX = 1
@@ -48165,6 +50619,12 @@ public class SkeletonModifier3D: Node3D {
 @MainActor
 public class SkeletonProfile: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SkeletonProfile") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SkeletonProfile")
+		}
+		self.init(ptr: raw)
+	}
 	public enum TailDirection: Int, Sendable, CaseIterable {
 		case averageChildren = 0
 		case specificChild = 1
@@ -48311,6 +50771,12 @@ public class SkeletonProfile: Resource {
 @MainActor
 public class Skin: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Skin") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Skin")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_bind_count(bind_count: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_bind_count", args: [VariantBox(bind_count)])
 	}
@@ -48357,6 +50823,12 @@ public class Skin: Resource {
 @MainActor
 public class Sky: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Sky") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Sky")
+		}
+		self.init(ptr: raw)
+	}
 	public enum RadianceSize: Int, Sendable, CaseIterable {
 		case 32_ = 0
 		case 64_ = 1
@@ -48414,6 +50886,12 @@ public class Sky: Resource {
 @MainActor
 public class SpringArm3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SpringArm3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SpringArm3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_hit_length() -> Double {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_hit_length", args: [])
@@ -48483,6 +50961,12 @@ public class SpringArm3D: Node3D {
 @MainActor
 public class SpringBoneCollision3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SpringBoneCollision3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SpringBoneCollision3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_skeleton() -> Skeleton3D? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_skeleton", args: [])
@@ -48545,6 +51029,12 @@ public class SpringBoneCollision3D: Node3D {
 @MainActor
 public class SpriteFrames: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SpriteFrames") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SpriteFrames")
+		}
+		self.init(ptr: raw)
+	}
 	public func add_animation(anim: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_animation", args: [VariantBox(anim)])
 	}
@@ -48638,6 +51128,12 @@ public class SpriteFrames: Resource {
 @MainActor
 public class StreamPeerBuffer: StreamPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StreamPeerBuffer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StreamPeerBuffer")
+		}
+		self.init(ptr: raw)
+	}
 	public func seek(position: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "seek", args: [VariantBox(position)])
 	}
@@ -48679,6 +51175,12 @@ public class StreamPeerBuffer: StreamPeer {
 @MainActor
 public class StreamPeerExtension: StreamPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StreamPeerExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StreamPeerExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func _get_data(r_buffer: Int, r_bytes: Int, r_received: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_data", args: [VariantBox(r_buffer), VariantBox(r_bytes), VariantBox(r_received)])
@@ -48709,6 +51211,12 @@ public class StreamPeerExtension: StreamPeer {
 @MainActor
 public class StreamPeerGZIP: StreamPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StreamPeerGZIP") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StreamPeerGZIP")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func start_compression(use_deflate: Bool = false, buffer_size: Int = 65535) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "start_compression", args: [VariantBox(use_deflate), VariantBox(buffer_size)])
@@ -48732,6 +51240,12 @@ public class StreamPeerGZIP: StreamPeer {
 @MainActor
 public class StreamPeerSocket: StreamPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StreamPeerSocket") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StreamPeerSocket")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Status: Int, Sendable, CaseIterable {
 		case none = 0
 		case connecting = 1
@@ -48756,6 +51270,12 @@ public class StreamPeerSocket: StreamPeer {
 @MainActor
 public class StreamPeerTLS: StreamPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StreamPeerTLS") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StreamPeerTLS")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Status: Int, Sendable, CaseIterable {
 		case disconnected = 0
 		case handshaking = 1
@@ -48794,6 +51314,12 @@ public class StreamPeerTLS: StreamPeer {
 @MainActor
 public class StyleBox: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StyleBox") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StyleBox")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_minimum_size() -> Vector2 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_minimum_size", args: [])
@@ -48876,6 +51402,12 @@ public class StyleBox: Resource {
 @MainActor
 public class SubViewport: Viewport {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SubViewport") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SubViewport")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ClearMode: Int, Sendable, CaseIterable {
 		case always = 0
 		case never = 1
@@ -48962,6 +51494,12 @@ public class SubViewport: Viewport {
 @MainActor
 public class SubtweenTweener: Tweener {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SubtweenTweener") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SubtweenTweener")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func set_delay(delay: Double) -> SubtweenTweener? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_delay", args: [VariantBox(delay)])
@@ -48972,6 +51510,12 @@ public class SubtweenTweener: Tweener {
 @MainActor
 public class SyntaxHighlighter: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SyntaxHighlighter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SyntaxHighlighter")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_line_syntax_highlighting(line: Int) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_line_syntax_highlighting", args: [VariantBox(line)])
@@ -49004,6 +51548,12 @@ public class SyntaxHighlighter: Resource {
 @MainActor
 public class TCPServer: SocketServer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TCPServer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TCPServer")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func listen(port: Int, bind_address: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "listen", args: [VariantBox(port), VariantBox(bind_address)])
@@ -49024,6 +51574,12 @@ public class TCPServer: SocketServer {
 @MainActor
 public class TextServerExtension: TextServer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TextServerExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TextServerExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func _has_feature(feature: TextServer.Feature) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_has_feature", args: [VariantBox(feature.rawValue)])
@@ -50114,11 +52670,23 @@ public class TextServerExtension: TextServer {
 @MainActor
 public class Texture: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Texture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Texture")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class Theme: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Theme") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Theme")
+		}
+		self.init(ptr: raw)
+	}
 	public enum DataType: Int, Sendable, CaseIterable {
 		case color = 0
 		case constant = 1
@@ -50456,6 +53024,12 @@ public class Theme: Resource {
 @MainActor
 public class TileMapPattern: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TileMapPattern") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TileMapPattern")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_cell(coords: Vector2i, source_id: Int = -1, atlas_coords: Vector2i, alternative_tile: Int = -1) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_cell", args: [VariantBox(coords), VariantBox(source_id), VariantBox(atlas_coords), VariantBox(alternative_tile)])
 	}
@@ -50505,6 +53079,12 @@ public class TileMapPattern: Resource {
 @MainActor
 public class TileSet: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TileSet") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TileSet")
+		}
+		self.init(ptr: raw)
+	}
 	public enum TileShape: Int, Sendable, CaseIterable {
 		case square = 0
 		case isometric = 1
@@ -50953,6 +53533,12 @@ public class TileSet: Resource {
 @MainActor
 public class TileSetSource: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TileSetSource") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TileSetSource")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_tiles_count() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tiles_count", args: [])
@@ -50988,6 +53574,12 @@ public class TileSetSource: Resource {
 @MainActor
 public class Translation: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Translation") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Translation")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_locale(locale: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_locale", args: [VariantBox(locale)])
 	}
@@ -51073,6 +53665,12 @@ public class Translation: Resource {
 @MainActor
 public class UDSServer: SocketServer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("UDSServer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class UDSServer")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func listen(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "listen", args: [VariantBox(path)])
@@ -51088,6 +53686,12 @@ public class UDSServer: SocketServer {
 @MainActor
 public class VehicleWheel3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VehicleWheel3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VehicleWheel3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(length: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(length)])
 	}
@@ -51311,6 +53915,12 @@ public class VehicleWheel3D: Node3D {
 @MainActor
 public class VideoStream: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VideoStream") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VideoStream")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_file(file: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_file", args: [VariantBox(file)])
 	}
@@ -51333,6 +53943,12 @@ public class VideoStream: Resource {
 @MainActor
 public class VideoStreamPlayback: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VideoStreamPlayback") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VideoStreamPlayback")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func mix_audio(num_frames: Int, buffer: VariantBox, offset: Int = 0) -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "mix_audio", args: [VariantBox(num_frames), VariantBox(buffer), VariantBox(offset)])
@@ -51396,6 +54012,12 @@ public class VideoStreamPlayback: Resource {
 @MainActor
 public class VisualInstance3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualInstance3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualInstance3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_base(base: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_base", args: [VariantBox(base)])
 	}
@@ -51472,6 +54094,12 @@ public class VisualInstance3D: Node3D {
 @MainActor
 public class VisualShaderGroup: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderGroup") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderGroup")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_group_name(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_group_name", args: [VariantBox(name)])
 	}
@@ -51631,6 +54259,12 @@ public class VisualShaderGroup: Resource {
 @MainActor
 public class VisualShaderNode: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNode") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNode")
+		}
+		self.init(ptr: raw)
+	}
 	public enum PortType: Int, Sendable, CaseIterable {
 		case scalar = 0
 		case scalarInt = 1
@@ -51721,6 +54355,12 @@ public class VisualShaderNode: Resource {
 @MainActor
 public class VoxelGIData: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VoxelGIData") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VoxelGIData")
+		}
+		self.init(ptr: raw)
+	}
 	public func allocate(to_cell_xform: Transform3D, aabb: AABB, octree_size: Vector3, octree_cells: VariantBox, data_cells: VariantBox, distance_field: VariantBox, level_counts: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "allocate", args: [VariantBox(to_cell_xform), VariantBox(aabb), VariantBox(octree_size), VariantBox(octree_cells), VariantBox(data_cells), VariantBox(distance_field), VariantBox(level_counts)])
 	}
@@ -51855,6 +54495,12 @@ public class VoxelGIData: Resource {
 @MainActor
 public class WebRTCDataChannel: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("WebRTCDataChannel") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class WebRTCDataChannel")
+		}
+		self.init(ptr: raw)
+	}
 	public enum WriteMode: Int, Sendable, CaseIterable {
 		case text = 0
 		case binary = 1
@@ -51934,6 +54580,12 @@ public class WebRTCDataChannel: PacketPeer {
 @MainActor
 public class WebRTCPeerConnectionExtension: WebRTCPeerConnection {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("WebRTCPeerConnectionExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class WebRTCPeerConnectionExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func _get_connection_state() -> WebRTCPeerConnection.ConnectionState {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_connection_state", args: [])
@@ -51992,6 +54644,12 @@ public class WebRTCPeerConnectionExtension: WebRTCPeerConnection {
 @MainActor
 public class WebSocketPeer: PacketPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("WebSocketPeer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class WebSocketPeer")
+		}
+		self.init(ptr: raw)
+	}
 	public enum WriteMode: Int, Sendable, CaseIterable {
 		case text = 0
 		case binary = 1
@@ -52013,7 +54671,7 @@ public class WebSocketPeer: PacketPeer {
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func send(message: VariantBox, write_mode: WebSocketPeer.WriteMode) -> Error {
+	public func send(message: VariantBox, write_mode: WebSocketPeer.WriteMode = .binary) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "send", args: [VariantBox(message), VariantBox(write_mode.rawValue)])
 		return __ret.asEnum(Error.self)
 	}
@@ -52153,6 +54811,12 @@ public class WebSocketPeer: PacketPeer {
 @MainActor
 public class WebXRInterface: XRInterface {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("WebXRInterface") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class WebXRInterface")
+		}
+		self.init(ptr: raw)
+	}
 	public enum TargetRayMode: Int, Sendable, CaseIterable {
 		case unknown = 0
 		case gaze = 1
@@ -52321,6 +54985,12 @@ public class WebXRInterface: XRInterface {
 @MainActor
 public class Window: Viewport {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Window") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Window")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Mode: Int, Sendable, CaseIterable {
 		case windowed = 0
 		case minimized = 1
@@ -53168,6 +55838,12 @@ public class Window: Viewport {
 @MainActor
 public class World2D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("World2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class World2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_canvas() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_canvas", args: [])
@@ -53209,6 +55885,12 @@ public class World2D: Resource {
 @MainActor
 public class World3D: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("World3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class World3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_space() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_space", args: [])
@@ -53286,6 +55968,12 @@ public class World3D: Resource {
 @MainActor
 public class X509Certificate: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("X509Certificate") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class X509Certificate")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func save(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "save", args: [VariantBox(path)])
@@ -53311,6 +55999,12 @@ public class X509Certificate: Resource {
 @MainActor
 public class XRFaceModifier3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRFaceModifier3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRFaceModifier3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_face_tracker(tracker_name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_face_tracker", args: [VariantBox(tracker_name)])
 	}
@@ -53340,6 +56034,12 @@ public class XRFaceModifier3D: Node3D {
 @MainActor
 public class XRFaceTracker: XRTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRFaceTracker") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRFaceTracker")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_blend_shape(blend_shape: XRFaceTracker.BlendShapeEntry) -> Double {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_blend_shape", args: [VariantBox(blend_shape.rawValue)])
@@ -53365,6 +56065,12 @@ public class XRFaceTracker: XRTracker {
 @MainActor
 public class XRInterfaceExtension: XRInterface {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRInterfaceExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRInterfaceExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_color_texture() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_color_texture", args: [])
@@ -53549,6 +56255,12 @@ public class XRInterfaceExtension: XRInterface {
 @MainActor
 public class XRNode3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRNode3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRNode3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_tracker(tracker_name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_tracker", args: [VariantBox(tracker_name)])
 	}
@@ -53611,6 +56323,12 @@ public class XRNode3D: Node3D {
 @MainActor
 public class XROrigin3D: Node3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XROrigin3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XROrigin3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_world_scale(world_scale: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_world_scale", args: [VariantBox(world_scale)])
 	}
@@ -53640,6 +56358,12 @@ public class XROrigin3D: Node3D {
 @MainActor
 public class XRPositionalTracker: XRTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRPositionalTracker") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRPositionalTracker")
+		}
+		self.init(ptr: raw)
+	}
 	public enum TrackerHand: Int, Sendable, CaseIterable {
 		case unknown = 0
 		case left = 1
@@ -53718,6 +56442,12 @@ public class XRPositionalTracker: XRTracker {
 @MainActor
 public class AcceptDialog: Window {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AcceptDialog") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AcceptDialog")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_ok_button() -> Button? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_ok_button", args: [])
@@ -53822,6 +56552,12 @@ public class AcceptDialog: Window {
 @MainActor
 public class AnimatedSprite2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimatedSprite2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimatedSprite2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_sprite_frames(sprite_frames: SpriteFrames) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_sprite_frames", args: [VariantBox(sprite_frames)])
 	}
@@ -53991,6 +56727,12 @@ public class AnimatedSprite2D: Node2D {
 @MainActor
 public class AnimationNodeExtension: AnimationNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func is_looping(node_info: VariantBox) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_looping", args: [VariantBox(node_info)])
@@ -54011,6 +56753,12 @@ public class AnimationNodeExtension: AnimationNode {
 @MainActor
 public class AnimationNodeObserverBlendSpace: AnimationNodeObserver {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeObserverBlendSpace") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeObserverBlendSpace")
+		}
+		self.init(ptr: raw)
+	}
 	public func emit_closest_point_changed(closest_point_name: String) {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("closest_point_changed"), VariantBox(closest_point_name)])
 	}
@@ -54019,6 +56767,12 @@ public class AnimationNodeObserverBlendSpace: AnimationNodeObserver {
 @MainActor
 public class AnimationNodeObserverOneShot: AnimationNodeObserver {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeObserverOneShot") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeObserverOneShot")
+		}
+		self.init(ptr: raw)
+	}
 	public func emit_started() {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("started")])
 	}
@@ -54036,6 +56790,12 @@ public class AnimationNodeObserverOneShot: AnimationNodeObserver {
 @MainActor
 public class AnimationNodeObserverTransition: AnimationNodeObserver {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeObserverTransition") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeObserverTransition")
+		}
+		self.init(ptr: raw)
+	}
 	public func emit_state_started(state: String) {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("state_started"), VariantBox(state)])
 	}
@@ -54047,11 +56807,23 @@ public class AnimationNodeObserverTransition: AnimationNodeObserver {
 @MainActor
 public class AnimationNodeOutput: AnimationNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeOutput") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeOutput")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AnimationNodeSync: AnimationNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeSync") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeSync")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_use_sync(enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_use_sync", args: [VariantBox(enable)])
 	}
@@ -54069,11 +56841,23 @@ public class AnimationNodeSync: AnimationNode {
 @MainActor
 public class AnimationNodeTimeScale: AnimationNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeTimeScale") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeTimeScale")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AnimationNodeTimeSeek: AnimationNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeTimeSeek") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeTimeSeek")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_explicit_elapse(enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_explicit_elapse", args: [VariantBox(enable)])
 	}
@@ -54091,11 +56875,23 @@ public class AnimationNodeTimeSeek: AnimationNode {
 @MainActor
 public class AnimationRootNode: AnimationNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationRootNode") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationRootNode")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class Area3D: CollisionObject3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Area3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Area3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum SpaceOverride: Int, Sendable, CaseIterable {
 		case disabled = 0
 		case combine = 1
@@ -54450,6 +57246,12 @@ public class Area3D: CollisionObject3D {
 @MainActor
 public class ArrayMesh: Mesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ArrayMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ArrayMesh")
+		}
+		self.init(ptr: raw)
+	}
 	public func add_blend_shape(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_blend_shape", args: [VariantBox(name)])
 	}
@@ -54593,6 +57395,12 @@ public class ArrayMesh: Mesh {
 @MainActor
 public class ArrayOccluder3D: Occluder3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ArrayOccluder3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ArrayOccluder3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_arrays(vertices: VariantBox, indices: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_arrays", args: [VariantBox(vertices), VariantBox(indices)])
 	}
@@ -54615,6 +57423,12 @@ public class ArrayOccluder3D: Occluder3D {
 @MainActor
 public class AudioEffectAmplify: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectAmplify") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectAmplify")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_volume_db(volume: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_volume_db", args: [VariantBox(volume)])
 	}
@@ -54644,6 +57458,12 @@ public class AudioEffectAmplify: AudioEffect {
 @MainActor
 public class AudioEffectCapture: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectCapture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectCapture")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func can_get_buffer(frames: Int) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "can_get_buffer", args: [VariantBox(frames)])
@@ -54694,6 +57514,12 @@ public class AudioEffectCapture: AudioEffect {
 @MainActor
 public class AudioEffectChorus: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectChorus") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectChorus")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_voice_count(voices: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_voice_count", args: [VariantBox(voices)])
 	}
@@ -54879,6 +57705,12 @@ public class AudioEffectChorus: AudioEffect {
 @MainActor
 public class AudioEffectCompressor: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectCompressor") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectCompressor")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_threshold(threshold: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_threshold", args: [VariantBox(threshold)])
 	}
@@ -54968,6 +57800,12 @@ public class AudioEffectCompressor: AudioEffect {
 @MainActor
 public class AudioEffectDelay: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectDelay") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectDelay")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_dry(amount: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_dry", args: [VariantBox(amount)])
 	}
@@ -55141,6 +57979,12 @@ public class AudioEffectDelay: AudioEffect {
 @MainActor
 public class AudioEffectDistortion: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectDistortion") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectDistortion")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Mode: Int, Sendable, CaseIterable {
 		case clip = 0
 		case atan = 1
@@ -55213,6 +58057,12 @@ public class AudioEffectDistortion: AudioEffect {
 @MainActor
 public class AudioEffectEQ: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectEQ") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectEQ")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_band_gain_db(band_idx: Int, volume_db: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_band_gain_db", args: [VariantBox(band_idx), VariantBox(volume_db)])
 	}
@@ -55231,6 +58081,12 @@ public class AudioEffectEQ: AudioEffect {
 @MainActor
 public class AudioEffectFilter: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectFilter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectFilter")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_cutoff(freq: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_cutoff", args: [VariantBox(freq)])
 	}
@@ -55284,6 +58140,12 @@ public class AudioEffectFilter: AudioEffect {
 @MainActor
 public class AudioEffectHardLimiter: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectHardLimiter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectHardLimiter")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_ceiling_db(ceiling: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_ceiling_db", args: [VariantBox(ceiling)])
 	}
@@ -55325,6 +58187,12 @@ public class AudioEffectHardLimiter: AudioEffect {
 @MainActor
 public class AudioEffectLimiter: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectLimiter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectLimiter")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_ceiling_db(ceiling: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_ceiling_db", args: [VariantBox(ceiling)])
 	}
@@ -55378,6 +58246,12 @@ public class AudioEffectLimiter: AudioEffect {
 @MainActor
 public class AudioEffectPanner: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectPanner") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectPanner")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_pan(cpanume: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_pan", args: [VariantBox(cpanume)])
 	}
@@ -55395,6 +58269,12 @@ public class AudioEffectPanner: AudioEffect {
 @MainActor
 public class AudioEffectPhaser: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectPhaser") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectPhaser")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_range_min_hz(hz: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_range_min_hz", args: [VariantBox(hz)])
 	}
@@ -55460,6 +58340,12 @@ public class AudioEffectPhaser: AudioEffect {
 @MainActor
 public class AudioEffectPitchShift: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectPitchShift") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectPitchShift")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_pitch_scale(rate: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_pitch_scale", args: [VariantBox(rate)])
 	}
@@ -55501,6 +58387,12 @@ public class AudioEffectPitchShift: AudioEffect {
 @MainActor
 public class AudioEffectRecord: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectRecord") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectRecord")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_recording_active(record: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_recording_active", args: [VariantBox(record)])
 	}
@@ -55531,6 +58423,12 @@ public class AudioEffectRecord: AudioEffect {
 @MainActor
 public class AudioEffectReverb: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectReverb") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectReverb")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_predelay_msec(msec: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_predelay_msec", args: [VariantBox(msec)])
 	}
@@ -55640,6 +58538,12 @@ public class AudioEffectReverb: AudioEffect {
 @MainActor
 public class AudioEffectSpectrumAnalyzer: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectSpectrumAnalyzer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectSpectrumAnalyzer")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_buffer_length(seconds: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_buffer_length", args: [VariantBox(seconds)])
 	}
@@ -55669,6 +58573,12 @@ public class AudioEffectSpectrumAnalyzer: AudioEffect {
 @MainActor
 public class AudioEffectStereoEnhance: AudioEffect {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectStereoEnhance") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectStereoEnhance")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_pan_pullout(amount: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_pan_pullout", args: [VariantBox(amount)])
 	}
@@ -55710,6 +58620,12 @@ public class AudioEffectStereoEnhance: AudioEffect {
 @MainActor
 public class AudioListener2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioListener2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioListener2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func make_current() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "make_current", args: [])
 	}
@@ -55726,6 +58642,12 @@ public class AudioListener2D: Node2D {
 @MainActor
 public class AudioStreamGenerator: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamGenerator") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamGenerator")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_mix_rate(hz: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_mix_rate", args: [VariantBox(hz)])
 	}
@@ -55767,6 +58689,12 @@ public class AudioStreamGenerator: AudioStream {
 @MainActor
 public class AudioStreamGeneratorPlayback: AudioStreamPlaybackResampled {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamGeneratorPlayback") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamGeneratorPlayback")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func push_frame(frame: Vector2) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "push_frame", args: [VariantBox(frame)])
@@ -55800,6 +58728,12 @@ public class AudioStreamGeneratorPlayback: AudioStreamPlaybackResampled {
 @MainActor
 public class AudioStreamInteractive: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamInteractive") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamInteractive")
+		}
+		self.init(ptr: raw)
+	}
 	public enum TransitionFromTime: Int, Sendable, CaseIterable {
 		case immediate = 0
 		case nextBeat = 1
@@ -56943,6 +59877,12 @@ public class AudioStreamInteractive: AudioStream {
 @MainActor
 public class AudioStreamMP3: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamMP3") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamMP3")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func load_from_buffer(stream_data: VariantBox) -> AudioStreamMP3? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_from_buffer", args: [VariantBox(stream_data)])
@@ -57030,11 +59970,23 @@ public class AudioStreamMP3: AudioStream {
 @MainActor
 public class AudioStreamMicrophone: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamMicrophone") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamMicrophone")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AudioStreamOggVorbis: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamOggVorbis") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamOggVorbis")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func load_from_buffer(stream_data: VariantBox) -> AudioStreamOggVorbis? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_from_buffer", args: [VariantBox(stream_data)])
@@ -57134,11 +60086,23 @@ public class AudioStreamOggVorbis: AudioStream {
 @MainActor
 public class AudioStreamPlaybackOggVorbis: AudioStreamPlaybackResampled {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamPlaybackOggVorbis") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamPlaybackOggVorbis")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AudioStreamPlayer2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamPlayer2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamPlayer2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_stream(stream: AudioStream) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_stream", args: [VariantBox(stream)])
 	}
@@ -57339,6 +60303,12 @@ public class AudioStreamPlayer2D: Node2D {
 @MainActor
 public class AudioStreamPlaylist: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamPlaylist") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamPlaylist")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_stream_count(stream_count: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_stream_count", args: [VariantBox(stream_count)])
 	}
@@ -57661,6 +60631,12 @@ public class AudioStreamPlaylist: AudioStream {
 @MainActor
 public class AudioStreamPolyphonic: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamPolyphonic") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamPolyphonic")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_polyphony(voices: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_polyphony", args: [VariantBox(voices)])
 	}
@@ -57678,6 +60654,12 @@ public class AudioStreamPolyphonic: AudioStream {
 @MainActor
 public class AudioStreamRandomizer: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamRandomizer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamRandomizer")
+		}
+		self.init(ptr: raw)
+	}
 	public func add_stream(index: Int, stream: AudioStream, weight: Double = 1.0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_stream", args: [VariantBox(index), VariantBox(stream), VariantBox(weight)])
 	}
@@ -57772,6 +60754,12 @@ public class AudioStreamRandomizer: AudioStream {
 @MainActor
 public class AudioStreamSynchronized: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamSynchronized") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamSynchronized")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_stream_count(stream_count: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_stream_count", args: [VariantBox(stream_count)])
 	}
@@ -58061,6 +61049,12 @@ public class AudioStreamSynchronized: AudioStream {
 @MainActor
 public class AudioStreamWAV: AudioStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioStreamWAV") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioStreamWAV")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Format: Int, Sendable, CaseIterable {
 		case 8Bits_ = 0
 		case 16Bits_ = 1
@@ -58183,6 +61177,12 @@ public class AudioStreamWAV: AudioStream {
 @MainActor
 public class BackBufferCopy: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("BackBufferCopy") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class BackBufferCopy")
+		}
+		self.init(ptr: raw)
+	}
 	public enum CopyMode: Int, Sendable, CaseIterable {
 		case disabled = 0
 		case rect = 1
@@ -58217,6 +61217,12 @@ public class BackBufferCopy: Node2D {
 @MainActor
 public class BaseButton: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("BaseButton") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class BaseButton")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ActionMode: Int, Sendable, CaseIterable {
 		case buttonPress = 0
 		case buttonRelease = 1
@@ -58384,6 +61390,12 @@ public class BaseButton: Control {
 @MainActor
 public class BaseMaterial3D: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("BaseMaterial3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class BaseMaterial3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum TextureFilter: Int, Sendable, CaseIterable {
 		case nearest = 0
 		case linear = 1
@@ -59734,6 +62746,12 @@ public class BaseMaterial3D: Material {
 @MainActor
 public class BlitMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("BlitMaterial") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class BlitMaterial")
+		}
+		self.init(ptr: raw)
+	}
 	public enum BlendMode: Int, Sendable, CaseIterable {
 		case mix = 0
 		case add = 1
@@ -59759,6 +62777,12 @@ public class BlitMaterial: Material {
 @MainActor
 public class Bone2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Bone2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Bone2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_rest(rest: Transform2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_rest", args: [VariantBox(rest)])
 	}
@@ -59813,6 +62837,12 @@ public class Bone2D: Node2D {
 @MainActor
 public class BoneConstraint3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("BoneConstraint3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class BoneConstraint3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ReferenceType: Int, Sendable, CaseIterable {
 		case bone = 0
 		case node = 1
@@ -59889,6 +62919,12 @@ public class BoneConstraint3D: SkeletonModifier3D {
 @MainActor
 public class BoneSpaceAdjuster3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("BoneSpaceAdjuster3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class BoneSpaceAdjuster3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_use_bone_skin_scale_for_all_bones(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_use_bone_skin_scale_for_all_bones", args: [VariantBox(enabled)])
 	}
@@ -59953,6 +62989,12 @@ public class BoneSpaceAdjuster3D: SkeletonModifier3D {
 @MainActor
 public class BoneTwistDisperser3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("BoneTwistDisperser3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class BoneTwistDisperser3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum DisperseMode: Int, Sendable, CaseIterable {
 		case even = 0
 		case weighted = 1
@@ -60111,6 +63153,12 @@ public class BoneTwistDisperser3D: SkeletonModifier3D {
 @MainActor
 public class BoxOccluder3D: Occluder3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("BoxOccluder3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class BoxOccluder3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_size(size: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_size", args: [VariantBox(size)])
 	}
@@ -60128,6 +63176,12 @@ public class BoxOccluder3D: Occluder3D {
 @MainActor
 public class BoxShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("BoxShape3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class BoxShape3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_size(size: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_size", args: [VariantBox(size)])
 	}
@@ -60145,6 +63199,12 @@ public class BoxShape3D: Shape3D {
 @MainActor
 public class CPUParticles2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CPUParticles2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CPUParticles2D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum DrawOrder: Int, Sendable, CaseIterable {
 		case index = 0
 		case lifetime = 1
@@ -60820,6 +63880,12 @@ public class CPUParticles2D: Node2D {
 @MainActor
 public class Camera2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Camera2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Camera2D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum AnchorMode: Int, Sendable, CaseIterable {
 		case fixedTopLeft = 0
 		case dragCenter = 1
@@ -61178,6 +64244,12 @@ public class Camera2D: Node2D {
 @MainActor
 public class CameraAttributesPhysical: CameraAttributes {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CameraAttributesPhysical") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CameraAttributesPhysical")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_aperture(aperture: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_aperture", args: [VariantBox(aperture)])
 	}
@@ -61296,6 +64368,12 @@ public class CameraAttributesPhysical: CameraAttributes {
 @MainActor
 public class CameraAttributesPractical: CameraAttributes {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CameraAttributesPractical") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CameraAttributesPractical")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_dof_blur_far_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_dof_blur_far_enabled", args: [VariantBox(enabled)])
 	}
@@ -61417,6 +64495,12 @@ public class CameraAttributesPractical: CameraAttributes {
 @MainActor
 public class CanvasGroup: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CanvasGroup") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CanvasGroup")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_fit_margin(fit_margin: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_fit_margin", args: [VariantBox(fit_margin)])
 	}
@@ -61462,6 +64546,12 @@ public class CanvasGroup: Node2D {
 @MainActor
 public class CanvasItemMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CanvasItemMaterial") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CanvasItemMaterial")
+		}
+		self.init(ptr: raw)
+	}
 	public enum BlendMode: Int, Sendable, CaseIterable {
 		case mix = 0
 		case add = 1
@@ -61551,6 +64641,12 @@ public class CanvasItemMaterial: Material {
 @MainActor
 public class CanvasModulate: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CanvasModulate") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CanvasModulate")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_color(color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_color", args: [VariantBox(color)])
 	}
@@ -61568,6 +64664,12 @@ public class CanvasModulate: Node2D {
 @MainActor
 public class CapsuleShape2D: Shape2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CapsuleShape2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CapsuleShape2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(radius)])
 	}
@@ -61609,6 +64711,12 @@ public class CapsuleShape2D: Shape2D {
 @MainActor
 public class CapsuleShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CapsuleShape3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CapsuleShape3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(radius)])
 	}
@@ -61650,6 +64758,12 @@ public class CapsuleShape3D: Shape3D {
 @MainActor
 public class CircleShape2D: Shape2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CircleShape2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CircleShape2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(radius)])
 	}
@@ -61667,6 +64781,12 @@ public class CircleShape2D: Shape2D {
 @MainActor
 public class CodeHighlighter: SyntaxHighlighter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CodeHighlighter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CodeHighlighter")
+		}
+		self.init(ptr: raw)
+	}
 	public func add_keyword_color(keyword: String, color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_keyword_color", args: [VariantBox(keyword), VariantBox(color)])
 	}
@@ -61808,6 +64928,12 @@ public class CodeHighlighter: SyntaxHighlighter {
 @MainActor
 public class CollisionObject2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CollisionObject2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CollisionObject2D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum DisableMode: Int, Sendable, CaseIterable {
 		case remove = 0
 		case makeStatic = 1
@@ -62024,6 +65150,12 @@ public class CollisionObject2D: Node2D {
 @MainActor
 public class CollisionPolygon2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CollisionPolygon2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CollisionPolygon2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_polygon(polygon: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_polygon", args: [VariantBox(polygon)])
 	}
@@ -62105,6 +65237,12 @@ public class CollisionPolygon2D: Node2D {
 @MainActor
 public class CollisionShape2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CollisionShape2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CollisionShape2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_shape(shape: Shape2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_shape", args: [VariantBox(shape)])
 	}
@@ -62186,6 +65324,12 @@ public class CollisionShape2D: Node2D {
 @MainActor
 public class ColorRect: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ColorRect") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ColorRect")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_color(color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_color", args: [VariantBox(color)])
 	}
@@ -62203,6 +65347,12 @@ public class ColorRect: Control {
 @MainActor
 public class ConcavePolygonShape2D: Shape2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ConcavePolygonShape2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ConcavePolygonShape2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_segments(segments: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_segments", args: [VariantBox(segments)])
 	}
@@ -62220,6 +65370,12 @@ public class ConcavePolygonShape2D: Shape2D {
 @MainActor
 public class ConcavePolygonShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ConcavePolygonShape3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ConcavePolygonShape3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_faces(faces: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_faces", args: [VariantBox(faces)])
 	}
@@ -62249,6 +65405,12 @@ public class ConcavePolygonShape3D: Shape3D {
 @MainActor
 public class ConeTwistJoint3D: Joint3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ConeTwistJoint3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ConeTwistJoint3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Param: Int, Sendable, CaseIterable {
 		case swingSpan = 0
 		case twistSpan = 1
@@ -62290,6 +65452,12 @@ public class ConeTwistJoint3D: Joint3D {
 @MainActor
 public class Container: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Container") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Container")
+		}
+		self.init(ptr: raw)
+	}
 	public func queue_sort() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "queue_sort", args: [])
 	}
@@ -62329,6 +65497,12 @@ public class Container: Control {
 @MainActor
 public class ConvexPolygonShape2D: Shape2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ConvexPolygonShape2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ConvexPolygonShape2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_point_cloud(point_cloud: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_point_cloud", args: [VariantBox(point_cloud)])
 	}
@@ -62349,6 +65523,12 @@ public class ConvexPolygonShape2D: Shape2D {
 @MainActor
 public class ConvexPolygonShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ConvexPolygonShape3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ConvexPolygonShape3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_points(points: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_points", args: [VariantBox(points)])
 	}
@@ -62366,6 +65546,12 @@ public class ConvexPolygonShape3D: Shape3D {
 @MainActor
 public class CylinderShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CylinderShape3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CylinderShape3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(radius)])
 	}
@@ -62395,6 +65581,12 @@ public class CylinderShape3D: Shape3D {
 @MainActor
 public class Decal: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Decal") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Decal")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_size(size: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_size", args: [VariantBox(size)])
 	}
@@ -62576,6 +65768,12 @@ public class Decal: VisualInstance3D {
 @MainActor
 public class ENetMultiplayerPeer: MultiplayerPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ENetMultiplayerPeer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ENetMultiplayerPeer")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func create_server(port: Int, max_clients: Int = 32, max_channels: Int = 0, in_bandwidth: Int = 0, out_bandwidth: Int = 0) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_server", args: [VariantBox(port), VariantBox(max_clients), VariantBox(max_channels), VariantBox(in_bandwidth), VariantBox(out_bandwidth)])
@@ -62618,11 +65816,23 @@ public class ENetMultiplayerPeer: MultiplayerPeer {
 @MainActor
 public class FBXDocument: GLTFDocument {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("FBXDocument") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class FBXDocument")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class FBXState: GLTFState {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("FBXState") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class FBXState")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_allow_geometry_helper_nodes() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_allow_geometry_helper_nodes", args: [])
@@ -62640,6 +65850,12 @@ public class FBXState: GLTFState {
 @MainActor
 public class FastNoiseLite: Noise {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("FastNoiseLite") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class FastNoiseLite")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_noise_type(type: FastNoiseLite.NoiseType) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_noise_type", args: [VariantBox(type.rawValue)])
 	}
@@ -62912,6 +66128,12 @@ public class FastNoiseLite: Noise {
 @MainActor
 public class FogMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("FogMaterial") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class FogMaterial")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_density(density: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_density", args: [VariantBox(density)])
 	}
@@ -62989,6 +66211,12 @@ public class FogMaterial: Material {
 @MainActor
 public class FogVolume: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("FogVolume") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class FogVolume")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_size(size: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_size", args: [VariantBox(size)])
 	}
@@ -63030,6 +66258,12 @@ public class FogVolume: VisualInstance3D {
 @MainActor
 public class FontFile: Font {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("FontFile") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class FontFile")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func load_bitmap_font(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load_bitmap_font", args: [VariantBox(path)])
@@ -63539,6 +66773,12 @@ public class FontFile: Font {
 @MainActor
 public class FontVariation: Font {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("FontVariation") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class FontVariation")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_base_font(font: Font) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_base_font", args: [VariantBox(font)])
 	}
@@ -63686,6 +66926,12 @@ public class FontVariation: Font {
 @MainActor
 public class GDScript: Script {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GDScript") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GDScript")
+		}
+		self.init(ptr: raw)
+	}
 	public func new() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "new", args: [])
 	}
@@ -63694,26 +66940,56 @@ public class GDScript: Script {
 @MainActor
 public class GLTFDocumentExtensionConvertImporterMesh: GLTFDocumentExtension {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFDocumentExtensionConvertImporterMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFDocumentExtensionConvertImporterMesh")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class GLTFDocumentExtensionPhysics: GLTFDocumentExtension {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFDocumentExtensionPhysics") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFDocumentExtensionPhysics")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class GLTFDocumentExtensionTextureKTX: GLTFDocumentExtension {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFDocumentExtensionTextureKTX") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFDocumentExtensionTextureKTX")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class GLTFDocumentExtensionTextureWebP: GLTFDocumentExtension {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GLTFDocumentExtensionTextureWebP") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GLTFDocumentExtensionTextureWebP")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class GPUParticles2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GPUParticles2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GPUParticles2D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum DrawOrder: Int, Sendable, CaseIterable {
 		case index = 0
 		case lifetime = 1
@@ -64076,6 +67352,12 @@ public class GPUParticles2D: Node2D {
 @MainActor
 public class GPUParticlesAttractor3D: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GPUParticlesAttractor3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GPUParticlesAttractor3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_cull_mask(mask: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_cull_mask", args: [VariantBox(mask)])
 	}
@@ -64129,6 +67411,12 @@ public class GPUParticlesAttractor3D: VisualInstance3D {
 @MainActor
 public class GPUParticlesCollision3D: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GPUParticlesCollision3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GPUParticlesCollision3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_cull_mask(mask: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_cull_mask", args: [VariantBox(mask)])
 	}
@@ -64146,6 +67434,12 @@ public class GPUParticlesCollision3D: VisualInstance3D {
 @MainActor
 public class Generic6DOFJoint3D: Joint3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Generic6DOFJoint3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Generic6DOFJoint3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Param: Int, Sendable, CaseIterable {
 		case linearLowerLimit = 0
 		case linearUpperLimit = 1
@@ -64644,6 +67938,12 @@ public class Generic6DOFJoint3D: Joint3D {
 @MainActor
 public class GeometryInstance3D: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GeometryInstance3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GeometryInstance3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ShadowCastingSetting: Int, Sendable, CaseIterable {
 		case off = 0
 		case on = 1
@@ -64872,6 +68172,12 @@ public class GeometryInstance3D: VisualInstance3D {
 @MainActor
 public class GraphEdit: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GraphEdit") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GraphEdit")
+		}
+		self.init(ptr: raw)
+	}
 	public enum GridPattern: Int, Sendable, CaseIterable {
 		case lines = 0
 		case dots = 1
@@ -65371,6 +68677,12 @@ public class GraphEdit: Control {
 @MainActor
 public class HeightMapShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("HeightMapShape3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class HeightMapShape3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_map_width(width: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_map_width", args: [VariantBox(width)])
 	}
@@ -65425,6 +68737,12 @@ public class HeightMapShape3D: Shape3D {
 @MainActor
 public class HingeJoint3D: Joint3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("HingeJoint3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class HingeJoint3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Param: Int, Sendable, CaseIterable {
 		case bias = 0
 		case limitUpper = 1
@@ -65502,6 +68820,12 @@ public class HingeJoint3D: Joint3D {
 @MainActor
 public class IKModifier3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("IKModifier3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class IKModifier3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_setting_count(count: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_setting_count", args: [VariantBox(count)])
 	}
@@ -65533,6 +68857,12 @@ public class IKModifier3D: SkeletonModifier3D {
 @MainActor
 public class ImmediateMesh: Mesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ImmediateMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ImmediateMesh")
+		}
+		self.init(ptr: raw)
+	}
 	public func surface_begin(primitive: Mesh.PrimitiveType, material: Material) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "surface_begin", args: [VariantBox(primitive.rawValue), VariantBox(material)])
 	}
@@ -65568,6 +68898,12 @@ public class ImmediateMesh: Mesh {
 @MainActor
 public class InputEventAction: InputEvent {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputEventAction") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputEventAction")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_action(action: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_action", args: [VariantBox(action)])
 	}
@@ -65616,6 +68952,12 @@ public class InputEventAction: InputEvent {
 @MainActor
 public class InputEventFromWindow: InputEvent {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputEventFromWindow") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputEventFromWindow")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_window_id(id: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_window_id", args: [VariantBox(id)])
 	}
@@ -65633,6 +68975,12 @@ public class InputEventFromWindow: InputEvent {
 @MainActor
 public class InputEventJoypadButton: InputEvent {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputEventJoypadButton") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputEventJoypadButton")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_button_index(button_index: JoyButton) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_button_index", args: [VariantBox(button_index.rawValue)])
 	}
@@ -65669,6 +69017,12 @@ public class InputEventJoypadButton: InputEvent {
 @MainActor
 public class InputEventJoypadMotion: InputEvent {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputEventJoypadMotion") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputEventJoypadMotion")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_axis(axis: JoyAxis) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_axis", args: [VariantBox(axis.rawValue)])
 	}
@@ -65698,6 +69052,12 @@ public class InputEventJoypadMotion: InputEvent {
 @MainActor
 public class InputEventMIDI: InputEvent {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputEventMIDI") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputEventMIDI")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_channel(channel: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_channel", args: [VariantBox(channel)])
 	}
@@ -65799,6 +69159,12 @@ public class InputEventMIDI: InputEvent {
 @MainActor
 public class InputEventShortcut: InputEvent {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputEventShortcut") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputEventShortcut")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_shortcut(shortcut: Shortcut) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_shortcut", args: [VariantBox(shortcut)])
 	}
@@ -65816,6 +69182,12 @@ public class InputEventShortcut: InputEvent {
 @MainActor
 public class ItemList: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ItemList") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ItemList")
+		}
+		self.init(ptr: raw)
+	}
 	public enum IconMode: Int, Sendable, CaseIterable {
 		case top = 0
 		case left = 1
@@ -66263,6 +69635,12 @@ public class ItemList: Control {
 @MainActor
 public class Joint2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Joint2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Joint2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_node_a(node: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_node_a", args: [VariantBox(node)])
 	}
@@ -66321,6 +69699,12 @@ public class Joint2D: Node2D {
 @MainActor
 public class JointLimitationCone3D: JointLimitation3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("JointLimitationCone3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class JointLimitationCone3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_angle(angle: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_angle", args: [VariantBox(angle)])
 	}
@@ -66338,6 +69722,12 @@ public class JointLimitationCone3D: JointLimitation3D {
 @MainActor
 public class Label: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Label") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Label")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_horizontal_alignment(alignment: HorizontalAlignment) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment.rawValue)])
 	}
@@ -66685,6 +70075,12 @@ public class Label: Control {
 @MainActor
 public class Light2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Light2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Light2D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ShadowFilter: Int, Sendable, CaseIterable {
 		case none = 0
 		case pcf5 = 1
@@ -66896,6 +70292,12 @@ public class Light2D: Node2D {
 @MainActor
 public class Light3D: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Light3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Light3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Param: Int, Sendable, CaseIterable {
 		case energy = 0
 		case indirectEnergy = 1
@@ -67203,6 +70605,12 @@ public class Light3D: VisualInstance3D {
 @MainActor
 public class LightOccluder2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("LightOccluder2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class LightOccluder2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_occluder_polygon(polygon: OccluderPolygon2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_occluder_polygon", args: [VariantBox(polygon)])
 	}
@@ -67244,6 +70652,12 @@ public class LightOccluder2D: Node2D {
 @MainActor
 public class LightmapGI: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("LightmapGI") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class LightmapGI")
+		}
+		self.init(ptr: raw)
+	}
 	public enum BakeQuality: Int, Sendable, CaseIterable {
 		case low = 0
 		case medium = 1
@@ -67575,6 +70989,12 @@ public class LightmapGI: VisualInstance3D {
 @MainActor
 public class LimitAngularVelocityModifier3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("LimitAngularVelocityModifier3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class LimitAngularVelocityModifier3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_root_bone_name(index: Int, bone_name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_root_bone_name", args: [VariantBox(index), VariantBox(bone_name)])
 	}
@@ -67663,6 +71083,12 @@ public class LimitAngularVelocityModifier3D: SkeletonModifier3D {
 @MainActor
 public class Line2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Line2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Line2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_points(points: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_points", args: [VariantBox(points)])
 	}
@@ -67870,6 +71296,12 @@ public class Line2D: Node2D {
 @MainActor
 public class LineEdit: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("LineEdit") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class LineEdit")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ExpandMode: Int, Sendable, CaseIterable {
 		case originalSize = 0
 		case fitToText = 1
@@ -68448,6 +71880,12 @@ public class LineEdit: Control {
 @MainActor
 public class LookAtModifier3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("LookAtModifier3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class LookAtModifier3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum OriginFrom: Int, Sendable, CaseIterable {
 		case self_ = 0
 		case specificBone = 1
@@ -68857,6 +72295,12 @@ public class LookAtModifier3D: SkeletonModifier3D {
 @MainActor
 public class Marker2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Marker2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Marker2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_gizmo_extents(extents: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_gizmo_extents", args: [VariantBox(extents)])
 	}
@@ -68874,6 +72318,12 @@ public class Marker2D: Node2D {
 @MainActor
 public class MenuBar: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MenuBar") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MenuBar")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_switch_on_hover(enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_switch_on_hover", args: [VariantBox(enable)])
 	}
@@ -69005,6 +72455,12 @@ public class MenuBar: Control {
 @MainActor
 public class MeshInstance2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MeshInstance2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MeshInstance2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_mesh(mesh: Mesh) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_mesh", args: [VariantBox(mesh)])
 	}
@@ -69037,6 +72493,12 @@ public class MeshInstance2D: Node2D {
 @MainActor
 public class ModifierBoneTarget3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ModifierBoneTarget3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ModifierBoneTarget3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_bone_name(bone_name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_bone_name", args: [VariantBox(bone_name)])
 	}
@@ -69066,6 +72528,12 @@ public class ModifierBoneTarget3D: SkeletonModifier3D {
 @MainActor
 public class MultiMeshInstance2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MultiMeshInstance2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MultiMeshInstance2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_multimesh(multimesh: MultiMesh) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_multimesh", args: [VariantBox(multimesh)])
 	}
@@ -69098,6 +72566,12 @@ public class MultiMeshInstance2D: Node2D {
 @MainActor
 public class MultiplayerPeerExtension: MultiplayerPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MultiplayerPeerExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MultiplayerPeerExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func _get_packet(r_buffer: Int, r_buffer_size: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_packet", args: [VariantBox(r_buffer), VariantBox(r_buffer_size)])
@@ -69204,6 +72678,12 @@ public class MultiplayerPeerExtension: MultiplayerPeer {
 @MainActor
 public class NavigationLink2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationLink2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationLink2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_rid() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_rid", args: [])
@@ -69330,6 +72810,12 @@ public class NavigationLink2D: Node2D {
 @MainActor
 public class NavigationObstacle2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationObstacle2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationObstacle2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_rid() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_rid", args: [])
@@ -69448,6 +72934,12 @@ public class NavigationObstacle2D: Node2D {
 @MainActor
 public class NavigationRegion2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NavigationRegion2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NavigationRegion2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_rid() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_rid", args: [])
@@ -69573,6 +73065,12 @@ public class NavigationRegion2D: Node2D {
 @MainActor
 public class NinePatchRect: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NinePatchRect") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NinePatchRect")
+		}
+		self.init(ptr: raw)
+	}
 	public enum AxisStretchMode: Int, Sendable, CaseIterable {
 		case stretch = 0
 		case tile = 1
@@ -69678,6 +73176,12 @@ public class NinePatchRect: Control {
 @MainActor
 public class OccluderInstance3D: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OccluderInstance3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OccluderInstance3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_bake_mask(mask: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_bake_mask", args: [VariantBox(mask)])
 	}
@@ -69741,16 +73245,34 @@ public class OccluderInstance3D: VisualInstance3D {
 @MainActor
 public class OfflineMultiplayerPeer: MultiplayerPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OfflineMultiplayerPeer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OfflineMultiplayerPeer")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class OpenXRActionBindingModifier: OpenXRBindingModifier {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRActionBindingModifier") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRActionBindingModifier")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class OpenXRCompositionLayerCylinder: OpenXRCompositionLayer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRCompositionLayerCylinder") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRCompositionLayerCylinder")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(radius)])
 	}
@@ -69804,6 +73326,12 @@ public class OpenXRCompositionLayerCylinder: OpenXRCompositionLayer {
 @MainActor
 public class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRCompositionLayerEquirect") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRCompositionLayerEquirect")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(radius)])
 	}
@@ -69869,6 +73397,12 @@ public class OpenXRCompositionLayerEquirect: OpenXRCompositionLayer {
 @MainActor
 public class OpenXRCompositionLayerQuad: OpenXRCompositionLayer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRCompositionLayerQuad") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRCompositionLayerQuad")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_quad_size(size: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_quad_size", args: [VariantBox(size)])
 	}
@@ -69886,6 +73420,12 @@ public class OpenXRCompositionLayerQuad: OpenXRCompositionLayer {
 @MainActor
 public class OpenXRFoveatedInsetViewport: SubViewport {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRFoveatedInsetViewport") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRFoveatedInsetViewport")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_xr_origin3d() -> XROrigin3D? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_xr_origin3d", args: [])
@@ -69901,6 +73441,12 @@ public class OpenXRFoveatedInsetViewport: SubViewport {
 @MainActor
 public class OpenXRHapticVibration: OpenXRHapticBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRHapticVibration") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRHapticVibration")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_duration(duration: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_duration", args: [VariantBox(duration)])
 	}
@@ -69942,11 +73488,23 @@ public class OpenXRHapticVibration: OpenXRHapticBase {
 @MainActor
 public class OpenXRIPBindingModifier: OpenXRBindingModifier {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRIPBindingModifier") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRIPBindingModifier")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class OpenXRSpatialEntityTracker: XRPositionalTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRSpatialEntityTracker") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialEntityTracker")
+		}
+		self.init(ptr: raw)
+	}
 	public enum EntityTrackingState: Int, Sendable, CaseIterable {
 		case stopped = 1
 		case paused = 2
@@ -70006,11 +73564,23 @@ public class OpenXRSpatialEntityTracker: XRPositionalTracker {
 @MainActor
 public class OpenXRVisibilityMask: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRVisibilityMask") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRVisibilityMask")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class OptimizedTranslation: Translation {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OptimizedTranslation") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OptimizedTranslation")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func generate(from: Translation) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "generate", args: [VariantBox(from)])
@@ -70021,11 +73591,23 @@ public class OptimizedTranslation: Translation {
 @MainActor
 public class Panel: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Panel") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Panel")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class PanoramaSkyMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PanoramaSkyMaterial") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PanoramaSkyMaterial")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_panorama(texture: Texture2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_panorama", args: [VariantBox(texture)])
 	}
@@ -70067,6 +73649,12 @@ public class PanoramaSkyMaterial: Material {
 @MainActor
 public class Parallax2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Parallax2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Parallax2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func _camera_moved(transform: Transform2D, screen_offset: Vector2, adj_screen_offset: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_camera_moved", args: [VariantBox(transform), VariantBox(screen_offset), VariantBox(adj_screen_offset)])
 	}
@@ -70207,6 +73795,12 @@ public class Parallax2D: Node2D {
 @MainActor
 public class ParallaxLayer: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ParallaxLayer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ParallaxLayer")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_motion_scale(scale: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_motion_scale", args: [VariantBox(scale)])
 	}
@@ -70252,6 +73846,12 @@ public class ParallaxLayer: Node2D {
 @MainActor
 public class ParticleProcessMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ParticleProcessMaterial") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ParticleProcessMaterial")
+		}
+		self.init(ptr: raw)
+	}
 	public enum EmissionShape: Int, Sendable, CaseIterable {
 		case point = 0
 		case sphere = 1
@@ -71354,6 +74954,12 @@ public class ParticleProcessMaterial: Material {
 @MainActor
 public class Path2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Path2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Path2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_curve(curve: Curve2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_curve", args: [VariantBox(curve)])
 	}
@@ -71371,6 +74977,12 @@ public class Path2D: Node2D {
 @MainActor
 public class PathFollow2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PathFollow2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PathFollow2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_progress(progress: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_progress", args: [VariantBox(progress)])
 	}
@@ -71460,6 +75072,12 @@ public class PathFollow2D: Node2D {
 @MainActor
 public class PhysicalBoneSimulator3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicalBoneSimulator3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicalBoneSimulator3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func is_simulating_physics() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_simulating_physics", args: [])
@@ -71482,6 +75100,12 @@ public class PhysicalBoneSimulator3D: SkeletonModifier3D {
 @MainActor
 public class PhysicalSkyMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicalSkyMaterial") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicalSkyMaterial")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_rayleigh_coefficient(rayleigh: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_rayleigh_coefficient", args: [VariantBox(rayleigh)])
 	}
@@ -71627,6 +75251,12 @@ public class PhysicalSkyMaterial: Material {
 @MainActor
 public class PhysicsBody3D: CollisionObject3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsBody3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsBody3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func move_and_collide(motion: Vector3, test_only: Bool = false, safe_margin: Double = 0.001, recovery_as_collision: Bool = false, max_collisions: Int = 1) -> KinematicCollision3D? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "move_and_collide", args: [VariantBox(motion), VariantBox(test_only), VariantBox(safe_margin), VariantBox(recovery_as_collision), VariantBox(max_collisions)])
@@ -71694,6 +75324,12 @@ public class PhysicsBody3D: CollisionObject3D {
 @MainActor
 public class PinJoint3D: Joint3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PinJoint3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PinJoint3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Param: Int, Sendable, CaseIterable {
 		case bias = 0
 		case damping = 1
@@ -71724,11 +75360,23 @@ public class PinJoint3D: Joint3D {
 @MainActor
 public class PlaceholderMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PlaceholderMaterial") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PlaceholderMaterial")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class PlaceholderMesh: Mesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PlaceholderMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PlaceholderMesh")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_aabb(aabb: AABB) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_aabb", args: [VariantBox(aabb)])
 	}
@@ -71741,6 +75389,12 @@ public class PlaceholderMesh: Mesh {
 @MainActor
 public class Polygon2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Polygon2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Polygon2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_polygon(polygon: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_polygon", args: [VariantBox(polygon)])
 	}
@@ -71984,6 +75638,12 @@ public class Polygon2D: Node2D {
 @MainActor
 public class PolygonOccluder3D: Occluder3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PolygonOccluder3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PolygonOccluder3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_polygon(polygon: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_polygon", args: [VariantBox(polygon)])
 	}
@@ -72006,6 +75666,12 @@ public class PolygonOccluder3D: Occluder3D {
 @MainActor
 public class Popup: Window {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Popup") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Popup")
+		}
+		self.init(ptr: raw)
+	}
 	public func emit_popup_hide() {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("popup_hide")])
 	}
@@ -72014,6 +75680,12 @@ public class Popup: Window {
 @MainActor
 public class PrimitiveMesh: Mesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PrimitiveMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PrimitiveMesh")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_material(material: Material) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_material", args: [VariantBox(material)])
 	}
@@ -72092,6 +75764,12 @@ public class PrimitiveMesh: Mesh {
 @MainActor
 public class ProceduralSkyMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ProceduralSkyMaterial") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ProceduralSkyMaterial")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_sky_top_color(color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_sky_top_color", args: [VariantBox(color)])
 	}
@@ -72281,6 +75959,12 @@ public class ProceduralSkyMaterial: Material {
 @MainActor
 public class QuadOccluder3D: Occluder3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("QuadOccluder3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class QuadOccluder3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_size(size: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_size", args: [VariantBox(size)])
 	}
@@ -72298,6 +75982,12 @@ public class QuadOccluder3D: Occluder3D {
 @MainActor
 public class Range: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Range") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Range")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_value() -> Double {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_value", args: [])
@@ -72441,6 +76131,12 @@ public class Range: Control {
 @MainActor
 public class RayCast2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RayCast2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RayCast2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_enabled", args: [VariantBox(enabled)])
 	}
@@ -72590,6 +76286,12 @@ public class RayCast2D: Node2D {
 @MainActor
 public class RectangleShape2D: Shape2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RectangleShape2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RectangleShape2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_size(size: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_size", args: [VariantBox(size)])
 	}
@@ -72607,6 +76309,12 @@ public class RectangleShape2D: Shape2D {
 @MainActor
 public class ReferenceRect: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ReferenceRect") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ReferenceRect")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_border_color() -> Color {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_border_color", args: [])
@@ -72648,6 +76356,12 @@ public class ReferenceRect: Control {
 @MainActor
 public class ReflectionProbe: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ReflectionProbe") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ReflectionProbe")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_intensity(intensity: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_intensity", args: [VariantBox(intensity)])
 	}
@@ -72837,6 +76551,12 @@ public class ReflectionProbe: VisualInstance3D {
 @MainActor
 public class RemoteTransform2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RemoteTransform2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RemoteTransform2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_remote_node(path: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_remote_node", args: [VariantBox(path)])
 	}
@@ -72909,6 +76629,12 @@ public class RemoteTransform2D: Node2D {
 @MainActor
 public class RetargetModifier3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RetargetModifier3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RetargetModifier3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum TransformFlag: Int, Sendable, CaseIterable {
 		case position = 1
 		case rotation = 2
@@ -72992,6 +76718,12 @@ public class RetargetModifier3D: SkeletonModifier3D {
 @MainActor
 public class RichTextLabel: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RichTextLabel") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RichTextLabel")
+		}
+		self.init(ptr: raw)
+	}
 	public enum MetaUnderline: Int, Sendable, CaseIterable {
 		case never = 0
 		case always = 1
@@ -73013,13 +76745,13 @@ public class RichTextLabel: Control {
 	public func set_text(text: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_text", args: [VariantBox(text)])
 	}
-	public func add_hr(width: Int = 90, height: Int = 2, color: Color, alignment: HorizontalAlignment, width_in_percent: Bool = true, height_in_percent: Bool = false) {
+	public func add_hr(width: Int = 90, height: Int = 2, color: Color, alignment: HorizontalAlignment = .center, width_in_percent: Bool = true, height_in_percent: Bool = false) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_hr", args: [VariantBox(width), VariantBox(height), VariantBox(color), VariantBox(alignment.rawValue), VariantBox(width_in_percent), VariantBox(height_in_percent)])
 	}
-	public func add_image(image: Texture2D, width: Double = 0, height: Double = 0, color: Color, inline_align: InlineAlignment, region: Rect2, key: VariantBox, pad: Bool = false, tooltip: String, width_unit: RichTextLabel.ImageUnit, height_unit: RichTextLabel.ImageUnit, alt_text: String) {
+	public func add_image(image: Texture2D, width: Double = 0, height: Double = 0, color: Color, inline_align: InlineAlignment = .center, region: Rect2, key: VariantBox, pad: Bool = false, tooltip: String, width_unit: RichTextLabel.ImageUnit = .pixel, height_unit: RichTextLabel.ImageUnit = .pixel, alt_text: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_image", args: [VariantBox(image), VariantBox(width), VariantBox(height), VariantBox(color), VariantBox(inline_align.rawValue), VariantBox(region), VariantBox(key), VariantBox(pad), VariantBox(tooltip), VariantBox(width_unit.rawValue), VariantBox(height_unit.rawValue), VariantBox(alt_text)])
 	}
-	public func update_image(key: VariantBox, mask: RichTextLabel.ImageUpdateMask, image: Texture2D, width: Double = 0, height: Double = 0, color: Color, inline_align: InlineAlignment, region: Rect2, pad: Bool = false, tooltip: String, width_unit: RichTextLabel.ImageUnit, height_unit: RichTextLabel.ImageUnit) {
+	public func update_image(key: VariantBox, mask: RichTextLabel.ImageUpdateMask, image: Texture2D, width: Double = 0, height: Double = 0, color: Color, inline_align: InlineAlignment = .center, region: Rect2, pad: Bool = false, tooltip: String, width_unit: RichTextLabel.ImageUnit = .pixel, height_unit: RichTextLabel.ImageUnit = .pixel) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "update_image", args: [VariantBox(key), VariantBox(mask.rawValue), VariantBox(image), VariantBox(width), VariantBox(height), VariantBox(color), VariantBox(inline_align.rawValue), VariantBox(region), VariantBox(pad), VariantBox(tooltip), VariantBox(width_unit.rawValue), VariantBox(height_unit.rawValue)])
 	}
 	public func newline() {
@@ -73065,7 +76797,7 @@ public class RichTextLabel: Control {
 	public func push_outline_color(color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "push_outline_color", args: [VariantBox(color)])
 	}
-	public func push_paragraph(alignment: HorizontalAlignment, base_direction: Control.TextDirection, language: String, st_parser: TextServer.StructuredTextParser, justification_flags: TextServer.JustificationFlag, tab_stops: VariantBox) {
+	public func push_paragraph(alignment: HorizontalAlignment, base_direction: Control.TextDirection = .auto, language: String, st_parser: TextServer.StructuredTextParser, justification_flags: TextServer.JustificationFlag, tab_stops: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "push_paragraph", args: [VariantBox(alignment.rawValue), VariantBox(base_direction.rawValue), VariantBox(language), VariantBox(st_parser.rawValue), VariantBox(justification_flags.rawValue), VariantBox(tab_stops)])
 	}
 	public func push_indent(level: Int) {
@@ -73074,7 +76806,7 @@ public class RichTextLabel: Control {
 	public func push_list(level: Int, type: RichTextLabel.ListType, capitalize: Bool, bullet: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "push_list", args: [VariantBox(level), VariantBox(type.rawValue), VariantBox(capitalize), VariantBox(bullet)])
 	}
-	public func push_meta(data: VariantBox, underline_mode: RichTextLabel.MetaUnderline, tooltip: String) {
+	public func push_meta(data: VariantBox, underline_mode: RichTextLabel.MetaUnderline = .always, tooltip: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "push_meta", args: [VariantBox(data), VariantBox(underline_mode.rawValue), VariantBox(tooltip)])
 	}
 	public func push_hint(description: String) {
@@ -73089,7 +76821,7 @@ public class RichTextLabel: Control {
 	public func push_strikethrough(color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "push_strikethrough", args: [VariantBox(color)])
 	}
-	public func push_table(columns: Int, inline_align: InlineAlignment, align_to_row: Int = -1, name: String) {
+	public func push_table(columns: Int, inline_align: InlineAlignment = .topTo, align_to_row: Int = -1, name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "push_table", args: [VariantBox(columns), VariantBox(inline_align.rawValue), VariantBox(align_to_row), VariantBox(name)])
 	}
 	public func push_dropcap(string: String, font: Font, size: Int, dropcap_margins: Rect2, color: Color, outline_size: Int = 0, outline_color: Color) {
@@ -73746,6 +77478,12 @@ public class RichTextLabel: Control {
 @MainActor
 public class RootMotionView: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RootMotionView") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RootMotionView")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_animation_path(path: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_animation_path", args: [VariantBox(path)])
 	}
@@ -73811,6 +77549,12 @@ public class RootMotionView: VisualInstance3D {
 @MainActor
 public class ScriptExtension: Script {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ScriptExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ScriptExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func _editor_can_reload_from_file() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_editor_can_reload_from_file", args: [])
@@ -73989,6 +77733,12 @@ public class ScriptExtension: Script {
 @MainActor
 public class SegmentShape2D: Shape2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SegmentShape2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SegmentShape2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_a(a: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_a", args: [VariantBox(a)])
 	}
@@ -74018,6 +77768,12 @@ public class SegmentShape2D: Shape2D {
 @MainActor
 public class SeparationRayShape2D: Shape2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SeparationRayShape2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SeparationRayShape2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_length(length: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_length", args: [VariantBox(length)])
 	}
@@ -74047,6 +77803,12 @@ public class SeparationRayShape2D: Shape2D {
 @MainActor
 public class SeparationRayShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SeparationRayShape3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SeparationRayShape3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_length(length: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_length", args: [VariantBox(length)])
 	}
@@ -74076,11 +77838,23 @@ public class SeparationRayShape3D: Shape3D {
 @MainActor
 public class Separator: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Separator") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Separator")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class ShaderMaterial: Material {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ShaderMaterial") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ShaderMaterial")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_shader(shader: Shader) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_shader", args: [VariantBox(shader)])
 	}
@@ -74104,6 +77878,12 @@ public class ShaderMaterial: Material {
 @MainActor
 public class ShapeCast2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ShapeCast2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ShapeCast2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_enabled", args: [VariantBox(enabled)])
 	}
@@ -74301,6 +78081,12 @@ public class ShapeCast2D: Node2D {
 @MainActor
 public class Skeleton2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Skeleton2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Skeleton2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_bone_count() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_bone_count", args: [])
@@ -74343,6 +78129,12 @@ public class Skeleton2D: Node2D {
 @MainActor
 public class SkeletonIK3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SkeletonIK3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SkeletonIK3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_root_bone(root_bone: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_root_bone", args: [VariantBox(root_bone)])
 	}
@@ -74484,6 +78276,12 @@ public class SkeletonIK3D: SkeletonModifier3D {
 @MainActor
 public class SkeletonModification2DCCDIK: SkeletonModification2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SkeletonModification2DCCDIK") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SkeletonModification2DCCDIK")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_target_node(target_nodepath: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_target_node", args: [VariantBox(target_nodepath)])
 	}
@@ -74581,6 +78379,12 @@ public class SkeletonModification2DCCDIK: SkeletonModification2D {
 @MainActor
 public class SkeletonModification2DFABRIK: SkeletonModification2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SkeletonModification2DFABRIK") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SkeletonModification2DFABRIK")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_target_node(target_nodepath: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_target_node", args: [VariantBox(target_nodepath)])
 	}
@@ -74642,6 +78446,12 @@ public class SkeletonModification2DFABRIK: SkeletonModification2D {
 @MainActor
 public class SkeletonModification2DJiggle: SkeletonModification2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SkeletonModification2DJiggle") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SkeletonModification2DJiggle")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_target_node(target_nodepath: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_target_node", args: [VariantBox(target_nodepath)])
 	}
@@ -74822,6 +78632,12 @@ public class SkeletonModification2DJiggle: SkeletonModification2D {
 @MainActor
 public class SkeletonModification2DLookAt: SkeletonModification2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SkeletonModification2DLookAt") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SkeletonModification2DLookAt")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_bone2d_node(bone2d_nodepath: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_bone2d_node", args: [VariantBox(bone2d_nodepath)])
 	}
@@ -74903,6 +78719,12 @@ public class SkeletonModification2DLookAt: SkeletonModification2D {
 @MainActor
 public class SkeletonModification2DPhysicalBones: SkeletonModification2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SkeletonModification2DPhysicalBones") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SkeletonModification2DPhysicalBones")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_physical_bone_chain_length(length: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_physical_bone_chain_length", args: [VariantBox(length)])
 	}
@@ -74937,6 +78759,12 @@ public class SkeletonModification2DPhysicalBones: SkeletonModification2D {
 @MainActor
 public class SkeletonModification2DStackHolder: SkeletonModification2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SkeletonModification2DStackHolder") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SkeletonModification2DStackHolder")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_held_modification_stack(held_modification_stack: SkeletonModificationStack2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_held_modification_stack", args: [VariantBox(held_modification_stack)])
 	}
@@ -74950,6 +78778,12 @@ public class SkeletonModification2DStackHolder: SkeletonModification2D {
 @MainActor
 public class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SkeletonModification2DTwoBoneIK") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SkeletonModification2DTwoBoneIK")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_target_node(target_nodepath: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_target_node", args: [VariantBox(target_nodepath)])
 	}
@@ -75039,11 +78873,23 @@ public class SkeletonModification2DTwoBoneIK: SkeletonModification2D {
 @MainActor
 public class SkeletonProfileHumanoid: SkeletonProfile {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SkeletonProfileHumanoid") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SkeletonProfileHumanoid")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class SliderJoint3D: Joint3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SliderJoint3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SliderJoint3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Param: Int, Sendable, CaseIterable {
 		case linearLimitUpper = 0
 		case linearLimitLower = 1
@@ -75170,6 +79016,12 @@ public class SliderJoint3D: Joint3D {
 @MainActor
 public class SphereOccluder3D: Occluder3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SphereOccluder3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SphereOccluder3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(radius)])
 	}
@@ -75187,6 +79039,12 @@ public class SphereOccluder3D: Occluder3D {
 @MainActor
 public class SphereShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SphereShape3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SphereShape3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(radius)])
 	}
@@ -75204,6 +79062,12 @@ public class SphereShape3D: Shape3D {
 @MainActor
 public class SpringBoneCollisionCapsule3D: SpringBoneCollision3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SpringBoneCollisionCapsule3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SpringBoneCollisionCapsule3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(radius)])
 	}
@@ -75257,11 +79121,23 @@ public class SpringBoneCollisionCapsule3D: SpringBoneCollision3D {
 @MainActor
 public class SpringBoneCollisionPlane3D: SpringBoneCollision3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SpringBoneCollisionPlane3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SpringBoneCollisionPlane3D")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class SpringBoneCollisionSphere3D: SpringBoneCollision3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SpringBoneCollisionSphere3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SpringBoneCollisionSphere3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(radius)])
 	}
@@ -75291,6 +79167,12 @@ public class SpringBoneCollisionSphere3D: SpringBoneCollision3D {
 @MainActor
 public class SpringBoneSimulator3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SpringBoneSimulator3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SpringBoneSimulator3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum CenterFrom: Int, Sendable, CaseIterable {
 		case worldOrigin = 0
 		case node = 1
@@ -75644,6 +79526,12 @@ public class SpringBoneSimulator3D: SkeletonModifier3D {
 @MainActor
 public class Sprite2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Sprite2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Sprite2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_texture(texture: Texture2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture", args: [VariantBox(texture)])
 	}
@@ -75821,6 +79709,12 @@ public class Sprite2D: Node2D {
 @MainActor
 public class StreamPeerTCP: StreamPeerSocket {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StreamPeerTCP") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StreamPeerTCP")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func bind(port: Int, host: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "bind", args: [VariantBox(port), VariantBox(host)])
@@ -75854,6 +79748,12 @@ public class StreamPeerTCP: StreamPeerSocket {
 @MainActor
 public class StreamPeerUDS: StreamPeerSocket {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StreamPeerUDS") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StreamPeerUDS")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func bind(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "bind", args: [VariantBox(path)])
@@ -75874,11 +79774,23 @@ public class StreamPeerUDS: StreamPeerSocket {
 @MainActor
 public class StyleBoxEmpty: StyleBox {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StyleBoxEmpty") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StyleBoxEmpty")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class StyleBoxFlat: StyleBox {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StyleBoxFlat") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StyleBoxFlat")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_bg_color(color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_bg_color", args: [VariantBox(color)])
 	}
@@ -76126,6 +80038,12 @@ public class StyleBoxFlat: StyleBox {
 @MainActor
 public class StyleBoxLine: StyleBox {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StyleBoxLine") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StyleBoxLine")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_color(color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_color", args: [VariantBox(color)])
 	}
@@ -76191,6 +80109,12 @@ public class StyleBoxLine: StyleBox {
 @MainActor
 public class StyleBoxTexture: StyleBox {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StyleBoxTexture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StyleBoxTexture")
+		}
+		self.init(ptr: raw)
+	}
 	public enum AxisStretchMode: Int, Sendable, CaseIterable {
 		case stretch = 0
 		case tile = 1
@@ -76347,11 +80271,23 @@ public class StyleBoxTexture: StyleBox {
 @MainActor
 public class SwiftScript: Script {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SwiftScript") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SwiftScript")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class SystemFont: Font {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SystemFont") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SystemFont")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_antialiasing(antialiasing: TextServer.FontAntialiasing) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_antialiasing", args: [VariantBox(antialiasing.rawValue)])
 	}
@@ -76551,6 +80487,12 @@ public class SystemFont: Font {
 @MainActor
 public class TabBar: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TabBar") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TabBar")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_tab_count(count: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_tab_count", args: [VariantBox(count)])
 	}
@@ -76888,6 +80830,12 @@ public class TabBar: Control {
 @MainActor
 public class TextEdit: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TextEdit") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TextEdit")
+		}
+		self.init(ptr: raw)
+	}
 	public enum CaretType: Int, Sendable, CaseIterable {
 		case line = 0
 		case block = 1
@@ -78192,16 +82140,34 @@ public class TextEdit: Control {
 @MainActor
 public class TextServerAdvanced: TextServerExtension {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TextServerAdvanced") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TextServerAdvanced")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class TextServerDummy: TextServerExtension {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TextServerDummy") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TextServerDummy")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class Texture2D: Texture {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Texture2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Texture2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_format() -> Image.Format {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_format", args: [])
@@ -78314,6 +82280,12 @@ public class Texture2D: Texture {
 @MainActor
 public class Texture3D: Texture {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Texture3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Texture3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_format() -> Image.Format {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_format", args: [])
@@ -78384,6 +82356,12 @@ public class Texture3D: Texture {
 @MainActor
 public class TextureLayered: Texture {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TextureLayered") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TextureLayered")
+		}
+		self.init(ptr: raw)
+	}
 	public enum LayeredType: Int, Sendable, CaseIterable {
 		case 2dArray_ = 0
 		case cubemap = 1
@@ -78464,6 +82442,12 @@ public class TextureLayered: Texture {
 @MainActor
 public class TextureRect: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TextureRect") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TextureRect")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_texture(texture: Texture2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture", args: [VariantBox(texture)])
 	}
@@ -78529,6 +82513,12 @@ public class TextureRect: Control {
 @MainActor
 public class TileMap: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TileMap") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TileMap")
+		}
+		self.init(ptr: raw)
+	}
 	public enum VisibilityMode: Int, Sendable, CaseIterable {
 		case default_ = 0
 		case forceShow = 1
@@ -78823,6 +82813,12 @@ public class TileMap: Node2D {
 @MainActor
 public class TileMapLayer: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TileMapLayer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TileMapLayer")
+		}
+		self.init(ptr: raw)
+	}
 	public enum DebugVisibilityMode: Int, Sendable, CaseIterable {
 		case default_ = 0
 		case forceShow = 1
@@ -79140,6 +83136,12 @@ public class TileMapLayer: Node2D {
 @MainActor
 public class TileSetAtlasSource: TileSetSource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TileSetAtlasSource") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TileSetAtlasSource")
+		}
+		self.init(ptr: raw)
+	}
 	public enum TileAnimationMode: Int, Sendable, CaseIterable {
 		case default_ = 0
 		case randomStartTimes = 1
@@ -79341,6 +83343,12 @@ public class TileSetAtlasSource: TileSetSource {
 @MainActor
 public class TileSetScenesCollectionSource: TileSetSource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TileSetScenesCollectionSource") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TileSetScenesCollectionSource")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_scene_tiles_count() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_scene_tiles_count", args: [])
@@ -79393,6 +83401,12 @@ public class TileSetScenesCollectionSource: TileSetSource {
 @MainActor
 public class TouchScreenButton: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TouchScreenButton") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TouchScreenButton")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_texture_normal(texture: Texture2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_normal", args: [VariantBox(texture)])
 	}
@@ -79517,6 +83531,12 @@ public class TouchScreenButton: Node2D {
 @MainActor
 public class Tree: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Tree") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Tree")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ScrollHintMode: Int, Sendable, CaseIterable {
 		case disabled = 0
 		case both = 1
@@ -79941,6 +83961,12 @@ public class Tree: Control {
 @MainActor
 public class VideoStreamPlayer: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VideoStreamPlayer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VideoStreamPlayer")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_stream(stream: VideoStream) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_stream", args: [VariantBox(stream)])
 	}
@@ -80119,11 +84145,23 @@ public class VideoStreamPlayer: Control {
 @MainActor
 public class VideoStreamTheora: VideoStream {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VideoStreamTheora") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VideoStreamTheora")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VirtualJoystick: Control {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VirtualJoystick") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VirtualJoystick")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_joystick_mode(mode: VirtualJoystick.JoystickMode) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_joystick_mode", args: [VariantBox(mode.rawValue)])
 	}
@@ -80276,6 +84314,12 @@ public class VirtualJoystick: Control {
 @MainActor
 public class VisibleOnScreenNotifier2D: Node2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisibleOnScreenNotifier2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisibleOnScreenNotifier2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_rect(rect: Rect2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_rect", args: [VariantBox(rect)])
 	}
@@ -80316,6 +84360,12 @@ public class VisibleOnScreenNotifier2D: Node2D {
 @MainActor
 public class VisibleOnScreenNotifier3D: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisibleOnScreenNotifier3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisibleOnScreenNotifier3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_aabb(rect: AABB) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_aabb", args: [VariantBox(rect)])
 	}
@@ -80339,6 +84389,12 @@ public class VisibleOnScreenNotifier3D: VisualInstance3D {
 @MainActor
 public class VisualShader: Shader {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShader") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShader")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Type: Int, Sendable, CaseIterable {
 		case vertex = 0
 		case fragment = 1
@@ -80478,6 +84534,12 @@ public class VisualShader: Shader {
 @MainActor
 public class VisualShaderNodeBillboard: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeBillboard") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeBillboard")
+		}
+		self.init(ptr: raw)
+	}
 	public enum BillboardType: Int, Sendable, CaseIterable {
 		case disabled = 0
 		case enabled = 1
@@ -80514,6 +84576,12 @@ public class VisualShaderNodeBillboard: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeClamp: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeClamp") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeClamp")
+		}
+		self.init(ptr: raw)
+	}
 	public enum OpType: Int, Sendable, CaseIterable {
 		case float = 0
 		case int = 1
@@ -80540,6 +84608,12 @@ public class VisualShaderNodeClamp: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeColorFunc: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeColorFunc") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeColorFunc")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_function(func_: VisualShaderNodeColorFunc.Function) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
 	}
@@ -80557,6 +84631,12 @@ public class VisualShaderNodeColorFunc: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeColorOp: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeColorOp") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeColorOp")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_operator(op: VisualShaderNodeColorOp.Operator) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op.rawValue)])
 	}
@@ -80574,6 +84654,12 @@ public class VisualShaderNodeColorOp: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeCompare: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeCompare") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeCompare")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_comparison_type(type: VisualShaderNodeCompare.ComparisonType) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_comparison_type", args: [VariantBox(type.rawValue)])
 	}
@@ -80615,11 +84701,23 @@ public class VisualShaderNodeCompare: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeConstant: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeConstant") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeConstant")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeCubemap: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeCubemap") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeCubemap")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Source: Int, Sendable, CaseIterable {
 		case texture = 0
 		case port = 1
@@ -80666,6 +84764,12 @@ public class VisualShaderNodeCubemap: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeCustom: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeCustom") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeCustom")
+		}
+		self.init(ptr: raw)
+	}
 	public func _set_initialized(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_set_initialized", args: [VariantBox(enabled)])
 	}
@@ -80809,6 +84913,12 @@ public class VisualShaderNodeCustom: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeDerivativeFunc: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeDerivativeFunc") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeDerivativeFunc")
+		}
+		self.init(ptr: raw)
+	}
 	public enum OpType: Int, Sendable, CaseIterable {
 		case scalar = 0
 		case vector2d = 1
@@ -80863,21 +84973,45 @@ public class VisualShaderNodeDerivativeFunc: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeDeterminant: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeDeterminant") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeDeterminant")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeDistanceFade: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeDistanceFade") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeDistanceFade")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeDotProduct: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeDotProduct") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeDotProduct")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeFloatFunc: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeFloatFunc") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeFloatFunc")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_function(func_: VisualShaderNodeFloatFunc.Function) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
 	}
@@ -80895,6 +85029,12 @@ public class VisualShaderNodeFloatFunc: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeFloatOp: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeFloatOp") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeFloatOp")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_operator(op: VisualShaderNodeFloatOp.Operator) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op.rawValue)])
 	}
@@ -80912,11 +85052,23 @@ public class VisualShaderNodeFloatOp: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeFresnel: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeFresnel") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeFresnel")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeGroup: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeGroup") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeGroup")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_group(group: VisualShaderGroup) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_group", args: [VariantBox(group)])
 	}
@@ -80934,21 +85086,45 @@ public class VisualShaderNodeGroup: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeGroupInput: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeGroupInput") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeGroupInput")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeGroupOutput: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeGroupOutput") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeGroupOutput")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeIf: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeIf") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeIf")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeInput: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeInput") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeInput")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_input_name(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_input_name", args: [VariantBox(name)])
 	}
@@ -80974,6 +85150,12 @@ public class VisualShaderNodeInput: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeIntFunc: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeIntFunc") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeIntFunc")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_function(func_: VisualShaderNodeIntFunc.Function) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
 	}
@@ -80991,6 +85173,12 @@ public class VisualShaderNodeIntFunc: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeIntOp: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeIntOp") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeIntOp")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_operator(op: VisualShaderNodeIntOp.Operator) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op.rawValue)])
 	}
@@ -81008,6 +85196,12 @@ public class VisualShaderNodeIntOp: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeIs: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeIs") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeIs")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_function(func_: VisualShaderNodeIs.Function) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
 	}
@@ -81025,11 +85219,23 @@ public class VisualShaderNodeIs: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeLinearSceneDepth: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeLinearSceneDepth") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeLinearSceneDepth")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeMix: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeMix") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeMix")
+		}
+		self.init(ptr: raw)
+	}
 	public enum OpType: Int, Sendable, CaseIterable {
 		case scalar = 0
 		case vector2d = 1
@@ -81057,6 +85263,12 @@ public class VisualShaderNodeMix: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeMultiplyAdd: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeMultiplyAdd") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeMultiplyAdd")
+		}
+		self.init(ptr: raw)
+	}
 	public enum OpType: Int, Sendable, CaseIterable {
 		case scalar = 0
 		case vector2d = 1
@@ -81081,16 +85293,34 @@ public class VisualShaderNodeMultiplyAdd: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeOuterProduct: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeOuterProduct") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeOuterProduct")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeOutput: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeOutput") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeOutput")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeParameter: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeParameter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeParameter")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_parameter_name(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_parameter_name", args: [VariantBox(name)])
 	}
@@ -81132,6 +85362,12 @@ public class VisualShaderNodeParameter: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeParameterRef: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeParameterRef") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeParameterRef")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_parameter_name(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_parameter_name", args: [VariantBox(name)])
 	}
@@ -81161,6 +85397,12 @@ public class VisualShaderNodeParameterRef: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeParticleAccelerator: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeParticleAccelerator") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeParticleAccelerator")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Mode: Int, Sendable, CaseIterable {
 		case linear = 0
 		case radial = 1
@@ -81184,11 +85426,23 @@ public class VisualShaderNodeParticleAccelerator: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeParticleConeVelocity: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeParticleConeVelocity") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeParticleConeVelocity")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeParticleEmit: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeParticleEmit") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeParticleEmit")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_flags(flags: VisualShaderNodeParticleEmit.EmitFlags) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_flags", args: [VariantBox(flags.rawValue)])
 	}
@@ -81206,6 +85460,12 @@ public class VisualShaderNodeParticleEmit: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeParticleEmitter: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeParticleEmitter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeParticleEmitter")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_mode_2d(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_mode_2d", args: [VariantBox(enabled)])
 	}
@@ -81223,6 +85483,12 @@ public class VisualShaderNodeParticleEmitter: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeParticleMultiplyByAxisAngle: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeParticleMultiplyByAxisAngle") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeParticleMultiplyByAxisAngle")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_degrees_mode(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_degrees_mode", args: [VariantBox(enabled)])
 	}
@@ -81240,6 +85506,12 @@ public class VisualShaderNodeParticleMultiplyByAxisAngle: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeParticleRandomness: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeParticleRandomness") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeParticleRandomness")
+		}
+		self.init(ptr: raw)
+	}
 	public enum OpType: Int, Sendable, CaseIterable {
 		case scalar = 0
 		case vector2d = 1
@@ -81264,16 +85536,34 @@ public class VisualShaderNodeParticleRandomness: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeProximityFade: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeProximityFade") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeProximityFade")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeRandomRange: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeRandomRange") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeRandomRange")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeRemap: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeRemap") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeRemap")
+		}
+		self.init(ptr: raw)
+	}
 	public enum OpType: Int, Sendable, CaseIterable {
 		case scalar = 0
 		case vector2d = 1
@@ -81301,6 +85591,12 @@ public class VisualShaderNodeRemap: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeReroute: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeReroute") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeReroute")
+		}
+		self.init(ptr: raw)
+	}
 	public func _set_port_type(port_type: VisualShaderNode.PortType) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_set_port_type", args: [VariantBox(port_type.rawValue)])
 	}
@@ -81318,6 +85614,12 @@ public class VisualShaderNodeReroute: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeResizableBase: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeResizableBase") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeResizableBase")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_size(size: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_size", args: [VariantBox(size)])
 	}
@@ -81335,21 +85637,45 @@ public class VisualShaderNodeResizableBase: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeRotationByAxis: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeRotationByAxis") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeRotationByAxis")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeSDFRaymarch: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeSDFRaymarch") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeSDFRaymarch")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeSDFToScreenUV: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeSDFToScreenUV") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeSDFToScreenUV")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeSample3D: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeSample3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeSample3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Source: Int, Sendable, CaseIterable {
 		case texture = 0
 		case port = 1
@@ -81372,16 +85698,34 @@ public class VisualShaderNodeSample3D: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeScreenNormalWorldSpace: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeScreenNormalWorldSpace") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeScreenNormalWorldSpace")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeScreenUVToSDF: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeScreenUVToSDF") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeScreenUVToSDF")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeSmoothStep: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeSmoothStep") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeSmoothStep")
+		}
+		self.init(ptr: raw)
+	}
 	public enum OpType: Int, Sendable, CaseIterable {
 		case scalar = 0
 		case vector2d = 1
@@ -81409,6 +85753,12 @@ public class VisualShaderNodeSmoothStep: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeStep: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeStep") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeStep")
+		}
+		self.init(ptr: raw)
+	}
 	public enum OpType: Int, Sendable, CaseIterable {
 		case scalar = 0
 		case vector2d = 1
@@ -81436,6 +85786,12 @@ public class VisualShaderNodeStep: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeSwitch: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeSwitch") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeSwitch")
+		}
+		self.init(ptr: raw)
+	}
 	public enum OpType: Int, Sendable, CaseIterable {
 		case float = 0
 		case int = 1
@@ -81464,6 +85820,12 @@ public class VisualShaderNodeSwitch: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeTexture: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeTexture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeTexture")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Source: Int, Sendable, CaseIterable {
 		case texture = 0
 		case screen = 1
@@ -81516,26 +85878,56 @@ public class VisualShaderNodeTexture: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeTextureSDF: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeTextureSDF") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeTextureSDF")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeTextureSDFNormal: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeTextureSDFNormal") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeTextureSDFNormal")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeTransformCompose: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeTransformCompose") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeTransformCompose")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeTransformDecompose: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeTransformDecompose") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeTransformDecompose")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeTransformFunc: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeTransformFunc") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeTransformFunc")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_function(func_: VisualShaderNodeTransformFunc.Function) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
 	}
@@ -81553,6 +85945,12 @@ public class VisualShaderNodeTransformFunc: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeTransformOp: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeTransformOp") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeTransformOp")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_operator(op: VisualShaderNodeTransformOp.Operator) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op.rawValue)])
 	}
@@ -81570,6 +85968,12 @@ public class VisualShaderNodeTransformOp: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeTransformVecMult: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeTransformVecMult") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeTransformVecMult")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_operator(op: VisualShaderNodeTransformVecMult.Operator) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op.rawValue)])
 	}
@@ -81587,6 +85991,12 @@ public class VisualShaderNodeTransformVecMult: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeUIntFunc: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeUIntFunc") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeUIntFunc")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_function(func_: VisualShaderNodeUIntFunc.Function) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
 	}
@@ -81604,6 +86014,12 @@ public class VisualShaderNodeUIntFunc: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeUIntOp: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeUIntOp") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeUIntOp")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_operator(op: VisualShaderNodeUIntOp.Operator) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op.rawValue)])
 	}
@@ -81621,6 +86037,12 @@ public class VisualShaderNodeUIntOp: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeUVFunc: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeUVFunc") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeUVFunc")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_function(func_: VisualShaderNodeUVFunc.Function) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
 	}
@@ -81638,11 +86060,23 @@ public class VisualShaderNodeUVFunc: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeUVPolarCoord: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeUVPolarCoord") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeUVPolarCoord")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeVarying: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeVarying") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeVarying")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_varying_name(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_varying_name", args: [VariantBox(name)])
 	}
@@ -81672,6 +86106,12 @@ public class VisualShaderNodeVarying: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeVectorBase: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeVectorBase") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeVectorBase")
+		}
+		self.init(ptr: raw)
+	}
 	public enum OpType: Int, Sendable, CaseIterable {
 		case vector2d = 0
 		case vector3d = 1
@@ -81695,11 +86135,23 @@ public class VisualShaderNodeVectorBase: VisualShaderNode {
 @MainActor
 public class VisualShaderNodeWorldPositionFromDepth: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeWorldPositionFromDepth") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeWorldPositionFromDepth")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VoxelGI: VisualInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VoxelGI") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VoxelGI")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Subdiv: Int, Sendable, CaseIterable {
 		case 64_ = 0
 		case 128_ = 1
@@ -81766,6 +86218,12 @@ public class VoxelGI: VisualInstance3D {
 @MainActor
 public class WebRTCDataChannelExtension: WebRTCDataChannel {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("WebRTCDataChannelExtension") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class WebRTCDataChannelExtension")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func _get_packet(r_buffer: Int, r_buffer_size: Int) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "_get_packet", args: [VariantBox(r_buffer), VariantBox(r_buffer_size)])
@@ -81857,6 +86315,12 @@ public class WebRTCDataChannelExtension: WebRTCDataChannel {
 @MainActor
 public class WebRTCMultiplayerPeer: MultiplayerPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("WebRTCMultiplayerPeer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class WebRTCMultiplayerPeer")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func create_server(channels_config: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_server", args: [VariantBox(channels_config)])
@@ -81900,6 +86364,12 @@ public class WebRTCMultiplayerPeer: MultiplayerPeer {
 @MainActor
 public class WebSocketMultiplayerPeer: MultiplayerPeer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("WebSocketMultiplayerPeer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class WebSocketMultiplayerPeer")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func create_client(url: String, tls_client_options: TLSOptions) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_client", args: [VariantBox(url), VariantBox(tls_client_options)])
@@ -82002,6 +86472,12 @@ public class WebSocketMultiplayerPeer: MultiplayerPeer {
 @MainActor
 public class WorldBoundaryShape2D: Shape2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("WorldBoundaryShape2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class WorldBoundaryShape2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_normal(normal: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_normal", args: [VariantBox(normal)])
 	}
@@ -82031,6 +86507,12 @@ public class WorldBoundaryShape2D: Shape2D {
 @MainActor
 public class WorldBoundaryShape3D: Shape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("WorldBoundaryShape3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class WorldBoundaryShape3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_plane(plane: Plane) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_plane", args: [VariantBox(plane)])
 	}
@@ -82048,6 +86530,12 @@ public class WorldBoundaryShape3D: Shape3D {
 @MainActor
 public class XRAnchor3D: XRNode3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRAnchor3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRAnchor3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_size() -> Vector3 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_size", args: [])
@@ -82063,6 +86551,12 @@ public class XRAnchor3D: XRNode3D {
 @MainActor
 public class XRBodyModifier3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRBodyModifier3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRBodyModifier3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum BodyUpdate: Int, Sendable, CaseIterable {
 		case upperBody = 1
 		case lowerBody = 2
@@ -82114,6 +86608,12 @@ public class XRBodyModifier3D: SkeletonModifier3D {
 @MainActor
 public class XRBodyTracker: XRPositionalTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRBodyTracker") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRBodyTracker")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Joint: Int, Sendable, CaseIterable {
 		case root = 0
 		case flagOrientationValid = 1
@@ -82253,6 +86753,12 @@ public class XRBodyTracker: XRPositionalTracker {
 @MainActor
 public class XRCamera3D: Camera3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRCamera3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRCamera3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_tracker(tracker_name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_tracker", args: [VariantBox(tracker_name)])
 	}
@@ -82270,6 +86776,12 @@ public class XRCamera3D: Camera3D {
 @MainActor
 public class XRController3D: XRNode3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRController3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRController3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func is_button_pressed(name: String) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_button_pressed", args: [VariantBox(name)])
@@ -82313,11 +86825,23 @@ public class XRController3D: XRNode3D {
 @MainActor
 public class XRControllerTracker: XRPositionalTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRControllerTracker") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRControllerTracker")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class XRHandModifier3D: SkeletonModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRHandModifier3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRHandModifier3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum BoneUpdate: Int, Sendable, CaseIterable {
 		case full = 0
 		case rotationOnly = 1
@@ -82352,6 +86876,12 @@ public class XRHandModifier3D: SkeletonModifier3D {
 @MainActor
 public class XRHandTracker: XRPositionalTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("XRHandTracker") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class XRHandTracker")
+		}
+		self.init(ptr: raw)
+	}
 	public enum HandTrackingSource: Int, Sendable, CaseIterable {
 		case unknown = 0
 		case unobstructed = 1
@@ -82463,6 +86993,12 @@ public class XRHandTracker: XRPositionalTracker {
 @MainActor
 public class AimModifier3D: BoneConstraint3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AimModifier3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AimModifier3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_forward_axis(index: Int, axis: SkeletonModifier3D.BoneAxis) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_forward_axis", args: [VariantBox(index), VariantBox(axis.rawValue)])
 	}
@@ -82512,6 +87048,12 @@ public class AimModifier3D: BoneConstraint3D {
 @MainActor
 public class AnimatedTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimatedTexture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimatedTexture")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_frames(frames: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_frames", args: [VariantBox(frames)])
 	}
@@ -84641,16 +89183,34 @@ public class AnimatedTexture: Texture2D {
 @MainActor
 public class AnimationNodeAdd2: AnimationNodeSync {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeAdd2") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeAdd2")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AnimationNodeAdd3: AnimationNodeSync {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeAdd3") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeAdd3")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AnimationNodeAnimation: AnimationRootNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeAnimation") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeAnimation")
+		}
+		self.init(ptr: raw)
+	}
 	public enum PlayMode: Int, Sendable, CaseIterable {
 		case forward = 0
 		case backward = 1
@@ -84756,16 +89316,34 @@ public class AnimationNodeAnimation: AnimationRootNode {
 @MainActor
 public class AnimationNodeBlend2: AnimationNodeSync {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeBlend2") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeBlend2")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AnimationNodeBlend3: AnimationNodeSync {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeBlend3") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeBlend3")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AnimationNodeBlendSpace1D: AnimationRootNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeBlendSpace1D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeBlendSpace1D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum BlendMode: Int, Sendable, CaseIterable {
 		case interpolated = 0
 		case discrete = 1
@@ -84921,6 +89499,12 @@ public class AnimationNodeBlendSpace1D: AnimationRootNode {
 @MainActor
 public class AnimationNodeBlendSpace2D: AnimationRootNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeBlendSpace2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeBlendSpace2D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum BlendMode: Int, Sendable, CaseIterable {
 		case interpolated = 0
 		case discrete = 1
@@ -85127,6 +89711,12 @@ public class AnimationNodeBlendSpace2D: AnimationRootNode {
 @MainActor
 public class AnimationNodeBlendTree: AnimationRootNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeBlendTree") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeBlendTree")
+		}
+		self.init(ptr: raw)
+	}
 	public func add_node(name: String, node: AnimationNode, position: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_node", args: [VariantBox(name), VariantBox(node), VariantBox(position)])
 	}
@@ -85185,6 +89775,12 @@ public class AnimationNodeBlendTree: AnimationRootNode {
 @MainActor
 public class AnimationNodeOneShot: AnimationNodeSync {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeOneShot") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeOneShot")
+		}
+		self.init(ptr: raw)
+	}
 	public enum OneShotRequest: Int, Sendable, CaseIterable {
 		case none = 0
 		case fire = 1
@@ -85324,6 +89920,12 @@ public class AnimationNodeOneShot: AnimationNodeSync {
 @MainActor
 public class AnimationNodeStateMachine: AnimationRootNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeStateMachine") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeStateMachine")
+		}
+		self.init(ptr: raw)
+	}
 	public enum StateMachineType: Int, Sendable, CaseIterable {
 		case root = 0
 		case nested = 1
@@ -85452,11 +90054,23 @@ public class AnimationNodeStateMachine: AnimationRootNode {
 @MainActor
 public class AnimationNodeSub2: AnimationNodeSync {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeSub2") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeSub2")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AnimationNodeTransition: AnimationNodeSync {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimationNodeTransition") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeTransition")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_input_count(input_count: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_input_count", args: [VariantBox(input_count)])
 	}
@@ -85529,6 +90143,12 @@ public class AnimationNodeTransition: AnimationNodeSync {
 @MainActor
 public class Area2D: CollisionObject2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Area2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Area2D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum SpaceOverride: Int, Sendable, CaseIterable {
 		case disabled = 0
 		case combine = 1
@@ -85791,6 +90411,12 @@ public class Area2D: CollisionObject2D {
 @MainActor
 public class AreaLight3D: Light3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AreaLight3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AreaLight3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_area_texture(texture: Texture2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_area_texture", args: [VariantBox(texture)])
 	}
@@ -85844,6 +90470,12 @@ public class AreaLight3D: Light3D {
 @MainActor
 public class AspectRatioContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AspectRatioContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AspectRatioContainer")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_ratio(ratio: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_ratio", args: [VariantBox(ratio)])
 	}
@@ -85901,6 +90533,12 @@ public class AspectRatioContainer: Container {
 @MainActor
 public class AtlasTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AtlasTexture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AtlasTexture")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_atlas(atlas: Texture2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_atlas", args: [VariantBox(atlas)])
 	}
@@ -85954,56 +90592,122 @@ public class AtlasTexture: Texture2D {
 @MainActor
 public class AudioEffectBandLimitFilter: AudioEffectFilter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectBandLimitFilter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectBandLimitFilter")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AudioEffectBandPassFilter: AudioEffectFilter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectBandPassFilter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectBandPassFilter")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AudioEffectEQ10: AudioEffectEQ {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectEQ10") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectEQ10")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AudioEffectEQ21: AudioEffectEQ {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectEQ21") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectEQ21")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AudioEffectEQ6: AudioEffectEQ {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectEQ6") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectEQ6")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AudioEffectHighPassFilter: AudioEffectFilter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectHighPassFilter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectHighPassFilter")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AudioEffectHighShelfFilter: AudioEffectFilter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectHighShelfFilter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectHighShelfFilter")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AudioEffectLowPassFilter: AudioEffectFilter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectLowPassFilter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectLowPassFilter")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AudioEffectLowShelfFilter: AudioEffectFilter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectLowShelfFilter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectLowShelfFilter")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AudioEffectNotchFilter: AudioEffectFilter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AudioEffectNotchFilter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AudioEffectNotchFilter")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class BoxContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("BoxContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class BoxContainer")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func add_spacer(begin: Bool) -> Control? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_spacer", args: [VariantBox(begin)])
@@ -86050,6 +90754,12 @@ public class BoxContainer: Container {
 @MainActor
 public class BoxMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("BoxMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class BoxMesh")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_size(size: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_size", args: [VariantBox(size)])
 	}
@@ -86103,6 +90813,12 @@ public class BoxMesh: PrimitiveMesh {
 @MainActor
 public class Button: BaseButton {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Button") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Button")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_text(text: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_text", args: [VariantBox(text)])
 	}
@@ -86276,6 +90992,12 @@ public class Button: BaseButton {
 @MainActor
 public class CPUParticles3D: GeometryInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CPUParticles3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CPUParticles3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum DrawOrder: Int, Sendable, CaseIterable {
 		case index = 0
 		case lifetime = 1
@@ -87037,6 +91759,12 @@ public class CPUParticles3D: GeometryInstance3D {
 @MainActor
 public class CSGShape3D: GeometryInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CSGShape3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CSGShape3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Operation: Int, Sendable, CaseIterable {
 		case union = 0
 		case intersection = 1
@@ -87203,6 +91931,12 @@ public class CSGShape3D: GeometryInstance3D {
 @MainActor
 public class CameraTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CameraTexture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CameraTexture")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_camera_feed_id(feed_id: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_camera_feed_id", args: [VariantBox(feed_id)])
 	}
@@ -87244,6 +91978,12 @@ public class CameraTexture: Texture2D {
 @MainActor
 public class CanvasTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CanvasTexture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CanvasTexture")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_diffuse_texture(texture: Texture2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_diffuse_texture", args: [VariantBox(texture)])
 	}
@@ -87349,6 +92089,12 @@ public class CanvasTexture: Texture2D {
 @MainActor
 public class CapsuleMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CapsuleMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CapsuleMesh")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(radius)])
 	}
@@ -87402,6 +92148,12 @@ public class CapsuleMesh: PrimitiveMesh {
 @MainActor
 public class CenterContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CenterContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CenterContainer")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_use_top_left(enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_use_top_left", args: [VariantBox(enable)])
 	}
@@ -87419,6 +92171,12 @@ public class CenterContainer: Container {
 @MainActor
 public class ChainIK3D: IKModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ChainIK3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ChainIK3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_root_bone_name(index: Int, bone_name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_root_bone_name", args: [VariantBox(index), VariantBox(bone_name)])
 	}
@@ -87495,6 +92253,12 @@ public class ChainIK3D: IKModifier3D {
 @MainActor
 public class CharacterBody3D: PhysicsBody3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CharacterBody3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CharacterBody3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum MotionMode: Int, Sendable, CaseIterable {
 		case grounded = 0
 		case floating = 1
@@ -87794,6 +92558,12 @@ public class CharacterBody3D: PhysicsBody3D {
 @MainActor
 public class CodeEdit: TextEdit {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CodeEdit") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CodeEdit")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_indent_size(size: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_indent_size", args: [VariantBox(size)])
 	}
@@ -88379,6 +93149,12 @@ public class CodeEdit: TextEdit {
 @MainActor
 public class CompressedTexture2D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CompressedTexture2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CompressedTexture2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func load(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load", args: [VariantBox(path)])
@@ -88398,6 +93174,12 @@ public class CompressedTexture2D: Texture2D {
 @MainActor
 public class CompressedTexture3D: Texture3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CompressedTexture3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CompressedTexture3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func load(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load", args: [VariantBox(path)])
@@ -88417,6 +93199,12 @@ public class CompressedTexture3D: Texture3D {
 @MainActor
 public class CompressedTextureLayered: TextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CompressedTextureLayered") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CompressedTextureLayered")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func load(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load", args: [VariantBox(path)])
@@ -88436,6 +93224,12 @@ public class CompressedTextureLayered: TextureLayered {
 @MainActor
 public class ConfirmationDialog: AcceptDialog {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ConfirmationDialog") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ConfirmationDialog")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_cancel_button() -> Button? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_cancel_button", args: [])
@@ -88458,6 +93252,12 @@ public class ConfirmationDialog: AcceptDialog {
 @MainActor
 public class ConvertTransformModifier3D: BoneConstraint3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ConvertTransformModifier3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ConvertTransformModifier3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum TransformMode: Int, Sendable, CaseIterable {
 		case position = 0
 		case rotation = 1
@@ -88560,6 +93360,12 @@ public class ConvertTransformModifier3D: BoneConstraint3D {
 @MainActor
 public class CopyTransformModifier3D: BoneConstraint3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CopyTransformModifier3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CopyTransformModifier3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum TransformFlag: Int, Sendable, CaseIterable {
 		case position = 1
 		case rotation = 2
@@ -88701,6 +93507,12 @@ public class CopyTransformModifier3D: BoneConstraint3D {
 @MainActor
 public class CurveTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CurveTexture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CurveTexture")
+		}
+		self.init(ptr: raw)
+	}
 	public enum TextureMode: Int, Sendable, CaseIterable {
 		case rgb = 0
 		case red = 1
@@ -88741,6 +93553,12 @@ public class CurveTexture: Texture2D {
 @MainActor
 public class CurveXYZTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CurveXYZTexture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CurveXYZTexture")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_width(width: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_width", args: [VariantBox(width)])
 	}
@@ -88789,6 +93607,12 @@ public class CurveXYZTexture: Texture2D {
 @MainActor
 public class CylinderMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CylinderMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CylinderMesh")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_top_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_top_radius", args: [VariantBox(radius)])
 	}
@@ -88878,6 +93702,12 @@ public class CylinderMesh: PrimitiveMesh {
 @MainActor
 public class DPITexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("DPITexture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class DPITexture")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func create_from_string(source: String, scale: Double = 1.0, saturation: Double = 1.0, color_map: VariantBox) -> DPITexture? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_from_string", args: [VariantBox(source), VariantBox(scale), VariantBox(saturation), VariantBox(color_map)])
@@ -88968,6 +93798,12 @@ public class DPITexture: Texture2D {
 @MainActor
 public class DampedSpringJoint2D: Joint2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("DampedSpringJoint2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class DampedSpringJoint2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_length(length: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_length", args: [VariantBox(length)])
 	}
@@ -89021,6 +93857,12 @@ public class DampedSpringJoint2D: Joint2D {
 @MainActor
 public class DirectionalLight2D: Light2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("DirectionalLight2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class DirectionalLight2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_max_distance(pixels: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_max_distance", args: [VariantBox(pixels)])
 	}
@@ -89042,6 +93884,12 @@ public class DirectionalLight2D: Light2D {
 @MainActor
 public class DirectionalLight3D: Light3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("DirectionalLight3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class DirectionalLight3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum SkyMode: Int, Sendable, CaseIterable {
 		case lightAndSky = 0
 		case lightOnly = 1
@@ -89116,6 +93964,12 @@ public class DirectionalLight3D: Light3D {
 @MainActor
 public class DrawableTexture2D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("DrawableTexture2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class DrawableTexture2D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum DrawableFormat: Int, Sendable, CaseIterable {
 		case rgba8 = 0
 		case rgba8Srgb = 1
@@ -89150,6 +94004,12 @@ public class DrawableTexture2D: Texture2D {
 @MainActor
 public class ExternalTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ExternalTexture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ExternalTexture")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_size(size: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_size", args: [VariantBox(size)])
 	}
@@ -89170,6 +94030,12 @@ public class ExternalTexture: Texture2D {
 @MainActor
 public class FlowContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("FlowContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class FlowContainer")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_line_count() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_line_count", args: [])
@@ -89228,6 +94094,12 @@ public class FlowContainer: Container {
 @MainActor
 public class FoldableContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("FoldableContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class FoldableContainer")
+		}
+		self.init(ptr: raw)
+	}
 	public func fold() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "fold", args: [])
 	}
@@ -89358,6 +94230,12 @@ public class FoldableContainer: Container {
 @MainActor
 public class GPUParticles3D: GeometryInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GPUParticles3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GPUParticles3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum DrawOrder: Int, Sendable, CaseIterable {
 		case index = 0
 		case lifetime = 1
@@ -89784,6 +94662,12 @@ public class GPUParticles3D: GeometryInstance3D {
 @MainActor
 public class GPUParticlesAttractorBox3D: GPUParticlesAttractor3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GPUParticlesAttractorBox3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GPUParticlesAttractorBox3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_size(size: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_size", args: [VariantBox(size)])
 	}
@@ -89801,6 +94685,12 @@ public class GPUParticlesAttractorBox3D: GPUParticlesAttractor3D {
 @MainActor
 public class GPUParticlesAttractorSphere3D: GPUParticlesAttractor3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GPUParticlesAttractorSphere3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GPUParticlesAttractorSphere3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(radius)])
 	}
@@ -89818,6 +94708,12 @@ public class GPUParticlesAttractorSphere3D: GPUParticlesAttractor3D {
 @MainActor
 public class GPUParticlesAttractorVectorField3D: GPUParticlesAttractor3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GPUParticlesAttractorVectorField3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GPUParticlesAttractorVectorField3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_size(size: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_size", args: [VariantBox(size)])
 	}
@@ -89847,6 +94743,12 @@ public class GPUParticlesAttractorVectorField3D: GPUParticlesAttractor3D {
 @MainActor
 public class GPUParticlesCollisionBox3D: GPUParticlesCollision3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GPUParticlesCollisionBox3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GPUParticlesCollisionBox3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_size(size: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_size", args: [VariantBox(size)])
 	}
@@ -89864,6 +94766,12 @@ public class GPUParticlesCollisionBox3D: GPUParticlesCollision3D {
 @MainActor
 public class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GPUParticlesCollisionHeightField3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GPUParticlesCollisionHeightField3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Resolution: Int, Sendable, CaseIterable {
 		case 256_ = 0
 		case 512_ = 1
@@ -89950,6 +94858,12 @@ public class GPUParticlesCollisionHeightField3D: GPUParticlesCollision3D {
 @MainActor
 public class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GPUParticlesCollisionSDF3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GPUParticlesCollisionSDF3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Resolution: Int, Sendable, CaseIterable {
 		case 16_ = 0
 		case 32_ = 1
@@ -90032,6 +94946,12 @@ public class GPUParticlesCollisionSDF3D: GPUParticlesCollision3D {
 @MainActor
 public class GPUParticlesCollisionSphere3D: GPUParticlesCollision3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GPUParticlesCollisionSphere3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GPUParticlesCollisionSphere3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(radius)])
 	}
@@ -90049,6 +94969,12 @@ public class GPUParticlesCollisionSphere3D: GPUParticlesCollision3D {
 @MainActor
 public class GradientTexture1D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GradientTexture1D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GradientTexture1D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_gradient(gradient: Gradient) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_gradient", args: [VariantBox(gradient)])
 	}
@@ -90085,6 +95011,12 @@ public class GradientTexture1D: Texture2D {
 @MainActor
 public class GradientTexture2D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GradientTexture2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GradientTexture2D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Fill: Int, Sendable, CaseIterable {
 		case linear = 0
 		case radial = 1
@@ -90194,6 +95126,12 @@ public class GradientTexture2D: Texture2D {
 @MainActor
 public class GraphElement: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GraphElement") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GraphElement")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_resizable(resizable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_resizable", args: [VariantBox(resizable)])
 	}
@@ -90295,6 +95233,12 @@ public class GraphElement: Container {
 @MainActor
 public class GridContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GridContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GridContainer")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_columns(columns: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_columns", args: [VariantBox(columns)])
 	}
@@ -90312,6 +95256,12 @@ public class GridContainer: Container {
 @MainActor
 public class GrooveJoint2D: Joint2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GrooveJoint2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GrooveJoint2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_length(length: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_length", args: [VariantBox(length)])
 	}
@@ -90341,11 +95291,23 @@ public class GrooveJoint2D: Joint2D {
 @MainActor
 public class HSeparator: Separator {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("HSeparator") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class HSeparator")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class ImageTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ImageTexture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ImageTexture")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func create_from_image(image: Image) -> ImageTexture? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_from_image", args: [VariantBox(image)])
@@ -90372,6 +95334,12 @@ public class ImageTexture: Texture2D {
 @MainActor
 public class ImageTexture3D: Texture3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ImageTexture3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ImageTexture3D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func create(format: Image.Format, width: Int, height: Int, depth: Int, use_mipmaps: Bool, data: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create", args: [VariantBox(format.rawValue), VariantBox(width), VariantBox(height), VariantBox(depth), VariantBox(use_mipmaps), VariantBox(data)])
@@ -90397,6 +95365,12 @@ public class ImageTexture3D: Texture3D {
 @MainActor
 public class ImageTextureLayered: TextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ImageTextureLayered") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ImageTextureLayered")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func create_from_images(images: VariantBox) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_from_images", args: [VariantBox(images)])
@@ -90422,6 +95396,12 @@ public class ImageTextureLayered: TextureLayered {
 @MainActor
 public class InputEventScreenDrag: InputEventFromWindow {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputEventScreenDrag") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputEventScreenDrag")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_index(index: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_index", args: [VariantBox(index)])
 	}
@@ -90535,6 +95515,12 @@ public class InputEventScreenDrag: InputEventFromWindow {
 @MainActor
 public class InputEventScreenTouch: InputEventFromWindow {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputEventScreenTouch") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputEventScreenTouch")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_index(index: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_index", args: [VariantBox(index)])
 	}
@@ -90602,6 +95588,12 @@ public class InputEventScreenTouch: InputEventFromWindow {
 @MainActor
 public class InputEventWithModifiers: InputEventFromWindow {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputEventWithModifiers") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputEventWithModifiers")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_command_or_control_autoremap(enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_command_or_control_autoremap", args: [VariantBox(enable)])
 	}
@@ -90677,6 +95669,12 @@ public class InputEventWithModifiers: InputEventFromWindow {
 @MainActor
 public class Label3D: GeometryInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Label3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Label3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_horizontal_alignment(alignment: HorizontalAlignment) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment.rawValue)])
 	}
@@ -91071,6 +96069,12 @@ public class Label3D: GeometryInstance3D {
 @MainActor
 public class LineBase3D: GeometryInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("LineBase3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class LineBase3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum MeshAlignment: Int, Sendable, CaseIterable {
 		case local = 0
 		case billboard = 1
@@ -91091,6 +96095,12 @@ public class LineBase3D: GeometryInstance3D {
 @MainActor
 public class LinkButton: BaseButton {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("LinkButton") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class LinkButton")
+		}
+		self.init(ptr: raw)
+	}
 	public enum UnderlineMode: Int, Sendable, CaseIterable {
 		case always = 0
 		case onHover = 1
@@ -91217,11 +96227,23 @@ public class LinkButton: BaseButton {
 @MainActor
 public class MarginContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MarginContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MarginContainer")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class MeshInstance3D: GeometryInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MeshInstance3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MeshInstance3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_mesh(mesh: Mesh) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_mesh", args: [VariantBox(mesh)])
 	}
@@ -91334,6 +96356,12 @@ public class MeshInstance3D: GeometryInstance3D {
 @MainActor
 public class MeshTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MeshTexture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MeshTexture")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_mesh(mesh: Mesh) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_mesh", args: [VariantBox(mesh)])
 	}
@@ -91375,6 +96403,12 @@ public class MeshTexture: Texture2D {
 @MainActor
 public class MultiMeshInstance3D: GeometryInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MultiMeshInstance3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MultiMeshInstance3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_multimesh(multimesh: MultiMesh) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_multimesh", args: [VariantBox(multimesh)])
 	}
@@ -91392,6 +96426,12 @@ public class MultiMeshInstance3D: GeometryInstance3D {
 @MainActor
 public class NoiseTexture2D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NoiseTexture2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NoiseTexture2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_width(width: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_width", args: [VariantBox(width)])
 	}
@@ -91531,6 +96571,12 @@ public class NoiseTexture2D: Texture2D {
 @MainActor
 public class NoiseTexture3D: Texture3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("NoiseTexture3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class NoiseTexture3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_width(width: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_width", args: [VariantBox(width)])
 	}
@@ -91629,11 +96675,23 @@ public class NoiseTexture3D: Texture3D {
 @MainActor
 public class ORMMaterial3D: BaseMaterial3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ORMMaterial3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ORMMaterial3D")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class OmniLight3D: Light3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OmniLight3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OmniLight3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_shadow_mode(mode: OmniLight3D.ShadowMode) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_shadow_mode", args: [VariantBox(mode.rawValue)])
 	}
@@ -91663,6 +96721,12 @@ public class OmniLight3D: Light3D {
 @MainActor
 public class OpenXRAnalogThresholdModifier: OpenXRActionBindingModifier {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRAnalogThresholdModifier") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRAnalogThresholdModifier")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_on_threshold(on_threshold: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_on_threshold", args: [VariantBox(on_threshold)])
 	}
@@ -91716,6 +96780,12 @@ public class OpenXRAnalogThresholdModifier: OpenXRActionBindingModifier {
 @MainActor
 public class OpenXRAnchorTracker: OpenXRSpatialEntityTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRAnchorTracker") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRAnchorTracker")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func has_uuid() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "has_uuid", args: [])
@@ -91741,6 +96811,12 @@ public class OpenXRAnchorTracker: OpenXRSpatialEntityTracker {
 @MainActor
 public class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRDpadBindingModifier") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRDpadBindingModifier")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_action_set(action_set: OpenXRActionSet) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_action_set", args: [VariantBox(action_set)])
 	}
@@ -91854,6 +96930,12 @@ public class OpenXRDpadBindingModifier: OpenXRIPBindingModifier {
 @MainActor
 public class OpenXRMarkerTracker: OpenXRSpatialEntityTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRMarkerTracker") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRMarkerTracker")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_bounds_size(bounds_size: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_bounds_size", args: [VariantBox(bounds_size)])
 	}
@@ -91901,6 +96983,12 @@ public class OpenXRMarkerTracker: OpenXRSpatialEntityTracker {
 @MainActor
 public class OpenXRPlaneTracker: OpenXRSpatialEntityTracker {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OpenXRPlaneTracker") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRPlaneTracker")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_bounds_size(bounds_size: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_bounds_size", args: [VariantBox(bounds_size)])
 	}
@@ -91976,11 +97064,23 @@ public class OpenXRPlaneTracker: OpenXRSpatialEntityTracker {
 @MainActor
 public class PanelContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PanelContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PanelContainer")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class PhysicalBone3D: PhysicsBody3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicalBone3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicalBone3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum DampMode: Int, Sendable, CaseIterable {
 		case combine = 0
 		case replace = 1
@@ -92223,6 +97323,12 @@ public class PhysicalBone3D: PhysicsBody3D {
 @MainActor
 public class PhysicsBody2D: CollisionObject2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicsBody2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsBody2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func move_and_collide(motion: Vector2, test_only: Bool = false, safe_margin: Double = 0.08, recovery_as_collision: Bool = false) -> KinematicCollision2D? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "move_and_collide", args: [VariantBox(motion), VariantBox(test_only), VariantBox(safe_margin), VariantBox(recovery_as_collision)])
@@ -92254,6 +97360,12 @@ public class PhysicsBody2D: CollisionObject2D {
 @MainActor
 public class PinJoint2D: Joint2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PinJoint2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PinJoint2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_softness(softness: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_softness", args: [VariantBox(softness)])
 	}
@@ -92339,6 +97451,12 @@ public class PinJoint2D: Joint2D {
 @MainActor
 public class PlaceholderTexture2D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PlaceholderTexture2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PlaceholderTexture2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_size(size: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_size", args: [VariantBox(size)])
 	}
@@ -92351,6 +97469,12 @@ public class PlaceholderTexture2D: Texture2D {
 @MainActor
 public class PlaceholderTexture3D: Texture3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PlaceholderTexture3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PlaceholderTexture3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_size(size: Vector3i) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_size", args: [VariantBox(size)])
 	}
@@ -92368,6 +97492,12 @@ public class PlaceholderTexture3D: Texture3D {
 @MainActor
 public class PlaceholderTextureLayered: TextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PlaceholderTextureLayered") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PlaceholderTextureLayered")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_size(size: Vector2i) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_size", args: [VariantBox(size)])
 	}
@@ -92392,6 +97522,12 @@ public class PlaceholderTextureLayered: TextureLayered {
 @MainActor
 public class PlaneMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PlaneMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PlaneMesh")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_size(size: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_size", args: [VariantBox(size)])
 	}
@@ -92457,6 +97593,12 @@ public class PlaneMesh: PrimitiveMesh {
 @MainActor
 public class PointLight2D: Light2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PointLight2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PointLight2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_texture(texture: Texture2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture", args: [VariantBox(texture)])
 	}
@@ -92502,11 +97644,23 @@ public class PointLight2D: Light2D {
 @MainActor
 public class PointMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PointMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PointMesh")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class PopupMenu: Popup {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PopupMenu") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PopupMenu")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func activate_item_by_event(event: InputEvent, for_global_only: Bool = false) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "activate_item_by_event", args: [VariantBox(event), VariantBox(for_global_only)])
@@ -92525,25 +97679,25 @@ public class PopupMenu: Popup {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_native_menu", args: [])
 		return __ret.asBool()
 	}
-	public func add_item(label: String, id: Int = -1, accel: Key) {
+	public func add_item(label: String, id: Int = -1, accel: Key = .none) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_item", args: [VariantBox(label), VariantBox(id), VariantBox(accel.rawValue)])
 	}
-	public func add_icon_item(texture: Texture2D, label: String, id: Int = -1, accel: Key) {
+	public func add_icon_item(texture: Texture2D, label: String, id: Int = -1, accel: Key = .none) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_item", args: [VariantBox(texture), VariantBox(label), VariantBox(id), VariantBox(accel.rawValue)])
 	}
-	public func add_check_item(label: String, id: Int = -1, accel: Key) {
+	public func add_check_item(label: String, id: Int = -1, accel: Key = .none) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_check_item", args: [VariantBox(label), VariantBox(id), VariantBox(accel.rawValue)])
 	}
-	public func add_icon_check_item(texture: Texture2D, label: String, id: Int = -1, accel: Key) {
+	public func add_icon_check_item(texture: Texture2D, label: String, id: Int = -1, accel: Key = .none) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_check_item", args: [VariantBox(texture), VariantBox(label), VariantBox(id), VariantBox(accel.rawValue)])
 	}
-	public func add_radio_check_item(label: String, id: Int = -1, accel: Key) {
+	public func add_radio_check_item(label: String, id: Int = -1, accel: Key = .none) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_radio_check_item", args: [VariantBox(label), VariantBox(id), VariantBox(accel.rawValue)])
 	}
-	public func add_icon_radio_check_item(texture: Texture2D, label: String, id: Int = -1, accel: Key) {
+	public func add_icon_radio_check_item(texture: Texture2D, label: String, id: Int = -1, accel: Key = .none) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_icon_radio_check_item", args: [VariantBox(texture), VariantBox(label), VariantBox(id), VariantBox(accel.rawValue)])
 	}
-	public func add_multistate_item(label: String, max_states: Int, default_state: Int = 0, id: Int = -1, accel: Key) {
+	public func add_multistate_item(label: String, max_states: Int, default_state: Int = 0, id: Int = -1, accel: Key = .none) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_multistate_item", args: [VariantBox(label), VariantBox(max_states), VariantBox(default_state), VariantBox(id), VariantBox(accel.rawValue)])
 	}
 	public func add_shortcut(shortcut: Shortcut, id: Int = -1, global: Bool = false, allow_echo: Bool = false) {
@@ -92980,11 +98134,23 @@ public class PopupMenu: Popup {
 @MainActor
 public class PopupPanel: Popup {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PopupPanel") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PopupPanel")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class PortableCompressedTexture2D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PortableCompressedTexture2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PortableCompressedTexture2D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum CompressionMode: Int, Sendable, CaseIterable {
 		case lossless = 0
 		case lossy = 1
@@ -93054,6 +98220,12 @@ public class PortableCompressedTexture2D: Texture2D {
 @MainActor
 public class PrismMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PrismMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PrismMesh")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_left_to_right(left_to_right: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_left_to_right", args: [VariantBox(left_to_right)])
 	}
@@ -93119,6 +98291,12 @@ public class PrismMesh: PrimitiveMesh {
 @MainActor
 public class ProgressBar: Range {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ProgressBar") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ProgressBar")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_fill_mode(mode: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_fill_mode", args: [VariantBox(mode)])
 	}
@@ -93176,6 +98354,12 @@ public class ProgressBar: Range {
 @MainActor
 public class RibbonTrailMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RibbonTrailMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RibbonTrailMesh")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Shape: Int, Sendable, CaseIterable {
 		case flat = 0
 		case cross = 1
@@ -93257,6 +98441,12 @@ public class RibbonTrailMesh: PrimitiveMesh {
 @MainActor
 public class RigidBody3D: PhysicsBody3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RigidBody3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RigidBody3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum FreezeMode: Int, Sendable, CaseIterable {
 		case static_ = 0
 		case kinematic = 1
@@ -93647,6 +98837,12 @@ public class RigidBody3D: PhysicsBody3D {
 @MainActor
 public class ScrollBar: Range {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ScrollBar") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ScrollBar")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_custom_step(step: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_custom_step", args: [VariantBox(step)])
 	}
@@ -93667,6 +98863,12 @@ public class ScrollBar: Range {
 @MainActor
 public class ScrollContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ScrollContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ScrollContainer")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ScrollMode: Int, Sendable, CaseIterable {
 		case disabled = 0
 		case auto = 1
@@ -93863,6 +99065,12 @@ public class ScrollContainer: Container {
 @MainActor
 public class Slider: Range {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Slider") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Slider")
+		}
+		self.init(ptr: raw)
+	}
 	public enum TickPosition: Int, Sendable, CaseIterable {
 		case bottomRight = 0
 		case topLeft = 1
@@ -93940,6 +99148,12 @@ public class Slider: Range {
 @MainActor
 public class SphereMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SphereMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SphereMesh")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(radius)])
 	}
@@ -94005,6 +99219,12 @@ public class SphereMesh: PrimitiveMesh {
 @MainActor
 public class SpinBox: Range {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SpinBox") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SpinBox")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_horizontal_alignment(alignment: HorizontalAlignment) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment.rawValue)])
 	}
@@ -94154,6 +99374,12 @@ public class SpinBox: Range {
 @MainActor
 public class SplitContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SplitContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SplitContainer")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_split_offsets(offsets: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_split_offsets", args: [VariantBox(offsets)])
 	}
@@ -94329,6 +99555,12 @@ public class SplitContainer: Container {
 @MainActor
 public class SpotLight3D: Light3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SpotLight3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SpotLight3D")
+		}
+		self.init(ptr: raw)
+	}
 	public var Spot: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "Spot") }
 		set { Host.shared.setProperty(object: ptr, name: "Spot", value: VariantBox(newValue)) }
@@ -94354,6 +99586,12 @@ public class SpotLight3D: Light3D {
 @MainActor
 public class SpriteBase3D: GeometryInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SpriteBase3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SpriteBase3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_centered(centered: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_centered", args: [VariantBox(centered)])
 	}
@@ -94581,11 +99819,23 @@ public class SpriteBase3D: GeometryInstance3D {
 @MainActor
 public class StandardMaterial3D: BaseMaterial3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StandardMaterial3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StandardMaterial3D")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class StaticBody3D: PhysicsBody3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StaticBody3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StaticBody3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_constant_linear_velocity(vel: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_constant_linear_velocity", args: [VariantBox(vel)])
 	}
@@ -94627,6 +99877,12 @@ public class StaticBody3D: PhysicsBody3D {
 @MainActor
 public class StreamedTexture2D: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StreamedTexture2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StreamedTexture2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func load(path: String) -> Error {
 		let __ret = Host.shared.callMethod(object: ptr, method: "load", args: [VariantBox(path)])
@@ -94670,6 +99926,12 @@ public class StreamedTexture2D: Texture2D {
 @MainActor
 public class SubViewportContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SubViewportContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SubViewportContainer")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_stretch(enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_stretch", args: [VariantBox(enable)])
 	}
@@ -94716,6 +99978,12 @@ public class SubViewportContainer: Container {
 @MainActor
 public class TabContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TabContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TabContainer")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_tab_count() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tab_count", args: [])
@@ -95013,6 +100281,12 @@ public class TabContainer: Container {
 @MainActor
 public class TextMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TextMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TextMesh")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_horizontal_alignment(alignment: HorizontalAlignment) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_horizontal_alignment", args: [VariantBox(alignment.rawValue)])
 	}
@@ -95246,6 +100520,12 @@ public class TextMesh: PrimitiveMesh {
 @MainActor
 public class Texture2DRD: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Texture2DRD") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Texture2DRD")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_texture_rd_rid(texture_rd_rid: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_rd_rid", args: [VariantBox(texture_rd_rid)])
 	}
@@ -95263,6 +100543,12 @@ public class Texture2DRD: Texture2D {
 @MainActor
 public class Texture3DRD: Texture3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Texture3DRD") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Texture3DRD")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_texture_rd_rid(texture_rd_rid: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_rd_rid", args: [VariantBox(texture_rd_rid)])
 	}
@@ -95280,6 +100566,12 @@ public class Texture3DRD: Texture3D {
 @MainActor
 public class TextureButton: BaseButton {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TextureButton") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TextureButton")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_texture_normal(texture: Texture2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_normal", args: [VariantBox(texture)])
 	}
@@ -95409,6 +100701,12 @@ public class TextureButton: BaseButton {
 @MainActor
 public class TextureLayeredRD: TextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TextureLayeredRD") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TextureLayeredRD")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_texture_rd_rid(texture_rd_rid: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_rd_rid", args: [VariantBox(texture_rd_rid)])
 	}
@@ -95426,6 +100724,12 @@ public class TextureLayeredRD: TextureLayered {
 @MainActor
 public class TextureProgressBar: Range {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TextureProgressBar") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TextureProgressBar")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_under_texture(tex: Texture2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_under_texture", args: [VariantBox(tex)])
 	}
@@ -95619,6 +100923,12 @@ public class TextureProgressBar: Range {
 @MainActor
 public class TorusMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TorusMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TorusMesh")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_inner_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_inner_radius", args: [VariantBox(radius)])
 	}
@@ -95672,6 +100982,12 @@ public class TorusMesh: PrimitiveMesh {
 @MainActor
 public class TubeTrailMesh: PrimitiveMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TubeTrailMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TubeTrailMesh")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(radius)])
 	}
@@ -95773,6 +101089,12 @@ public class TubeTrailMesh: PrimitiveMesh {
 @MainActor
 public class TwoBoneIK3D: IKModifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TwoBoneIK3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TwoBoneIK3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_target_node(index: Int, target_node: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_target_node", args: [VariantBox(index), VariantBox(target_node)])
 	}
@@ -95894,11 +101216,23 @@ public class TwoBoneIK3D: IKModifier3D {
 @MainActor
 public class VSeparator: Separator {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VSeparator") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VSeparator")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class ViewportTexture: Texture2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ViewportTexture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ViewportTexture")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_viewport_path_in_scene(path: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_viewport_path_in_scene", args: [VariantBox(path)])
 	}
@@ -95916,6 +101250,12 @@ public class ViewportTexture: Texture2D {
 @MainActor
 public class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisibleOnScreenEnabler2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisibleOnScreenEnabler2D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum EnableMode: Int, Sendable, CaseIterable {
 		case inherit = 0
 		case always = 1
@@ -95954,6 +101294,12 @@ public class VisibleOnScreenEnabler2D: VisibleOnScreenNotifier2D {
 @MainActor
 public class VisibleOnScreenEnabler3D: VisibleOnScreenNotifier3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisibleOnScreenEnabler3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisibleOnScreenEnabler3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum EnableMode: Int, Sendable, CaseIterable {
 		case inherit = 0
 		case always = 1
@@ -95992,6 +101338,12 @@ public class VisibleOnScreenEnabler3D: VisibleOnScreenNotifier3D {
 @MainActor
 public class VisualShaderNodeBooleanConstant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeBooleanConstant") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeBooleanConstant")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_constant(constant: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_constant", args: [VariantBox(constant)])
 	}
@@ -96009,6 +101361,12 @@ public class VisualShaderNodeBooleanConstant: VisualShaderNodeConstant {
 @MainActor
 public class VisualShaderNodeBooleanParameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeBooleanParameter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeBooleanParameter")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_default_value_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_default_value_enabled", args: [VariantBox(enabled)])
 	}
@@ -96038,6 +101396,12 @@ public class VisualShaderNodeBooleanParameter: VisualShaderNodeParameter {
 @MainActor
 public class VisualShaderNodeColorConstant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeColorConstant") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeColorConstant")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_constant(constant: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_constant", args: [VariantBox(constant)])
 	}
@@ -96055,6 +101419,12 @@ public class VisualShaderNodeColorConstant: VisualShaderNodeConstant {
 @MainActor
 public class VisualShaderNodeColorParameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeColorParameter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeColorParameter")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_default_value_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_default_value_enabled", args: [VariantBox(enabled)])
 	}
@@ -96084,6 +101454,12 @@ public class VisualShaderNodeColorParameter: VisualShaderNodeParameter {
 @MainActor
 public class VisualShaderNodeCurveTexture: VisualShaderNodeResizableBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeCurveTexture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeCurveTexture")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_texture(texture: CurveTexture) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture", args: [VariantBox(texture)])
 	}
@@ -96101,6 +101477,12 @@ public class VisualShaderNodeCurveTexture: VisualShaderNodeResizableBase {
 @MainActor
 public class VisualShaderNodeCurveXYZTexture: VisualShaderNodeResizableBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeCurveXYZTexture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeCurveXYZTexture")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_texture(texture: CurveXYZTexture) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture", args: [VariantBox(texture)])
 	}
@@ -96118,11 +101500,23 @@ public class VisualShaderNodeCurveXYZTexture: VisualShaderNodeResizableBase {
 @MainActor
 public class VisualShaderNodeFaceForward: VisualShaderNodeVectorBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeFaceForward") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeFaceForward")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeFloatConstant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeFloatConstant") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeFloatConstant")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_constant(constant: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_constant", args: [VariantBox(constant)])
 	}
@@ -96140,6 +101534,12 @@ public class VisualShaderNodeFloatConstant: VisualShaderNodeConstant {
 @MainActor
 public class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeFloatParameter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeFloatParameter")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Hint: Int, Sendable, CaseIterable {
 		case none = 0
 		case range = 1
@@ -96223,6 +101623,12 @@ public class VisualShaderNodeFloatParameter: VisualShaderNodeParameter {
 @MainActor
 public class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeFrame") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeFrame")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_title(title: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_title", args: [VariantBox(title)])
 	}
@@ -96294,6 +101700,12 @@ public class VisualShaderNodeFrame: VisualShaderNodeResizableBase {
 @MainActor
 public class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeGroupBase") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeGroupBase")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_inputs(inputs: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_inputs", args: [VariantBox(inputs)])
 	}
@@ -96380,6 +101792,12 @@ public class VisualShaderNodeGroupBase: VisualShaderNodeResizableBase {
 @MainActor
 public class VisualShaderNodeIntConstant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeIntConstant") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeIntConstant")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_constant(constant: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_constant", args: [VariantBox(constant)])
 	}
@@ -96397,6 +101815,12 @@ public class VisualShaderNodeIntConstant: VisualShaderNodeConstant {
 @MainActor
 public class VisualShaderNodeIntParameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeIntParameter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeIntParameter")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Hint: Int, Sendable, CaseIterable {
 		case none = 0
 		case range = 1
@@ -96493,11 +101917,23 @@ public class VisualShaderNodeIntParameter: VisualShaderNodeParameter {
 @MainActor
 public class VisualShaderNodeParticleBoxEmitter: VisualShaderNodeParticleEmitter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeParticleBoxEmitter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeParticleBoxEmitter")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeParticleMeshEmitter: VisualShaderNodeParticleEmitter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeParticleMeshEmitter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeParticleMeshEmitter")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_mesh(mesh: Mesh) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_mesh", args: [VariantBox(mesh)])
 	}
@@ -96539,21 +101975,45 @@ public class VisualShaderNodeParticleMeshEmitter: VisualShaderNodeParticleEmitte
 @MainActor
 public class VisualShaderNodeParticleOutput: VisualShaderNodeOutput {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeParticleOutput") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeParticleOutput")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeParticleRingEmitter: VisualShaderNodeParticleEmitter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeParticleRingEmitter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeParticleRingEmitter")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeParticleSphereEmitter: VisualShaderNodeParticleEmitter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeParticleSphereEmitter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeParticleSphereEmitter")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeTexture2DArray: VisualShaderNodeSample3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeTexture2DArray") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeTexture2DArray")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_texture_array(value: TextureLayered) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture_array", args: [VariantBox(value)])
 	}
@@ -96571,6 +102031,12 @@ public class VisualShaderNodeTexture2DArray: VisualShaderNodeSample3D {
 @MainActor
 public class VisualShaderNodeTexture3D: VisualShaderNodeSample3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeTexture3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeTexture3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_texture(value: Texture3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture", args: [VariantBox(value)])
 	}
@@ -96588,6 +102054,12 @@ public class VisualShaderNodeTexture3D: VisualShaderNodeSample3D {
 @MainActor
 public class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeTextureParameter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeTextureParameter")
+		}
+		self.init(ptr: raw)
+	}
 	public enum ColorDefault: Int, Sendable, CaseIterable {
 		case white = 0
 		case black = 1
@@ -96659,6 +102131,12 @@ public class VisualShaderNodeTextureParameter: VisualShaderNodeParameter {
 @MainActor
 public class VisualShaderNodeTransformConstant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeTransformConstant") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeTransformConstant")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_constant(constant: Transform3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_constant", args: [VariantBox(constant)])
 	}
@@ -96676,6 +102154,12 @@ public class VisualShaderNodeTransformConstant: VisualShaderNodeConstant {
 @MainActor
 public class VisualShaderNodeTransformParameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeTransformParameter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeTransformParameter")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_default_value_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_default_value_enabled", args: [VariantBox(enabled)])
 	}
@@ -96705,6 +102189,12 @@ public class VisualShaderNodeTransformParameter: VisualShaderNodeParameter {
 @MainActor
 public class VisualShaderNodeUIntConstant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeUIntConstant") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeUIntConstant")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_constant(constant: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_constant", args: [VariantBox(constant)])
 	}
@@ -96722,6 +102212,12 @@ public class VisualShaderNodeUIntConstant: VisualShaderNodeConstant {
 @MainActor
 public class VisualShaderNodeUIntParameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeUIntParameter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeUIntParameter")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_default_value_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_default_value_enabled", args: [VariantBox(enabled)])
 	}
@@ -96751,16 +102247,34 @@ public class VisualShaderNodeUIntParameter: VisualShaderNodeParameter {
 @MainActor
 public class VisualShaderNodeVaryingGetter: VisualShaderNodeVarying {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeVaryingGetter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeVaryingGetter")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeVaryingSetter: VisualShaderNodeVarying {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeVaryingSetter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeVaryingSetter")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeVec2Constant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeVec2Constant") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeVec2Constant")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_constant(constant: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_constant", args: [VariantBox(constant)])
 	}
@@ -96778,6 +102292,12 @@ public class VisualShaderNodeVec2Constant: VisualShaderNodeConstant {
 @MainActor
 public class VisualShaderNodeVec2Parameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeVec2Parameter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeVec2Parameter")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_default_value_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_default_value_enabled", args: [VariantBox(enabled)])
 	}
@@ -96807,6 +102327,12 @@ public class VisualShaderNodeVec2Parameter: VisualShaderNodeParameter {
 @MainActor
 public class VisualShaderNodeVec3Constant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeVec3Constant") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeVec3Constant")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_constant(constant: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_constant", args: [VariantBox(constant)])
 	}
@@ -96824,6 +102350,12 @@ public class VisualShaderNodeVec3Constant: VisualShaderNodeConstant {
 @MainActor
 public class VisualShaderNodeVec3Parameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeVec3Parameter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeVec3Parameter")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_default_value_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_default_value_enabled", args: [VariantBox(enabled)])
 	}
@@ -96853,6 +102385,12 @@ public class VisualShaderNodeVec3Parameter: VisualShaderNodeParameter {
 @MainActor
 public class VisualShaderNodeVec4Constant: VisualShaderNodeConstant {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeVec4Constant") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeVec4Constant")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_constant(constant: Quaternion) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_constant", args: [VariantBox(constant)])
 	}
@@ -96882,6 +102420,12 @@ public class VisualShaderNodeVec4Constant: VisualShaderNodeConstant {
 @MainActor
 public class VisualShaderNodeVec4Parameter: VisualShaderNodeParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeVec4Parameter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeVec4Parameter")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_default_value_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_default_value_enabled", args: [VariantBox(enabled)])
 	}
@@ -96911,21 +102455,45 @@ public class VisualShaderNodeVec4Parameter: VisualShaderNodeParameter {
 @MainActor
 public class VisualShaderNodeVectorCompose: VisualShaderNodeVectorBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeVectorCompose") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeVectorCompose")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeVectorDecompose: VisualShaderNodeVectorBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeVectorDecompose") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeVectorDecompose")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeVectorDistance: VisualShaderNodeVectorBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeVectorDistance") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeVectorDistance")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeVectorFunc: VisualShaderNodeVectorBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeVectorFunc") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeVectorFunc")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_function(func_: VisualShaderNodeVectorFunc.Function) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_function", args: [VariantBox(func_.rawValue)])
 	}
@@ -96943,11 +102511,23 @@ public class VisualShaderNodeVectorFunc: VisualShaderNodeVectorBase {
 @MainActor
 public class VisualShaderNodeVectorLen: VisualShaderNodeVectorBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeVectorLen") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeVectorLen")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeVectorOp: VisualShaderNodeVectorBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeVectorOp") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeVectorOp")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_operator(op: VisualShaderNodeVectorOp.Operator) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_operator", args: [VariantBox(op.rawValue)])
 	}
@@ -96965,11 +102545,23 @@ public class VisualShaderNodeVectorOp: VisualShaderNodeVectorBase {
 @MainActor
 public class VisualShaderNodeVectorRefract: VisualShaderNodeVectorBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeVectorRefract") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeVectorRefract")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AnimatableBody3D: StaticBody3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimatableBody3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimatableBody3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_sync_to_physics(enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_sync_to_physics", args: [VariantBox(enable)])
 	}
@@ -96987,6 +102579,12 @@ public class AnimatableBody3D: StaticBody3D {
 @MainActor
 public class AnimatedSprite3D: SpriteBase3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimatedSprite3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimatedSprite3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_sprite_frames(sprite_frames: SpriteFrames) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_sprite_frames", args: [VariantBox(sprite_frames)])
 	}
@@ -97107,11 +102705,23 @@ public class AnimatedSprite3D: SpriteBase3D {
 @MainActor
 public class CSGCombiner3D: CSGShape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CSGCombiner3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CSGCombiner3D")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class CSGPrimitive3D: CSGShape3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CSGPrimitive3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CSGPrimitive3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_flip_faces(flip_faces: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_flip_faces", args: [VariantBox(flip_faces)])
 	}
@@ -97129,6 +102739,12 @@ public class CSGPrimitive3D: CSGShape3D {
 @MainActor
 public class CharacterBody2D: PhysicsBody2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CharacterBody2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CharacterBody2D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum MotionMode: Int, Sendable, CaseIterable {
 		case grounded = 0
 		case floating = 1
@@ -97423,16 +103039,34 @@ public class CharacterBody2D: PhysicsBody2D {
 @MainActor
 public class CheckBox: Button {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CheckBox") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CheckBox")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class CheckButton: Button {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CheckButton") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CheckButton")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class ColorPickerButton: Button {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ColorPickerButton") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ColorPickerButton")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_pick_color(color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_pick_color", args: [VariantBox(color)])
 	}
@@ -97496,21 +103130,45 @@ public class ColorPickerButton: Button {
 @MainActor
 public class CompressedCubemap: CompressedTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CompressedCubemap") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CompressedCubemap")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class CompressedCubemapArray: CompressedTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CompressedCubemapArray") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CompressedCubemapArray")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class CompressedTexture2DArray: CompressedTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CompressedTexture2DArray") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CompressedTexture2DArray")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class Cubemap: ImageTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Cubemap") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Cubemap")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func create_placeholder() -> Resource? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_placeholder", args: [])
@@ -97521,6 +103179,12 @@ public class Cubemap: ImageTextureLayered {
 @MainActor
 public class CubemapArray: ImageTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CubemapArray") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CubemapArray")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func create_placeholder() -> Resource? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_placeholder", args: [])
@@ -97531,6 +103195,12 @@ public class CubemapArray: ImageTextureLayered {
 @MainActor
 public class FileDialog: ConfirmationDialog {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("FileDialog") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class FileDialog")
+		}
+		self.init(ptr: raw)
+	}
 	public enum FileMode: Int, Sendable, CaseIterable {
 		case openFile = 0
 		case openFiles = 1
@@ -97875,6 +103545,12 @@ public class FileDialog: ConfirmationDialog {
 @MainActor
 public class GraphFrame: GraphElement {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GraphFrame") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GraphFrame")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_title(title: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_title", args: [VariantBox(title)])
 	}
@@ -97960,6 +103636,12 @@ public class GraphFrame: GraphElement {
 @MainActor
 public class GraphNode: GraphElement {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("GraphNode") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class GraphNode")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_title(title: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_title", args: [VariantBox(title)])
 	}
@@ -98158,31 +103840,67 @@ public class GraphNode: GraphElement {
 @MainActor
 public class HBoxContainer: BoxContainer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("HBoxContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class HBoxContainer")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class HFlowContainer: FlowContainer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("HFlowContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class HFlowContainer")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class HScrollBar: ScrollBar {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("HScrollBar") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class HScrollBar")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class HSlider: Slider {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("HSlider") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class HSlider")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class HSplitContainer: SplitContainer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("HSplitContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class HSplitContainer")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class InputEventGesture: InputEventWithModifiers {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputEventGesture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputEventGesture")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_position(position: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_position", args: [VariantBox(position)])
 	}
@@ -98200,6 +103918,12 @@ public class InputEventGesture: InputEventWithModifiers {
 @MainActor
 public class InputEventKey: InputEventWithModifiers {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputEventKey") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputEventKey")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_pressed(pressed: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_pressed", args: [VariantBox(pressed)])
 	}
@@ -98314,6 +104038,12 @@ public class InputEventKey: InputEventWithModifiers {
 @MainActor
 public class InputEventMouse: InputEventWithModifiers {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputEventMouse") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputEventMouse")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_button_mask(button_mask: MouseButtonMask) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_button_mask", args: [VariantBox(button_mask.rawValue)])
 	}
@@ -98355,6 +104085,12 @@ public class InputEventMouse: InputEventWithModifiers {
 @MainActor
 public class IterateIK3D: ChainIK3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("IterateIK3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class IterateIK3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_max_iterations(max_iterations: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_max_iterations", args: [VariantBox(max_iterations)])
 	}
@@ -98476,6 +104212,12 @@ public class IterateIK3D: ChainIK3D {
 @MainActor
 public class MenuButton: Button {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("MenuButton") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class MenuButton")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_popup() -> PopupMenu? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_popup", args: [])
@@ -98519,6 +104261,12 @@ public class MenuButton: Button {
 @MainActor
 public class OptionButton: Button {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("OptionButton") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class OptionButton")
+		}
+		self.init(ptr: raw)
+	}
 	public func add_item(label: String, id: Int = -1) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_item", args: [VariantBox(label), VariantBox(id)])
 	}
@@ -98741,26 +104489,56 @@ public class OptionButton: Button {
 @MainActor
 public class PlaceholderCubemap: PlaceholderTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PlaceholderCubemap") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PlaceholderCubemap")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class PlaceholderCubemapArray: PlaceholderTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PlaceholderCubemapArray") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PlaceholderCubemapArray")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class PlaceholderTexture2DArray: PlaceholderTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PlaceholderTexture2DArray") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PlaceholderTexture2DArray")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class QuadMesh: PlaneMesh {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("QuadMesh") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class QuadMesh")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class RigidBody2D: PhysicsBody2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("RigidBody2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class RigidBody2D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum FreezeMode: Int, Sendable, CaseIterable {
 		case static_ = 0
 		case kinematic = 1
@@ -99146,6 +104924,12 @@ public class RigidBody2D: PhysicsBody2D {
 @MainActor
 public class SoftBody3D: MeshInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SoftBody3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SoftBody3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum DisableMode: Int, Sendable, CaseIterable {
 		case remove = 0
 		case keepActive = 1
@@ -99369,6 +105153,12 @@ public class SoftBody3D: MeshInstance3D {
 @MainActor
 public class SplineIK3D: ChainIK3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("SplineIK3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class SplineIK3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_path_3d(index: Int, path_3d: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_path_3d", args: [VariantBox(index), VariantBox(path_3d)])
 	}
@@ -99410,6 +105200,12 @@ public class SplineIK3D: ChainIK3D {
 @MainActor
 public class Sprite3D: SpriteBase3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Sprite3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Sprite3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_texture(texture: Texture2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_texture", args: [VariantBox(texture)])
 	}
@@ -99513,6 +105309,12 @@ public class Sprite3D: SpriteBase3D {
 @MainActor
 public class StaticBody2D: PhysicsBody2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("StaticBody2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class StaticBody2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_constant_linear_velocity(vel: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_constant_linear_velocity", args: [VariantBox(vel)])
 	}
@@ -99554,6 +105356,12 @@ public class StaticBody2D: PhysicsBody2D {
 @MainActor
 public class Texture2DArray: ImageTextureLayered {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Texture2DArray") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Texture2DArray")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func create_placeholder() -> Resource? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_placeholder", args: [])
@@ -99564,21 +105372,45 @@ public class Texture2DArray: ImageTextureLayered {
 @MainActor
 public class Texture2DArrayRD: TextureLayeredRD {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Texture2DArrayRD") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Texture2DArrayRD")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class TextureCubemapArrayRD: TextureLayeredRD {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TextureCubemapArrayRD") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TextureCubemapArrayRD")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class TextureCubemapRD: TextureLayeredRD {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("TextureCubemapRD") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class TextureCubemapRD")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class Trail3D: LineBase3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("Trail3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class Trail3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum LimitMode: Int, Sendable, CaseIterable {
 		case lifetime = 0
 		case maxLength = 1
@@ -99777,31 +105609,67 @@ public class Trail3D: LineBase3D {
 @MainActor
 public class VBoxContainer: BoxContainer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VBoxContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VBoxContainer")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VFlowContainer: FlowContainer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VFlowContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VFlowContainer")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VScrollBar: ScrollBar {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VScrollBar") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VScrollBar")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VSlider: Slider {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VSlider") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VSlider")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VSplitContainer: SplitContainer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VSplitContainer") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VSplitContainer")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VehicleBody3D: RigidBody3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VehicleBody3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VehicleBody3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_engine_force(engine_force: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_engine_force", args: [VariantBox(engine_force)])
 	}
@@ -99847,6 +105715,12 @@ public class VehicleBody3D: RigidBody3D {
 @MainActor
 public class VisualShaderNodeComment: VisualShaderNodeFrame {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeComment") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeComment")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_description(description: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_description", args: [VariantBox(description)])
 	}
@@ -99864,11 +105738,23 @@ public class VisualShaderNodeComment: VisualShaderNodeFrame {
 @MainActor
 public class VisualShaderNodeCubemapParameter: VisualShaderNodeTextureParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeCubemapParameter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeCubemapParameter")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeExpression: VisualShaderNodeGroupBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeExpression") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeExpression")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_expression(expression: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_expression", args: [VariantBox(expression)])
 	}
@@ -99886,26 +105772,56 @@ public class VisualShaderNodeExpression: VisualShaderNodeGroupBase {
 @MainActor
 public class VisualShaderNodeTexture2DArrayParameter: VisualShaderNodeTextureParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeTexture2DArrayParameter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeTexture2DArrayParameter")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeTexture2DParameter: VisualShaderNodeTextureParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeTexture2DParameter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeTexture2DParameter")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeTexture3DParameter: VisualShaderNodeTextureParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeTexture3DParameter") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeTexture3DParameter")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class VisualShaderNodeTextureParameterTriplanar: VisualShaderNodeTextureParameter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeTextureParameterTriplanar") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeTextureParameterTriplanar")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class AnimatableBody2D: StaticBody2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("AnimatableBody2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class AnimatableBody2D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_sync_to_physics(enable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_sync_to_physics", args: [VariantBox(enable)])
 	}
@@ -99923,11 +105839,23 @@ public class AnimatableBody2D: StaticBody2D {
 @MainActor
 public class CCDIK3D: IterateIK3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CCDIK3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CCDIK3D")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class CSGBox3D: CSGPrimitive3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CSGBox3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CSGBox3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_size(size: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_size", args: [VariantBox(size)])
 	}
@@ -99957,6 +105885,12 @@ public class CSGBox3D: CSGPrimitive3D {
 @MainActor
 public class CSGCylinder3D: CSGPrimitive3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CSGCylinder3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CSGCylinder3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(radius)])
 	}
@@ -100034,6 +105968,12 @@ public class CSGCylinder3D: CSGPrimitive3D {
 @MainActor
 public class CSGMesh3D: CSGPrimitive3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CSGMesh3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CSGMesh3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_mesh(mesh: Mesh) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_mesh", args: [VariantBox(mesh)])
 	}
@@ -100063,6 +106003,12 @@ public class CSGMesh3D: CSGPrimitive3D {
 @MainActor
 public class CSGPolygon3D: CSGPrimitive3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CSGPolygon3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CSGPolygon3D")
+		}
+		self.init(ptr: raw)
+	}
 	public enum Mode: Int, Sendable, CaseIterable {
 		case depth = 0
 		case spin = 1
@@ -100292,6 +106238,12 @@ public class CSGPolygon3D: CSGPrimitive3D {
 @MainActor
 public class CSGSphere3D: CSGPrimitive3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CSGSphere3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CSGSphere3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_radius", args: [VariantBox(radius)])
 	}
@@ -100357,6 +106309,12 @@ public class CSGSphere3D: CSGPrimitive3D {
 @MainActor
 public class CSGTorus3D: CSGPrimitive3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("CSGTorus3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class CSGTorus3D")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_inner_radius(radius: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_inner_radius", args: [VariantBox(radius)])
 	}
@@ -100434,6 +106392,12 @@ public class CSGTorus3D: CSGPrimitive3D {
 @MainActor
 public class ColorPicker: VBoxContainer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("ColorPicker") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ColorPicker")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_pick_color(color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_pick_color", args: [VariantBox(color)])
 	}
@@ -100618,11 +106582,23 @@ public class ColorPicker: VBoxContainer {
 @MainActor
 public class FABRIK3D: IterateIK3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("FABRIK3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class FABRIK3D")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class InputEventMagnifyGesture: InputEventGesture {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputEventMagnifyGesture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputEventMagnifyGesture")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_factor(factor: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_factor", args: [VariantBox(factor)])
 	}
@@ -100640,6 +106616,12 @@ public class InputEventMagnifyGesture: InputEventGesture {
 @MainActor
 public class InputEventMouseButton: InputEventMouse {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputEventMouseButton") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputEventMouseButton")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_factor(factor: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_factor", args: [VariantBox(factor)])
 	}
@@ -100695,6 +106677,12 @@ public class InputEventMouseButton: InputEventMouse {
 @MainActor
 public class InputEventMouseMotion: InputEventMouse {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputEventMouseMotion") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputEventMouseMotion")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_tilt(tilt: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_tilt", args: [VariantBox(tilt)])
 	}
@@ -100784,6 +106772,12 @@ public class InputEventMouseMotion: InputEventMouse {
 @MainActor
 public class InputEventPanGesture: InputEventGesture {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("InputEventPanGesture") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class InputEventPanGesture")
+		}
+		self.init(ptr: raw)
+	}
 	public func set_delta(delta: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_delta", args: [VariantBox(delta)])
 	}
@@ -100801,11 +106795,23 @@ public class InputEventPanGesture: InputEventGesture {
 @MainActor
 public class JacobianIK3D: IterateIK3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("JacobianIK3D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class JacobianIK3D")
+		}
+		self.init(ptr: raw)
+	}
 }
 
 @MainActor
 public class PhysicalBone2D: RigidBody2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("PhysicalBone2D") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class PhysicalBone2D")
+		}
+		self.init(ptr: raw)
+	}
 	@discardableResult
 	public func get_joint() -> Joint2D? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_joint", args: [])
@@ -100881,4 +106887,10 @@ public class PhysicalBone2D: RigidBody2D {
 @MainActor
 public class VisualShaderNodeGlobalExpression: VisualShaderNodeExpression {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override convenience init() {
+		guard let raw = Host.shared.createObject("VisualShaderNodeGlobalExpression") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeGlobalExpression")
+		}
+		self.init(ptr: raw)
+	}
 }

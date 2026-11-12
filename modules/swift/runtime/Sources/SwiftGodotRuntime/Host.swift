@@ -51,6 +51,7 @@ public struct SwiftGodotHostMirror {
 	public var node_get_parent: (@convention(c) (UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer?)?
 	public var print: (@convention(c) (UnsafePointer<CChar>?) -> Void)?
 	public var push_error: (@convention(c) (UnsafePointer<CChar>?) -> Void)?
+	public var object_create: (@convention(c) (UnsafePointer<CChar>?) -> UnsafeMutableRawPointer?)?
 }
 
 @MainActor
@@ -282,5 +283,10 @@ public final class Host {
 
 	public func print(_ message: String) {
 		message.withCString { requireHost().pointee.print!($0) }
+	}
+
+	// Instantiates a registered engine class (e.g. "Label") through ClassDB.
+	public func createObject(_ className: String) -> UnsafeMutableRawPointer? {
+		className.withCString { requireHost().pointee.object_create!($0) }
 	}
 }

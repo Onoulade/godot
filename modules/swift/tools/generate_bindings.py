@@ -230,6 +230,44 @@ def camel_case(s):
 
 GLOBAL_ENUMS: dict[str, dict[str, int]] = {}
 
+# "Node.InternalMode" -> {"INTERNAL_MODE_DISABLED": 0, ...}, for enum default values.
+CLASS_ENUM_VALUES: dict[str, dict[str, int]] = {}
+
+
+def enum_case_names(enum_name, values):
+    prefix = snake_upper(enum_name) + "_"
+    cases = []
+    used = set()
+    for const, val in sorted(values.items(), key=lambda kv: kv[1]):
+        base = const[len(prefix) :] if const.startswith(prefix) else const
+        case = sanitize(camel_case(base))
+        while case in used:
+            case += "_"
+        used.add(case)
+        cases.append((case, val))
+    return cases
+
+
+def enum_default_literal(class_name, dv):
+    if dv is None or not class_name:
+        return None
+    if "." in class_name:
+        values = CLASS_ENUM_VALUES.get(class_name)
+        enum_name = class_name.split(".")[-1]
+    else:
+        values = GLOBAL_ENUMS.get(class_name)
+        enum_name = class_name
+    if not values:
+        return None
+    try:
+        target = int(str(dv).strip())
+    except ValueError:
+        return None
+    for case, val in enum_case_names(enum_name, values):
+        if val == target:
+            return "." + case
+    return None
+
 
 def enum_swift_type(class_name, generated):
     # "Node.ProcessMode" -> "Node.ProcessMode" if Node is generated, else Int.
@@ -296,7 +334,10 @@ def emit_method(m, generated):
     for a in args:
         st = swift_type(a.get("type"), a.get("class_name"), generated)
         pname = sanitize(a.get("name", "arg"))
-        dv = None if is_enum(a.get("type"), a.get("class_name")) else default_literal(a.get("default_value"))
+        if is_enum(a.get("type"), a.get("class_name")):
+            dv = enum_default_literal(a.get("class_name"), a.get("default_value")) if st != "Int" else None
+        else:
+            dv = default_literal(a.get("default_value"))
         params.append(f"{pname}: {st} = {dv}" if dv is not None else f"{pname}: {st}")
         if is_enum(a.get("type"), a.get("class_name")) and st != "Int":
             call_args.append(f"VariantBox({pname}.rawValue)")
@@ -358,17 +399,7 @@ def emit_property(p, method_names):
 
 
 def emit_enum_cases(name, values, indent):
-    prefix = snake_upper(name) + "_"
-    lines = []
-    used = set()
-    for const, val in sorted(values.items(), key=lambda kv: kv[1]):
-        base = const[len(prefix) :] if const.startswith(prefix) else const
-        case = sanitize(camel_case(base))
-        while case in used:
-            case += "_"
-        used.add(case)
-        lines.append(f"{indent}case {case} = {val}")
-    return lines
+    return [f"{indent}case {case} = {val}" for case, val in enum_case_names(name, values)]
 
 
 def emit_enum(en):
@@ -412,6 +443,7 @@ def main():
     parser.add_argument("--api", default="extension_api.json", help="Path to extension_api.json")
     parser.add_argument("--classes", help="Comma-separated class names to generate")
     parser.add_argument("--all", action="store_true", help="Generate all classes in the API")
+    parser.add_argument("--exclude", help="Comma-separated class names to skip (e.g. module classes)")
     parser.add_argument("--out", required=True, help="Output Swift file")
     parser.add_argument(
         "--global-enums-headers",
@@ -427,6 +459,9 @@ def main():
         GLOBAL_ENUMS.update(parse_header_enums(header))
 
     all_classes = {c["name"]: c for c in api.get("classes", [])}
+    for c in all_classes.values():
+        for en in c.get("enums", []):
+            CLASS_ENUM_VALUES[f"{c['name']}.{en.get('name', '')}"] = en.get("values", {})
     if args.all:
         selected = set(all_classes)
     elif args.classes:
@@ -438,6 +473,8 @@ def main():
     else:
         print("Provide --classes or --all", file=sys.stderr)
         sys.exit(1)
+    if args.exclude:
+        selected -= {c.strip() for c in args.exclude.split(",") if c.strip()}
 
     def depth(name):
         d = 0
@@ -481,6 +518,14 @@ def main():
         out.append("@MainActor")
         out.append(f"public class {cname}: {parent} {{")
         out.append("\tpublic override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }")
+        out.append(
+            "\tpublic override convenience init() {" if parent != "GodotObject" else "\tpublic convenience init() {"
+        )
+        out.append(f'\t\tguard let raw = Host.shared.createObject("{cname}") else {{')
+        out.append(f'\t\t\tfatalError("SwiftGodot: cannot instantiate Godot class {cname}")')
+        out.append("\t\t}")
+        out.append("\t\tself.init(ptr: raw)")
+        out.append("\t}")
         for en in c.get("enums", []):
             out.extend(emit_enum(en))
         method_names = set()

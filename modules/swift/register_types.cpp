@@ -34,6 +34,7 @@
 #include "swift_language.h"
 #include "swift_resource_format.h"
 #include "swift_script.h"
+#include "swift_view_host.h"
 
 #include "core/io/resource_loader.h"
 #include "core/io/resource_saver.h"
@@ -106,6 +107,10 @@ void initialize_swift_module(ModuleInitializationLevel p_level) {
 
 		resource_saver_swift.instantiate();
 		ResourceSaver::add_resource_format_saver(resource_saver_swift);
+	}
+
+	if (p_level == MODULE_INITIALIZATION_LEVEL_SCENE) {
+		GDREGISTER_CLASS(SwiftViewHost);
 	}
 
 #ifdef TOOLS_ENABLED

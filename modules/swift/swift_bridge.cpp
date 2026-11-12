@@ -107,6 +107,9 @@ Error SwiftBridge::_try_load_from(const String &p_dir) {
 	abi.script_get_property_type = reinterpret_cast<int (*)(SwiftGodotScriptHandle, int)>(_resolve("swiftgodot_script_get_property_type", true));
 	abi.script_get_property_usage = reinterpret_cast<int (*)(SwiftGodotScriptHandle, int)>(_resolve("swiftgodot_script_get_property_usage", true));
 
+	abi.scene_build = reinterpret_cast<GDExtensionObjectPtr (*)(GDExtensionObjectPtr)>(_resolve("swiftgodot_scene_build", true));
+	abi.scene_invalidate = reinterpret_cast<void (*)(GDExtensionObjectPtr)>(_resolve("swiftgodot_scene_invalidate", true));
+
 	abi.instance_create = reinterpret_cast<SwiftGodotInstanceHandle (*)(SwiftGodotScriptHandle, GDExtensionObjectPtr)>(_resolve("swiftgodot_instance_create", true));
 	abi.instance_free = reinterpret_cast<void (*)(SwiftGodotInstanceHandle)>(_resolve("swiftgodot_instance_free", true));
 	abi.instance_call = reinterpret_cast<GDExtensionBool (*)(SwiftGodotInstanceHandle, const char *, GDExtensionConstVariantPtr *, int, GDExtensionVariantPtr, GDExtensionCallError *)>(_resolve("swiftgodot_instance_call", true));

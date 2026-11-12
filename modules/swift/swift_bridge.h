@@ -75,6 +75,11 @@ struct SwiftGodotABI {
 	int (*script_get_property_type)(SwiftGodotScriptHandle p_script, int p_index) = nullptr;
 	int (*script_get_property_usage)(SwiftGodotScriptHandle p_script, int p_index) = nullptr;
 
+	// Declarative UI (PR #2): build the root node of a Swift scene and
+	// invalidate it (scoped re-render through the attribute graph).
+	GDExtensionObjectPtr (*scene_build)(GDExtensionObjectPtr p_host) = nullptr;
+	void (*scene_invalidate)(GDExtensionObjectPtr p_host) = nullptr;
+
 	SwiftGodotInstanceHandle (*instance_create)(SwiftGodotScriptHandle p_script, GDExtensionObjectPtr p_owner) = nullptr;
 	void (*instance_free)(SwiftGodotInstanceHandle p_instance) = nullptr;
 	GDExtensionBool (*instance_call)(SwiftGodotInstanceHandle p_instance, const char *p_method, GDExtensionConstVariantPtr *p_args, int p_arg_count, GDExtensionVariantPtr r_ret, GDExtensionCallError *r_error) = nullptr;

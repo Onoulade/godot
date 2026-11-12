@@ -22,6 +22,7 @@ def get_doc_classes():
     return [
         "SwiftLanguage",
         "SwiftScript",
+        "SwiftViewHost",
     ]
 
 

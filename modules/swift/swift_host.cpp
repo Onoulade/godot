@@ -45,6 +45,7 @@
 #include "core/math/vector3.h"
 #include "core/math/vector3i.h"
 #include "core/math/vector4.h"
+#include "core/object/class_db.h"
 #include "core/object/object.h"
 #include "core/os/os.h"
 #include "core/string/node_path.h"
@@ -358,6 +359,15 @@ static void _host_push_error(const char *p_message) {
 	ERR_PRINT(String::utf8(p_message));
 }
 
+static GDExtensionObjectPtr _host_object_create(const char *p_class_name) {
+	StringName class_name = StringName(String::utf8(p_class_name));
+	if (!ClassDB::can_instantiate(class_name)) {
+		ERR_PRINT(String("SwiftHost: cannot instantiate class ") + String::utf8(p_class_name));
+		return nullptr;
+	}
+	return (GDExtensionObjectPtr)ClassDB::instantiate(class_name);
+}
+
 static const SwiftGodotHost _host = {
 	_host_variant_get_type,
 	_host_variant_as_bool,
@@ -407,6 +417,7 @@ static const SwiftGodotHost _host = {
 	_host_node_get_parent,
 	_host_print,
 	_host_push_error,
+	_host_object_create,
 };
 
 const SwiftGodotHost *SwiftHost::get_host() {

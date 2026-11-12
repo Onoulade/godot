@@ -88,6 +88,9 @@ struct SwiftGodotHost {
 
 	void (*print)(const char *p_message) = nullptr;
 	void (*push_error)(const char *p_message) = nullptr;
+
+	// Instantiates a registered engine class (ClassDB::instantiate), e.g. "Label".
+	GDExtensionObjectPtr (*object_create)(const char *p_class_name) = nullptr;
 };
 
 class SwiftHost {

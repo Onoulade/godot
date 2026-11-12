@@ -13,6 +13,7 @@ public enum VariantTypeMirror: Int32 {
 	let path: String
 	let source: String
 	var className: String?
+	var rootViewClass: String?
 	var isTool: Bool = false
 	var methods: [String] = []
 	var signals: [String] = []
@@ -81,8 +82,8 @@ public final class Runtime {
 	public func compileScript(path: String, source: String) -> UnsafeMutableRawPointer? {
 		let script = CompiledScript(path: path, source: source)
 		parseMetadata(script)
-		if let className = script.className {
-			ScriptCompiler.shared.tryCompile(script: script, className: className)
+		if script.className != nil || script.rootViewClass != nil {
+			ScriptCompiler.shared.tryCompile(script: script, className: script.className, rootView: script.rootViewClass)
 		}
 		lock.lock()
 		let handle = UnsafeMutableRawPointer(bitPattern: ObjectIdentifier(script).hashValue & 0x7FFF_FFFF)!
@@ -227,8 +228,12 @@ public final class Runtime {
 
 		if let match = firstMatch(of: "\\bclass\\s+([A-Za-z_][A-Za-z0-9_]*)", in: source) {
 			script.className = match
-		} else {
-			script.error = "No class declaration found."
+		}
+		if let view = firstMatch(of: "\\bstruct\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*:[^{]*\\bView\\b", in: source) {
+			script.rootViewClass = view
+		}
+		if script.className == nil && script.rootViewClass == nil {
+			script.error = "No class or View declaration found."
 			return
 		}
 
