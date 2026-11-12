@@ -31,14 +31,15 @@ jobs:
           nm -D "$UILIB" | grep -q swiftgodot_scene_build
           nm -D "$UILIB" | grep -q swiftgodot_scene_invalidate
 
+  # macOS only on manual dispatch: this account cannot provision a macOS
+  # runner, so on pull_request the job is cancelled instantly (no steps, no
+  # log) and fails the whole run. Run it manually when a macOS runner is
+  # available.
   build-swift-runtime-macos:
     name: Build Swift runtime (macOS)
+    if: github.event_name == 'workflow_dispatch'
     runs-on: macos-latest
     timeout-minutes: 30
-    # GitHub cancels macOS jobs instantly when no macOS runner can be
-    # provisioned for the account (no log, no steps); don't fail the PR run
-    # for that platform-level cancellation.
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: swift-actions/setup-swift@v2
