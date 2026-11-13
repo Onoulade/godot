@@ -48,7 +48,7 @@ public final class ScriptCompiler {
 			let packageRoot = URL(fileURLWithPath: #filePath)
 				.deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
 			let buildDir = packageRoot.appendingPathComponent(".build/debug", isDirectory: true)
-			var arguments = [
+			let arguments = [
 				"-parse-as-library", "-emit-library",
 				"-I", buildDir.appendingPathComponent("Modules", isDirectory: true).path,
 				"-o", libURL.path,

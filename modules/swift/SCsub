@@ -52,14 +52,12 @@ def _build_swift_runtime_libs():
         print(f"swift module:   {config} build: swift build -c {config} --package-path modules/swift/runtime")
         print("swift module:   then copy libswiftgodot_runtime next to the binary in bin/.")
         return
-    package_path = os.path.join("modules", "swift", "runtime")
-    print(f"swift module: building the Swift runtime package ({swift} build -c {config})...")
-    result = subprocess.run([swift, "build", "-c", config, "--package-path", package_path])
-    if result.returncode != 0:
-        print(
-            "swift module: WARNING: 'swift build' failed; runtime libraries not copied (Swift scripts will load but not run)."
-        )
-        return
+    # SCons reads this SCsub with the module dir as cwd: use absolute paths.
+    package_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "runtime")
+    bin_dir = env.Dir("#bin").abspath
+    os.makedirs(bin_dir, exist_ok=True)
+    # SwiftGodotUI is part of the single swiftgodot_runtime library now; drop
+    # stale copies from older builds (loading both would duplicate classes).
     if os.name == "nt":
         names = ("swiftgodot_runtime.dll",)
         stale = ("SwiftGodotUI.dll",)
@@ -69,16 +67,19 @@ def _build_swift_runtime_libs():
     else:
         names = ("libswiftgodot_runtime.so",)
         stale = ("libSwiftGodotUI.so",)
-    build_dir = os.path.realpath(os.path.join(package_path, ".build", config))
-    bin_dir = env.Dir("#bin").abspath
-    os.makedirs(bin_dir, exist_ok=True)
-    # SwiftGodotUI is part of the single swiftgodot_runtime library now; drop
-    # stale copies from older builds (loading both would duplicate classes).
     for name in stale:
         stale_path = os.path.join(bin_dir, name)
         if os.path.exists(stale_path):
             os.remove(stale_path)
             print(f"swift module: removed stale {name} from bin/")
+    print(f"swift module: building the Swift runtime package ({swift} build -c {config})...")
+    result = subprocess.run([swift, "build", "-c", config, "--package-path", package_path])
+    if result.returncode != 0:
+        print(
+            "swift module: WARNING: 'swift build' failed; runtime library not copied (Swift scripts will load but not run)."
+        )
+        return
+    build_dir = os.path.realpath(os.path.join(package_path, ".build", config))
     for name in names:
         found = None
         for root, _dirs, files in os.walk(build_dir):
