@@ -56,11 +56,12 @@ class SwiftExportPlugin : public EditorExportPlugin {
 
 protected:
 	virtual void _export_begin(const HashSet<String> &p_features, bool p_debug, const String &p_path, int p_flags) override {
-		// Ship the Swift runtime libraries as shared objects: next to the
+		// Ship the Swift runtime library as a shared object: next to the
 		// exported executable on Linux/Windows, in Contents/Frameworks of the
 		// .app on macOS — exactly where SwiftBridge searches at load time.
+		// (SwiftGodotUI is compiled into the same library.)
 		String exe_dir = OS::get_singleton()->get_executable_path().get_base_dir();
-		const String lib_names[] = { SwiftBridge::get_runtime_library_name(), SwiftBridge::get_ui_library_name() };
+		const String lib_names[] = { SwiftBridge::get_runtime_library_name() };
 		for (const String &lib_name : lib_names) {
 			String lib_path = exe_dir.path_join(lib_name);
 			if (FileAccess::exists(lib_path)) {

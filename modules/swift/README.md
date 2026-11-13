@@ -173,20 +173,22 @@ scons platform=<platform> module_swift_enabled=yes
 ```
 
 The Swift runtime package is built automatically by `scons` when a Swift
-toolchain (`swift` in `PATH`) is available: the produced
-`libswiftgodot_runtime.{so,dylib,dll}` and `libSwiftGodotUI.{so,dylib,dll}`
-are copied next to the Godot executable in `bin/`, where the module loads
-them at startup (it also searches `../Frameworks/` inside macOS `.app`
-bundles and `res://bin`). Set `SWIFTGODOT_SKIP_RUNTIME_BUILD=1` to skip this
-step (e.g. on CI builders without Swift). To do it by hand instead (watch the `swift module:` lines in the scons output
-to see whether the toolchain was found):
+toolchain (`swift` in `PATH`/`xcrun`) is available: the produced
+`libswiftgodot_runtime.{so,dylib,dll}` is copied next to the Godot executable
+in `bin/`, where the module loads it at startup (it also searches
+`../Frameworks/` inside macOS `.app` bundles, `@executable_path/../Frameworks`
+and `res://bin`). Note the runtime is a **single** dynamic library:
+`SwiftGodotUI` is compiled into it — shipping a separate `libSwiftGodotUI`
+would register every Swift class twice and crash on macOS. Set
+`SWIFTGODOT_SKIP_RUNTIME_BUILD=1` to skip this step (e.g. on CI builders
+without Swift). To do it by hand instead (watch the `swift module:` lines in
+the scons output to see whether the toolchain was found):
 
 ```sh
 swift build -c debug --package-path modules/swift/runtime   # editor/template_debug; use -c release otherwise
-cp modules/swift/runtime/.build/debug/libswiftgodot_runtime.{so,dylib,dll} \
-   modules/swift/runtime/.build/debug/libSwiftGodotUI.{so,dylib,dll} \
-   bin/
-# for a macOS .app bundle, put them in Godot.app/Contents/Frameworks/ instead
+cp modules/swift/runtime/.build/debug/libswiftgodot_runtime.{so,dylib,dll} bin/
+rm -f bin/libSwiftGodotUI.{so,dylib,dll}   # stale copy from older builds
+# for a macOS .app bundle, put the dylib in Godot.app/Contents/Frameworks/ instead
 ```
 
 If the runtime library is missing at startup, the editor prints a warning and

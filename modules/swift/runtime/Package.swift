@@ -8,8 +8,11 @@ let package = Package(
 	// itself, so this only raises the Apple deployment target.
 	platforms: [.macOS(.v14)],
 	products: [
-		.library(name: "swiftgodot_runtime", type: .dynamic, targets: ["SwiftGodotRuntime"]),
-		.library(name: "SwiftGodotUI", type: .dynamic, targets: ["SwiftGodotUI"]),
+		// One single dynamic library for both targets: a separate UI dylib
+		// would statically embed SwiftGodotRuntime's objects, and loading both
+		// dylibs would register every Swift/ObjC class twice (objc
+		// "implemented in both" warnings and spurious cast crashes on macOS).
+		.library(name: "swiftgodot_runtime", type: .dynamic, targets: ["SwiftGodotRuntime", "SwiftGodotUI"]),
 	],
 	// No external dependencies: Apple's Observation framework (@Observable,
 	// withObservationTracking) ships inside the Swift toolchain's standard

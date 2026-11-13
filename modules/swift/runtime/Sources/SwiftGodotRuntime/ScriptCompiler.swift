@@ -57,9 +57,8 @@ public final class ScriptCompiler {
 				"-rpath", buildDir.path,
 				"-lswiftgodot_runtime",
 			]
-			if rootView != nil {
-				arguments.append("-lSwiftGodotUI")
-			}
+			// SwiftGodotUI's symbols live in the same libswiftgodot_runtime
+			// dylib (single dynamic product), so no extra -l flag is needed.
 			let process = Process()
 			process.executableURL = URL(fileURLWithPath: swiftc)
 			process.arguments = arguments

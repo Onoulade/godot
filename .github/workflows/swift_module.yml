@@ -26,10 +26,10 @@ jobs:
           nm -D "$LIB" | grep -q swiftgodot_runtime_version
           nm -D "$LIB" | grep -q swiftgodot_script_compile
           nm -D "$LIB" | grep -q swiftgodot_instance_create
-          UILIB=$(find -L modules/swift/runtime/.build/release -name "libSwiftGodotUI.so" | head -1)
-          test -n "$UILIB"
-          nm -D "$UILIB" | grep -q swiftgodot_scene_build
-          nm -D "$UILIB" | grep -q swiftgodot_scene_invalidate
+          # SwiftGodotUI is compiled into the same library (single dynamic
+          # product, so no duplicate ObjC classes when loaded).
+          nm -D "$LIB" | grep -q swiftgodot_scene_build
+          nm -D "$LIB" | grep -q swiftgodot_scene_invalidate
 
   # macOS only on manual dispatch: this account cannot provision a macOS
   # runner, so on pull_request the job is cancelled instantly (no steps, no
@@ -52,9 +52,7 @@ jobs:
           LIB=$(find -L modules/swift/runtime/.build/release -name "libswiftgodot_runtime.dylib" | head -1)
           test -n "$LIB"
           nm -gU "$LIB" | grep -q swiftgodot_init
-          UILIB=$(find -L modules/swift/runtime/.build/release -name "libSwiftGodotUI.dylib" | head -1)
-          test -n "$UILIB"
-          nm -gU "$UILIB" | grep -q swiftgodot_scene_build
+          nm -gU "$LIB" | grep -q swiftgodot_scene_build
 
   # Windows runtime build is a follow-up: swift-actions/setup-swift@v2 only
   # ships Windows toolchains up to 5.6.3, so Swift 6 on a Windows runner
