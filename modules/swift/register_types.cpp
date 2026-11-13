@@ -34,12 +34,15 @@
 #include "swift_language.h"
 #include "swift_resource_format.h"
 #include "swift_script.h"
+#include "swift_view_host.h"
 
 #include "core/io/resource_loader.h"
 #include "core/io/resource_saver.h"
 #include "core/object/class_db.h"
 
 #ifdef TOOLS_ENABLED
+#include "swift_lsp.h"
+
 #include "core/io/file_access.h"
 #include "editor/editor_node.h"
 #include "editor/export/editor_export.h"
@@ -53,11 +56,19 @@ class SwiftExportPlugin : public EditorExportPlugin {
 
 protected:
 	virtual void _export_begin(const HashSet<String> &p_features, bool p_debug, const String &p_path, int p_flags) override {
-		String runtime_path = OS::get_singleton()->get_executable_path().get_base_dir().path_join(SwiftBridge::get_runtime_library_name());
-		if (FileAccess::exists(runtime_path)) {
-			add_file(SwiftBridge::get_runtime_library_name(), FileAccess::get_file_as_bytes(runtime_path), true);
-		} else {
-			WARN_PRINT("Swift export: the Swift runtime library ('" + SwiftBridge::get_runtime_library_name() + "') was not found next to the editor binary; Swift scripts will not run in the exported project.");
+		// Ship the Swift runtime library as a shared object: next to the
+		// exported executable on Linux/Windows, in Contents/Frameworks of the
+		// .app on macOS — exactly where SwiftBridge searches at load time.
+		// (SwiftGodotUI is compiled into the same library.)
+		String exe_dir = OS::get_singleton()->get_executable_path().get_base_dir();
+		const String lib_names[] = { SwiftBridge::get_runtime_library_name() };
+		for (const String &lib_name : lib_names) {
+			String lib_path = exe_dir.path_join(lib_name);
+			if (FileAccess::exists(lib_path)) {
+				add_shared_object(lib_path, {}, "");
+			} else {
+				WARN_PRINT("Swift export: '" + lib_name + "' was not found next to the editor binary; Swift scripts will not run in the exported project.");
+			}
 		}
 	}
 
@@ -68,6 +79,16 @@ protected:
 		Vector<uint8_t> file = FileAccess::get_file_as_bytes(p_path);
 		if (!file.is_empty()) {
 			add_file(p_path, file, true);
+		}
+		// Bundle the precompiled library cached by the editor, so exported
+		// games run Swift scripts without a Swift toolchain. Shipped as a
+		// loose file (not packed in the .pck): it is dlopen'ed at runtime.
+		String bin_path = p_path + ".swiftbin";
+		if (FileAccess::exists(bin_path)) {
+			Vector<uint8_t> bin = FileAccess::get_file_as_bytes(bin_path);
+			if (!bin.is_empty()) {
+				add_file(bin_path, bin, false);
+			}
 		}
 	}
 
@@ -108,6 +129,10 @@ void initialize_swift_module(ModuleInitializationLevel p_level) {
 		ResourceSaver::add_resource_format_saver(resource_saver_swift);
 	}
 
+	if (p_level == MODULE_INITIALIZATION_LEVEL_SCENE) {
+		GDREGISTER_CLASS(SwiftViewHost);
+	}
+
 #ifdef TOOLS_ENABLED
 	if (p_level == MODULE_INITIALIZATION_LEVEL_EDITOR) {
 		EditorNode::add_init_callback(_editor_init);
@@ -139,6 +164,7 @@ void uninitialize_swift_module(ModuleInitializationLevel p_level) {
 			EditorExport::get_singleton()->remove_export_plugin(swift_export_plugin);
 			swift_export_plugin.unref();
 		}
+		SwiftLSPClient::get_singleton()->stop();
 	}
 #endif // TOOLS_ENABLED
 }

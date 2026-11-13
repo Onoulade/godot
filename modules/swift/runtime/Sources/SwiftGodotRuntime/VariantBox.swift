@@ -18,42 +18,50 @@ public class VariantBox {
 	}
 
 	deinit {
-		if owned {
-			Host.shared.variantFree(ptr)
+		MainActor.assumeIsolated {
+			if owned {
+				Host.shared.variantFree(ptr)
+			}
 		}
 	}
 
-	public init(_ value: Int) {
+	public convenience init(_ value: Int) {
 		self.init()
 		Host.shared.variantSetInt(ptr, Int64(value))
 	}
 
-	public init(_ value: Double) {
+	public convenience init(_ value: Double) {
 		self.init()
 		Host.shared.variantSetDouble(ptr, value)
 	}
 
-	public init(_ value: Bool) {
+	public convenience init(_ value: Bool) {
 		self.init()
 		Host.shared.variantSetBool(ptr, value)
 	}
 
-	public init(_ value: String) {
+	public convenience init(_ value: String) {
 		self.init()
 		Host.shared.variantSetString(ptr, value)
 	}
 
-	public init(_ box: VariantBox) {
+	public convenience init(_ box: VariantBox) {
 		self.init()
 		Host.shared.variantCopy(ptr, box.ptr)
 	}
 
-	public init(_ object: GodotObject) {
+	public convenience init(_ object: GodotObject) {
 		self.init()
 		Host.shared.variantSetObject(ptr, object.ptr)
 	}
 
-	public var borrowedPtr: UnsafeRawPointer { ptr }
+	// Int-raw-value enums (Key, Error, class enums, ...).
+	public convenience init<T: RawRepresentable>(_ value: T) where T.RawValue == Int {
+		self.init()
+		Host.shared.variantSetInt(ptr, Int64(value.rawValue))
+	}
+
+	public var borrowedPtr: UnsafeRawPointer { UnsafeRawPointer(ptr) }
 
 	public func asInt() -> Int {
 		Int(Host.shared.variantAsInt(ptr))
@@ -73,6 +81,12 @@ public class VariantBox {
 
 	public func asObject<T: GodotObject>(_ type: T.Type) -> T? {
 		guard let object = Host.shared.variantGetObject(ptr) else { return nil }
-		return T(ptr: object)
+		return GodotObject(ptr: object) as? T
+	}
+
+	// Same, with T inferred from the context (return type / property type).
+	public func asObject<T: GodotObject>() -> T? {
+		guard let object = Host.shared.variantGetObject(ptr) else { return nil }
+		return GodotObject(ptr: object) as? T
 	}
 }

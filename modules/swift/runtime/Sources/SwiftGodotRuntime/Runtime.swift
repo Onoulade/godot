@@ -2,7 +2,7 @@ import Foundation
 
 // Variant::Type values mirrored from the engine (core/variant/variant.h).
 public enum VariantTypeMirror: Int32 {
-	case nil = 0
+	case none = 0
 	case bool = 1
 	case int = 2
 	case float = 3
@@ -13,12 +13,14 @@ public enum VariantTypeMirror: Int32 {
 	let path: String
 	let source: String
 	var className: String?
+	var rootViewClass: String?
 	var isTool: Bool = false
 	var methods: [String] = []
 	var signals: [String] = []
 	var properties: [(name: String, type: Int32, usage: Int32)] = []
 	var error: String?
 	var libraryHandle: UnsafeMutableRawPointer?
+	var libraryPath: String?
 	var descriptor: UnsafePointer<SwiftGodotScriptDescriptor>?
 
 	init(path: String, source: String) {
@@ -81,9 +83,55 @@ public final class Runtime {
 	public func compileScript(path: String, source: String) -> UnsafeMutableRawPointer? {
 		let script = CompiledScript(path: path, source: source)
 		parseMetadata(script)
-		if let className = script.className {
-			ScriptCompiler.shared.tryCompile(script: script, className: className)
+		if script.className != nil || script.rootViewClass != nil {
+			ScriptCompiler.shared.tryCompile(script: script, className: script.className, rootView: script.rootViewClass)
 		}
+		return store(script)
+	}
+
+	// Loads a precompiled script library (exported ".swiftbin") and attaches
+	// its descriptor / scene registration without invoking swiftc.
+	public func loadPrecompiled(libraryPath: String, path: String, source: String) -> UnsafeMutableRawPointer? {
+		let script = CompiledScript(path: path, source: source)
+		parseMetadata(script)
+		script.libraryPath = libraryPath
+		if let handle = dlopen(libraryPath, RTLD_NOW | RTLD_LOCAL) {
+			attachLibrary(handle: handle, script: script)
+		} else {
+			let message = dlerror().map { String(cString: $0) } ?? "unknown"
+			script.error = "dlopen failed on precompiled library: \(message)"
+		}
+		return store(script)
+	}
+
+	public func getScriptLibraryPath(_ handle: UnsafeMutableRawPointer?, buffer: UnsafeMutablePointer<CChar>?, bufferSize: Int32) {
+		let path = script(for: handle)?.libraryPath ?? ""
+		guard let buffer = buffer, bufferSize > 0 else { return }
+		path.withCString { cString in
+			strncpy(buffer, cString, Int(bufferSize) - 1)
+			buffer[Int(bufferSize) - 1] = 0
+		}
+	}
+
+	// Attaches an already-dlopened library to `script`: reads the script
+	// descriptor and, for scene scripts, calls swiftgodot_scene_register.
+	func attachLibrary(handle: UnsafeMutableRawPointer, script: CompiledScript) {
+		guard let descriptorPtr = dlsym(handle, "swiftgodot_script_descriptor") else {
+			script.error = "Compiled library does not export swiftgodot_script_descriptor."
+			dlclose(handle)
+			return
+		}
+		typealias DescriptorFn = @convention(c) () -> UnsafeRawPointer?
+		let descriptorFn = unsafeBitCast(descriptorPtr, to: DescriptorFn.self)
+		script.libraryHandle = handle
+		script.descriptor = unsafeBitCast(descriptorFn(), to: UnsafePointer<SwiftGodotScriptDescriptor>.self)
+		if script.rootViewClass != nil, let registerPtr = dlsym(handle, "swiftgodot_scene_register") {
+			typealias RegisterFn = @convention(c) () -> Void
+			unsafeBitCast(registerPtr, to: RegisterFn.self)()
+		}
+	}
+
+	private func store(_ script: CompiledScript) -> UnsafeMutableRawPointer? {
 		lock.lock()
 		let handle = UnsafeMutableRawPointer(bitPattern: ObjectIdentifier(script).hashValue & 0x7FFF_FFFF)!
 		scripts[handle] = script
@@ -113,9 +161,9 @@ public final class Runtime {
 		}
 	}
 
-	public func getScriptClassName(_ handle: UnsafeMutableRawPointer?) -> UnsafePointer<CChar>? {
+	public func getScriptClassName(_ handle: UnsafeMutableRawPointer?) -> UnsafeRawPointer? {
 		guard let className = script(for: handle)?.className else { return nil }
-		return className.withCString { strdup($0) }
+		return className.withCString { UnsafeRawPointer(strdup($0)) }
 	}
 
 	public func isScriptTool(_ handle: UnsafeMutableRawPointer?) -> Bool {
@@ -126,9 +174,9 @@ public final class Runtime {
 		return Int32(script(for: handle)?.methods.count ?? 0)
 	}
 
-	public func getScriptMethodName(_ handle: UnsafeMutableRawPointer?, index: Int32) -> UnsafePointer<CChar>? {
+	public func getScriptMethodName(_ handle: UnsafeMutableRawPointer?, index: Int32) -> UnsafeRawPointer? {
 		guard let methods = script(for: handle)?.methods, index >= 0, index < methods.count else { return nil }
-		return methods[Int(index)].withCString { strdup($0) }
+		return methods[Int(index)].withCString { UnsafeRawPointer(strdup($0)) }
 	}
 
 	public func scriptHasMethod(_ handle: UnsafeMutableRawPointer?, method: String) -> Bool {
@@ -139,9 +187,9 @@ public final class Runtime {
 		return Int32(script(for: handle)?.signals.count ?? 0)
 	}
 
-	public func getScriptSignalName(_ handle: UnsafeMutableRawPointer?, index: Int32) -> UnsafePointer<CChar>? {
+	public func getScriptSignalName(_ handle: UnsafeMutableRawPointer?, index: Int32) -> UnsafeRawPointer? {
 		guard let signals = script(for: handle)?.signals, index >= 0, index < signals.count else { return nil }
-		return signals[Int(index)].withCString { strdup($0) }
+		return signals[Int(index)].withCString { UnsafeRawPointer(strdup($0)) }
 	}
 
 	public func scriptHasSignal(_ handle: UnsafeMutableRawPointer?, signal: String) -> Bool {
@@ -152,9 +200,9 @@ public final class Runtime {
 		return Int32(script(for: handle)?.properties.count ?? 0)
 	}
 
-	public func getScriptPropertyName(_ handle: UnsafeMutableRawPointer?, index: Int32) -> UnsafePointer<CChar>? {
+	public func getScriptPropertyName(_ handle: UnsafeMutableRawPointer?, index: Int32) -> UnsafeRawPointer? {
 		guard let properties = script(for: handle)?.properties, index >= 0, index < properties.count else { return nil }
-		return properties[Int(index)].name.withCString { strdup($0) }
+		return properties[Int(index)].name.withCString { UnsafeRawPointer(strdup($0)) }
 	}
 
 	public func getScriptPropertyType(_ handle: UnsafeMutableRawPointer?, index: Int32) -> Int32 {
@@ -173,7 +221,7 @@ public final class Runtime {
 		guard let script = script(for: handle) else { return nil }
 		var object: AnyObject?
 		if let descriptor = script.descriptor, let newInstance = descriptor.pointee.new_instance, let raw = newInstance() {
-			object = Unmanaged<AnyObject>.fromOpaque(raw).takeUnretainedValue()
+			object = Unmanaged<AnyObject>.fromOpaque(UnsafeMutableRawPointer(mutating: raw)).takeUnretainedValue()
 		}
 		let box = ScriptInstanceBox(script: script, owner: owner, object: object)
 		lock.lock()
@@ -190,17 +238,18 @@ public final class Runtime {
 		lock.unlock()
 	}
 
-	public func instanceCall(_ handle: UnsafeMutableRawPointer?, method: String, args: UnsafePointer<UnsafeRawPointer?>?, argCount: Int32, ret: UnsafeMutableRawPointer?, error: UnsafeMutablePointer<GDExtensionCallErrorMirror>?) -> UInt8 {
+	public func instanceCall(_ handle: UnsafeMutableRawPointer?, method: String, args: UnsafeMutableRawPointer?, argCount: Int32, ret: UnsafeMutableRawPointer?, error: UnsafeMutableRawPointer?) -> UInt8 {
+		let errorMirror = error?.assumingMemoryBound(to: GDExtensionCallErrorMirror.self)
 		guard let box = instance(for: handle), let descriptor = box.script.descriptor else {
-			if let error = error {
-				error.pointee.error = 1 // CALL_ERROR_INVALID_METHOD
+			if let errorMirror = errorMirror {
+				errorMirror.pointee.error = 1 // CALL_ERROR_INVALID_METHOD
 			}
 			return 0
 		}
 		let methodIndex = box.script.methods.firstIndex(of: method) ?? -1
 		guard methodIndex >= 0, let fns = descriptor.pointee.method_fns, let fn = fns[methodIndex] else {
-			if let error = error {
-				error.pointee.error = 1
+			if let errorMirror = errorMirror {
+				errorMirror.pointee.error = 1
 			}
 			return 0
 		}
@@ -227,8 +276,12 @@ public final class Runtime {
 
 		if let match = firstMatch(of: "\\bclass\\s+([A-Za-z_][A-Za-z0-9_]*)", in: source) {
 			script.className = match
-		} else {
-			script.error = "No class declaration found."
+		}
+		if let view = firstMatch(of: "\\bstruct\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*:[^{]*\\bView\\b", in: source) {
+			script.rootViewClass = view
+		}
+		if script.className == nil && script.rootViewClass == nil {
+			script.error = "No class or View declaration found."
 			return
 		}
 
@@ -251,31 +304,41 @@ public final class Runtime {
 		case "Int", "Int32", "Int64", "UInt", "UInt32", "UInt64": return VariantTypeMirror.int.rawValue
 		case "Float", "Double": return VariantTypeMirror.float.rawValue
 		case "String": return VariantTypeMirror.string.rawValue
-		default: return VariantTypeMirror.nil.rawValue
+		default: return VariantTypeMirror.none.rawValue
 		}
+	}
+
+	private func nsrange(of source: String) -> NSRange {
+		NSRange(location: 0, length: source.utf16.count)
+	}
+
+	// NSRange -> String without Range(_:in:) (unreliable overload resolution).
+	private func substring(of source: String, _ r: NSRange) -> String? {
+		guard r.location >= 0, r.location + r.length <= source.utf16.count else { return nil }
+		let start = String.Index(utf16Offset: r.location, in: source)
+		let end = String.Index(utf16Offset: r.location + r.length, in: source)
+		return String(source[start..<end])
 	}
 
 	private func firstMatch(of pattern: String, in source: String) -> String? {
 		guard let regex = try? NSRegularExpression(pattern: pattern) else { return nil }
-		let range = NSRange(source.startIndex..., in: source)
-		guard let match = regex.firstMatch(in: source, range: range), match.numberOfRanges > 1 else { return nil }
-		return String(source[Range(match.range(at: 1), in: source)!])
+		guard let match = regex.firstMatch(in: source, range: nsrange(of: source)), match.numberOfRanges > 1 else { return nil }
+		return substring(of: source, match.range(at: 1))
 	}
 
 	private func allMatches(of pattern: String, in source: String) -> [String] {
 		guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }
-		let range = NSRange(source.startIndex..., in: source)
-		return regex.matches(in: source, range: range).compactMap { match in
-			match.numberOfRanges > 1 ? String(source[Range(match.range(at: 1), in: source)!]) : nil
+		return regex.matches(in: source, range: nsrange(of: source)).compactMap { match in
+			guard match.numberOfRanges > 1 else { return nil }
+			return substring(of: source, match.range(at: 1))
 		}
 	}
 
 	private func allMatchesWithGroups(of pattern: String, in source: String) -> [[String]] {
 		guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }
-		let range = NSRange(source.startIndex..., in: source)
-		return regex.matches(in: source, range: range).map { match in
+		return regex.matches(in: source, range: nsrange(of: source)).map { match in
 			(1..<match.numberOfRanges).map { group in
-				String(source[Range(match.range(at: group), in: source)!])
+				substring(of: source, match.range(at: group)) ?? ""
 			}
 		}
 	}

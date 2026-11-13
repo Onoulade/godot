@@ -45,9 +45,13 @@
 #include "core/math/vector3.h"
 #include "core/math/vector3i.h"
 #include "core/math/vector4.h"
+#include "core/object/class_db.h"
 #include "core/object/object.h"
+#include "core/os/memory.h"
 #include "core/os/os.h"
 #include "core/string/node_path.h"
+#include "core/variant/array.h"
+#include "core/variant/dictionary.h"
 #include "core/variant/variant.h"
 #include "scene/main/node.h"
 
@@ -358,6 +362,95 @@ static void _host_push_error(const char *p_message) {
 	ERR_PRINT(String::utf8(p_message));
 }
 
+static GDExtensionObjectPtr _host_object_create(const char *p_class_name) {
+	StringName class_name = StringName(String::utf8(p_class_name));
+	if (!ClassDB::can_instantiate(class_name)) {
+		ERR_PRINT(String("SwiftHost: cannot instantiate class ") + String::utf8(p_class_name));
+		return nullptr;
+	}
+	return (GDExtensionObjectPtr)ClassDB::instantiate(class_name);
+}
+
+static GDExtensionVariantPtr _host_variant_new_array() {
+	return (GDExtensionVariantPtr)memnew(Variant(Array()));
+}
+
+static int _host_variant_array_size(GDExtensionConstVariantPtr p_variant) {
+	const Variant *v = (const Variant *)p_variant;
+	if (v->get_type() != Variant::ARRAY) {
+		return 0;
+	}
+	return v->operator Array().size();
+}
+
+static void _host_variant_array_append(GDExtensionVariantPtr p_variant, GDExtensionConstVariantPtr p_value) {
+	Variant *v = (Variant *)p_variant;
+	if (v->get_type() != Variant::ARRAY) {
+		return;
+	}
+	v->operator Array().append(*(const Variant *)p_value);
+}
+
+static GDExtensionConstVariantPtr _host_variant_array_get(GDExtensionConstVariantPtr p_variant, int p_index) {
+	const Variant *v = (const Variant *)p_variant;
+	if (v->get_type() != Variant::ARRAY) {
+		return nullptr;
+	}
+	const Array &arr = v->operator Array();
+	if (p_index < 0 || p_index >= arr.size()) {
+		return nullptr;
+	}
+	// The element lives in the Array's shared storage, valid while the Variant lives.
+	return (GDExtensionConstVariantPtr)&arr[p_index];
+}
+
+static void _host_variant_array_set(GDExtensionVariantPtr p_variant, int p_index, GDExtensionConstVariantPtr p_value) {
+	Variant *v = (Variant *)p_variant;
+	if (v->get_type() != Variant::ARRAY) {
+		return;
+	}
+	Array arr = v->operator Array();
+	if (p_index >= 0 && p_index < arr.size()) {
+		arr[p_index] = *(const Variant *)p_value;
+	}
+}
+
+static GDExtensionVariantPtr _host_variant_new_dictionary() {
+	return (GDExtensionVariantPtr)memnew(Variant(Dictionary()));
+}
+
+static int _host_variant_dictionary_size(GDExtensionConstVariantPtr p_variant) {
+	const Variant *v = (const Variant *)p_variant;
+	if (v->get_type() != Variant::DICTIONARY) {
+		return 0;
+	}
+	return v->operator Dictionary().size();
+}
+
+static GDExtensionBool _host_variant_dictionary_has(GDExtensionConstVariantPtr p_variant, GDExtensionConstVariantPtr p_key) {
+	const Variant *v = (const Variant *)p_variant;
+	if (v->get_type() != Variant::DICTIONARY) {
+		return false;
+	}
+	return v->operator Dictionary().has(*(const Variant *)p_key);
+}
+
+static GDExtensionConstVariantPtr _host_variant_dictionary_get(GDExtensionConstVariantPtr p_variant, GDExtensionConstVariantPtr p_key) {
+	const Variant *v = (const Variant *)p_variant;
+	if (v->get_type() != Variant::DICTIONARY) {
+		return nullptr;
+	}
+	return (GDExtensionConstVariantPtr)v->operator Dictionary().getptr(*(const Variant *)p_key);
+}
+
+static void _host_variant_dictionary_set(GDExtensionVariantPtr p_variant, GDExtensionConstVariantPtr p_key, GDExtensionConstVariantPtr p_value) {
+	Variant *v = (Variant *)p_variant;
+	if (v->get_type() != Variant::DICTIONARY) {
+		return;
+	}
+	v->operator Dictionary()[*(const Variant *)p_key] = *(const Variant *)p_value;
+}
+
 static const SwiftGodotHost _host = {
 	_host_variant_get_type,
 	_host_variant_as_bool,
@@ -407,6 +500,17 @@ static const SwiftGodotHost _host = {
 	_host_node_get_parent,
 	_host_print,
 	_host_push_error,
+	_host_object_create,
+	_host_variant_new_array,
+	_host_variant_array_size,
+	_host_variant_array_append,
+	_host_variant_array_get,
+	_host_variant_array_set,
+	_host_variant_new_dictionary,
+	_host_variant_dictionary_size,
+	_host_variant_dictionary_has,
+	_host_variant_dictionary_get,
+	_host_variant_dictionary_set,
 };
 
 const SwiftGodotHost *SwiftHost::get_host() {

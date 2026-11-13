@@ -67,7 +67,7 @@ void SwiftInstance::get_property_list(List<PropertyInfo> *r_properties) const {
 	}
 	int count = abi.script_get_property_count(script_handle);
 	for (int i = 0; i < count; i++) {
-		const char *name = abi.script_get_property_name(script_handle, i);
+		const char *name = (const char *)abi.script_get_property_name(script_handle, i);
 		if (name == nullptr) {
 			continue;
 		}
@@ -97,7 +97,7 @@ Variant::Type SwiftInstance::get_property_type(const StringName &p_name, bool *r
 	}
 	int count = abi.script_get_property_count(script_handle);
 	for (int i = 0; i < count; i++) {
-		const char *prop_name = abi.script_get_property_name(script_handle, i);
+		const char *prop_name = (const char *)abi.script_get_property_name(script_handle, i);
 		if (prop_name != nullptr && String::utf8(prop_name) == p_name) {
 			if (r_is_valid != nullptr) {
 				*r_is_valid = true;
@@ -119,7 +119,7 @@ void SwiftInstance::get_method_list(List<MethodInfo> *r_list) const {
 	}
 	int count = abi.script_get_method_count(script_handle);
 	for (int i = 0; i < count; i++) {
-		const char *name = abi.script_get_method_name(script_handle, i);
+		const char *name = (const char *)abi.script_get_method_name(script_handle, i);
 		if (name == nullptr) {
 			continue;
 		}

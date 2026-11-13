@@ -1,9 +1,97 @@
 #!/usr/bin/env python
 from misc.utility.scons_hints import *
 
+import os
+import shutil
+import subprocess
+import sys
+
 Import("env")
 Import("env_modules")
 
 env_swift = env_modules.Clone()
 
 env_swift.add_source_files(env.modules_sources, "*.cpp")
+
+
+# Build the Swift runtime package (when a Swift toolchain is available) and
+# copy its dynamic libraries next to the engine binary: SwiftBridge searches
+# the executable's directory first when loading the runtime at startup.
+# Set SWIFTGODOT_SKIP_RUNTIME_BUILD=1 to skip (e.g. no toolchain on a CI
+# builder that only compiles the C++ side).
+def _find_swift():
+    swift = shutil.which("swift")
+    if swift is not None:
+        return swift
+    # Fall back to xcrun (Xcode selected without CLI tools in PATH) and the
+    # usual install locations.
+    xcrun = shutil.which("xcrun")
+    if xcrun is not None:
+        try:
+            out = subprocess.run([xcrun, "--find", "swift"], capture_output=True, text=True, timeout=30)
+            if out.returncode == 0 and out.stdout.strip() and os.path.exists(out.stdout.strip()):
+                return out.stdout.strip()
+        except Exception:
+            pass
+    for candidate in ("/usr/bin/swift", "/usr/local/bin/swift", "/opt/homebrew/bin/swift"):
+        if os.path.exists(candidate):
+            return candidate
+    return None
+
+
+def _build_swift_runtime_libs():
+    if os.environ.get("SWIFTGODOT_SKIP_RUNTIME_BUILD"):
+        return
+    if env.GetOption("clean") or env.GetOption("help"):
+        return
+    config = "debug" if env["target"] in ("editor", "template_debug") else "release"
+    swift = _find_swift()
+    if swift is None:
+        print("swift module: no Swift toolchain found (swift/xcrun); skipping the runtime build.")
+        print("swift module: to enable Swift scripts, install a Swift 6 toolchain or run manually:")
+        print(f"swift module:   {config} build: swift build -c {config} --package-path modules/swift/runtime")
+        print("swift module:   then copy libswiftgodot_runtime next to the binary in bin/.")
+        return
+    # SCons reads this SCsub with the module dir as cwd (and without __file__):
+    # anchor everything to the repository root via env.Dir("#...").
+    package_path = env.Dir("#modules/swift/runtime").abspath
+    bin_dir = env.Dir("#bin").abspath
+    os.makedirs(bin_dir, exist_ok=True)
+    # SwiftGodotUI is part of the single swiftgodot_runtime library now; drop
+    # stale copies from older builds (loading both would duplicate classes).
+    if os.name == "nt":
+        names = ("swiftgodot_runtime.dll",)
+        stale = ("SwiftGodotUI.dll",)
+    elif sys.platform == "darwin":
+        names = ("libswiftgodot_runtime.dylib",)
+        stale = ("libSwiftGodotUI.dylib",)
+    else:
+        names = ("libswiftgodot_runtime.so",)
+        stale = ("libSwiftGodotUI.so",)
+    for name in stale:
+        stale_path = os.path.join(bin_dir, name)
+        if os.path.exists(stale_path):
+            os.remove(stale_path)
+            print(f"swift module: removed stale {name} from bin/")
+    print(f"swift module: building the Swift runtime package ({swift} build -c {config})...")
+    result = subprocess.run([swift, "build", "-c", config, "--package-path", package_path])
+    if result.returncode != 0:
+        print(
+            "swift module: WARNING: 'swift build' failed; runtime library not copied (Swift scripts will load but not run)."
+        )
+        return
+    build_dir = os.path.realpath(os.path.join(package_path, ".build", config))
+    for name in names:
+        found = None
+        for root, _dirs, files in os.walk(build_dir):
+            if name in files:
+                found = os.path.join(root, name)
+                break
+        if found is None:
+            print(f"swift module: WARNING: {name} not found under {build_dir}")
+            continue
+        shutil.copy2(found, os.path.join(bin_dir, name))
+        print(f"swift module: copied {name} next to the engine binary")
+
+
+_build_swift_runtime_libs()

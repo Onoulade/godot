@@ -77,14 +77,94 @@ returns `false` and a warning is printed.
    calls scripts on the main thread). Value types are `Sendable`; their
    marshaling entry points are `@MainActor`. User scripts can therefore use
    `@MainActor`, `async`/`await` and actors freely.
-   **Remaining:** per-platform runtime builds in CI, precompiling scripts at
-   export time (an exported game has no `swiftc`), user docs, LSP-based
-   completion. Class enums are nested `enum: Int, Sendable, CaseIterable`
+   **Remaining:** user docs (separate documentation repo). Class enums are nested `enum: Int, Sendable, CaseIterable`
    (e.g. `Node.ProcessMode.inherit`); global enums (Key, Error,
    MouseButton, PropertyHint, ...) are extracted from the core headers
    (`tools/generate_bindings.py --global-enums-headers`) and emitted as
    top-level `enum: Int, Sendable, CaseIterable`, with signatures mapped
    to them (e.g. `is_key_pressed(key: Key)`, `-> Error`).
+
+## Declarative UI (SwiftUI-style scenes)
+
+On top of the script layer, `SwiftGodotUI` (in `runtime/`, depending on
+`SwiftGodotRuntime` and on Apple's
+[swift-observation](https://github.com/apple/swift-observation) package)
+adds a SwiftUI-style declarative layer. Design decisions:
+
+- **Leaf primitives are native Godot nodes.** Scenes are built from the
+  generated bindings (`Label()`, `Button()`, `VBoxContainer()`, ...) wrapped
+  in `NodeView<Root: Node>`. SwiftUI-like container wrappers
+  (VStack/HStack/...) will be layered on top later. To make this possible,
+  the host vtable gained `object_create` (ClassDB::instantiate) and every
+  generated class gets a `public convenience init()` (e.g. `Label()`);
+  enum-typed arguments now also get their default value mapped to a Swift
+  case (`add_child(node:)` just works).
+- **Diff engine = component stack + attribute graph** with scoped,
+  propagated invalidation: `ComponentStack`/`ComponentFrame` give each
+  component a stable identity (type + position) while `body` evaluates,
+  and `Differ` reconciles the rendered Godot node tree in place instead of
+  rebuilding it.
+- **Observation = Apple's real dependency** (`@Observable`,
+  `withObservationTracking` from swift-observation), not a hand-rolled
+  didSet. `@State` is a property wrapper over an `@Observable` box.
+
+Files: `View.swift` (`@MainActor protocol View`, `@ViewBuilder`,
+`EmptyView`, `NodeView`, `TupleView`, `OptionalView`, `EitherView`),
+`AttributeGraph.swift` (tracked evaluation + coalesced main-actor flush),
+`State.swift`, `Differ.swift`, `Scene.swift` (the `swiftgodot_scene_build` /
+`swiftgodot_scene_invalidate` C entry points and `SceneRegistry`).
+
+Engine side: `SwiftViewHost` (a `Node`) calls `scene_build` on
+`NOTIFICATION_READY` and exposes `invalidate()`; the ABI gained
+`scene_build`/`scene_invalidate`. A script declaring `struct MyScene: View`
+gets a generated `swiftgodot_scene_register` entry point that registers the
+root view (by name) in `SceneRegistry`; each host renders the view named by
+its `root_view` property (several hosts can host different scenes) and
+re-renders through the attribute graph + differ on invalidation: `renderTree()`
+produces a `RenderedView` (node + component identity), and the differ keeps
+same-type containers stable, reconciles children pairwise by position, and
+swaps leaves in place. Compiling scene scripts requires the runtime package
+to be pre-built (`swift build` in `modules/swift/runtime`); `ScriptCompiler`
+links each per-script library against its `.build/debug`.
+
+**Precompiled scripts at export (`.swiftbin`):** exported games have no
+`swiftc`. In the editor, every successful compile is cached next to the
+source as `<script>.swiftbin` (via the ABI's `script_get_library_path`);
+outside the editor, `SwiftScript::reload` loads the `.swiftbin` through
+`script_load_precompiled` instead of compiling, and `SwiftExportPlugin`
+bundles the `.swiftbin` files into the export. The editor always recompiles
+from source, so a stale cache is never used there.
+
+**Status:** done except container wrappers (VStack/HStack/... on top of
+`TupleView`) and user docs (separate documentation repo).
+
+## Editor completion (LSP) and typed collections
+
+- **LSP completion** — `swift_lsp.h/.cpp` (editor builds only) runs a
+  persistent `sourcekit-lsp` process (stdio pipes via `OS::execute_with_pipe`,
+  LSP 3.17 JSON-RPC with `Content-Length` framing) and answers
+  `textDocument/completion` for `.swift` files, merged with the local
+  keyword/type/global-class/owner-member lists in
+  `SwiftEditorLanguage::complete_code`. The binary is looked up in the
+  `swift/lsp_path` project setting, the `SOURCEKIT_LSP` environment variable,
+  then the `PATH`; documents are synced with `didOpen`/`didChange` (full
+  text) and the server is shut down with the editor. Without sourcekit-lsp,
+  completion silently falls back to the local lists.
+- **Typed Array/Dictionary wrappers** — the host vtable gained Array and
+  Dictionary variant operations, exposed in Swift as `GodotArray` /
+  `GodotDictionary` (`Collections.swift`) with `VariantBoxConvertible`
+  conformances for scalars, value types, engine objects and the collections
+  themselves; `VariantBox.asArray()` / `.asDictionary()` give borrowed views
+  of Array/Dictionary variants (e.g. method returns).
+- **CI fix** — Apple's Observation framework is part of the Swift toolchain
+  standard library (`stdlib/public/Observation` in swiftlang/swift) on all
+  platforms, so the runtime package has no external dependency: `import
+  Observation` resolves against the toolchain directly (the previously used
+  `apple/swift-observation` package URL does not exist and broke CI). On
+  Apple platforms Observation requires macOS 14+, so `Package.swift` sets
+  `platforms: [.macOS(.v14)]` for the runtime libraries; the C++ module
+  itself still builds on older macOS (without the runtime dylib, scripts
+  just load but cannot run, with a startup warning).
 
 ## Building
 
@@ -92,19 +172,37 @@ returns `false` and a warning is printed.
 scons platform=<platform> module_swift_enabled=yes
 ```
 
-The Swift runtime itself is built separately with the Swift toolchain:
+The Swift runtime package is built automatically by `scons` when a Swift
+toolchain (`swift` in `PATH`/`xcrun`) is available: the produced
+`libswiftgodot_runtime.{so,dylib,dll}` is copied next to the Godot executable
+in `bin/`, where the module loads it at startup (it also searches
+`../Frameworks/` inside macOS `.app` bundles, `@executable_path/../Frameworks`
+and `res://bin`). Note the runtime is a **single** dynamic library:
+`SwiftGodotUI` is compiled into it — shipping a separate `libSwiftGodotUI`
+would register every Swift class twice and crash on macOS. Set
+`SWIFTGODOT_SKIP_RUNTIME_BUILD=1` to skip this step (e.g. on CI builders
+without Swift). To do it by hand instead (watch the `swift module:` lines in
+the scons output to see whether the toolchain was found):
 
 ```sh
-cd modules/swift/runtime
-swift build -c release
-# then place the produced libswiftgodot_runtime.{so,dylib,dll}
-# next to the Godot executable or in res://bin of the project.
+swift build -c debug --package-path modules/swift/runtime   # editor/template_debug; use -c release otherwise
+cp modules/swift/runtime/.build/debug/libswiftgodot_runtime.{so,dylib,dll} bin/
+rm -f bin/libSwiftGodotUI.{so,dylib,dll}   # stale copy from older builds
+# for a macOS .app bundle, put the dylib in Godot.app/Contents/Frameworks/ instead
 ```
+
+If the runtime library is missing at startup, the editor prints a warning and
+Swift scripts load but cannot be instantiated (no crash): attach the runtime
+libraries and restart.
 
 Regenerating the bindings (needs an editor build to dump the API):
 
 ```sh
 godot --headless --dump-extension-api   # produces extension_api.json
 python3 modules/swift/tools/generate_bindings.py --api extension_api.json --all \
+    --exclude SwiftViewHost \
     --out modules/swift/runtime/Sources/SwiftGodotRuntime/Generated/GodotBindings.swift
 ```
+
+(`--exclude` skips module-provided classes such as `SwiftViewHost` that the
+editor dump also contains.)

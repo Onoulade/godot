@@ -21,11 +21,42 @@ jobs:
         run: swift build -c release --package-path modules/swift/runtime
       - name: Smoke-test the runtime library exports
         run: |
-          LIB=$(find modules/swift/runtime/.build/release -name "libswiftgodot_runtime.so" | head -1)
+          LIB=$(find -L modules/swift/runtime/.build/release -name "libswiftgodot_runtime.so" | head -1)
           test -n "$LIB"
           nm -D "$LIB" | grep -q swiftgodot_runtime_version
           nm -D "$LIB" | grep -q swiftgodot_script_compile
           nm -D "$LIB" | grep -q swiftgodot_instance_create
+          # SwiftGodotUI is compiled into the same library (single dynamic
+          # product, so no duplicate ObjC classes when loaded).
+          nm -D "$LIB" | grep -q swiftgodot_scene_build
+          nm -D "$LIB" | grep -q swiftgodot_scene_invalidate
+
+  # macOS only on manual dispatch: this account cannot provision a macOS
+  # runner, so on pull_request the job is cancelled instantly (no steps, no
+  # log) and fails the whole run. Run it manually when a macOS runner is
+  # available.
+  build-swift-runtime-macos:
+    name: Build Swift runtime (macOS)
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: macos-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: swift-actions/setup-swift@v2
+        with:
+          swift-version: "6.0"
+      - name: Build the runtime package
+        run: swift build -c release --package-path modules/swift/runtime
+      - name: Check the runtime libraries
+        run: |
+          LIB=$(find -L modules/swift/runtime/.build/release -name "libswiftgodot_runtime.dylib" | head -1)
+          test -n "$LIB"
+          nm -gU "$LIB" | grep -q swiftgodot_init
+          nm -gU "$LIB" | grep -q swiftgodot_scene_build
+
+  # Windows runtime build is a follow-up: swift-actions/setup-swift@v2 only
+  # ships Windows toolchains up to 5.6.3, so Swift 6 on a Windows runner
+  # needs a manual installer (swift.org) or swiftly.
 
   build-engine-with-swift-module:
     name: Build engine with module_swift_enabled=yes
@@ -64,10 +95,16 @@ jobs:
           udev=no libdecor=no touch=no vulkan=no -j"$(nproc)" progress=no
       - name: Dump extension_api.json and regenerate bindings
         run: |
-          mkdir -p /tmp/apidump && cd /tmp/apidump
-          cp "$GITHUB_WORKSPACE"/bin/godot.linuxbsd.editor.dev.x86_64* godot
-          printf 'config_version=5\n\n[application]\n\nconfig/name="apidump"\n' > project.godot
-          "$GITHUB_WORKSPACE"/bin/godot.linuxbsd.editor.dev.x86_64* --headless --dump-extension-api
-          python3 "$GITHUB_WORKSPACE"/modules/swift/tools/generate_bindings.py --api extension_api.json --all \
-            --out /tmp/apidump/GodotBindings.swift
-          diff -q /tmp/apidump/GodotBindings.swift "$GITHUB_WORKSPACE"/modules/swift/runtime/Sources/SwiftGodotRuntime/Generated/GodotBindings.swift
+          mkdir -p /tmp/apidump
+          cp "$GITHUB_WORKSPACE"/bin/godot.linuxbsd.editor.dev.x86_64* /tmp/apidump/godot
+          printf 'config_version=5\n\n[application]\n\nconfig/name="apidump"\n' > /tmp/apidump/project.godot
+          (cd /tmp/apidump && ./godot --headless --dump-extension-api)
+          python3 modules/swift/tools/generate_bindings.py --api /tmp/apidump/extension_api.json --all \
+            --exclude SwiftViewHost --out /tmp/apidump/GodotBindings.swift
+          diff -q /tmp/apidump/GodotBindings.swift modules/swift/runtime/Sources/SwiftGodotRuntime/Generated/GodotBindings.swift
+      - name: Upload the official API dump (to regenerate bindings locally)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: extension_api.json
+          path: /tmp/apidump/extension_api.json

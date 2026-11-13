@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class name="SwiftViewHost" inherits="Node" api_type="core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../doc/class.xsd">
+	<brief_description>
+		Hosts a declarative Swift scene built by the Swift runtime (Swift-enabled builds only).
+	</brief_description>
+	<description>
+		[SwiftViewHost] parents the root node produced by the Swift runtime's declarative UI (ABI entry [code]swiftgodot_scene_build[/code]) when it becomes ready, and re-renders it on demand through [method invalidate] (ABI entry [code]swiftgodot_scene_invalidate[/code]). Requires the [code]swiftgodot_runtime[/code] library to be present.
+	</description>
+	<tutorials>
+	</tutorials>
+	<methods>
+		<method name="invalidate">
+			<return type="void" />
+			<description>
+				Asks the Swift runtime to re-render the hosted scene (scoped invalidation through the attribute graph).
+			</description>
+		</method>
+	</methods>
+	<members>
+		<member name="root_view" type="String" setter="set_root_view" getter="get_root_view" default="&quot;&quot;">
+			Name of the Swift [code]struct X: View[/code] to render in this host. With several [SwiftViewHost] nodes, each can host a different scene.
+		</member>
+	</members>
+</class>

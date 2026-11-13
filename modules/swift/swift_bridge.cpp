@@ -32,6 +32,7 @@
 
 #include "swift_host.h"
 
+#include "core/config/project_settings.h"
 #include "core/os/memory.h"
 
 // Engine-side GDExtension function resolver, handed to the Swift runtime so
@@ -71,10 +72,9 @@ void *SwiftBridge::_resolve(const char *p_name, bool p_optional) {
 	return symbol;
 }
 
-Error SwiftBridge::_try_load_from(const String &p_dir) {
-	String path = p_dir.path_join(get_runtime_library_name());
+Error SwiftBridge::_try_load_from(const String &p_path) {
 	void *handle = nullptr;
-	Error err = OS::get_singleton()->open_dynamic_library(path, handle);
+	Error err = OS::get_singleton()->open_dynamic_library(p_path, handle);
 	if (err != OK) {
 		return err;
 	}
@@ -90,24 +90,29 @@ Error SwiftBridge::_try_load_from(const String &p_dir) {
 	abi.host_init = reinterpret_cast<void (*)(const SwiftGodotHost *)>(_resolve("swiftgodot_host_init", true));
 	abi.runtime_shutdown = reinterpret_cast<void (*)()>(_resolve("swiftgodot_shutdown", true));
 
-	abi.script_compile = reinterpret_cast<SwiftGodotScriptHandle (*)(const char *, const char *)>(_resolve("swiftgodot_script_compile", true));
+	abi.script_compile = reinterpret_cast<uintptr_t (*)(const char *, const char *)>(_resolve("swiftgodot_script_compile", true));
+	abi.script_load_precompiled = reinterpret_cast<uintptr_t (*)(const char *, const char *, const char *)>(_resolve("swiftgodot_script_load_precompiled", true));
+	abi.script_get_library_path = reinterpret_cast<void (*)(SwiftGodotScriptHandle, char *, int)>(_resolve("swiftgodot_script_get_library_path", true));
 	abi.script_free = reinterpret_cast<void (*)(SwiftGodotScriptHandle)>(_resolve("swiftgodot_script_free", true));
 	abi.script_is_valid = reinterpret_cast<GDExtensionBool (*)(SwiftGodotScriptHandle)>(_resolve("swiftgodot_script_is_valid", true));
 	abi.script_get_error = reinterpret_cast<void (*)(SwiftGodotScriptHandle, char *, int)>(_resolve("swiftgodot_script_get_error", true));
-	abi.script_get_class_name = reinterpret_cast<const char *(*)(SwiftGodotScriptHandle)>(_resolve("swiftgodot_script_get_class_name", true));
+	abi.script_get_class_name = reinterpret_cast<uintptr_t (*)(SwiftGodotScriptHandle)>(_resolve("swiftgodot_script_get_class_name", true));
 	abi.script_is_tool = reinterpret_cast<GDExtensionBool (*)(SwiftGodotScriptHandle)>(_resolve("swiftgodot_script_is_tool", true));
 	abi.script_get_method_count = reinterpret_cast<int (*)(SwiftGodotScriptHandle)>(_resolve("swiftgodot_script_get_method_count", true));
-	abi.script_get_method_name = reinterpret_cast<const char *(*)(SwiftGodotScriptHandle, int)>(_resolve("swiftgodot_script_get_method_name", true));
+	abi.script_get_method_name = reinterpret_cast<uintptr_t (*)(SwiftGodotScriptHandle, int)>(_resolve("swiftgodot_script_get_method_name", true));
 	abi.script_has_method = reinterpret_cast<GDExtensionBool (*)(SwiftGodotScriptHandle, const char *)>(_resolve("swiftgodot_script_has_method", true));
 	abi.script_get_signal_count = reinterpret_cast<int (*)(SwiftGodotScriptHandle)>(_resolve("swiftgodot_script_get_signal_count", true));
-	abi.script_get_signal_name = reinterpret_cast<const char *(*)(SwiftGodotScriptHandle, int)>(_resolve("swiftgodot_script_get_signal_name", true));
+	abi.script_get_signal_name = reinterpret_cast<uintptr_t (*)(SwiftGodotScriptHandle, int)>(_resolve("swiftgodot_script_get_signal_name", true));
 	abi.script_has_signal = reinterpret_cast<GDExtensionBool (*)(SwiftGodotScriptHandle, const char *)>(_resolve("swiftgodot_script_has_signal", true));
 	abi.script_get_property_count = reinterpret_cast<int (*)(SwiftGodotScriptHandle)>(_resolve("swiftgodot_script_get_property_count", true));
-	abi.script_get_property_name = reinterpret_cast<const char *(*)(SwiftGodotScriptHandle, int)>(_resolve("swiftgodot_script_get_property_name", true));
+	abi.script_get_property_name = reinterpret_cast<uintptr_t (*)(SwiftGodotScriptHandle, int)>(_resolve("swiftgodot_script_get_property_name", true));
 	abi.script_get_property_type = reinterpret_cast<int (*)(SwiftGodotScriptHandle, int)>(_resolve("swiftgodot_script_get_property_type", true));
 	abi.script_get_property_usage = reinterpret_cast<int (*)(SwiftGodotScriptHandle, int)>(_resolve("swiftgodot_script_get_property_usage", true));
 
-	abi.instance_create = reinterpret_cast<SwiftGodotInstanceHandle (*)(SwiftGodotScriptHandle, GDExtensionObjectPtr)>(_resolve("swiftgodot_instance_create", true));
+	abi.scene_build = reinterpret_cast<uintptr_t (*)(GDExtensionObjectPtr)>(_resolve("swiftgodot_scene_build", true));
+	abi.scene_invalidate = reinterpret_cast<void (*)(GDExtensionObjectPtr)>(_resolve("swiftgodot_scene_invalidate", true));
+
+	abi.instance_create = reinterpret_cast<uintptr_t (*)(SwiftGodotScriptHandle, GDExtensionObjectPtr)>(_resolve("swiftgodot_instance_create", true));
 	abi.instance_free = reinterpret_cast<void (*)(SwiftGodotInstanceHandle)>(_resolve("swiftgodot_instance_free", true));
 	abi.instance_call = reinterpret_cast<GDExtensionBool (*)(SwiftGodotInstanceHandle, const char *, GDExtensionConstVariantPtr *, int, GDExtensionVariantPtr, GDExtensionCallError *)>(_resolve("swiftgodot_instance_call", true));
 	abi.instance_notification = reinterpret_cast<void (*)(SwiftGodotInstanceHandle, int, GDExtensionBool)>(_resolve("swiftgodot_instance_notification", true));
@@ -128,12 +133,27 @@ Error SwiftBridge::load() {
 		return OK;
 	}
 
-	Vector<String> search_dirs;
-	search_dirs.push_back(OS::get_singleton()->get_executable_path().get_base_dir());
-	search_dirs.push_back("res://bin");
-	search_dirs.push_back("res://");
-	for (const String &dir : search_dirs) {
-		if (_try_load_from(dir) == OK) {
+	String lib = get_runtime_library_name();
+	String exe_dir = OS::get_singleton()->get_executable_path().get_base_dir();
+	Vector<String> candidates;
+	candidates.push_back(exe_dir.path_join(lib));
+	// macOS .app bundles keep bundled dylibs in Contents/Frameworks, next to
+	// Contents/MacOS where the executable lives.
+	candidates.push_back(exe_dir.path_join("..").path_join("Frameworks").path_join(lib));
+	// Project-local locations (globalized: dlopen cannot read res:// inside a
+	// packed .pck, but a real directory works, e.g. an unpacked project).
+	candidates.push_back(ProjectSettings::get_singleton()->globalize_path("res://bin").path_join(lib));
+	candidates.push_back(ProjectSettings::get_singleton()->globalize_path("res://").path_join(lib));
+#ifdef __APPLE__
+	// dlopen() expands @executable_path itself, covering .app bundles no
+	// matter the current working directory.
+	candidates.push_back("@executable_path/../Frameworks/" + lib);
+#endif
+	for (const String &path : candidates) {
+		if (_try_load_from(path) == OK) {
+			// The scene/UI entry points (swiftgodot_scene_build/invalidate) live
+			// in the same library since SwiftGodotUI is part of the single
+			// swiftgodot_runtime dynamic product.
 			return OK;
 		}
 	}

@@ -13,8 +13,13 @@ Object-typed values are wrapped in generated Swift classes; value types
 import argparse
 import ast
 import json
+import os
 import re
 import sys
+
+# Repo root (modules/swift/tools/generate_bindings.py -> 3 levels up), used to
+# resolve the core headers no matter the current working directory.
+REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 
 GLOBAL_ENUM_HEADERS = [
     "core/math/math_defs.h",
@@ -95,6 +100,8 @@ ALL_CONSTS: dict[str, int] = {}
 
 
 def parse_header_enums(path):
+    if not os.path.exists(path):
+        path = os.path.join(REPO_ROOT, path)
     with open(path) as f:
         text = f.read()
     text = re.sub(r"//[^\n]*", "", text)
@@ -183,12 +190,21 @@ SWIFT_KEYWORDS = {
 }
 
 
+# "Type" would clash with the `.Type` expression on the enclosing type.
+RESERVED_TYPE_NAMES = {"Type"}
+
+
 def sanitize(name):
     if not name:
         return "unnamed_"
-    if name in SWIFT_KEYWORDS or name[0].isdigit():
-        return name + "_"
-    return name
+    s = re.sub(r"[^A-Za-z0-9_]", "_", str(name))
+    if not s:
+        return "unnamed_"
+    if s[0].isdigit():
+        s = "_" + s
+    if s in SWIFT_KEYWORDS or s in RESERVED_TYPE_NAMES:
+        s += "_"
+    return s
 
 
 def is_void(jtype):
@@ -230,44 +246,170 @@ def camel_case(s):
 
 GLOBAL_ENUMS: dict[str, dict[str, int]] = {}
 
+# "Node.InternalMode" -> {"INTERNAL_MODE_DISABLED": 0, ...}, for enum default values.
+CLASS_ENUM_VALUES: dict[str, dict[str, int]] = {}
+
+
+def enum_case_names(enum_name, values):
+    prefix = snake_upper(enum_name) + "_"
+    cases = []
+    used = set()
+    seen_values = set()  # Swift enums require unique raw values: drop aliases.
+    for const, val in sorted(values.items(), key=lambda kv: kv[1]):
+        if val in seen_values:
+            continue
+        seen_values.add(val)
+        base = const[len(prefix) :] if const.startswith(prefix) else const
+        case = sanitize(camel_case(base))
+        while case in used:
+            case += "_"
+        used.add(case)
+        cases.append((case, val))
+    return cases
+
+
+def enum_default_literal(class_name, dv):
+    if dv is None or not class_name:
+        return None
+    if "." in class_name:
+        values = CLASS_ENUM_VALUES.get(class_name)
+        enum_name = class_name.split(".")[-1]
+    else:
+        values = GLOBAL_ENUMS.get(class_name)
+        enum_name = class_name
+    if not values:
+        return None
+    s = str(dv).strip()
+    try:
+        target = int(s)
+    except ValueError:
+        # Constant name form, e.g. "INTERNAL_MODE_DISABLED" or "Node.INTERNAL_MODE_DISABLED".
+        s = s.split(".")[-1]
+        for const, val in values.items():
+            if const == s or const.endswith("." + s):
+                target = val
+                break
+        else:
+            return None
+    for case, val in enum_case_names(enum_name, values):
+        if val == target:
+            return "." + case
+    return None
+
 
 def enum_swift_type(class_name, generated):
-    # "Node.ProcessMode" -> "Node.ProcessMode" if Node is generated, else Int.
+    # "Node.ProcessMode" -> "Node.ProcessMode" if Node is generated and the
+    # enum is known, else Int.
     if not class_name:
         return "Int"
     if "." not in class_name:
-        return class_name if class_name in GLOBAL_ENUMS else "Int"
-    cls = class_name.split(".")[0]
-    if cls in generated:
-        return class_name
+        return sanitize(class_name) if class_name in GLOBAL_ENUMS else "Int"
+    cls, en = class_name.split(".", 1)
+    if cls in generated and CLASS_ENUM_VALUES.get(class_name):
+        return f"{cls}.{sanitize(en)}"
     return "Int"
 
 
-def is_enum(jtype, class_name):
-    if (jtype or "").lower() != "int" or not class_name:
+def enum_values(en):
+    # Official --dump-extension-api uses a list of {"name","value"} (or
+    # [name, value] pairs); accept a plain {name: value} dict too.
+    values = en.get("values", {})
+    if isinstance(values, dict):
+        return values
+    out = {}
+    for item in values:
+        if isinstance(item, dict):
+            out[item.get("name")] = item.get("value")
+        elif isinstance(item, (list, tuple)) and len(item) == 2:
+            out[item[0]] = item[1]
+    return out
+
+
+def is_known_enum(class_name):
+    if not class_name:
         return False
-    return "." in class_name or class_name in GLOBAL_ENUMS
+    if "." in class_name:
+        return bool(CLASS_ENUM_VALUES.get(class_name))
+    return class_name in GLOBAL_ENUMS
+
+
+def enum_name_of(jtype, class_name):
+    # New dump format encodes enums as "enum::Class.Enum" / "enum::Key";
+    # the old format used "int" + class_name.
+    t = (jtype or "").strip()
+    if t.lower().startswith("enum::"):
+        return t[len("enum::") :]
+    if t.lower() == "int" and is_known_enum(class_name):
+        return class_name
+    return None
+
+
+def is_enum(jtype, class_name):
+    return enum_name_of(jtype, class_name) is not None
+
+
+def base_class_of(t):
+    # New dump format encodes "any of these classes" as a comma-separated
+    # list (entries starting with '-' are exclusions): pick the base class.
+    parts = [p.strip() for p in t.split(",") if p.strip()]
+    if not parts:
+        return t
+    if any(p.startswith("-") for p in parts):
+        for p in parts:
+            if not p.startswith("-"):
+                return p
+        return parts[0].lstrip("-")
+    return parts[-1]
 
 
 def swift_type(jtype, class_name, generated):
-    t = (jtype or "").lower()
-    if t == "bool":
-        return "Bool"
-    if t == "int":
-        if is_enum(jtype, class_name):
-            return enum_swift_type(class_name, generated)
+    t = (jtype or "").strip()
+    tl = t.lower()
+    en = enum_name_of(t, class_name)
+    if en is not None:
+        return enum_swift_type(en, generated)
+    if tl.startswith("bitfield::"):
         return "Int"
-    if t == "float":
+    if "," in t:
+        return swift_type(base_class_of(t), None, generated)
+    if t.endswith("*"):
+        return swift_type(t[:-1].strip(), None, generated)
+    if tl == "bool":
+        return "Bool"
+    if tl == "int":
+        return "Int"
+    if tl in ("float", "double"):
         return "Double"
-    if t in ("string", "stringname", "nodepath"):
+    if tl in ("string", "stringname", "nodepath"):
         return "String"
-    if t in VALUE_TYPES:
-        return VALUE_TYPES[t]
-    if t == "object":
+    if tl in VALUE_TYPES:
+        return VALUE_TYPES[tl]
+    if tl == "object":
         if class_name and class_name in generated:
             return class_name
         return "GodotObject"
+    if tl.startswith("object::"):
+        name = t[len("object::") :]
+        return name if name in generated else "GodotObject"
+    if t and t[0].isupper() and t in generated:
+        return t
     return "VariantBox"
+
+
+def is_object_type(jtype, class_name, generated):
+    t = (jtype or "").strip()
+    tl = t.lower()
+    if tl.startswith(("enum::", "bitfield::")):
+        return False
+    if tl == "object" or tl.startswith("object::"):
+        return True
+    if "," in t:
+        return is_object_type(base_class_of(t), None, generated)
+    if t.endswith("*"):
+        return is_object_type(t[:-1].strip(), None, generated)
+    if t and t[0].isupper() and t in generated:
+        return True
+    return False
 
 
 def default_literal(dv):
@@ -287,18 +429,33 @@ def default_literal(dv):
 
 def emit_method(m, generated):
     name = sanitize(m.get("name", "unknown"))
-    ret = m.get("return_type", {})
+    # New dump format uses "return_value" (absent = void); old format "return_type".
+    ret = m.get("return_value") or m.get("return_type") or {}
     ret_void = is_void(ret.get("type", "void"))
     ret_swift = swift_type(ret.get("type"), ret.get("class_name"), generated)
+    ret_enum = enum_name_of(ret.get("type"), ret.get("class_name"))
+    ret_object = is_object_type(ret.get("type"), ret.get("class_name"), generated)
     args = m.get("arguments", [])
     params = []
     call_args = []
     for a in args:
         st = swift_type(a.get("type"), a.get("class_name"), generated)
         pname = sanitize(a.get("name", "arg"))
-        dv = None if is_enum(a.get("type"), a.get("class_name")) else default_literal(a.get("default_value"))
+        en = enum_name_of(a.get("type"), a.get("class_name"))
+        if en is not None:
+            if st != "Int":
+                dv = enum_default_literal(en, a.get("default_value"))
+            else:
+                dv = default_literal(a.get("default_value"))
+        else:
+            dv = default_literal(a.get("default_value"))
+            if dv is not None:
+                if st not in ("Bool", "Int", "Double", "String"):
+                    dv = None
+                elif st == "String" and not (dv.startswith('"') and dv.endswith('"')):
+                    dv = None
         params.append(f"{pname}: {st} = {dv}" if dv is not None else f"{pname}: {st}")
-        if is_enum(a.get("type"), a.get("class_name")) and st != "Int":
+        if en is not None and st != "Int":
             call_args.append(f"VariantBox({pname}.rawValue)")
         else:
             call_args.append(f"VariantBox({pname})")
@@ -306,12 +463,7 @@ def emit_method(m, generated):
     lines = []
     if not ret_void:
         lines.append("\t@discardableResult")
-    lines.append(
-        "\t"
-        + signature
-        + ("" if ret_void else f" -> {ret_swift}" + ("?" if ret.get("type", "").lower() == "object" else ""))
-        + " {"
-    )
+    lines.append("\t" + signature + ("" if ret_void else f" -> {ret_swift}" + ("?" if ret_object else "")) + " {")
     mname = m.get("name", "unknown")
     args_joined = ", ".join(call_args)
     call = f'Host.shared.callMethod(object: ptr, method: "{mname}", args: [{args_joined}])'
@@ -328,53 +480,53 @@ def emit_method(m, generated):
         lines.append("\t\treturn __ret.asString()")
     elif ret_swift in VALUE_TYPE_ACCESSORS:
         lines.append(f"\t\treturn __ret.{VALUE_TYPE_ACCESSORS[ret_swift]}()")
-    elif is_enum(ret.get("type"), ret.get("class_name")) and ret_swift != "Int":
+    elif ret_enum is not None and ret_swift != "Int":
         lines.append(f"\t\treturn __ret.asEnum({ret_swift}.self)")
     elif ret_swift == "VariantBox":
         lines.append("\t\treturn __ret")
     else:
-        lines.append(f"\t\treturn __ret.asObject({ret_swift}.self)")
+        lines.append("\t\treturn __ret.asObject()")
     lines.append("\t}")
     return lines
 
 
-def emit_property(p, method_names):
+def emit_property(p, method_names, generated):
     name = sanitize(p.get("name", "unknown"))
     if name in method_names:
         return []
-    st = swift_type(p.get("type"), p.get("class_name"), set())
+    st = swift_type(p.get("type"), p.get("class_name"), generated)
+    is_object = is_object_type(p.get("type"), p.get("class_name"), generated)
+    decl = st + "?" if is_object else st
     raw = p.get("name")
-    if is_enum(p.get("type"), p.get("class_name")) and st != "Int":
+    if enum_name_of(p.get("type"), p.get("class_name")) is not None and st != "Int":
         accessor = f".asEnum({st}.self)"
+    elif st == "VariantBox":
+        accessor = ""
+    elif st == "GodotObject" or st in generated:
+        accessor = ".asObject()"
     else:
-        accessor = f".as{st}()" if st in ("Bool", "Int", "Double", "String") or st in VALUE_TYPE_ACCESSORS else ""
+        accessor = f".as{st}()"
+    if is_object:
+        setter = f'\t\tset {{ Host.shared.setProperty(object: ptr, name: "{raw}", value: newValue.map {{ VariantBox($0) }} ?? VariantBox()) }}'
+    else:
+        setter = f'\t\tset {{ Host.shared.setProperty(object: ptr, name: "{raw}", value: VariantBox(newValue)) }}'
     lines = [
-        f"\tpublic var {name}: {st} {{",
+        f"\tpublic var {name}: {decl} {{",
         f'\t\tget {{ Host.shared.getProperty(object: ptr, name: "{raw}")' + accessor + " }",
-        f'\t\tset {{ Host.shared.setProperty(object: ptr, name: "{raw}", value: VariantBox(newValue)) }}',
+        setter,
         "\t}",
     ]
     return lines
 
 
 def emit_enum_cases(name, values, indent):
-    prefix = snake_upper(name) + "_"
-    lines = []
-    used = set()
-    for const, val in sorted(values.items(), key=lambda kv: kv[1]):
-        base = const[len(prefix) :] if const.startswith(prefix) else const
-        case = sanitize(camel_case(base))
-        while case in used:
-            case += "_"
-        used.add(case)
-        lines.append(f"{indent}case {case} = {val}")
-    return lines
+    return [f"{indent}case {case} = {val}" for case, val in enum_case_names(name, values)]
 
 
 def emit_enum(en):
     name = sanitize(en.get("name", "Enum"))
     lines = [f"\tpublic enum {name}: Int, Sendable, CaseIterable {{"]
-    lines.extend(emit_enum_cases(en.get("name", ""), en.get("values", {}), "\t\t"))
+    lines.extend(emit_enum_cases(en.get("name", ""), enum_values(en), "\t\t"))
     lines.append("\t}")
     return lines
 
@@ -387,17 +539,20 @@ def emit_top_level_enum(name, values):
     return lines
 
 
-def emit_signal(s):
+def emit_signal(s, generated):
     name = sanitize(s.get("name", "unknown"))
     args = s.get("arguments", [])
     params = []
     sname = s.get("name", "unknown")
     call_args = [f'VariantBox("{sname}")']
     for a in args:
-        st = swift_type(a.get("type"), a.get("class_name"), set())
+        st = swift_type(a.get("type"), a.get("class_name"), generated)
         pname = sanitize(a.get("name", "arg"))
         params.append(f"{pname}: {st}")
-        call_args.append(f"VariantBox({pname})")
+        if enum_name_of(a.get("type"), a.get("class_name")) is not None and st != "Int":
+            call_args.append(f"VariantBox({pname}.rawValue)")
+        else:
+            call_args.append(f"VariantBox({pname})")
     args_joined = ", ".join(call_args)
     params_joined = ", ".join(params)
     return [
@@ -412,6 +567,7 @@ def main():
     parser.add_argument("--api", default="extension_api.json", help="Path to extension_api.json")
     parser.add_argument("--classes", help="Comma-separated class names to generate")
     parser.add_argument("--all", action="store_true", help="Generate all classes in the API")
+    parser.add_argument("--exclude", help="Comma-separated class names to skip (e.g. module classes)")
     parser.add_argument("--out", required=True, help="Output Swift file")
     parser.add_argument(
         "--global-enums-headers",
@@ -423,10 +579,18 @@ def main():
     with open(args.api) as f:
         api = json.load(f)
 
+    # Global enums come from the dump itself when present (new format: list of
+    # {"name","values":[{"name","value"}]}); core headers fill the gaps.
+    for en in api.get("global_enums", []):
+        GLOBAL_ENUMS[en.get("name", "")] = enum_values(en)
     for header in args.global_enums_headers.split(","):
-        GLOBAL_ENUMS.update(parse_header_enums(header))
+        for ename, values in parse_header_enums(header).items():
+            GLOBAL_ENUMS.setdefault(ename, values)
 
     all_classes = {c["name"]: c for c in api.get("classes", [])}
+    for c in all_classes.values():
+        for en in c.get("enums", []):
+            CLASS_ENUM_VALUES[f"{c['name']}.{en.get('name', '')}"] = enum_values(en)
     if args.all:
         selected = set(all_classes)
     elif args.classes:
@@ -438,6 +602,8 @@ def main():
     else:
         print("Provide --classes or --all", file=sys.stderr)
         sys.exit(1)
+    if args.exclude:
+        selected -= {c.strip() for c in args.exclude.split(",") if c.strip()}
 
     def depth(name):
         d = 0
@@ -448,6 +614,26 @@ def main():
         return d
 
     ordered = sorted(selected, key=lambda n: (depth(n), n))
+
+    # Members inherited from a generated ancestor must not be re-emitted
+    # (Swift would require 'override'); collect ancestor member names.
+    def inherited_members(name):
+        names = set()
+        cur = all_classes.get(name)
+        while cur is not None and cur.get("inherits"):
+            parent = all_classes.get(cur["inherits"])
+            if parent is None:
+                break
+            for m in parent.get("methods", []):
+                names.add(m.get("name"))
+            for p in parent.get("properties", []):
+                names.add(p.get("name"))
+            for s in parent.get("signals", []):
+                names.add(s.get("name"))
+            cur = parent
+        return names
+
+    inherited = {cname: inherited_members(cname) for cname in selected}
 
     out = []
     out.append("// Generated by modules/swift/tools/generate_bindings.py from extension_api.json. Do not edit.")
@@ -462,6 +648,11 @@ def main():
     out.append("public class GodotObject {")
     out.append("\tpublic let ptr: UnsafeMutableRawPointer")
     out.append("\tpublic init(ptr: UnsafeMutableRawPointer) { self.ptr = ptr }")
+    out.append("\tpublic init() {")
+    out.append("\t\t// Abstract: concrete engine classes override this via ClassDB::instantiate.")
+    out.append("\t\tptr = UnsafeMutableRawPointer(bitPattern: -1)!")
+    out.append('\t\tfatalError("GodotObject is abstract; instantiate a concrete engine class, e.g. Node()")')
+    out.append("\t}")
     out.append("\tpublic convenience init?(raw: UnsafeMutableRawPointer?) {")
     out.append("\t\tguard let raw else { return nil }")
     out.append("\t\tself.init(ptr: raw)")
@@ -481,18 +672,36 @@ def main():
         out.append("@MainActor")
         out.append(f"public class {cname}: {parent} {{")
         out.append("\tpublic override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }")
+        out.append("\tpublic override init() {")
+        out.append(f'\t\tguard let raw = Host.shared.createObject("{cname}") else {{')
+        out.append(f'\t\t\tfatalError("SwiftGodot: cannot instantiate Godot class {cname}")')
+        out.append("\t\t}")
+        out.append("\t\tsuper.init(ptr: raw)")
+        out.append("\t}")
+        inherited_names = inherited.get(cname, set())
+        emitted_enums = set()
         for en in c.get("enums", []):
+            ename = sanitize(en.get("name", "Enum"))
+            if ename in emitted_enums:
+                continue
+            emitted_enums.add(ename)
             out.extend(emit_enum(en))
         method_names = set()
         for m in c.get("methods", []):
-            if m.get("is_virtual"):
+            if m.get("is_virtual") or m.get("name") in inherited_names:
                 continue
             method_names.add(sanitize(m.get("name")))
             out.extend(emit_method(m, selected))
         for p in c.get("properties", []):
-            out.extend(emit_property(p, method_names))
+            if p.get("name") in inherited_names:
+                continue
+            out.extend(emit_property(p, method_names, selected))
         for s in c.get("signals", []):
-            out.extend(emit_signal(s))
+            if s.get("name") in inherited_names:
+                continue
+            if sanitize("emit_" + str(s.get("name", ""))) in method_names:
+                continue  # a real engine method with this name exists
+            out.extend(emit_signal(s, selected))
         out.append("}")
         out.append("")
 
