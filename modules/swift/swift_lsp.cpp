@@ -247,31 +247,31 @@ void SwiftLSPClient::_sync_document(const String &p_uri, const String &p_text) {
 	}
 }
 
-static EditorLanguage::CompletionKind _lsp_kind_to_completion_kind(int p_lsp_kind) {
+static ScriptLanguage::CodeCompletionKind _lsp_kind_to_completion_kind(int p_lsp_kind) {
 	switch (p_lsp_kind) {
 		case 2: // Method
 		case 3: // Function
 		case 4: // Constructor
-			return EditorLanguage::CompletionKind::FUNCTION;
+			return ScriptLanguage::CODE_COMPLETION_KIND_FUNCTION;
 		case 5: // Field
 		case 10: // Property
-			return EditorLanguage::CompletionKind::MEMBER_VARIABLE;
+			return ScriptLanguage::CODE_COMPLETION_KIND_MEMBER;
 		case 6: // Variable
-			return EditorLanguage::CompletionKind::VARIABLE;
+			return ScriptLanguage::CODE_COMPLETION_KIND_VARIABLE;
 		case 7: // Class
 		case 8: // Interface
-			return EditorLanguage::CompletionKind::CLASS;
+			return ScriptLanguage::CODE_COMPLETION_KIND_CLASS;
 		case 13: // Enum
-			return EditorLanguage::CompletionKind::ENUM;
+			return ScriptLanguage::CODE_COMPLETION_KIND_ENUM;
 		case 14: // EnumMember
 		case 21: // Constant (LSP has no constant; enum members are close)
-			return EditorLanguage::CompletionKind::CONSTANT;
+			return ScriptLanguage::CODE_COMPLETION_KIND_CONSTANT;
 		case 15: // Keyword
-			return EditorLanguage::CompletionKind::KEYWORD;
+			return ScriptLanguage::CODE_COMPLETION_KIND_KEYWORD;
 		case 18: // File
-			return EditorLanguage::CompletionKind::FILE_PATH;
+			return ScriptLanguage::CODE_COMPLETION_KIND_FILE_PATH;
 		default:
-			return EditorLanguage::CompletionKind::PLAIN_TEXT;
+			return ScriptLanguage::CODE_COMPLETION_KIND_PLAIN_TEXT;
 	}
 }
 
@@ -294,7 +294,7 @@ static String _lsp_kind_color(int p_lsp_kind) {
 	}
 }
 
-Error SwiftLSPClient::complete(const String &p_code, const String &p_path, List<EditorLanguage::CompletionOption> *r_options) {
+Error SwiftLSPClient::complete(const String &p_code, const String &p_path, List<ScriptLanguage::CodeCompletionOption> *r_options) {
 	if (!initialized && !_start()) {
 		return ERR_CANT_OPEN;
 	}
@@ -332,7 +332,7 @@ Error SwiftLSPClient::complete(const String &p_code, const String &p_path, List<
 		items = ((Dictionary)result)["items"];
 	}
 	HashSet<String> existing;
-	for (const EditorLanguage::CompletionOption &opt : *r_options) {
+	for (const ScriptLanguage::CodeCompletionOption &opt : *r_options) {
 		existing.insert(opt.display);
 	}
 	for (int i = 0; i < items.size(); i++) {
@@ -346,7 +346,7 @@ Error SwiftLSPClient::complete(const String &p_code, const String &p_path, List<
 		}
 		existing.insert(label);
 		int lsp_kind = item.has("kind") ? (int)item["kind"] : 1;
-		EditorLanguage::CompletionOption option(label, _lsp_kind_to_completion_kind(lsp_kind), EditorLanguage::CompletionLocation::OTHER, _lsp_kind_color(lsp_kind));
+		ScriptLanguage::CodeCompletionOption option(label, _lsp_kind_to_completion_kind(lsp_kind), ScriptLanguage::LOCATION_OTHER, _lsp_kind_color(lsp_kind));
 		if (item.has("insertText")) {
 			option.insert_text = item["insertText"];
 		} else if (item.has("textEdit")) {

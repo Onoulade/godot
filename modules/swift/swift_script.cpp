@@ -38,7 +38,8 @@
 #include "core/config/project_settings.h"
 #include "core/io/file_access.h"
 #include "core/os/memory.h"
-#include "core/string/regex.h"
+
+#include "modules/regex/regex.h"
 
 void SwiftScript::_bind_methods() {
 }

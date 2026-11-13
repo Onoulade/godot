@@ -33,8 +33,8 @@
 #ifdef TOOLS_ENABLED
 
 #include "core/io/file_access.h"
-#include "core/object/editor_language.h"
 #include "core/object/object.h"
+#include "core/object/script_language.h"
 #include "core/string/ustring.h"
 #include "core/templates/hash_map.h"
 #include "core/templates/list.h"
@@ -74,7 +74,7 @@ public:
 
 	// Appends LSP completion items for the document; p_code contains the
 	// 0xFFFF sentinel at the caret position.
-	Error complete(const String &p_code, const String &p_path, List<EditorLanguage::CompletionOption> *r_options);
+	Error complete(const String &p_code, const String &p_path, List<ScriptLanguage::CodeCompletionOption> *r_options);
 };
 
 #endif // TOOLS_ENABLED
