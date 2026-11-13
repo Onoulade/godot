@@ -553,8 +553,7 @@ public enum PropertyHint: Int, Sendable, CaseIterable {
 	case groupEnable = 42
 	case inputName = 43
 	case filePath = 44
-	case audioBus = 45
-	case max = 46
+	case max = 45
 }
 
 public enum PropertyUsageFlags: Int, Sendable, CaseIterable {
@@ -1783,11 +1782,6 @@ public class ClassDB: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_class_enabled", args: [VariantBox(class_)])
 		return __ret.asBool()
 	}
-	@discardableResult
-	public func is_class_exposed(class_: String) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_class_exposed", args: [VariantBox(class_)])
-		return __ret.asBool()
-	}
 }
 
 @MainActor
@@ -1836,7 +1830,6 @@ public class DisplayServer: Object {
 		case accessibilityScreenReader = 34
 		case hdrOutput = 35
 		case pipMode = 36
-		case embedded = 37
 	}
 	public enum AccessibilityRole: Int, Sendable, CaseIterable {
 		case roleUnknown = 0
@@ -1965,11 +1958,6 @@ public class DisplayServer: Object {
 		case screenSensorPortrait = 5
 		case screenSensor = 6
 	}
-	public enum SensorOrientation: Int, Sendable, CaseIterable {
-		case undefined = 0
-		case portrait = 1
-		case landscape = 2
-	}
 	public enum VirtualKeyboardType: Int, Sendable, CaseIterable {
 		case keyboardTypeDefault = 0
 		case keyboardTypeMultiline = 1
@@ -2059,11 +2047,6 @@ public class DisplayServer: Object {
 		case windowEdgeBottom = 6
 		case windowEdgeBottomRight = 7
 		case windowEdgeMax = 8
-	}
-	public enum NotificationStatus: Int, Sendable, CaseIterable {
-		case notificationActivated = 0
-		case notificationDismissed = 1
-		case notificationFailed = 2
 	}
 	public enum VSyncMode: Int, Sendable, CaseIterable {
 		case vsyncDisabled = 0
@@ -2416,13 +2399,13 @@ public class DisplayServer: Object {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func get_display_cutouts(screen: Int = -1) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_display_cutouts", args: [VariantBox(screen)])
+	public func get_display_cutouts() -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_display_cutouts", args: [])
 		return __ret
 	}
 	@discardableResult
-	public func get_display_safe_area(screen: Int = -1) -> Rect2i {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_display_safe_area", args: [VariantBox(screen)])
+	public func get_display_safe_area() -> Rect2i {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_display_safe_area", args: [])
 		return __ret.asRect2i()
 	}
 	@discardableResult
@@ -2685,9 +2668,6 @@ public class DisplayServer: Object {
 	}
 	public func window_set_ime_position(position: Vector2i, window_id: Int = 0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "window_set_ime_position", args: [VariantBox(position), VariantBox(window_id)])
-	}
-	public func window_set_ime_rect(rect: Rect2i, window_id: Int = 0) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "window_set_ime_rect", args: [VariantBox(rect), VariantBox(window_id)])
 	}
 	public func window_set_vsync_mode(vsync_mode: DisplayServer.VSyncMode, window_id: Int = 0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "window_set_vsync_mode", args: [VariantBox(vsync_mode.rawValue), VariantBox(window_id)])
@@ -3059,14 +3039,6 @@ public class DisplayServer: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "cursor_set_custom_image", args: [VariantBox(cursor), VariantBox(shape.rawValue), VariantBox(hotspot)])
 	}
 	@discardableResult
-	public func send_toast_notification(title: String, text: String, image: Texture2D, callback: VariantBox) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "send_toast_notification", args: [VariantBox(title), VariantBox(text), VariantBox(image), VariantBox(callback)])
-		return __ret.asInt()
-	}
-	public func hide_toast_notification(id: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "hide_toast_notification", args: [VariantBox(id)])
-	}
-	@discardableResult
 	public func get_swap_cancel_ok() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_swap_cancel_ok", args: [])
 		return __ret.asBool()
@@ -3223,8 +3195,8 @@ public class DisplayServer: Object {
 	public func pip_mode_set_auto_enter_on_background(auto_enter_on_background: Bool, window_id: Int = 0) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "pip_mode_set_auto_enter_on_background", args: [VariantBox(auto_enter_on_background), VariantBox(window_id)])
 	}
-	public func emit_orientation_changed(orientation: DisplayServer.SensorOrientation) {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("orientation_changed"), VariantBox(orientation.rawValue)])
+	public func emit_orientation_changed(orientation: Int) {
+		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("orientation_changed"), VariantBox(orientation)])
 	}
 }
 
@@ -3318,11 +3290,6 @@ public class EditorInterface: Object {
 		}
 		super.init(ptr: raw)
 	}
-	@discardableResult
-	public func is_exiting() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_exiting", args: [])
-		return __ret.asBool()
-	}
 	public func restart_editor(save: Bool = true) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "restart_editor", args: [VariantBox(save)])
 	}
@@ -3367,11 +3334,6 @@ public class EditorInterface: Object {
 		return __ret.asObject()
 	}
 	@discardableResult
-	public func get_scene_paint_2d() -> ScenePaint2DEditor? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_scene_paint_2d", args: [])
-		return __ret.asObject()
-	}
-	@discardableResult
 	public func make_mesh_previews(meshes: VariantBox, preview_size: Int) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "make_mesh_previews", args: [VariantBox(meshes), VariantBox(preview_size)])
 		return __ret
@@ -3395,6 +3357,11 @@ public class EditorInterface: Object {
 		return __ret.asObject()
 	}
 	@discardableResult
+	public func get_editor_main_screen() -> VBoxContainer? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_editor_main_screen", args: [])
+		return __ret.asObject()
+	}
+	@discardableResult
 	public func get_script_editor() -> ScriptEditor? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_script_editor", args: [])
 		return __ret.asObject()
@@ -3409,18 +3376,8 @@ public class EditorInterface: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_editor_viewport_3d", args: [VariantBox(idx)])
 		return __ret.asObject()
 	}
-	@discardableResult
-	public func get_editor_main_screen() -> VBoxContainer? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_editor_main_screen", args: [])
-		return __ret.asObject()
-	}
 	public func set_main_screen_editor(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_main_screen_editor", args: [VariantBox(name)])
-	}
-	@discardableResult
-	public func get_dock_by_name(name: String) -> EditorDock? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_dock_by_name", args: [VariantBox(name)])
-		return __ret.asObject()
 	}
 	public func set_distraction_free_mode(enter: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_distraction_free_mode", args: [VariantBox(enter)])
@@ -4801,11 +4758,6 @@ public class Input: Object {
 		return __ret.asVector3()
 	}
 	@discardableResult
-	public func get_device_orientation() -> Quaternion {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_device_orientation", args: [])
-		return __ret.asQuaternion()
-	}
-	@discardableResult
 	public func get_joy_accelerometer(device: Int) -> Vector3 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_joy_accelerometer", args: [VariantBox(device)])
 		return __ret.asVector3()
@@ -4865,34 +4817,6 @@ public class Input: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_joy_motion_sensors_calibrating", args: [VariantBox(device)])
 		return __ret.asBool()
 	}
-	public func set_joy_motion_sensors_auto_calibration_enabled(device: Int, enable: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_joy_motion_sensors_auto_calibration_enabled", args: [VariantBox(device), VariantBox(enable)])
-	}
-	@discardableResult
-	public func is_joy_motion_sensors_auto_calibration_enabled(device: Int) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_joy_motion_sensors_auto_calibration_enabled", args: [VariantBox(device)])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func get_joy_touchpad_finger_position(device: Int, finger: Int, touchpad: Int = 0) -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_joy_touchpad_finger_position", args: [VariantBox(device), VariantBox(finger), VariantBox(touchpad)])
-		return __ret.asVector2()
-	}
-	@discardableResult
-	public func get_joy_touchpad_finger_pressure(device: Int, finger: Int, touchpad: Int = 0) -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_joy_touchpad_finger_pressure", args: [VariantBox(device), VariantBox(finger), VariantBox(touchpad)])
-		return __ret.asDouble()
-	}
-	@discardableResult
-	public func get_joy_touchpad_fingers(device: Int, touchpad: Int = 0) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_joy_touchpad_fingers", args: [VariantBox(device), VariantBox(touchpad)])
-		return __ret
-	}
-	@discardableResult
-	public func get_joy_num_touchpads(device: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_joy_num_touchpads", args: [VariantBox(device)])
-		return __ret.asInt()
-	}
 	public func set_gravity(value: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_gravity", args: [VariantBox(value)])
 	}
@@ -4904,9 +4828,6 @@ public class Input: Object {
 	}
 	public func set_gyroscope(value: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_gyroscope", args: [VariantBox(value)])
-	}
-	public func set_device_orientation(value: Quaternion) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_device_orientation", args: [VariantBox(value)])
 	}
 	public func set_joy_light(device: Int, color: Color) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_joy_light", args: [VariantBox(device), VariantBox(color)])
@@ -5482,11 +5403,6 @@ public class NativeMenu: Object {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func is_item_indeterminate(rid: VariantBox, idx: Int) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_item_indeterminate", args: [VariantBox(rid), VariantBox(idx)])
-		return __ret.asBool()
-	}
-	@discardableResult
 	public func is_item_checkable(rid: VariantBox, idx: Int) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_item_checkable", args: [VariantBox(rid), VariantBox(idx)])
 		return __ret.asBool()
@@ -5563,9 +5479,6 @@ public class NativeMenu: Object {
 	}
 	public func set_item_checked(rid: VariantBox, idx: Int, checked: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_item_checked", args: [VariantBox(rid), VariantBox(idx), VariantBox(checked)])
-	}
-	public func set_item_indeterminate(rid: VariantBox, idx: Int, indeterminate: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_item_indeterminate", args: [VariantBox(rid), VariantBox(idx), VariantBox(indeterminate)])
 	}
 	public func set_item_checkable(rid: VariantBox, idx: Int, checkable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_item_checkable", args: [VariantBox(rid), VariantBox(idx), VariantBox(checkable)])
@@ -7880,11 +7793,6 @@ public class OS: Object {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func get_preferred_locales() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_preferred_locales", args: [])
-		return __ret
-	}
-	@discardableResult
 	public func get_locale_language() -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_locale_language", args: [])
 		return __ret.asString()
@@ -8159,8 +8067,7 @@ public class Performance: Object {
 		case navigation3dEdgeConnectionCount = 56
 		case navigation3dEdgeFreeCount = 57
 		case navigation3dObstacleCount = 58
-		case renderStreamingTextureMemUsed = 59
-		case max = 60
+		case max = 59
 	}
 	public enum MonitorType: Int, Sendable, CaseIterable {
 		case quantity = 0
@@ -8776,13 +8683,13 @@ public class PhysicsDirectSpaceState2D: Object {
 		super.init(ptr: raw)
 	}
 	@discardableResult
-	public func intersect_ray(parameters: PhysicsRayQueryParameters2D) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "intersect_ray", args: [VariantBox(parameters)])
+	public func intersect_point(parameters: PhysicsPointQueryParameters2D, max_results: Int = 32) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "intersect_point", args: [VariantBox(parameters), VariantBox(max_results)])
 		return __ret
 	}
 	@discardableResult
-	public func intersect_point(parameters: PhysicsPointQueryParameters2D, max_results: Int = 32) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "intersect_point", args: [VariantBox(parameters), VariantBox(max_results)])
+	public func intersect_ray(parameters: PhysicsRayQueryParameters2D) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "intersect_ray", args: [VariantBox(parameters)])
 		return __ret
 	}
 	@discardableResult
@@ -8805,36 +8712,6 @@ public class PhysicsDirectSpaceState2D: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_rest_info", args: [VariantBox(parameters)])
 		return __ret
 	}
-	@discardableResult
-	public func intersect_ray_into(parameters: PhysicsRayQueryParameters2D, result: PhysicsIntersectRayResult2D) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "intersect_ray_into", args: [VariantBox(parameters), VariantBox(result)])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func intersect_point_into(parameters: PhysicsPointQueryParameters2D, result: PhysicsIntersectPointResult2D) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "intersect_point_into", args: [VariantBox(parameters), VariantBox(result)])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func intersect_shape_into(parameters: PhysicsShapeQueryParameters2D, result: PhysicsIntersectShapeResult2D) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "intersect_shape_into", args: [VariantBox(parameters), VariantBox(result)])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func cast_motion_into(parameters: PhysicsShapeQueryParameters2D, result: PhysicsCastMotionResult2D) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "cast_motion_into", args: [VariantBox(parameters), VariantBox(result)])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func collide_shape_into(parameters: PhysicsShapeQueryParameters2D, result: PhysicsCollideShapeResult2D) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "collide_shape_into", args: [VariantBox(parameters), VariantBox(result)])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func get_rest_info_into(parameters: PhysicsShapeQueryParameters2D, result: PhysicsGetRestInfoResult2D) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_rest_info_into", args: [VariantBox(parameters), VariantBox(result)])
-		return __ret.asBool()
-	}
 }
 
 @MainActor
@@ -8847,13 +8724,13 @@ public class PhysicsDirectSpaceState3D: Object {
 		super.init(ptr: raw)
 	}
 	@discardableResult
-	public func intersect_ray(parameters: PhysicsRayQueryParameters3D) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "intersect_ray", args: [VariantBox(parameters)])
+	public func intersect_point(parameters: PhysicsPointQueryParameters3D, max_results: Int = 32) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "intersect_point", args: [VariantBox(parameters), VariantBox(max_results)])
 		return __ret
 	}
 	@discardableResult
-	public func intersect_point(parameters: PhysicsPointQueryParameters3D, max_results: Int = 32) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "intersect_point", args: [VariantBox(parameters), VariantBox(max_results)])
+	public func intersect_ray(parameters: PhysicsRayQueryParameters3D) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "intersect_ray", args: [VariantBox(parameters)])
 		return __ret
 	}
 	@discardableResult
@@ -8875,36 +8752,6 @@ public class PhysicsDirectSpaceState3D: Object {
 	public func get_rest_info(parameters: PhysicsShapeQueryParameters3D) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_rest_info", args: [VariantBox(parameters)])
 		return __ret
-	}
-	@discardableResult
-	public func intersect_ray_into(parameters: PhysicsRayQueryParameters3D, result: PhysicsIntersectRayResult3D) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "intersect_ray_into", args: [VariantBox(parameters), VariantBox(result)])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func intersect_point_into(parameters: PhysicsPointQueryParameters3D, result: PhysicsIntersectPointResult3D) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "intersect_point_into", args: [VariantBox(parameters), VariantBox(result)])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func intersect_shape_into(parameters: PhysicsShapeQueryParameters3D, result: PhysicsIntersectShapeResult3D) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "intersect_shape_into", args: [VariantBox(parameters), VariantBox(result)])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func cast_motion_into(parameters: PhysicsShapeQueryParameters3D, result: PhysicsCastMotionResult3D) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "cast_motion_into", args: [VariantBox(parameters), VariantBox(result)])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func collide_shape_into(parameters: PhysicsShapeQueryParameters3D, result: PhysicsCollideShapeResult3D) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "collide_shape_into", args: [VariantBox(parameters), VariantBox(result)])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func get_rest_info_into(parameters: PhysicsShapeQueryParameters3D, result: PhysicsGetRestInfoResult3D) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_rest_info_into", args: [VariantBox(parameters), VariantBox(result)])
-		return __ret.asBool()
 	}
 }
 
@@ -9601,16 +9448,14 @@ public class PhysicsServer3D: Object {
 		case g6dofJointAngularSpringStiffness = 19
 		case g6dofJointAngularSpringDamping = 20
 		case g6dofJointAngularSpringEquilibriumPoint = 21
-		case g6dofJointLinearDriveForceLimit = 22
-		case g6dofJointAngularDriveTorqueLimit = 23
-		case g6dofJointMax = 24
+		case g6dofJointMax = 22
 	}
 	public enum G6DOFJointAxisFlag: Int, Sendable, CaseIterable {
 		case g6dofJointFlagEnableLinearLimit = 0
 		case g6dofJointFlagEnableAngularLimit = 1
 		case g6dofJointFlagEnableAngularSpring = 2
 		case g6dofJointFlagEnableLinearSpring = 3
-		case g6dofJointFlagEnableAngularMotor = 4
+		case g6dofJointFlagEnableMotor = 4
 		case g6dofJointFlagEnableLinearMotor = 5
 		case g6dofJointFlagMax = 6
 	}
@@ -10373,14 +10218,6 @@ public class PhysicsServer3D: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "generic_6dof_joint_get_flag", args: [VariantBox(joint), VariantBox(axis), VariantBox(flag.rawValue)])
 		return __ret.asBool()
 	}
-	public func generic_6dof_joint_set_angular_target_rotation(joint: VariantBox, target_rotation: Quaternion) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "generic_6dof_joint_set_angular_target_rotation", args: [VariantBox(joint), VariantBox(target_rotation)])
-	}
-	@discardableResult
-	public func generic_6dof_joint_get_angular_target_rotation(joint: VariantBox) -> Quaternion {
-		let __ret = Host.shared.callMethod(object: ptr, method: "generic_6dof_joint_get_angular_target_rotation", args: [VariantBox(joint)])
-		return __ret.asQuaternion()
-	}
 	public func free_rid(rid: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "free_rid", args: [VariantBox(rid)])
 	}
@@ -10960,7 +10797,6 @@ public class RenderingDevice: Object {
 		case textureSlice2d = 0
 		case textureSliceCubemap = 1
 		case textureSlice3d = 2
-		case textureSlice2dArray = 3
 	}
 	public enum SamplerFilter: Int, Sendable, CaseIterable {
 		case nearest = 0
@@ -11182,7 +11018,6 @@ public class RenderingDevice: Object {
 		case supportsRayQuery = 11
 		case supportsRaytracingPipeline = 12
 		case supportsHdrOutput = 13
-		case supportsRasterizationRateMap = 14
 	}
 	public enum Limit: Int, Sendable, CaseIterable {
 		case maxBoundUniformSets = 0
@@ -11283,8 +11118,8 @@ public class RenderingDevice: Object {
 		return __ret
 	}
 	@discardableResult
-	public func texture_create_shared_from_slice(view: RDTextureView, with_texture: VariantBox, layer: Int, mipmap: Int, mipmaps: Int = 1, slice_type: RenderingDevice.TextureSliceType = .textureSlice2d, layers: Int = 0) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "texture_create_shared_from_slice", args: [VariantBox(view), VariantBox(with_texture), VariantBox(layer), VariantBox(mipmap), VariantBox(mipmaps), VariantBox(slice_type.rawValue), VariantBox(layers)])
+	public func texture_create_shared_from_slice(view: RDTextureView, with_texture: VariantBox, layer: Int, mipmap: Int, mipmaps: Int = 1, slice_type: RenderingDevice.TextureSliceType = .textureSlice2d) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "texture_create_shared_from_slice", args: [VariantBox(view), VariantBox(with_texture), VariantBox(layer), VariantBox(mipmap), VariantBox(mipmaps), VariantBox(slice_type.rawValue)])
 		return __ret
 	}
 	@discardableResult
@@ -11349,11 +11184,6 @@ public class RenderingDevice: Object {
 	public func texture_get_format(texture: VariantBox) -> RDTextureFormat? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "texture_get_format", args: [VariantBox(texture)])
 		return __ret.asObject()
-	}
-	@discardableResult
-	public func texture_get_nearest_supported_samples(format: RDTextureFormat) -> RenderingDevice.TextureSamples {
-		let __ret = Host.shared.callMethod(object: ptr, method: "texture_get_nearest_supported_samples", args: [VariantBox(format)])
-		return __ret.asEnum(RenderingDevice.TextureSamples.self)
 	}
 	@discardableResult
 	public func texture_get_native_handle(texture: VariantBox) -> Int {
@@ -11981,7 +11811,6 @@ public class RenderingServer: Object {
 		case arrayFlagUse8BoneWeights = 134217728
 		case arrayFlagUsesEmptyVertexArray = 268435456
 		case arrayFlagCompressAttributes = 536870912
-		case arrayFlagUseStorageBuffer = 1073741824
 		case arrayFlagFormatVersion2 = 34359738368
 	}
 	public enum PrimitiveType: Int, Sendable, CaseIterable {
@@ -12040,8 +11869,7 @@ public class RenderingServer: Object {
 		case shadowBlur = 18
 		case transmittanceBias = 19
 		case intensity = 20
-		case contactShadowBlur = 21
-		case max = 22
+		case max = 21
 	}
 	public enum LightBakeMode: Int, Sendable, CaseIterable {
 		case lightBakeDisabled = 0
@@ -12642,9 +12470,6 @@ public class RenderingServer: Object {
 	public func texture_replace(texture: VariantBox, by_texture: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "texture_replace", args: [VariantBox(texture), VariantBox(by_texture)])
 	}
-	public func texture_replace_compatible(texture: VariantBox, by_texture: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "texture_replace_compatible", args: [VariantBox(texture), VariantBox(by_texture)])
-	}
 	public func texture_set_size_override(texture: VariantBox, width: Int, height: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "texture_set_size_override", args: [VariantBox(texture), VariantBox(width), VariantBox(height)])
 	}
@@ -12851,26 +12676,6 @@ public class RenderingServer: Object {
 	public func mesh_surface_update_index_region(mesh: VariantBox, surface: Int, offset: Int, data: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "mesh_surface_update_index_region", args: [VariantBox(mesh), VariantBox(surface), VariantBox(offset), VariantBox(data)])
 	}
-	@discardableResult
-	public func mesh_surface_get_vertex_buffer_rd_rid(mesh: VariantBox, surface: Int) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "mesh_surface_get_vertex_buffer_rd_rid", args: [VariantBox(mesh), VariantBox(surface)])
-		return __ret
-	}
-	@discardableResult
-	public func mesh_surface_get_attribute_buffer_rd_rid(mesh: VariantBox, surface: Int) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "mesh_surface_get_attribute_buffer_rd_rid", args: [VariantBox(mesh), VariantBox(surface)])
-		return __ret
-	}
-	@discardableResult
-	public func mesh_surface_get_skin_buffer_rd_rid(mesh: VariantBox, surface: Int) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "mesh_surface_get_skin_buffer_rd_rid", args: [VariantBox(mesh), VariantBox(surface)])
-		return __ret
-	}
-	@discardableResult
-	public func mesh_surface_get_index_buffer_rd_rid(mesh: VariantBox, surface: Int) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "mesh_surface_get_index_buffer_rd_rid", args: [VariantBox(mesh), VariantBox(surface)])
-		return __ret
-	}
 	public func mesh_set_shadow_mesh(mesh: VariantBox, shadow_mesh: VariantBox) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "mesh_set_shadow_mesh", args: [VariantBox(mesh), VariantBox(shadow_mesh)])
 	}
@@ -13065,9 +12870,6 @@ public class RenderingServer: Object {
 	}
 	public func light_set_max_sdfgi_cascade(light: VariantBox, cascade: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "light_set_max_sdfgi_cascade", args: [VariantBox(light), VariantBox(cascade)])
-	}
-	public func light_set_allow_contact_shadows(light: VariantBox, enable: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "light_set_allow_contact_shadows", args: [VariantBox(light), VariantBox(enable)])
 	}
 	public func light_omni_set_shadow_mode(light: VariantBox, mode: RenderingServer.LightOmniShadowMode) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "light_omni_set_shadow_mode", args: [VariantBox(light), VariantBox(mode.rawValue)])
@@ -13504,9 +13306,6 @@ public class RenderingServer: Object {
 	}
 	public func camera_set_frustum(camera: VariantBox, size: Double, offset: Vector2, z_near: Double, z_far: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "camera_set_frustum", args: [VariantBox(camera), VariantBox(size), VariantBox(offset), VariantBox(z_near), VariantBox(z_far)])
-	}
-	public func camera_set_xr_projections(camera: VariantBox, projections: VariantBox, offsets: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "camera_set_xr_projections", args: [VariantBox(camera), VariantBox(projections), VariantBox(offsets)])
 	}
 	public func camera_set_transform(camera: VariantBox, transform: Transform3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "camera_set_transform", args: [VariantBox(camera), VariantBox(transform)])
@@ -14571,11 +14370,6 @@ public class ResourceLoader: Object {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func get_resource_type(path: String) -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_resource_type", args: [VariantBox(path)])
-		return __ret.asString()
-	}
-	@discardableResult
 	public func list_directory(directory_path: String) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "list_directory", args: [VariantBox(directory_path)])
 		return __ret
@@ -14790,64 +14584,6 @@ public class TextServerManager: Object {
 }
 
 @MainActor
-public class TextureStreaming: Object {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("TextureStreaming") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class TextureStreaming")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func get_min_lod_override() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_min_lod_override", args: [])
-		return __ret.asInt()
-	}
-	public func set_min_lod_override(min_lod: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_min_lod_override", args: [VariantBox(min_lod)])
-	}
-	@discardableResult
-	public func get_max_lod_override() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_lod_override", args: [])
-		return __ret.asInt()
-	}
-	public func set_max_lod_override(max_lod: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_max_lod_override", args: [VariantBox(max_lod)])
-	}
-	@discardableResult
-	public func get_memory_budget_mb_override() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_memory_budget_mb_override", args: [])
-		return __ret.asInt()
-	}
-	public func set_memory_budget_mb_override(mb: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_memory_budget_mb_override", args: [VariantBox(mb)])
-	}
-	@discardableResult
-	public func get_memory_budget_bytes_used() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_memory_budget_bytes_used", args: [])
-		return __ret.asInt()
-	}
-	public func flush_texture_streaming() {
-		let __ret = Host.shared.callMethod(object: ptr, method: "flush_texture_streaming", args: [])
-	}
-	public var min_lod_override: Int {
-		get { Host.shared.getProperty(object: ptr, name: "min_lod_override").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "min_lod_override", value: VariantBox(newValue)) }
-	}
-	public var max_lod_override: Int {
-		get { Host.shared.getProperty(object: ptr, name: "max_lod_override").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "max_lod_override", value: VariantBox(newValue)) }
-	}
-	public var memory_budget_mb_override: Int {
-		get { Host.shared.getProperty(object: ptr, name: "memory_budget_mb_override").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "memory_budget_mb_override", value: VariantBox(newValue)) }
-	}
-	public func emit_flush_completed() {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("flush_completed")])
-	}
-}
-
-@MainActor
 public class ThemeDB: Object {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public override init() {
@@ -14906,14 +14642,6 @@ public class ThemeDB: Object {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_fallback_stylebox", args: [])
 		return __ret.asObject()
 	}
-	public func set_fallback_sound(audio: AudioStream) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_fallback_sound", args: [VariantBox(audio)])
-	}
-	@discardableResult
-	public func get_fallback_sound() -> AudioStream? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_fallback_sound", args: [])
-		return __ret.asObject()
-	}
 	public var fallback_base_scale: Double {
 		get { Host.shared.getProperty(object: ptr, name: "fallback_base_scale").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "fallback_base_scale", value: VariantBox(newValue)) }
@@ -14933,10 +14661,6 @@ public class ThemeDB: Object {
 	public var fallback_stylebox: StyleBox? {
 		get { Host.shared.getProperty(object: ptr, name: "fallback_stylebox").asObject() }
 		set { Host.shared.setProperty(object: ptr, name: "fallback_stylebox", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
-	}
-	public var fallback_sound: AudioStream? {
-		get { Host.shared.getProperty(object: ptr, name: "fallback_sound").asObject() }
-		set { Host.shared.setProperty(object: ptr, name: "fallback_sound", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
 	}
 	public func emit_fallback_changed() {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("fallback_changed")])
@@ -16256,7 +15980,7 @@ public class XRServer: Object {
 		super.init(ptr: raw)
 	}
 	public enum TrackerType: Int, Sendable, CaseIterable {
-		case trackerCamera = 1
+		case trackerHead = 1
 		case trackerController = 2
 		case trackerBasestation = 4
 		case trackerAnchor = 8
@@ -16353,16 +16077,6 @@ public class XRServer: Object {
 	public func get_tracker(tracker_name: String) -> XRTracker? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tracker", args: [VariantBox(tracker_name)])
 		return __ret.asObject()
-	}
-	@discardableResult
-	public func get_camera_projections(tracker_name: String, aspect: Double, near: Double, far: Double) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_camera_projections", args: [VariantBox(tracker_name), VariantBox(aspect), VariantBox(near), VariantBox(far)])
-		return __ret
-	}
-	@discardableResult
-	public func get_camera_offsets(tracker_name: String) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_camera_offsets", args: [VariantBox(tracker_name)])
-		return __ret
 	}
 	@discardableResult
 	public func get_primary_interface() -> XRInterface? {
@@ -19126,9 +18840,6 @@ public class EditorExportPlugin: RefCounted {
 	public func add_apple_embedded_platform_cpp_code(code: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_apple_embedded_platform_cpp_code", args: [VariantBox(code)])
 	}
-	public func add_apple_embedded_platform_spm_package(url: String, version: String, products: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_apple_embedded_platform_spm_package", args: [VariantBox(url), VariantBox(version), VariantBox(products)])
-	}
 	public func add_ios_project_static_lib(path: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_ios_project_static_lib", args: [VariantBox(path)])
 	}
@@ -19309,11 +19020,6 @@ public class EditorExportPreset: RefCounted {
 	public func get_encryption_key() -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_encryption_key", args: [])
 		return __ret.asString()
-	}
-	@discardableResult
-	public func resolve_encryption_key() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "resolve_encryption_key", args: [])
-		return __ret
 	}
 	@discardableResult
 	public func get_script_export_mode() -> EditorExportPreset.ScriptExportMode {
@@ -19639,6 +19345,18 @@ public class EditorPlugin: Node {
 	public func remove_import_plugin(importer: EditorImportPlugin) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "remove_import_plugin", args: [VariantBox(importer)])
 	}
+	public func add_scene_format_importer_plugin(scene_format_importer: EditorSceneFormatImporter, first_priority: Bool = false) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_scene_format_importer_plugin", args: [VariantBox(scene_format_importer), VariantBox(first_priority)])
+	}
+	public func remove_scene_format_importer_plugin(scene_format_importer: EditorSceneFormatImporter) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "remove_scene_format_importer_plugin", args: [VariantBox(scene_format_importer)])
+	}
+	public func add_scene_post_import_plugin(scene_import_plugin: EditorScenePostImportPlugin, first_priority: Bool = false) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_scene_post_import_plugin", args: [VariantBox(scene_import_plugin), VariantBox(first_priority)])
+	}
+	public func remove_scene_post_import_plugin(scene_import_plugin: EditorScenePostImportPlugin) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "remove_scene_post_import_plugin", args: [VariantBox(scene_import_plugin)])
+	}
 	public func add_export_plugin(plugin: EditorExportPlugin) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_export_plugin", args: [VariantBox(plugin)])
 	}
@@ -19650,6 +19368,12 @@ public class EditorPlugin: Node {
 	}
 	public func remove_export_platform(platform: EditorExportPlatform) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "remove_export_platform", args: [VariantBox(platform)])
+	}
+	public func add_node_3d_gizmo_plugin(plugin: EditorNode3DGizmoPlugin) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "add_node_3d_gizmo_plugin", args: [VariantBox(plugin)])
+	}
+	public func remove_node_3d_gizmo_plugin(plugin: EditorNode3DGizmoPlugin) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "remove_node_3d_gizmo_plugin", args: [VariantBox(plugin)])
 	}
 	public func add_inspector_plugin(plugin: EditorInspectorPlugin) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_inspector_plugin", args: [VariantBox(plugin)])
@@ -19674,24 +19398,6 @@ public class EditorPlugin: Node {
 	}
 	public func remove_context_menu_plugin(plugin: EditorContextMenuPlugin) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "remove_context_menu_plugin", args: [VariantBox(plugin)])
-	}
-	public func add_node_3d_gizmo_plugin(plugin: EditorNode3DGizmoPlugin) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_node_3d_gizmo_plugin", args: [VariantBox(plugin)])
-	}
-	public func remove_node_3d_gizmo_plugin(plugin: EditorNode3DGizmoPlugin) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "remove_node_3d_gizmo_plugin", args: [VariantBox(plugin)])
-	}
-	public func add_scene_format_importer_plugin(scene_format_importer: EditorSceneFormatImporter, first_priority: Bool = false) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_scene_format_importer_plugin", args: [VariantBox(scene_format_importer), VariantBox(first_priority)])
-	}
-	public func remove_scene_format_importer_plugin(scene_format_importer: EditorSceneFormatImporter) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "remove_scene_format_importer_plugin", args: [VariantBox(scene_format_importer)])
-	}
-	public func add_scene_post_import_plugin(scene_import_plugin: EditorScenePostImportPlugin, first_priority: Bool = false) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_scene_post_import_plugin", args: [VariantBox(scene_import_plugin), VariantBox(first_priority)])
-	}
-	public func remove_scene_post_import_plugin(scene_import_plugin: EditorScenePostImportPlugin) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "remove_scene_post_import_plugin", args: [VariantBox(scene_import_plugin)])
 	}
 	@discardableResult
 	public func get_editor_interface() -> EditorInterface? {
@@ -20349,175 +20055,6 @@ public class FileAccess: RefCounted {
 }
 
 @MainActor
-public class FuzzySearch: RefCounted {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("FuzzySearch") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class FuzzySearch")
-		}
-		super.init(ptr: raw)
-	}
-	public func set_start_offset(start_offset: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_start_offset", args: [VariantBox(start_offset)])
-	}
-	@discardableResult
-	public func get_start_offset() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_start_offset", args: [])
-		return __ret.asInt()
-	}
-	public func set_max_results(max_results: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_max_results", args: [VariantBox(max_results)])
-	}
-	@discardableResult
-	public func get_max_results() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_results", args: [])
-		return __ret.asInt()
-	}
-	public func set_max_misses(max_misses: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_max_misses", args: [VariantBox(max_misses)])
-	}
-	@discardableResult
-	public func get_max_misses() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_misses", args: [])
-		return __ret.asInt()
-	}
-	public func set_use_exact_tokens(use_exact_tokens: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_use_exact_tokens", args: [VariantBox(use_exact_tokens)])
-	}
-	@discardableResult
-	public func get_use_exact_tokens() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_use_exact_tokens", args: [])
-		return __ret.asBool()
-	}
-	public func set_case_sensitive(case_sensitive: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_case_sensitive", args: [VariantBox(case_sensitive)])
-	}
-	@discardableResult
-	public func get_case_sensitive() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_case_sensitive", args: [])
-		return __ret.asBool()
-	}
-	public func set_filter_low_scores(filter_low_scores: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_filter_low_scores", args: [VariantBox(filter_low_scores)])
-	}
-	@discardableResult
-	public func get_filter_low_scores() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_filter_low_scores", args: [])
-		return __ret.asBool()
-	}
-	public func set_filter_factor(filter_factor: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_filter_factor", args: [VariantBox(filter_factor)])
-	}
-	@discardableResult
-	public func get_filter_factor() -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_filter_factor", args: [])
-		return __ret.asDouble()
-	}
-	public func set_filter_cutoff(filter_cutoff: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_filter_cutoff", args: [VariantBox(filter_cutoff)])
-	}
-	@discardableResult
-	public func get_filter_cutoff() -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_filter_cutoff", args: [])
-		return __ret.asDouble()
-	}
-	@discardableResult
-	public func search(query: String, target: String) -> FuzzySearchMatch? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "search", args: [VariantBox(query), VariantBox(target)])
-		return __ret.asObject()
-	}
-	@discardableResult
-	public func search_all(query: String, targets: VariantBox) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "search_all", args: [VariantBox(query), VariantBox(targets)])
-		return __ret
-	}
-	public var start_offset: Int {
-		get { Host.shared.getProperty(object: ptr, name: "start_offset").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "start_offset", value: VariantBox(newValue)) }
-	}
-	public var max_results: Int {
-		get { Host.shared.getProperty(object: ptr, name: "max_results").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "max_results", value: VariantBox(newValue)) }
-	}
-	public var max_misses: Int {
-		get { Host.shared.getProperty(object: ptr, name: "max_misses").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "max_misses", value: VariantBox(newValue)) }
-	}
-	public var use_exact_tokens: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "use_exact_tokens").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "use_exact_tokens", value: VariantBox(newValue)) }
-	}
-	public var case_sensitive: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "case_sensitive").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "case_sensitive", value: VariantBox(newValue)) }
-	}
-	public var filter_low_scores: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "filter_low_scores").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "filter_low_scores", value: VariantBox(newValue)) }
-	}
-	public var filter_factor: Double {
-		get { Host.shared.getProperty(object: ptr, name: "filter_factor").asDouble() }
-		set { Host.shared.setProperty(object: ptr, name: "filter_factor", value: VariantBox(newValue)) }
-	}
-	public var filter_cutoff: Double {
-		get { Host.shared.getProperty(object: ptr, name: "filter_cutoff").asDouble() }
-		set { Host.shared.setProperty(object: ptr, name: "filter_cutoff", value: VariantBox(newValue)) }
-	}
-}
-
-@MainActor
-public class FuzzySearchMatch: RefCounted {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("FuzzySearchMatch") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class FuzzySearchMatch")
-		}
-		super.init(ptr: raw)
-	}
-	public func set_target(target: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_target", args: [VariantBox(target)])
-	}
-	@discardableResult
-	public func get_target() -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_target", args: [])
-		return __ret.asString()
-	}
-	public func set_score(score: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_score", args: [VariantBox(score)])
-	}
-	@discardableResult
-	public func get_score() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_score", args: [])
-		return __ret.asInt()
-	}
-	public func set_original_index(original_index: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_original_index", args: [VariantBox(original_index)])
-	}
-	@discardableResult
-	public func get_original_index() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_original_index", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_matched_substrings() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_matched_substrings", args: [])
-		return __ret
-	}
-	public var target: String {
-		get { Host.shared.getProperty(object: ptr, name: "target").asString() }
-		set { Host.shared.setProperty(object: ptr, name: "target", value: VariantBox(newValue)) }
-	}
-	public var score: Int {
-		get { Host.shared.getProperty(object: ptr, name: "score").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "score", value: VariantBox(newValue)) }
-	}
-	public var original_index: Int {
-		get { Host.shared.getProperty(object: ptr, name: "original_index").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "original_index", value: VariantBox(newValue)) }
-	}
-}
-
-@MainActor
 public class GDScriptLanguageProtocol: JSONRPC {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public override init() {
@@ -20630,8 +20167,23 @@ public class GDScriptTextDocument: RefCounted {
 		return __ret
 	}
 	@discardableResult
+	public func foldingRange(params: VariantBox) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "foldingRange", args: [VariantBox(params)])
+		return __ret
+	}
+	@discardableResult
+	public func codeLens(params: VariantBox) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "codeLens", args: [VariantBox(params)])
+		return __ret
+	}
+	@discardableResult
 	public func documentLink(params: VariantBox) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "documentLink", args: [VariantBox(params)])
+		return __ret
+	}
+	@discardableResult
+	public func colorPresentation(params: VariantBox) -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "colorPresentation", args: [VariantBox(params)])
 		return __ret
 	}
 	@discardableResult
@@ -21141,22 +20693,6 @@ public class HTTPRequest: Node {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_download_file", args: [])
 		return __ret.asString()
 	}
-	public func set_keep_partial_download(enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_keep_partial_download", args: [VariantBox(enabled)])
-	}
-	@discardableResult
-	public func is_keeping_partial_download() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_keeping_partial_download", args: [])
-		return __ret.asBool()
-	}
-	public func set_append_to_download_file(enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_append_to_download_file", args: [VariantBox(enabled)])
-	}
-	@discardableResult
-	public func is_appending_to_download_file() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_appending_to_download_file", args: [])
-		return __ret.asBool()
-	}
 	@discardableResult
 	public func get_downloaded_bytes() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_downloaded_bytes", args: [])
@@ -21196,14 +20732,6 @@ public class HTTPRequest: Node {
 	public var download_chunk_size: Int {
 		get { Host.shared.getProperty(object: ptr, name: "download_chunk_size").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "download_chunk_size", value: VariantBox(newValue)) }
-	}
-	public var keep_partial_download: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "keep_partial_download").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "keep_partial_download", value: VariantBox(newValue)) }
-	}
-	public var append_to_download_file: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "append_to_download_file").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "append_to_download_file", value: VariantBox(newValue)) }
 	}
 	public var use_threads: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "use_threads").asBool() }
@@ -24287,11 +23815,6 @@ public class OpenXRAPIExtension: RefCounted {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func get_primary_view_count() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_primary_view_count", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
 	public func get_view_configuration() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_view_configuration", args: [])
 		return __ret.asInt()
@@ -24775,116 +24298,6 @@ public class OpenXRSpatialComponentData: RefCounted {
 }
 
 @MainActor
-public class OpenXRSpatialContainerExtension: OpenXRExtensionWrapper {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("OpenXRSpatialContainerExtension") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialContainerExtension")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func is_enabled() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_enabled", args: [])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func is_spatial_container_active() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_spatial_container_active", args: [])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func get_supported_bounds_modes() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_supported_bounds_modes", args: [])
-		return __ret
-	}
-	@discardableResult
-	public func get_spatial_container_state() -> OpenXRSpatialContainerState? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_spatial_container_state", args: [])
-		return __ret.asObject()
-	}
-	@discardableResult
-	public func get_spatial_container_bounds() -> Vector3 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_spatial_container_bounds", args: [])
-		return __ret.asVector3()
-	}
-	@discardableResult
-	public func request_spatial_container_bounds_mode(bounds_mode: OpenXRSpatialContainerState.BoundsMode) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "request_spatial_container_bounds_mode", args: [VariantBox(bounds_mode.rawValue)])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func request_spatial_container_visible(visible: Bool) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "request_spatial_container_visible", args: [VariantBox(visible)])
-		return __ret.asBool()
-	}
-	public func emit_spatial_container_bounds_changed(spatial_container_rid: VariantBox, spatial_container_infinite_bounds: Bool, spatial_container_bounds_mode: Int, spatial_container_bounds: Vector3) {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("spatial_container_bounds_changed"), VariantBox(spatial_container_rid), VariantBox(spatial_container_infinite_bounds), VariantBox(spatial_container_bounds_mode), VariantBox(spatial_container_bounds)])
-	}
-	public func emit_spatial_container_bounds_mode_request_denied(spatial_container_rid: VariantBox) {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("spatial_container_bounds_mode_request_denied"), VariantBox(spatial_container_rid)])
-	}
-	public func emit_spatial_container_closed(spatial_container_rid: VariantBox) {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("spatial_container_closed"), VariantBox(spatial_container_rid)])
-	}
-	public func emit_spatial_container_interactable_changed(spatial_container_rid: VariantBox, spatial_container_interactable: Bool) {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("spatial_container_interactable_changed"), VariantBox(spatial_container_rid), VariantBox(spatial_container_interactable)])
-	}
-	public func emit_spatial_container_visible_changed(spatial_container_rid: VariantBox, spatial_container_visible: Bool) {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("spatial_container_visible_changed"), VariantBox(spatial_container_rid), VariantBox(spatial_container_visible)])
-	}
-	public func emit_spatial_container_visible_request_denied(spatial_container_rid: VariantBox) {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("spatial_container_visible_request_denied"), VariantBox(spatial_container_rid)])
-	}
-}
-
-@MainActor
-public class OpenXRSpatialContainerSelfRenderingExtension: OpenXRExtensionWrapper {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("OpenXRSpatialContainerSelfRenderingExtension") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialContainerSelfRenderingExtension")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func is_enabled() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_enabled", args: [])
-		return __ret.asBool()
-	}
-}
-
-@MainActor
-public class OpenXRSpatialContainerState: RefCounted {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("OpenXRSpatialContainerState") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRSpatialContainerState")
-		}
-		super.init(ptr: raw)
-	}
-	public enum BoundsMode: Int, Sendable, CaseIterable {
-		case bounded = 0
-		case immersive = 1
-	}
-	@discardableResult
-	public func get_bounds_mode() -> OpenXRSpatialContainerState.BoundsMode {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_bounds_mode", args: [])
-		return __ret.asEnum(OpenXRSpatialContainerState.BoundsMode.self)
-	}
-	@discardableResult
-	public func is_interactable() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_interactable", args: [])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func is_visible() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_visible", args: [])
-		return __ret.asBool()
-	}
-}
-
-@MainActor
 public class OpenXRSpatialEntityExtension: OpenXRExtensionWrapper {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public override init() {
@@ -24914,14 +24327,6 @@ public class OpenXRSpatialEntityExtension: OpenXRExtensionWrapper {
 		case anchor = 1000762000
 		case persistence = 1000763000
 	}
-	public enum TrackingState: Int, Sendable, CaseIterable {
-		case trackingUnsupportedCapability = -3
-		case trackingNoPermission = -2
-		case trackingSetupFailed = -1
-		case trackingNotActive = 0
-		case trackingSettingUp = 1
-		case trackingEnabled = 2
-	}
 	@discardableResult
 	public func supports_capability(capability: OpenXRSpatialEntityExtension.Capability) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "supports_capability", args: [VariantBox(capability.rawValue)])
@@ -24933,8 +24338,8 @@ public class OpenXRSpatialEntityExtension: OpenXRExtensionWrapper {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func create_spatial_context(capability_configurations: VariantBox, next: OpenXRStructureBase, user_callback: VariantBox, failed_callback: VariantBox) -> OpenXRFutureResult? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "create_spatial_context", args: [VariantBox(capability_configurations), VariantBox(next), VariantBox(user_callback), VariantBox(failed_callback)])
+	public func create_spatial_context(capability_configurations: VariantBox, next: OpenXRStructureBase, user_callback: VariantBox) -> OpenXRFutureResult? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "create_spatial_context", args: [VariantBox(capability_configurations), VariantBox(next), VariantBox(user_callback)])
 		return __ret.asObject()
 	}
 	@discardableResult
@@ -25060,12 +24465,6 @@ public class OpenXRSpatialMarkerTrackingCapability: OpenXRExtensionWrapper {
 		}
 		super.init(ptr: raw)
 	}
-	public enum MarkerTypeFlags: Int, Sendable, CaseIterable {
-		case markerQrCode = 1
-		case markerMicroQrCode = 2
-		case markerAruco = 4
-		case markerAprilTag = 8
-	}
 	@discardableResult
 	public func is_qrcode_supported() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_qrcode_supported", args: [])
@@ -25094,19 +24493,6 @@ public class OpenXRSpatialMarkerTrackingCapability: OpenXRExtensionWrapper {
 	public func do_entity_update(spatial_context: VariantBox, component_data: VariantBox, next_snapshot_create: OpenXRStructureBase, next_snapshot_query: OpenXRStructureBase) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "do_entity_update", args: [VariantBox(spatial_context), VariantBox(component_data), VariantBox(next_snapshot_create), VariantBox(next_snapshot_query)])
 	}
-	@discardableResult
-	public func get_built_in_tracking_state() -> OpenXRSpatialEntityExtension.TrackingState {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_built_in_tracking_state", args: [])
-		return __ret.asEnum(OpenXRSpatialEntityExtension.TrackingState.self)
-	}
-	@discardableResult
-	public func start_built_in_tracking(marker_types: Int) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "start_built_in_tracking", args: [VariantBox(marker_types)])
-		return __ret.asBool()
-	}
-	public func stop_built_in_tracking(clear_trackers: Bool = true) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "stop_built_in_tracking", args: [VariantBox(clear_trackers)])
-	}
 }
 
 @MainActor
@@ -25128,19 +24514,6 @@ public class OpenXRSpatialPlaneTrackingCapability: OpenXRExtensionWrapper {
 		let __ret = Host.shared.callMethod(object: ptr, method: "start_entity_discovery", args: [VariantBox(spatial_context), VariantBox(component_data), VariantBox(next_snapshot_create), VariantBox(next_snapshot_query), VariantBox(user_callback)])
 		return __ret.asObject()
 	}
-	@discardableResult
-	public func get_built_in_tracking_state() -> OpenXRSpatialEntityExtension.TrackingState {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_built_in_tracking_state", args: [])
-		return __ret.asEnum(OpenXRSpatialEntityExtension.TrackingState.self)
-	}
-	@discardableResult
-	public func start_built_in_tracking() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "start_built_in_tracking", args: [])
-		return __ret.asBool()
-	}
-	public func stop_built_in_tracking(clear_trackers: Bool = true) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "stop_built_in_tracking", args: [VariantBox(clear_trackers)])
-	}
 }
 
 @MainActor
@@ -25151,11 +24524,6 @@ public class OpenXRStructureBase: RefCounted {
 			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRStructureBase")
 		}
 		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func get_header(next: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_header", args: [VariantBox(next)])
-		return __ret.asInt()
 	}
 	@discardableResult
 	public func get_structure_type() -> Int {
@@ -25282,140 +24650,6 @@ public class PacketPeer: RefCounted {
 }
 
 @MainActor
-public class PhysicsCastMotionResult2D: RefCounted {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("PhysicsCastMotionResult2D") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsCastMotionResult2D")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func get_safe_fraction() -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_safe_fraction", args: [])
-		return __ret.asDouble()
-	}
-	@discardableResult
-	public func get_unsafe_fraction() -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_unsafe_fraction", args: [])
-		return __ret.asDouble()
-	}
-	public var safe_fraction: Double {
-		get { Host.shared.getProperty(object: ptr, name: "safe_fraction").asDouble() }
-		set { Host.shared.setProperty(object: ptr, name: "safe_fraction", value: VariantBox(newValue)) }
-	}
-	public var unsafe_fraction: Double {
-		get { Host.shared.getProperty(object: ptr, name: "unsafe_fraction").asDouble() }
-		set { Host.shared.setProperty(object: ptr, name: "unsafe_fraction", value: VariantBox(newValue)) }
-	}
-}
-
-@MainActor
-public class PhysicsCastMotionResult3D: RefCounted {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("PhysicsCastMotionResult3D") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsCastMotionResult3D")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func get_safe_fraction() -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_safe_fraction", args: [])
-		return __ret.asDouble()
-	}
-	@discardableResult
-	public func get_unsafe_fraction() -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_unsafe_fraction", args: [])
-		return __ret.asDouble()
-	}
-	public var safe_fraction: Double {
-		get { Host.shared.getProperty(object: ptr, name: "safe_fraction").asDouble() }
-		set { Host.shared.setProperty(object: ptr, name: "safe_fraction", value: VariantBox(newValue)) }
-	}
-	public var unsafe_fraction: Double {
-		get { Host.shared.getProperty(object: ptr, name: "unsafe_fraction").asDouble() }
-		set { Host.shared.setProperty(object: ptr, name: "unsafe_fraction", value: VariantBox(newValue)) }
-	}
-}
-
-@MainActor
-public class PhysicsCollideShapeResult2D: RefCounted {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("PhysicsCollideShapeResult2D") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsCollideShapeResult2D")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func get_max_collisions() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_collisions", args: [])
-		return __ret.asInt()
-	}
-	public func set_max_collisions(max_collisions: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_max_collisions", args: [VariantBox(max_collisions)])
-	}
-	@discardableResult
-	public func get_collision_count() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collision_count", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_point_on_queried_shape(collision_index: Int) -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_point_on_queried_shape", args: [VariantBox(collision_index)])
-		return __ret.asVector2()
-	}
-	@discardableResult
-	public func get_point_on_colliding_shape(collision_index: Int) -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_point_on_colliding_shape", args: [VariantBox(collision_index)])
-		return __ret.asVector2()
-	}
-	public var max_collisions: Int {
-		get { Host.shared.getProperty(object: ptr, name: "max_collisions").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "max_collisions", value: VariantBox(newValue)) }
-	}
-}
-
-@MainActor
-public class PhysicsCollideShapeResult3D: RefCounted {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("PhysicsCollideShapeResult3D") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsCollideShapeResult3D")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func get_max_collisions() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_collisions", args: [])
-		return __ret.asInt()
-	}
-	public func set_max_collisions(max_collisions: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_max_collisions", args: [VariantBox(max_collisions)])
-	}
-	@discardableResult
-	public func get_collision_count() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collision_count", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_point_on_queried_shape(collision_index: Int) -> Vector3 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_point_on_queried_shape", args: [VariantBox(collision_index)])
-		return __ret.asVector3()
-	}
-	@discardableResult
-	public func get_point_on_colliding_shape(collision_index: Int) -> Vector3 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_point_on_colliding_shape", args: [VariantBox(collision_index)])
-		return __ret.asVector3()
-	}
-	public var max_collisions: Int {
-		get { Host.shared.getProperty(object: ptr, name: "max_collisions").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "max_collisions", value: VariantBox(newValue)) }
-	}
-}
-
-@MainActor
 public class PhysicsDirectBodyState2DExtension: PhysicsDirectBodyState2D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public override init() {
@@ -25466,467 +24700,6 @@ public class PhysicsDirectSpaceState3DExtension: PhysicsDirectSpaceState3D {
 	public func is_body_excluded_from_query(body: VariantBox) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_body_excluded_from_query", args: [VariantBox(body)])
 		return __ret.asBool()
-	}
-}
-
-@MainActor
-public class PhysicsGetRestInfoResult2D: RefCounted {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("PhysicsGetRestInfoResult2D") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsGetRestInfoResult2D")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func get_point() -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_point", args: [])
-		return __ret.asVector2()
-	}
-	@discardableResult
-	public func get_normal() -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_normal", args: [])
-		return __ret.asVector2()
-	}
-	@discardableResult
-	public func get_collider_rid() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_rid", args: [])
-		return __ret
-	}
-	@discardableResult
-	public func get_collider_id() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_id", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_collider_shape() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_shape", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_collider_velocity() -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_velocity", args: [])
-		return __ret.asVector2()
-	}
-	public var point: Vector2 {
-		get { Host.shared.getProperty(object: ptr, name: "point").asVector2() }
-		set { Host.shared.setProperty(object: ptr, name: "point", value: VariantBox(newValue)) }
-	}
-	public var normal: Vector2 {
-		get { Host.shared.getProperty(object: ptr, name: "normal").asVector2() }
-		set { Host.shared.setProperty(object: ptr, name: "normal", value: VariantBox(newValue)) }
-	}
-	public var collider_rid: VariantBox {
-		get { Host.shared.getProperty(object: ptr, name: "collider_rid") }
-		set { Host.shared.setProperty(object: ptr, name: "collider_rid", value: VariantBox(newValue)) }
-	}
-	public var collider_id: Int {
-		get { Host.shared.getProperty(object: ptr, name: "collider_id").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "collider_id", value: VariantBox(newValue)) }
-	}
-	public var collider_shape: Int {
-		get { Host.shared.getProperty(object: ptr, name: "collider_shape").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "collider_shape", value: VariantBox(newValue)) }
-	}
-	public var collider_velocity: Vector2 {
-		get { Host.shared.getProperty(object: ptr, name: "collider_velocity").asVector2() }
-		set { Host.shared.setProperty(object: ptr, name: "collider_velocity", value: VariantBox(newValue)) }
-	}
-}
-
-@MainActor
-public class PhysicsGetRestInfoResult3D: RefCounted {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("PhysicsGetRestInfoResult3D") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsGetRestInfoResult3D")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func get_point() -> Vector3 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_point", args: [])
-		return __ret.asVector3()
-	}
-	@discardableResult
-	public func get_normal() -> Vector3 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_normal", args: [])
-		return __ret.asVector3()
-	}
-	@discardableResult
-	public func get_collider_rid() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_rid", args: [])
-		return __ret
-	}
-	@discardableResult
-	public func get_collider_id() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_id", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_collider_shape() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_shape", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_collider_velocity() -> Vector3 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_velocity", args: [])
-		return __ret.asVector3()
-	}
-	public var point: Vector3 {
-		get { Host.shared.getProperty(object: ptr, name: "point").asVector3() }
-		set { Host.shared.setProperty(object: ptr, name: "point", value: VariantBox(newValue)) }
-	}
-	public var normal: Vector3 {
-		get { Host.shared.getProperty(object: ptr, name: "normal").asVector3() }
-		set { Host.shared.setProperty(object: ptr, name: "normal", value: VariantBox(newValue)) }
-	}
-	public var collider_rid: VariantBox {
-		get { Host.shared.getProperty(object: ptr, name: "collider_rid") }
-		set { Host.shared.setProperty(object: ptr, name: "collider_rid", value: VariantBox(newValue)) }
-	}
-	public var collider_id: Int {
-		get { Host.shared.getProperty(object: ptr, name: "collider_id").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "collider_id", value: VariantBox(newValue)) }
-	}
-	public var collider_shape: Int {
-		get { Host.shared.getProperty(object: ptr, name: "collider_shape").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "collider_shape", value: VariantBox(newValue)) }
-	}
-	public var collider_velocity: Vector3 {
-		get { Host.shared.getProperty(object: ptr, name: "collider_velocity").asVector3() }
-		set { Host.shared.setProperty(object: ptr, name: "collider_velocity", value: VariantBox(newValue)) }
-	}
-}
-
-@MainActor
-public class PhysicsIntersectPointResult2D: RefCounted {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("PhysicsIntersectPointResult2D") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsIntersectPointResult2D")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func get_max_intersections() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_intersections", args: [])
-		return __ret.asInt()
-	}
-	public func set_max_intersections(max_intersections: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_max_intersections", args: [VariantBox(max_intersections)])
-	}
-	@discardableResult
-	public func get_intersection_count() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_intersection_count", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_collider_id(intersection_index: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_id", args: [VariantBox(intersection_index)])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_collider_rid(intersection_index: Int) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_rid", args: [VariantBox(intersection_index)])
-		return __ret
-	}
-	@discardableResult
-	public func get_collider(intersection_index: Int) -> GodotObject? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider", args: [VariantBox(intersection_index)])
-		return __ret.asObject()
-	}
-	@discardableResult
-	public func get_collider_shape(intersection_index: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_shape", args: [VariantBox(intersection_index)])
-		return __ret.asInt()
-	}
-	public var max_intersections: Int {
-		get { Host.shared.getProperty(object: ptr, name: "max_intersections").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "max_intersections", value: VariantBox(newValue)) }
-	}
-}
-
-@MainActor
-public class PhysicsIntersectPointResult3D: RefCounted {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("PhysicsIntersectPointResult3D") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsIntersectPointResult3D")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func get_max_intersections() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_intersections", args: [])
-		return __ret.asInt()
-	}
-	public func set_max_intersections(max_intersections: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_max_intersections", args: [VariantBox(max_intersections)])
-	}
-	@discardableResult
-	public func get_intersection_count() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_intersection_count", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_collider_id(intersection_index: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_id", args: [VariantBox(intersection_index)])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_collider_rid(intersection_index: Int) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_rid", args: [VariantBox(intersection_index)])
-		return __ret
-	}
-	@discardableResult
-	public func get_collider(intersection_index: Int) -> GodotObject? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider", args: [VariantBox(intersection_index)])
-		return __ret.asObject()
-	}
-	@discardableResult
-	public func get_collider_shape(intersection_index: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_shape", args: [VariantBox(intersection_index)])
-		return __ret.asInt()
-	}
-	public var max_intersections: Int {
-		get { Host.shared.getProperty(object: ptr, name: "max_intersections").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "max_intersections", value: VariantBox(newValue)) }
-	}
-}
-
-@MainActor
-public class PhysicsIntersectRayResult2D: RefCounted {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("PhysicsIntersectRayResult2D") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsIntersectRayResult2D")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func get_position() -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_position", args: [])
-		return __ret.asVector2()
-	}
-	@discardableResult
-	public func get_normal() -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_normal", args: [])
-		return __ret.asVector2()
-	}
-	@discardableResult
-	public func get_collider_rid() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_rid", args: [])
-		return __ret
-	}
-	@discardableResult
-	public func get_collider_id() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_id", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_collider() -> GodotObject? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider", args: [])
-		return __ret.asObject()
-	}
-	@discardableResult
-	public func get_collider_shape() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_shape", args: [])
-		return __ret.asInt()
-	}
-	public var position: Vector2 {
-		get { Host.shared.getProperty(object: ptr, name: "position").asVector2() }
-		set { Host.shared.setProperty(object: ptr, name: "position", value: VariantBox(newValue)) }
-	}
-	public var normal: Vector2 {
-		get { Host.shared.getProperty(object: ptr, name: "normal").asVector2() }
-		set { Host.shared.setProperty(object: ptr, name: "normal", value: VariantBox(newValue)) }
-	}
-	public var collider_rid: VariantBox {
-		get { Host.shared.getProperty(object: ptr, name: "collider_rid") }
-		set { Host.shared.setProperty(object: ptr, name: "collider_rid", value: VariantBox(newValue)) }
-	}
-	public var collider_id: Int {
-		get { Host.shared.getProperty(object: ptr, name: "collider_id").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "collider_id", value: VariantBox(newValue)) }
-	}
-	public var collider: GodotObject? {
-		get { Host.shared.getProperty(object: ptr, name: "collider").asObject() }
-		set { Host.shared.setProperty(object: ptr, name: "collider", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
-	}
-	public var collider_shape: Int {
-		get { Host.shared.getProperty(object: ptr, name: "collider_shape").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "collider_shape", value: VariantBox(newValue)) }
-	}
-}
-
-@MainActor
-public class PhysicsIntersectRayResult3D: RefCounted {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("PhysicsIntersectRayResult3D") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsIntersectRayResult3D")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func get_position() -> Vector3 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_position", args: [])
-		return __ret.asVector3()
-	}
-	@discardableResult
-	public func get_normal() -> Vector3 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_normal", args: [])
-		return __ret.asVector3()
-	}
-	@discardableResult
-	public func get_collider_rid() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_rid", args: [])
-		return __ret
-	}
-	@discardableResult
-	public func get_collider_id() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_id", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_collider() -> GodotObject? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider", args: [])
-		return __ret.asObject()
-	}
-	@discardableResult
-	public func get_collider_shape() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_shape", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_collider_face_index() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_face_index", args: [])
-		return __ret.asInt()
-	}
-	public var position: Vector3 {
-		get { Host.shared.getProperty(object: ptr, name: "position").asVector3() }
-		set { Host.shared.setProperty(object: ptr, name: "position", value: VariantBox(newValue)) }
-	}
-	public var normal: Vector3 {
-		get { Host.shared.getProperty(object: ptr, name: "normal").asVector3() }
-		set { Host.shared.setProperty(object: ptr, name: "normal", value: VariantBox(newValue)) }
-	}
-	public var collider_rid: VariantBox {
-		get { Host.shared.getProperty(object: ptr, name: "collider_rid") }
-		set { Host.shared.setProperty(object: ptr, name: "collider_rid", value: VariantBox(newValue)) }
-	}
-	public var collider_id: Int {
-		get { Host.shared.getProperty(object: ptr, name: "collider_id").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "collider_id", value: VariantBox(newValue)) }
-	}
-	public var collider: GodotObject? {
-		get { Host.shared.getProperty(object: ptr, name: "collider").asObject() }
-		set { Host.shared.setProperty(object: ptr, name: "collider", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
-	}
-	public var collider_shape: Int {
-		get { Host.shared.getProperty(object: ptr, name: "collider_shape").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "collider_shape", value: VariantBox(newValue)) }
-	}
-	public var collider_face_index: Int {
-		get { Host.shared.getProperty(object: ptr, name: "collider_face_index").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "collider_face_index", value: VariantBox(newValue)) }
-	}
-}
-
-@MainActor
-public class PhysicsIntersectShapeResult2D: RefCounted {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("PhysicsIntersectShapeResult2D") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsIntersectShapeResult2D")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func get_max_intersections() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_intersections", args: [])
-		return __ret.asInt()
-	}
-	public func set_max_intersections(max_intersections: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_max_intersections", args: [VariantBox(max_intersections)])
-	}
-	@discardableResult
-	public func get_intersection_count() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_intersection_count", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_collider_id(intersection_index: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_id", args: [VariantBox(intersection_index)])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_collider_rid(intersection_index: Int) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_rid", args: [VariantBox(intersection_index)])
-		return __ret
-	}
-	@discardableResult
-	public func get_collider(intersection_index: Int) -> GodotObject? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider", args: [VariantBox(intersection_index)])
-		return __ret.asObject()
-	}
-	@discardableResult
-	public func get_collider_shape(intersection_index: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_shape", args: [VariantBox(intersection_index)])
-		return __ret.asInt()
-	}
-	public var max_intersections: Int {
-		get { Host.shared.getProperty(object: ptr, name: "max_intersections").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "max_intersections", value: VariantBox(newValue)) }
-	}
-}
-
-@MainActor
-public class PhysicsIntersectShapeResult3D: RefCounted {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("PhysicsIntersectShapeResult3D") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class PhysicsIntersectShapeResult3D")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func get_max_intersections() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_intersections", args: [])
-		return __ret.asInt()
-	}
-	public func set_max_intersections(max_intersections: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_max_intersections", args: [VariantBox(max_intersections)])
-	}
-	@discardableResult
-	public func get_intersection_count() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_intersection_count", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_collider_id(intersection_index: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_id", args: [VariantBox(intersection_index)])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_collider_rid(intersection_index: Int) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_rid", args: [VariantBox(intersection_index)])
-		return __ret
-	}
-	@discardableResult
-	public func get_collider(intersection_index: Int) -> GodotObject? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider", args: [VariantBox(intersection_index)])
-		return __ret.asObject()
-	}
-	@discardableResult
-	public func get_collider_shape(intersection_index: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_collider_shape", args: [VariantBox(intersection_index)])
-		return __ret.asInt()
-	}
-	public var max_intersections: Int {
-		get { Host.shared.getProperty(object: ptr, name: "max_intersections").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "max_intersections", value: VariantBox(newValue)) }
 	}
 }
 
@@ -31066,11 +29839,6 @@ public class TextServer: RefCounted {
 		return __ret.asString()
 	}
 	@discardableResult
-	public func get_short_name() -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_short_name", args: [])
-		return __ret.asString()
-	}
-	@discardableResult
 	public func get_features() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_features", args: [])
 		return __ret.asInt()
@@ -34176,7 +32944,6 @@ public class XRInterface: RefCounted {
 		case xrVrsTextureFormatUnified = 0
 		case xrVrsTextureFormatFragmentShadingRate = 1
 		case xrVrsTextureFormatFragmentDensityMap = 2
-		case xrVrsTextureFormatRasterizationRateMap = 3
 	}
 	@discardableResult
 	public func get_name() -> String {
@@ -34282,16 +33049,6 @@ public class XRInterface: RefCounted {
 	}
 	public func stop_passthrough() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "stop_passthrough", args: [])
-	}
-	@discardableResult
-	public func get_camera_projections(tracker_name: String, aspect: Double, near: Double, far: Double) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_camera_projections", args: [VariantBox(tracker_name), VariantBox(aspect), VariantBox(near), VariantBox(far)])
-		return __ret
-	}
-	@discardableResult
-	public func get_camera_offsets(tracker_name: String) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_camera_offsets", args: [VariantBox(tracker_name)])
-		return __ret
 	}
 	@discardableResult
 	public func get_transform_for_view(view: Int, cam_transform: Transform3D) -> Transform3D {
@@ -34610,8 +33367,6 @@ public class Animation: Resource {
 		case interpolationCubic = 2
 		case interpolationLinearAngle = 3
 		case interpolationCubicAngle = 4
-		case interpolationMakima = 5
-		case interpolationMakimaAngle = 6
 	}
 	public enum UpdateMode: Int, Sendable, CaseIterable {
 		case updateContinuous = 0
@@ -35175,17 +33930,6 @@ public class AnimationNode: Resource {
 }
 
 @MainActor
-public class AnimationNodeObserver: Resource {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("AnimationNodeObserver") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeObserver")
-		}
-		super.init(ptr: raw)
-	}
-}
-
-@MainActor
 public class AnimationNodeStateMachinePlayback: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public override init() {
@@ -35563,14 +34307,6 @@ public class AnimationPlayer: AnimationMixer {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_movie_quit_on_finish_enabled", args: [])
 		return __ret.asBool()
 	}
-	public func set_clear_cache_on_stop_enabled(enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_clear_cache_on_stop_enabled", args: [VariantBox(enabled)])
-	}
-	@discardableResult
-	public func is_clear_cache_on_stop_enabled() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_clear_cache_on_stop_enabled", args: [])
-		return __ret.asBool()
-	}
 	@discardableResult
 	public func get_current_animation_position() -> Double {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_current_animation_position", args: [])
@@ -35679,10 +34415,6 @@ public class AnimationPlayer: AnimationMixer {
 	public var movie_quit_on_finish: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "movie_quit_on_finish").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "movie_quit_on_finish", value: VariantBox(newValue)) }
-	}
-	public var clear_cache_on_stop: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "clear_cache_on_stop").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "clear_cache_on_stop", value: VariantBox(newValue)) }
 	}
 	public func emit_current_animation_changed(anim_name: String) {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("current_animation_changed"), VariantBox(anim_name)])
@@ -37453,7 +36185,6 @@ public class Control: CanvasItem {
 		case sizeExpandFill = 3
 		case sizeShrinkCenter = 4
 		case sizeShrinkEnd = 8
-		case sizeMaximize = 16
 	}
 	public enum MouseFilter: Int, Sendable, CaseIterable {
 		case stop = 0
@@ -37718,9 +36449,6 @@ public class Control: CanvasItem {
 		let __ret = Host.shared.callMethod(object: ptr, method: "find_valid_focus_neighbor", args: [VariantBox(side.rawValue)])
 		return __ret.asObject()
 	}
-	public func play_theme_sound(stream: AudioStream) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "play_theme_sound", args: [VariantBox(stream)])
-	}
 	public func set_h_size_flags(flags: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_h_size_flags", args: [VariantBox(flags)])
 	}
@@ -37849,9 +36577,6 @@ public class Control: CanvasItem {
 	public func add_theme_constant_override(name: String, constant: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_theme_constant_override", args: [VariantBox(name), VariantBox(constant)])
 	}
-	public func add_theme_sound_override(name: String, audio: AudioStream) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_theme_sound_override", args: [VariantBox(name), VariantBox(audio)])
-	}
 	public func remove_theme_icon_override(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "remove_theme_icon_override", args: [VariantBox(name)])
 	}
@@ -37869,9 +36594,6 @@ public class Control: CanvasItem {
 	}
 	public func remove_theme_constant_override(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "remove_theme_constant_override", args: [VariantBox(name)])
-	}
-	public func remove_theme_sound_override(name: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "remove_theme_sound_override", args: [VariantBox(name)])
 	}
 	@discardableResult
 	public func get_theme_icon(name: String, theme_type: String) -> Texture2D? {
@@ -37904,11 +36626,6 @@ public class Control: CanvasItem {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func get_theme_sound(name: String, theme_type: String) -> AudioStream? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_theme_sound", args: [VariantBox(name), VariantBox(theme_type)])
-		return __ret.asObject()
-	}
-	@discardableResult
 	public func has_theme_icon_override(name: String) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "has_theme_icon_override", args: [VariantBox(name)])
 		return __ret.asBool()
@@ -37939,11 +36656,6 @@ public class Control: CanvasItem {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func has_theme_sound_override(name: String) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "has_theme_sound_override", args: [VariantBox(name)])
-		return __ret.asBool()
-	}
-	@discardableResult
 	public func has_theme_icon(name: String, theme_type: String) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "has_theme_icon", args: [VariantBox(name), VariantBox(theme_type)])
 		return __ret.asBool()
@@ -37971,11 +36683,6 @@ public class Control: CanvasItem {
 	@discardableResult
 	public func has_theme_constant(name: String, theme_type: String) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "has_theme_constant", args: [VariantBox(name), VariantBox(theme_type)])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func has_theme_sound(name: String, theme_type: String) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "has_theme_sound", args: [VariantBox(name), VariantBox(theme_type)])
 		return __ret.asBool()
 	}
 	@discardableResult
@@ -39277,11 +37984,6 @@ public class EditorNode3DGizmo: Node3DGizmo {
 	public func get_subgizmo_selection() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_subgizmo_selection", args: [])
 		return __ret
-	}
-	@discardableResult
-	public func is_selected() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_selected", args: [])
-		return __ret.asBool()
 	}
 }
 
@@ -43302,22 +42004,6 @@ public class GridMap: Node3D {
 	public func make_baked_meshes(gen_lightmap_uv: Bool = false, lightmap_uv_texel_size: Double = 0.1) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "make_baked_meshes", args: [VariantBox(gen_lightmap_uv), VariantBox(lightmap_uv_texel_size)])
 	}
-	public func set_debug_show_octants(enable: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_debug_show_octants", args: [VariantBox(enable)])
-	}
-	@discardableResult
-	public func get_debug_show_octants() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_debug_show_octants", args: [])
-		return __ret.asBool()
-	}
-	public func set_debug_octant_color(color: Color) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_debug_octant_color", args: [VariantBox(color)])
-	}
-	@discardableResult
-	public func get_debug_octant_color() -> Color {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_debug_octant_color", args: [])
-		return __ret.asColor()
-	}
 	public var mesh_library: MeshLibrary? {
 		get { Host.shared.getProperty(object: ptr, name: "mesh_library").asObject() }
 		set { Host.shared.setProperty(object: ptr, name: "mesh_library", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
@@ -43369,14 +42055,6 @@ public class GridMap: Node3D {
 	public var bake_navigation: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "bake_navigation").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "bake_navigation", value: VariantBox(newValue)) }
-	}
-	public var debug_show_octants: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "debug_show_octants").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "debug_show_octants", value: VariantBox(newValue)) }
-	}
-	public var debug_octant_color: Color {
-		get { Host.shared.getProperty(object: ptr, name: "debug_octant_color").asColor() }
-		set { Host.shared.setProperty(object: ptr, name: "debug_octant_color", value: VariantBox(newValue)) }
 	}
 	public func emit_cell_size_changed(cell_size: Vector3) {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("cell_size_changed"), VariantBox(cell_size)])
@@ -43488,9 +42166,7 @@ public class Image: Resource {
 		case rg16i = 44
 		case rgb16i = 45
 		case rgba16i = 46
-		case astc6x6 = 47
-		case astc6x6Hdr = 48
-		case max = 49
+		case max = 47
 	}
 	public enum Interpolation: Int, Sendable, CaseIterable {
 		case interpolateNearest = 0
@@ -43524,13 +42200,6 @@ public class Image: Resource {
 		case generic = 0
 		case srgb = 1
 		case normal = 2
-	}
-	public enum CompressProfile: Int, Sendable, CaseIterable {
-		case automatic = 0
-		case maxQuality = 1
-		case compressed = 2
-		case maxCompression = 3
-		case max = 4
 	}
 	public enum ASTCFormat: Int, Sendable, CaseIterable {
 		case astcFormat4x4 = 0
@@ -43603,8 +42272,8 @@ public class Image: Resource {
 		let __ret = Host.shared.callMethod(object: ptr, method: "flip_y", args: [])
 	}
 	@discardableResult
-	public func generate_mipmaps(renormalize: Bool = false, preserve_alpha_test_coverage: Bool = false, alpha_test_threshold: Double = 0.5) -> Error {
-		let __ret = Host.shared.callMethod(object: ptr, method: "generate_mipmaps", args: [VariantBox(renormalize), VariantBox(preserve_alpha_test_coverage), VariantBox(alpha_test_threshold)])
+	public func generate_mipmaps(renormalize: Bool = false) -> Error {
+		let __ret = Host.shared.callMethod(object: ptr, method: "generate_mipmaps", args: [VariantBox(renormalize)])
 		return __ret.asEnum(Error.self)
 	}
 	public func clear_mipmaps() {
@@ -43709,13 +42378,13 @@ public class Image: Resource {
 		return __ret.asEnum(Image.UsedChannels.self)
 	}
 	@discardableResult
-	public func compress(mode: Image.CompressMode, source: Image.CompressSource = .generic, profile: Image.CompressProfile = .automatic) -> Error {
-		let __ret = Host.shared.callMethod(object: ptr, method: "compress", args: [VariantBox(mode.rawValue), VariantBox(source.rawValue), VariantBox(profile.rawValue)])
+	public func compress(mode: Image.CompressMode, source: Image.CompressSource = .generic, astc_format: Image.ASTCFormat = .astcFormat4x4) -> Error {
+		let __ret = Host.shared.callMethod(object: ptr, method: "compress", args: [VariantBox(mode.rawValue), VariantBox(source.rawValue), VariantBox(astc_format.rawValue)])
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
-	public func compress_from_channels(mode: Image.CompressMode, channels: Image.UsedChannels, profile: Image.CompressProfile = .automatic) -> Error {
-		let __ret = Host.shared.callMethod(object: ptr, method: "compress_from_channels", args: [VariantBox(mode.rawValue), VariantBox(channels.rawValue), VariantBox(profile.rawValue)])
+	public func compress_from_channels(mode: Image.CompressMode, channels: Image.UsedChannels, astc_format: Image.ASTCFormat = .astcFormat4x4) -> Error {
+		let __ret = Host.shared.callMethod(object: ptr, method: "compress_from_channels", args: [VariantBox(mode.rawValue), VariantBox(channels.rawValue), VariantBox(astc_format.rawValue)])
 		return __ret.asEnum(Error.self)
 	}
 	@discardableResult
@@ -44834,7 +43503,6 @@ public class Mesh: Resource {
 		case arrayFlagUse8BoneWeights = 134217728
 		case arrayFlagUsesEmptyVertexArray = 268435456
 		case arrayFlagCompressAttributes = 536870912
-		case arrayFlagUseStorageBuffer = 1073741824
 	}
 	public enum BlendShapeMode: Int, Sendable, CaseIterable {
 		case normalized = 0
@@ -44887,16 +43555,6 @@ public class Mesh: Resource {
 		return __ret.asObject()
 	}
 	@discardableResult
-	public func create_outline(margin: Double) -> Mesh? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "create_outline", args: [VariantBox(margin)])
-		return __ret.asObject()
-	}
-	@discardableResult
-	public func generate_triangle_mesh() -> TriangleMesh? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "generate_triangle_mesh", args: [])
-		return __ret.asObject()
-	}
-	@discardableResult
 	public func create_trimesh_shape() -> ConcavePolygonShape3D? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_trimesh_shape", args: [])
 		return __ret.asObject()
@@ -44904,6 +43562,16 @@ public class Mesh: Resource {
 	@discardableResult
 	public func create_convex_shape(clean: Bool = true, simplify: Bool = false) -> ConvexPolygonShape3D? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_convex_shape", args: [VariantBox(clean), VariantBox(simplify)])
+		return __ret.asObject()
+	}
+	@discardableResult
+	public func create_outline(margin: Double) -> Mesh? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "create_outline", args: [VariantBox(margin)])
+		return __ret.asObject()
+	}
+	@discardableResult
+	public func generate_triangle_mesh() -> TriangleMesh? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "generate_triangle_mesh", args: [])
 		return __ret.asObject()
 	}
 	public var lightmap_size_hint: Vector2i {
@@ -44926,9 +43594,6 @@ public class MeshLibrary: Resource {
 	}
 	public func set_item_name(id: Int, name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_item_name", args: [VariantBox(id), VariantBox(name)])
-	}
-	public func set_item_category(id: Int, category: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_item_category", args: [VariantBox(id), VariantBox(category)])
 	}
 	public func set_item_mesh(id: Int, mesh: Mesh) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_item_mesh", args: [VariantBox(id), VariantBox(mesh)])
@@ -44957,11 +43622,6 @@ public class MeshLibrary: Resource {
 	@discardableResult
 	public func get_item_name(id: Int) -> String {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_item_name", args: [VariantBox(id)])
-		return __ret.asString()
-	}
-	@discardableResult
-	public func get_item_category(id: Int) -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_item_category", args: [VariantBox(id)])
 		return __ret.asString()
 	}
 	@discardableResult
@@ -47814,13 +46474,6 @@ public class OpenXRInterface: XRInterface {
 		case lossPending = 7
 		case exiting = 8
 	}
-	public enum ViewConfiguration: Int, Sendable, CaseIterable {
-		case mono = 0
-		case stereo = 1
-		case stereoWithInset = 2
-		case unset = 254
-		case unknown = 255
-	}
 	public enum Hand: Int, Sendable, CaseIterable {
 		case left = 0
 		case right = 1
@@ -47907,22 +46560,12 @@ public class OpenXRInterface: XRInterface {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func get_active_view_configuration() -> OpenXRInterface.ViewConfiguration {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_active_view_configuration", args: [])
-		return __ret.asEnum(OpenXRInterface.ViewConfiguration.self)
-	}
-	@discardableResult
 	public func get_display_refresh_rate() -> Double {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_display_refresh_rate", args: [])
 		return __ret.asDouble()
 	}
 	public func set_display_refresh_rate(refresh_rate: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_display_refresh_rate", args: [VariantBox(refresh_rate)])
-	}
-	@discardableResult
-	public func get_recommended_target_size() -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_recommended_target_size", args: [])
-		return __ret.asVector2()
 	}
 	@discardableResult
 	public func get_render_target_size_multiplier() -> Double {
@@ -50003,17 +48646,6 @@ public class ResourceImporterShaderFile: ResourceImporter {
 }
 
 @MainActor
-public class ResourceImporterStreamedTexture: ResourceImporter {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("ResourceImporterStreamedTexture") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class ResourceImporterStreamedTexture")
-		}
-		super.init(ptr: raw)
-	}
-}
-
-@MainActor
 public class ResourceImporterTexture: ResourceImporter {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public override init() {
@@ -50418,9 +49050,6 @@ public class Shader: Resource {
 	public func get_shader_uniform_list(get_groups: Bool = false) -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_shader_uniform_list", args: [VariantBox(get_groups)])
 		return __ret
-	}
-	public func set_include_path(path: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_include_path", args: [VariantBox(path)])
 	}
 	public func inspect_native_shader_code() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "inspect_native_shader_code", args: [])
@@ -50944,19 +49573,11 @@ public class Skeleton3D: Node3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_bone_pose_scale", args: [VariantBox(bone_idx)])
 		return __ret.asVector3()
 	}
-	public func set_bone_skin_scale(bone_idx: Int, skin_scale: Vector3) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_bone_skin_scale", args: [VariantBox(bone_idx), VariantBox(skin_scale)])
+	public func reset_bone_pose(bone_idx: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "reset_bone_pose", args: [VariantBox(bone_idx)])
 	}
-	@discardableResult
-	public func get_bone_skin_scale(bone_idx: Int) -> Vector3 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_bone_skin_scale", args: [VariantBox(bone_idx)])
-		return __ret.asVector3()
-	}
-	public func reset_bone_pose(bone_idx: Int, reset_bone_skin_scale: Bool = false) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "reset_bone_pose", args: [VariantBox(bone_idx), VariantBox(reset_bone_skin_scale)])
-	}
-	public func reset_bone_poses(reset_bone_skin_scale: Bool = false) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "reset_bone_poses", args: [VariantBox(reset_bone_skin_scale)])
+	public func reset_bone_poses() {
+		let __ret = Host.shared.callMethod(object: ptr, method: "reset_bone_poses", args: [])
 	}
 	@discardableResult
 	public func is_bone_enabled(bone_idx: Int) -> Bool {
@@ -52228,8 +50849,7 @@ public class Theme: Resource {
 		case fontSize = 3
 		case icon = 4
 		case stylebox = 5
-		case sound = 6
-		case max = 7
+		case max = 6
 	}
 	public func set_icon(name: String, theme_type: String, texture: Texture2D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_icon", args: [VariantBox(name), VariantBox(theme_type), VariantBox(texture)])
@@ -52403,35 +51023,6 @@ public class Theme: Resource {
 	@discardableResult
 	public func get_constant_type_list() -> VariantBox {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_constant_type_list", args: [])
-		return __ret
-	}
-	public func set_sound(name: String, theme_type: String, sound: AudioStream) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_sound", args: [VariantBox(name), VariantBox(theme_type), VariantBox(sound)])
-	}
-	@discardableResult
-	public func get_sound(name: String, theme_type: String) -> AudioStream? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_sound", args: [VariantBox(name), VariantBox(theme_type)])
-		return __ret.asObject()
-	}
-	@discardableResult
-	public func has_sound(name: String, theme_type: String) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "has_sound", args: [VariantBox(name), VariantBox(theme_type)])
-		return __ret.asBool()
-	}
-	public func rename_sound(old_name: String, name: String, theme_type: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "rename_sound", args: [VariantBox(old_name), VariantBox(name), VariantBox(theme_type)])
-	}
-	public func clear_sound(name: String, theme_type: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "clear_sound", args: [VariantBox(name), VariantBox(theme_type)])
-	}
-	@discardableResult
-	public func get_sound_list(theme_type: String) -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_sound_list", args: [VariantBox(theme_type)])
-		return __ret
-	}
-	@discardableResult
-	public func get_sound_type_list() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_sound_type_list", args: [])
 		return __ret
 	}
 	public func set_default_base_scale(base_scale: Double) {
@@ -53495,171 +52086,6 @@ public class VisualInstance3D: Node3D {
 }
 
 @MainActor
-public class VisualShaderGroup: Resource {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("VisualShaderGroup") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderGroup")
-		}
-		super.init(ptr: raw)
-	}
-	public func set_group_name(name: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_group_name", args: [VariantBox(name)])
-	}
-	@discardableResult
-	public func get_group_name() -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_group_name", args: [])
-		return __ret.asString()
-	}
-	@discardableResult
-	public func insert_input_port(id: Int, type: VisualShaderNode.PortType, name: String) -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "insert_input_port", args: [VariantBox(id), VariantBox(type.rawValue), VariantBox(name)])
-		return __ret.asString()
-	}
-	public func remove_input_port(id: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "remove_input_port", args: [VariantBox(id)])
-	}
-	public func move_input_port(from: Int, to: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "move_input_port", args: [VariantBox(from), VariantBox(to)])
-	}
-	public func set_input_port_name(id: Int, name: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_input_port_name", args: [VariantBox(id), VariantBox(name)])
-	}
-	public func set_input_port_type(id: Int, type: VisualShaderNode.PortType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_input_port_type", args: [VariantBox(id), VariantBox(type.rawValue)])
-	}
-	public func set_input_port_count(count: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_input_port_count", args: [VariantBox(count)])
-	}
-	@discardableResult
-	public func get_input_port_count() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_input_port_count", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_input_port_name(id: Int) -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_input_port_name", args: [VariantBox(id)])
-		return __ret.asString()
-	}
-	@discardableResult
-	public func get_input_port_type(id: Int) -> VisualShaderNode.PortType {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_input_port_type", args: [VariantBox(id)])
-		return __ret.asEnum(VisualShaderNode.PortType.self)
-	}
-	@discardableResult
-	public func insert_output_port(id: Int, type: VisualShaderNode.PortType, name: String) -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "insert_output_port", args: [VariantBox(id), VariantBox(type.rawValue), VariantBox(name)])
-		return __ret.asString()
-	}
-	public func remove_output_port(id: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "remove_output_port", args: [VariantBox(id)])
-	}
-	public func move_output_port(from: Int, to: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "move_output_port", args: [VariantBox(from), VariantBox(to)])
-	}
-	public func set_output_port_name(id: Int, name: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_output_port_name", args: [VariantBox(id), VariantBox(name)])
-	}
-	public func set_output_port_type(id: Int, type: VisualShaderNode.PortType) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_output_port_type", args: [VariantBox(id), VariantBox(type.rawValue)])
-	}
-	public func set_output_port_count(count: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_output_port_count", args: [VariantBox(count)])
-	}
-	@discardableResult
-	public func get_output_port_count() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_output_port_count", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_output_port_name(id: Int) -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_output_port_name", args: [VariantBox(id)])
-		return __ret.asString()
-	}
-	@discardableResult
-	public func get_output_port_type(id: Int) -> VisualShaderNode.PortType {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_output_port_type", args: [VariantBox(id)])
-		return __ret.asEnum(VisualShaderNode.PortType.self)
-	}
-	public func add_node(node: VisualShaderNode, position: Vector2, id: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_node", args: [VariantBox(node), VariantBox(position), VariantBox(id)])
-	}
-	@discardableResult
-	public func get_node(id: Int) -> VisualShaderNode? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_node", args: [VariantBox(id)])
-		return __ret.asObject()
-	}
-	public func set_node_position(id: Int, position: Vector2) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_node_position", args: [VariantBox(id), VariantBox(position)])
-	}
-	@discardableResult
-	public func get_node_position(id: Int) -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_node_position", args: [VariantBox(id)])
-		return __ret.asVector2()
-	}
-	@discardableResult
-	public func get_node_list() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_node_list", args: [])
-		return __ret
-	}
-	@discardableResult
-	public func get_valid_node_id() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_valid_node_id", args: [])
-		return __ret.asInt()
-	}
-	public func remove_node(id: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "remove_node", args: [VariantBox(id)])
-	}
-	public func replace_node(id: Int, new_class: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "replace_node", args: [VariantBox(id), VariantBox(new_class)])
-	}
-	@discardableResult
-	public func is_node_connection(from_node: Int, from_port: Int, to_node: Int, to_port: Int) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_node_connection", args: [VariantBox(from_node), VariantBox(from_port), VariantBox(to_node), VariantBox(to_port)])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func can_connect_nodes(from_node: Int, from_port: Int, to_node: Int, to_port: Int) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "can_connect_nodes", args: [VariantBox(from_node), VariantBox(from_port), VariantBox(to_node), VariantBox(to_port)])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func connect_nodes(from_node: Int, from_port: Int, to_node: Int, to_port: Int) -> Error {
-		let __ret = Host.shared.callMethod(object: ptr, method: "connect_nodes", args: [VariantBox(from_node), VariantBox(from_port), VariantBox(to_node), VariantBox(to_port)])
-		return __ret.asEnum(Error.self)
-	}
-	public func disconnect_nodes(from_node: Int, from_port: Int, to_node: Int, to_port: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "disconnect_nodes", args: [VariantBox(from_node), VariantBox(from_port), VariantBox(to_node), VariantBox(to_port)])
-	}
-	public func connect_nodes_forced(from_node: Int, from_port: Int, to_node: Int, to_port: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "connect_nodes_forced", args: [VariantBox(from_node), VariantBox(from_port), VariantBox(to_node), VariantBox(to_port)])
-	}
-	@discardableResult
-	public func get_node_connections() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_node_connections", args: [])
-		return __ret
-	}
-	public func attach_node_to_frame(id: Int, frame: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "attach_node_to_frame", args: [VariantBox(id), VariantBox(frame)])
-	}
-	public func detach_node_from_frame(id: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "detach_node_from_frame", args: [VariantBox(id)])
-	}
-	public var group_name: String {
-		get { Host.shared.getProperty(object: ptr, name: "group_name").asString() }
-		set { Host.shared.setProperty(object: ptr, name: "group_name", value: VariantBox(newValue)) }
-	}
-	public var input_port_count: Int {
-		get { Host.shared.getProperty(object: ptr, name: "input_port_count").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "input_port_count", value: VariantBox(newValue)) }
-	}
-	public var output_port_count: Int {
-		get { Host.shared.getProperty(object: ptr, name: "output_port_count").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "output_port_count", value: VariantBox(newValue)) }
-	}
-}
-
-@MainActor
 public class VisualShaderNode: Resource {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public override init() {
@@ -54198,14 +52624,6 @@ public class WebXRInterface: XRInterface {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_requested_reference_space_types", args: [])
 		return __ret.asString()
 	}
-	public func set_disable_webxr_layers(disable: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_disable_webxr_layers", args: [VariantBox(disable)])
-	}
-	@discardableResult
-	public func get_disable_webxr_layers() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_disable_webxr_layers", args: [])
-		return __ret.asBool()
-	}
 	@discardableResult
 	public func is_input_source_active(input_source_id: Int) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_input_source_active", args: [VariantBox(input_source_id)])
@@ -54254,10 +52672,6 @@ public class WebXRInterface: XRInterface {
 	public var requested_reference_space_types: String {
 		get { Host.shared.getProperty(object: ptr, name: "requested_reference_space_types").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "requested_reference_space_types", value: VariantBox(newValue)) }
-	}
-	public var disable_webxr_layers: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "disable_webxr_layers").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "disable_webxr_layers", value: VariantBox(newValue)) }
 	}
 	public var reference_space_type: String {
 		get { Host.shared.getProperty(object: ptr, name: "reference_space_type").asString() }
@@ -54477,14 +52891,6 @@ public class Window: Viewport {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_output_max_linear_value", args: [])
 		return __ret.asDouble()
 	}
-	public func set_fullscreen_shortcut_enabled(enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_fullscreen_shortcut_enabled", args: [VariantBox(enabled)])
-	}
-	@discardableResult
-	public func is_fullscreen_shortcut_enabled() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_fullscreen_shortcut_enabled", args: [])
-		return __ret.asBool()
-	}
 	@discardableResult
 	public func is_maximize_allowed() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_maximize_allowed", args: [])
@@ -54567,9 +52973,6 @@ public class Window: Viewport {
 	}
 	public func set_ime_position(position: Vector2i) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_ime_position", args: [VariantBox(position)])
-	}
-	public func set_ime_rect(rect: Rect2i) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_ime_rect", args: [VariantBox(rect)])
 	}
 	@discardableResult
 	public func is_embedded() -> Bool {
@@ -54704,9 +53107,6 @@ public class Window: Viewport {
 	public func add_theme_constant_override(name: String, constant: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_theme_constant_override", args: [VariantBox(name), VariantBox(constant)])
 	}
-	public func add_theme_sound_override(name: String, sound: AudioStream) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "add_theme_sound_override", args: [VariantBox(name), VariantBox(sound)])
-	}
 	public func remove_theme_icon_override(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "remove_theme_icon_override", args: [VariantBox(name)])
 	}
@@ -54724,9 +53124,6 @@ public class Window: Viewport {
 	}
 	public func remove_theme_constant_override(name: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "remove_theme_constant_override", args: [VariantBox(name)])
-	}
-	public func remove_theme_sound_override(name: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "remove_theme_sound_override", args: [VariantBox(name)])
 	}
 	@discardableResult
 	public func get_theme_icon(name: String, theme_type: String) -> Texture2D? {
@@ -54759,11 +53156,6 @@ public class Window: Viewport {
 		return __ret.asInt()
 	}
 	@discardableResult
-	public func get_theme_sound(name: String, theme_type: String) -> AudioStream? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_theme_sound", args: [VariantBox(name), VariantBox(theme_type)])
-		return __ret.asObject()
-	}
-	@discardableResult
 	public func has_theme_icon_override(name: String) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "has_theme_icon_override", args: [VariantBox(name)])
 		return __ret.asBool()
@@ -54794,11 +53186,6 @@ public class Window: Viewport {
 		return __ret.asBool()
 	}
 	@discardableResult
-	public func has_theme_sound_override(name: String) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "has_theme_sound_override", args: [VariantBox(name)])
-		return __ret.asBool()
-	}
-	@discardableResult
 	public func has_theme_icon(name: String, theme_type: String) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "has_theme_icon", args: [VariantBox(name), VariantBox(theme_type)])
 		return __ret.asBool()
@@ -54826,11 +53213,6 @@ public class Window: Viewport {
 	@discardableResult
 	public func has_theme_constant(name: String, theme_type: String) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "has_theme_constant", args: [VariantBox(name), VariantBox(theme_type)])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func has_theme_sound(name: String, theme_type: String) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "has_theme_sound", args: [VariantBox(name), VariantBox(theme_type)])
 		return __ret.asBool()
 	}
 	@discardableResult
@@ -55036,10 +53418,6 @@ public class Window: Viewport {
 	public var maximize_disabled: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "maximize_disabled").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "maximize_disabled", value: VariantBox(newValue)) }
-	}
-	public var fullscreen_shortcut_enabled: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "fullscreen_shortcut_enabled").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "fullscreen_shortcut_enabled", value: VariantBox(newValue)) }
 	}
 	public var force_native: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "force_native").asBool() }
@@ -56042,60 +54420,6 @@ public class AnimationNodeExtension: AnimationNode {
 	public func get_remaining_time(node_info: VariantBox, break_loop: Bool) -> Double {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_remaining_time", args: [VariantBox(node_info), VariantBox(break_loop)])
 		return __ret.asDouble()
-	}
-}
-
-@MainActor
-public class AnimationNodeObserverBlendSpace: AnimationNodeObserver {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("AnimationNodeObserverBlendSpace") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeObserverBlendSpace")
-		}
-		super.init(ptr: raw)
-	}
-	public func emit_closest_point_changed(closest_point_name: String) {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("closest_point_changed"), VariantBox(closest_point_name)])
-	}
-}
-
-@MainActor
-public class AnimationNodeObserverOneShot: AnimationNodeObserver {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("AnimationNodeObserverOneShot") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeObserverOneShot")
-		}
-		super.init(ptr: raw)
-	}
-	public func emit_started() {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("started")])
-	}
-	public func emit_fade_in_finished() {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("fade_in_finished")])
-	}
-	public func emit_fade_out_started() {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("fade_out_started")])
-	}
-	public func emit_finished() {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("finished")])
-	}
-}
-
-@MainActor
-public class AnimationNodeObserverTransition: AnimationNodeObserver {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("AnimationNodeObserverTransition") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class AnimationNodeObserverTransition")
-		}
-		super.init(ptr: raw)
-	}
-	public func emit_state_started(state: String) {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("state_started"), VariantBox(state)])
-	}
-	public func emit_state_finished(state: String) {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("state_finished"), VariantBox(state)])
 	}
 }
 
@@ -59136,19 +57460,16 @@ public class BaseButton: Control {
 		case buttonPress = 0
 		case buttonRelease = 1
 	}
-	public func press() {
-		let __ret = Host.shared.callMethod(object: ptr, method: "press", args: [])
-	}
 	public func set_pressed(pressed: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_pressed", args: [VariantBox(pressed)])
-	}
-	public func set_pressed_no_signal(pressed: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_pressed_no_signal", args: [VariantBox(pressed)])
 	}
 	@discardableResult
 	public func is_pressed() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_pressed", args: [])
 		return __ret.asBool()
+	}
+	public func set_pressed_no_signal(pressed: Bool) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_pressed_no_signal", args: [VariantBox(pressed)])
 	}
 	@discardableResult
 	public func is_hovered() -> Bool {
@@ -59358,8 +57679,7 @@ public class BaseMaterial3D: Material {
 		case refraction = 10
 		case detail = 11
 		case bentNormalMapping = 12
-		case particlesAnimation = 13
-		case max = 14
+		case max = 13
 	}
 	public enum BlendMode: Int, Sendable, CaseIterable {
 		case mix = 0
@@ -60505,10 +58825,6 @@ public class BaseMaterial3D: Material {
 		get { Host.shared.getProperty(object: ptr, name: "billboard_keep_scale").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "billboard_keep_scale", value: VariantBox(newValue)) }
 	}
-	public var particles_anim_enabled: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "particles_anim_enabled").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "particles_anim_enabled", value: VariantBox(newValue)) }
-	}
 	public var particles_anim_h_frames: Int {
 		get { Host.shared.getProperty(object: ptr, name: "particles_anim_h_frames").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "particles_anim_h_frames", value: VariantBox(newValue)) }
@@ -60630,7 +58946,6 @@ public class BlitMaterial: Material {
 		case sub = 2
 		case mul = 3
 		case disabled = 4
-		case premultipliedAlpha = 5
 	}
 	public func set_blend_mode(blend_mode: BlitMaterial.BlendMode) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_blend_mode", args: [VariantBox(blend_mode.rawValue)])
@@ -60785,76 +59100,6 @@ public class BoneConstraint3D: SkeletonModifier3D {
 	}
 	public func clear_setting() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "clear_setting", args: [])
-	}
-}
-
-@MainActor
-public class BoneSpaceAdjuster3D: SkeletonModifier3D {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("BoneSpaceAdjuster3D") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class BoneSpaceAdjuster3D")
-		}
-		super.init(ptr: raw)
-	}
-	public func set_use_bone_skin_scale_for_all_bones(enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_use_bone_skin_scale_for_all_bones", args: [VariantBox(enabled)])
-	}
-	@discardableResult
-	public func are_all_bones_using_bone_skin_scale() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "are_all_bones_using_bone_skin_scale", args: [])
-		return __ret.asBool()
-	}
-	public func set_bone_name(index: Int, bone_name: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_bone_name", args: [VariantBox(index), VariantBox(bone_name)])
-	}
-	@discardableResult
-	public func get_bone_name(index: Int) -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_bone_name", args: [VariantBox(index)])
-		return __ret.asString()
-	}
-	public func set_bone(index: Int, bone: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_bone", args: [VariantBox(index), VariantBox(bone)])
-	}
-	@discardableResult
-	public func get_bone(index: Int) -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_bone", args: [VariantBox(index)])
-		return __ret.asInt()
-	}
-	public func set_use_bone_skin_scale(index: Int, enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_use_bone_skin_scale", args: [VariantBox(index), VariantBox(enabled)])
-	}
-	@discardableResult
-	public func is_using_bone_skin_scale(index: Int) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_using_bone_skin_scale", args: [VariantBox(index)])
-		return __ret.asBool()
-	}
-	public func set_bone_scale(index: Int, scale: Vector3) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_bone_scale", args: [VariantBox(index), VariantBox(scale)])
-	}
-	@discardableResult
-	public func get_bone_scale(index: Int) -> Vector3 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_bone_scale", args: [VariantBox(index)])
-		return __ret.asVector3()
-	}
-	public func set_setting_size(size: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_setting_size", args: [VariantBox(size)])
-	}
-	@discardableResult
-	public func get_setting_size() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_setting_size", args: [])
-		return __ret.asInt()
-	}
-	public func clear_setting() {
-		let __ret = Host.shared.callMethod(object: ptr, method: "clear_setting", args: [])
-	}
-	public var use_bone_skin_scale_for_all_bones: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "use_bone_skin_scale_for_all_bones").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "use_bone_skin_scale_for_all_bones", value: VariantBox(newValue)) }
-	}
-	public var setting_size: Int {
-		get { Host.shared.getProperty(object: ptr, name: "setting_size").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "setting_size", value: VariantBox(newValue)) }
 	}
 }
 
@@ -65200,16 +63445,14 @@ public class Generic6DOFJoint3D: Joint3D {
 		case angularSpringStiffness = 19
 		case angularSpringDamping = 20
 		case angularSpringEquilibriumPoint = 21
-		case linearDriveForceLimit = 22
-		case angularDriveTorqueLimit = 23
-		case max = 24
+		case max = 22
 	}
 	public enum Flag: Int, Sendable, CaseIterable {
 		case enableLinearLimit = 0
 		case enableAngularLimit = 1
 		case enableAngularSpring = 2
 		case enableLinearSpring = 3
-		case enableAngularMotor = 4
+		case enableMotor = 4
 		case enableLinearMotor = 5
 		case max = 6
 	}
@@ -65260,22 +63503,6 @@ public class Generic6DOFJoint3D: Joint3D {
 	public func get_flag_z(flag: Generic6DOFJoint3D.Flag) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_flag_z", args: [VariantBox(flag.rawValue)])
 		return __ret.asBool()
-	}
-	public func set_angular_target_rotation(target_rotation: Quaternion) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_angular_target_rotation", args: [VariantBox(target_rotation)])
-	}
-	@discardableResult
-	public func get_angular_target_rotation() -> Quaternion {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_angular_target_rotation", args: [])
-		return __ret.asQuaternion()
-	}
-	@discardableResult
-	public func has_target_rotation() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "has_target_rotation", args: [])
-		return __ret.asBool()
-	}
-	public func clear_angular_target_rotation() {
-		let __ret = Host.shared.callMethod(object: ptr, method: "clear_angular_target_rotation", args: [])
 	}
 }
 
@@ -67195,35 +65422,6 @@ public class Label: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_structured_text_bidi_override_options", args: [])
 		return __ret
 	}
-	public func set_resize_font_to_fit(enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_resize_font_to_fit", args: [VariantBox(enabled)])
-	}
-	@discardableResult
-	public func is_resize_font_to_fit_enabled() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_resize_font_to_fit_enabled", args: [])
-		return __ret.asBool()
-	}
-	public func set_minimum_font_size(size: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_minimum_font_size", args: [VariantBox(size)])
-	}
-	@discardableResult
-	public func get_minimum_font_size() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_minimum_font_size", args: [])
-		return __ret.asInt()
-	}
-	public func set_maximum_font_size(size: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_maximum_font_size", args: [VariantBox(size)])
-	}
-	@discardableResult
-	public func get_maximum_font_size() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_maximum_font_size", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_rendered_font_size() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_rendered_font_size", args: [])
-		return __ret.asInt()
-	}
 	@discardableResult
 	public func get_character_bounds(pos: Int) -> Rect2 {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_character_bounds", args: [VariantBox(pos)])
@@ -67280,18 +65478,6 @@ public class Label: Control {
 	public var tab_stops: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "tab_stops") }
 		set { Host.shared.setProperty(object: ptr, name: "tab_stops", value: VariantBox(newValue)) }
-	}
-	public var resize_font_to_fit: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "resize_font_to_fit").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "resize_font_to_fit", value: VariantBox(newValue)) }
-	}
-	public var minimum_font_size: Int {
-		get { Host.shared.getProperty(object: ptr, name: "minimum_font_size").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "minimum_font_size", value: VariantBox(newValue)) }
-	}
-	public var maximum_font_size: Int {
-		get { Host.shared.getProperty(object: ptr, name: "maximum_font_size").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "maximum_font_size", value: VariantBox(newValue)) }
 	}
 	public var lines_skipped: Int {
 		get { Host.shared.getProperty(object: ptr, name: "lines_skipped").asInt() }
@@ -67571,8 +65757,7 @@ public class Light3D: VisualInstance3D {
 		case shadowBlur = 18
 		case transmittanceBias = 19
 		case intensity = 20
-		case contactShadowBlur = 21
-		case max = 22
+		case max = 21
 	}
 	public enum BakeMode: Int, Sendable, CaseIterable {
 		case bakeDisabled = 0
@@ -67674,14 +65859,6 @@ public class Light3D: VisualInstance3D {
 	public func get_shadow_caster_mask() -> Int {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_shadow_caster_mask", args: [])
 		return __ret.asInt()
-	}
-	public func set_allow_contact_shadows(enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_allow_contact_shadows", args: [VariantBox(enabled)])
-	}
-	@discardableResult
-	public func get_allow_contact_shadows() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_allow_contact_shadows", args: [])
-		return __ret.asBool()
 	}
 	public func set_bake_mode(bake_mode: Light3D.BakeMode) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_bake_mode", args: [VariantBox(bake_mode.rawValue)])
@@ -67800,14 +65977,6 @@ public class Light3D: VisualInstance3D {
 		get { Host.shared.getProperty(object: ptr, name: "shadow_caster_mask").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "shadow_caster_mask", value: VariantBox(newValue)) }
 	}
-	public var shadow_contact_shadows_allow: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "shadow_contact_shadows_allow").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "shadow_contact_shadows_allow", value: VariantBox(newValue)) }
-	}
-	public var shadow_contact_shadows_blur: Double {
-		get { Host.shared.getProperty(object: ptr, name: "shadow_contact_shadows_blur").asDouble() }
-		set { Host.shared.setProperty(object: ptr, name: "shadow_contact_shadows_blur", value: VariantBox(newValue)) }
-	}
 	public var distance_fade_enabled: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "distance_fade_enabled").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "distance_fade_enabled", value: VariantBox(newValue)) }
@@ -67912,7 +66081,6 @@ public class LightmapGI: VisualInstance3D {
 		case textureSizeTooSmall = 9
 		case lightmapTooSmall = 10
 		case atlasTooSmall = 11
-		case textureExceedsDeviceLimit = 12
 	}
 	public enum EnvironmentMode: Int, Sendable, CaseIterable {
 		case disabled = 0
@@ -68096,14 +66264,6 @@ public class LightmapGI: VisualInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_camera_attributes", args: [])
 		return __ret.asObject()
 	}
-	public func set_specular_intensity(specular_intensity: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_specular_intensity", args: [VariantBox(specular_intensity)])
-	}
-	@discardableResult
-	public func get_specular_intensity() -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_specular_intensity", args: [])
-		return __ret.asDouble()
-	}
 	public var quality: Int {
 		get { Host.shared.getProperty(object: ptr, name: "quality").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "quality", value: VariantBox(newValue)) }
@@ -68127,10 +66287,6 @@ public class LightmapGI: VisualInstance3D {
 	public var directional: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "directional").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "directional", value: VariantBox(newValue)) }
-	}
-	public var specular_intensity: Double {
-		get { Host.shared.getProperty(object: ptr, name: "specular_intensity").asDouble() }
-		set { Host.shared.setProperty(object: ptr, name: "specular_intensity", value: VariantBox(newValue)) }
 	}
 	public var shadowmask_mode: Int {
 		get { Host.shared.getProperty(object: ptr, name: "shadowmask_mode").asInt() }
@@ -69266,14 +67422,6 @@ public class LookAtModifier3D: SkeletonModifier3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_limitation_symmetry", args: [])
 		return __ret.asBool()
 	}
-	public func set_use_rest_for_limitation(enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_use_rest_for_limitation", args: [VariantBox(enabled)])
-	}
-	@discardableResult
-	public func is_using_rest_for_limitation() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_using_rest_for_limitation", args: [])
-		return __ret.asBool()
-	}
 	public func set_primary_limit_angle(angle: Double) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_primary_limit_angle", args: [VariantBox(angle)])
 	}
@@ -69452,10 +67600,6 @@ public class LookAtModifier3D: SkeletonModifier3D {
 	public var use_angle_limitation: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "use_angle_limitation").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "use_angle_limitation", value: VariantBox(newValue)) }
-	}
-	public var use_rest_for_limitation: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "use_rest_for_limitation").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "use_rest_for_limitation", value: VariantBox(newValue)) }
 	}
 	public var symmetry_limitation: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "symmetry_limitation").asBool() }
@@ -70499,27 +68643,6 @@ public class OpenXRCompositionLayerQuad: OpenXRCompositionLayer {
 }
 
 @MainActor
-public class OpenXRFoveatedInsetViewport: SubViewport {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("OpenXRFoveatedInsetViewport") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class OpenXRFoveatedInsetViewport")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func get_xr_origin3d() -> XROrigin3D? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_xr_origin3d", args: [])
-		return __ret.asObject()
-	}
-	@discardableResult
-	public func get_xr_camera3d() -> XRCamera3D? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_xr_camera3d", args: [])
-		return __ret.asObject()
-	}
-}
-
-@MainActor
 public class OpenXRHapticVibration: OpenXRHapticBase {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public override init() {
@@ -70941,8 +69064,7 @@ public class ParticleProcessMaterial: Material {
 		case particleFlagDisableZ = 2
 		case particleFlagDampingAsFriction = 3
 		case particleFlagInheritEmitterScale = 4
-		case particleFlagPreserveColor = 5
-		case particleFlagMax = 6
+		case particleFlagMax = 5
 	}
 	public enum EmissionShape: Int, Sendable, CaseIterable {
 		case point = 0
@@ -71455,10 +69577,6 @@ public class ParticleProcessMaterial: Material {
 	public var particle_flag_inherit_emitter_scale: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "particle_flag_inherit_emitter_scale").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "particle_flag_inherit_emitter_scale", value: VariantBox(newValue)) }
-	}
-	public var particle_flag_preserve_color: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "particle_flag_preserve_color").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "particle_flag_preserve_color", value: VariantBox(newValue)) }
 	}
 	public var emission_shape_offset: Vector3 {
 		get { Host.shared.getProperty(object: ptr, name: "emission_shape_offset").asVector3() }
@@ -73555,14 +71673,6 @@ public class RetargetModifier3D: SkeletonModifier3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_profile", args: [])
 		return __ret.asObject()
 	}
-	public func set_copy_bone_skin_scale(enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_copy_bone_skin_scale", args: [VariantBox(enabled)])
-	}
-	@discardableResult
-	public func is_copying_bone_skin_scale() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_copying_bone_skin_scale", args: [])
-		return __ret.asBool()
-	}
 	public func set_use_global_pose(use_global_pose: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_use_global_pose", args: [VariantBox(use_global_pose)])
 	}
@@ -73606,10 +71716,6 @@ public class RetargetModifier3D: SkeletonModifier3D {
 	public var profile: SkeletonProfile? {
 		get { Host.shared.getProperty(object: ptr, name: "profile").asObject() }
 		set { Host.shared.setProperty(object: ptr, name: "profile", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
-	}
-	public var copy_bone_skin_scale: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "copy_bone_skin_scale").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "copy_bone_skin_scale", value: VariantBox(newValue)) }
 	}
 	public var use_global_pose: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "use_global_pose").asBool() }
@@ -73655,13 +71761,6 @@ public class RichTextLabel: Control {
 		case updatePad = 32
 		case updateTooltip = 64
 		case updateWidthUnit = 128
-	}
-	public enum ResourceAccessFlag: Int, Sendable, CaseIterable {
-		case resourceAccessResources = 1
-		case resourceAccessUserdata = 2
-		case resourceAccessFilesystem = 4
-		case resourceAccessPipe = 8
-		case resourceAccessNetwork = 16
 	}
 	public enum ImageUnit: Int, Sendable, CaseIterable {
 		case pixel = 0
@@ -73956,35 +72055,6 @@ public class RichTextLabel: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_fit_content_enabled", args: [])
 		return __ret.asBool()
 	}
-	public func set_resize_font_to_fit(enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_resize_font_to_fit", args: [VariantBox(enabled)])
-	}
-	@discardableResult
-	public func is_resize_font_to_fit_enabled() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_resize_font_to_fit_enabled", args: [])
-		return __ret.asBool()
-	}
-	public func set_minimum_font_size(size: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_minimum_font_size", args: [VariantBox(size)])
-	}
-	@discardableResult
-	public func get_minimum_font_size() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_minimum_font_size", args: [])
-		return __ret.asInt()
-	}
-	public func set_maximum_font_size(size: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_maximum_font_size", args: [VariantBox(size)])
-	}
-	@discardableResult
-	public func get_maximum_font_size() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_maximum_font_size", args: [])
-		return __ret.asInt()
-	}
-	@discardableResult
-	public func get_rendered_font_size() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_rendered_font_size", args: [])
-		return __ret.asInt()
-	}
 	public func set_selection_enabled(enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_selection_enabled", args: [VariantBox(enabled)])
 	}
@@ -74227,18 +72297,6 @@ public class RichTextLabel: Control {
 	public func menu_option(option: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "menu_option", args: [VariantBox(option)])
 	}
-	@discardableResult
-	public func get_resource_access_flags() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_resource_access_flags", args: [])
-		return __ret.asInt()
-	}
-	public func set_resource_access_flags(flags: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_resource_access_flags", args: [VariantBox(flags)])
-	}
-	public var resource_access_flags: Int {
-		get { Host.shared.getProperty(object: ptr, name: "resource_access_flags").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "resource_access_flags", value: VariantBox(newValue)) }
-	}
 	public var bbcode_enabled: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "bbcode_enabled").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "bbcode_enabled", value: VariantBox(newValue)) }
@@ -74330,18 +72388,6 @@ public class RichTextLabel: Control {
 	public var drag_and_drop_selection_enabled: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "drag_and_drop_selection_enabled").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "drag_and_drop_selection_enabled", value: VariantBox(newValue)) }
-	}
-	public var resize_font_to_fit: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "resize_font_to_fit").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "resize_font_to_fit", value: VariantBox(newValue)) }
-	}
-	public var minimum_font_size: Int {
-		get { Host.shared.getProperty(object: ptr, name: "minimum_font_size").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "minimum_font_size", value: VariantBox(newValue)) }
-	}
-	public var maximum_font_size: Int {
-		get { Host.shared.getProperty(object: ptr, name: "maximum_font_size").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "maximum_font_size", value: VariantBox(newValue)) }
 	}
 	public var visible_characters: Int {
 		get { Host.shared.getProperty(object: ptr, name: "visible_characters").asInt() }
@@ -74453,34 +72499,6 @@ public class RootMotionView: VisualInstance3D {
 	public var zero_y: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "zero_y").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "zero_y", value: VariantBox(newValue)) }
-	}
-}
-
-@MainActor
-public class ScenePaint2DEditor: Control {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("ScenePaint2DEditor") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class ScenePaint2DEditor")
-		}
-		super.init(ptr: raw)
-	}
-	public func register_scene_provider(control: Control, callback: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "register_scene_provider", args: [VariantBox(control), VariantBox(callback)])
-	}
-	public func unregister_scene_provider(control: Control) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "unregister_scene_provider", args: [VariantBox(control)])
-	}
-	public func set_painted_scene(scene: Node2D) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_painted_scene", args: [VariantBox(scene)])
-	}
-	@discardableResult
-	public func get_painted_scene() -> Node2D? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_painted_scene", args: [])
-		return __ret.asObject()
-	}
-	public func emit_scene_painted(node: Node2D) {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("scene_painted"), VariantBox(node)])
 	}
 }
 
@@ -77106,13 +75124,6 @@ public class TabBar: Control {
 		case alignmentRight = 2
 		case alignmentMax = 3
 	}
-	public enum SizingMode: Int, Sendable, CaseIterable {
-		case tabSizingFitContent = 0
-		case tabSizingUniform = 1
-		case tabSizingJustify = 2
-		case tabSizingExpand = 3
-		case tabSizingMax = 4
-	}
 	public enum CloseButtonDisplayPolicy: Int, Sendable, CaseIterable {
 		case closeButtonShowNever = 0
 		case closeButtonShowActiveOnly = 1
@@ -77249,14 +75260,6 @@ public class TabBar: Control {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tab_alignment", args: [])
 		return __ret.asEnum(TabBar.AlignmentMode.self)
 	}
-	public func set_tab_sizing(tab_sizing: TabBar.SizingMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_tab_sizing", args: [VariantBox(tab_sizing.rawValue)])
-	}
-	@discardableResult
-	public func get_tab_sizing() -> TabBar.SizingMode {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_tab_sizing", args: [])
-		return __ret.asEnum(TabBar.SizingMode.self)
-	}
 	public func set_clip_tabs(clip_tabs: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_clip_tabs", args: [VariantBox(clip_tabs)])
 	}
@@ -77376,10 +75379,6 @@ public class TabBar: Control {
 	public var tab_alignment: Int {
 		get { Host.shared.getProperty(object: ptr, name: "tab_alignment").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "tab_alignment", value: VariantBox(newValue)) }
-	}
-	public var tab_sizing: Int {
-		get { Host.shared.getProperty(object: ptr, name: "tab_sizing").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "tab_sizing", value: VariantBox(newValue)) }
 	}
 	public var clip_tabs: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "clip_tabs").asBool() }
@@ -78165,14 +76164,6 @@ public class TextEdit: Control {
 	public func delete_selection(caret_index: Int = -1) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "delete_selection", args: [VariantBox(caret_index)])
 	}
-	public func set_selection_handle_enabled(enable: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_selection_handle_enabled", args: [VariantBox(enable)])
-	}
-	@discardableResult
-	public func is_selection_handle_enabled() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_selection_handle_enabled", args: [])
-		return __ret.asBool()
-	}
 	public func set_line_wrapping_mode(mode: TextEdit.LineWrappingMode) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_line_wrapping_mode", args: [VariantBox(mode.rawValue)])
 	}
@@ -78611,10 +76602,6 @@ public class TextEdit: Control {
 	public var tab_input_mode: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "tab_input_mode").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "tab_input_mode", value: VariantBox(newValue)) }
-	}
-	public var selection_handle_enabled: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "selection_handle_enabled").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "selection_handle_enabled", value: VariantBox(newValue)) }
 	}
 	public var virtual_keyboard_enabled: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "virtual_keyboard_enabled").asBool() }
@@ -81537,51 +79524,6 @@ public class VisualShaderNodeFresnel: VisualShaderNode {
 }
 
 @MainActor
-public class VisualShaderNodeGroup: VisualShaderNode {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("VisualShaderNodeGroup") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeGroup")
-		}
-		super.init(ptr: raw)
-	}
-	public func set_group(group: VisualShaderGroup) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_group", args: [VariantBox(group)])
-	}
-	@discardableResult
-	public func get_group() -> VisualShaderGroup? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_group", args: [])
-		return __ret.asObject()
-	}
-	public var group: VisualShaderGroup? {
-		get { Host.shared.getProperty(object: ptr, name: "group").asObject() }
-		set { Host.shared.setProperty(object: ptr, name: "group", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
-	}
-}
-
-@MainActor
-public class VisualShaderNodeGroupInput: VisualShaderNode {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("VisualShaderNodeGroupInput") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeGroupInput")
-		}
-		super.init(ptr: raw)
-	}
-}
-
-@MainActor
-public class VisualShaderNodeGroupOutput: VisualShaderNode {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("VisualShaderNodeGroupOutput") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class VisualShaderNodeGroupOutput")
-		}
-		super.init(ptr: raw)
-	}
-}
-
-@MainActor
 public class VisualShaderNodeIf: VisualShaderNode {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public override init() {
@@ -83241,18 +81183,6 @@ public class XRCamera3D: Camera3D {
 		}
 		super.init(ptr: raw)
 	}
-	public func set_tracker(tracker_name: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_tracker", args: [VariantBox(tracker_name)])
-	}
-	@discardableResult
-	public func get_tracker() -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_tracker", args: [])
-		return __ret.asString()
-	}
-	public var tracker: String {
-		get { Host.shared.getProperty(object: ptr, name: "tracker").asString() }
-		set { Host.shared.setProperty(object: ptr, name: "tracker", value: VariantBox(newValue)) }
-	}
 }
 
 @MainActor
@@ -84096,6 +82026,10 @@ public class AnimationNodeBlendSpace2D: AnimationRootNode {
 	public var auto_triangles: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "auto_triangles").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "auto_triangles", value: VariantBox(newValue)) }
+	}
+	public var triangles: VariantBox {
+		get { Host.shared.getProperty(object: ptr, name: "triangles") }
+		set { Host.shared.setProperty(object: ptr, name: "triangles", value: VariantBox(newValue)) }
 	}
 	public var min_space: Vector2 {
 		get { Host.shared.getProperty(object: ptr, name: "min_space").asVector2() }
@@ -85147,14 +83081,6 @@ public class BoxContainer: Container {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_vertical", args: [])
 		return __ret.asBool()
 	}
-	public func set_reverse_sort(reverse_sort: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_reverse_sort", args: [VariantBox(reverse_sort)])
-	}
-	@discardableResult
-	public func is_reverse_sort() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_reverse_sort", args: [])
-		return __ret.asBool()
-	}
 	public var alignment: Int {
 		get { Host.shared.getProperty(object: ptr, name: "alignment").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "alignment", value: VariantBox(newValue)) }
@@ -85162,10 +83088,6 @@ public class BoxContainer: Container {
 	public var vertical: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "vertical").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "vertical", value: VariantBox(newValue)) }
-	}
-	public var reverse_sort: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "reverse_sort").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "reverse_sort", value: VariantBox(newValue)) }
 	}
 }
 
@@ -87630,14 +85552,6 @@ public class ConvertTransformModifier3D: BoneConstraint3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_reference_range_max", args: [VariantBox(index)])
 		return __ret.asDouble()
 	}
-	public func set_global(index: Int, enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_global", args: [VariantBox(index), VariantBox(enabled)])
-	}
-	@discardableResult
-	public func is_global(index: Int) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_global", args: [VariantBox(index)])
-		return __ret.asBool()
-	}
 	public func set_relative(index: Int, enabled: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_relative", args: [VariantBox(index), VariantBox(enabled)])
 	}
@@ -87775,14 +85689,6 @@ public class CopyTransformModifier3D: BoneConstraint3D {
 	@discardableResult
 	public func is_axis_z_inverted(index: Int) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_axis_z_inverted", args: [VariantBox(index)])
-		return __ret.asBool()
-	}
-	public func set_global(index: Int, enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_global", args: [VariantBox(index), VariantBox(enabled)])
-	}
-	@discardableResult
-	public func is_global(index: Int) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_global", args: [VariantBox(index)])
 		return __ret.asBool()
 	}
 	public func set_relative(index: Int, enabled: Bool) {
@@ -88223,10 +86129,6 @@ public class DirectionalLight3D: Light3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_sky_mode", args: [])
 		return __ret.asEnum(DirectionalLight3D.SkyMode.self)
 	}
-	public var sky_mode: Int {
-		get { Host.shared.getProperty(object: ptr, name: "sky_mode").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "sky_mode", value: VariantBox(newValue)) }
-	}
 	public var directional_shadow_mode: Int {
 		get { Host.shared.getProperty(object: ptr, name: "directional_shadow_mode").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "directional_shadow_mode", value: VariantBox(newValue)) }
@@ -88258,6 +86160,10 @@ public class DirectionalLight3D: Light3D {
 	public var directional_shadow_pancake_size: Double {
 		get { Host.shared.getProperty(object: ptr, name: "directional_shadow_pancake_size").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "directional_shadow_pancake_size", value: VariantBox(newValue)) }
+	}
+	public var sky_mode: Int {
+		get { Host.shared.getProperty(object: ptr, name: "sky_mode").asInt() }
+		set { Host.shared.setProperty(object: ptr, name: "sky_mode", value: VariantBox(newValue)) }
 	}
 }
 
@@ -88628,8 +86534,8 @@ public class EditorSpinSlider: Range {
 		get { Host.shared.getProperty(object: ptr, name: "flat").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "flat", value: VariantBox(newValue)) }
 	}
-	public var control_state: Int {
-		get { Host.shared.getProperty(object: ptr, name: "control_state").asInt() }
+	public var control_state: Bool {
+		get { Host.shared.getProperty(object: ptr, name: "control_state").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "control_state", value: VariantBox(newValue)) }
 	}
 	public var hide_slider: Bool {
@@ -88847,16 +86753,6 @@ public class FoldableContainer: Container {
 	}
 	public func add_title_bar_control(control: Control) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "add_title_bar_control", args: [VariantBox(control)])
-	}
-	@discardableResult
-	public func get_title_bar_control(index: Int) -> Control? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_title_bar_control", args: [VariantBox(index)])
-		return __ret.asObject()
-	}
-	@discardableResult
-	public func get_title_bar_control_count() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_title_bar_control_count", args: [])
-		return __ret.asInt()
 	}
 	public func remove_title_bar_control(control: Control) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "remove_title_bar_control", args: [VariantBox(control)])
@@ -90178,14 +88074,6 @@ public class InputEventScreenTouch: InputEventFromWindow {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_double_tap", args: [])
 		return __ret.asBool()
 	}
-	public func set_long_press(long_press: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_long_press", args: [VariantBox(long_press)])
-	}
-	@discardableResult
-	public func is_long_press() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_long_press", args: [])
-		return __ret.asBool()
-	}
 	public var index: Int {
 		get { Host.shared.getProperty(object: ptr, name: "index").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "index", value: VariantBox(newValue)) }
@@ -90205,10 +88093,6 @@ public class InputEventScreenTouch: InputEventFromWindow {
 	public var double_tap: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "double_tap").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "double_tap", value: VariantBox(newValue)) }
-	}
-	public var long_press: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "long_press").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "long_press", value: VariantBox(newValue)) }
 	}
 }
 
@@ -90691,33 +88575,6 @@ public class Label3D: GeometryInstance3D {
 	public var structured_text_bidi_override_options: VariantBox {
 		get { Host.shared.getProperty(object: ptr, name: "structured_text_bidi_override_options") }
 		set { Host.shared.setProperty(object: ptr, name: "structured_text_bidi_override_options", value: VariantBox(newValue)) }
-	}
-}
-
-@MainActor
-public class LineBase3D: GeometryInstance3D {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("LineBase3D") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class LineBase3D")
-		}
-		super.init(ptr: raw)
-	}
-	public enum MeshAlignment: Int, Sendable, CaseIterable {
-		case local = 0
-		case billboard = 1
-		case max = 2
-	}
-	public enum TilingMode: Int, Sendable, CaseIterable {
-		case stretch = 0
-		case tile = 1
-		case tilingMax = 2
-	}
-	public enum MaterialMode: Int, Sendable, CaseIterable {
-		case mix = 0
-		case add = 1
-		case custom = 2
-		case max = 3
 	}
 }
 
@@ -91640,16 +89497,6 @@ public class OpenXRPlaneTracker: OpenXRSpatialEntityTracker {
 		return __ret.asTransform3D()
 	}
 	@discardableResult
-	public func get_vertices() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_vertices", args: [])
-		return __ret
-	}
-	@discardableResult
-	public func get_indices() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_indices", args: [])
-		return __ret
-	}
-	@discardableResult
 	public func get_mesh() -> Mesh? {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_mesh", args: [])
 		return __ret.asObject()
@@ -91721,11 +89568,6 @@ public class PhysicalBone3D: PhysicsBody3D {
 	public func get_joint_type() -> PhysicalBone3D.JointType {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_joint_type", args: [])
 		return __ret.asEnum(PhysicalBone3D.JointType.self)
-	}
-	@discardableResult
-	public func get_joint_rid() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_joint_rid", args: [])
-		return __ret
 	}
 	public func set_joint_offset(offset: Transform3D) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_joint_offset", args: [VariantBox(offset)])
@@ -92353,9 +90195,6 @@ public class PopupMenu: Popup {
 	public func set_item_checked(index: Int, checked: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_item_checked", args: [VariantBox(index), VariantBox(checked)])
 	}
-	public func set_item_indeterminate(index: Int, indeterminate: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_item_indeterminate", args: [VariantBox(index), VariantBox(indeterminate)])
-	}
 	public func set_item_id(index: Int, id: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_item_id", args: [VariantBox(index), VariantBox(id)])
 	}
@@ -92448,11 +90287,6 @@ public class PopupMenu: Popup {
 	@discardableResult
 	public func is_item_checked(index: Int) -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_item_checked", args: [VariantBox(index)])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func is_item_indeterminate(index: Int) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_item_indeterminate", args: [VariantBox(index)])
 		return __ret.asBool()
 	}
 	@discardableResult
@@ -93190,16 +91024,6 @@ public class RigidBody3D: PhysicsBody3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_using_continuous_collision_detection", args: [])
 		return __ret.asBool()
 	}
-	@discardableResult
-	public func get_velocity_at_local_position(local_position: Vector3) -> Vector3 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_velocity_at_local_position", args: [VariantBox(local_position)])
-		return __ret.asVector3()
-	}
-	@discardableResult
-	public func get_velocity_at_position(global_point: Vector3) -> Vector3 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_velocity_at_position", args: [VariantBox(global_point)])
-		return __ret.asVector3()
-	}
 	public func set_axis_velocity(axis_velocity: Vector3) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_axis_velocity", args: [VariantBox(axis_velocity)])
 	}
@@ -93448,12 +91272,6 @@ public class ScrollContainer: Container {
 		case all = 1
 		case topAndLeft = 2
 		case bottomAndRight = 3
-		case topAndBottom = 4
-		case leftAndRight = 5
-		case top = 6
-		case bottom = 7
-		case left = 8
-		case right = 9
 	}
 	public func set_h_scroll(value: Int) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_h_scroll", args: [VariantBox(value)])
@@ -93791,30 +91609,6 @@ public class SpinBox: Range {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_horizontal_alignment", args: [])
 		return __ret.asEnum(HorizontalAlignment.self)
 	}
-	public func set_format(format: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_format", args: [VariantBox(format)])
-	}
-	@discardableResult
-	public func get_format() -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_format", args: [])
-		return __ret.asString()
-	}
-	public func set_plural_format(format: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_plural_format", args: [VariantBox(format)])
-	}
-	@discardableResult
-	public func get_plural_format() -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_plural_format", args: [])
-		return __ret.asString()
-	}
-	public func set_format_auto_translate_mode(mode: Node.AutoTranslateMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_format_auto_translate_mode", args: [VariantBox(mode.rawValue)])
-	}
-	@discardableResult
-	public func get_format_auto_translate_mode() -> Node.AutoTranslateMode {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_format_auto_translate_mode", args: [])
-		return __ret.asEnum(Node.AutoTranslateMode.self)
-	}
 	public func set_suffix(suffix: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_suffix", args: [VariantBox(suffix)])
 	}
@@ -93891,6 +91685,14 @@ public class SpinBox: Range {
 		get { Host.shared.getProperty(object: ptr, name: "update_on_text_changed").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "update_on_text_changed", value: VariantBox(newValue)) }
 	}
+	public var prefix: String {
+		get { Host.shared.getProperty(object: ptr, name: "prefix").asString() }
+		set { Host.shared.setProperty(object: ptr, name: "prefix", value: VariantBox(newValue)) }
+	}
+	public var suffix: String {
+		get { Host.shared.getProperty(object: ptr, name: "suffix").asString() }
+		set { Host.shared.setProperty(object: ptr, name: "suffix", value: VariantBox(newValue)) }
+	}
 	public var custom_arrow_step: Double {
 		get { Host.shared.getProperty(object: ptr, name: "custom_arrow_step").asDouble() }
 		set { Host.shared.setProperty(object: ptr, name: "custom_arrow_step", value: VariantBox(newValue)) }
@@ -93902,26 +91704,6 @@ public class SpinBox: Range {
 	public var select_all_on_focus: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "select_all_on_focus").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "select_all_on_focus", value: VariantBox(newValue)) }
-	}
-	public var format: String {
-		get { Host.shared.getProperty(object: ptr, name: "format").asString() }
-		set { Host.shared.setProperty(object: ptr, name: "format", value: VariantBox(newValue)) }
-	}
-	public var plural_format: String {
-		get { Host.shared.getProperty(object: ptr, name: "plural_format").asString() }
-		set { Host.shared.setProperty(object: ptr, name: "plural_format", value: VariantBox(newValue)) }
-	}
-	public var format_auto_translate_mode: Int {
-		get { Host.shared.getProperty(object: ptr, name: "format_auto_translate_mode").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "format_auto_translate_mode", value: VariantBox(newValue)) }
-	}
-	public var prefix: String {
-		get { Host.shared.getProperty(object: ptr, name: "prefix").asString() }
-		set { Host.shared.setProperty(object: ptr, name: "prefix", value: VariantBox(newValue)) }
-	}
-	public var suffix: String {
-		get { Host.shared.getProperty(object: ptr, name: "suffix").asString() }
-		set { Host.shared.setProperty(object: ptr, name: "suffix", value: VariantBox(newValue)) }
 	}
 }
 
@@ -94436,55 +92218,6 @@ public class StaticBody3D: PhysicsBody3D {
 }
 
 @MainActor
-public class StreamedTexture2D: Texture2D {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("StreamedTexture2D") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class StreamedTexture2D")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func load(path: String) -> Error {
-		let __ret = Host.shared.callMethod(object: ptr, method: "load", args: [VariantBox(path)])
-		return __ret.asEnum(Error.self)
-	}
-	@discardableResult
-	public func get_load_path() -> String {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_load_path", args: [])
-		return __ret.asString()
-	}
-	public func set_max_lod_override(max_lod: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_max_lod_override", args: [VariantBox(max_lod)])
-	}
-	@discardableResult
-	public func get_max_lod_override() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_lod_override", args: [])
-		return __ret.asInt()
-	}
-	public func set_min_lod_override(min_lod: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_min_lod_override", args: [VariantBox(min_lod)])
-	}
-	@discardableResult
-	public func get_min_lod_override() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_min_lod_override", args: [])
-		return __ret.asInt()
-	}
-	public var load_path: String {
-		get { Host.shared.getProperty(object: ptr, name: "load_path").asString() }
-		set { Host.shared.setProperty(object: ptr, name: "load_path", value: VariantBox(newValue)) }
-	}
-	public var max_lod_override: Int {
-		get { Host.shared.getProperty(object: ptr, name: "max_lod_override").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "max_lod_override", value: VariantBox(newValue)) }
-	}
-	public var min_lod_override: Int {
-		get { Host.shared.getProperty(object: ptr, name: "min_lod_override").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "min_lod_override", value: VariantBox(newValue)) }
-	}
-}
-
-@MainActor
 public class SubViewportContainer: Container {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public override init() {
@@ -94595,14 +92328,6 @@ public class TabContainer: Container {
 	public func get_tab_alignment() -> TabBar.AlignmentMode {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_tab_alignment", args: [])
 		return __ret.asEnum(TabBar.AlignmentMode.self)
-	}
-	public func set_tab_sizing(tab_sizing: TabBar.SizingMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_tab_sizing", args: [VariantBox(tab_sizing.rawValue)])
-	}
-	@discardableResult
-	public func get_tab_sizing() -> TabBar.SizingMode {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_tab_sizing", args: [])
-		return __ret.asEnum(TabBar.SizingMode.self)
 	}
 	public func set_tabs_position(tabs_position: TabContainer.TabPosition) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_tabs_position", args: [VariantBox(tabs_position.rawValue)])
@@ -94769,10 +92494,6 @@ public class TabContainer: Container {
 	public var tab_alignment: Int {
 		get { Host.shared.getProperty(object: ptr, name: "tab_alignment").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "tab_alignment", value: VariantBox(newValue)) }
-	}
-	public var tab_sizing: Int {
-		get { Host.shared.getProperty(object: ptr, name: "tab_sizing").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "tab_sizing", value: VariantBox(newValue)) }
 	}
 	public var current_tab: Int {
 		get { Host.shared.getProperty(object: ptr, name: "current_tab").asInt() }
@@ -97817,7 +95538,6 @@ public class EditorDock: MarginContainer {
 		case horizontal = 2
 		case floating = 4
 		case all = 7
-		case mainScreen = 8
 	}
 	public enum DockSlot: Int, Sendable, CaseIterable {
 		case none = -1
@@ -97832,8 +95552,7 @@ public class EditorDock: MarginContainer {
 		case bottom = 8
 		case bottomL = 9
 		case bottomR = 10
-		case mainScreen = 11
-		case max = 12
+		case max = 11
 	}
 	public func open_() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "open", args: [])
@@ -97882,14 +95601,6 @@ public class EditorDock: MarginContainer {
 	@discardableResult
 	public func is_closable() -> Bool {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_closable", args: [])
-		return __ret.asBool()
-	}
-	public func set_allow_switch_screen(allow: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_allow_switch_screen", args: [VariantBox(allow)])
-	}
-	@discardableResult
-	public func is_allow_switch_screen() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_allow_switch_screen", args: [])
 		return __ret.asBool()
 	}
 	public func set_icon_name(icon_name: String) {
@@ -97968,10 +95679,6 @@ public class EditorDock: MarginContainer {
 		get { Host.shared.getProperty(object: ptr, name: "closable").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "closable", value: VariantBox(newValue)) }
 	}
-	public var allow_switch_screen: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "allow_switch_screen").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "allow_switch_screen", value: VariantBox(newValue)) }
-	}
 	public var icon_name: String {
 		get { Host.shared.getProperty(object: ptr, name: "icon_name").asString() }
 		set { Host.shared.setProperty(object: ptr, name: "icon_name", value: VariantBox(newValue)) }
@@ -98049,14 +95756,6 @@ public class EditorInspector: ScrollContainer {
 		let __ret = Host.shared.callMethod(object: ptr, method: "create_default_inspector", args: [VariantBox(filter_line_edit)])
 		return __ret.asObject()
 	}
-	public func set_property_clipboard(value: VariantBox) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_property_clipboard", args: [VariantBox(value)])
-	}
-	@discardableResult
-	public func get_property_clipboard() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_property_clipboard", args: [])
-		return __ret
-	}
 	public func emit_property_selected(property: String) {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("property_selected"), VariantBox(property)])
 	}
@@ -98121,9 +95820,6 @@ public class FileDialog: ConfirmationDialog {
 		case layout = 6
 		case overwriteWarning = 7
 		case delete = 8
-		case navigationButtons = 9
-		case driveSelector = 10
-		case filters = 11
 	}
 	public func clear_filters() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "clear_filters", args: [])
@@ -98213,6 +95909,14 @@ public class FileDialog: ConfirmationDialog {
 	}
 	public func set_current_path(path: String) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_current_path", args: [VariantBox(path)])
+	}
+	public func set_mode_overrides_title(override: Bool) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "set_mode_overrides_title", args: [VariantBox(override)])
+	}
+	@discardableResult
+	public func is_mode_overriding_title() -> Bool {
+		let __ret = Host.shared.callMethod(object: ptr, method: "is_mode_overriding_title", args: [])
+		return __ret.asBool()
 	}
 	public func set_file_mode(mode: FileDialog.FileMode) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_file_mode", args: [VariantBox(mode.rawValue)])
@@ -98311,14 +96015,6 @@ public class FileDialog: ConfirmationDialog {
 	public func invalidate() {
 		let __ret = Host.shared.callMethod(object: ptr, method: "invalidate", args: [])
 	}
-	public func set_mode_overrides_title(override: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_mode_overrides_title", args: [VariantBox(override)])
-	}
-	@discardableResult
-	public func is_mode_overriding_title() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_mode_overriding_title", args: [])
-		return __ret.asBool()
-	}
 	public var mode_overrides_title: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "mode_overrides_title").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "mode_overrides_title", value: VariantBox(newValue)) }
@@ -98394,18 +96090,6 @@ public class FileDialog: ConfirmationDialog {
 	public var deleting_enabled: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "deleting_enabled").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "deleting_enabled", value: VariantBox(newValue)) }
-	}
-	public var navigation_buttons_enabled: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "navigation_buttons_enabled").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "navigation_buttons_enabled", value: VariantBox(newValue)) }
-	}
-	public var drive_selector_enabled: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "drive_selector_enabled").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "drive_selector_enabled", value: VariantBox(newValue)) }
-	}
-	public var filters_enabled: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "filters_enabled").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "filters_enabled", value: VariantBox(newValue)) }
 	}
 	public var current_dir: String {
 		get { Host.shared.getProperty(object: ptr, name: "current_dir").asString() }
@@ -99071,14 +96755,6 @@ public class IterateIK3D: ChainIK3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_joint_limitation_rotation_offset", args: [VariantBox(index), VariantBox(joint)])
 		return __ret.asQuaternion()
 	}
-	public func set_joint_use_rest_for_limitation(index: Int, joint: Int, enabled: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_joint_use_rest_for_limitation", args: [VariantBox(index), VariantBox(joint), VariantBox(enabled)])
-	}
-	@discardableResult
-	public func is_joint_using_rest_for_limitation(index: Int, joint: Int) -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_joint_using_rest_for_limitation", args: [VariantBox(index), VariantBox(joint)])
-		return __ret.asBool()
-	}
 	public var max_iterations: Int {
 		get { Host.shared.getProperty(object: ptr, name: "max_iterations").asInt() }
 		set { Host.shared.setProperty(object: ptr, name: "max_iterations", value: VariantBox(newValue)) }
@@ -99600,16 +97276,6 @@ public class RigidBody2D: PhysicsBody2D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "get_continuous_collision_detection_mode", args: [])
 		return __ret.asEnum(RigidBody2D.CCDMode.self)
 	}
-	@discardableResult
-	public func get_velocity_at_local_position(local_position: Vector2) -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_velocity_at_local_position", args: [VariantBox(local_position)])
-		return __ret.asVector2()
-	}
-	@discardableResult
-	public func get_velocity_at_position(global_point: Vector2) -> Vector2 {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_velocity_at_position", args: [VariantBox(global_point)])
-		return __ret.asVector2()
-	}
 	public func set_axis_velocity(axis_velocity: Vector2) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_axis_velocity", args: [VariantBox(axis_velocity)])
 	}
@@ -99828,6 +97494,85 @@ public class ScriptCreateDialog: ConfirmationDialog {
 }
 
 @MainActor
+public class ScriptEditor: PanelContainer {
+	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
+	public override init() {
+		guard let raw = Host.shared.createObject("ScriptEditor") else {
+			fatalError("SwiftGodot: cannot instantiate Godot class ScriptEditor")
+		}
+		super.init(ptr: raw)
+	}
+	@discardableResult
+	public func get_current_editor() -> ScriptEditorBase? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_current_editor", args: [])
+		return __ret.asObject()
+	}
+	@discardableResult
+	public func get_open_script_editors() -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_open_script_editors", args: [])
+		return __ret
+	}
+	@discardableResult
+	public func get_breakpoints() -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_breakpoints", args: [])
+		return __ret
+	}
+	public func register_syntax_highlighter(syntax_highlighter: EditorSyntaxHighlighter) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "register_syntax_highlighter", args: [VariantBox(syntax_highlighter)])
+	}
+	public func unregister_syntax_highlighter(syntax_highlighter: EditorSyntaxHighlighter) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "unregister_syntax_highlighter", args: [VariantBox(syntax_highlighter)])
+	}
+	public func goto_line(line_number: Int) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "goto_line", args: [VariantBox(line_number)])
+	}
+	@discardableResult
+	public func get_current_script() -> Script? {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_current_script", args: [])
+		return __ret.asObject()
+	}
+	@discardableResult
+	public func get_open_scripts() -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_open_scripts", args: [])
+		return __ret
+	}
+	public func open_script_create_dialog(base_name: String, base_path: String) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "open_script_create_dialog", args: [VariantBox(base_name), VariantBox(base_path)])
+	}
+	public func reload_open_files() {
+		let __ret = Host.shared.callMethod(object: ptr, method: "reload_open_files", args: [])
+	}
+	public func goto_help(topic: String) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "goto_help", args: [VariantBox(topic)])
+	}
+	public func update_docs_from_script(script: Script) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "update_docs_from_script", args: [VariantBox(script)])
+	}
+	public func clear_docs_from_script(script: Script) {
+		let __ret = Host.shared.callMethod(object: ptr, method: "clear_docs_from_script", args: [VariantBox(script)])
+	}
+	@discardableResult
+	public func get_unsaved_files() -> VariantBox {
+		let __ret = Host.shared.callMethod(object: ptr, method: "get_unsaved_files", args: [])
+		return __ret
+	}
+	public func save_all_scripts() {
+		let __ret = Host.shared.callMethod(object: ptr, method: "save_all_scripts", args: [])
+	}
+	@discardableResult
+	public func close_file(path: String) -> Error {
+		let __ret = Host.shared.callMethod(object: ptr, method: "close_file", args: [VariantBox(path)])
+		return __ret.asEnum(Error.self)
+	}
+	public func emit_editor_script_changed(script: Script) {
+		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("editor_script_changed"), VariantBox(script)])
+	}
+	public func emit_script_close(script: Script) {
+		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("script_close"), VariantBox(script)])
+	}
+}
+
+@MainActor
 public class SoftBody3D: MeshInstance3D {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public override init() {
@@ -99985,11 +97730,6 @@ public class SoftBody3D: MeshInstance3D {
 		let __ret = Host.shared.callMethod(object: ptr, method: "is_point_pinned", args: [VariantBox(point_index)])
 		return __ret.asBool()
 	}
-	@discardableResult
-	public func get_point_count() -> Int {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_point_count", args: [])
-		return __ret.asInt()
-	}
 	public func set_ray_pickable(ray_pickable: Bool) {
 		let __ret = Host.shared.callMethod(object: ptr, method: "set_ray_pickable", args: [VariantBox(ray_pickable)])
 	}
@@ -100041,10 +97781,6 @@ public class SoftBody3D: MeshInstance3D {
 	public var ray_pickable: Bool {
 		get { Host.shared.getProperty(object: ptr, name: "ray_pickable").asBool() }
 		set { Host.shared.setProperty(object: ptr, name: "ray_pickable", value: VariantBox(newValue)) }
-	}
-	public var point_count: Int {
-		get { Host.shared.getProperty(object: ptr, name: "point_count").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "point_count", value: VariantBox(newValue)) }
 	}
 	public var disable_mode: Int {
 		get { Host.shared.getProperty(object: ptr, name: "disable_mode").asInt() }
@@ -100293,210 +98029,6 @@ public class TextureCubemapRD: TextureLayeredRD {
 			fatalError("SwiftGodot: cannot instantiate Godot class TextureCubemapRD")
 		}
 		super.init(ptr: raw)
-	}
-}
-
-@MainActor
-public class Trail3D: LineBase3D {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("Trail3D") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class Trail3D")
-		}
-		super.init(ptr: raw)
-	}
-	public enum LimitMode: Int, Sendable, CaseIterable {
-		case lifetime = 0
-		case maxLength = 1
-		case max = 2
-	}
-	public func set_width(width: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_width", args: [VariantBox(width)])
-	}
-	@discardableResult
-	public func get_width() -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_width", args: [])
-		return __ret.asDouble()
-	}
-	public func set_width_curve(curve: Curve) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_width_curve", args: [VariantBox(curve)])
-	}
-	@discardableResult
-	public func get_width_curve() -> Curve? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_width_curve", args: [])
-		return __ret.asObject()
-	}
-	public func set_emitting(emitting: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_emitting", args: [VariantBox(emitting)])
-	}
-	@discardableResult
-	public func is_emitting() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "is_emitting", args: [])
-		return __ret.asBool()
-	}
-	public func set_color(color: Color) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_color", args: [VariantBox(color)])
-	}
-	@discardableResult
-	public func get_color() -> Color {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_color", args: [])
-		return __ret.asColor()
-	}
-	public func set_color_gradient(gradient: Gradient) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_color_gradient", args: [VariantBox(gradient)])
-	}
-	@discardableResult
-	public func get_color_gradient() -> Gradient? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_color_gradient", args: [])
-		return __ret.asObject()
-	}
-	public func set_material_mode(material_mode: LineBase3D.MaterialMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_material_mode", args: [VariantBox(material_mode.rawValue)])
-	}
-	@discardableResult
-	public func get_material_mode() -> LineBase3D.MaterialMode {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_material_mode", args: [])
-		return __ret.asEnum(LineBase3D.MaterialMode.self)
-	}
-	public func set_material(material: ShaderMaterial) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_material", args: [VariantBox(material)])
-	}
-	@discardableResult
-	public func get_material() -> ShaderMaterial? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_material", args: [])
-		return __ret.asObject()
-	}
-	public func set_mesh_alignment(alignment: LineBase3D.MeshAlignment) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_mesh_alignment", args: [VariantBox(alignment.rawValue)])
-	}
-	@discardableResult
-	public func get_mesh_alignment() -> LineBase3D.MeshAlignment {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_mesh_alignment", args: [])
-		return __ret.asEnum(LineBase3D.MeshAlignment.self)
-	}
-	public func set_tiling_multiplier(tiling_multiplier: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_tiling_multiplier", args: [VariantBox(tiling_multiplier)])
-	}
-	@discardableResult
-	public func get_tiling_multiplier() -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_tiling_multiplier", args: [])
-		return __ret.asDouble()
-	}
-	public func set_tiling_mode(tiling_mode: LineBase3D.TilingMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_tiling_mode", args: [VariantBox(tiling_mode.rawValue)])
-	}
-	@discardableResult
-	public func get_tiling_mode() -> LineBase3D.TilingMode {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_tiling_mode", args: [])
-		return __ret.asEnum(LineBase3D.TilingMode.self)
-	}
-	public func clear() {
-		let __ret = Host.shared.callMethod(object: ptr, method: "clear", args: [])
-	}
-	public func set_min_section_length(min_section_length: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_min_section_length", args: [VariantBox(min_section_length)])
-	}
-	@discardableResult
-	public func get_min_section_length() -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_min_section_length", args: [])
-		return __ret.asDouble()
-	}
-	public func set_limit_mode(limit_mode: Trail3D.LimitMode) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_limit_mode", args: [VariantBox(limit_mode.rawValue)])
-	}
-	@discardableResult
-	public func get_limit_mode() -> Trail3D.LimitMode {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_limit_mode", args: [])
-		return __ret.asEnum(Trail3D.LimitMode.self)
-	}
-	public func set_lifetime(lifetime: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_lifetime", args: [VariantBox(lifetime)])
-	}
-	@discardableResult
-	public func get_lifetime() -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_lifetime", args: [])
-		return __ret.asDouble()
-	}
-	public func set_max_length(max_length: Double) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_max_length", args: [VariantBox(max_length)])
-	}
-	@discardableResult
-	public func get_max_length() -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_max_length", args: [])
-		return __ret.asDouble()
-	}
-	public func set_pin_uv(pin_uv: Bool) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "set_pin_uv", args: [VariantBox(pin_uv)])
-	}
-	@discardableResult
-	public func get_pin_uv() -> Bool {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_pin_uv", args: [])
-		return __ret.asBool()
-	}
-	@discardableResult
-	public func get_current_length() -> Double {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_current_length", args: [])
-		return __ret.asDouble()
-	}
-	public var emitting: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "emitting").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "emitting", value: VariantBox(newValue)) }
-	}
-	public var limit_mode: Int {
-		get { Host.shared.getProperty(object: ptr, name: "limit_mode").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "limit_mode", value: VariantBox(newValue)) }
-	}
-	public var lifetime: Double {
-		get { Host.shared.getProperty(object: ptr, name: "lifetime").asDouble() }
-		set { Host.shared.setProperty(object: ptr, name: "lifetime", value: VariantBox(newValue)) }
-	}
-	public var max_length: Double {
-		get { Host.shared.getProperty(object: ptr, name: "max_length").asDouble() }
-		set { Host.shared.setProperty(object: ptr, name: "max_length", value: VariantBox(newValue)) }
-	}
-	public var width: Double {
-		get { Host.shared.getProperty(object: ptr, name: "width").asDouble() }
-		set { Host.shared.setProperty(object: ptr, name: "width", value: VariantBox(newValue)) }
-	}
-	public var width_curve: Curve? {
-		get { Host.shared.getProperty(object: ptr, name: "width_curve").asObject() }
-		set { Host.shared.setProperty(object: ptr, name: "width_curve", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
-	}
-	public var color: Color {
-		get { Host.shared.getProperty(object: ptr, name: "color").asColor() }
-		set { Host.shared.setProperty(object: ptr, name: "color", value: VariantBox(newValue)) }
-	}
-	public var color_gradient: Gradient? {
-		get { Host.shared.getProperty(object: ptr, name: "color_gradient").asObject() }
-		set { Host.shared.setProperty(object: ptr, name: "color_gradient", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
-	}
-	public var mesh_alignment: Int {
-		get { Host.shared.getProperty(object: ptr, name: "mesh_alignment").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "mesh_alignment", value: VariantBox(newValue)) }
-	}
-	public var material_mode: Int {
-		get { Host.shared.getProperty(object: ptr, name: "material_mode").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "material_mode", value: VariantBox(newValue)) }
-	}
-	public var material: ShaderMaterial? {
-		get { Host.shared.getProperty(object: ptr, name: "material").asObject() }
-		set { Host.shared.setProperty(object: ptr, name: "material", value: newValue.map { VariantBox($0) } ?? VariantBox()) }
-	}
-	public var tiling_mode: Int {
-		get { Host.shared.getProperty(object: ptr, name: "tiling_mode").asInt() }
-		set { Host.shared.setProperty(object: ptr, name: "tiling_mode", value: VariantBox(newValue)) }
-	}
-	public var tiling_multiplier: Double {
-		get { Host.shared.getProperty(object: ptr, name: "tiling_multiplier").asDouble() }
-		set { Host.shared.setProperty(object: ptr, name: "tiling_multiplier", value: VariantBox(newValue)) }
-	}
-	public var pin_uv: Bool {
-		get { Host.shared.getProperty(object: ptr, name: "pin_uv").asBool() }
-		set { Host.shared.setProperty(object: ptr, name: "pin_uv", value: VariantBox(newValue)) }
-	}
-	public var min_section_length: Double {
-		get { Host.shared.getProperty(object: ptr, name: "min_section_length").asDouble() }
-		set { Host.shared.setProperty(object: ptr, name: "min_section_length", value: VariantBox(newValue)) }
 	}
 }
 
@@ -101962,85 +99494,6 @@ public class PhysicalBone2D: RigidBody2D {
 }
 
 @MainActor
-public class ScriptEditor: EditorDock {
-	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
-	public override init() {
-		guard let raw = Host.shared.createObject("ScriptEditor") else {
-			fatalError("SwiftGodot: cannot instantiate Godot class ScriptEditor")
-		}
-		super.init(ptr: raw)
-	}
-	@discardableResult
-	public func get_current_editor() -> ScriptEditorBase? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_current_editor", args: [])
-		return __ret.asObject()
-	}
-	@discardableResult
-	public func get_open_script_editors() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_open_script_editors", args: [])
-		return __ret
-	}
-	@discardableResult
-	public func get_breakpoints() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_breakpoints", args: [])
-		return __ret
-	}
-	public func register_syntax_highlighter(syntax_highlighter: EditorSyntaxHighlighter) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "register_syntax_highlighter", args: [VariantBox(syntax_highlighter)])
-	}
-	public func unregister_syntax_highlighter(syntax_highlighter: EditorSyntaxHighlighter) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "unregister_syntax_highlighter", args: [VariantBox(syntax_highlighter)])
-	}
-	public func goto_line(line_number: Int) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "goto_line", args: [VariantBox(line_number)])
-	}
-	@discardableResult
-	public func get_current_script() -> Script? {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_current_script", args: [])
-		return __ret.asObject()
-	}
-	@discardableResult
-	public func get_open_scripts() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_open_scripts", args: [])
-		return __ret
-	}
-	public func open_script_create_dialog(base_name: String, base_path: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "open_script_create_dialog", args: [VariantBox(base_name), VariantBox(base_path)])
-	}
-	public func reload_open_files() {
-		let __ret = Host.shared.callMethod(object: ptr, method: "reload_open_files", args: [])
-	}
-	public func goto_help(topic: String) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "goto_help", args: [VariantBox(topic)])
-	}
-	public func update_docs_from_script(script: Script) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "update_docs_from_script", args: [VariantBox(script)])
-	}
-	public func clear_docs_from_script(script: Script) {
-		let __ret = Host.shared.callMethod(object: ptr, method: "clear_docs_from_script", args: [VariantBox(script)])
-	}
-	@discardableResult
-	public func get_unsaved_files() -> VariantBox {
-		let __ret = Host.shared.callMethod(object: ptr, method: "get_unsaved_files", args: [])
-		return __ret
-	}
-	public func save_all_scripts() {
-		let __ret = Host.shared.callMethod(object: ptr, method: "save_all_scripts", args: [])
-	}
-	@discardableResult
-	public func close_file(path: String) -> Error {
-		let __ret = Host.shared.callMethod(object: ptr, method: "close_file", args: [VariantBox(path)])
-		return __ret.asEnum(Error.self)
-	}
-	public func emit_editor_script_changed(script: Script) {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("editor_script_changed"), VariantBox(script)])
-	}
-	public func emit_script_close(script: Script) {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("script_close"), VariantBox(script)])
-	}
-}
-
-@MainActor
 public class ScriptEditorBase: VBoxContainer {
 	public override init(ptr: UnsafeMutableRawPointer) { super.init(ptr: ptr) }
 	public override init() {
@@ -102060,6 +99513,15 @@ public class ScriptEditorBase: VBoxContainer {
 	public func emit_name_changed() {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("name_changed")])
 	}
+	public func emit_edited_script_changed() {
+		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("edited_script_changed")])
+	}
+	public func emit_search_in_files_requested(text: String) {
+		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("search_in_files_requested"), VariantBox(text)])
+	}
+	public func emit_request_save_history() {
+		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("request_save_history")])
+	}
 	public func emit_request_help(topic: String) {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("request_help"), VariantBox(topic)])
 	}
@@ -102069,23 +99531,14 @@ public class ScriptEditorBase: VBoxContainer {
 	public func emit_go_to_help(what: String) {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("go_to_help"), VariantBox(what)])
 	}
-	public func emit_go_to_method(script: GodotObject, method: String) {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("go_to_method"), VariantBox(script), VariantBox(method)])
-	}
-	public func emit_request_save_history() {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("request_save_history")])
-	}
 	public func emit_request_save_previous_state(state: VariantBox) {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("request_save_previous_state"), VariantBox(state)])
 	}
-	public func emit_edited_script_changed() {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("edited_script_changed")])
-	}
-	public func emit_search_in_files_requested(text: String) {
-		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("search_in_files_requested"), VariantBox(text)])
-	}
 	public func emit_replace_in_files_requested(text: String) {
 		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("replace_in_files_requested"), VariantBox(text)])
+	}
+	public func emit_go_to_method(script: GodotObject, method: String) {
+		_ = Host.shared.callMethod(object: ptr, method: "emit_signal", args: [VariantBox("go_to_method"), VariantBox(script), VariantBox(method)])
 	}
 }
 
