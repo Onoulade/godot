@@ -40,8 +40,6 @@
 #include "core/object/class_db.h"
 
 #ifdef TOOLS_ENABLED
-#include "swift_editor_language.h"
-
 #include "core/io/file_access.h"
 #include "editor/editor_node.h"
 #include "editor/export/editor_export.h"
@@ -112,7 +110,6 @@ void initialize_swift_module(ModuleInitializationLevel p_level) {
 
 #ifdef TOOLS_ENABLED
 	if (p_level == MODULE_INITIALIZATION_LEVEL_EDITOR) {
-		memnew(SwiftEditorLanguage);
 		EditorNode::add_init_callback(_editor_init);
 	}
 #endif // TOOLS_ENABLED
@@ -141,9 +138,6 @@ void uninitialize_swift_module(ModuleInitializationLevel p_level) {
 		if (swift_export_plugin.is_valid()) {
 			EditorExport::get_singleton()->remove_export_plugin(swift_export_plugin);
 			swift_export_plugin.unref();
-		}
-		if (SwiftEditorLanguage::get_singleton() != nullptr) {
-			memdelete(SwiftEditorLanguage::get_singleton());
 		}
 	}
 #endif // TOOLS_ENABLED

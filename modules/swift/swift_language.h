@@ -32,10 +32,6 @@
 
 #include "core/object/script_language.h"
 
-#ifdef TOOLS_ENABLED
-#include "core/object/editor_language.h"
-#endif // TOOLS_ENABLED
-
 class SwiftScript;
 
 class SwiftLanguage : public ScriptLanguage {
@@ -58,10 +54,6 @@ class SwiftLanguage : public ScriptLanguage {
 	HashMap<StringName, uint64_t> prof_total_usec;
 	String last_error;
 
-#ifdef TOOLS_ENABLED
-	EditorLanguage *editor_language = nullptr;
-#endif // TOOLS_ENABLED
-
 	void _call_enter(const StringName &p_method, const String &p_file);
 	void _call_exit(const StringName &p_method);
 
@@ -75,9 +67,14 @@ public:
 	virtual String get_extension() const override { return "swift"; }
 	virtual void finish() override;
 
-#ifdef TOOLS_ENABLED
-	virtual EditorLanguage *get_editor_language() override;
-#endif // TOOLS_ENABLED
+	// Editor-side support lives directly on ScriptLanguage in 4.7 (there is
+	// no separate EditorLanguage class): validate/find_function/
+	// auto_indent_code are pure virtual there.
+	virtual bool validate(const String &p_script, const String &p_path, List<String> *r_functions, List<ScriptError> *r_errors, List<Warning> *r_warnings, HashSet<int> *r_safe_lines) const override;
+	virtual int find_function(const String &p_function, const String &p_code) const override;
+	virtual void auto_indent_code(String &p_code, int p_from_line, int p_to_line) const override {}
+	virtual Error complete_code(const String &p_code, const String &p_path, Object *p_owner, List<CodeCompletionOption> *r_options, bool &r_force, String &r_call_hint) override;
+	virtual Error lookup_code(const String &p_code, const String &p_symbol, const String &p_path, Object *p_owner, LookupResult &r_result) override;
 
 	virtual Vector<String> get_reserved_words() const override;
 	virtual bool is_control_flow_keyword(const String &p_string) const override;
@@ -102,8 +99,9 @@ public:
 	virtual String debug_parse_stack_level_expression(int p_level, const String &p_expression, int p_max_subitems = -1, int p_max_depth = -1) override { return String(); }
 
 	virtual void reload_all_scripts() override;
-	virtual void reload_scripts(const Array &p_scripts) override;
-	virtual void reload_tool_script(const Ref<Script> &p_script) override;
+	virtual void reload_scripts(const Array &p_scripts, bool p_soft_reload) override;
+	virtual void reload_tool_script(const Ref<Script> &p_script, bool p_soft_reload) override;
+	virtual void get_recognized_extensions(List<String> *p_extensions) const override;
 
 	virtual void get_public_functions(List<MethodInfo> *r_functions) const override {}
 	virtual void get_public_constants(List<Pair<String, Variant>> *r_constants) const override;

@@ -33,14 +33,13 @@
 #include "swift_bridge.h"
 #include "swift_script.h"
 
-#ifdef TOOLS_ENABLED
-#include "swift_editor_language.h"
-#endif // TOOLS_ENABLED
-
 #include "core/io/file_access.h"
+#include "core/object/class_db.h"
 #include "core/os/memory.h"
 #include "core/os/os.h"
-#include "core/string/regex.h"
+#include "core/variant/variant.h"
+
+#include "modules/regex/regex.h"
 
 void SwiftLanguage::_bind_methods() {
 }
@@ -54,25 +53,7 @@ void SwiftLanguage::init() {
 
 void SwiftLanguage::finish() {
 	SwiftBridge::get_singleton()->unload();
-#ifdef TOOLS_ENABLED
-	if (editor_language != nullptr) {
-		memdelete(editor_language);
-		editor_language = nullptr;
-	}
-#endif // TOOLS_ENABLED
 }
-
-#ifdef TOOLS_ENABLED
-EditorLanguage *SwiftLanguage::get_editor_language() {
-	if (SwiftEditorLanguage::get_singleton() != nullptr) {
-		return SwiftEditorLanguage::get_singleton();
-	}
-	if (editor_language == nullptr) {
-		editor_language = memnew(EditorLanguage);
-	}
-	return editor_language;
-}
-#endif // TOOLS_ENABLED
 
 Vector<String> SwiftLanguage::get_reserved_words() const {
 	static const Vector<String> words = {
@@ -216,7 +197,7 @@ void SwiftLanguage::reload_all_scripts() {
 	}
 }
 
-void SwiftLanguage::reload_scripts(const Array &p_scripts) {
+void SwiftLanguage::reload_scripts(const Array &p_scripts, bool p_soft_reload) {
 	for (int i = 0; i < p_scripts.size(); i++) {
 		Ref<Script> script = p_scripts[i];
 		if (script.is_valid()) {
@@ -225,10 +206,14 @@ void SwiftLanguage::reload_scripts(const Array &p_scripts) {
 	}
 }
 
-void SwiftLanguage::reload_tool_script(const Ref<Script> &p_script) {
-	if (p_script.is_valid() && p_script->is_tool()) {
+void SwiftLanguage::reload_tool_script(const Ref<Script> &p_script, bool p_soft_reload) {
+	if (p_script.is_valid() && p_script->is_valid()) {
 		p_script->reload();
 	}
+}
+
+void SwiftLanguage::get_recognized_extensions(List<String> *p_extensions) const {
+	p_extensions->push_back("swift");
 }
 
 String SwiftLanguage::debug_get_error() const {
@@ -336,4 +321,149 @@ String SwiftLanguage::get_global_class_name(const String &p_path, String *r_base
 		*r_is_tool = source.contains("@tool");
 	}
 	return match->get_string(1);
+}
+
+static Ref<RegEx> _swift_func_regex() {
+	static Ref<RegEx> func_regex;
+	if (func_regex.is_null()) {
+		func_regex.instantiate();
+		func_regex->compile("\\bfunc\\s+([A-Za-z_][A-Za-z0-9_]*)");
+	}
+	return func_regex;
+}
+
+bool SwiftLanguage::validate(const String &p_script, const String &p_path, List<String> *r_functions, List<ScriptError> *r_errors, List<Warning> *r_warnings, HashSet<int> *r_safe_lines) const {
+	PackedStringArray lines = p_script.split("\n");
+	int depth = 0;
+	bool in_block_comment = false;
+	for (int i = 0; i < lines.size(); i++) {
+		const String &line = lines[i];
+		for (int c = 0; c < line.length(); c++) {
+			char32_t ch = line[c];
+			if (in_block_comment) {
+				if (ch == '*' && c + 1 < line.length() && line[c + 1] == '/') {
+					in_block_comment = false;
+					c++;
+				}
+				continue;
+			}
+			if (ch == '"') {
+				// Skip the string literal.
+				c++;
+				while (c < line.length() && line[c] != '"') {
+					if (line[c] == '\\') {
+						c++;
+					}
+					c++;
+				}
+				continue;
+			}
+			if (ch == '/' && c + 1 < line.length() && line[c + 1] == '/') {
+				break;
+			}
+			if (ch == '/' && c + 1 < line.length() && line[c + 1] == '*') {
+				in_block_comment = true;
+				c++;
+				continue;
+			}
+			if (ch == '{') {
+				depth++;
+			} else if (ch == '}') {
+				depth--;
+			}
+		}
+		if (r_safe_lines != nullptr) {
+			r_safe_lines->insert(i + 1);
+		}
+		Ref<RegExMatch> match = _swift_func_regex()->search(line);
+		if (match.is_valid() && r_functions != nullptr) {
+			r_functions->push_back(match->get_string(1));
+		}
+	}
+	if (depth != 0 && r_errors != nullptr) {
+		ScriptError error;
+		error.path = p_path;
+		error.line = lines.size();
+		error.message = vformat("Unbalanced braces (depth %d at end of file).", depth);
+		r_errors->push_back(error);
+	}
+	return true;
+}
+
+int SwiftLanguage::find_function(const String &p_function, const String &p_code) const {
+	PackedStringArray lines = p_code.split("\n");
+	Ref<RegEx> regex;
+	regex.instantiate();
+	regex->compile(vformat("\\bfunc\\s+%s\\s*\\(", p_function));
+	for (int i = 0; i < lines.size(); i++) {
+		if (regex->search(lines[i]).is_valid()) {
+			return i + 1;
+		}
+	}
+	return -1;
+}
+
+Error SwiftLanguage::complete_code(const String &p_code, const String &p_path, Object *p_owner, List<CodeCompletionOption> *r_options, bool &r_force, String &r_call_hint) {
+	Ref<RegEx> partial_regex;
+	partial_regex.instantiate();
+	partial_regex->compile("[A-Za-z_][A-Za-z0-9_]*$");
+	Ref<RegExMatch> partial_match = partial_regex->search(p_code);
+	String prefix = partial_match.is_valid() ? partial_match->get_string(0) : String();
+	r_force = false;
+
+	for (const String &word : get_reserved_words()) {
+		if (word.begins_with(prefix)) {
+			r_options->push_back(CodeCompletionOption(word, CODE_COMPLETION_KIND_KEYWORD, LOCATION_LOCAL, "keyword_color"));
+		}
+	}
+	for (int t = 1; t < Variant::Type::VARIANT_MAX; t++) {
+		String type_name = Variant::get_type_name((Variant::Type)t);
+		if (type_name.begins_with(prefix) && type_name != prefix) {
+			r_options->push_back(CodeCompletionOption(type_name, CODE_COMPLETION_KIND_PLAIN_TEXT, LOCATION_LOCAL, "base_type_color"));
+		}
+	}
+	LocalVector<StringName> global_classes;
+	ScriptServer::get_global_class_list(global_classes);
+	for (const StringName &class_name : global_classes) {
+		if (String(class_name).begins_with(prefix)) {
+			r_options->push_back(CodeCompletionOption(class_name, CODE_COMPLETION_KIND_PLAIN_TEXT, LOCATION_OTHER_USER_CODE, "user_type_color"));
+		}
+	}
+	if (p_owner != nullptr) {
+		StringName owner_class = p_owner->get_class_name();
+		List<MethodInfo> methods;
+		ClassDB::get_method_list(owner_class, &methods);
+		for (const MethodInfo &mi : methods) {
+			if (String(mi.name).begins_with(prefix) && mi.name != prefix) {
+				r_options->push_back(CodeCompletionOption(mi.name, CODE_COMPLETION_KIND_PLAIN_TEXT, LOCATION_PARENT_MASK | LOCATION_LOCAL, "member_method_color"));
+			}
+		}
+		List<PropertyInfo> properties;
+		ClassDB::get_property_list(owner_class, &properties);
+		for (const PropertyInfo &pi : properties) {
+			if ((pi.usage & PROPERTY_USAGE_EDITOR) && String(pi.name).begins_with(prefix) && pi.name != prefix) {
+				r_options->push_back(CodeCompletionOption(pi.name, CODE_COMPLETION_KIND_PLAIN_TEXT, LOCATION_PARENT_MASK | LOCATION_LOCAL, "member_variable_color"));
+			}
+		}
+	}
+	return OK;
+}
+
+Error SwiftLanguage::lookup_code(const String &p_code, const String &p_symbol, const String &p_path, Object *p_owner, LookupResult &r_result) {
+	if (ScriptServer::is_global_class(p_symbol)) {
+		r_result.type = LOOKUP_RESULT_CLASS;
+		r_result.class_name = p_symbol;
+		r_result.script_path = ScriptServer::get_global_class_path(p_symbol);
+		return OK;
+	}
+	PackedStringArray lines = p_code.split("\n");
+	for (int i = 0; i < lines.size(); i++) {
+		if (lines[i].find(p_symbol) != -1) {
+			r_result.type = LOOKUP_RESULT_SCRIPT_LOCATION;
+			r_result.script_path = p_path;
+			r_result.location = i + 1;
+			return OK;
+		}
+	}
+	return ERR_DOES_NOT_EXIST;
 }

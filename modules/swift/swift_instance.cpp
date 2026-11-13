@@ -226,7 +226,7 @@ void SwiftInstance::notification(int p_notification, bool p_reversed) {
 	}
 }
 
-Script *SwiftInstance::get_script() const {
+Ref<Script> SwiftInstance::get_script() const {
 	return script;
 }
 

@@ -68,7 +68,7 @@ public:
 	virtual bool has_method(const StringName &p_method) const override;
 	virtual MethodInfo get_method_info(const StringName &p_method) const override;
 	virtual bool is_tool() const override;
-	virtual bool is_script_valid() const override { return valid; }
+	virtual bool is_valid() const override { return valid; }
 	virtual bool is_abstract() const override { return false; }
 	virtual ScriptLanguage *get_language() const override;
 	virtual bool has_script_signal(const StringName &p_signal) const override;
