@@ -52,8 +52,9 @@ def _build_swift_runtime_libs():
         print(f"swift module:   {config} build: swift build -c {config} --package-path modules/swift/runtime")
         print("swift module:   then copy libswiftgodot_runtime next to the binary in bin/.")
         return
-    # SCons reads this SCsub with the module dir as cwd: use absolute paths.
-    package_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "runtime")
+    # SCons reads this SCsub with the module dir as cwd (and without __file__):
+    # anchor everything to the repository root via env.Dir("#...").
+    package_path = env.Dir("#modules/swift/runtime").abspath
     bin_dir = env.Dir("#bin").abspath
     os.makedirs(bin_dir, exist_ok=True)
     # SwiftGodotUI is part of the single swiftgodot_runtime library now; drop
